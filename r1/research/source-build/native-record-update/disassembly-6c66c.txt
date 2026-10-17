@@ -1,0 +1,31 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0006c66c <r1_stock_i2c5_acquire+0x1c194>:
+   6c66c:	b570      	push	{r4, r5, r6, lr}
+   6c66e:	2800      	cmp	r0, #0
+   6c670:	d018      	beq.n	6c6a4 <r1_stock_i2c5_acquire+0x1c1cc>
+   6c672:	2900      	cmp	r1, #0
+   6c674:	d016      	beq.n	6c6a4 <r1_stock_i2c5_acquire+0x1c1cc>
+   6c676:	4605      	mov	r5, r0
+   6c678:	460c      	mov	r4, r1
+   6c67a:	4608      	mov	r0, r1
+   6c67c:	f7ff ffe0 	bl	6c640 <r1_stock_i2c5_acquire+0x1c168>
+   6c680:	2800      	cmp	r0, #0
+   6c682:	d00f      	beq.n	6c6a4 <r1_stock_i2c5_acquire+0x1c1cc>
+   6c684:	220c      	movs	r2, #12
+   6c686:	4621      	mov	r1, r4
+   6c688:	4628      	mov	r0, r5
+   6c68a:	f7bb f8c6 	bl	2781a <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x81a>
+   6c68e:	2800      	cmp	r0, #0
+   6c690:	d008      	beq.n	6c6a4 <r1_stock_i2c5_acquire+0x1c1cc>
+   6c692:	4620      	mov	r0, r4
+   6c694:	f006 ffb6 	bl	73604 <r1_stock_i2c5_acquire+0x2312c>
+   6c698:	4621      	mov	r1, r4
+   6c69a:	4628      	mov	r0, r5
+   6c69c:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
+   6c6a0:	f7ff bf4c 	b.w	6c53c <r1_stock_i2c5_acquire+0x1c064>
+   6c6a4:	bd70      	pop	{r4, r5, r6, pc}

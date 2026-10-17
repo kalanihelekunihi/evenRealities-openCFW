@@ -1,0 +1,26 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00073604 <r1_stock_i2c5_acquire+0x2312c>:
+   73604:	b53e      	push	{r1, r2, r3, r4, r5, lr}
+   73606:	0004      	movs	r4, r0
+   73608:	d010      	beq.n	7362c <r1_stock_i2c5_acquire+0x23154>
+   7360a:	4d09      	ldr	r5, [pc, #36]	@ (73630 <r1_stock_i2c5_acquire+0x23158>)
+   7360c:	220c      	movs	r2, #12
+   7360e:	4669      	mov	r1, sp
+   73610:	6828      	ldr	r0, [r5, #0]
+   73612:	f000 f98d 	bl	73930 <r1_stock_i2c5_acquire+0x23458>
+   73616:	6820      	ldr	r0, [r4, #0]
+   73618:	9000      	str	r0, [sp, #0]
+   7361a:	6860      	ldr	r0, [r4, #4]
+   7361c:	9001      	str	r0, [sp, #4]
+   7361e:	68a0      	ldr	r0, [r4, #8]
+   73620:	9002      	str	r0, [sp, #8]
+   73622:	220c      	movs	r2, #12
+   73624:	4669      	mov	r1, sp
+   73626:	6828      	ldr	r0, [r5, #0]
+   73628:	f000 f99e 	bl	73968 <r1_stock_i2c5_acquire+0x23490>
+   7362c:	bd3e      	pop	{r1, r2, r3, r4, r5, pc}

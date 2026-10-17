@@ -725,6 +725,250 @@
           "Unused list-tail bytes, invalid/partial event pointers, original compiler output and whole-image completeness remain open."
         ],
         "instruction_identity_proven": false
+      },
+      "native_event_multicast": {
+        "report": "r1/research/source-build/native-event-multicast/report.json",
+        "verification": "r1/research/source-build/native-event-multicast/verification.json",
+        "compiled_bodies": 1,
+        "native_code_bytes": 202,
+        "native_exact_verification_bytes": 212,
+        "comparisons": 4550,
+        "remaining_main_imports": 83,
+        "gates": [
+          "Subscriber mutex lock/unlock and current-thread thunk remain explicit provider imports.",
+          "Subscriber root table extent and initialization owner remain unresolved. Two stride-8 route records are observed; their symbolic task-context ownership remains open.",
+          "Provider/callback/memmove/heap/publish execution is fixture-backed in this receipt; caller and actual provider composition remain unresolved.",
+          "Unchecked event index and context dereference, truncated allocation versus full copy length, post-callback traversal mutation are preserved; fault/private history coverage remains open.",
+          "Original compiler/final placement and whole-image source and byte identity remain unresolved."
+        ]
+      },
+      "native_subscriber_sync": {
+        "report": "r1/research/source-build/native-subscriber-sync/report.json",
+        "verification": "r1/research/source-build/native-subscriber-sync/verification.json",
+        "compiled_bodies": 3,
+        "native_code_bytes": 46,
+        "native_exact_verification_rom_bytes": 88,
+        "typed_ram_bytes": 84,
+        "comparisons": 13824,
+        "remaining_main_imports": 80,
+        "gates": [
+          "Local lock/unlock and current-thread thunk now link against existing source CMSIS/FreeRTOS providers; actual scheduling/provider execution remains fixture-backed in this receipt.",
+          "Source owns only the authenticated4-byte mutex handle,80-byte static control block,16-byte CMSIS attribute record and12-byte name. Full root/route ownership and final adjacency remain unresolved.",
+          "Final scatter integration, original compiler/placement, raw private histories, multicast-to-provider composition and whole-image source and byte identity remain unresolved."
+        ]
+      },
+      "native_subscriber_registration": {
+        "report": "r1/research/source-build/native-subscriber-registration/report.json",
+        "verification": "r1/research/source-build/native-subscriber-registration/verification.json",
+        "composed_verification": "r1/research/source-build/native-subscriber-registration/composed-verification.json",
+        "compiled_bodies": 1,
+        "native_code_bytes": 146,
+        "native_exact_verification_rom_bytes": 172,
+        "joint_exact_rom_bytes": 472,
+        "typed_ram_bytes": 20,
+        "direct_comparisons": 4800,
+        "composed_workflows": 2430,
+        "remaining_main_imports": 78,
+        "gates": [
+          "Registration bounds five root slots, backed by20 source-owned cold-zero bytes at20015708; multicast still accepts unchecked indices, so arbitrary-index adjacency and faults remain open.",
+          "Two typed route records use symbolic existing sensor/system thread-field owners; final context placement and scatter integration remain unresolved.",
+          "Registration, multicast and local sync wrappers execute together; heap/memmove/CMSIS/publish/task lookup remain fixtures in composition.",
+          "Allocation failure BASEPRI64 plus invalid store is retained and tested; complete raw private histories, original compiler/final placement and whole-image source and byte identity remain unresolved."
+        ]
+      },
+      "native_subscriber_consume": {
+        "report": "r1/research/source-build/native-subscriber-consume/report.json",
+        "verification": "r1/research/source-build/native-subscriber-consume/verification.json",
+        "delivery_verification": "r1/research/source-build/native-subscriber-consume/delivery-verification.json",
+        "compiled_bodies": 1,
+        "native_code_bytes": 58,
+        "native_exact_verification_rom_bytes": 60,
+        "joint_exact_rom_bytes": 532,
+        "new_ram_state_bytes": 0,
+        "direct_comparisons": 27651,
+        "composed_workflows": 2430,
+        "remaining_main_imports": 77,
+        "gates": [
+          "Destructive packet traversal preserves fresh packet-head reads after callbacks and callback r1=function-address behavior; all raw dispatcher-to-callback history remains unverified.",
+          "Registration, multicast, local sync wrappers and consumer execute in composed workflows. Packet delivery is modeled by copying captured publish packets; actual CMSIS queue/scheduling remains open.",
+          "Heap/memmove/CMSIS/publish/current-task and application callbacks remain fixtures. Packet length is not consumed as a traversal bound; malformed/cyclic/private histories remain open.",
+          "Original compiler/final placement and whole-image source/byte equality remain unresolved."
+        ]
+      },
+      "native_health_daily_fixture": {
+        "report": "r1/research/source-build/native-health-daily-fixture/report.json",
+        "verification": "r1/research/source-build/native-health-daily-fixture/verification.json",
+        "compiled_bodies": 2,
+        "native_code_bytes": 786,
+        "native_exact_verification_rom_bytes": 1192,
+        "comparisons": 13568,
+        "remaining_main_imports": 79,
+        "gates": [
+          "Core8B378 is compiled through its contiguous return at8B686 with inline typed strings/literals through8B818. Frozen noncontiguous aggregate range includes notification tails, which remain explicit imports.",
+          "Native log-prefix expression retains28 records relative to existing __start_log_const_data; shared global stop is not changed. Final full log-section/configuration layout remains open.",
+          "Fixture overwrites saved argument slots with logging arguments/cache addresses; native tail and return registers are preserved. Signed random remainders, wrapped hour arithmetic and late writes beyond24 buckets remain unchecked as native.",
+          "Reused native-libc-primitives rand is source-linked; initial seed/startup state ownership remains unresolved. Direct daily tests fixture PRNG/time/log/cache/notification providers, with separate actual temperature accessor execution.",
+          "No full daily-cache extent or new RAM ownership is claimed. Actual provider/caller composition, malformed/private histories, original compiler/final placement and whole-image source/byte equality remain unresolved."
+        ]
+      },
+      "native_health_daily_logging": {
+        "report": "r1/research/source-build/native-health-daily-logging/report.json",
+        "verification": "r1/research/source-build/native-health-daily-logging/verification.json",
+        "composed_verification": "r1/research/source-build/native-health-daily-logging/composed-verification.json",
+        "compiled_bodies": 3,
+        "native_code_bytes": 562,
+        "native_exact_verification_rom_bytes": 912,
+        "joint_exact_rom_bytes": 2104,
+        "direct_comparisons": 7104,
+        "composed_comparisons": 576,
+        "remaining_main_imports": 76,
+        "gates": [
+          "Three prior notify imports are diagnostic logging tails, not packet publication. They now execute with the daily fixture; logging frontend/mode/cache/time/PRNG providers remain fixtures.",
+          "Native24-row loop, min/average/max argument order, temperature+250 display offsets, mutable mode reads and overwritten saved r1-r3 are retained. Raw return may be mode<<30 or logger result; no conventional status is substituted.",
+          "Shared28-record log prefix remains symbolic. No new RAM or full cache-extent ownership is claimed.",
+          "Actual log frontend/cache/runtime composition, PRNG seed/configuration, malformed/private histories, original compiler/final layout and whole-image source/byte equality remain unresolved."
+        ]
+      },
+      "native_health_service_wrappers": {
+        "report": "r1/research/source-build/native-health-service-wrappers/report.json",
+        "verification": "r1/research/source-build/native-health-service-wrappers/verification.json",
+        "compiled_bodies": 7,
+        "native_code_bytes": 208,
+        "native_exact_verification_rom_bytes": 354,
+        "comparisons": 18656,
+        "remaining_main_imports": 72,
+        "gates": [
+          "Sleep sync guard wrapper is source-linked but backend5B6F4 remains explicit import; positive pointer/length guard is not full input validation.",
+          "Two source bridges execute actual state publish helpers; publisher remains a fixture here. Low-byte0/1 acceptance, stack payload and full-word stack mutation effects are retained.",
+          "Status logging and null-buffer diagnostics retain mutable mode reads, symbolic28-record log prefix and raw mode-shift/logger returns; no new status convention is introduced.",
+          "No-op callback preserves original registers. No RAM/configuration owner is added.",
+          "Actual backend/publisher/logging/caller composition, malformed/private histories, full section configuration, original compiler/final placement and whole-image source/byte equality remain unresolved."
+        ]
+      },
+      "native_sleep_sync_status": {
+        "report": "r1/research/source-build/native-sleep-sync-status/report.json",
+        "verification": "r1/research/source-build/native-sleep-sync-status/verification.json",
+        "compiled_bodies": 1,
+        "native_code_bytes": 228,
+        "native_exact_verification_rom_bytes": 412,
+        "joint_exact_rom_bytes": 766,
+        "new_ram_state_bytes": 12,
+        "direct_comparisons": 17456,
+        "wrapper_comparisons": 17456,
+        "remaining_main_imports": 71,
+        "gates": [
+          "Source owns only the authenticated12-byte zero-initialized sleep context prefix at200067B4; full context, callback table and runtime registration remain unresolved.",
+          "Read24-byte header buffer is cleared once per invocation, so partial reads retain previous data; read return is ignored. Count is low8(length/12), trailing bytes ignored.",
+          "Matching words compare against fresh record fields after read; write uses captured address+20 and fresh callback table, passing retained marker11223344. Write nonzero logs failure without stopping subsequent records.",
+          "Actual wrapper/backend execute together. Read/write, memclear and logging providers are fixtures; no physical storage operations occur.",
+          "Full raw private histories, malformed pointers/cycles, runtime/scatter integration, original compiler/final placement and whole-image source/byte equality remain unresolved."
+        ]
+      },
+      "native_sleep_record": {
+        "report": "r1/research/source-build/native-sleep-record/report.json",
+        "verification": "r1/research/source-build/native-sleep-record/verification.json",
+        "compiled_bodies": 5,
+        "native_code_bytes": 482,
+        "native_exact_verification_rom_bytes": 924,
+        "comparisons": 17429,
+        "remaining_main_imports": 72,
+        "gates": [
+          "Record store permits length0, rejects lengths>3888 and null input when initialized, treats any nonzero init byte as initialized and does not recheck after callbacks.",
+          "At most two writes, with UINT32_MAX select invoking fallback and low8 sector id passed to writer. Two zero results execute actual erase-all/count source before returning0; nonzero write succeeds.",
+          "Event wrapper uses low16(u16(payload+30)+32), and successful storage tail-calls throttle(kind6). Actual throttle remains fixture-backed here.",
+          "Erase/count reuse the existing12-byte sleep context prefix; count is low8(region_size>>12). Each erase reloads region base/operation table; runtime metadata/ops ownership remains unresolved.",
+          "Sector select/fallback/write, indirect erase/log/throttle are fixtures. No physical storage writes occur. Full caller/provider/private histories, original compiler/final layout and whole-image source/byte equality remain unresolved."
+        ]
+      },
+      "native_sleep_sector_select": {
+        "report": "r1/research/source-build/native-sleep-sector-select/report.json",
+        "verification": "r1/research/source-build/native-sleep-sector-select/verification.json",
+        "compiled_bodies": 2,
+        "native_code_bytes": 346,
+        "native_exact_verification_rom_bytes": 536,
+        "joint_exact_rom_bytes": 556,
+        "remaining_main_imports": 70,
+        "gates": [
+          "Select accepts erased word0, both words1/2 erased, or native magic with mismatched second magic. Result uses signed-byte sector index; UINT32_MAX remains no-candidate sentinel.",
+          "Fallback chooses first strict unsigned minimum word2, defaults0 if none, converts selected index to uint8, rereads count then clamps invalid index0, always issues erase even count0.",
+          "Both use16-byte buffer zeroed once; partial reads retain prior words and read return is ignored. Initial count is captured, while base/ops reload each I/O.",
+          "Existing source count helper executes; read/erase/mode/log providers remain fixtures. No new RAM/context owner or physical storage operation occurs.",
+          "Record writer8FE98, full metadata/ops registration, actual I/O composition, malformed/private histories, original compiler/final placement and whole-image source/byte equality remain unresolved."
+        ],
+        "comparisons": 25712
+      },
+      "native_sleep_sector_write": {
+        "report": "r1/research/source-build/native-sleep-sector-write/report.json",
+        "verification": "r1/research/source-build/native-sleep-sector-write/verification.json",
+        "compiled_bodies": 1,
+        "native_code_bytes": 508,
+        "native_exact_verification_rom_bytes": 913,
+        "comparisons": 5760,
+        "remaining_main_imports": 70,
+        "gates": [
+          "Writer includes contiguous8FE98..90093, including success code beyond frozen366-byte noncontiguous range; frozen corpus and ownership ledger are unchanged.",
+          "Eight24-byte header slots, once-cleared retained partial-read scratch, low16 aligned size mask65532 and wrapped capacity arithmetic are retained. Payload bytes10/12/16 and CRC are loaded after data-write callback mutations.",
+          "Data/header write callbacks treat0 as success. Header serializes20 bytes, retaining unread/unchanged fields. Fresh callback tables are loaded for data/header writes.",
+          "Capacity failure invokes finalize but discards its result and returns0; success at slot7 returns finalize raw result, while earlier success returns1. Finalizer901E4 remains explicit import.",
+          "I/O, memclear, CRC, mode/log and finalizer are fixtures in direct receipt. Full record/allocator/provider composition, context registration, malformed/private histories, compiler/final placement and whole-image source/byte equality remain unresolved."
+        ]
+      },
+      "native_sleep_sector_finalize": {
+        "report": "r1/research/source-build/native-sleep-sector-finalize/report.json",
+        "verification": "r1/research/source-build/native-sleep-sector-finalize/verification.json",
+        "composed_verification": "r1/research/source-build/native-sleep-sector-finalize/composed-verification.json",
+        "compiled_bodies": 1,
+        "native_code_bytes": 192,
+        "native_exact_verification_rom_bytes": 292,
+        "joint_exact_rom_bytes": 1225,
+        "direct_comparisons": 18432,
+        "composed_comparisons": 176,
+        "remaining_main_imports": 69,
+        "gates": [
+          "Finalizer captures target base before scanning, captures initial source count, scans with fresh region/ops and retains partial16-byte header data, ignoring read returns.",
+          "Strict unsigned minimum word2, all-erased/default0 then increment, magic pair and zero flag are preserved. Fresh ops are loaded for final16-byte header write;0 callback result maps to boolean1.",
+          "Writer/finalizer/count execute together for capacity failure and slot7 completion, preserving distinct return behavior. I/O/memclear/CRC/mode/log remain fixtures.",
+          "No new RAM owner. Local chain is now tested under the bounded image contract in native-sleep-storage-chain; actual I/O/runtime metadata/ops registration, malformed/private histories, original compiler/final placement and whole-image source/byte equality remain unresolved."
+        ],
+        "local_fixture_backed_chain_composition": "r1/research/source-build/native-sleep-storage-chain/verification.json"
+      },
+      "native_sleep_storage_chain": {
+        "verification": "r1/research/source-build/native-sleep-storage-chain/verification.json",
+        "proof_elf": "r1/research/source-build/native-sleep-storage-chain/source-chain-proof.elf",
+        "proof_layout": "r1/research/source-build/native-sleep-storage-chain/source-chain-layout.ld",
+        "workflows": 1152,
+        "record_comparisons": 12384,
+        "native_exact_storage_bytes": 2665,
+        "native_exact_checksum_table_bytes": 1536,
+        "source_crc_text_bytes": 516,
+        "remaining_main_imports": 69,
+        "gates": [
+          "Actual local event/record/select/fallback/writer/finalizer/erase/count and compiled C CRC execute together against an independent repeated-append/image/error oracle. Controlled cases use1..3 sectors, valid32/64/512/3888-byte records, up to25 appends, log modes0/7 and six error plans.",
+          "I/O is a mutable image contract, not physical flash; callbacks perform full reads and assignment writes, with modeled failures and erase. Memclear/mode/log/throttle remain fixtures. Runtime registration and hardware/programming semantics remain open.",
+          "Compiled C CRC text is placed at its native entry for this isolated test and overlaps unused native CRC32/hash routines. The proof verifies typed composition and generated tables, not whole-image placement or raw private-stack identity.",
+          "Context is compiled source but initialized/mutated by controlled runtime inputs; actual metadata/ops registration is unresolved.",
+          "Whole firmware source completeness, final compiler/scatter/link placement, device execution and whole-image byte identity remain unresolved."
+        ]
+      },
+      "native_sleep_report": {
+        "report": "r1/research/source-build/native-sleep-report/report.json",
+        "verification": "r1/research/source-build/native-sleep-report/verification.json",
+        "chain_verification": "r1/research/source-build/native-sleep-report-chain/verification.json",
+        "compiled_bodies": 1,
+        "native_code_bytes": 434,
+        "native_exact_verification_rom_bytes": 1029,
+        "direct_comparisons": 9458,
+        "chain_workflows": 864,
+        "chain_report_comparisons": 4320,
+        "chain_native_exact_storage_bytes": 3694,
+        "remaining_main_imports": 68,
+        "gates": [
+          "Four field groups use fresh payload reads after mode callbacks, and reuse saved r1-r3 stack slots for log arguments. Unsigned end-start below3600 is rejected; publication length is low16(u16 stages+32).",
+          "Publish2000 nonzero result is returned raw. Zero logs then tail-calls actual storage event wrapper in chain receipt. Direct unit keeps publication/storage fixtures and verifies native pointer faults.",
+          "Report, storage wrappers/record/allocator/writer/finalizer/erase/count and compiled C CRC execute together under bounded repeated-append/image/error oracle. Publish acceptance is modeled; no actual queue delivery is proven.",
+          "I/O image, publish/memclear/mode/log/throttle remain fixtures. Isolated C CRC placement overlaps unused native CRC32/hash routines and is not final image placement.",
+          "Runtime metadata/ops binding, malformed/private histories, actual provider/hardware execution, original compiler/final layout and whole-image source/byte equality remain unresolved."
+        ]
       }
     },
     {
@@ -6302,6 +6546,876 @@
       "Native7518a sets bit6 of register0x17; it must not be silently mapped to pinned ST CTRL_REG7 at0x3f.",
       "17 ST bodies explicitly externalize their local byte to native saved-r3 scratch; original vendor checkout remains unproven.",
       "Only transport callbacks are fixtures; full private callback frames, arbitrary faults/aliases, full raw ABI, actual sensor/bus, instruction and image identity remain unproven."
+    ]
+  },
+  "native_lis_setup_checkpoint": {
+    "report": "native-lis-setup/report.json",
+    "verification": "native-lis-setup/verification.json",
+    "comparisons": 26000,
+    "attributed_upstream_body_count": 2,
+    "native_reconstructed_body_count": 2,
+    "unresolved_imports": 29,
+    "whole_image_complete": false,
+    "gates": [
+      "Top-level LIS configuration and interrupt routing remain unresolved.",
+      "Native power encoding differs from modern ST; second-read failure still writes and returns summed wrapping status.",
+      "Register0x17 bit6 effect is implemented from native evidence but its semantic name remains unproven.",
+      "Only transport callbacks are fixtures; full callback/private frames, arbitrary aliases/faults, raw ABI, live sensor/bus, original compiler/placement and whole-image identity remain unproven."
+    ]
+  },
+  "native_lis_configure_candidate_checkpoint": {
+    "report": "native-lis-configure/report.json",
+    "failed_composition_probe": "native-lis-configure/composed-frame-probe.json",
+    "compiled_candidate_imports": 28,
+    "latest_verified_parent_imports": 29,
+    "composed_runtime_verified": false,
+    "source_owned_log_text_bytes": 104,
+    "whole_image_complete": false,
+    "gates": [
+      "The composed graph first differs at the reset-set read: native bus request record2003cf80 versus source2003cf70; data pointer2003cfb0 and record bytes match.",
+      "Return, context, outer40 local bytes, register model and poll count match only the retained first failing case; do not generalize or normalize request addresses.",
+      "Attributed/native C kernels add private frames below native API scratch. Resolve call boundaries before promoting configuration or full transport composition.",
+      "Logging, delay and bus operations are explicit test fixtures; original compiler/placement, full raw ABI, live sensors and whole-image identity remain unproven."
+    ],
+    "superseded_by": "native-lis-call-frames/verification.json"
+  },
+  "native_lis_call_frames_checkpoint": {
+    "report": "native-lis-call-frames/report.json",
+    "verification": "native-lis-call-frames/verification.json",
+    "composed_comparisons": 51840,
+    "direct_regression_comparisons": 94419,
+    "unresolved_imports": 28,
+    "closed_parent_imports": [
+      "r1_lis2dw12_configure_boundary"
+    ],
+    "source_owned_log_text_bytes": 104,
+    "superseded_failure": "native-lis-configure/composed-frame-probe.json",
+    "whole_image_complete": false,
+    "gates": [
+      "Actual configuration,22 native frame bridges,pure ST assignments,FIFO,default transports and registry execute; bus/custom-read/delay/log callbacks are fixtures.",
+      "Full private frame history and full raw ABI remain unproven despite matching bus request and register-data API pointers; pointers are not normalized.",
+      "LIS interrupt routing auxiliary providers, other sensors and actual hardware remain unresolved.",
+      "Pinned source attribution is retained; original vendor checkout, compiler/placement,instruction and whole-image identity remain unproven."
+    ]
+  },
+  "native_lis_aux_checkpoint": {
+    "report": "native-lis-aux/report.json",
+    "verification": "native-lis-aux/verification.json",
+    "route_verification": "native-lis-aux/route-verification.json",
+    "composed_comparisons": 4320,
+    "direct_comparisons": 73468,
+    "exhaustive_ctrl4_ctrl5_pairs": 65536,
+    "matching_firmware_faults": 108,
+    "unresolved_imports": 26,
+    "closed_parent_imports": [
+      "r1_lis2dw12_aux16_boundary",
+      "r1_lis2dw12_aux20_boundary"
+    ],
+    "source_owned_log_text_bytes": 164,
+    "whole_image_complete": false,
+    "gates": [
+      "All selected LIS native providers are now source-linked; actual sensor/bus execution remains unproven.",
+      "Tap auxiliary wrappers ignore transport failures and always return1; this is native behavior, not proof of successful sensor setup.",
+      "Enable75290 is a frozen manual-provenance supplement, not a newly discovered Ghidra function; REA exact bytes and native disassembly remain its evidence.",
+      "Full private histories, full raw ABI, original vendor checkout, compiler/placement, instruction and whole-image identity remain unproven."
+    ]
+  },
+  "native_bma_interface_checkpoint": {
+    "report": "native-bma-interface/report.json",
+    "verification": "native-bma-interface/verification.json",
+    "comparisons": 4437,
+    "matching_faults": 1080,
+    "unresolved_imports": 26,
+    "source_initialized_address_bytes": 4,
+    "typed_context_candidate_bytes": 52,
+    "whole_image_complete": false,
+    "gates": [
+      "BMA identity/FIFO/configuration providers remain unresolved; this stage prepares their actual transport/interface dependencies.",
+      "Pinned Bosch ARM context layout matches observed field offsets; full native allocation extent remains unproven.",
+      "Actual interface/default callbacks, attributed null-check, motion requests and registry execute; bus and cycle callbacks are fixtures.",
+      "Feature-register path and scratch-buffer histories require correlation before upstream generic register reads can replace the native body.",
+      "Full raw ABI/private history, live sensors/bus, original compiler/placement,instruction and whole-image identity remain unproven."
+    ]
+  },
+  "native_bma_reads_checkpoint": {
+    "report": "native-bma-reads/report.json",
+    "verification": "native-bma-reads/verification.json",
+    "comparisons": 7092,
+    "matching_faults": 150,
+    "unresolved_imports": 27,
+    "closed_parent_imports": [
+      "r1_bma456w_identity_probe"
+    ],
+    "newly_exposed_imports": [
+      "r1_bma4_feature_chunk_read_boundary",
+      "r1_bma4_set_advance_power_save_boundary"
+    ],
+    "source_owned_log_text_bytes": 148,
+    "whole_image_complete": false,
+    "gates": [
+      "Actual identity,interface,null check,read dispatcher,direct callback/copy,power getter,default bus requests and registry execute; bus/raw/log and two unresolved feature helpers are fixtures.",
+      "Feature chunk read87e58 and advance-power-save setter5468e remain explicit provider leaves, not compiled SDK-body proof.",
+      "Native128-byte callback buffer is not clamped; oversized callback writes, full16-bit index wrap/private histories and arbitrary aliases remain unproven.",
+      "Raw callback R0 is tested at full width and stored low byte into status; typed upstream callback compatibility does not prove arbitrary raw ABI inputs.",
+      "Full native context extent, original vendor checkout, live sensor/bus, full ABI, compiler/placement,instruction and whole-image identity remain open."
+    ]
+  },
+  "native_bma_feature_io_checkpoint": {
+    "report": "native-bma-feature-io/report.json",
+    "verification": "native-bma-feature-io/verification.json",
+    "comparisons": 11902,
+    "matching_faults": 140,
+    "continued_after_error_cases": 160,
+    "unresolved_imports": 25,
+    "closed_parent_imports": [
+      "r1_bma4_feature_chunk_read_boundary",
+      "r1_bma4_set_advance_power_save_boundary"
+    ],
+    "newly_exposed_imports": [],
+    "whole_image_complete": false,
+    "gates": [
+      "Actual seven new bodies plus public feature reads,existing read/copy/nullcheck,default callbacks,requests and registry execute; only transport and delay callbacks are fixtures.",
+      "Full chunk loops continue after errors and advance index only after transfer+increment success;16-bit wrap and zero transfer-size division are emulator observations under default divide behavior.",
+      "BMA product configuration and FIFO providers remain unresolved.",
+      "Full private histories/raw ABI,arbitrary large lengths/aliases,actual sensors/bus/delay,original vendor checkout/compiler/placement,instruction and whole-image identity remain unproven."
+    ]
+  },
+  "native_bma_fifo_checkpoint": {
+    "report": "native-bma-fifo/report.json",
+    "verification": "native-bma-fifo/verification.json",
+    "comparisons": 76397,
+    "matching_faults": 6,
+    "exhaustive_wire_lengths": 65536,
+    "unresolved_imports": 24,
+    "closed_parent_imports": [
+      "r1_bma456w_fifo_read"
+    ],
+    "newly_exposed_imports": [],
+    "source_owned_log_text_bytes": 272,
+    "whole_image_complete": false,
+    "gates": [
+      "Actual FIFO/get-length/raw-byte transfer/normalizer/read-write/power-save/default requests and registry execute; transport/delay/cycle/log callbacks are fixtures.",
+      "Native failures preserve0 for disable/restore errors and-1 for read errors without invented restoration.",
+      "Partial bus fixture payloads bound large wire-count tests; arbitrary buffers/count aliasing and full private stack histories/raw ABI remain unproven.",
+      "BMA product configuration, actual sensors/bus, original vendor checkout/compiler/placement,instruction and whole-image identity remain open."
+    ]
+  },
+  "native_bma_setup_checkpoint": {
+    "report": "native-bma-setup/report.json",
+    "setup_verification": "native-bma-setup/setup-verification.json",
+    "validator_verification": "native-bma-setup/validator-verification.json",
+    "private_input_alias_gate": "native-bma-setup/private-input-frame-alias-probe.json",
+    "setter_comparisons": 6966,
+    "validator_comparisons": 262144,
+    "matching_faults": 729,
+    "unresolved_imports": 24,
+    "whole_image_complete": false,
+    "gates": [
+      "Failed private-stack input alias at2003cfef remains: config40 payload native00/source11; no input or pointer normalized. Scoped setter tests use caller-owned RAM inputs.",
+      "Full original placement/private frame/raw ABI remain unproven; standalone validator R0 proofs do not prove nested private-frame alias histories.",
+      "BMA product configuration604-byte wrapper and initialization chain remain unresolved.",
+      "Native variant init543c4 copies8 literal bytes for6 remap fields; trailing2 bytes and raw restoredr2/r3 ownership need correlation.",
+      "Actual sensor/bus/delay,original vendor checkout/compiler/placement,instruction and whole-image identity remain open."
+    ]
+  },
+  "native_bma_initialize_checkpoint": {
+    "report": "native-bma-initialize/report.json",
+    "verification": "native-bma-initialize/verification.json",
+    "partial_read_history_gate": "native-bma-initialize/partial-read-history-probe.json",
+    "comparisons": 13248,
+    "matching_faults": 3,
+    "unresolved_imports": 23,
+    "closed_parent_imports": [
+      "r1_bma456w_configure_boundary"
+    ],
+    "newly_exposed_imports": [],
+    "diagnostic_data_bytes": 724,
+    "observed_remap_read_span_bytes": 8,
+    "whole_image_complete": false,
+    "gates": [
+      "Partial successful two-byte FIFO configuration reads remain divergent: native register49 payload80/source00 with matching pointers,return and context. Passing configuration scope requires complete successful reads.",
+      "Prior private-stack configuration input alias gate remains open.",
+      "Observed remap span owns6 typed default bytes+2 following literal bytes802e under native read contract; following-byte semantic origin remains unproven.",
+      "All selected Bosch provider bodies are source-linked; full context/private history/raw ABI,actual hardware,original vendor checkout/compiler/placement,instruction and whole-image identity remain unproven."
+    ]
+  },
+  "native_qma_transport_checkpoint": {
+    "report": "native-qma-transport/report.json",
+    "verification": "native-qma-transport/verification.json",
+    "comparisons": 17074,
+    "matching_faults": 2,
+    "unresolved_imports": 20,
+    "closed_parent_imports": [
+      "r1_qma6100_bounded_fifo_read",
+      "r1_qma6100_chip_id",
+      "r1_qma6100_irq_boundary"
+    ],
+    "newly_exposed_imports": [],
+    "cold_source_runtime_bytes": 12,
+    "source_text_bytes": 144,
+    "whole_image_complete": false,
+    "gates": [
+      "Actual native QMA transport,chip-ID,IRQ,FIFO,normalizer,requests and registry execute;bus/cycle/log/event callbacks are fixtures.",
+      "Existing owner-authorized hardened QMA reconstruction is comparison evidence,not substituted for native ignored-error/unwritten-byte contracts. No unlicensed QST source is compiled.",
+      "Configuration and sensor-state2001e4b0 remain unresolved; runtime address20007698 is distinct and must not be silently unified.",
+      "Full private history/raw ABI,sensor state extent,actual sensors/bus/timing,compiler/placement,instruction and whole-image identity remain unproven; prior Bosch/NV/health/DFU gates persist."
+    ]
+  },
+  "native_qma_configuration_checkpoint": {
+    "report": "native-qma-configuration/report.json",
+    "verification": "native-qma-configuration/verification.json",
+    "comparisons": 5806,
+    "unresolved_imports": 19,
+    "closed_parent_imports": [
+      "r1_qma6100_configure_boundary"
+    ],
+    "newly_exposed_imports": [],
+    "source_sensor_prefix_bytes": 24,
+    "source_axis_default_bytes": 12,
+    "whole_image_complete": false,
+    "gates": [
+      "All seven configuration bodies, existing transports, requests and registry execute; only bus/cycle callbacks are fixtures.",
+      "Composed successful-but-unwritten reads expose private stack history: native final register19 payloadFB/sourceF3, returns1 match; candidate and complete failed trace preserved. Passing scope excludes composed setup/configuration with active bus leaving reads unwritten.",
+      "Native sensor address2001e4b0 is source-owned and remains distinct from transport runtime address20007698. Full sensor object extent is unproven.",
+      "No unlicensed QST source is compiled; portable hardened source remains comparison evidence only.",
+      "Full private history/raw ABI, physical sensor/bus/timing, compiler/placement/instruction/whole-image identity and all previous Bosch/NV/health/DFU gates remain open."
+    ]
+  },
+  "native_temperature_checkpoint": {
+    "report": "native-temperature/report.json",
+    "verification": "native-temperature/verification.json",
+    "comparisons": 69964,
+    "unresolved_imports": 18,
+    "selected_graph_existing_imports": 11,
+    "closed_parent_imports": [
+      "r1_temperature_pair_read_calibrated"
+    ],
+    "newly_exposed_imports": [],
+    "source_cold_calibration_bytes": 6,
+    "source_diagnostic_bytes": 100,
+    "whole_image_complete": false,
+    "gates": [
+      "Passing eight-body tests use explicit GXT bus/mode/registry,NV,RTOS and log fixtures; actual whole source consumer graph is not proven.",
+      "Actual GXT composition exposes native first write data pointer2003cfc8/source2003cfcc; payload00C20000 and final raw19795 match. Complete unnormalized probe and immutable candidate retained.",
+      "Cold-data audit corrected initialFF calibration initializer to native zero and reran build/verification; earlier candidate and correction hashes preserved.",
+      "No guessed or unlicensed vendor source is compiled; existing attributable providers remain linked.",
+      "Full private frame/raw ABI,original toolchain/placement,instruction/whole-image identity,sensor hardware and prior QMA/Bosch/NV/health/DFU gates remain unresolved."
+    ]
+  },
+  "native_gxt_call_frames_checkpoint": {
+    "report": "native-gxt-call-frames/report.json",
+    "verification": "native-gxt-call-frames/verification.json",
+    "comparisons": 5376,
+    "temperature_compositions": 3456,
+    "unresolved_imports": 18,
+    "selected_graph_existing_imports": 11,
+    "replaced_provider_count": 5,
+    "closed_parent_imports": [],
+    "newly_exposed_imports": [],
+    "whole_image_complete": false,
+    "gates": [
+      "Previous four-byte GXT mode buffer-pointer mismatch is superseded within5376 direct/composed cases without pointer normalization; original failed candidate and trace remain immutable.",
+      "Actual temperature,GXT bus/mode providers execute; registry dispatch,NV,RTOS delay and log callbacks remain fixtures.",
+      "Five parent symbol bindings weakened only in clone; all allocated section contents and all other symbols unchanged.",
+      "Full registry/NV/RTOS composition,all private history/raw ABI,original toolchain/placement,instruction/whole-image identity and physical sensor proof remain open.",
+      "QMA unwritten-read,Bosch partial-read/private-alias,NV,health and DFU gates persist."
+    ]
+  },
+  "native_event_table_prefixes_checkpoint": {
+    "report": "native-event-table-prefixes/report.json",
+    "verification": "native-event-table-prefixes/verification.json",
+    "comparisons": 1824,
+    "source_configuration_bytes": 164,
+    "unresolved_imports": 52,
+    "closed_parent_imports": [
+      "r1_native_event_table_sensor",
+      "r1_native_event_table_storage",
+      "r1_native_event_table_system"
+    ],
+    "new_callback_body_imports": 37,
+    "callback_frontier": "native-event-table-prefixes/callback-frontier.json",
+    "whole_image_complete": false,
+    "gates": [
+      "Only bounded observed prefixes are source-owned; native dispatch can read beyond them, so complete table extents/neighboring ownership remain unproven.",
+      "37 non-null callback bodies are explicit unresolved typed imports, not executable data or no-op stubs; no ownership function is promoted by table compilation alone.",
+      "Source dispatch and164 relocated table bytes match;callback/free bodies are fixtures in1824 cases.",
+      "REA procedure-object gaps and unavailable Ghidra GUI do not block frozen corpus/authenticated byte analysis.",
+      "Full callback/consumer composition,private/raw ABI,original compiler/placement,instruction/whole-image identity and prior QMA/Bosch/NV/health/DFU gates remain open."
+    ]
+  },
+  "native_event_callbacks_checkpoint": {
+    "report": "native-event-callbacks/report.json",
+    "verification": "native-event-callbacks/verification.json",
+    "callback_bodies_compiled": 37,
+    "reachable_native_code_bytes": 1766,
+    "unique_source_text_bytes": 815,
+    "comparisons": 53280,
+    "matching_faults": 792,
+    "unresolved_imports": 56,
+    "closed_parent_callback_imports": 37,
+    "new_service_imports": 41,
+    "selected_graph_imports": 49,
+    "service_frontier": "native-event-callbacks/service-frontier.json",
+    "whole_image_complete": false,
+    "gates": [
+      "All37 callback bodies execute in direct boundary tests;services/log/free are fixtures. No complete service implementation is implied.",
+      "Actual dispatcher composition exposesr2/r3 mismatch: native42857/98765432 vs source100080B/0, matchingr0/r1. Complete probe and old candidate preserved with no normalization.",
+      "C callback signatures now match typed tables; allocated code/data unchanged by declaration correction. Interior diagnostic suffix uses typed alias,not duplicate overlapping storage.",
+      "50 service targets are explicit:9 existing source providers and41 newly unresolved bodies; upstream body/ownership classifications remain unproven where no authenticated match exists.",
+      "Full table extents,all private/raw ABI,original compiler/placement,instruction/whole-image identity and prior QMA/Bosch/NV/health/DFU gates remain unresolved."
+    ]
+  },
+  "native_health_event_consumers_checkpoint": {
+    "report": "native-health-event-consumers/report.json",
+    "verification": "native-health-event-consumers/verification.json",
+    "consumer_bodies_compiled": 6,
+    "native_code_bytes": 236,
+    "comparisons": 92320,
+    "callback_compositions": 4032,
+    "matching_faults": 720,
+    "unresolved_imports": 57,
+    "selected_graph_imports": 7,
+    "closed_parent_imports": 6,
+    "newly_exposed_imports": 7,
+    "whole_image_complete": false,
+    "gates": [
+      "Six actual consumers and event callbacks execute; clock,storage,notification and log callbacks are fixtures. No outer dispatcher composition is claimed.",
+      "Timestamp rules,packed saved-r2/r3 fields and raw returns match within92320 cases including every16-bit temperature value. Low-byte-plus6 packing is preserved.",
+      "Seven explicit storage/notification bodies remain unresolved; no no-op substitute or invented provider body is supplied.",
+      "Host fixture bounds repair changed no native source; old runner/log and hashes are retained.",
+      "Outer dispatcher scratch/code-pointer,all private/raw ABI,original toolchain/placement,whole-image identity,hardware and prior QMA/Bosch/NV/health/DFU gates remain open."
+    ]
+  },
+  "native_health_notification_throttle_checkpoint": {
+    "report": "native-health-notification-throttle/report.json",
+    "verification": "native-health-notification-throttle/verification.json",
+    "native_code_bytes": 72,
+    "source_owned_cold_state_bytes": 4,
+    "comparisons": 15852,
+    "consumer_compositions": 2304,
+    "unresolved_imports": 61,
+    "selected_graph_imports": 5,
+    "closed_parent_imports": 1,
+    "new_stage_body_imports": 5,
+    "selected_byte_identity_proof": "native-health-notification-throttle/consumer-exact-spans-verification.json",
+    "selected_byte_identical_spans": 7,
+    "selected_byte_identical_bytes": 312,
+    "whole_image_complete": false,
+    "gates": [
+      "Independent unsigned threshold/state tests match through actual throttle and four consumers;gate,clock,report-stage and storage are fixtures.",
+      "Seven source code spans totaling312 bytes match exactly at native verification placement; consumer-to-throttle branch uses actual source symbol, external native dependency-address bindings are explicit. Whole provider/image identity is unproven.",
+      "Only last-send word200067A4 is source-owned; full native context extent is unproven.",
+      "Five explicit stage bodies remain unresolved; no no-op substitute or guessed third-party implementation is supplied.",
+      "Outer dispatcher scratch/raw ABI,all private histories,full context/table extents,original full toolchain/placement,whole-image/hardware proof and prior QMA/Bosch/NV/health/DFU gates remain open."
+    ]
+  },
+  "native_health_notification_stages_checkpoint": {
+    "report": "native-health-notification-stages/report.json",
+    "verification": "native-health-notification-stages/verification.json",
+    "controller_bodies_compiled": 5,
+    "native_instruction_bytes": 3400,
+    "selected_byte_identical_spans": 5,
+    "selected_byte_identical_bytes": 6313,
+    "source_unique_diagnostic_bytes": 2692,
+    "source_descriptor_prefix_bytes": 12,
+    "source_pending_bytes": 4,
+    "comparisons": 24360,
+    "unresolved_imports": 90,
+    "closed_parent_stage_imports": 5,
+    "newly_exposed_imports": 34,
+    "upstream_reuse_candidates": "native-health-notification-stages/upstream-reuse-candidates.json",
+    "whole_image_complete": false,
+    "gates": [
+      "Five compiled controller spans including typed literals/text and zero padding match6313 native bytes at verification placement; external provider/callback addresses are explicit bindings,not complete graph/image proof.",
+      "Heap/IO/time/database/builder/log APIs are fixtures; iterator and encoder callback bodies are not executed and remain explicit unresolved dependencies.",
+      "Only12 descriptor-prefix bytes and4 pending bytes are owned; complete descriptor/context extents remain gated.",
+      "FlashDB2.0.0 Apache-2.0 APIs are concrete candidates for63694/63CB4/63AD8; exact native struct/body/raw ABI and checkout identity remain unproven, and no new upstream source is compiled in this stage.",
+      "Original relocated candidate is immutable; source uses symbolic native instructions and typed inline data,not instruction-byte arrays.",
+      "Full provider/dispatcher composition,private/raw ABI,whole-image identity,hardware and prior dispatcher/QMA/Bosch/NV/health/DFU gates persist."
+    ]
+  },
+  "flashdb_query_count": {
+    "report": "native-flashdb-query-count/report.json",
+    "verification": "native-flashdb-query-count/verification.json",
+    "upstream_helpers": "native-flashdb-tsdb-kernels/verification.json",
+    "main_unresolved_imports": 89,
+    "native_verification_bytes": 171,
+    "whole_image_complete": false,
+    "gates": [
+      "Time iterator and printf are fixtures in the count execution comparison.",
+      "Native uninitialized count return is zero, differing from upstream FDB_INIT_FAILED.",
+      "Three pure C helpers retain caller-saved register differences; none promoted to main.",
+      "Original compiler, whole image source closure and byte identity remain unresolved."
+    ]
+  },
+  "flashdb_iterator": {
+    "report": "native-flashdb-iterator/report.json",
+    "verification": "native-flashdb-iterator/verification.json",
+    "main_unresolved_imports": 90,
+    "closed_import": "r1_health_sync_provider_00063ad8",
+    "new_read_imports": [
+      "r1_fdb_native_read_sector",
+      "r1_fdb_native_read_tsl"
+    ],
+    "comparisons": 948,
+    "actual_count_compositions": 468,
+    "new_native_verification_bytes": 592,
+    "joint_native_verification_bytes": 763,
+    "whole_image_complete": false,
+    "gates": [
+      "Sector/log reads, memory copy, lock callbacks, custom direct callbacks and printf are fixtures.",
+      "Actual source count -> iterator -> navigation/count callback composition executes at native verification placements.",
+      "Failed sector read with no output retains stale stack addressing; no clearing invented.",
+      "Native compiler, full private histories, whole-image layout/source closure/byte identity remain open."
+    ]
+  },
+  "flashdb_log_read": {
+    "report": "native-flashdb-log-read/report.json",
+    "verification": "native-flashdb-log-read/verification.json",
+    "direct_verification": "native-flashdb-log-read/direct-verification.json",
+    "main_unresolved_imports": 90,
+    "closed_import": "r1_fdb_native_read_tsl",
+    "new_import": "r1_fdb_native_partition_read",
+    "direct_comparisons": 29248,
+    "composed_comparisons": 948,
+    "new_native_verification_bytes": 126,
+    "joint_native_verification_bytes": 889,
+    "whole_image_complete": false,
+    "gates": [
+      "Partition read and sector read remain explicit source imports; fixtures in these scoped execution receipts.",
+      "Native log reader ignores flash-read status and uses uninitialized/partial stack bytes; preserved for tested prefixes and fills.",
+      "Actual count/iterator/log-read/flash-adapter/status-decoder/count-callback source composition executes.",
+      "Full private histories, original compiler/placement, whole-image source closure and identity remain unproven."
+    ]
+  },
+  "flashdb_sector_read": {
+    "report": "native-flashdb-sector-read/report.json",
+    "verification": "native-flashdb-sector-read/verification.json",
+    "direct_verification": "native-flashdb-sector-read/direct-verification.json",
+    "main_unresolved_imports": 89,
+    "closed_import": "r1_fdb_native_read_sector",
+    "direct_comparisons": 9615,
+    "assertion_loop_cases": 83,
+    "composed_comparisons": 948,
+    "new_native_verification_bytes": 513,
+    "joint_native_verification_bytes": 1402,
+    "whole_image_complete": false,
+    "gates": [
+      "Partition I/O remains an explicit import and fixture in these scoped execution receipts.",
+      "Actual count/iterator/sector/log/flash/status/callback source executes; copy, locks, custom direct callbacks and printf are fixtures.",
+      "Null sector and both-prewrite assertion loops are native loops observed through bounded emulator stops.",
+      "Original compiler/placement, full private histories and whole-image source/byte equality remain unresolved."
+    ]
+  },
+  "fal_partition_read": {
+    "report": "native-fal-partition-read/report.json",
+    "verification": "native-fal-partition-read/verification.json",
+    "direct_verification": "native-fal-partition-read/direct-verification.json",
+    "main_unresolved_imports": 89,
+    "closed_import": "r1_fdb_native_partition_read",
+    "new_import": "r1_fal_native_device_by_partition",
+    "direct_comparisons": 6863,
+    "assertion_loop_cases": 3,
+    "composed_comparisons": 948,
+    "new_native_verification_bytes": 460,
+    "joint_native_verification_bytes": 1862,
+    "whole_image_complete": false,
+    "gates": [
+      "Device lookup remains an explicit source import64F74; device read callback is fixture in scoped execution.",
+      "Actual TSDB count/iterator/sector/log/partition/flash/status/callback source executes.",
+      "Native wrapped bounds, fresh post-lookup offset, negative callback returns and assertions retained.",
+      "Original compiler/placement, full private histories and whole-image source/byte equality remain unresolved."
+    ]
+  },
+  "fal_device_lookup": {
+    "report": "native-fal-device-lookup/report.json",
+    "verification": "native-fal-device-lookup/verification.json",
+    "direct_verification": "native-fal-device-lookup/direct-verification.json",
+    "main_unresolved_imports": 88,
+    "closed_import": "r1_fal_native_device_by_partition",
+    "direct_comparisons": 17370,
+    "composed_comparisons": 948,
+    "reused_existing_state_bytes": 36,
+    "new_ram_bytes": 0,
+    "new_native_verification_bytes": 206,
+    "joint_native_verification_bytes": 2068,
+    "whole_image_complete": false,
+    "gates": [
+      "Device read callback remains a runtime fixture; source FAL lookup executes against initializer-owned sections.",
+      "Existing table/count/cache symbols globalized in parent clone; every allocated section and other symbol unchanged.",
+      "Native table pointer and count adjacency is constrained only in verification layout; final image linker placement remains open.",
+      "Native inclusive bounds, unaligned floor-index behavior and assertion loops preserved.",
+      "Full private histories, original compiler and whole-image source/byte equality remain unresolved."
+    ]
+  },
+  "fal_read_frames": {
+    "report": "native-fal-read-frames/report.json",
+    "verification": "native-fal-read-frames/verification.json",
+    "direct_verification": "native-fal-read-frames/direct-verification.json",
+    "main_unresolved_imports": 88,
+    "replacement_symbols": [
+      "r1_native_fal_device_read",
+      "r1_stock_dispatch_10"
+    ],
+    "direct_comparisons": 6144,
+    "native_fault_cases": 1536,
+    "composed_comparisons": 948,
+    "reused_existing_state_bytes": 16,
+    "new_ram_bytes": 0,
+    "new_native_verification_bytes": 66,
+    "joint_native_verification_bytes": 2134,
+    "whole_image_complete": false,
+    "gates": [
+      "Registry driver read remains a fixture; native FAL read adapter and registry dispatch now execute in source TSDB chain.",
+      "Existing parent clone weakens only two symbols; allocated sections and other symbol entries unchanged.",
+      "Native ignored driver error and saved requested length preserved; null operation-table fault behavior retained.",
+      "Final layout, full private histories, original compiler and whole-image equality remain unresolved."
+    ]
+  },
+  "internal_flash_read_frames": {
+    "report": "native-internal-flash-read-frames/report.json",
+    "verification": "native-internal-flash-read-frames/verification.json",
+    "direct_verification": "native-internal-flash-read-frames/direct-verification.json",
+    "main_unresolved_imports": 88,
+    "replacement_symbols": [
+      "r1_internal_flash_device_read",
+      "r1_internal_flash_mapped_read"
+    ],
+    "direct_comparisons": 3420,
+    "native_fault_cases": 420,
+    "composed_comparisons": 948,
+    "reused_existing_record_context_bytes": 100,
+    "new_ram_bytes": 0,
+    "new_native_verification_bytes": 92,
+    "joint_native_verification_bytes": 2226,
+    "whole_image_complete": false,
+    "gates": [
+      "Actual TSDB/FAL/registry/flash read policy/mapped copy source executes; no read I/O provider fixture in composed test.",
+      "Emulator flash contents, record/runtime bindings, copy/lock/custom callbacks and printf remain controlled fixtures; not physical flash data proof.",
+      "Native low16 length, callback mutation/faults and forward bytewise overlap preserved.",
+      "Only two old source provider symbols weakened in parent clone; allocated sections and other symbols unchanged.",
+      "Final layout, full private histories, original compiler, whole-image source closure and identity remain open."
+    ]
+  },
+  "flashdb_control": {
+    "report": "native-flashdb-control/report.json",
+    "verification": "native-flashdb-control/verification.json",
+    "main_unresolved_imports": 87,
+    "closed_import": "r1_health_sync_provider_00063694",
+    "comparisons": 5728,
+    "assertion_loop_cases": 971,
+    "fault_cases": 23,
+    "new_native_verification_bytes": 476,
+    "joint_native_verification_bytes": 490,
+    "symbolic_tbb_data_bytes": 12,
+    "whole_image_complete": false,
+    "gates": [
+      "Printf and zero low-ROM contents are fixtures in this scoped direct control receipt.",
+      "All command bytes and all init bytes checked; native exact true==1 guard and raw-byte setters preserved.",
+      "Source owns diagnostic text and symbolic jump offsets; no opcode arrays.",
+      "Source health-stage caller composition, full private histories, final layout/compiler and whole-image identity remain unresolved."
+    ]
+  },
+  "health_sample_storage": {
+    "report": "native-health-sample-storage/report.json",
+    "verification": "native-health-sample-storage/verification.json",
+    "contracts": "native-health-sample-storage/contracts.json",
+    "cold_prefix_evidence": "native-health-sample-storage/cold-prefix-evidence.json",
+    "main_unresolved_imports": 84,
+    "closed_imports": [
+      "r1_hr_event_storage",
+      "r1_hrv_event_storage",
+      "r1_spo2_event_storage",
+      "r1_stress_event_storage",
+      "r1_temperature_event_storage"
+    ],
+    "new_imports": [
+      "r1_health_storage_average",
+      "r1_health_storage_hour_index"
+    ],
+    "comparisons": 131365,
+    "native_code_bytes": 1136,
+    "native_verification_bytes": 2089,
+    "bounded_cold_zero_prefix_bytes": 473,
+    "whole_image_complete": false,
+    "gates": [
+      "Hour conversion, average and logging providers are fixtures in the direct receipt.",
+      "All byte values/all65536 HRV values, packet/cache aliases and provider mutations checked with independent cache oracle.",
+      "Prefix ownership is not a full context extent; native storage has no hour-index bounds guard.",
+      "Averaging row5 at20016670 aliases the stress cache first8 bytes; future helper must reuse those bytes.",
+      "Source event-consumer/averaging composition, full private histories, original compiler/layout and whole-image source/byte equality remain unresolved."
+    ]
+  },
+  "health_average": {
+    "report": "native-health-average/report.json",
+    "verification": "native-health-average/verification.json",
+    "composed_verification": "native-health-average/composed-verification.json",
+    "main_unresolved_imports": 82,
+    "closed_imports": [
+      "r1_health_storage_average",
+      "r1_health_storage_hour_index"
+    ],
+    "direct_comparisons": 35151,
+    "composed_comparisons": 5952,
+    "new_cold_zero_bytes": 40,
+    "reused_stress_prefix_bytes": 8,
+    "new_native_verification_bytes": 242,
+    "joint_native_verification_bytes": 2331,
+    "whole_image_complete": false,
+    "gates": [
+      "Actual average/hour and five storage bodies execute, including HRV/stress/HRV coupled row5 alias sequences.",
+      "UTC offset/calendar/log providers are fixtures in these scoped receipts.",
+      "Four FP rounding modes, count/sum wrap and partial calendar output behavior retained.",
+      "Final rows0-4/stress-prefix adjacency must be established by final linker placement; no second row5 owner.",
+      "Full cache contexts, private histories, source calendar/caller composition, original compiler and whole-image identity remain open."
+    ]
+  },
+  "calendar_frames": {
+    "report": "native-calendar-frames/report.json",
+    "verification": "native-calendar-frames/verification.json",
+    "storage_composed_verification": "native-calendar-frames/storage-composed-verification.json",
+    "main_unresolved_imports": 82,
+    "replacement_symbols": [
+      "r1_time_utc_offset_get",
+      "time_calendar_utc_to_calendar",
+      "time_calendar_unix_to_broken_down"
+    ],
+    "direct_comparisons": 89407,
+    "composed_comparisons": 5952,
+    "reused_existing_config_bytes": 92,
+    "new_ram_bytes": 0,
+    "new_native_frame_verification_bytes": 328,
+    "joint_native_verification_bytes": 2683,
+    "whole_image_complete": false,
+    "gates": [
+      "Actual offset/calendar/Unix source executes in storage/averaging chain; calendar is no longer a provider fixture in this receipt.",
+      "Controlled timezone/packet updates and logging remain fixtures; runtime state/record native placements are verification bindings.",
+      "Old C providers retained historically; parent clone changes only three function bindings and exposes two existing config symbols.",
+      "Complete contexts, full private histories, original compiler/final placement, hardware clock binding and whole-image source/byte equality remain open."
+    ]
+  },
+  "activity_storage": {
+    "report": "native-activity-storage/report.json",
+    "verification": "native-activity-storage/verification.json",
+    "composed_verification": "native-activity-storage/composed-verification.json",
+    "main_unresolved_imports": 81,
+    "closed_import": "r1_activity_event_storage",
+    "direct_comparisons": 88406,
+    "composed_comparisons": 3744,
+    "reused_existing_activity_cache_bytes": 576,
+    "reused_existing_config_total_bytes": 584,
+    "new_ram_bytes": 0,
+    "new_native_verification_bytes": 550,
+    "joint_native_verification_bytes": 902,
+    "whole_image_complete": false,
+    "gates": [
+      "Actual activity storage/bucket/offset/calendar/Unix source executes in composed receipt.",
+      "Native whole delta enters starting bucket even when end differs; packed12/10/10 fields independently wrap.",
+      "Existing cache plus metadata reused; timezone/packet mutations and logging remain fixtures.",
+      "Event-consumer composition, hardware/runtime initialization, full private histories, original compiler/final layout and whole-image equality remain open."
+    ]
+  },
+  "time_update": {
+    "report": "native-time-update/report.json",
+    "verification": "native-time-update/verification.json",
+    "main_unresolved_imports": 79,
+    "closed_imports": [
+      "r1_event_service_0008aea4",
+      "r1_event_service_0008aeb0"
+    ],
+    "comparisons": 17411,
+    "reused_existing_config_bytes": 56,
+    "new_ram_bytes": 0,
+    "native_verification_bytes": 192,
+    "whole_image_complete": false,
+    "gates": [
+      "Native flag/update/snapshot source executes; backend GET/UPDATE and20-byte memory-clear are fixtures.",
+      "Native capture-byte XOR1, snapshot bitmask flags, wide offset comparison and nonzero result behavior preserved.",
+      "Fresh stack-held backend/context after GET callback mutation tested.",
+      "Event callback composition, actual hardware backend and memory helper, full private histories, final compiler/layout and whole-image equality remain open."
+    ]
+  },
+  "native_health_latest_samples": {
+    "report": "native-health-latest-samples/report.json",
+    "verification": "native-health-latest-samples/verification.json",
+    "composed_verification": "native-health-latest-samples/composed-verification.json",
+    "compiled_bodies": 6,
+    "native_code_bytes": 216,
+    "new_native_verification_bytes": 230,
+    "joint_native_verification_bytes": 1446,
+    "direct_comparisons": 67176,
+    "composed_workflows": 864,
+    "removed_duplicate_backing_bytes": 313,
+    "reused_existing_cache_bytes": 328,
+    "new_ram_bytes": 0,
+    "main_unresolved_imports": 68,
+    "whole_image_complete": false,
+    "gates": [
+      "Hour/average/mode/log providers remain fixtures in storage composition",
+      "Calendar and full runtime integration remain unresolved",
+      "Final compiler/scatter layout and whole-image byte equality remain unresolved",
+      "Full raw ABI/private histories and hardware behavior unverified"
+    ]
+  },
+  "native_health_get_dispatch": {
+    "report": "native-health-get-dispatch/report.json",
+    "verification": "native-health-get-dispatch/verification.json",
+    "direct_comparisons": 4320,
+    "native_code_bytes": 400,
+    "native_span_bytes": 516,
+    "typed_jump_table_bytes": 8,
+    "new_readonly_template_bytes": 28,
+    "new_ram_bytes": 0,
+    "native_verification_bytes": 544,
+    "main_unresolved_imports": 70,
+    "closed_import": "r1_event_service_0008b8e8",
+    "new_imports": [
+      "r1_health_get_hr_encode",
+      "r1_health_get_hrv_encode",
+      "r1_health_get_spo2_encode"
+    ],
+    "whole_image_complete": false,
+    "gates": [
+      "Actual getter/offset/timestamp/notification provider composition pending",
+      "Encoder bodies unresolved",
+      "Mode/log/publish and all other providers are fixtures in direct checks",
+      "Full raw ABI/private histories, final compiler/scatter placement, hardware and whole-image equality unresolved"
+    ]
+  },
+  "native_health_get_encoders": {
+    "report": "native-health-get-encoders/report.json",
+    "verification": "native-health-get-encoders/verification.json",
+    "compiled_bodies": 4,
+    "direct_and_nested_comparisons": 9000,
+    "native_verification_bytes": 280,
+    "new_ram_bytes": 0,
+    "main_unresolved_imports": 67,
+    "closed_imports": [
+      "r1_health_get_hr_encode",
+      "r1_health_get_hrv_encode",
+      "r1_health_get_spo2_encode"
+    ],
+    "whole_image_complete": false,
+    "gates": [
+      "Phone handle, flag and protocol response providers remain fixtures in this stage",
+      "Actual dispatcher/getter/encoder/protocol composition pending",
+      "Final compiler/scatter layout, full private histories, hardware and whole-image equality unresolved"
+    ]
+  },
+  "native_health_get_chain": {
+    "verification": "native-health-get-chain/verification.json",
+    "proof_elf": "native-health-get-chain/proof.elf",
+    "workflows": 1296,
+    "native_verification_bytes": 1054,
+    "existing_cache_bytes": 328,
+    "main_unresolved_imports": 67,
+    "whole_image_complete": false,
+    "gates": [
+      "Time/offset/phone/log/flag/response providers remain fixtures",
+      "Notification branches are outside this GET composition",
+      "Final compiler/scatter placement, full raw/private histories, hardware and whole-image byte equality remain unresolved"
+    ]
+  },
+  "native_health_init": {
+    "report": "native-health-init/report.json",
+    "verification": "native-health-init/verification.json",
+    "compiled_bodies": 2,
+    "direct_and_nested_comparisons": 3824,
+    "native_code_bytes": 92,
+    "native_verification_bytes": 164,
+    "new_ram_bytes": 0,
+    "main_unresolved_imports": 66,
+    "closed_import": "r1_event_service_0008d380",
+    "whole_image_complete": false,
+    "gates": [
+      "Mode/log/publish providers remain fixtures",
+      "Queue delivery and full runtime integration unresolved",
+      "Final compiler/scatter placement, full private histories, hardware and whole-image equality unresolved"
+    ],
+    "supplemental_entries_outside_frozen_function_ledger": [
+      "0x0008d380",
+      "0x0008a866"
+    ]
+  },
+  "native_charge_notification": {
+    "report": "native-charge-notification/report.json",
+    "verification": "native-charge-notification/verification.json",
+    "comparisons": 27972,
+    "native_code_bytes": 76,
+    "native_verification_bytes": 88,
+    "new_readonly_template_bytes": 8,
+    "new_ram_bytes": 0,
+    "main_unresolved_imports": 65,
+    "closed_import": "r1_event_service_000838e0",
+    "whole_image_complete": false,
+    "gates": [
+      "Charge-state/phone/protocol providers remain fixtures in direct checks",
+      "Actual provider composition and delivery unresolved",
+      "Final compiler/scatter layout, full private histories, hardware and whole-image equality unresolved"
+    ]
+  },
+  "native_record_update": {
+    "report": "native-record-update/report.json",
+    "verification": "native-record-update/verification.json",
+    "comparisons": 1540,
+    "native_code_bytes": 102,
+    "native_verification_bytes": 104,
+    "new_ram_bytes": 0,
+    "main_unresolved_imports": 66,
+    "closed_import": "r1_event_service_0006c66c",
+    "new_imports": [
+      "r1_record12_apply",
+      "r1_record12_persist"
+    ],
+    "reused_source_provider": "native-libc-sequences/r1_native_memcmp",
+    "whole_image_complete": false,
+    "gates": [
+      "memcmp/persist/apply are fixtures in direct checks",
+      "Persistence/apply bodies and native state ownership unresolved",
+      "Export context beyond existing status cells remains unresolved",
+      "Final compiler/scatter layout, full private histories, hardware and whole-image equality unresolved"
+    ]
+  },
+  "native_record_providers": {
+    "report": "native-record-providers/report.json",
+    "verification": "native-record-providers/verification.json",
+    "comparisons": 8291,
+    "native_code_bytes": 180,
+    "native_verification_bytes": 308,
+    "new_ram_bytes": 0,
+    "main_unresolved_imports": 65,
+    "closed_imports": [
+      "r1_record12_apply",
+      "r1_record12_persist"
+    ],
+    "new_import": "r1_record12_reinitialize",
+    "reused_owners": [
+      "r1_device_id_once_status",
+      "r1_health_settings_kv_handle"
+    ],
+    "whole_image_complete": false,
+    "gates": [
+      "Mode/log/reinitialize/KV providers remain fixtures in direct checks",
+      "Actual wrapper/provider composition and KV integration pending",
+      "Reinitialize body unresolved",
+      "Final compiler/scatter layout, full private histories, hardware and whole-image equality unresolved"
+    ]
+  },
+  "native_record_chain": {
+    "verification": "native-record-chain/verification.json",
+    "proof_elf": "native-record-chain/proof.elf",
+    "workflows": 19776,
+    "native_span_bytes": 412,
+    "byte_identical_native_span_bytes": 408,
+    "relocated_call_bytes": 4,
+    "source_c_memcmp_text_bytes": 28,
+    "main_unresolved_imports": 65,
+    "whole_image_complete": false,
+    "gates": [
+      "KV/mode/log/reinitialize remain fixtures",
+      "Reinitialize state ownership and body unresolved",
+      "C memcmp relocated in isolated proof; final layout/instruction equality unproven",
+      "Full raw/private histories, hardware and whole-image equality unresolved"
     ]
   }
 }

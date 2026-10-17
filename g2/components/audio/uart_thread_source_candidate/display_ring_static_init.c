@@ -10,8 +10,8 @@ extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
 extern uint8_t audio_uart_ring_config_workspace[]; /* RAM0x20324600, 0x5000 bytes */
 extern uint32_t audio_uart_ring_config_primary[]; /* address0x80100000, product record */
 extern uint32_t audio_uart_ring_config_secondary[]; /* address0x80700000, product record */
-extern uint32_t audio_uart_ring_active[]; /* RAM0x20002c00, >=7 words */
-extern uint32_t audio_uart_ring_secondary_active[]; /* RAM0x20002c24, >=7 words */
+extern uint32_t audio_uart_font_primary_active[]; /* RAM0x20002c00, >=7 words */
+extern uint32_t audio_uart_font_secondary_active[]; /* RAM0x20002c24, >=7 words */
 extern uint8_t audio_uart_ring_config_name[16]; /* RAM0x20073e94 */
 extern uint8_t audio_uart_ring_config_idle; /* RAM0x20074fe3, byte access native */
 extern uint32_t audio_uart_font_glyph_cache_callback(void *,void *,uint32_t,uint32_t); /* Thumb callback0x46d239 */
@@ -46,7 +46,7 @@ void audio_uart_display_ring_static_init(void) {
     audio_uart_buffer_zero(audio_uart_ring_config_workspace,0x5000u,0u);
     audio_uart_ring_config_lock();
     const uint32_t *first=audio_uart_ring_config_primary;
-    uint32_t *active=audio_uart_ring_active;
+    uint32_t *active=audio_uart_font_primary_active;
     if(first[0]==0x5a5a5a5au) {
         ring_config_log(1u,0x1feu,first);
         active[6]=first[13];
@@ -63,7 +63,7 @@ void audio_uart_display_ring_static_init(void) {
         active[6]=0u;
     }
     const uint32_t *second=audio_uart_ring_config_secondary;
-    uint32_t *secondary=audio_uart_ring_secondary_active;
+    uint32_t *secondary=audio_uart_font_secondary_active;
     if(second[0]==0x5a5a5a5au) {
         ring_config_log(1u,0x216u,second);
         secondary[6]=second[13];

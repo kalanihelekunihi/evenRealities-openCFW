@@ -9205,3 +9205,1686 @@ open. Full callback/private stack histories, arbitrary aliases/faults, full raw
 ABI, live sensor/bus, original compiler/placement, instruction and whole-image
 identity are unproven. Original vendor checkout is unproven. No physical write
 occurred; prior unresolved evidence gates remain in force.
+
+### LIS multi-register setup contracts
+
+`native-lis-setup` compiles75120 data-rate and75450 filter-path bodies using
+attributed BSD-3-Clause ST source from commit
+`8d4bd522015004a9646102702901ba5a15ec6d39`. Two local register bytes are
+externalized at native24-byte frame offsets0/4, and their exact upstream slices,
+full license and three explicit adaptations are recorded. Native ODR/filter
+status gates remain the same: each failed read/write suppresses later calls.
+
+Two additional bodies are reconstructed from native evidence.7575a power setup
+maps input bits0/1/2 to CTRL1 bits3/1/2 and input bit3 to CTRL6 bit2; the modern
+ST enum uses a different encoding. After successful first read/write, native
+always performs the second write even when its preceding read fails, then
+returns the wrapping sum of second-read/write statuses. Substituting the modern
+ST body would change both encoding and error behavior.7518a reads register17,
+sets bit6 and writes only on read success; its semantic name remains unproven,
+so it is named`r1_lis_reg17_bit6_enable` rather than given a guessed SDK meaning.
+
+26000 native/source comparisons pass,6500 per entry. Tests cover all256 input
+and register bytes with adversarial companions, all81 combinations of four
+success/error statuses, unwritten reads, two incoming saved-register histories,
+full-word scratch overwrites and callback/handle rebinding between reads/writes.
+Actual four bodies and read/write proxies execute; only transport callbacks
+are fixtures. Rawr0, restoredr2/r3 for24-byte entries (r3 for16-byte entry), callee
+registers/SP, API scratch pointers/lengths, payload, context and data RAM match.
+Observations:37724 reads and29516 writes. Trace
+`d53fcefa6458c4852fe50e6ddf2433511f10c0749ea7f8564ab1fbbb62d850ec`.
+
+REA byte receipts bind all four native entries. The selected graph has zero
+imports; main imports remain29 while top-level configuration and interrupt
+routing remain open. Original vendor checkout, full callback/private stack
+histories, arbitrary aliases/faults, full raw ABI, actual sensor/bus execution,
+original compiler/placement, instruction and whole-image identity remain
+unproven. Prior unresolved evidence gates are retained. No physical write
+occurred.
+
+### LIS top-level configuration candidate and composed-frame gate
+
+`native_lis_configure.c` compiles the318-byte native75510 provider contract
+with a64-byte outer frame and104 exact diagnostic-text bytes. It overwrites
+both context callbacks with native defaults, checks ID44, issues reset, polls
+with delay2 and rejects the12th poll even if its bit just cleared, applies the
+actual setup sequence, selects ODR3/4/5/6 for default/50/100/(150 or200), delays100
+and drains up to five FIFO samples. Signed rate comparisons, fresh logging-mode
+checks, marker1c0001 and the original ignored-status behavior are retained.
+REA authenticates444 bytes covering body/literals/text. The candidate closes
+configuration at link time, producing28 main imports; this is a compiled
+candidate, not a replacement for the latest verified29-import parent.
+
+Composed execution found a concrete discrepancy. For rate0, ID44, successful
+transport and immediately clear reset, the first ID request matches. The next
+reset-set read passes bus request2003cf80 natively versus2003cf70 in source.
+Both request records contain identical20 bytes and point to register scratch
+2003cfb0; return1, context, outer40 local bytes, register model and poll count
+also match this case. C kernel private frames move lower bus request records,
+so earlier isolated register API-scratch proofs do not establish full transport
+composition. No pointer is normalized and no source/runtime claim is promoted.
+The failing case, complete traces, source/objects/reports/driver/log are retained
+under`pre-call-boundary-fix` with`composed-frame-probe.json`.
+
+Configuration remains an explicit evidence gate until native call boundaries
+are resolved, likely by returning from pure bit-update kernels before invoking
+transport at the native caller SP. Register masks and SDK status behavior need
+no invented changes. Logging, delay and bus operations are test fixtures. Full
+private histories/raw ABI, actual sensors, original compiler/placement and
+whole-image identity remain unproven. This is internal implementation work,
+not an external blocker. No physical device write occurred.
+
+### LIS configuration composed call-frame repair
+
+`native-lis-call-frames` supersedes the composed transport mismatch retained in
+`native-lis-configure/composed-frame-probe.json`.22 native frame bridges call
+transport at the original caller SP.20 exact ST assignments from the pinned
+BSD-3-Clause source are factored into pure C byte updates, with source slices,
+assignments and full license retained; helpers return before transport runs.
+Native power encoding/error addition and register17 behavior remain explicit
+reconstructed bodies. No request pointer is normalized. The parent object is
+cloned with only22 named function bindings weakened; all allocated sections
+and every other symbol/address/binding are checked unchanged. New strong
+bridges replace those entries without changing the historical tested sources.
+
+51840 composed comparisons pass:46080 ID failures,1152 reset timeouts and4608
+configured outcomes. The actual configuration provider, register bridges/pure
+helpers, FIFO, default transports, memory clear and registry execute. Bus,
+custom read, delay and logging callbacks are fixtures. Tests span signed rate
+edges, ID failure/success, reset counts0/1/10/11/12, fresh logging modes including
+changing modes, missing bus/slots, unwritten/error transports, context rebinding,
+FIFO levels and two RAM patterns. API bus-record pointers, exact20-byte records,
+register-data pointers/payloads, rawr0, callee registers/SP, context, outer40
+local bytes, register model and poll counts match. Observations:65664 reads,
+23616 writes,37440 custom reads,29376 delays,125952 mode queries,31488 ring and
+23616 SDK log calls. Trace
+`2c806975de2871743390be1f09e04d1d604e774ac99f92c0760144eb62297e1d`.
+
+Direct regression against the replacement runtime also passes55767 register,
+26000 setup and12652 FIFO comparisons, retaining their previous trace hashes.
+Total146259 comparisons. Configuration is now admitted to the tested frontier;
+main imports fall29 to28. The unfixed candidate, failing case, source/object
+snapshot and receipts remain immutable.104 diagnostic bytes are source-owned
+and byte-checked. The selected unmodified logging graph still exposes provider
+imports; a fixture-linked emulator test does not establish that graph's full
+runtime behavior or a zero-import whole image.
+
+Full callback/private stack history, arbitrary faults/aliases, full raw ABI,
+real sensors/bus/delay/logging, original vendor checkout, compiler/placement,
+instruction and whole-image identity remain unproven. LIS auxiliary interrupt
+routing, other providers and prior NV/health/DFU/snapshot gates remain open.
+No physical device write occurred.
+
+### Native LIS tap auxiliaries and interrupt routing
+
+`native-lis-aux` compiles751b8 disable,75290 enable and756cc/756da INT1 route
+get/set. The setter reads CTRL5 then CTRL_REG7, derives interrupt-enable from
+fresh CTRL4/CTRL5 fields, writes CTRL4 and conditionally CTRL_REG7, preserving
+all status gates,24-byte native frame and restoredr2/r3. Its pure C condition
+and assignments are factored from the exact BSD-3-Clause ST route-set slice at
+pin`8d4bd522015004a9646102702901ba5a15ec6d39`; full license is retained. The getter
+has its native8-byte frame. All transport calls occur after the pure helper
+returns, preserving native bus-request and register-data pointers.
+
+Enable sets all three tap axes, thresholds3, duration/quiet/shock0, tap mode1,
+then route bit3. Disable clears route bit3 and all axes/mode, sets full scale2
+and ODR3. Both preserve their8-byte outer frame, ignore provider status, perform
+fresh logging-mode checks and return1.164 exact source-owned diagnostic bytes
+and marker1c0003 are authenticated. The enable diagnostic says400Hz/2g, but the
+native enable body does not set ODR/full scale; no such behavior is invented.
+REA has no analyzed function at75290. Its frozen manual-provenance supplement
+already records170 bytes; exact REA byte reads and native disassembly support
+this body without changing the frozen corpus or claiming a Ghidra dossier.
+
+73468 direct comparisons pass:65536 exhaustively pair every CTRL4/CTRL5 byte,
+4860 status/write/alias/rebinding cases,3072 getter cases. The enable bit also
+matches an independent mask oracle, preserving all other CTRL_REG7 bits.108
+firmware faults match. Register/status/scratch pointers, restoredr2/r3, callee
+registers/SP, context and RAM match. A preliminary fixture incorrectly attempted
+host memory writes to NULL; its396-count receipt/driver/log are archived under
+`pre-null-fixture-guard` and are not native fault evidence. The corrected fixture
+mutates only mapped non-NULL targets; actual NULL dereferences remain unguarded
+in firmware and yield the108 matching emulator faults. Direct trace
+`ebc15577e401c3fdf2f5ebfe6cdf966c7c6eeaa446517376ba00bab3ee637d8c`.
+
+4320 composed auxiliary comparisons pass,2160 each. Actual wrappers, routing,
+register helpers, default transport, memory clear and registry execute; bus,
+custom read and logging callbacks are fixtures. Cases cover register patterns,
+fresh/changing log modes, missing bus/slots, unwritten/error transports, context
+rebinding and initial callback alternatives. Rawr0=1, restoredr3, context,
+outer local byte/word and register model match. Observations:4500 reads,3960
+writes,24840 custom reads,11520 mode queries,2880 ring and2160 SDK log calls.
+Trace`a648bd55e58264d22fa1efd4dec91be5d2105257f2b7acd6ca24480ae366658c`.
+
+Two main imports close, leaving26 with no new imports. All selected LIS native
+providers are now source-linked. This does not prove live sensor setup or full
+private stack histories/raw ABI. Arbitrary aliases/faults, real hardware,
+original vendor checkout/compiler/placement, instruction and whole-image
+identity remain gated; prior NV/health/DFU/snapshot gates persist. No physical
+device write occurred.
+
+### Native Bosch BMA interface and typed context candidate
+
+`native-bma-interface` compiles53aec interface initialization,53ab4/53ad0
+default read/write callbacks,53aa4 microsecond delay and7b61c null check. The
+helper is extracted from Bosch BMA456 SensorAPI commit
+`3266db2c5de15be1a00232b8c0f2fd23e07934e0` under BSD-3-Clause, renamed/exported
+without algorithm changes, with exact slice and full license retained. Pinned
+`struct bma4_dev` is52 bytes under the ARM short-enum ABI; offset assertions
+bind interface4, enum8, status9, variant13, transfer length20, read36/write40/
+delay44 and performance50 to native observations. A source-owned typed zero
+context candidate is placed at2001e4e8 in tests; the full native allocation
+extent remains unproven. Its bus-address word200076c0=18 is independently bound
+to the authenticated initialized-data image, four source-owned bytes.
+
+Initialization writes only observed fields in native order: interface1, default
+callbacks, address pointer, delay callback, transfer length64, variant3 and
+performance0. It retains every other byte. Defaults read the address byte through
+the interface pointer, truncate transfer length to16 bits, call existing actual
+motion request/registry dispatch and map bus success to0 or failure to raw-2.
+Delay0 returns directly; nonzero delay passes wrapping`us<<6` to the existing
+cycle primitive. The source contains named assembly mnemonics and typed SDK
+layout checks, with no imported executable data.
+
+4437 native/source comparisons pass:12 initialization,2160 read,2160 write,
+9 delay and96 null-check cases. Actual five entries, memory clear, motion
+requests and registry execute; bus and cycle callbacks are fixtures. Tests cover
+NULL/unaligned contexts, all8 callback-presence combinations, missing bus/slots,
+transport statuses, wide register/length values and NULL interface pointers.
+1080 byte-load faults match. Rawr0, callee registers/SP, context/data bytes,
+exact20-byte request records and API pointers match. Only relocated callback
+function identities are mapped to native symbol identities; no data/stack
+pointer is normalized. Observations:540 reads,540 writes,8 cycle calls. Trace
+`130d5206b638cad71a52ee513cde69dcc59fbf1de0f7875af584894768190e2f`.
+
+The main partial remains at26 imports; these prerequisites prepare BMA identity,
+FIFO and configuration reduction. REA dossiers show generic register reads have
+a feature-register5e path and private128-byte callback buffer, while FIFO reads
+return signed16 byte counts and preserve asymmetric power-save failure returns.
+Those contracts must be correlated before admitting upstream bodies wholesale.
+Full context extent/private histories/raw ABI, real sensor/bus/cycle execution,
+original compiler/placement, instruction and whole-image identity remain open.
+Prior unresolved gates persist. No physical device write occurred.
+
+### Native Bosch identity and register-read dispatcher
+
+`native-bma-reads` compiles53b2c identity,54534 public register dispatch,
+87bbc direct read and54408 advance-power-save getter. Identity initializes the
+interface only when its read pointer is absent, clears only its saved-r3 low
+byte, reads register0, logs failures with fresh mode reads and returns the byte
+only on success.148 exact diagnostic bytes and marker1c0001 are source-owned.
+The fixed context path makes native initialization failure unreachable in normal
+mapped execution; that diagnostic branch is compiled but not separately
+injected as a failing initializer in this receipt.
+
+The direct read uses its native152-byte frame, including the128-byte callback
+buffer, checks the actual attributed null helper and pointer, applies SPI mask
+only when interface byte0, passes wrapping length+dummy to the captured callback,
+stores its low status byte but branches on full rawr0. On success, a pure C copy
+helper reuses the exact Bosch16-bit-index loop from pinned commit
+`3266db2c5de15be1a00232b8c0f2fd23e07934e0` under BSD-3-Clause. The buffer is explicit
+and the context is volatile so the dummy byte is reloaded after every possible
+aliasing store. Copying runs after the callback returns, preserving actual
+transport frame coordinates. No128-byte clamp or widened loop index is invented.
+
+The public dispatcher compares the full register word to5e, retains the native
+feature validation/error order, conditionally disables/re-enables power save,
+and selects direct or chunked reads by feature length/transfer length. The
+power getter runs through the actual register-read graph and writes only after
+success. Feature-chunk87e58 and power-save-set5468e remain explicit unresolved
+provider imports and bounded fixtures in their dispatch tests. One parent
+identity import closes and two leaves are exposed, moving main imports26 to27.
+
+7092 native/source comparisons pass:4348 direct,1360 dispatch,88 power getter,
+1296 identity. Actual new bodies, copy loop, interface/null helper, motion
+requests and registry execute; raw/bus/log callbacks and the two unresolved
+feature leaves are fixtures. Cases cover missing callback combinations, NULL
+contexts/destinations, unaligned/end-RAM destinations, data aliasing dummy-byte
+state, zero/wide/oversized lengths, SPI/dummy values, error/unwritten reads,
+callback rebinding and changing log modes.150 faults match. Full raw callback
+status256 is a deliberate machine-contract stress input, beyond an int8 SDK
+callback declaration. It remains an error even though stored status byte is0.
+Rawr0, savedr3 where applicable, callee registers/SP, callback buffer/request
+pointers, context and bounded output RAM match. Observations:5223 raw callbacks,
+108 bus callbacks,130 power-save and36 chunk fixtures,3072 mode reads,768 ring
+and576 SDK logs. Trace
+`c9b0fb61e9cf40d338156dc2371807277f1238b2c6c51b3af84639bb8e799c96`.
+
+Full private frame history, arbitrary oversized callback writes/aliases, full
+16-bit-index wrap behavior, full raw ABI, native context extent, original vendor
+checkout, live sensor/bus/log execution, compiler/placement, instruction and
+whole-image identity remain unproven. Prior unresolved gates persist. No
+physical device write occurred.
+
+### Bosch power save and complete feature-register transport graph
+
+`native-bma-feature-io` compiles seven native contracts:9756a direct write,
+5475a public write,5468e power-save setter,8edd8 feature-address reset,70fda
+address increment,87e58 chunk read and976b8 chunk write. Existing actual public
+reads, direct copy/null check, default callbacks, motion requests and registry
+compose with these bodies. Both previous feature helper imports close; no new
+imports appear. Main imports fall27 to25; selected feature graph has zero.
+Bosch BSD-3-Clause power-mask and four address-update assignments are factored
+from exact pinned source slices into pure C helpers, preserving the native
+transport call frames. Full license and pin
+`3266db2c5de15be1a00232b8c0f2fd23e07934e0` attribution remain attached.
+
+Direct writes preserve full raw callback-status testing and low-byte status
+storage, then freshly load performance mode/delay callback/interface pointer;
+mode exactly1 delays2us, otherwise450us. Public writes retain their extra
+success guard before disabling APS, while existing public reads preserve their
+own observed order. Feature reset writes context ASIC bytes23/24. Increment
+reads5b/5c, adds half transfer length, splits address bytes and writes them
+with native asymmetric error handling. A pure helper's address math also
+matches an independent oracle. Chunk loops preserve native full loop count,
+16-bit remainder/index, continue after failures, and advance the data pointer
+only after both transfer and address increment succeed. No early break or
+zero-transfer-size guard is invented.
+
+11902 native/source comparisons pass:3488 direct write,4384 public write,
+752 power setter,32 reset,392 increment,928 chunk read,934 chunk write and992
+public read regressions with actual feature helpers.140 faults match.160 cases
+observe later operations succeeding after a chunk error. Tests cover transient/
+persistent failures, all callback-presence combinations, NULL inputs, raw/SPI
+register words, transfer sizes0/1/2/16, remainder paths, power modes, unwritten
+reads, callback-time delay/handle rebinding, actual default bus transport, and
+six large-write vectors that exercise16-bit index wrap. Default emulator UDIV
+behavior for zero divisor is observed, not promoted to all hardware CCR states.
+Rawr0, callee registers/SP, callback data/request pointers, context/output RAM,
+register model and operation ordering match. Observations:14074 reads,23637
+writes,17953 delays. Trace
+`bb1f5ab62c129e8d0d0114ceed1bc4f437846dd494fb2dd59ea71a1d6f9fbc07`.
+
+Only raw/bus and delay callbacks are fixtures; feature bodies are actual source.
+The earlier10910-case receipt before public-read regression expansion is
+preserved. An initial test-oracle assertion incorrectly required address updates
+on rejected NULL/missing-callback cases; that runner/log is archived under
+`pre-oracle-guard`. The oracle now checks successful increments. Firmware source
+was unchanged by that test correction.
+
+BMA product configuration and FIFO remain open. Full private stack histories,
+full raw ABI, arbitrary large lengths/backing/aliases, live sensor/bus/delay,
+original vendor checkout/compiler/placement, instruction and whole-image
+identity remain unproven. Prior unresolved gates persist. No physical device
+write occurred.
+
+### Native Bosch FIFO count, byte transfer and product wrapper
+
+`native-bma-fifo` compiles54440 FIFO length,544c8 byte transfer and541a8 product
+FIFO wrapper. Length clears its whole saved-r3 word, reads two bytes, masks the
+high byte to6 bits and writes only after success. Its pure mask reuses the exact
+Bosch assignment/header macro from BSD-3-Clause pin
+`3266db2c5de15be1a00232b8c0f2fd23e07934e0`, with full license/slice retained. The
+custom raw-byte API is reconstructed separately from the upstream structured
+`bma4_read_fifo_data` API. It validates context/output/count, obtains length,
+clamps to the full requested byte count, selects26/a6 from interface, calls the
+fresh read pointer, stores low status but checks full rawr0, then returns the
+fresh stack count as signed16. It does not add dummy-byte copying or a sample
+count clamp absent from native code.
+
+The product wrapper rejects NULL/zero requests with-1, disables APS, delays450,
+passes wrapping low16 of`6*requested` to byte transfer, then restores APS only
+after nonnegative reads. Disable/restore failures log and return0; negative
+read failures log and return-1 without restoration. Success returns signed byte
+count divided by6. Exact native frames and fresh logging-mode checks are
+preserved.272 diagnostic bytes are source-owned and byte-checked. One parent
+FIFO import closes with no new imports, moving main25 to24. Product BMA
+configuration remains open.
+
+76397 native/source comparisons pass:65984 length,3599 byte transfer,3599
+product FIFO and3215 composed normalization. Every65536 wire-length pattern
+also matches an independent14-bit mask oracle. Tests cover zero guards,
+non-multiple-of6 counts, wide request wrapping, read/disable/restore failures,
+SPI/dummy values, unwritten/partial payloads, callback rebinding, NULL/unaligned/
+end-RAM outputs and FIFO-data aliases to native saved count slots. Alias tests
+preserve signed negative count behavior rather than hiding it.6 emulator faults
+match. Actual FIFO bodies, normalization, full read/write and APS graph, default
+requests and registry execute; only transport, delay/cycle and logging callbacks
+are fixtures. Rawr0, callee registers/SP, callback/request pointers, bounded
+output/context RAM and final APS state match. Observations:84872 reads,6406
+writes,4966 delay callbacks,3902 cycle calls,11682 mode reads,2784 ring and2784
+SDK logs,3215 acquire/3213 release callbacks; faults account for incomplete
+normalizer paths. Trace
+`d8c352c4e5f9d2fbd6a39d9214a86b2689ecc4497c2265fc4b9c6bd96b99d4a5`.
+
+Large count tests deliberately use bounded partial transport payloads. They do
+not prove arbitrary callback writes/backing or full private-frame histories/raw
+ABI. Actual sensors/bus/delay/logging, full native context extent, original
+vendor checkout/compiler/placement, instruction and whole-image identity remain
+unproven. Prior unresolved evidence gates persist. No physical device write
+occurred.
+
+### Bosch acceleration/FIFO setup and parameter validation
+
+`native-bma-setup` compiles545ca acceleration config,54640 enable,546d0 FIFO
+config and96820 parameter validation. Four validator bodies are extracted from
+Bosch BSD-3-Clause pin`3266db2c5de15be1a00232b8c0f2fd23e07934e0` and renamed/exported
+without algorithm changes. Enable-mask and FIFO configuration logic are factored
+into pure helpers that return before native transport calls. Full license and
+six source slices are retained. FIFO enable compares the full raw word to1;
+value101(hex) is not silently truncated to a byte. Acceleration config preserves
+sequential source-byte loads/stores and updates performance status after the
+second write even when that write fails. Enable preserves the25000us delay after
+a failed write; FIFO config preserves the1000us gap between successful first
+write and second write. These behaviors are not hardened or repaired silently.
+
+262144 standalone validator comparisons cover every ODR/bandwidth byte pair at
+performance values0/1/2/255 against native execution and an independent limits
+oracle. Results:95 valid,262012 out-of-range(-8),37 invalid averaging(-15).
+Actual attributed validator bodies execute with no fixtures; rawr0/callee/SP
+match. Trace`a10ddf6d9fe8623200f165df93194c023eda7a7d1e8825b3447338ce8c79e947`.
+6966 scoped setter comparisons pass:1960 enable,3046 config,1960 FIFO config,
+including729 matching faults and405 failed-write cases followed by25000us delay.
+Actual setters/validator/kernels/read-write/default requests/registry execute;
+raw/bus/delay callbacks are fixtures. Cases include failure/mutation histories,
+missing callbacks, caller-owned RAM aliases, full enable words, parameter
+limits and register-state oracles. Rawr0, callee/SP, callback/request pointers,
+context and bounded RAM match. Observations:3890 reads,6772 writes,6549 delays.
+Trace`a7221a9b06ed1a3b007c84622cf9b230c803afd39204ba4d09d7e0b3f814c89f`.
+
+**Unresolved private-input frame gate:** an input pointer2003cfef lies below the
+setter's frame and overlaps a nested callee return/private stack. The native
+path writes00 to register40 while source writes11; return0 and final context
+match. Standalone validator output equivalence does not close this composed
+alias discrepancy. The full case/traces, original driver/log, source/objects and
+report are retained under`pre-private-alias-scope` with
+`private-input-frame-alias-probe.json`. Scoped passing tests exclude those
+callee-private input addresses and explicitly carry the gate. No private byte,
+input value or pointer is zeroed or normalized. Full original placement/private
+frame history and raw ABI remain unproven; this is internal correlation work,
+not an external blocker.
+
+The main partial remains at24 imports; these are prerequisites for the remaining
+604-byte product configuration wrapper. REA confirms that path configures ODR,
+acceleration and FIFO and does not call a feature-stream upload. Variant
+initialization543c4 loads8 literal bytes for a6-byte remap object; the trailing2
+bytes and raw restoredr2/r3 require ownership/ABI correlation before reduction.
+The6 meaningful remap fields match pinned designated defaults. Source/runtime
+scope, full native context extent, live sensor/bus/delay, original vendor
+checkout/compiler/placement, instruction and whole-image identity remain gated.
+Prior unresolved evidence gates persist. No physical device write occurred.
+
+### Bosch initialization and product configuration
+
+`native-bma-initialize` compiles5447e base initialization,543c4 variant init
+and604-byte53c6c product configuration. Base init preserves24-byte frame, SPI
+pre-read/dummy-byte policy, status gates and chip assignment. Variant init
+preserves16-byte frame, ID16 check, resolution16, feature length76, config-size
+5016 and default remap. Product setup preserves32-byte frame, rates6/7/8/9 for
+default/50/100/200, range2, averaging configuration, accel enable, APS disable,
+FIFO clear7f/enable40/clear10 and APS restore, with exact failure/log ordering.
+Fresh mode reads and marker1c0001 are retained.724 exact diagnostic bytes are
+source-owned. Init/helper behavior and designated remap constants correlate to
+Bosch BSD-3-Clause pin`3266db2c5de15be1a00232b8c0f2fd23e07934e0`; source slices,
+headers and config-array size are authenticated. The5016-byte vendor array is
+not embedded or uploaded by this native sequence; only its size is needed.
+
+The native variant initializer reads8 bytes for6 typed remap fields. A declared
+C span holds the6 Bosch designated defaults plus observed following bytes802e.
+All8 bytes are authenticated at9a768 and byte-checked against the compiled
+constant; restoredr2/r3 are compared without replacing those bytes with invented
+padding. The semantic origin/ownership of the two following bytes beyond the
+remap object remains unproven, despite their observed literal-read contract.
+This separates source-owned build data from claims about original declarations.
+
+13248 scoped native/source comparisons pass:5184 base,5184 variant,2880 product
+configuration. Cases cover NULL/unaligned contexts, callback presence, SPI/I2C,
+ID values, transfer failures, partial base/variant reads, request-rate edges,
+changing log modes and missing bus/operation callbacks. Configuration success
+scope uses complete successful reads. Actual init/configuration, full Bosch
+setters/validation/read-write/default adapters/registry execute; transport,
+cycle/delay and logging callbacks are fixtures.3 faults match. Rawr0, restored
+r2/r3 as applicable, callee/SP, callback/request pointers, context and bounded RAM
+match. Observations:13950 reads,18051 writes,22725 cycles,6320 modes,1580 ring and
+1202 SDK logs. Trace
+`43010b1e931a1a5bda16ea62803787b66f62269d486509a630cd88bffd982bbb`.
+
+**Unresolved partial-read history:** a successful FIFO configuration read of2
+bytes writes only its first byte. Native later writes80 to register49 while
+source writes00, with identical API pointers/records and matching return1,
+restored register and context values. Later FIFO writes/final register state
+also differ. Full case/traces, source/objects/report/driver/log are preserved
+under`pre-partial-read-scope` with`partial-read-history-probe.json`. Passing
+product configuration tests exclude this partial-success history and explicitly
+carry the gate. No uninitialized byte or data/stack pointer is normalized. Relocated callback
+identities are compared symbolically. The earlier
+private-stack input alias gate is also retained; neither is an external blocker.
+
+One main import closes, leaving23 with no new imports. All selected Bosch native
+provider bodies are now source-linked within these bounded contracts. This does
+not establish full private history/raw ABI or byte-identical firmware. Full
+native context extent, real sensor/bus/cycle/log execution, original vendor
+checkout/compiler/placement, instruction and whole-image identity remain open.
+Ghidra-MCP currently reports no GUI instance; REA headless evidence remains
+available. No physical device write occurred.
+
+### Native QMA transport, identity, interrupt and FIFO providers
+
+`native-qma-transport` compiles8714c read retry,873f4 write retry,86e48 delay,
+86e34 chip ID,86fa8 IRQ and86ff4 FIFO. These are owner-authorized reductions of
+native contracts. The existing hardened reconstruction remains unchanged as
+comparison evidence, with hashes bound separately from build inputs. No
+unlicensed QST snapshot is compiled.12 source-owned cold bytes at20007698 hold
+address12 plus independent double-tap/any-motion callback slots;144 exact FIFO
+diagnostic bytes are source-owned. This runtime address is distinct from the
+sensor-state address byte at2001e4b0; configuration must preserve that distinction
+until its complete native contract is reduced.
+
+Reads try five times, loading the fresh address each time, and delay5 units
+after every failure including the fifth. Each unit sends64000 cycles to the
+existing named cycle primitive. Writes try five times without delays and pass
+one byte from their saved full value word. Chip ID does not initialize the
+saved-r3 byte or propagate read status. IRQ clears its saved word, permits ten
+read-retry rounds, uses any-motion bits0..2 then fresh double-tap byte1 bit5,
+and freshly loads callback pointers between calls. FIFO requires level-read
+success1, masks7 bits, rejects depths above64 with0, clamps to requested count,
+then performs payload read and reset3e=87 even for zero samples. Payload/reset
+errors are ignored and the clamped count is returned. These contracts differ
+from the portable hardened path and are not silently replaced by its guards.
+
+17074 native/source comparisons pass:3026 reads,4032 writes,4 delays,1344 IDs,
+1024 IRQ,6382 FIFO and1262 composed normalization. Actual six bodies, normalizer,
+motion requests and registry execute; bus, cycle, log and event callbacks are
+fixtures. Tests cover retry success/failure boundaries, last-failure delay,
+wide register/length words, saved-value mutation, fresh address changes,
+unwritten ID bytes, IRQ callback rebinding/status mutation, every256 FIFO level
+byte, zero requests, ignored payload/reset errors, missing bus operations and
+bounded NULL/end-RAM inputs. Rawr0, savedr2/r3 where applicable, callee/SP,
+exact request/data pointers, runtime and bounded RAM match.2 faults match.
+Observations:39282 reads,10190 writes,271566 cycle callbacks,15270 modes,1440
+ring/1440 SDK logs,392 any-motion/371 double-tap events,842 acquire/841 release.
+Trace`09039ade6a0173324a0165df6bebcc5ca654c281ce9fec6e5c15351451bf14f9`.
+
+The first test runner hooked a different duplicate cycle primitive, so native
+execution exhausted its instruction bound inside9a6a0 before comparison. Its
+runner/log are retained under`pre-cycle-fixture-address-fix`; the native86e64
+literal and9a6a0 primitive are now explicitly authenticated. Firmware source
+was unchanged by that fixture correction. This is cycle-argument emulator
+evidence, not physical timing proof.
+
+Three main imports close with no new imports, leaving20. QMA configuration
+remains unresolved. Full sensor-state extent/private frame history/raw ABI,
+arbitrary callbacks/backing/aliases, live sensor/bus/events/timing, original
+compiler/placement, instruction and whole-image identity remain unproven.
+Prior Bosch partial-read/private-input and NV/health/DFU/snapshot gates remain
+open. No physical device write occurred.
+
+### Native QMA configuration graph
+
+`native-qma-configuration` compiles seven native bodies:86e68 product
+configuration,86ee4 setup,86d40 any-motion,87188 range,871c4 reset,87250 steps,
+and872e4 tap routing. REA Ghidra dossiers and byte receipts bind these bodies
+to the authenticated application; Ghidra-MCP discovery found no running GUI
+instance. The owner-authorized native source uses symbolic inline assembly
+inside C translation units to preserve callback-visible frames; it contains
+no executable byte array. Existing hardened QMA source remains comparison-only,
+not a build dependency. No unlicensed QST source is compiled or claimed as
+upstream. The previously attributable Nordic delay provider is reused. A later
+upstream update must retain these native contracts rather than importing the
+portable path's guards or error propagation.
+
+The source owns a24-byte aligned sensor-state prefix at2001e4b0 (observed
+fields through offset21, alignment tail22..23), with scale at4,state at8,
+three sign halfwords at10 and maps at16. Full object extent remains gated.
+Twelve typed axis-default bytes match9a6a6 exactly. Configuration tries copied
+address bytes12 then13 in the sensor state, clears/stores ID, and acceptsFA or
+high nibble9. Actual transport still freshly uses its independent address at
+20007698. Configure passes the low8 rate to setup, then always clears state8
+and copies orientation defaults. It does not silently make these addresses
+share storage.
+
+Setup ignores all underlying statuses and returns1. Reset clears only low
+bytes of two saved words, performs writes36=B6/00, delays5/100, polls11 for80
+and33 for05 with up to102 rounds each, then returns0 even on timeout. Range
+stores2048/1024/512/256 for full-word2/4/8/15, otherwise4096, then tail-writes
+reg0F with the input byte. Rate25/50/100/150-or200 selects native register
+pairs; other full rates skip those writes. Motion, steps and tap preserve
+native byte masks, unconditional writes, chip-specific branches, ignored read
+failures and fresh state reads. Motion returns its restored/mutated savedr0
+word rather than a synthesized status.
+
+The selected configuration graph has no unresolved symbols. The broader main
+partial runtime closes configure with no new imports, leaving19. Full private
+frame history/raw ABI, exact original compiler/placement/instruction identity,
+whole-image identity and physical sensor/bus/timing proof remain open. All
+previous Bosch partial-read and stack-alias, DFU, NV and health evidence gates
+persist. This is source/compiler/emulator evidence and authorizes no hardware
+writes.
+
+The first composed setup suite found a concrete unwritten-read private-history
+difference: setup(rate25,chip90,successful bus callback leaving all read bytes
+unwritten,zero seeded stack) returns1 on both sides, but trace1698 writes
+register19 with nativeFB/sourceF3. Request pointers and record bytes otherwise
+match. `unwritten-setup-history-probe.json` and the complete candidate, builder,
+runner, objects, report and failed log under`pre-unwritten-setup-history` retain
+this evidence unchanged. Passing scope explicitly excludes composed setup and
+configuration with active bus callbacks that leave reads unwritten. Direct
+reset, motion, steps and tap still cover unwritten reads. No payload mask or
+return normalization is applied; original placement/private-history behavior
+remains an unresolved gate, not source completeness or whole-image proof.
+
+5806 scoped comparisons pass:555 configure,555 setup,1138 motion,1054 range,
+228 reset,1138 steps and1138 tap. These include full-word rate/range inputs,
+retry failures, failed writes, timeout boundaries, byte patterns, live address/ID
+mutations and missing bus callbacks. Native/source rawr0, savedr2/r3 where
+applicable, callee saves/SP, exact requests/data pointers and state match within
+this scope.162035 reads,203573 writes and1123250 cycle callbacks were observed.
+Trace`7fe598835eeb3fab480e878d470217b5561342b1fba273d294d3ba7cede2474f`.
+The unwritten composed history gate above remains open.
+
+### Native calibrated temperature path
+
+`native-temperature` adds eight owner-authorized native bodies:50e4c calibrated
+pair,6f600 shared sample read,6f80c/6f826 channel reads,6f738 one-shot setup,
+6f818/6f832 channel one-shots and7badc calibration copy. Non-contiguous REA
+Ghidra body ranges are reduced together; public six-byte veneers alone are
+not treated as complete providers. Symbolic inline assembly in C translation
+units preserves native frame and floating-point effects without executable
+opcode arrays. Existing GXT310 bus/mode/registry, RTOS delay and NV source
+providers remain linked, with no new unlicensed dependency or guessed vendor
+checkout. Future dependency updates must retain authenticated contracts.
+
+The shared read zeroes its saved word, requests2 bytes from register0 ignoring
+status, reverses and sign-extends the sample, multiplies by binary32 1/128 then
+1000, and converts toward zero. One-shot writes native four-byte word0000C101
+as a two-byte transfer to register1, treats any nonzero transfer return as
+success, and otherwise uses fresh log modes.100 exact diagnostic bytes are
+source-owned. The pair acquires/enables, triggers both one-shots, delays80 via
+osDelay, reads both channels, disables/releases, then reads calibration. These
+statuses are ignored. Calibration reader allocates128 bytes, reads124 ignoring
+status, and copies bytes62..67. The six-byte source record at200076f0 has exact
+cold value000000000000. Only an all-FF observed calibration bypasses offsets;
+flags0 subtract/1 add unsigned16 offsets, other flags leave the sample alone.
+The wrapped sum is adjusted by its top bit then bits1..16 are returned; no
+portable saturation or substituted signed-division policy is added.
+
+69964 scoped comparisons pass:65776 shared reads,240 for each channel read,
+48 for each of three one-shot entries,1782 pair reads and1782 calibration
+copies. Every65536 wire word is checked against an independent integer oracle.
+Selected rounding modes, failed/unwritten/partial transfers, partial124-byte
+NV reads, invalid flags, all-FF positions, logging modes and callback-mutated
+one-shot words are covered. Rawr0, savedr3 where applicable, callee saves/SP,
+S0/S1/FPSCR, bounded data and exact typed boundary arguments/pointers match.
+Bus/mode/registry/NV/RTOS/log dependencies are fixtures in this passing scope;
+no end-to-end source/hardware claim follows.69820 read-transfer,3708 write-
+transfer and3564 NV callbacks execute. Trace
+`25954065685c7ace271e27f6234c4cdb194753b57240bf34d3e919867c42a139`.
+
+A separate actual GXT bus/mode composition probe reaches equal raw result19795
+but first dispatch write has native buffer2003cfc8/source2003cfcc (SP-56/SP-52)
+with identical00C20000 word and record address. The first differing request
+record and complete trace are retained in`composed-history-probe.json`; no
+pointer normalization is applied. `post-cold-calibration-frame-probe` preserves
+the current candidate/objects/builder report/runner/log. Prior snapshots remain
+immutable. This is a concrete call-frame gate for the reused GXT source path,
+not a passing composition or an external blocker.
+
+The cold-data audit also rejected the initial all-FF source initializer. The
+entire earlier candidate is preserved under`pre-cold-calibration-fix`, with
+`cold-calibration-correction.json` hashes. Source now initializes zero, is
+rebuilt and reverified; arbitrary seeded behavioral cases do not prove cold
+initialization. Main partial imports fall19 to18 with no new imports. The
+selected transitive graph still exposes11 existing imports through its NV/RTOS
+consumers. Full private history/raw ABI, exact original compiler/placement,
+whole-image instruction/byte identity and physical sensors remain gated;
+prior QMA/Bosch/NV/health/DFU gates persist. No hardware writes occurred.
+
+### GXT mode call-frame correction
+
+`native-gxt-call-frames` supersedes the relocated mode implementation at five
+symbols:6f648 shared switch,6f804/6f81e channels,50f9c enable pair and50f88
+disable pair. Native symbolic inline-assembly bridges in C retain the16-byte
+shared frame,24-byte enable frame and8-byte disable frame. They reuse the
+existing source-owned308-byte GXT mode/configuration/text spans; no duplicate
+constant source, executable blob or new vendor source is introduced. Existing
+GXT bus/request bodies, temperature bodies, calibration state and floating-point
+conversion execute in composition. Future upstream changes must preserve these
+callback-visible contracts or produce new explicit evidence gates.
+
+A copied parent object weakens exactly these five symbol bindings. Audit
+compares every allocated section's type/flags/size/alignment/payload hash and
+all other symbol entries to the original; the historical parent object/source
+is unchanged. The final partial runtime keeps18 imports and selected NV/RTOS
+transitive graph11. Existing mode contracts are strengthened, not counted as
+new ownership functions; the previous69964 scoped temperature sample/calibration
+comparisons remain independently bound to their original source and report.
+
+5376 native/source comparisons pass:3456 actual temperature compositions and
+384 direct cases for each of five corrected mode/pair symbols. Composition
+covers the exact prior counterexample, successful and failed dispatch statuses,
+read callbacks writing zero/one/two bytes, partial calibration reads, positive
+and negative sample pairs, invalid and all-FF calibration flags, fresh logging
+modes and mutation of the full four-byte configuration word through a two-byte
+write pointer. Every observed request/data pointer and payload is compared
+without normalization, along with rawr0, callee saves/SP, S0/S1/FPSCR, calibration
+and bounded destination data. Observations include6912 read dispatches,23424
+write dispatches,3456 acquire/release/NV/delay callbacks,56064 mode queries,
+8256 structured formats,10560 one-argument and3456 zero-argument SDK logs.
+Trace`7d32c628728fb2f567e1477ba017ee594f163c37d324f701067f27af13cd4781`.
+
+The earlier native2003cfc8/source2003cfcc first-write pointer mismatch is
+resolved within this composed scope, while the original unnormalized failure
+and candidate remain immutable under`native-temperature`. Registry dispatch,
+NV reader, RTOS delay and logging are fixtures at their explicitly named
+boundaries in this proof. Complete registry/NV/RTOS execution, all private
+return-address histories/raw ABI, original compiler/placement, whole-image
+instruction/byte identity and physical sensors remain unproven. Prior QMA
+unwritten-read, Bosch alias/partial-read and NV/health/DFU gates remain open.
+
+### Source-owned bounded event-table prefixes
+
+`native-event-table-prefixes` owns164 writable callback-table bytes as typed C
+function-pointer relocations:17 sensor words at20006750,16 system words at
+20006e54 and8 storage words at200066fc. Their relocated words match the
+SHA-authenticated decompressed initialized data. These are bounded observed
+prefixes, not asserted full table extents. The native dispatcher still permits
+lookups outside them; no guard or fabricated table length is added. The sensor
+sentinel at index0 is not admitted by the dispatcher; indices1..16 correspond
+to events2..17. System indices1..15 correspond1000..100E. Storage indices1..7
+correspond2000..2006, with the final slot zero.
+
+37 non-null callbacks are explicit typed imports, each named by its original
+entry address. They use symbolic function relocations and contain no retained
+instructions or return stubs.
+`callback-frontier.json` records each source dependency, frozen ownership
+matches where available and unproven body spans. Three table anchors close,
+but37 callback-body imports are newly exposed: the main link therefore grows
+18 to52 unresolved imports. This makes the hidden configuration dependencies
+reviewable and does not imply callback bodies are implemented. No ownership
+function is upgraded or added solely because its pointer word compiles.
+
+1824 native/source dispatch comparisons pass:768 sensor,720 system and336
+storage. Every included live/null slot is tested with zero, four, five and
+65535-byte lengths, four payloads and writable rebinding to null or a replacement
+callback. High ID/length words are nonzero to check truncation; callback mutation
+of the input record confirms cached payload/length ownership.1200 callback and
+912 free observations match. The source dispatcher and source table relocations
+execute; callback bodies and free are fixtures. Trace
+`a3f881d47894d59563ebb655ab02edb4360859cf3a2ff2dd7b634059e0fc603d`.
+The original exhaustive65536-ID broad-RAM dispatcher proof remains independently
+bound; these prefix tests do not replace its out-of-prefix indexing evidence.
+
+REA's current headless Ghidra target lacks procedure objects for several of
+these callback entries and89EEC, despite native Thumb instructions/frozen
+pseudocode being present. `rea-procedure-availability.json` retains the scoped
+provider failures with target/profile attribution. Ghidra-MCP discovery found
+no running GUI instance. This is an analysis-coverage gap, not proof that a body
+is absent and not an external stop condition: frozen corpus and authenticated
+byte/disassembly evidence remain available. The first prefix test runner omitted
+the native free fixture; its driver/log are preserved under
+`pre-native-free-fixture-fix`. Correcting the fixture changed no firmware source.
+
+Full callback-body compilation, all table extents and neighboring data ownership,
+complete dispatcher/handler composition, private/raw ABI, original compiler/
+placement, byte-identical whole image and physical-device execution remain
+open. All previous QMA/Bosch/NV/health/DFU gates persist. No hardware write occurs.
+
+### Native event callback bodies and explicit service frontier
+
+`native-event-callbacks` compiles all37 non-null callbacks exposed by the bounded
+sensor/system/storage table prefixes. Native Thumb CFG traversal covers1766
+reachable code bytes. External tail branches remain explicit service calls;
+local branches and return paths are reduced as symbolic inline assembly inside
+C translation units, not retained instruction arrays. The actual native two-byte
+return-only body at428B2 is preserved rather than used as a substitute for other
+callbacks. Callback definitions use the tables' compatible C signature
+`void(uint32_t,uint32_t)`; raw machine register behavior is separately measured.
+
+The source owns815 unique diagnostic bytes in31 arrays, with a32nd string
+identity at42724 represented as the interior suffix42710+20. The full observed
+string uses824 bytes when counted with that shared suffix twice. No duplicate
+overlapping array is placed there. The initial duplicate-string candidate is
+retained under`pre-text-alias-correction`. A recovery metadata field was renamed
+to say that Ghidra bodies were not used for this CFG pass, rather than claiming
+absence from the frozen corpus; earlier contracts/reports remain immutable under
+`pre-recovery-metadata-label-fix`. `pre-callback-c-type-correction` preserves the
+earlier C declaration; allocated section bytes are identical after correcting
+the table/callback type compatibility. `correction-history.json` binds snapshots.
+
+53280 direct native/source comparisons pass,1440 per callback, with792 matching
+bounded faults. Zero, unaligned, valid and end-RAM payloads, wide/full lengths,
+zero/nonzero/full-word service results, fresh log modes, signed and all-FF data,
+service mutation and native saved-stack words are exercised. Rawr0..r3,
+callee saves/SP, exact typed logging stack arguments, call order and bounded RAM
+match in the passing scope.54750 service/log observations execute. Services,
+logging and free are explicit fixtures, not full consumer composition. Trace
+`da957f07ccedeaeb09bf91ed745d7a37b5e848c0e7306249955258fd2fded52b`.
+
+A separate failed actual dispatcher/table/callback probe is preserved in
+`dispatch-raw-abi-probe.json` and`pre-dispatch-raw-abi-scope`. Sensor event2 with
+payload20010000,length0 tail-calls8B0FC with matchingr0/r1, but nativer2/r3 are
+42857/98765432 while source carries100080B/0. The first difference is the native
+callback address versus relocated source callback address; the dispatcher also
+changes another scratch register. No register or pointer normalization is
+applied. Passing receipt explicitly excludes composed dispatch; full scratch
+ABI and original code placement remain open. This is an internal evidence gate,
+not an external stop condition.
+
+37 callback imports close. Fifty service targets are named:9 already have
+source providers in the parent;41 newly exposed bodies remain unresolved. Main
+imports therefore grow52 to56, and the selected dispatch/handler graph has49
+imports. `service-frontier.json` records every target, source symbol, frozen
+ownership match where available and lack of an established upstream body match.
+Historical ownership/decompiler classifications are retained; they are not
+promoted to third-party implementation provenance by this native-byte recovery.
+No new unlicensed vendor source or guessed upstream implementation is compiled.
+Attributable existing logger/registry/runtime source remains separately bound.
+
+Full service-body compilation, actual dispatcher ABI/composition, table extents,
+all private histories, original toolchain/link placement, byte-identical whole
+image and physical behavior remain unproven. Prior QMA/Bosch/NV/health/DFU gates
+persist. These checks execute only in Unicorn; no device or firmware write occurs.
+
+### Native health-event consumers
+
+`native-health-event-consumers` adds six source bodies spanning236 native bytes:
+8A7F4 activity,8A80A HR,8A83E HRV,8A8AE SpO2,8A8D8 stress and8A8FC temperature.
+Frozen pseudocode/ownership and Thumb disassembly are hash-bound; REA supplies
+an authenticated308-byte read covering the complete code region. Current REA
+procedure objects are unavailable at these entries, so no missing dossier is
+presented as proof of a missing function. Symbolic native instructions compile
+inside C functions with the same two-word interface used by the event callbacks.
+No third-party body, opcode array, silent source fallback or new vendor checkout
+is introduced. These are product wiring contracts; upstream body identity is
+not asserted. Existing attributable runtime providers remain independently bound.
+
+Activity accepts any nonzero input pointer, calls activity storage and then
+notification kind4. HR accepts bytes40..220 and HRV has no NULL/range guard;
+both fill only zero payload timestamps. They serialize measurement+timestamp
+into savedr2/r3 words at nativeSP-16: HR writes1+4 bytes,HRV2+4. SpO2 accepts
+bytes>=70, unconditionally replaces timestamp and notifies kind1; HR notifies0,
+HRV5. Stress accepts bytes<=100, replaces timestamp and stores without a
+notification call. Temperature accepts the unsigned16 value250..500, replaces
+timestamp and packs **low byte plus6 modulo256**, followed by timestamp, rather
+than a guessed portable temperature conversion. It also omits notification.
+None of these bodies validates the supplied length. Actual callback wrappers
+retain their separate pointer/length policies.
+
+92320 native/source comparisons pass:88288 direct bodies and4032 actual event
+callback compositions. Every65536 temperature value is checked; all256 HR,
+SpO2 and stress bytes are exercised with old/zero timestamps and callback-driven
+mutation. An independent oracle checks acceptance, packed fields, timestamp
+policy and notification kinds. Unaligned/end-RAM/NULL inputs, clock boundaries,
+full-word status returns, fresh modes, packed saved-word mutation and native
+rawr0..r3/callee saves/SP are included.720 actual emulated faults match.
+Observations:10657 timestamps,14699 storage,11352 notification,1792 mode,
+448 ring and448 SDK callbacks. Trace
+`a4b96f1ad2cc3be40ca6433d4500b13166f966c0c0ac703e458a0eda10d6f39c`.
+
+Clock, storage, notification and logging callbacks remain fixtures. Composition
+here begins at the six existing event callbacks, not the outer dispatcher;
+the earlier dispatcher scratch-register/code-placement gate remains open. The
+first runner attempted an unbounded host snapshot of an end-RAM storage argument.
+`pre-storage-fixture-span-fix` preserves that runner/log and
+`fixture-correction.json` binds the repair history. Host fixture reads/mutations
+are now bounded; the native source was unchanged. Unread service pointers are
+recorded as such, not claimed as actual storage faults or storage behavior.
+
+Six main imports close and seven storage/notification bodies become explicit:
+activity,HR,HRV,SpO2,stress and temperature storage plus notification throttling.
+Main unresolved imports therefore grow56 to57; the selected consumer graph has
+exactly those seven imports. Remaining aggregation/provider bodies, complete
+dispatcher composition, all private/raw ABI, original compiler/placement,
+byte-identical whole image and hardware proof remain gates. Prior QMA/Bosch/
+NV/health/DFU evidence remains unchanged. No device or firmware writes occur.
+
+### Native health notification throttle and selected byte identity
+
+`native-health-notification-throttle` compiles8B138's72-byte native body and
+owns only the4-byte last-send word at200067A4, with authenticated cold zero
+initialization. The preceding context word is not claimed as source-owned;
+the symbolic native-base-minus4 expression preserves the originalr5 base.
+REA's76-byte receipt, frozen pseudocode, disassembly and compiler inputs are
+hash-bound. No opcode array or invented whole context is used.
+
+After the authenticated phone gate returns nonzero, the code captures the
+current timestamp and freshly reads the last-send word. It sends if last is
+zero, unsigned now<last, or now-last>=10800; equality10800 sends. Otherwise
+rawr0 is the elapsed delta. It calls the four stages8C150,8CD60,8C750,8BAEC
+withr0=0, then8B818 withr0=1/r1=0. All stage return values are ignored for
+control flow. Finally it stores the previously captured timestamp, overwriting
+any stage callback mutation; rawr0 remains the last stage's return. The input
+kind does not select stages. Disconnection skips time lookup and every stage.
+No new retries, guards, synchronization or alternate clock policy is inserted.
+
+15852 native/source comparisons pass:13548 direct and2304 through actual
+activity/HR/HRV/SpO2 consumers. An independent unsigned oracle covers threshold
+neighbors, high-bit/wrapped/backwards timestamps, initial-zero state, full-word
+gate results, ignored stage errors and mutation of the state by gate,clock or
+stage callbacks. Stage order and exact arguments, rawr0..r3,callee saves/SP,
+state and unchanged neighbor guards match.9545 sends produce47725 stage
+callbacks;15852 gates,12844 clocks and2304 storage callbacks are observed.
+Gate,clock,stage and storage are fixtures; this is not full dispatcher or
+physical execution. Trace
+`c6b724116c8b3239df47a7da2567161b7e7da77ed753cf44edb63ae8ae19cb09`.
+
+Additional source-build verification establishes **312 byte-identical bytes
+across seven code spans**: all six preceding consumer bodies(236 bytes), plus
+the throttle body and literal(76 bytes). Both C objects are linked together at
+the original addresses; consumer-to-throttle branches bind the actual compiled
+throttle symbol. External gate,clock,storage and stage addresses are explicit
+verification bindings. Every compiled span equals the authenticated application
+bytes, including the throttle literal. `exact-span-verification.json` covers
+that76-byte unit; `consumer-exact-spans-verification.json` covers the joint seven
+spans. This is selected native-placement code identity, not a complete provider
+graph, complete image or recovered original linker/toolchain proof. Earlier
+relocatable/emulator reports remain immutable with their broader identity gates.
+
+One notification import closes and five named report-stage bodies are newly
+exposed, growing main imports57 to61. The selected throttle graph has exactly
+those five unresolved stage imports. Native phone/runtime providers remain
+linked separately; no guessed upstream body or unlicensed vendor source is
+introduced. Report/storage implementation, outer dispatcher scratch ABI,
+complete context/table extents, all private histories, whole-image identity and
+hardware proof remain open. Prior QMA/Bosch/NV/health/DFU gates persist.
+
+### Source health notification sync controllers
+
+`native-health-notification-stages` compiles five controllers exposed by the
+throttle:HR8C150,SpO2 8CD60,HRV8C750,activity8BAEC and status8B818. These include
+3400 native instruction bytes. The four larger controllers read24-byte sync
+markers, use native epoch/day/window rules, allocate128-byte caches and native
+148/220/1180-byte builders, query/iterate flash, handle no-flash fast-forward,
+flush buffered/offline data, finalize and free both allocations. Allocation
+failures, ignored provider results and fresh log modes remain native behavior.
+The status controller packs first low8 and second low16 into its saved-r3 word,
+leaving byte1 from incomingr3, calls5B39C with the encoder pointer, then restores
+the modified saved word. No synthesized failure return or replacement stub is
+added. Iterator/encoder callback bodies remain named source dependencies.
+
+The first translated candidate passed24336 native/source comparisons using
+symbolic relocated literal loads. It is preserved immutably under
+`pre-inline-literal-layout`. The final source instead retains native PC-relative
+instructions, readable`.asciz` text, symbolic`.word` pointers and authenticated
+zero padding in C inline assembly. It contains no opcode/instruction-byte arrays.
+Five source-compiled code+literal/text spans, totaling**6313 bytes**, now match
+the authenticated application exactly at verification placement. External
+providers and callbacks are explicit native-address verification bindings,
+not compiled-body proof or fallback providers in a completed image. After the layout correction and explicit full-word nonzero provider-return
+cases,24360 behavioral comparisons pass:1446 per large controller and18576
+status-packing cases. The prior byte-identical receipt and runner remain under
+`pre-controller-status-fixture-coverage`. Rawr0..r3,
+callee saves/SP, exact call/stack arguments, sync records, heap images, allocation/
+free order and pending bytes match. Trace
+`726d43c022458792b95986177f34560daca594ba1ce5e31f60468f4853aa3761`.
+
+Only six2-byte descriptor prefixes at99BF4+i*16 are source-owned(kind/length),
+not the full96-byte descriptor/callback table. Four individual cold-zero pending
+bytes are owned at2000679A,2000679D,200067AD and200067AA. The controller-readable
+text is2692 unique bytes; other owned readonly bytes are typed words and proven
+zero padding. Full descriptor/context extents remain gated. Heap,IO,time,
+database,logging and builder APIs are fixtures in behavioral verification;
+iterator/builder encoder callbacks are explicitly **not executed**. Tests cover
+window/day boundaries, backwards markers, no-data queries, allocation failures,
+buffered/offline modes, partial/failed IO, fresh modes and mutable pending state.
+No actual flash query, persistent storage or phone transmission is claimed.
+
+Five stage imports close and34 unresolved providers/callbacks are exposed,
+growing main imports61 to90. Thirteen other targets already have parent source
+providers. `contracts.json` names all47 referenced targets; whole-provider
+composition and all callbacks remain gates. The native-placement byte match
+covers these five controller spans, not their implementations or a complete
+image. Earlier broad identity gates remain immutable.
+
+The existing`third-party/upstream/flashdb-2.0.0` Apache-2.0 corpus supplies three
+specific reuse candidates:63694 maps by API shape/command6 to
+`fdb_tsdb_control`/`FDB_TSDB_CTRL_GET_LAST_TIME`;63CB4 maps by db/from/to/status2
+shape to`fdb_tsl_query_count`/`FDB_TSL_WRITE`;63AD8 maps by its five arguments to
+`fdb_tsl_iter_by_time`. `upstream-reuse-candidates.json` binds LICENSE,headers and
+source hashes. These are evidence-backed API candidates, not authenticated
+native body/vendor-checkout or struct/raw-ABI matches. No upstream body is a
+new build input here. Reusing that attributable source after native ABI checks
+can shorten the remaining analysis and retain a path for comparing upstream
+fixes without silently changing the stock contracts or byte-identity target.
+
+Remaining callback/builders, source DB ABI, full contexts/tables, all private
+histories, original whole-image compiler/placement, image identity and hardware
+proof remain unproven. Prior dispatcher scratch,QMA,Bosch,NV,health and DFU
+gates persist. No device, flash or external-message write occurs.
+
+FlashDB query-count now has a source-linked native adapter, count callback and
+DB-path helper (`native-flashdb-query-count/report.json`). The current main
+provider object has89 unresolved imports. The adapter preserves the native
+uninitialized return0 and saved argument words; pinned upstream instead returns
+FDB_INIT_FAILED. 8,192 emulator comparisons check raw R0-R3, preserved registers,
+SP, logging/iterator arguments, DB and stack arena. Iterator/printf are fixtures;
+actual source DB-path executes. Three native-address verification spans reproduce
+171 bytes (100 code plus71 inline literal/text/padding), with external iterator
+and printf addresses bound only for verification. Whole-image identity is false.
+
+Separately, five pure C FlashDB2.0.0 helpers compile from pinned Apache-2.0
+slices and pass50,000 typed differential comparisons. Three retain scratch
+register differences. They are not added to the main graph; the C callback also
+uses a different increment encoding. See`native-flashdb-tsdb-kernels/README.md`
+for pins, source slices and explicit raw-ABI/byte-identity gates. REA Ghidra
+12.1.4 supplied independent native callback bytes; Ghidra-MCP finds no GUI
+instance. Control/time iteration remain the next evidence-backed provider work.
+
+FlashDB iterator follow-up (`native-flashdb-iterator/report.json`) links the
+native time-iteration body plus four navigation helpers, closing63AD8 and
+exposing sector/log read providers87C24/87E14 (90 imports in current main).
+948 comparisons include468 actual count -> iterator -> count-callback
+compositions. Signed forward/reverse bounds, empty/using/full/invalid sectors,
+failed reads with/without writes, unused records, early callback exits, null
+callbacks, init flags and lock/unlock mutation fixtures are covered. A normal
+three-sector case independently checks expected in-range record counts.
+Uninitialized direct iteration logs and continues; count still returns0 early.
+Failed read without output can feed stale stack sector addressing into reverse
+navigation; it is retained, not cleared. Sector/log reads, copy, lock callbacks,
+custom direct callbacks and printf remain fixtures.
+
+New five source spans reproduce592 native bytes (508 code plus84 inline
+text/pointers/padding); jointly with count/callback/path the eight spans match
+763 bytes at explicit native verification placements. REA's Ghidra12.1.4
+reads independently bind iterator/helper bytes. These are local source and
+emulator proofs, not full private-history, original compiler, whole-image
+layout/equality or hardware proof. Earlier pure upstream-helper scratch
+mismatches remain historical scoped evidence; the main graph uses the
+symbolic native navigation bodies to preserve stock register behavior.
+
+FlashDB log-read follow-up (`native-flashdb-log-read/report.json`) links87E14
+read_tsl plus3F03E flash-read adapter and3F076 status decoder. One log-reader
+import closes and631E8 partition-read becomes explicit (90 main imports).
+Three symbolic source bodies reproduce126 code bytes; with the prior iterator
+and count chain eleven source spans reproduce889 bytes at native verification
+placements. REA Ghidra12.1.4 independently binds reader/adapter bytes.
+
+29,248 direct comparisons cover3,072 status tables with an independent oracle,
+7,168 flash reads including every file-mode byte and signed return boundaries,
+and19,008 log reads including every0..32 byte prefix, failure/success returns,
+file modes and three stack fills. Native read_tsl ignores the storage error and
+uses remaining private buffer bytes. Status0/1 returns max_len,unused-address
+and time0; later statuses use the read metadata. Neither behavior is hardened
+away.948 additional comparisons execute actual source count -> iterator ->
+log-read -> flash adapter/status decoder -> count callback. Sector read,
+partition I/O, copy, locks, custom callbacks and printf remain fixtures there.
+The current source imports still include sector read87C24 and partition read
+631E8. Full private histories, original compiler/layout, complete image source
+closure, whole-image identity and hardware behavior remain unresolved.
+
+FlashDB sector-read follow-up (`native-flashdb-sector-read/report.json`) closes
+87C24 without exposing new imports (89 main imports remain). The source owns
+360 native code bytes,136 inline literal/text/padding bytes and the17-byte
+read_sector_info assertion-name string. These513 new bytes match native
+verification placements; thirteen joint source spans match1,402 bytes. REA
+Ghidra12.1.4 independently binds the496-byte sector body/data span.
+
+9,615 direct comparisons pass against an independent sector layout, return and
+space-accounting model, including every0..80-byte header prefix, all valid
+sector/end-info status combinations, ignored read errors, traversal length
+alignment/wrap/space exhaustion and83 cases observing the two real assertion
+loops. No invented traps or return stubs replace those loops. A further948
+comparisons execute actual source count -> iterator -> sector/log -> flash-read
+adapter/status decoder -> count callback. Partition I/O remains a fixture and
+source import631E8; copy, locks, direct custom callbacks and printf are fixtures
+in that composed receipt. Native invalid magic returns8 and preserves fields
+not assigned before that exit. Header read errors remain ignored. All prior
+compiler, private-history, whole-image source/layout/equality and hardware
+gates remain open. The next storage boundary is the native FAL partition read.
+
+Native FAL partition read631E8 now compiles and links in
+`native-fal-partition-read/report.json`, closing the partition import and
+exposing device-by-partition64F74 (89 main imports). Pinned FlashDB's bundled
+FAL0.5.99 Apache-2.0 source supplies the attributable comparison contract.
+The native symbolic body preserves the wrapped32-bit addr+size bounds check,
+fresh partition offset read after lookup, raw signed callback return and
+native diagnostics/assertion loops. Source owns172 code bytes,196 inline
+data/text/padding bytes,19 function-name bytes and73 missing-device diagnostic
+bytes. These460 new bytes match native placements;16 joint source spans match
+1,862 bytes under explicit external verification bindings.
+
+6,863 direct comparisons pass, including three assertion-loop cases,1,710
+device callback calls and684 negative callback returns. Independent checks cover
+wrapping address/size/offset, lookup mutation of offset/length and output alias
+to the partition offset field.948 further comparisons execute source TSDB
+count/iterator/sector/log/partition/flash/status/callback composition. Device
+lookup and read callback remain fixtures, as do copy/locks/custom direct
+callbacks/printf. REA Ghidra12.1.4 binds the368-byte native function/data span.
+The64F74 helper's partition bounds/cache state and device callback ownership
+remain the next source work. No physical storage reads/writes occur. Whole-image
+source closure, original compiler/layout, raw private histories and byte
+identity remain unresolved.
+
+Native FAL device lookup64F74 now links in`native-fal-device-lookup/report.json`,
+closing one import (88 main imports). It reuses the unchanged pinned initializer's
+4-byte table pointer,4-byte count and28-byte cache. A parent-object clone exposes
+only those three existing symbols; allocated section type/flags/size/alignment/
+payload hashes and every other symbol entry remain identical. No second state
+family is allocated. A selected36-byte shared-state object is retained for
+verification. Table pointer200077B8 and count200077BC adjacency is required by
+the native body and explicit in the verification layout; final image layout is
+still a gate, not claimed by the relocatable main object.
+
+17,370 direct comparisons cover counts0..9, offsets-65..513, zero/nonzero/
+wrapping cache words, inclusive bounds, both real assertion loops and6,804
+accepted unaligned pointers. The native byte offset uses signed ASR6, without
+an alignment guard.948 composed comparisons execute actual source count,
+iterator, sector/log/partition read, device lookup, flash adapter/status decoder
+and count callback using the existing source state sections. Cache values and
+device read callback remain runtime fixtures, as do copy/locks/custom direct
+callbacks/printf. The58-byte body plus122-byte inline data/text/padding and
+26-byte function-name string reproduce206 new native bytes;18 joint source
+spans reproduce2,068 bytes at verification placements. REA Ghidra12.1.4 binds
+the180-byte function/data span. Device callback ownership, final layout,
+private histories and whole-image source/byte identity remain unresolved.
+
+`native-fal-read-frames/report.json` replaces the two existing FAL read/registry
+slot10 bodies with symbolic native frame-preserving source. The old verified C
+providers remain historical evidence; a parent clone weakens only those two
+symbols, with identical allocated sections and all other symbol entries. No
+imports change (88 main imports) and no RAM state is duplicated:16 existing
+handle/request bytes are reused. The read body30 code+2 padding+8 pointer bytes
+and dispatcher26 code bytes reproduce66 bytes at native verification placements.
+Twenty combined TSDB/FAL source spans reproduce2,134 bytes.
+
+6,144 direct comparisons check read/dispatch paths, request/handle mutation,
+destination alias to request words, zero/wrapping lengths and signed callback
+returns, with1,536 native invalid-operation-table faults retained. The read
+adapter ignores driver errors and returns its saved requested length.948 further
+comparisons execute actual source count/iterator/sector/log/partition/lookup/
+device-read/registry-dispatch/status/callback composition. Only the registry
+driver read is the I/O fixture; copy, locks, custom direct callbacks and printf
+remain fixtures. REA Ghidra12.1.4 independently binds both native spans. The
+concrete registry flash driver, final shared-state/whole-image placement, all
+private histories and whole-image source/byte identity remain unresolved.
+
+`native-internal-flash-read-frames/report.json` replaces two existing internal
+flash read/copy providers with symbolic native frame-preserving source. Only
+those two provider symbols are weakened in a parent clone; all allocated
+sections and other symbol entries are unchanged. Existing80-byte flash record
+and20-byte fstorage context remain the sole state owners. No new RAM or imports
+are introduced (88 main imports). The58+24 code bytes plus10 pointer/padding
+bytes reproduce92 native verification bytes.22 joint source spans reproduce
+2,226 bytes at native placements, independently bound by REA Ghidra12.1.4.
+
+3,420 direct comparisons check bytewise forward-copy overlap, zero/small lengths,
+low16 truncation, callback/request/context mutation, fresh after-hook loading,
+missing request/uninitialized status and420 native null-callback faults.948
+additional comparisons execute actual source TSDB count/iterator/sector/log/
+partition/lookup/FAL read/registry dispatch/internal flash policy/mapped copy.
+Read I/O is no longer a provider fixture in that receipt: source instructions
+copy bytes from generated emulator flash contents. These input contents and
+runtime record/binding fixtures are not observed device flash. Copy (iterator
+struct assignment),locks,custom callbacks and printf remain fixtures. Native
+registered-driver/startup binding, final shared-state layout, full private
+histories, original compiler and whole-image source/byte equality remain gates.
+
+FlashDB control63694 now compiles/links in`native-flashdb-control/report.json`,
+closing one import (87 remain). The native242-byte code body uses a12-byte TBB
+case table encoded as symbolic target offsets, not instruction-byte arrays.
+Source also owns130 inline literal/text/padding bytes and92 external diagnostic
+bytes (17 function name+75 file-mode error). These476 new bytes match native
+verification placements,490 jointly with the existing14-byte source DB-path
+helper. REA Ghidra12.1.4 independently binds the384-byte function/data span.
+
+5,728 direct comparisons pass, checking all256 command bytes, all256 init bytes,
+aliasing arguments to DB fields, raw byte setters/getters, disabled FILE_MODE
+branches, unknown commands and exact init==1 rollover assertion.971 native
+assertion-loop and23 memory-fault cases are retained. An independent mutation
+oracle checks DB/output bytes. Source DB-path executes; printf and zero low-ROM
+contents are fixtures, so null DB reads are not physical boot/MBR proof. Command9
+logs unsupported file mode;10 is a native no-op with FILE_MODE off. Source health
+caller composition, full private histories, original compiler/final layout and
+whole-image source/byte identity remain unresolved.
+
+`native-health-sample-storage/report.json` links five native sample aggregators:
+HR5AD90,HRV5AF60,SpO2 5BB2C,stress5BCEC,temperature5BE7C. Five storage imports
+close; hour-index5ACA6 and averaging5ABA0 become explicit (84 main imports).
+The native bodies total1,136 code bytes. Five code/inline-word/text/padding spans
+plus the65-byte external stress diagnostic reproduce2,089 native verification
+bytes. Temperature's trailing two zero bytes are padding rather than decoded
+instructions. REA Ghidra12.1.4 independently binds all five full source spans.
+
+131,365 comparisons pass:13,217 each HR/SpO2/stress/temperature and78,497 HRV.
+They include all65,536 HRV values/all byte values, hour indices0/23/24/25/255,
+max/min reset rules, full-word average truncation, packet/cache aliases, fresh
+packet reads after helper mutations and changing logging modes. An independent
+byte-level oracle checks cache/latest-sample mutations. Hour/average/logging are
+fixtures; event consumer and real averaging composition remain open.
+
+Source owns only473 proven cold-zero prefix bytes (four80-byte prefixes and one
+153-byte HRV prefix), not full context extents. Native storage does not bound the
+hour index. Out-of-prefix fixture writes are compared but do not establish source
+ownership there. Cold-prefix evidence binds the authenticated scatter zero
+region. It also records a concrete alias: averaging row5 at20016670 is the first
+8 bytes of the stress prefix. The future averaging helper must reuse those bytes;
+only the preceding40 averaging-row bytes currently lack an owner. Full coupled
+behavior, private histories, original compiler/final layout and whole-image
+source/byte equality remain unresolved. No device writes occur.
+
+`native-health-average/report.json` links native hourly averaging5ABA0 and
+hour-index5ACA6, closing both imports (82 remain). They add182 code bytes and
+60 inline literal/text bytes, reproducing242 native verification bytes. With
+five sample-storage bodies and diagnostic text, eight joint spans reproduce
+2,331 bytes at explicit native verification placements. REA Ghidra12.1.4 binds
+both helper spans. The new typed row array owns only40 cold-zero bytes for
+rows0..4; row5 reuses the existing stress prefix first8 bytes. Source verification
+links the two sections adjacently at20016648/20016670. Final layout remains a
+required gate; no second owner is allocated for the alias.
+
+35,151 direct comparisons cover14,415 averaging cases and20,736 hour cases,
+including four FPSCR rounding modes, rational binary32 conversion/division
+oracle, count16/sum32 wrap, count-zero division, invalid types, all256 calendar
+hour bytes and every0..8-byte output prefix. The hour helper initializes its
+8-byte output and ignores the converter's return. Averaging clears the8-byte
+row on count0 or hour change, then wraps count/sum and uses native binary32
+arithmetic before returning a halfword.
+
+5,952 further source composition calls (4,800 individual plus1,152 calls within
+384 HRV -> stress -> HRV sequences) preserve the coupled row5/stress alias.
+Independent byte-level/FP oracles include aliased packets, different outer/inner
+hours and provider mutation. Offset/calendar/logging remain fixtures. This
+supersedes the earlier isolated-storage averaging-fixture limitation only for
+these scoped compositions. Event-consumer and actual calendar-provider
+composition, complete contexts, full private histories, original compiler/final
+layout and whole-image source/byte identity remain unresolved.
+
+`native-calendar-frames/report.json` replaces offset getter8ADB4, packed-calendar
+adapter8AF40 and Unix converter5A7BC with symbolic native frames. A parent clone
+weakens only those three functions and exposes existing fallback/month-table
+symbols; allocated sections and every other symbol entry remain unchanged.
+Existing32-byte time state,36-byte fallback and24-byte month table are reused;
+no RAM owner is duplicated. The310 code+18 literal/padding bytes reproduce328
+native frame bytes;352 with the reused month table. REA Ghidra12.1.4 binds all
+three native frame spans. Main imports remain82.
+
+89,407 direct comparisons pass:65,536 signed-offset words,5,343 Unix conversions
+and18,528 packed conversions, including six native faults. Python datetime and
+sequential byte-level oracles check unsigned32-bit epoch/offset wrap, leap/year
+boundaries, null-output fallback, packed NULL return and aliased input/output.
+The native converter rereads the input timestamp when computing weekday; alias
+checks preserve that behavior rather than imposing a single captured input.
+
+5,952 additional storage/averaging comparisons execute actual source offset,
+calendar and Unix conversion. Calendar is no longer a provider fixture in this
+receipt. HRV/stress/HRV alias sequences and FP/cache oracles remain active.
+Controlled timezone/packet updates and logging remain fixtures. Twelve combined
+source spans, including the source month table, reproduce2,683 native-placement
+bytes. These are emulator/source proofs; actual hardware clock/startup binding,
+final layout, complete contexts/private histories, original compiler and whole
+image source/byte equality remain unresolved. Existing C provider receipts stay
+historical; no new vendor or upstream attribution is claimed for these bodies.
+
+`native-activity-storage/report.json` links native activity delta storage5AA14
+and ten-minute bucket helper5AC74, closing the activity import (81 remain).
+296 code bytes plus98 inline data/text/padding bytes and156 external diagnostic
+bytes reproduce550 native verification bytes. REA Ghidra12.1.4 independently
+binds both function/data spans. The existing576-byte activity cache and8-byte
+metadata/gap region remain the sole state owners; selected configuration is584
+bytes and no RAM state is duplicated.
+
+88,406 direct comparisons pass (86,117 storage/2,289 bucket), including all65,536
+byte bucket pairs,12/10/10 packed counter wrapping, null input, aliased packets,
+helper mutations and changing logging modes. Three sequential native word
+stores are retained, so packet aliases observe intermediate writes. Bucket
+bounds144 are preserved. Native activity places the entire delta in the start
+bucket even when the end bucket differs; no proportional redistribution or
+saturation is substituted.
+
+3,744 further comparisons execute actual source activity/bucket/offset/calendar/
+Unix conversion across day boundaries, timestamp wrap, duration endpoints,
+timezone changes and packet aliases. Calendar/bucket are not provider fixtures
+in that receipt; controlled timezone/packet changes and logging remain fixtures.
+Eight joint source spans including the reused month table reproduce902 native
+verification bytes. Event-consumer composition, actual runtime/clock binding,
+private histories, original compiler/final layout and whole-image source/byte
+equality remain unresolved. No physical device operations occur.
+
+`native-time-update/report.json` links native event time flag8AEA4 and backend
+update8AEB0, closing two imports (79 remain), and replaces the existing snapshot
+5A990 body with its native frame. Only snapshot's symbol binding changes in the
+parent clone; allocated sections and every other symbol entry are identical.
+Existing32-byte time state and24-byte registration are reused. No new RAM is
+allocated.176 code+16 literal bytes reproduce192 native verification bytes,
+independently bound by REA Ghidra12.1.4.
+
+17,411 comparisons pass:256 setters,7,170 snapshots and9,985 updates, including
+three native memory faults. Independent state/cache/callback oracles preserve
+snapshot's (-flag)&pointer mask, capture-byte XOR1 behavior (anything except1
+may capture), original32-bit offset comparison before halfword storage,
+cache invalidation and raw nonzero update results. Callback fixtures mutate
+state and the stack-held snapshot/context to prove native fresh loads. Snapshot
+output aliases observe sequential writes. Backend GET/UPDATE callbacks and
+20-byte memclear remain fixtures; no hardware clock update occurs. Event caller
+composition, actual backend/memory-helper execution, full private histories,
+original compiler/final placement and whole-image source/byte identity remain
+unresolved.
+
+`native-event-multicast` compiles the local product subscriber multicast body
+8B028.202 symbolic instruction bytes and10 padding/literal bytes reproduce212
+native verification bytes, independently bound by REA/Ghidra12.1.4.4,550
+comparisons cover cache/copy behavior, callback traversal mutation, all four-node
+combinations of disabled/local/two remote/unknown routes, allocation failures,
+queue result independence and length truncation around65536. No hardening is
+substituted for native behavior. Providers and callbacks remain fixtures.
+One import closes; five explicit dependencies are exposed (lock/unlock, current
+thread, roots and routes), leaving83 main imports. Root extent/initialization,
+route symbolic task ownership, actual provider/caller composition, faults,
+private histories, compiler/final placement and whole-image equality remain
+open. No new RAM owner or hardware operation is introduced.
+
+`native-subscriber-sync` adds local mutex lock5DCB0/unlock5DCD4 wrappers and
+current-thread thunk7D814, reusing existing upstream CMSIS mutex and FreeRTOS
+current-task providers.13,824 comparisons pass with independent callback/state
+oracles: creation failure still passesNULL to acquire, created handles replace
+creation callback state changes, acquire/release mutations persist, tail returns
+and arbitrary full-word results are retained. Providers remain fixtures here.
+46 code bytes plus literals/padding and the typed mutex attribute/name reproduce
+88 ROM verification bytes; REA/Ghidra independently authenticates all five spans.
+The4-byte handle at20006794 is initially zero in authenticated decompressed data;
+the80-byte static mutex control at2001571C lies within native zero-init range.
+These84 RAM bytes have typed source owners, with final scatter/placement gated.
+Three imports close, leaving80. Subscriber root/route ownership, actual provider
+and multicast composition, private histories, compiler/layout and whole-image
+source/byte equality remain open. No new upstream attribution is inferred for
+the local wrappers; CMSIS/FreeRTOS provenance stays with their existing providers.
+
+`native-subscriber-registration` compiles local registration8AF8C and owns the
+five pointer roots at20015708 (20 cold-zero RAM bytes) and two typed stride-8
+route records at99BA8. The roots end at the already owned mutex control block;
+registration's unsigned index<5 check establishes the bounded table. Multicast
+still performs unchecked indexing; no new guard is introduced. Route pointers
+reference the existing sensor/system task thread fields symbolically. Two
+configuration imports close, leaving78; no new provider import is exposed.
+
+4,800 direct comparisons include984 native allocation faults, duplicate callback
+rejection, default sensor context, all valid/invalid index cases in the test set,
+lock-driven root replacement and heap-callback list mutations. Native BASEPRI64
+and invalid store on allocation failure are retained. A further2,430 workflows
+execute actual source registration -> multicast and local mutex/current-thread
+wrappers with independently checked lists/cache/inline callbacks/route masks.
+These workflows include9,720 registrations and2,430 multicasts. Heap, memmove,
+CMSIS, publish and current-task providers remain fixtures.172 new and472 joint
+ROM bytes reproduce native verification placements. Source state/configuration
+is typed; full scatter integration, arbitrary-index/fault histories, actual
+provider/runtime scheduling, original compiler/final placement and whole-image
+source/byte equality remain unresolved. No new upstream origin is inferred for
+these product-specific algorithms; existing CMSIS/FreeRTOS source is reused.
+
+`native-subscriber-consume` compiles packet consumer8B0FC (58 instruction bytes
+and2 padding bytes,60 native verification bytes; REA/Ghidra independently bound).
+It uses no new RAM owner and closes one import, leaving77. The leading packet
+word is destructively advanced through fresh node.next loads. Callbacks receive
+payload+6 and r1=callback function address; the packet length is not a traversal
+bound. No conventional payload/length callback ABI is substituted.
+
+27,651 direct comparisons include7,254 faults from invalid context pointers and
+callback-mutated packet heads. Disabled callbacks, local/remote thread matches,
+lock-driven head replacement, callback-driven link/head changes, unused packet
+lengths and raw unlock results are checked against an independent traversal
+oracle. A separate2,430 composed workflow receipt executes actual source
+registration, multicast, sync wrappers and consumer with independent list/cache/
+callback/routing checks. Nine spans reproduce532 native ROM bytes. Captured
+publish packets are copied to emulate remote delivery; this is not source queue
+or scheduling execution. Heap, memmove, CMSIS, publish, current-task and product
+callbacks remain fixtures. Existing raw dispatcher ABI discrepancies are not
+closed by these local checks. Malformed/cyclic/private histories, full provider
+composition, compiler/final layout and whole-image source/byte identity remain
+open. This is local product reconstruction using existing source CMSIS/FreeRTOS
+providers; no new third-party attribution or hardware proof is claimed.
+
+`native-health-daily-fixture` compiles the diagnostic daily-cache generator8B378
+and temperature accessor5BE5C.786 instruction bytes plus typed inline strings,
+literals and padding reproduce1,192 native verification bytes, independently
+bound by REA/Ghidra. The frozen function's noncontiguous aggregate range includes
+notification tails; three remain explicit imports. One import closes and three
+are exposed, leaving79. The previously compiled native PRNG is selected from its
+source object and linked, with no duplicate state owner; its initial seed/startup
+ownership remains open. The28-record native logging prefix is represented by
+__start_log_const_data+224, preserving the wider graph's shared stop symbol.
+
+13,568 comparisons include13,312 fixture invocations and256 actual temperature
+accessor checks. An independent oracle checks signed PRNG remainders (including
+negative controlled provider returns), wrapped unsigned timestamps/hour ranges,
+low-byte/clamped bucket indices, first-bucket metadata and later overlapping
+bucket writes. Null/invalid input types, all eight log modes, missing caches and
+partial prior writes are covered. Saved r0-r3 slots are reused for logging and
+cache pointers; native returns and tail notification arguments retain those
+writes instead of restoring conventional input values. Time/log/cache/PRNG and
+notification execution remain fixtures in this receipt. No full cache extent
+or extra RAM ownership is claimed; native writes can exceed24 buckets. Actual
+provider/caller composition, initial PRNG state, full log/configuration layout,
+malformed/private histories, original compiler/final placement and whole-image
+source/byte equality remain open. These are local diagnostic product algorithms;
+no new third-party origin is inferred or hardware operation performed.
+
+`native-health-daily-logging` compiles three daily-cache diagnostic tails8D40C,
+8E3F8 and8E560 (previous imports named notify; they log, not publish packets).
+562 instruction bytes plus typed inline text/literals/padding reproduce912
+native verification bytes, independently bound by REA/Ghidra. All three imports
+close, leaving76; no new RAM owner or dependency is introduced. Existing source
+logging providers and the symbolic28-record log prefix are reused.
+
+7,104 direct comparisons independently check latest-value and24 hourly rows,
+min/average/max argument order, temperature+250 display conversion, all encoded
+byte values in controlled cache patterns, null caches, changing log modes and
+fresh cache reads after mode-provider mutations. Native saved r1-r3 slots are
+reused as outgoing stack arguments; their resulting values and the raw return
+(mode shifted left30 or logger return) are retained. A further576 composed
+comparisons execute the actual daily fixture and three logging tails together;
+five spans reproduce2,104 joint ROM bytes. Cache, time, random, mode and log
+providers remain fixtures in composition; direct temperature accessor checks
+belong to the preceding fixture receipt, not this composed receipt. The earlier
+scope-label receipt/driver are preserved under pre-composition-scope-label.
+Actual provider/runtime execution, cache extents, PRNG initialization, log/config
+layout, malformed/private histories, original compiler/final placement and
+whole-image source/byte equality remain open. These are local diagnostic product
+algorithms using existing source logging providers; no new upstream attribution
+or hardware proof is inferred.
+
+`native-health-service-wrappers` compiles seven bodies: sleep status logger8E154,
+sleep sync guard8E1E0, SpO2/temperature state bridges8E274/8E552, no-op callback
+8E55C and state publication helpers8A87E/8A896.208 instruction bytes plus typed
+text/literals/padding reproduce354 native verification bytes, independently
+bound by REA/Ghidra. Five imports close and backend5B6F4 is exposed explicitly,
+leaving72. No new RAM owner is introduced; existing logging/publish providers
+and the symbolic28-record logging prefix are reused.
+
+18,656 comparisons independently check all low-byte state values and wide-word
+variants, bridge constants, dynamic logging modes, raw returns, null/nonzero
+pointer/length guards and direct backend argument forwarding. Source bridges
+execute actual source publish helpers; their one-byte payload points into the
+saved argument stack word. Controlled publisher mutations affect the word later
+popped into r3, preserving native behavior. No-op callbacks preserve registers.
+Mode/log/publish/sleep-backend execution remains fixture-backed; native address
+bindings establish verification placement only. Actual provider/caller/runtime
+composition, backend input semantics, malformed/private histories, full section
+configuration, original compiler/final layout and whole-image source/byte
+equality remain open. These are owner-authorized local product adapters using
+existing source providers; no new third-party attribution or hardware proof is
+inferred.
+
+`native-sleep-sync-status` compiles backend5B6F4 and gives the authenticated
+12-byte zero-initialized context prefix at200067B4 a typed source owner. Full
+context and runtime callback-table ownership remain open.228 instruction bytes
+plus typed inline strings/literals reproduce412 native verification bytes,
+independently bound by REA/Ghidra. One import closes, leaving71; no new direct
+import is exposed. No physical storage operation occurs.
+
+34,912 comparisons split equally between direct backend and actual source guard
+wrapper -> backend execution. Both objects reproduce766 joint ROM verification
+bytes. Independent record/partial-read/marker oracles cover low8(length/12)
+truncation (including255/0 wrap), ignored trailing bytes and read returns,
+24-byte scratch cleared only once, retained unwritten header words, fresh input
+comparisons after callback mutations, fresh read/write ops lookup, captured
+address+20 writes and retained/callback-mutated11223344 marker values. Nonzero
+write results log failures and continue. Mode/log values and packet-address
+reloads match the native contracts. Read/write callbacks, memclear and logs are
+fixtures; their invocations establish emulator contracts, not hardware effects.
+Full context/registration, actual I/O/provider composition, malformed/private
+histories, scatter integration, original compiler/final layout and whole-image
+source/byte equality remain open. This is a local product storage adapter; no
+new upstream attribution is inferred.
+
+`native-sleep-record` compiles storage5B890, event wrapper8DC94, erase-all5B2F8,
+sector count8FE14 and erase thunk8DD88.482 instruction bytes plus typed inline
+text/literals reproduce924 native verification bytes, independently bound by
+REA/Ghidra. Two event imports close and three sector allocator/writer providers
+are explicitly exposed, leaving72. The existing12-byte sleep context prefix is
+reused; no new state owner or upstream attribution is introduced.
+
+17,429 comparisons independently check initialization bytes, maximum3888-byte
+size and allowed zero-length requests, null inputs, at most two writes, raw
+UINT32_MAX fallback selection, low8 writer sector ids and full-word log ids.
+Actual event -> store -> erase-all -> sector-count bodies execute together.
+Provider mutations demonstrate no recheck of initialization/length on retry,
+and fresh region base/ops lookup for each erase. Count is low8(size>>12), with
+all256 count values and wrap tested. The event wrapper retains low16(u16 size
+atpayload+30 +32), and success calls throttle withkind6. Select/fallback/write,
+indirect erase, logging and throttle are fixtures;266,616 recorded erase calls
+are emulator fixture observations across both sides, not storage operations.
+Actual sector provider/runtime registration, metadata/ops ownership, malformed/
+private histories, original compiler/final placement and whole-image source/
+byte equality remain open. No physical firmware or storage writes occur.
+
+`native-sleep-sector-select` compiles free-selector8FE28 and oldest-sector
+fallback8FC6C.346 instruction bytes plus typed inline literals/text reproduce536
+native verification bytes, independently bound by REA/Ghidra. Two imports close,
+leaving70; record writer8FE98 remains explicit. Existing source sector count and
+sleep context prefix are reused, with no new RAM or third-party attribution.
+
+The independent header oracle checks erased-word and magic qualification,
+retained partial16-byte reads, ignored read returns, strict unsigned minimum
+selection with first-tie retention, no-candidate default0 and signed-byte return
+values. Fallback rereads live count before clamping, always erases (even count0),
+and reloads current metadata for post-erase logs. Controlled callback mutations
+replace region/ops during scanning, shrink count and change base after erase.
+All256 count values and negative signed-byte sector results are exercised. The
+source count helper executes; three spans reproduce556 joint ROM bytes. Read,
+erase, log-mode and logging providers remain fixtures; no storage operation is
+performed. Record-writer/caller/provider composition, full runtime metadata/ops
+ownership, malformed/private histories, original compiler/final layout and
+whole-image source/byte equality remain unresolved.
+
+The selector receipt passes25,712 comparisons (12,856 each selector/fallback),
+including4,374,256 fixture read observations across both native/source sides.
+These counts are emulator evidence, not storage or runtime deployment proof.
+
+`native-sleep-sector-write` compiles the entire contiguous writer8FE98..90093,
+including success code beyond the frozen366-byte aggregate function range.
+The corpus/ledger remain unchanged; new contracts describe the native span
+explicitly.508 instruction bytes, inline typed strings/literals and69-byte
+external success text reproduce913 native verification bytes, independently
+bound by REA/Ghidra. Writer import closes and finalizer901E4 is exposed, leaving
+70; no state owner is added. Existing source CRC/logging providers stay linked.
+
+5,760 direct comparisons independently check eight-slot scanning, retained
+partial24-byte reads, low16 aligned length, unsigned wrapped capacity, data and
+20-byte metadata serialization, preserved header fields, low16 CRC placement,
+post-data-write payload loads and fresh callback-table selection after mutations.
+I/O callbacks use0 for success. Capacity failure invokes finalizer then returns0
+regardless of its result; successful slot7 returns its raw result, earlier slots
+return1. Exhausted slots and I/O errors return0. Writes/CRC/memclear/log/finalizer
+are emulator fixtures; no storage operation occurs. Actual record/allocator/
+writer/finalizer/provider composition, runtime context, malformed/private
+histories, original compiler/final layout and whole-image source/byte equality
+remain open. This is a local product storage algorithm; no new upstream origin
+or hardware proof is inferred.
+
+`native-sleep-sector-finalize` compiles901E4:192 instruction bytes plus typed
+inline literals/text reproduce292 native verification bytes, independently
+bound by REA/Ghidra. One import closes, leaving69; no new state owner or upstream
+attribution is introduced. Existing source sector count and sleep context are
+reused.
+
+18,432 direct checks independently verify strict unsigned minimum header word2,
+all-erased/no-sector default0 then increment, retained partial16-byte reads,
+ignored read returns, captured target address despite metadata changes, captured
+initial count and fresh I/O callbacks. The16-byte final header retains magic
+CCFFAABB/66889977, counter and zero flag;0 write result becomes boolean1. All256
+count values, counter boundaryFFFFFFFE->FFFFFFFF and callback table mutations
+are covered. A further176 workflows execute actual writer -> finalizer -> count
+with independent slot/header/capacity oracles. Four spans reproduce1,225 joint
+ROM bytes. Capacity failure still returns0 after finalization; slot7 completion
+returns actual finalizer success/failure. I/O, memclear, CRC, mode and logging
+remain fixtures. Full recorder/allocator/writer/finalizer chain, runtime metadata/
+ops ownership, malformed/private histories, original compiler/final layout and
+whole-image source/byte equality remain open. No physical storage writes occur.
+
+`native-sleep-storage-chain` adds a bounded full local composition receipt rather
+than another body replacement. Actual source event/record/select/fallback/write/
+finalize/erase/count and the already compiled C checksum provider execute in
+1,152 workflows with12,384 repeated record comparisons. An independent bitwise
+CRC and record/sector/image model checks every read/write/erase/log operation,
+return and resulting image after each append. Cases span1..3 sectors, records
+of32/64/512/3888 bytes,1/8/9/25 appends, log modes0/7 and no-error/first-data/
+two-data/first-header/first-commit/first-erase failure plans. Main imports remain69.
+
+2,665 local storage ROM bytes and1,536 generated checksum table bytes reproduce
+native verification placement. Source objects, linked proof ELF/layout and test
+driver are hash-bound. The source CRC text is516 bytes and uses an isolated
+native-entry placement that overlaps unused native CRC32/hash code; it is not
+whole-image layout or instruction equality proof. Earlier passing driver and
+receipt are retained under pre-proof-artifact before adding the ELF binding.
+The compiled context prefix is reused with controlled initialization inputs.
+Full reads, assignment writes and erase over a mutable image are I/O fixtures,
+not physical flash semantics or operations. Memclear/mode/log/throttle remain
+fixtures; actual CRC source executes, and private stack/raw scratch identity is
+not asserted across different CRC implementations. Runtime metadata/ops binding,
+hardware/provider integration, malformed/unbounded histories, final compiler/
+scatter/link placement and whole-image source/byte equality remain unresolved.
+No new upstream attribution, RAM owner, firmware write or commit is introduced.
+
+`native-sleep-report` compiles handler8DD90, including four diagnostic field
+groups, unsigned3600-second duration guard, event2000 publication and storage
+fallback.434 instruction bytes plus typed inline/external text/literals reproduce
+1,029 native verification bytes, independently bound by REA/Ghidra. The initial
+broader REA read is retained separately; the final contract binds the precise
+964-byte body/data span and65-byte external string. One import closes, leaving68.
+
+9,458 direct comparisons include two native memory faults, fresh payload fields
+after mode callbacks, saved r1-r3 stack argument reuse, duration/wrap boundaries,
+low16(u16 stages+32) publication length and raw publish/fallback results. A further
+864 full-chain workflows compare4,320 reports against an independent image/error
+model. Actual handler -> storage event/record/select/fallback/write/finalize/
+erase/count and compiled C CRC execute. Cases cross3599/3600 seconds, publish
+acceptance/failure, repeated appends and six I/O error plans.3,694 storage/report
+bytes and1,536 generated checksum table bytes match native verification spans.
+The linked proof ELF/layout are hash-bound. Publish/image I/O/memclear/mode/log/
+throttle remain fixtures, not queue delivery or physical storage. The isolated
+source CRC placement overlaps unused native CRC32/hash code; it does not prove
+final placement or raw private histories. Runtime binding, provider/hardware
+integration, original compiler/scatter layout and whole-image source/byte
+equality remain unresolved. No new state owner, upstream attribution or physical
+firmware operation is introduced.
+
+`native-health-latest-samples` compiles six HR/SpO2/HRV packed and public getters,
+with216 instruction bytes and230 authenticated ROM bytes. REA/Ghidra byte
+receipts bind the recovered spans.67,176 direct comparisons cover all65,536
+HRV sample values, byte values, null/zero/alias cases and sequential copy effects.
+SpO2 clears only its sample byte and timestamp; HR and HRV clear the leading word.
+864 composed workflows execute actual storage and getters over repeated updates,
+checking1,446 native bytes against independent cache/sample models.
+
+The latest graph aliases the three storage prefixes to their existing full cache
+owners, reusing328 bytes and removing313 redundant backing bytes. Other allocated
+sections and inherited function bytes are preserved; no new RAM is allocated.
+68 main imports remain. Hour/average/mode/log providers remain fixtures in this
+composition. Final compiler/layout, full runtime/private histories, hardware and
+whole-image byte equality remain gated. This local recovery adds no upstream
+origin claim; pinned dependency attribution and update routes remain unchanged.
+
+`native-health-get-dispatch` compiles the health GET router8B8E8.400 instruction
+bytes, an8-byte symbolic TBB table and typed strings/literals reproduce516 ROM
+bytes; a28-byte uint32 template reproduces99BC8. REA/Ghidra receipts authenticate
+both spans. Existing last-timestamp state is reused with no new RAM.4,320 direct
+fixture comparisons check module/type routing, native SpO2 range70..100,
+packet layouts, logging modes, callback command mutations and fresh request IDs.
+The complete source/native register and stack observations match for these cases.
+
+One event-service import closes and three encoder bodies become explicit,
+leaving70 main imports. All providers are fixtures in these direct checks;
+actual getter/offset/timestamp/notification composition remains a separate gate.
+Final compiler/scatter placement, full private histories, hardware and whole-image
+byte equality remain unresolved. This local router has no new upstream origin
+claim. Existing dependency pins and attributable update routes remain in force.
+
+`native-health-get-encoders` compiles HR/HRV/SpO2 reply encoders83930/83972/83C20
+and shared sample sender82EF4, totaling280 authenticated instruction bytes.
+REA/Ghidra receipts bind each body.9,000 direct/nested comparisons check native
+headers, request truncation, flag combination, null payload replies, raw provider
+results, exact invalid-handle65535 guard and preserved frames. HRV sends9 bytes;
+HR and SpO2 send8. Actual compiled sample sender executes beneath the encoders.
+Three imports close with no new imports or RAM owners;67 remain in the main graph.
+
+Phone handle, flag and response providers are fixtures in this stage. End-to-end
+dispatcher/getter/encoder/protocol composition, final compiler/scatter placement,
+full private histories, hardware and whole-image equality remain gated. These
+local product wrappers add no upstream origin claim; their existing protocol
+providers and established dependency pins remain the integration route.
+
+`native-health-get-chain` verifies actual dispatcher -> public/packed getters ->
+HR/HRV/SpO2 encoders -> shared sample sender over1,296 GET workflows. An independent
+packet/header/result oracle covers zero/truncated samples, SpO2 range boundaries,
+offset truncation, handle65535 rejection, request-ID mutation before capture and
+later phone callback mutation after capture. All three full caches remain intact.
+1,054 ROM bytes match the native image;328 existing cache bytes share their single
+owners. The persisted proof ELF, layout, source objects and driver are hash-bound.
+An initial receipt/driver is retained under pre-cache-oracle before strengthening
+the independent unchanged-cache check. Main imports remain67.
+
+Time/offset/phone/log/flag/response providers remain fixtures; this does not prove
+transport delivery or notification branches. Full raw/private histories, final
+compiler/scatter placement, hardware and whole-image byte equality remain gated.
+No new upstream attribution, state owner or firmware operation is introduced.
+
+`native-health-init` compiles HR initialization8D380 and byte event helper8A866,
+with92 instruction bytes and164 authenticated ROM bytes including typed diagnostic
+strings/literals. REA/Ghidra receipts bind both spans.3,824 direct/nested cases
+cover changing mode results, independent log-branch decisions, all256 low-byte
+values plus high-word aliases, raw publish results and callback writes to the
+saved argument slot later popped into r3. The service executes the actual helper
+and publishes event1001 with one-byte value1. One import closes;66 remain, with
+no new imports or RAM owners. Mode/log/publish providers remain fixtures; queue
+delivery, runtime integration, full private histories, final compiler/scatter
+layout, hardware and whole-image equality remain gated. No new upstream origin
+claim or physical firmware operation is introduced.
+
+The two native-health-init entries are supplemental recovered boundaries outside
+the frozen function ledger. Their contracts do not alter corpus ownership rows
+or increment the tested-candidate count (1,092 remains current).
+
+`native-charge-notification` compiles event service838E0 and an eight-byte typed
+read-only template at9A44C.76 instruction bytes plus the literal/template reproduce
+88 authenticated ROM bytes, bound by REA/Ghidra receipts.27,972 direct comparisons
+cover all256 charge bytes, high-word truncation, arbitrary nonzero active/full
+results, full-over-active precedence, seven-byte payload, callback mutation of
+that payload and raw protocol results. The source reuses already compiled state/
+phone/protocol providers in the main graph; one import closes, leaving65. No RAM
+owner or new provider import is introduced.
+
+Those providers remain fixtures in direct checks; actual provider composition,
+transport delivery, full private histories, final compiler/scatter placement,
+hardware and whole-image equality remain gated. The local wrapper adds no
+upstream origin claim; existing protocol/dependency update routes are retained.
+
+`native-record-update` compiles validator6C640 and update service6C66C,102
+instruction bytes and104 authenticated ROM bytes. REA/Ghidra receipts bind both
+spans.1,540 direct/nested comparisons check every byte value in each validated
+field, cross-boundary combinations, null/alias pointers, comparison returns and
+callback mutation between persistence and apply. The validator accepts field0
+11..99, field1 0..1, field2 101..219 and field3 31..149. The wrapper compares all
+12 bytes, persists only on nonzero compare, then applies fresh data without
+revalidation. Native null-path raw return values and frames are retained.
+
+The main graph selects the already authenticated C memcmp provider from its
+existing compiled unit. One event-service import closes; persistence73604 and
+apply6C53C become explicit imports, leaving66. No RAM owner is added. Memcmp/
+persist/apply remain fixtures in these direct checks; actual provider composition,
+persistence/apply bodies, state ownership, final compiler/scatter placement,
+private histories, hardware and whole-image equality remain gated. Export state
+beyond the previously owned status cells remains unresolved. No speculative
+third-party attribution or physical firmware operation is introduced.
+
+`native-record-providers` compiles apply6C53C and persist73604.180 instruction
+bytes plus typed strings/literals reproduce308 authenticated ROM bytes bound by
+REA/Ghidra receipts. Both reuse existing owners: status byte20006DA0 and health
+settings KV handle20007DF0.8,291 comparisons check per-field thresholds (>2 for
+field0, any field1 change, >9 for fields2/3), low-bit status gating, logging,
+null raw returns, read-result independence, fresh handle/source after callbacks,
+partial reads and sequential three-word copies including stack aliases. An alias
+callback can overwrite a saved register word; the independent frame oracle retains
+that native effect. No new RAM owner is allocated.
+
+Two imports close; reinitialization4C37C becomes explicit, leaving65. Mode/log/
+reinitialize/KV providers remain fixtures in direct checks. Actual composed
+wrapper/provider/KV execution, reinitialize body, final compiler/scatter layout,
+full private histories, hardware and whole-image equality remain gated. No new
+third-party origin claim or physical firmware operation is introduced.
+
+`native-record-chain` executes actual validator/update/persist/apply and compiled
+C memcmp over19,776 workflows. Independent validation, comparison, persistence
+payload and threshold oracles cover identical records, invalid fields, changes
+across all12 bytes, read callbacks mutating records/handles, partial reads, low-bit
+status gating and raw boundary results. The proof binds412 native-span bytes;
+408 are byte-identical and four at6C68A relocate the call to the28-byte compiled
+C memcmp at an isolated verification address. This is explicitly not complete
+instruction equality. Proof ELF/layout, source objects and driver are hash-bound.
+Main imports remain65. KV/mode/log/reinitialize providers remain fixtures, and
+full raw/private histories are not compared across different memcmp bodies.
+
+The reinitializer's crash payload already has a source owner; its separate
+context pointer and algorithm flag still need ownership/integration evidence.
+Those gates, final compiler/scatter layout, hardware and whole-image equality
+remain unresolved. No new upstream claim, state owner or firmware operation is
+introduced by this composition.

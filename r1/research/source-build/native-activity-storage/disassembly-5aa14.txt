@@ -1,0 +1,99 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0005aa14 <r1_stock_i2c5_acquire+0xa53c>:
+   5aa14:	b5f0      	push	{r4, r5, r6, r7, lr}
+   5aa16:	b085      	sub	sp, #20
+   5aa18:	0004      	movs	r4, r0
+   5aa1a:	d031      	beq.n	5aa80 <r1_stock_i2c5_acquire+0xa5a8>
+   5aa1c:	88e1      	ldrh	r1, [r4, #6]
+   5aa1e:	68a0      	ldr	r0, [r4, #8]
+   5aa20:	1a40      	subs	r0, r0, r1
+   5aa22:	f000 f927 	bl	5ac74 <r1_stock_i2c5_acquire+0xa79c>
+   5aa26:	4605      	mov	r5, r0
+   5aa28:	68a0      	ldr	r0, [r4, #8]
+   5aa2a:	f000 f923 	bl	5ac74 <r1_stock_i2c5_acquire+0xa79c>
+   5aa2e:	4606      	mov	r6, r0
+   5aa30:	4836      	ldr	r0, [pc, #216]	@ (5ab0c <r1_stock_i2c5_acquire+0xa634>)
+   5aa32:	4937      	ldr	r1, [pc, #220]	@ (5ab10 <r1_stock_i2c5_acquire+0xa638>)
+   5aa34:	1a40      	subs	r0, r0, r1
+   5aa36:	08c7      	lsrs	r7, r0, #3
+   5aa38:	2d90      	cmp	r5, #144	@ 0x90
+   5aa3a:	d201      	bcs.n	5aa40 <r1_stock_i2c5_acquire+0xa568>
+   5aa3c:	2e90      	cmp	r6, #144	@ 0x90
+   5aa3e:	d321      	bcc.n	5aa84 <r1_stock_i2c5_acquire+0xa5ac>
+   5aa40:	f036 fd54 	bl	914ec <_stack+0x114ec>
+   5aa44:	07c0      	lsls	r0, r0, #31
+   5aa46:	d103      	bne.n	5aa50 <r1_stock_i2c5_acquire+0xa578>
+   5aa48:	f036 fd50 	bl	914ec <_stack+0x114ec>
+   5aa4c:	0740      	lsls	r0, r0, #29
+   5aa4e:	d509      	bpl.n	5aa64 <r1_stock_i2c5_acquire+0xa58c>
+   5aa50:	88e0      	ldrh	r0, [r4, #6]
+   5aa52:	a230      	add	r2, pc, #192	@ (adr r2, 5ab14 <r1_stock_i2c5_acquire+0xa63c>)
+   5aa54:	e88d 0061 	stmia.w	sp, {r0, r5, r6}
+   5aa58:	a12e      	add	r1, pc, #184	@ (adr r1, 5ab14 <r1_stock_i2c5_acquire+0xa63c>)
+   5aa5a:	f04f 60a0 	mov.w	r0, #83886080	@ 0x5000000
+   5aa5e:	68a3      	ldr	r3, [r4, #8]
+   5aa60:	f036 fdea 	bl	91638 <_stack+0x11638>
+   5aa64:	f036 fd42 	bl	914ec <_stack+0x114ec>
+   5aa68:	0780      	lsls	r0, r0, #30
+   5aa6a:	d509      	bpl.n	5aa80 <r1_stock_i2c5_acquire+0xa5a8>
+   5aa6c:	e9cd 5600 	strd	r5, r6, [sp]
+   5aa70:	2001      	movs	r0, #1
+   5aa72:	88e3      	ldrh	r3, [r4, #6]
+   5aa74:	eb00 4007 	add.w	r0, r0, r7, lsl #16
+   5aa78:	a130      	add	r1, pc, #192	@ (adr r1, 5ab3c <r1_stock_i2c5_acquire+0xa664>)
+   5aa7a:	68a2      	ldr	r2, [r4, #8]
+   5aa7c:	f01e ffbc 	bl	799f8 <r1_stock_gpio_pin_set+0x5c4>
+   5aa80:	b005      	add	sp, #20
+   5aa82:	bdf0      	pop	{r4, r5, r6, r7, pc}
+   5aa84:	42b5      	cmp	r5, r6
+   5aa86:	d028      	beq.n	5aada <r1_stock_i2c5_acquire+0xa602>
+   5aa88:	f036 fd30 	bl	914ec <_stack+0x114ec>
+   5aa8c:	07c0      	lsls	r0, r0, #31
+   5aa8e:	d103      	bne.n	5aa98 <r1_stock_i2c5_acquire+0xa5c0>
+   5aa90:	f036 fd2c 	bl	914ec <_stack+0x114ec>
+   5aa94:	0740      	lsls	r0, r0, #29
+   5aa96:	d50e      	bpl.n	5aab6 <r1_stock_i2c5_acquire+0xa5de>
+   5aa98:	8861      	ldrh	r1, [r4, #2]
+   5aa9a:	88a0      	ldrh	r0, [r4, #4]
+   5aa9c:	e9cd 0103 	strd	r0, r1, [sp, #12]
+   5aaa0:	e9cd 5601 	strd	r5, r6, [sp, #4]
+   5aaa4:	88e0      	ldrh	r0, [r4, #6]
+   5aaa6:	9000      	str	r0, [sp, #0]
+   5aaa8:	4a2d      	ldr	r2, [pc, #180]	@ (5ab60 <r1_stock_i2c5_acquire+0xa688>)
+   5aaaa:	f04f 6058 	mov.w	r0, #226492416	@ 0xd800000
+   5aaae:	4611      	mov	r1, r2
+   5aab0:	68a3      	ldr	r3, [r4, #8]
+   5aab2:	f036 fdc1 	bl	91638 <_stack+0x11638>
+   5aab6:	f036 fd19 	bl	914ec <_stack+0x114ec>
+   5aaba:	0780      	lsls	r0, r0, #30
+   5aabc:	d50d      	bpl.n	5aada <r1_stock_i2c5_acquire+0xa602>
+   5aabe:	8860      	ldrh	r0, [r4, #2]
+   5aac0:	88a1      	ldrh	r1, [r4, #4]
+   5aac2:	e9cd 1002 	strd	r1, r0, [sp, #8]
+   5aac6:	e9cd 5600 	strd	r5, r6, [sp]
+   5aaca:	2003      	movs	r0, #3
+   5aacc:	88e3      	ldrh	r3, [r4, #6]
+   5aace:	eb00 4007 	add.w	r0, r0, r7, lsl #16
+   5aad2:	4924      	ldr	r1, [pc, #144]	@ (5ab64 <r1_stock_i2c5_acquire+0xa68c>)
+   5aad4:	68a2      	ldr	r2, [r4, #8]
+   5aad6:	f01e ffa7 	bl	79a28 <r1_stock_gpio_pin_set+0x5f4>
+   5aada:	4923      	ldr	r1, [pc, #140]	@ (5ab68 <r1_stock_i2c5_acquire+0xa690>)
+   5aadc:	88a2      	ldrh	r2, [r4, #4]
+   5aade:	f851 0025 	ldr.w	r0, [r1, r5, lsl #2]
+   5aae2:	4402      	add	r2, r0
+   5aae4:	f362 000b 	bfi	r0, r2, #0, #12
+   5aae8:	f841 0025 	str.w	r0, [r1, r5, lsl #2]
+   5aaec:	8863      	ldrh	r3, [r4, #2]
+   5aaee:	eb03 3210 	add.w	r2, r3, r0, lsr #12
+   5aaf2:	f362 3015 	bfi	r0, r2, #12, #10
+   5aaf6:	f841 0025 	str.w	r0, [r1, r5, lsl #2]
+   5aafa:	8822      	ldrh	r2, [r4, #0]
+   5aafc:	eb02 5290 	add.w	r2, r2, r0, lsr #22
+   5ab00:	f362 509f 	bfi	r0, r2, #22, #10
+   5ab04:	f841 0025 	str.w	r0, [r1, r5, lsl #2]
+   5ab08:	e7ba      	b.n	5aa80 <r1_stock_i2c5_acquire+0xa5a8>

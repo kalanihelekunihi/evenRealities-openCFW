@@ -1,0 +1,47 @@
+{
+  "comparisons": 17411,
+  "counts": {
+    "setter": 256,
+    "snapshot": 7170,
+    "update": 9985,
+    "faults": 3,
+    "get_calls": 4878,
+    "update_calls": 5472,
+    "clears": 4368
+  },
+  "trace_sha256": "d3526395f81675a86076f4af8f456cd0fdf100828155852e5be853992090f6ee",
+  "exact_spans": [
+    {
+      "symbol": "r1_event_service_0008aea4",
+      "address": "0x8aea4",
+      "size": 12,
+      "sha256": "10b92f38b6a81c7b218c69c5ec4bb132fb35888bbc22fac3c24e92b768a43f59"
+    },
+    {
+      "symbol": "r1_event_service_0008aeb0",
+      "address": "0x8aeb0",
+      "size": 144,
+      "sha256": "8fc907295e3905086aa1076a2f21f347d4fe2824d039828acacbf0c7e4fa697f"
+    },
+    {
+      "symbol": "r1_clock_backend_snapshot",
+      "address": "0x5a990",
+      "size": 36,
+      "sha256": "cd0f0d4e0f39415521c971306e1f5c979c43d2a4dacc8e45b03416b671baa146"
+    }
+  ],
+  "exact_bytes": 192,
+  "object_sha256": "0ba15bd2daa35087c4f8842477772f4459a10157fa9a5921334728d3db0930b5",
+  "shared_config_object_sha256": "de576c3382f4c8cff5ba7b0f9703c00c47975635b1e640e5af66a41e1100447a",
+  "driver_sha256": "d648961f3986fe1d9fdb80aa12becd18af5efc2de3afe14031933ab81eefea33",
+  "report_sha256": "b0db72db7dd12ce40c216509f398c653f9c7b5783d3aec3a4ec3deca99a0a999",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "actual_flag_update_and_snapshot_execute": true,
+  "backend_callbacks_and_memclr_are_fixtures": true,
+  "independent_state_cache_and_callback_contract_oracle": true,
+  "all_capture_and_snapshot_flag_bytes_checked": true,
+  "fresh_stack_snapshot_and_context_after_get_mutation_checked": true,
+  "full_private_history_or_raw_abi_verified": false,
+  "whole_image_complete": false,
+  "hardware_write_executed": false
+}

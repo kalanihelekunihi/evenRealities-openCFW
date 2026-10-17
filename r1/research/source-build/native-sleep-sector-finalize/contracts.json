@@ -1,0 +1,469 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "analysis_elf_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "frozen_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "generator_sha256": "1882e2546dd7aae8669dbdad0767d2e50f79ff869a05e99203e5d6bdc26aeea1",
+  "source_sha256": "3a98fdea81966253d07fbe9f3de66bf86ef171f3e75513b9f36343ab709b1d55",
+  "bodies": [
+    {
+      "address": "0x901e4",
+      "code_bytes": 192,
+      "source_span_bytes": 292,
+      "symbol": "r1_sleep_sector_finalize",
+      "instructions": [
+        {
+          "address": "0x901e4",
+          "size": 4,
+          "assembly": "stmdb\tsp!, {r4, r5, r6, r7, r8, r9, lr}"
+        },
+        {
+          "address": "0x901e8",
+          "size": 2,
+          "assembly": "ldr\tr6, [pc, #184]"
+        },
+        {
+          "address": "0x901ea",
+          "size": 2,
+          "assembly": "sub\tsp, #60"
+        },
+        {
+          "address": "0x901ec",
+          "size": 4,
+          "assembly": "mov.w\tr8, #0"
+        },
+        {
+          "address": "0x901f0",
+          "size": 2,
+          "assembly": "ldr\tr1, [r6, #4]"
+        },
+        {
+          "address": "0x901f2",
+          "size": 2,
+          "assembly": "mov\tr5, r8"
+        },
+        {
+          "address": "0x901f4",
+          "size": 4,
+          "assembly": "mov.w\tr4, #4294967295"
+        },
+        {
+          "address": "0x901f8",
+          "size": 2,
+          "assembly": "ldr\tr1, [r1, #52]"
+        },
+        {
+          "address": "0x901fa",
+          "size": 4,
+          "assembly": "str.w\tr8, [sp, #32]"
+        },
+        {
+          "address": "0x901fe",
+          "size": 4,
+          "assembly": "add.w\tr9, r1, r0, lsl #12"
+        },
+        {
+          "address": "0x90202",
+          "size": 2,
+          "assembly": "ldr\tr0, [pc, #164]"
+        },
+        {
+          "address": "0x90204",
+          "size": 2,
+          "assembly": "str\tr0, [sp, #24]"
+        },
+        {
+          "address": "0x90206",
+          "size": 2,
+          "assembly": "ldr\tr0, [pc, #164]"
+        },
+        {
+          "address": "0x90208",
+          "size": 4,
+          "assembly": "str.w\tr8, [sp, #36]"
+        },
+        {
+          "address": "0x9020c",
+          "size": 2,
+          "assembly": "str\tr0, [sp, #28]"
+        },
+        {
+          "address": "0x9020e",
+          "size": 4,
+          "assembly": "bl\t8fe14 <_stack+0xfe14>"
+        },
+        {
+          "address": "0x90212",
+          "size": 2,
+          "assembly": "str\tr5, [sp, #8]"
+        },
+        {
+          "address": "0x90214",
+          "size": 2,
+          "assembly": "str\tr5, [sp, #12]"
+        },
+        {
+          "address": "0x90216",
+          "size": 2,
+          "assembly": "str\tr5, [sp, #16]"
+        },
+        {
+          "address": "0x90218",
+          "size": 2,
+          "assembly": "str\tr5, [sp, #20]"
+        },
+        {
+          "address": "0x9021a",
+          "size": 2,
+          "assembly": "mov\tr7, r0"
+        },
+        {
+          "address": "0x9021c",
+          "size": 2,
+          "assembly": "movs\tr5, #0"
+        },
+        {
+          "address": "0x9021e",
+          "size": 2,
+          "assembly": "b.n\t9023e <_stack+0x1023e>"
+        },
+        {
+          "address": "0x90220",
+          "size": 2,
+          "assembly": "ldr\tr0, [r6, #4]"
+        },
+        {
+          "address": "0x90222",
+          "size": 2,
+          "assembly": "ldr\tr1, [r6, #8]"
+        },
+        {
+          "address": "0x90224",
+          "size": 2,
+          "assembly": "movs\tr2, #16"
+        },
+        {
+          "address": "0x90226",
+          "size": 2,
+          "assembly": "ldr\tr0, [r0, #52]"
+        },
+        {
+          "address": "0x90228",
+          "size": 2,
+          "assembly": "ldr\tr3, [r1, #40]"
+        },
+        {
+          "address": "0x9022a",
+          "size": 4,
+          "assembly": "add.w\tr0, r0, r5, lsl #12"
+        },
+        {
+          "address": "0x9022e",
+          "size": 2,
+          "assembly": "add\tr1, sp, #8"
+        },
+        {
+          "address": "0x90230",
+          "size": 2,
+          "assembly": "blx\tr3"
+        },
+        {
+          "address": "0x90232",
+          "size": 2,
+          "assembly": "ldr\tr0, [sp, #16]"
+        },
+        {
+          "address": "0x90234",
+          "size": 2,
+          "assembly": "cmp\tr0, r4"
+        },
+        {
+          "address": "0x90236",
+          "size": 2,
+          "assembly": "bcs.n\t9023a <_stack+0x1023a>"
+        },
+        {
+          "address": "0x90238",
+          "size": 2,
+          "assembly": "mov\tr4, r0"
+        },
+        {
+          "address": "0x9023a",
+          "size": 2,
+          "assembly": "adds\tr5, r5, #1"
+        },
+        {
+          "address": "0x9023c",
+          "size": 2,
+          "assembly": "uxtb\tr5, r5"
+        },
+        {
+          "address": "0x9023e",
+          "size": 2,
+          "assembly": "cmp\tr5, r7"
+        },
+        {
+          "address": "0x90240",
+          "size": 2,
+          "assembly": "bcc.n\t90220 <_stack+0x10220>"
+        },
+        {
+          "address": "0x90242",
+          "size": 2,
+          "assembly": "adds\tr0, r4, #1"
+        },
+        {
+          "address": "0x90244",
+          "size": 2,
+          "assembly": "bne.n\t90248 <_stack+0x10248>"
+        },
+        {
+          "address": "0x90246",
+          "size": 2,
+          "assembly": "movs\tr4, #0"
+        },
+        {
+          "address": "0x90248",
+          "size": 2,
+          "assembly": "adds\tr4, r4, #1"
+        },
+        {
+          "address": "0x9024a",
+          "size": 4,
+          "assembly": "strd\tr4, r8, [sp, #32]"
+        },
+        {
+          "address": "0x9024e",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x90252",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #31"
+        },
+        {
+          "address": "0x90254",
+          "size": 2,
+          "assembly": "bne.n\t9025e <_stack+0x1025e>"
+        },
+        {
+          "address": "0x90256",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x9025a",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #29"
+        },
+        {
+          "address": "0x9025c",
+          "size": 2,
+          "assembly": "bpl.n\t9026c <_stack+0x1026c>"
+        },
+        {
+          "address": "0x9025e",
+          "size": 2,
+          "assembly": "add\tr2, pc, #80"
+        },
+        {
+          "address": "0x90260",
+          "size": 2,
+          "assembly": "add\tr1, pc, #76"
+        },
+        {
+          "address": "0x90262",
+          "size": 4,
+          "assembly": "mov.w\tr0, #205520896"
+        },
+        {
+          "address": "0x90266",
+          "size": 2,
+          "assembly": "ldr\tr3, [sp, #32]"
+        },
+        {
+          "address": "0x90268",
+          "size": 4,
+          "assembly": "bl\t91638 <_stack+0x11638>"
+        },
+        {
+          "address": "0x9026c",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x90270",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #30"
+        },
+        {
+          "address": "0x90272",
+          "size": 2,
+          "assembly": "bpl.n\t9028a <_stack+0x1028a>"
+        },
+        {
+          "address": "0x90274",
+          "size": 2,
+          "assembly": "ldr\tr0, [pc, #100]"
+        },
+        {
+          "address": "0x90276",
+          "size": 2,
+          "assembly": "ldr\tr1, [pc, #104]"
+        },
+        {
+          "address": "0x90278",
+          "size": 2,
+          "assembly": "ldr\tr2, [sp, #32]"
+        },
+        {
+          "address": "0x9027a",
+          "size": 2,
+          "assembly": "subs\tr0, r0, r1"
+        },
+        {
+          "address": "0x9027c",
+          "size": 2,
+          "assembly": "lsrs\tr0, r0, #3"
+        },
+        {
+          "address": "0x9027e",
+          "size": 2,
+          "assembly": "movs\tr1, #3"
+        },
+        {
+          "address": "0x90280",
+          "size": 4,
+          "assembly": "add.w\tr0, r1, r0, lsl #16"
+        },
+        {
+          "address": "0x90284",
+          "size": 2,
+          "assembly": "add\tr1, pc, #92"
+        },
+        {
+          "address": "0x90286",
+          "size": 4,
+          "assembly": "bl\t799c8 <r1_stock_gpio_pin_set+0x594>"
+        },
+        {
+          "address": "0x9028a",
+          "size": 2,
+          "assembly": "ldr\tr0, [r6, #8]"
+        },
+        {
+          "address": "0x9028c",
+          "size": 2,
+          "assembly": "movs\tr2, #16"
+        },
+        {
+          "address": "0x9028e",
+          "size": 2,
+          "assembly": "add\tr1, sp, #24"
+        },
+        {
+          "address": "0x90290",
+          "size": 2,
+          "assembly": "ldr\tr3, [r0, #44]"
+        },
+        {
+          "address": "0x90292",
+          "size": 2,
+          "assembly": "mov\tr0, r9"
+        },
+        {
+          "address": "0x90294",
+          "size": 2,
+          "assembly": "blx\tr3"
+        },
+        {
+          "address": "0x90296",
+          "size": 2,
+          "assembly": "cbz\tr0, 902a0 <_stack+0x102a0>"
+        },
+        {
+          "address": "0x90298",
+          "size": 2,
+          "assembly": "movs\tr0, #0"
+        },
+        {
+          "address": "0x9029a",
+          "size": 2,
+          "assembly": "add\tsp, #60"
+        },
+        {
+          "address": "0x9029c",
+          "size": 4,
+          "assembly": "ldmia.w\tsp!, {r4, r5, r6, r7, r8, r9, pc}"
+        },
+        {
+          "address": "0x902a0",
+          "size": 2,
+          "assembly": "movs\tr0, #1"
+        },
+        {
+          "address": "0x902a2",
+          "size": 2,
+          "assembly": "b.n\t9029a <_stack+0x1029a>"
+        }
+      ],
+      "data": [
+        {
+          "address": "0x902a4",
+          "size": 4,
+          "kind": "word",
+          "value": "r1_sleep_sync_context_prefix"
+        },
+        {
+          "address": "0x902a8",
+          "size": 4,
+          "kind": "word",
+          "value": "0xccffaabb"
+        },
+        {
+          "address": "0x902ac",
+          "size": 4,
+          "kind": "word",
+          "value": "0x66889977"
+        },
+        {
+          "address": "0x902b0",
+          "size": 41,
+          "kind": "text",
+          "value": "[RING]sleep storage write full count: %d"
+        },
+        {
+          "address": "0x902dc",
+          "size": 4,
+          "kind": "word",
+          "value": "__start_log_const_data+224"
+        },
+        {
+          "address": "0x902e0",
+          "size": 4,
+          "kind": "word",
+          "value": "__start_log_const_data"
+        },
+        {
+          "address": "0x902e4",
+          "size": 35,
+          "kind": "text",
+          "value": "sleep storage write full count: %d"
+        }
+      ],
+      "disassembly_sha256": "8af46db50666e3e93b07b036e91e9a9be0dd02efe181dc3ad7ef6dd5387dd5d2"
+    }
+  ],
+  "providers": {
+    "0x8fe14": "r1_sleep_sector_count",
+    "0x914ec": "r1_structured_log_mode_get",
+    "0x91638": "r1_structured_log_format",
+    "0x799c8": "nrf_log_frontend_std_1"
+  },
+  "native_code_bytes": 192,
+  "native_span_bytes": 292,
+  "new_ram_state_bytes": 0,
+  "full_context_extent_owned": false,
+  "io_callbacks_unresolved": true,
+  "whole_image_complete": false
+}

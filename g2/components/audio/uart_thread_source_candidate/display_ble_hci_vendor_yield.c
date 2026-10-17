@@ -1,6 +1,7 @@
 /* Native vendor delay 0x4807a0. ROM 0x4807f0/f4/f8 authenticate
  * 250.0f, 96.0f and live 0x40021000 clock configuration. The 0x40
- * cycle-delay target is resident ROM and remains an explicit contract. */
+ * cycle-delay target is populated from the official payload's ITCM
+ * decompression record; its boot copy remains a separate contract. */
 #include <stdint.h>
 
 extern void audio_ble_vendor_cycle_delay_rom_00000040(uint32_t);

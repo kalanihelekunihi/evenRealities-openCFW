@@ -1,0 +1,2601 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "analysis_elf_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "frozen_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "generator_sha256": "4887e551d3c1b9b813d85e538f835f3ce7cc83bdc44ffec58e517c89b28fb74f",
+  "source_sha256": "967e4e3c4791ee9943d2e6366d43844027e16f9a3b657e420248f58c81b2d030",
+  "bodies": [
+    {
+      "family": "hr",
+      "address": "0x5ad90",
+      "code_bytes": 220,
+      "source_span_bytes": 392,
+      "symbol": "r1_hr_event_storage",
+      "cache_address": "0x2001654c",
+      "cache_prefix_bytes": 80,
+      "full_cache_context_extent_proven": false,
+      "instructions": [
+        {
+          "address": "0x5ad90",
+          "size": 2,
+          "assembly": "push\t{r1, r2, r3, r4, r5, r6, r7, lr}"
+        },
+        {
+          "address": "0x5ad92",
+          "size": 2,
+          "assembly": "movs\tr4, r0"
+        },
+        {
+          "address": "0x5ad94",
+          "size": 2,
+          "assembly": "beq.n\t5ae6a <r1_stock_i2c5_acquire+0xa992>"
+        },
+        {
+          "address": "0x5ad96",
+          "size": 4,
+          "assembly": "ldr.w\tr0, [r4, #1]"
+        },
+        {
+          "address": "0x5ad9a",
+          "size": 4,
+          "assembly": "bl\t5aca6 <r1_stock_i2c5_acquire+0xa7ce>"
+        },
+        {
+          "address": "0x5ad9e",
+          "size": 2,
+          "assembly": "mov\tr5, r0"
+        },
+        {
+          "address": "0x5ada0",
+          "size": 4,
+          "assembly": "ldr.w\tr2, [r4, #1]"
+        },
+        {
+          "address": "0x5ada4",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r4, #0]"
+        },
+        {
+          "address": "0x5ada6",
+          "size": 2,
+          "assembly": "movs\tr0, #0"
+        },
+        {
+          "address": "0x5ada8",
+          "size": 4,
+          "assembly": "bl\t5aba0 <r1_stock_i2c5_acquire+0xa6c8>"
+        },
+        {
+          "address": "0x5adac",
+          "size": 2,
+          "assembly": "mov\tr7, r0"
+        },
+        {
+          "address": "0x5adae",
+          "size": 2,
+          "assembly": "ldr\tr2, [pc, #188]"
+        },
+        {
+          "address": "0x5adb0",
+          "size": 4,
+          "assembly": "add.w\tr0, r5, r5, lsl #1"
+        },
+        {
+          "address": "0x5adb4",
+          "size": 2,
+          "assembly": "adds\tr5, r0, r2"
+        },
+        {
+          "address": "0x5adb6",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r4, #0]"
+        },
+        {
+          "address": "0x5adb8",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r5, #1]"
+        },
+        {
+          "address": "0x5adba",
+          "size": 2,
+          "assembly": "cmp\tr0, r1"
+        },
+        {
+          "address": "0x5adbc",
+          "size": 2,
+          "assembly": "bls.n\t5adc0 <r1_stock_i2c5_acquire+0xa8e8>"
+        },
+        {
+          "address": "0x5adbe",
+          "size": 2,
+          "assembly": "strb\tr0, [r5, #1]"
+        },
+        {
+          "address": "0x5adc0",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r4, #0]"
+        },
+        {
+          "address": "0x5adc2",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r5, #2]"
+        },
+        {
+          "address": "0x5adc4",
+          "size": 2,
+          "assembly": "cmp\tr1, r0"
+        },
+        {
+          "address": "0x5adc6",
+          "size": 2,
+          "assembly": "bcc.n\t5adca <r1_stock_i2c5_acquire+0xa8f2>"
+        },
+        {
+          "address": "0x5adc8",
+          "size": 2,
+          "assembly": "cbnz\tr0, 5adcc <r1_stock_i2c5_acquire+0xa8f4>"
+        },
+        {
+          "address": "0x5adca",
+          "size": 2,
+          "assembly": "strb\tr1, [r5, #2]"
+        },
+        {
+          "address": "0x5adcc",
+          "size": 2,
+          "assembly": "strb\tr7, [r5, #0]"
+        },
+        {
+          "address": "0x5adce",
+          "size": 2,
+          "assembly": "ldr\tr0, [r4, #0]"
+        },
+        {
+          "address": "0x5add0",
+          "size": 4,
+          "assembly": "str.w\tr0, [r2, #75]!"
+        },
+        {
+          "address": "0x5add4",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r4, #4]"
+        },
+        {
+          "address": "0x5add6",
+          "size": 2,
+          "assembly": "strb\tr0, [r2, #4]"
+        },
+        {
+          "address": "0x5add8",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5addc",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #31"
+        },
+        {
+          "address": "0x5adde",
+          "size": 2,
+          "assembly": "bne.n\t5ade8 <r1_stock_i2c5_acquire+0xa910>"
+        },
+        {
+          "address": "0x5ade0",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5ade4",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #29"
+        },
+        {
+          "address": "0x5ade6",
+          "size": 2,
+          "assembly": "bpl.n\t5adfc <r1_stock_i2c5_acquire+0xa924>"
+        },
+        {
+          "address": "0x5ade8",
+          "size": 4,
+          "assembly": "ldr.w\tr0, [r4, #1]"
+        },
+        {
+          "address": "0x5adec",
+          "size": 2,
+          "assembly": "str\tr0, [sp, #0]"
+        },
+        {
+          "address": "0x5adee",
+          "size": 2,
+          "assembly": "ldrb\tr3, [r4, #0]"
+        },
+        {
+          "address": "0x5adf0",
+          "size": 2,
+          "assembly": "add\tr2, pc, #124"
+        },
+        {
+          "address": "0x5adf2",
+          "size": 2,
+          "assembly": "add\tr1, pc, #124"
+        },
+        {
+          "address": "0x5adf4",
+          "size": 4,
+          "assembly": "mov.w\tr0, #209715200"
+        },
+        {
+          "address": "0x5adf8",
+          "size": 4,
+          "assembly": "bl\t91638 <_stack+0x11638>"
+        },
+        {
+          "address": "0x5adfc",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5ae00",
+          "size": 2,
+          "assembly": "lsls\tr1, r0, #30"
+        },
+        {
+          "address": "0x5ae02",
+          "size": 2,
+          "assembly": "ldr\tr0, [pc, #144]"
+        },
+        {
+          "address": "0x5ae04",
+          "size": 2,
+          "assembly": "ldr\tr2, [pc, #144]"
+        },
+        {
+          "address": "0x5ae06",
+          "size": 4,
+          "assembly": "sub.w\tr0, r0, r2"
+        },
+        {
+          "address": "0x5ae0a",
+          "size": 4,
+          "assembly": "mov.w\tr0, r0, lsr #3"
+        },
+        {
+          "address": "0x5ae0e",
+          "size": 4,
+          "assembly": "mov.w\tr2, #3"
+        },
+        {
+          "address": "0x5ae12",
+          "size": 4,
+          "assembly": "add.w\tr6, r2, r0, lsl #16"
+        },
+        {
+          "address": "0x5ae16",
+          "size": 2,
+          "assembly": "bpl.n\t5ae26 <r1_stock_i2c5_acquire+0xa94e>"
+        },
+        {
+          "address": "0x5ae18",
+          "size": 4,
+          "assembly": "ldr.w\tr3, [r4, #1]"
+        },
+        {
+          "address": "0x5ae1c",
+          "size": 2,
+          "assembly": "ldrb\tr2, [r4, #0]"
+        },
+        {
+          "address": "0x5ae1e",
+          "size": 2,
+          "assembly": "mov\tr0, r6"
+        },
+        {
+          "address": "0x5ae20",
+          "size": 2,
+          "assembly": "add\tr1, pc, #120"
+        },
+        {
+          "address": "0x5ae22",
+          "size": 4,
+          "assembly": "bl\t799d6 <r1_stock_gpio_pin_set+0x5a2>"
+        },
+        {
+          "address": "0x5ae26",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5ae2a",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #31"
+        },
+        {
+          "address": "0x5ae2c",
+          "size": 2,
+          "assembly": "bne.n\t5ae36 <r1_stock_i2c5_acquire+0xa95e>"
+        },
+        {
+          "address": "0x5ae2e",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5ae32",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #29"
+        },
+        {
+          "address": "0x5ae34",
+          "size": 2,
+          "assembly": "bpl.n\t5ae4e <r1_stock_i2c5_acquire+0xa976>"
+        },
+        {
+          "address": "0x5ae36",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r5, #2]"
+        },
+        {
+          "address": "0x5ae38",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r5, #1]"
+        },
+        {
+          "address": "0x5ae3a",
+          "size": 2,
+          "assembly": "str\tr7, [sp, #0]"
+        },
+        {
+          "address": "0x5ae3c",
+          "size": 4,
+          "assembly": "strd\tr1, r0, [sp, #4]"
+        },
+        {
+          "address": "0x5ae40",
+          "size": 2,
+          "assembly": "ldrb\tr3, [r4, #0]"
+        },
+        {
+          "address": "0x5ae42",
+          "size": 2,
+          "assembly": "add\tr2, pc, #116"
+        },
+        {
+          "address": "0x5ae44",
+          "size": 2,
+          "assembly": "add\tr1, pc, #112"
+        },
+        {
+          "address": "0x5ae46",
+          "size": 4,
+          "assembly": "mov.w\tr0, #218103808"
+        },
+        {
+          "address": "0x5ae4a",
+          "size": 4,
+          "assembly": "bl\t91638 <_stack+0x11638>"
+        },
+        {
+          "address": "0x5ae4e",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5ae52",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #30"
+        },
+        {
+          "address": "0x5ae54",
+          "size": 2,
+          "assembly": "bpl.n\t5ae6a <r1_stock_i2c5_acquire+0xa992>"
+        },
+        {
+          "address": "0x5ae56",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r5, #2]"
+        },
+        {
+          "address": "0x5ae58",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r5, #1]"
+        },
+        {
+          "address": "0x5ae5a",
+          "size": 4,
+          "assembly": "strd\tr0, r1, [sp]"
+        },
+        {
+          "address": "0x5ae5e",
+          "size": 2,
+          "assembly": "ldrb\tr2, [r4, #0]"
+        },
+        {
+          "address": "0x5ae60",
+          "size": 2,
+          "assembly": "mov\tr0, r6"
+        },
+        {
+          "address": "0x5ae62",
+          "size": 2,
+          "assembly": "mov\tr3, r7"
+        },
+        {
+          "address": "0x5ae64",
+          "size": 2,
+          "assembly": "add\tr1, pc, #132"
+        },
+        {
+          "address": "0x5ae66",
+          "size": 4,
+          "assembly": "bl\t799f8 <r1_stock_gpio_pin_set+0x5c4>"
+        },
+        {
+          "address": "0x5ae6a",
+          "size": 2,
+          "assembly": "pop\t{r1, r2, r3, r4, r5, r6, r7, pc}"
+        }
+      ],
+      "inline_layout": [
+        {
+          "address": "0x5ae6c",
+          "size": 4,
+          "kind": "word",
+          "value": 536962380,
+          "expression": "r1_health_storage_hr_prefix"
+        },
+        {
+          "address": "0x5ae70",
+          "size": 33,
+          "kind": "text",
+          "text": "[RING]last_hr: %d, timestamp: %d"
+        },
+        {
+          "address": "0x5ae91",
+          "size": 3,
+          "kind": "zero"
+        },
+        {
+          "address": "0x5ae94",
+          "size": 4,
+          "kind": "word",
+          "value": 804092,
+          "expression": "0xc44fc"
+        },
+        {
+          "address": "0x5ae98",
+          "size": 4,
+          "kind": "word",
+          "value": 803868,
+          "expression": "0xc441c"
+        },
+        {
+          "address": "0x5ae9c",
+          "size": 27,
+          "kind": "text",
+          "text": "last_hr: %d, timestamp: %d"
+        },
+        {
+          "address": "0x5aeb7",
+          "size": 1,
+          "kind": "zero"
+        },
+        {
+          "address": "0x5aeb8",
+          "size": 49,
+          "kind": "text",
+          "text": "[RING]hr: %d, avg_hr: %d, max_hr: %d, min_hr: %d"
+        },
+        {
+          "address": "0x5aee9",
+          "size": 3,
+          "kind": "zero"
+        },
+        {
+          "address": "0x5aeec",
+          "size": 43,
+          "kind": "text",
+          "text": "hr: %d, avg_hr: %d, max_hr: %d, min_hr: %d"
+        },
+        {
+          "address": "0x5af17",
+          "size": 1,
+          "kind": "zero"
+        }
+      ],
+      "disassembly_sha256": "469a9733628b831bf070775a7cb6bcda39e56908c73785ec62e7c1b6ac3ea3d8"
+    },
+    {
+      "family": "hrv",
+      "address": "0x5af60",
+      "code_bytes": 226,
+      "source_span_bytes": 408,
+      "symbol": "r1_hrv_event_storage",
+      "cache_address": "0x200169c0",
+      "cache_prefix_bytes": 153,
+      "full_cache_context_extent_proven": false,
+      "instructions": [
+        {
+          "address": "0x5af60",
+          "size": 2,
+          "assembly": "push\t{r1, r2, r3, r4, r5, r6, r7, lr}"
+        },
+        {
+          "address": "0x5af62",
+          "size": 2,
+          "assembly": "movs\tr4, r0"
+        },
+        {
+          "address": "0x5af64",
+          "size": 2,
+          "assembly": "beq.n\t5b040 <r1_stock_i2c5_acquire+0xab68>"
+        },
+        {
+          "address": "0x5af66",
+          "size": 4,
+          "assembly": "ldr.w\tr0, [r4, #2]"
+        },
+        {
+          "address": "0x5af6a",
+          "size": 4,
+          "assembly": "bl\t5aca6 <r1_stock_i2c5_acquire+0xa7ce>"
+        },
+        {
+          "address": "0x5af6e",
+          "size": 2,
+          "assembly": "mov\tr5, r0"
+        },
+        {
+          "address": "0x5af70",
+          "size": 4,
+          "assembly": "ldr.w\tr2, [r4, #2]"
+        },
+        {
+          "address": "0x5af74",
+          "size": 2,
+          "assembly": "ldrh\tr1, [r4, #0]"
+        },
+        {
+          "address": "0x5af76",
+          "size": 2,
+          "assembly": "movs\tr0, #5"
+        },
+        {
+          "address": "0x5af78",
+          "size": 4,
+          "assembly": "bl\t5aba0 <r1_stock_i2c5_acquire+0xa6c8>"
+        },
+        {
+          "address": "0x5af7c",
+          "size": 2,
+          "assembly": "mov\tr7, r0"
+        },
+        {
+          "address": "0x5af7e",
+          "size": 2,
+          "assembly": "ldr\tr1, [pc, #196]"
+        },
+        {
+          "address": "0x5af80",
+          "size": 4,
+          "assembly": "add.w\tr0, r5, r5, lsl #1"
+        },
+        {
+          "address": "0x5af84",
+          "size": 4,
+          "assembly": "add.w\tr5, r1, r0, lsl #1"
+        },
+        {
+          "address": "0x5af88",
+          "size": 2,
+          "assembly": "ldrh\tr0, [r4, #0]"
+        },
+        {
+          "address": "0x5af8a",
+          "size": 2,
+          "assembly": "ldrh\tr1, [r5, #2]"
+        },
+        {
+          "address": "0x5af8c",
+          "size": 2,
+          "assembly": "cmp\tr0, r1"
+        },
+        {
+          "address": "0x5af8e",
+          "size": 2,
+          "assembly": "bls.n\t5af92 <r1_stock_i2c5_acquire+0xaaba>"
+        },
+        {
+          "address": "0x5af90",
+          "size": 2,
+          "assembly": "strh\tr0, [r5, #2]"
+        },
+        {
+          "address": "0x5af92",
+          "size": 2,
+          "assembly": "ldrh\tr1, [r4, #0]"
+        },
+        {
+          "address": "0x5af94",
+          "size": 2,
+          "assembly": "ldrh\tr0, [r5, #4]"
+        },
+        {
+          "address": "0x5af96",
+          "size": 2,
+          "assembly": "cmp\tr1, r0"
+        },
+        {
+          "address": "0x5af98",
+          "size": 2,
+          "assembly": "bcc.n\t5af9c <r1_stock_i2c5_acquire+0xaac4>"
+        },
+        {
+          "address": "0x5af9a",
+          "size": 2,
+          "assembly": "cbnz\tr0, 5af9e <r1_stock_i2c5_acquire+0xaac6>"
+        },
+        {
+          "address": "0x5af9c",
+          "size": 2,
+          "assembly": "strh\tr1, [r5, #4]"
+        },
+        {
+          "address": "0x5af9e",
+          "size": 2,
+          "assembly": "ldr\tr0, [pc, #164]"
+        },
+        {
+          "address": "0x5afa0",
+          "size": 2,
+          "assembly": "strh\tr7, [r5, #0]"
+        },
+        {
+          "address": "0x5afa2",
+          "size": 2,
+          "assembly": "adds\tr0, #128"
+        },
+        {
+          "address": "0x5afa4",
+          "size": 2,
+          "assembly": "ldr\tr1, [r4, #0]"
+        },
+        {
+          "address": "0x5afa6",
+          "size": 4,
+          "assembly": "str.w\tr1, [r0, #19]!"
+        },
+        {
+          "address": "0x5afaa",
+          "size": 2,
+          "assembly": "ldrh\tr1, [r4, #4]"
+        },
+        {
+          "address": "0x5afac",
+          "size": 2,
+          "assembly": "strh\tr1, [r0, #4]"
+        },
+        {
+          "address": "0x5afae",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5afb2",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #31"
+        },
+        {
+          "address": "0x5afb4",
+          "size": 2,
+          "assembly": "bne.n\t5afbe <r1_stock_i2c5_acquire+0xaae6>"
+        },
+        {
+          "address": "0x5afb6",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5afba",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #29"
+        },
+        {
+          "address": "0x5afbc",
+          "size": 2,
+          "assembly": "bpl.n\t5afd2 <r1_stock_i2c5_acquire+0xaafa>"
+        },
+        {
+          "address": "0x5afbe",
+          "size": 4,
+          "assembly": "ldr.w\tr0, [r4, #2]"
+        },
+        {
+          "address": "0x5afc2",
+          "size": 2,
+          "assembly": "str\tr0, [sp, #0]"
+        },
+        {
+          "address": "0x5afc4",
+          "size": 2,
+          "assembly": "ldrh\tr3, [r4, #0]"
+        },
+        {
+          "address": "0x5afc6",
+          "size": 2,
+          "assembly": "add\tr2, pc, #128"
+        },
+        {
+          "address": "0x5afc8",
+          "size": 2,
+          "assembly": "add\tr1, pc, #124"
+        },
+        {
+          "address": "0x5afca",
+          "size": 4,
+          "assembly": "mov.w\tr0, #209715200"
+        },
+        {
+          "address": "0x5afce",
+          "size": 4,
+          "assembly": "bl\t91638 <_stack+0x11638>"
+        },
+        {
+          "address": "0x5afd2",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5afd6",
+          "size": 2,
+          "assembly": "lsls\tr1, r0, #30"
+        },
+        {
+          "address": "0x5afd8",
+          "size": 2,
+          "assembly": "ldr\tr0, [pc, #144]"
+        },
+        {
+          "address": "0x5afda",
+          "size": 2,
+          "assembly": "ldr\tr2, [pc, #148]"
+        },
+        {
+          "address": "0x5afdc",
+          "size": 4,
+          "assembly": "sub.w\tr0, r0, r2"
+        },
+        {
+          "address": "0x5afe0",
+          "size": 4,
+          "assembly": "mov.w\tr0, r0, lsr #3"
+        },
+        {
+          "address": "0x5afe4",
+          "size": 4,
+          "assembly": "mov.w\tr2, #3"
+        },
+        {
+          "address": "0x5afe8",
+          "size": 4,
+          "assembly": "add.w\tr6, r2, r0, lsl #16"
+        },
+        {
+          "address": "0x5afec",
+          "size": 2,
+          "assembly": "bpl.n\t5affc <r1_stock_i2c5_acquire+0xab24>"
+        },
+        {
+          "address": "0x5afee",
+          "size": 4,
+          "assembly": "ldr.w\tr3, [r4, #2]"
+        },
+        {
+          "address": "0x5aff2",
+          "size": 2,
+          "assembly": "ldrh\tr2, [r4, #0]"
+        },
+        {
+          "address": "0x5aff4",
+          "size": 2,
+          "assembly": "mov\tr0, r6"
+        },
+        {
+          "address": "0x5aff6",
+          "size": 2,
+          "assembly": "add\tr1, pc, #124"
+        },
+        {
+          "address": "0x5aff8",
+          "size": 4,
+          "assembly": "bl\t799d6 <r1_stock_gpio_pin_set+0x5a2>"
+        },
+        {
+          "address": "0x5affc",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5b000",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #31"
+        },
+        {
+          "address": "0x5b002",
+          "size": 2,
+          "assembly": "bne.n\t5b00c <r1_stock_i2c5_acquire+0xab34>"
+        },
+        {
+          "address": "0x5b004",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5b008",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #29"
+        },
+        {
+          "address": "0x5b00a",
+          "size": 2,
+          "assembly": "bpl.n\t5b024 <r1_stock_i2c5_acquire+0xab4c>"
+        },
+        {
+          "address": "0x5b00c",
+          "size": 2,
+          "assembly": "ldrh\tr0, [r5, #4]"
+        },
+        {
+          "address": "0x5b00e",
+          "size": 2,
+          "assembly": "ldrh\tr1, [r5, #2]"
+        },
+        {
+          "address": "0x5b010",
+          "size": 2,
+          "assembly": "str\tr7, [sp, #0]"
+        },
+        {
+          "address": "0x5b012",
+          "size": 4,
+          "assembly": "strd\tr1, r0, [sp, #4]"
+        },
+        {
+          "address": "0x5b016",
+          "size": 2,
+          "assembly": "ldrh\tr3, [r4, #0]"
+        },
+        {
+          "address": "0x5b018",
+          "size": 2,
+          "assembly": "add\tr2, pc, #116"
+        },
+        {
+          "address": "0x5b01a",
+          "size": 2,
+          "assembly": "add\tr1, pc, #116"
+        },
+        {
+          "address": "0x5b01c",
+          "size": 4,
+          "assembly": "mov.w\tr0, #218103808"
+        },
+        {
+          "address": "0x5b020",
+          "size": 4,
+          "assembly": "bl\t91638 <_stack+0x11638>"
+        },
+        {
+          "address": "0x5b024",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5b028",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #30"
+        },
+        {
+          "address": "0x5b02a",
+          "size": 2,
+          "assembly": "bpl.n\t5b040 <r1_stock_i2c5_acquire+0xab68>"
+        },
+        {
+          "address": "0x5b02c",
+          "size": 2,
+          "assembly": "ldrh\tr1, [r5, #4]"
+        },
+        {
+          "address": "0x5b02e",
+          "size": 2,
+          "assembly": "ldrh\tr0, [r5, #2]"
+        },
+        {
+          "address": "0x5b030",
+          "size": 4,
+          "assembly": "strd\tr0, r1, [sp]"
+        },
+        {
+          "address": "0x5b034",
+          "size": 2,
+          "assembly": "ldrh\tr2, [r4, #0]"
+        },
+        {
+          "address": "0x5b036",
+          "size": 2,
+          "assembly": "mov\tr0, r6"
+        },
+        {
+          "address": "0x5b038",
+          "size": 2,
+          "assembly": "mov\tr3, r7"
+        },
+        {
+          "address": "0x5b03a",
+          "size": 2,
+          "assembly": "add\tr1, pc, #140"
+        },
+        {
+          "address": "0x5b03c",
+          "size": 4,
+          "assembly": "bl\t799f8 <r1_stock_gpio_pin_set+0x5c4>"
+        },
+        {
+          "address": "0x5b040",
+          "size": 2,
+          "assembly": "pop\t{r1, r2, r3, r4, r5, r6, r7, pc}"
+        }
+      ],
+      "inline_layout": [
+        {
+          "address": "0x5b042",
+          "size": 2,
+          "kind": "zero"
+        },
+        {
+          "address": "0x5b044",
+          "size": 4,
+          "kind": "word",
+          "value": 536963520,
+          "expression": "r1_health_storage_hrv_prefix"
+        },
+        {
+          "address": "0x5b048",
+          "size": 34,
+          "kind": "text",
+          "text": "[RING]last_hrv: %d, timestamp: %d"
+        },
+        {
+          "address": "0x5b06a",
+          "size": 2,
+          "kind": "zero"
+        },
+        {
+          "address": "0x5b06c",
+          "size": 4,
+          "kind": "word",
+          "value": 804092,
+          "expression": "0xc44fc"
+        },
+        {
+          "address": "0x5b070",
+          "size": 4,
+          "kind": "word",
+          "value": 803868,
+          "expression": "0xc441c"
+        },
+        {
+          "address": "0x5b074",
+          "size": 28,
+          "kind": "text",
+          "text": "last_hrv: %d, timestamp: %d"
+        },
+        {
+          "address": "0x5b090",
+          "size": 53,
+          "kind": "text",
+          "text": "[RING]hrv: %d, avg_hrv: %d, max_hrv: %d, min_hrv: %d"
+        },
+        {
+          "address": "0x5b0c5",
+          "size": 3,
+          "kind": "zero"
+        },
+        {
+          "address": "0x5b0c8",
+          "size": 47,
+          "kind": "text",
+          "text": "hrv: %d, avg_hrv: %d, max_hrv: %d, min_hrv: %d"
+        },
+        {
+          "address": "0x5b0f7",
+          "size": 1,
+          "kind": "zero"
+        }
+      ],
+      "disassembly_sha256": "4429a39b79cfb5dd27d5a6fd89d326b77b19cdf9779f40f9526c99dc06ee63ae"
+    },
+    {
+      "family": "spo2",
+      "address": "0x5bb2c",
+      "code_bytes": 224,
+      "source_span_bytes": 416,
+      "symbol": "r1_spo2_event_storage",
+      "cache_address": "0x200165a0",
+      "cache_prefix_bytes": 80,
+      "full_cache_context_extent_proven": false,
+      "instructions": [
+        {
+          "address": "0x5bb2c",
+          "size": 2,
+          "assembly": "push\t{r1, r2, r3, r4, r5, r6, r7, lr}"
+        },
+        {
+          "address": "0x5bb2e",
+          "size": 2,
+          "assembly": "movs\tr4, r0"
+        },
+        {
+          "address": "0x5bb30",
+          "size": 2,
+          "assembly": "beq.n\t5bc0a <r1_stock_i2c5_acquire+0xb732>"
+        },
+        {
+          "address": "0x5bb32",
+          "size": 4,
+          "assembly": "ldr.w\tr0, [r4, #1]"
+        },
+        {
+          "address": "0x5bb36",
+          "size": 4,
+          "assembly": "bl\t5aca6 <r1_stock_i2c5_acquire+0xa7ce>"
+        },
+        {
+          "address": "0x5bb3a",
+          "size": 2,
+          "assembly": "mov\tr5, r0"
+        },
+        {
+          "address": "0x5bb3c",
+          "size": 4,
+          "assembly": "ldr.w\tr2, [r4, #1]"
+        },
+        {
+          "address": "0x5bb40",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r4, #0]"
+        },
+        {
+          "address": "0x5bb42",
+          "size": 2,
+          "assembly": "movs\tr0, #1"
+        },
+        {
+          "address": "0x5bb44",
+          "size": 4,
+          "assembly": "bl\t5aba0 <r1_stock_i2c5_acquire+0xa6c8>"
+        },
+        {
+          "address": "0x5bb48",
+          "size": 2,
+          "assembly": "mov\tr7, r0"
+        },
+        {
+          "address": "0x5bb4a",
+          "size": 2,
+          "assembly": "ldr\tr2, [pc, #192]"
+        },
+        {
+          "address": "0x5bb4c",
+          "size": 4,
+          "assembly": "add.w\tr0, r5, r5, lsl #1"
+        },
+        {
+          "address": "0x5bb50",
+          "size": 2,
+          "assembly": "adds\tr5, r0, r2"
+        },
+        {
+          "address": "0x5bb52",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r4, #0]"
+        },
+        {
+          "address": "0x5bb54",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r5, #1]"
+        },
+        {
+          "address": "0x5bb56",
+          "size": 2,
+          "assembly": "cmp\tr0, r1"
+        },
+        {
+          "address": "0x5bb58",
+          "size": 2,
+          "assembly": "bls.n\t5bb5c <r1_stock_i2c5_acquire+0xb684>"
+        },
+        {
+          "address": "0x5bb5a",
+          "size": 2,
+          "assembly": "strb\tr0, [r5, #1]"
+        },
+        {
+          "address": "0x5bb5c",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r4, #0]"
+        },
+        {
+          "address": "0x5bb5e",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r5, #2]"
+        },
+        {
+          "address": "0x5bb60",
+          "size": 2,
+          "assembly": "cmp\tr1, r0"
+        },
+        {
+          "address": "0x5bb62",
+          "size": 2,
+          "assembly": "bcc.n\t5bb66 <r1_stock_i2c5_acquire+0xb68e>"
+        },
+        {
+          "address": "0x5bb64",
+          "size": 2,
+          "assembly": "cbnz\tr0, 5bb68 <r1_stock_i2c5_acquire+0xb690>"
+        },
+        {
+          "address": "0x5bb66",
+          "size": 2,
+          "assembly": "strb\tr1, [r5, #2]"
+        },
+        {
+          "address": "0x5bb68",
+          "size": 2,
+          "assembly": "strb\tr7, [r5, #0]"
+        },
+        {
+          "address": "0x5bb6a",
+          "size": 2,
+          "assembly": "ldr\tr0, [r4, #0]"
+        },
+        {
+          "address": "0x5bb6c",
+          "size": 4,
+          "assembly": "str.w\tr0, [r2, #75]!"
+        },
+        {
+          "address": "0x5bb70",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r4, #4]"
+        },
+        {
+          "address": "0x5bb72",
+          "size": 2,
+          "assembly": "strb\tr0, [r2, #4]"
+        },
+        {
+          "address": "0x5bb74",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5bb78",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #31"
+        },
+        {
+          "address": "0x5bb7a",
+          "size": 2,
+          "assembly": "bne.n\t5bb84 <r1_stock_i2c5_acquire+0xb6ac>"
+        },
+        {
+          "address": "0x5bb7c",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5bb80",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #29"
+        },
+        {
+          "address": "0x5bb82",
+          "size": 2,
+          "assembly": "bpl.n\t5bb98 <r1_stock_i2c5_acquire+0xb6c0>"
+        },
+        {
+          "address": "0x5bb84",
+          "size": 4,
+          "assembly": "ldr.w\tr0, [r4, #1]"
+        },
+        {
+          "address": "0x5bb88",
+          "size": 2,
+          "assembly": "str\tr0, [sp, #0]"
+        },
+        {
+          "address": "0x5bb8a",
+          "size": 2,
+          "assembly": "ldrb\tr3, [r4, #0]"
+        },
+        {
+          "address": "0x5bb8c",
+          "size": 2,
+          "assembly": "add\tr2, pc, #128"
+        },
+        {
+          "address": "0x5bb8e",
+          "size": 2,
+          "assembly": "add\tr1, pc, #128"
+        },
+        {
+          "address": "0x5bb90",
+          "size": 4,
+          "assembly": "mov.w\tr0, #209715200"
+        },
+        {
+          "address": "0x5bb94",
+          "size": 4,
+          "assembly": "bl\t91638 <_stack+0x11638>"
+        },
+        {
+          "address": "0x5bb98",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5bb9c",
+          "size": 2,
+          "assembly": "lsls\tr1, r0, #30"
+        },
+        {
+          "address": "0x5bb9e",
+          "size": 2,
+          "assembly": "ldr\tr0, [pc, #148]"
+        },
+        {
+          "address": "0x5bba0",
+          "size": 2,
+          "assembly": "ldr\tr2, [pc, #148]"
+        },
+        {
+          "address": "0x5bba2",
+          "size": 4,
+          "assembly": "sub.w\tr0, r0, r2"
+        },
+        {
+          "address": "0x5bba6",
+          "size": 4,
+          "assembly": "mov.w\tr0, r0, lsr #3"
+        },
+        {
+          "address": "0x5bbaa",
+          "size": 4,
+          "assembly": "mov.w\tr2, #3"
+        },
+        {
+          "address": "0x5bbae",
+          "size": 4,
+          "assembly": "add.w\tr6, r2, r0, lsl #16"
+        },
+        {
+          "address": "0x5bbb2",
+          "size": 2,
+          "assembly": "bpl.n\t5bbc2 <r1_stock_i2c5_acquire+0xb6ea>"
+        },
+        {
+          "address": "0x5bbb4",
+          "size": 4,
+          "assembly": "ldr.w\tr3, [r4, #1]"
+        },
+        {
+          "address": "0x5bbb8",
+          "size": 2,
+          "assembly": "ldrb\tr2, [r4, #0]"
+        },
+        {
+          "address": "0x5bbba",
+          "size": 2,
+          "assembly": "mov\tr0, r6"
+        },
+        {
+          "address": "0x5bbbc",
+          "size": 2,
+          "assembly": "add\tr1, pc, #124"
+        },
+        {
+          "address": "0x5bbbe",
+          "size": 4,
+          "assembly": "bl\t799d6 <r1_stock_gpio_pin_set+0x5a2>"
+        },
+        {
+          "address": "0x5bbc2",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5bbc6",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #31"
+        },
+        {
+          "address": "0x5bbc8",
+          "size": 2,
+          "assembly": "bne.n\t5bbd2 <r1_stock_i2c5_acquire+0xb6fa>"
+        },
+        {
+          "address": "0x5bbca",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5bbce",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #29"
+        },
+        {
+          "address": "0x5bbd0",
+          "size": 2,
+          "assembly": "bpl.n\t5bbea <r1_stock_i2c5_acquire+0xb712>"
+        },
+        {
+          "address": "0x5bbd2",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r5, #2]"
+        },
+        {
+          "address": "0x5bbd4",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r5, #1]"
+        },
+        {
+          "address": "0x5bbd6",
+          "size": 2,
+          "assembly": "str\tr7, [sp, #0]"
+        },
+        {
+          "address": "0x5bbd8",
+          "size": 4,
+          "assembly": "strd\tr1, r0, [sp, #4]"
+        },
+        {
+          "address": "0x5bbdc",
+          "size": 2,
+          "assembly": "ldrb\tr3, [r4, #0]"
+        },
+        {
+          "address": "0x5bbde",
+          "size": 2,
+          "assembly": "add\tr2, pc, #124"
+        },
+        {
+          "address": "0x5bbe0",
+          "size": 2,
+          "assembly": "add\tr1, pc, #120"
+        },
+        {
+          "address": "0x5bbe2",
+          "size": 4,
+          "assembly": "mov.w\tr0, #218103808"
+        },
+        {
+          "address": "0x5bbe6",
+          "size": 4,
+          "assembly": "bl\t91638 <_stack+0x11638>"
+        },
+        {
+          "address": "0x5bbea",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5bbee",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #30"
+        },
+        {
+          "address": "0x5bbf0",
+          "size": 2,
+          "assembly": "bpl.n\t5bc0a <r1_stock_i2c5_acquire+0xb732>"
+        },
+        {
+          "address": "0x5bbf2",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r5, #2]"
+        },
+        {
+          "address": "0x5bbf4",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r5, #1]"
+        },
+        {
+          "address": "0x5bbf6",
+          "size": 4,
+          "assembly": "strd\tr0, r1, [sp]"
+        },
+        {
+          "address": "0x5bbfa",
+          "size": 2,
+          "assembly": "ldrb\tr2, [r4, #0]"
+        },
+        {
+          "address": "0x5bbfc",
+          "size": 2,
+          "assembly": "mov\tr0, r6"
+        },
+        {
+          "address": "0x5bbfe",
+          "size": 2,
+          "assembly": "mov\tr3, r7"
+        },
+        {
+          "address": "0x5bc00",
+          "size": 2,
+          "assembly": "b.n\t5bc04 <r1_stock_i2c5_acquire+0xb72c>"
+        },
+        {
+          "address": "0x5bc02",
+          "size": 2,
+          "assembly": "b.n\t5bc0a <r1_stock_i2c5_acquire+0xb732>"
+        },
+        {
+          "address": "0x5bc04",
+          "size": 2,
+          "assembly": "add\tr1, pc, #144"
+        },
+        {
+          "address": "0x5bc06",
+          "size": 4,
+          "assembly": "bl\t799f8 <r1_stock_gpio_pin_set+0x5c4>"
+        },
+        {
+          "address": "0x5bc0a",
+          "size": 2,
+          "assembly": "pop\t{r1, r2, r3, r4, r5, r6, r7, pc}"
+        }
+      ],
+      "inline_layout": [
+        {
+          "address": "0x5bc0c",
+          "size": 4,
+          "kind": "word",
+          "value": 536962464,
+          "expression": "r1_health_storage_spo2_prefix"
+        },
+        {
+          "address": "0x5bc10",
+          "size": 35,
+          "kind": "text",
+          "text": "[RING]last_spo2: %d, timestamp: %d"
+        },
+        {
+          "address": "0x5bc33",
+          "size": 1,
+          "kind": "zero"
+        },
+        {
+          "address": "0x5bc34",
+          "size": 4,
+          "kind": "word",
+          "value": 804092,
+          "expression": "0xc44fc"
+        },
+        {
+          "address": "0x5bc38",
+          "size": 4,
+          "kind": "word",
+          "value": 803868,
+          "expression": "0xc441c"
+        },
+        {
+          "address": "0x5bc3c",
+          "size": 29,
+          "kind": "text",
+          "text": "last_spo2: %d, timestamp: %d"
+        },
+        {
+          "address": "0x5bc59",
+          "size": 3,
+          "kind": "zero"
+        },
+        {
+          "address": "0x5bc5c",
+          "size": 57,
+          "kind": "text",
+          "text": "[RING]spo2: %d, avg_spo2: %d, max_spo2: %d, min_spo2: %d"
+        },
+        {
+          "address": "0x5bc95",
+          "size": 3,
+          "kind": "zero"
+        },
+        {
+          "address": "0x5bc98",
+          "size": 51,
+          "kind": "text",
+          "text": "spo2: %d, avg_spo2: %d, max_spo2: %d, min_spo2: %d"
+        },
+        {
+          "address": "0x5bccb",
+          "size": 1,
+          "kind": "zero"
+        }
+      ],
+      "disassembly_sha256": "258c0312473b756f6d3c720af43227b2388528590ef4c3073b45ff578e598c04"
+    },
+    {
+      "family": "stress",
+      "address": "0x5bcec",
+      "code_bytes": 220,
+      "source_span_bytes": 368,
+      "symbol": "r1_stress_event_storage",
+      "cache_address": "0x20016670",
+      "cache_prefix_bytes": 80,
+      "full_cache_context_extent_proven": false,
+      "instructions": [
+        {
+          "address": "0x5bcec",
+          "size": 2,
+          "assembly": "push\t{r1, r2, r3, r4, r5, r6, r7, lr}"
+        },
+        {
+          "address": "0x5bcee",
+          "size": 2,
+          "assembly": "movs\tr4, r0"
+        },
+        {
+          "address": "0x5bcf0",
+          "size": 2,
+          "assembly": "beq.n\t5bdc6 <r1_stock_i2c5_acquire+0xb8ee>"
+        },
+        {
+          "address": "0x5bcf2",
+          "size": 4,
+          "assembly": "ldr.w\tr0, [r4, #1]"
+        },
+        {
+          "address": "0x5bcf6",
+          "size": 4,
+          "assembly": "bl\t5aca6 <r1_stock_i2c5_acquire+0xa7ce>"
+        },
+        {
+          "address": "0x5bcfa",
+          "size": 2,
+          "assembly": "mov\tr5, r0"
+        },
+        {
+          "address": "0x5bcfc",
+          "size": 4,
+          "assembly": "ldr.w\tr2, [r4, #1]"
+        },
+        {
+          "address": "0x5bd00",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r4, #0]"
+        },
+        {
+          "address": "0x5bd02",
+          "size": 2,
+          "assembly": "movs\tr0, #3"
+        },
+        {
+          "address": "0x5bd04",
+          "size": 4,
+          "assembly": "bl\t5aba0 <r1_stock_i2c5_acquire+0xa6c8>"
+        },
+        {
+          "address": "0x5bd08",
+          "size": 2,
+          "assembly": "mov\tr7, r0"
+        },
+        {
+          "address": "0x5bd0a",
+          "size": 2,
+          "assembly": "ldr\tr1, [pc, #188]"
+        },
+        {
+          "address": "0x5bd0c",
+          "size": 4,
+          "assembly": "add.w\tr0, r5, r5, lsl #1"
+        },
+        {
+          "address": "0x5bd10",
+          "size": 2,
+          "assembly": "adds\tr5, r0, r1"
+        },
+        {
+          "address": "0x5bd12",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r4, #0]"
+        },
+        {
+          "address": "0x5bd14",
+          "size": 2,
+          "assembly": "ldrb\tr2, [r5, #1]"
+        },
+        {
+          "address": "0x5bd16",
+          "size": 2,
+          "assembly": "cmp\tr0, r2"
+        },
+        {
+          "address": "0x5bd18",
+          "size": 2,
+          "assembly": "bls.n\t5bd1c <r1_stock_i2c5_acquire+0xb844>"
+        },
+        {
+          "address": "0x5bd1a",
+          "size": 2,
+          "assembly": "strb\tr0, [r5, #1]"
+        },
+        {
+          "address": "0x5bd1c",
+          "size": 2,
+          "assembly": "ldrb\tr2, [r4, #0]"
+        },
+        {
+          "address": "0x5bd1e",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r5, #2]"
+        },
+        {
+          "address": "0x5bd20",
+          "size": 2,
+          "assembly": "cmp\tr2, r0"
+        },
+        {
+          "address": "0x5bd22",
+          "size": 2,
+          "assembly": "bcc.n\t5bd26 <r1_stock_i2c5_acquire+0xb84e>"
+        },
+        {
+          "address": "0x5bd24",
+          "size": 2,
+          "assembly": "cbnz\tr0, 5bd28 <r1_stock_i2c5_acquire+0xb850>"
+        },
+        {
+          "address": "0x5bd26",
+          "size": 2,
+          "assembly": "strb\tr2, [r5, #2]"
+        },
+        {
+          "address": "0x5bd28",
+          "size": 2,
+          "assembly": "strb\tr7, [r5, #0]"
+        },
+        {
+          "address": "0x5bd2a",
+          "size": 2,
+          "assembly": "ldr\tr0, [r4, #0]"
+        },
+        {
+          "address": "0x5bd2c",
+          "size": 4,
+          "assembly": "str.w\tr0, [r1, #75]!"
+        },
+        {
+          "address": "0x5bd30",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r4, #4]"
+        },
+        {
+          "address": "0x5bd32",
+          "size": 2,
+          "assembly": "strb\tr0, [r1, #4]"
+        },
+        {
+          "address": "0x5bd34",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5bd38",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #31"
+        },
+        {
+          "address": "0x5bd3a",
+          "size": 2,
+          "assembly": "bne.n\t5bd44 <r1_stock_i2c5_acquire+0xb86c>"
+        },
+        {
+          "address": "0x5bd3c",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5bd40",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #29"
+        },
+        {
+          "address": "0x5bd42",
+          "size": 2,
+          "assembly": "bpl.n\t5bd58 <r1_stock_i2c5_acquire+0xb880>"
+        },
+        {
+          "address": "0x5bd44",
+          "size": 4,
+          "assembly": "ldr.w\tr0, [r4, #1]"
+        },
+        {
+          "address": "0x5bd48",
+          "size": 2,
+          "assembly": "str\tr0, [sp, #0]"
+        },
+        {
+          "address": "0x5bd4a",
+          "size": 2,
+          "assembly": "ldrb\tr3, [r4, #0]"
+        },
+        {
+          "address": "0x5bd4c",
+          "size": 2,
+          "assembly": "add\tr2, pc, #124"
+        },
+        {
+          "address": "0x5bd4e",
+          "size": 2,
+          "assembly": "add\tr1, pc, #124"
+        },
+        {
+          "address": "0x5bd50",
+          "size": 4,
+          "assembly": "mov.w\tr0, #209715200"
+        },
+        {
+          "address": "0x5bd54",
+          "size": 4,
+          "assembly": "bl\t91638 <_stack+0x11638>"
+        },
+        {
+          "address": "0x5bd58",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5bd5c",
+          "size": 2,
+          "assembly": "lsls\tr1, r0, #30"
+        },
+        {
+          "address": "0x5bd5e",
+          "size": 2,
+          "assembly": "ldr\tr0, [pc, #148]"
+        },
+        {
+          "address": "0x5bd60",
+          "size": 2,
+          "assembly": "ldr\tr3, [pc, #148]"
+        },
+        {
+          "address": "0x5bd62",
+          "size": 4,
+          "assembly": "mov.w\tr2, #3"
+        },
+        {
+          "address": "0x5bd66",
+          "size": 4,
+          "assembly": "sub.w\tr0, r0, r3"
+        },
+        {
+          "address": "0x5bd6a",
+          "size": 4,
+          "assembly": "mov.w\tr0, r0, lsr #3"
+        },
+        {
+          "address": "0x5bd6e",
+          "size": 4,
+          "assembly": "add.w\tr6, r2, r0, lsl #16"
+        },
+        {
+          "address": "0x5bd72",
+          "size": 2,
+          "assembly": "bpl.n\t5bd82 <r1_stock_i2c5_acquire+0xb8aa>"
+        },
+        {
+          "address": "0x5bd74",
+          "size": 4,
+          "assembly": "ldr.w\tr3, [r4, #1]"
+        },
+        {
+          "address": "0x5bd78",
+          "size": 2,
+          "assembly": "ldrb\tr2, [r4, #0]"
+        },
+        {
+          "address": "0x5bd7a",
+          "size": 2,
+          "assembly": "mov\tr0, r6"
+        },
+        {
+          "address": "0x5bd7c",
+          "size": 2,
+          "assembly": "add\tr1, pc, #124"
+        },
+        {
+          "address": "0x5bd7e",
+          "size": 4,
+          "assembly": "bl\t799d6 <r1_stock_gpio_pin_set+0x5a2>"
+        },
+        {
+          "address": "0x5bd82",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5bd86",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #31"
+        },
+        {
+          "address": "0x5bd88",
+          "size": 2,
+          "assembly": "bne.n\t5bd92 <r1_stock_i2c5_acquire+0xb8ba>"
+        },
+        {
+          "address": "0x5bd8a",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5bd8e",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #29"
+        },
+        {
+          "address": "0x5bd90",
+          "size": 2,
+          "assembly": "bpl.n\t5bdaa <r1_stock_i2c5_acquire+0xb8d2>"
+        },
+        {
+          "address": "0x5bd92",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r5, #2]"
+        },
+        {
+          "address": "0x5bd94",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r5, #1]"
+        },
+        {
+          "address": "0x5bd96",
+          "size": 2,
+          "assembly": "str\tr7, [sp, #0]"
+        },
+        {
+          "address": "0x5bd98",
+          "size": 4,
+          "assembly": "strd\tr1, r0, [sp, #4]"
+        },
+        {
+          "address": "0x5bd9c",
+          "size": 2,
+          "assembly": "ldr\tr2, [pc, #124]"
+        },
+        {
+          "address": "0x5bd9e",
+          "size": 2,
+          "assembly": "ldrb\tr3, [r4, #0]"
+        },
+        {
+          "address": "0x5bda0",
+          "size": 2,
+          "assembly": "mov\tr1, r2"
+        },
+        {
+          "address": "0x5bda2",
+          "size": 4,
+          "assembly": "mov.w\tr0, #218103808"
+        },
+        {
+          "address": "0x5bda6",
+          "size": 4,
+          "assembly": "bl\t91638 <_stack+0x11638>"
+        },
+        {
+          "address": "0x5bdaa",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5bdae",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #30"
+        },
+        {
+          "address": "0x5bdb0",
+          "size": 2,
+          "assembly": "bpl.n\t5bdc6 <r1_stock_i2c5_acquire+0xb8ee>"
+        },
+        {
+          "address": "0x5bdb2",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r5, #2]"
+        },
+        {
+          "address": "0x5bdb4",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r5, #1]"
+        },
+        {
+          "address": "0x5bdb6",
+          "size": 4,
+          "assembly": "strd\tr0, r1, [sp]"
+        },
+        {
+          "address": "0x5bdba",
+          "size": 2,
+          "assembly": "ldrb\tr2, [r4, #0]"
+        },
+        {
+          "address": "0x5bdbc",
+          "size": 2,
+          "assembly": "mov\tr0, r6"
+        },
+        {
+          "address": "0x5bdbe",
+          "size": 2,
+          "assembly": "mov\tr3, r7"
+        },
+        {
+          "address": "0x5bdc0",
+          "size": 2,
+          "assembly": "add\tr1, pc, #92"
+        },
+        {
+          "address": "0x5bdc2",
+          "size": 4,
+          "assembly": "bl\t799f8 <r1_stock_gpio_pin_set+0x5c4>"
+        },
+        {
+          "address": "0x5bdc6",
+          "size": 2,
+          "assembly": "pop\t{r1, r2, r3, r4, r5, r6, r7, pc}"
+        }
+      ],
+      "inline_layout": [
+        {
+          "address": "0x5bdc8",
+          "size": 4,
+          "kind": "word",
+          "value": 536962672,
+          "expression": "r1_health_storage_stress_prefix"
+        },
+        {
+          "address": "0x5bdcc",
+          "size": 37,
+          "kind": "text",
+          "text": "[RING]last_stress: %d, timestamp: %d"
+        },
+        {
+          "address": "0x5bdf1",
+          "size": 3,
+          "kind": "zero"
+        },
+        {
+          "address": "0x5bdf4",
+          "size": 4,
+          "kind": "word",
+          "value": 804092,
+          "expression": "0xc44fc"
+        },
+        {
+          "address": "0x5bdf8",
+          "size": 4,
+          "kind": "word",
+          "value": 803868,
+          "expression": "0xc441c"
+        },
+        {
+          "address": "0x5bdfc",
+          "size": 31,
+          "kind": "text",
+          "text": "last_stress: %d, timestamp: %d"
+        },
+        {
+          "address": "0x5be1b",
+          "size": 1,
+          "kind": "zero"
+        },
+        {
+          "address": "0x5be1c",
+          "size": 4,
+          "kind": "word",
+          "value": 784616,
+          "expression": "r1_health_storage_stress_text"
+        },
+        {
+          "address": "0x5be20",
+          "size": 59,
+          "kind": "text",
+          "text": "stress: %d, avg_stress: %d, max_stress: %d, min_stress: %d"
+        },
+        {
+          "address": "0x5be5b",
+          "size": 1,
+          "kind": "zero"
+        }
+      ],
+      "disassembly_sha256": "e8c7252decb99a7c21f04037c9d250f04d64ccd1519462581ca29c0041f7a5cf"
+    },
+    {
+      "family": "temperature",
+      "address": "0x5be7c",
+      "code_bytes": 246,
+      "source_span_bytes": 440,
+      "symbol": "r1_temperature_event_storage",
+      "cache_address": "0x200165f4",
+      "cache_prefix_bytes": 80,
+      "full_cache_context_extent_proven": false,
+      "instructions": [
+        {
+          "address": "0x5be7c",
+          "size": 2,
+          "assembly": "push\t{r1, r2, r3, r4, r5, r6, r7, lr}"
+        },
+        {
+          "address": "0x5be7e",
+          "size": 2,
+          "assembly": "movs\tr4, r0"
+        },
+        {
+          "address": "0x5be80",
+          "size": 2,
+          "assembly": "beq.n\t5bf70 <r1_stock_i2c5_acquire+0xba98>"
+        },
+        {
+          "address": "0x5be82",
+          "size": 4,
+          "assembly": "ldr.w\tr0, [r4, #1]"
+        },
+        {
+          "address": "0x5be86",
+          "size": 4,
+          "assembly": "bl\t5aca6 <r1_stock_i2c5_acquire+0xa7ce>"
+        },
+        {
+          "address": "0x5be8a",
+          "size": 2,
+          "assembly": "mov\tr5, r0"
+        },
+        {
+          "address": "0x5be8c",
+          "size": 4,
+          "assembly": "ldr.w\tr2, [r4, #1]"
+        },
+        {
+          "address": "0x5be90",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r4, #0]"
+        },
+        {
+          "address": "0x5be92",
+          "size": 2,
+          "assembly": "movs\tr0, #2"
+        },
+        {
+          "address": "0x5be94",
+          "size": 4,
+          "assembly": "bl\t5aba0 <r1_stock_i2c5_acquire+0xa6c8>"
+        },
+        {
+          "address": "0x5be98",
+          "size": 2,
+          "assembly": "mov\tr6, r0"
+        },
+        {
+          "address": "0x5be9a",
+          "size": 2,
+          "assembly": "ldr\tr0, [pc, #216]"
+        },
+        {
+          "address": "0x5be9c",
+          "size": 4,
+          "assembly": "add.w\tr1, r5, r5, lsl #1"
+        },
+        {
+          "address": "0x5bea0",
+          "size": 2,
+          "assembly": "adds\tr5, r1, r0"
+        },
+        {
+          "address": "0x5bea2",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r4, #0]"
+        },
+        {
+          "address": "0x5bea4",
+          "size": 2,
+          "assembly": "ldrb\tr2, [r5, #1]"
+        },
+        {
+          "address": "0x5bea6",
+          "size": 2,
+          "assembly": "cmp\tr1, r2"
+        },
+        {
+          "address": "0x5bea8",
+          "size": 2,
+          "assembly": "bls.n\t5beac <r1_stock_i2c5_acquire+0xb9d4>"
+        },
+        {
+          "address": "0x5beaa",
+          "size": 2,
+          "assembly": "strb\tr1, [r5, #1]"
+        },
+        {
+          "address": "0x5beac",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r4, #0]"
+        },
+        {
+          "address": "0x5beae",
+          "size": 2,
+          "assembly": "ldrb\tr2, [r5, #2]"
+        },
+        {
+          "address": "0x5beb0",
+          "size": 2,
+          "assembly": "cmp\tr1, r2"
+        },
+        {
+          "address": "0x5beb2",
+          "size": 2,
+          "assembly": "bcc.n\t5beb6 <r1_stock_i2c5_acquire+0xb9de>"
+        },
+        {
+          "address": "0x5beb4",
+          "size": 2,
+          "assembly": "cbnz\tr2, 5beb8 <r1_stock_i2c5_acquire+0xb9e0>"
+        },
+        {
+          "address": "0x5beb6",
+          "size": 2,
+          "assembly": "strb\tr1, [r5, #2]"
+        },
+        {
+          "address": "0x5beb8",
+          "size": 2,
+          "assembly": "strb\tr6, [r5, #0]"
+        },
+        {
+          "address": "0x5beba",
+          "size": 2,
+          "assembly": "ldr\tr1, [r4, #0]"
+        },
+        {
+          "address": "0x5bebc",
+          "size": 4,
+          "assembly": "str.w\tr1, [r0, #75]!"
+        },
+        {
+          "address": "0x5bec0",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r4, #4]"
+        },
+        {
+          "address": "0x5bec2",
+          "size": 2,
+          "assembly": "strb\tr1, [r0, #4]"
+        },
+        {
+          "address": "0x5bec4",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5bec8",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #31"
+        },
+        {
+          "address": "0x5beca",
+          "size": 2,
+          "assembly": "bne.n\t5bed4 <r1_stock_i2c5_acquire+0xb9fc>"
+        },
+        {
+          "address": "0x5becc",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5bed0",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #29"
+        },
+        {
+          "address": "0x5bed2",
+          "size": 2,
+          "assembly": "bpl.n\t5beea <r1_stock_i2c5_acquire+0xba12>"
+        },
+        {
+          "address": "0x5bed4",
+          "size": 4,
+          "assembly": "ldr.w\tr0, [r4, #1]"
+        },
+        {
+          "address": "0x5bed8",
+          "size": 2,
+          "assembly": "str\tr0, [sp, #0]"
+        },
+        {
+          "address": "0x5beda",
+          "size": 2,
+          "assembly": "ldrb\tr3, [r4, #0]"
+        },
+        {
+          "address": "0x5bedc",
+          "size": 2,
+          "assembly": "add\tr2, pc, #152"
+        },
+        {
+          "address": "0x5bede",
+          "size": 2,
+          "assembly": "add\tr1, pc, #152"
+        },
+        {
+          "address": "0x5bee0",
+          "size": 4,
+          "assembly": "mov.w\tr0, #209715200"
+        },
+        {
+          "address": "0x5bee4",
+          "size": 2,
+          "assembly": "adds\tr3, #250"
+        },
+        {
+          "address": "0x5bee6",
+          "size": 4,
+          "assembly": "bl\t91638 <_stack+0x11638>"
+        },
+        {
+          "address": "0x5beea",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5beee",
+          "size": 2,
+          "assembly": "lsls\tr1, r0, #30"
+        },
+        {
+          "address": "0x5bef0",
+          "size": 2,
+          "assembly": "ldr\tr0, [pc, #168]"
+        },
+        {
+          "address": "0x5bef2",
+          "size": 2,
+          "assembly": "ldr\tr2, [pc, #172]"
+        },
+        {
+          "address": "0x5bef4",
+          "size": 4,
+          "assembly": "sub.w\tr0, r0, r2"
+        },
+        {
+          "address": "0x5bef8",
+          "size": 4,
+          "assembly": "mov.w\tr0, r0, lsr #3"
+        },
+        {
+          "address": "0x5befc",
+          "size": 4,
+          "assembly": "mov.w\tr2, #3"
+        },
+        {
+          "address": "0x5bf00",
+          "size": 4,
+          "assembly": "add.w\tr7, r2, r0, lsl #16"
+        },
+        {
+          "address": "0x5bf04",
+          "size": 2,
+          "assembly": "bpl.n\t5bf16 <r1_stock_i2c5_acquire+0xba3e>"
+        },
+        {
+          "address": "0x5bf06",
+          "size": 2,
+          "assembly": "ldrb\tr2, [r4, #0]"
+        },
+        {
+          "address": "0x5bf08",
+          "size": 4,
+          "assembly": "ldr.w\tr3, [r4, #1]"
+        },
+        {
+          "address": "0x5bf0c",
+          "size": 2,
+          "assembly": "mov\tr0, r7"
+        },
+        {
+          "address": "0x5bf0e",
+          "size": 2,
+          "assembly": "add\tr1, pc, #148"
+        },
+        {
+          "address": "0x5bf10",
+          "size": 2,
+          "assembly": "adds\tr2, #250"
+        },
+        {
+          "address": "0x5bf12",
+          "size": 4,
+          "assembly": "bl\t799d6 <r1_stock_gpio_pin_set+0x5a2>"
+        },
+        {
+          "address": "0x5bf16",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5bf1a",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #31"
+        },
+        {
+          "address": "0x5bf1c",
+          "size": 2,
+          "assembly": "bne.n\t5bf26 <r1_stock_i2c5_acquire+0xba4e>"
+        },
+        {
+          "address": "0x5bf1e",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5bf22",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #29"
+        },
+        {
+          "address": "0x5bf24",
+          "size": 2,
+          "assembly": "bpl.n\t5bf48 <r1_stock_i2c5_acquire+0xba70>"
+        },
+        {
+          "address": "0x5bf26",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r5, #2]"
+        },
+        {
+          "address": "0x5bf28",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r5, #1]"
+        },
+        {
+          "address": "0x5bf2a",
+          "size": 4,
+          "assembly": "add.w\tr2, r6, #250"
+        },
+        {
+          "address": "0x5bf2e",
+          "size": 2,
+          "assembly": "str\tr2, [sp, #0]"
+        },
+        {
+          "address": "0x5bf30",
+          "size": 2,
+          "assembly": "adds\tr0, #250"
+        },
+        {
+          "address": "0x5bf32",
+          "size": 2,
+          "assembly": "adds\tr1, #250"
+        },
+        {
+          "address": "0x5bf34",
+          "size": 4,
+          "assembly": "strd\tr1, r0, [sp, #4]"
+        },
+        {
+          "address": "0x5bf38",
+          "size": 2,
+          "assembly": "ldrb\tr3, [r4, #0]"
+        },
+        {
+          "address": "0x5bf3a",
+          "size": 2,
+          "assembly": "add\tr2, pc, #136"
+        },
+        {
+          "address": "0x5bf3c",
+          "size": 2,
+          "assembly": "add\tr1, pc, #132"
+        },
+        {
+          "address": "0x5bf3e",
+          "size": 4,
+          "assembly": "mov.w\tr0, #218103808"
+        },
+        {
+          "address": "0x5bf42",
+          "size": 2,
+          "assembly": "adds\tr3, #250"
+        },
+        {
+          "address": "0x5bf44",
+          "size": 4,
+          "assembly": "bl\t91638 <_stack+0x11638>"
+        },
+        {
+          "address": "0x5bf48",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x5bf4c",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #30"
+        },
+        {
+          "address": "0x5bf4e",
+          "size": 2,
+          "assembly": "bpl.n\t5bf70 <r1_stock_i2c5_acquire+0xba98>"
+        },
+        {
+          "address": "0x5bf50",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r5, #2]"
+        },
+        {
+          "address": "0x5bf52",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r5, #1]"
+        },
+        {
+          "address": "0x5bf54",
+          "size": 2,
+          "assembly": "adds\tr0, #250"
+        },
+        {
+          "address": "0x5bf56",
+          "size": 2,
+          "assembly": "adds\tr1, #250"
+        },
+        {
+          "address": "0x5bf58",
+          "size": 4,
+          "assembly": "strd\tr1, r0, [sp]"
+        },
+        {
+          "address": "0x5bf5c",
+          "size": 2,
+          "assembly": "ldrb\tr2, [r4, #0]"
+        },
+        {
+          "address": "0x5bf5e",
+          "size": 2,
+          "assembly": "mov\tr0, r7"
+        },
+        {
+          "address": "0x5bf60",
+          "size": 4,
+          "assembly": "add.w\tr3, r6, #250"
+        },
+        {
+          "address": "0x5bf64",
+          "size": 2,
+          "assembly": "b.n\t5bf68 <r1_stock_i2c5_acquire+0xba90>"
+        },
+        {
+          "address": "0x5bf66",
+          "size": 2,
+          "assembly": "b.n\t5bf70 <r1_stock_i2c5_acquire+0xba98>"
+        },
+        {
+          "address": "0x5bf68",
+          "size": 2,
+          "assembly": "add\tr1, pc, #148"
+        },
+        {
+          "address": "0x5bf6a",
+          "size": 2,
+          "assembly": "adds\tr2, #250"
+        },
+        {
+          "address": "0x5bf6c",
+          "size": 4,
+          "assembly": "bl\t799f8 <r1_stock_gpio_pin_set+0x5c4>"
+        },
+        {
+          "address": "0x5bf70",
+          "size": 2,
+          "assembly": "pop\t{r1, r2, r3, r4, r5, r6, r7, pc}"
+        }
+      ],
+      "inline_layout": [
+        {
+          "address": "0x5bf72",
+          "size": 2,
+          "kind": "zero"
+        },
+        {
+          "address": "0x5bf74",
+          "size": 4,
+          "kind": "word",
+          "value": 536962548,
+          "expression": "r1_health_storage_temperature_prefix"
+        },
+        {
+          "address": "0x5bf78",
+          "size": 35,
+          "kind": "text",
+          "text": "[RING]last_temp: %d, timestamp: %d"
+        },
+        {
+          "address": "0x5bf9b",
+          "size": 1,
+          "kind": "zero"
+        },
+        {
+          "address": "0x5bf9c",
+          "size": 4,
+          "kind": "word",
+          "value": 804092,
+          "expression": "0xc44fc"
+        },
+        {
+          "address": "0x5bfa0",
+          "size": 4,
+          "kind": "word",
+          "value": 803868,
+          "expression": "0xc441c"
+        },
+        {
+          "address": "0x5bfa4",
+          "size": 29,
+          "kind": "text",
+          "text": "last_temp: %d, timestamp: %d"
+        },
+        {
+          "address": "0x5bfc1",
+          "size": 3,
+          "kind": "zero"
+        },
+        {
+          "address": "0x5bfc4",
+          "size": 57,
+          "kind": "text",
+          "text": "[RING]temp: %d, avg_temp: %d, max_temp: %d, min_temp: %d"
+        },
+        {
+          "address": "0x5bffd",
+          "size": 3,
+          "kind": "zero"
+        },
+        {
+          "address": "0x5c000",
+          "size": 51,
+          "kind": "text",
+          "text": "temp: %d, avg_temp: %d, max_temp: %d, min_temp: %d"
+        },
+        {
+          "address": "0x5c033",
+          "size": 1,
+          "kind": "zero"
+        }
+      ],
+      "disassembly_sha256": "786c4e3b2facc72213f53a97d22da4da5d7b4775a7cb4b5feb54c6204db76fa0"
+    }
+  ],
+  "providers": {
+    "0x5aca6": "r1_health_storage_hour_index",
+    "0x5aba0": "r1_health_storage_average",
+    "0x914ec": "r1_structured_log_mode_get",
+    "0x91638": "r1_structured_log_format",
+    "0x799d6": "nrf_log_frontend_std_2",
+    "0x799f8": "nrf_log_frontend_std_4"
+  },
+  "native_code_bytes": 1136,
+  "source_prefix_bytes": 473,
+  "external_stress_text": {
+    "address": "0xbf8e8",
+    "text": "[RING]stress: %d, avg_stress: %d, max_stress: %d, min_stress: %d",
+    "size": 65
+  },
+  "whole_image_complete": false
+}

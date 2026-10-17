@@ -1,0 +1,160 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0008b8e8 <r1_stock_gpio_pin_set+0x124b4>:
+   8b8e8:	b530      	push	{r4, r5, lr}
+   8b8ea:	b085      	sub	sp, #20
+   8b8ec:	4604      	mov	r4, r0
+   8b8ee:	f005 fdfd 	bl	914ec <_stack+0x114ec>
+   8b8f2:	07c0      	lsls	r0, r0, #31
+   8b8f4:	d103      	bne.n	8b8fe <_stack+0xb8fe>
+   8b8f6:	f005 fdf9 	bl	914ec <_stack+0x114ec>
+   8b8fa:	0740      	lsls	r0, r0, #29
+   8b8fc:	d508      	bpl.n	8b910 <_stack+0xb910>
+   8b8fe:	7860      	ldrb	r0, [r4, #1]
+   8b900:	9000      	str	r0, [sp, #0]
+   8b902:	7823      	ldrb	r3, [r4, #0]
+   8b904:	a25e      	add	r2, pc, #376	@ (adr r2, 8ba80 <_stack+0xba80>)
+   8b906:	a15e      	add	r1, pc, #376	@ (adr r1, 8ba80 <_stack+0xba80>)
+   8b908:	f04f 6048 	mov.w	r0, #209715200	@ 0xc800000
+   8b90c:	f005 fe94 	bl	91638 <_stack+0x11638>
+   8b910:	f005 fdec 	bl	914ec <_stack+0x114ec>
+   8b914:	0780      	lsls	r0, r0, #30
+   8b916:	d50b      	bpl.n	8b930 <_stack+0xb930>
+   8b918:	4865      	ldr	r0, [pc, #404]	@ (8bab0 <_stack+0xbab0>)
+   8b91a:	4966      	ldr	r1, [pc, #408]	@ (8bab4 <_stack+0xbab4>)
+   8b91c:	7863      	ldrb	r3, [r4, #1]
+   8b91e:	1a40      	subs	r0, r0, r1
+   8b920:	08c0      	lsrs	r0, r0, #3
+   8b922:	2103      	movs	r1, #3
+   8b924:	eb01 4000 	add.w	r0, r1, r0, lsl #16
+   8b928:	7822      	ldrb	r2, [r4, #0]
+   8b92a:	a163      	add	r1, pc, #396	@ (adr r1, 8bab8 <_stack+0xbab8>)
+   8b92c:	f7ee f853 	bl	799d6 <r1_stock_gpio_pin_set+0x5a2>
+   8b930:	f7ff fa38 	bl	8ada4 <_stack+0xada4>
+   8b934:	496b      	ldr	r1, [pc, #428]	@ (8bae4 <_stack+0xbae4>)
+   8b936:	4d6c      	ldr	r5, [pc, #432]	@ (8bae8 <_stack+0xbae8>)
+   8b938:	6048      	str	r0, [r1, #4]
+   8b93a:	7820      	ldrb	r0, [r4, #0]
+   8b93c:	2807      	cmp	r0, #7
+   8b93e:	d22b      	bcs.n	8b998 <_stack+0xb998>
+   8b940:	e8df f000 	tbb	[pc, r0]
+   8b944:	2c04      	cmp	r4, #4
+   8b946:	2a2a      	cmp	r2, #42	@ 0x2a
+   8b948:	5982      	ldr	r2, [r0, r6]
+   8b94a:	0095      	lsls	r5, r2, #2
+   8b94c:	7860      	ldrb	r0, [r4, #1]
+   8b94e:	b138      	cbz	r0, 8b960 <_stack+0xb960>
+   8b950:	2801      	cmp	r0, #1
+   8b952:	d121      	bne.n	8b998 <_stack+0xb998>
+   8b954:	8860      	ldrh	r0, [r4, #2]
+   8b956:	b005      	add	sp, #20
+   8b958:	e8bd 4030 	ldmia.w	sp!, {r4, r5, lr}
+   8b95c:	f000 bbf8 	b.w	8c150 <_stack+0xc150>
+   8b960:	a802      	add	r0, sp, #8
+   8b962:	f001 fea3 	bl	8d6ac <_stack+0xd6ac>
+   8b966:	b190      	cbz	r0, 8b98e <_stack+0xb98e>
+   8b968:	e9d5 0100 	ldrd	r0, r1, [r5]
+   8b96c:	e9cd 0100 	strd	r0, r1, [sp]
+   8b970:	9803      	ldr	r0, [sp, #12]
+   8b972:	f8cd 0002 	str.w	r0, [sp, #2]
+   8b976:	f89d 0008 	ldrb.w	r0, [sp, #8]
+   8b97a:	f88d 0007 	strb.w	r0, [sp, #7]
+   8b97e:	f7ff fa19 	bl	8adb4 <_stack+0xadb4>
+   8b982:	f8ad 0000 	strh.w	r0, [sp]
+   8b986:	8862      	ldrh	r2, [r4, #2]
+   8b988:	2100      	movs	r1, #0
+   8b98a:	4668      	mov	r0, sp
+   8b98c:	e002      	b.n	8b994 <_stack+0xb994>
+   8b98e:	2100      	movs	r1, #0
+   8b990:	8862      	ldrh	r2, [r4, #2]
+   8b992:	4608      	mov	r0, r1
+   8b994:	f7f7 ffcc 	bl	83930 <_stack+0x3930>
+   8b998:	b005      	add	sp, #20
+   8b99a:	bd30      	pop	{r4, r5, pc}
+   8b99c:	7860      	ldrb	r0, [r4, #1]
+   8b99e:	b138      	cbz	r0, 8b9b0 <_stack+0xb9b0>
+   8b9a0:	2801      	cmp	r0, #1
+   8b9a2:	d1f9      	bne.n	8b998 <_stack+0xb998>
+   8b9a4:	8860      	ldrh	r0, [r4, #2]
+   8b9a6:	b005      	add	sp, #20
+   8b9a8:	e8bd 4030 	ldmia.w	sp!, {r4, r5, lr}
+   8b9ac:	f001 b9d8 	b.w	8cd60 <_stack+0xcd60>
+   8b9b0:	a802      	add	r0, sp, #8
+   8b9b2:	f002 fdb7 	bl	8e524 <_stack+0xe524>
+   8b9b6:	b1d0      	cbz	r0, 8b9ee <_stack+0xb9ee>
+   8b9b8:	f89d 0008 	ldrb.w	r0, [sp, #8]
+   8b9bc:	3846      	subs	r0, #70	@ 0x46
+   8b9be:	281e      	cmp	r0, #30
+   8b9c0:	d815      	bhi.n	8b9ee <_stack+0xb9ee>
+   8b9c2:	e9d5 0102 	ldrd	r0, r1, [r5, #8]
+   8b9c6:	e9cd 0100 	strd	r0, r1, [sp]
+   8b9ca:	9803      	ldr	r0, [sp, #12]
+   8b9cc:	f8cd 0002 	str.w	r0, [sp, #2]
+   8b9d0:	f89d 0008 	ldrb.w	r0, [sp, #8]
+   8b9d4:	f88d 0007 	strb.w	r0, [sp, #7]
+   8b9d8:	f7ff f9ec 	bl	8adb4 <_stack+0xadb4>
+   8b9dc:	f8ad 0000 	strh.w	r0, [sp]
+   8b9e0:	8862      	ldrh	r2, [r4, #2]
+   8b9e2:	2100      	movs	r1, #0
+   8b9e4:	ea4f 000d 	mov.w	r0, sp
+   8b9e8:	f7f8 f91a 	bl	83c20 <_stack+0x3c20>
+   8b9ec:	e7d4      	b.n	8b998 <_stack+0xb998>
+   8b9ee:	2100      	movs	r1, #0
+   8b9f0:	8862      	ldrh	r2, [r4, #2]
+   8b9f2:	4608      	mov	r0, r1
+   8b9f4:	e7f8      	b.n	8b9e8 <_stack+0xb9e8>
+   8b9f6:	7860      	ldrb	r0, [r4, #1]
+   8b9f8:	b138      	cbz	r0, 8ba0a <_stack+0xba0a>
+   8b9fa:	2801      	cmp	r0, #1
+   8b9fc:	d1cc      	bne.n	8b998 <_stack+0xb998>
+   8b9fe:	8860      	ldrh	r0, [r4, #2]
+   8ba00:	b005      	add	sp, #20
+   8ba02:	e8bd 4030 	ldmia.w	sp!, {r4, r5, lr}
+   8ba06:	f000 bea3 	b.w	8c750 <_stack+0xc750>
+   8ba0a:	4668      	mov	r0, sp
+   8ba0c:	f001 ff24 	bl	8d858 <_stack+0xd858>
+   8ba10:	b1a0      	cbz	r0, 8ba3c <_stack+0xba3c>
+   8ba12:	3510      	adds	r5, #16
+   8ba14:	ab02      	add	r3, sp, #8
+   8ba16:	e895 0007 	ldmia.w	r5, {r0, r1, r2}
+   8ba1a:	e883 0007 	stmia.w	r3, {r0, r1, r2}
+   8ba1e:	9801      	ldr	r0, [sp, #4]
+   8ba20:	f8cd 000a 	str.w	r0, [sp, #10]
+   8ba24:	f8bd 0000 	ldrh.w	r0, [sp]
+   8ba28:	f8ad 000f 	strh.w	r0, [sp, #15]
+   8ba2c:	f7ff f9c2 	bl	8adb4 <_stack+0xadb4>
+   8ba30:	f8ad 0008 	strh.w	r0, [sp, #8]
+   8ba34:	8862      	ldrh	r2, [r4, #2]
+   8ba36:	2100      	movs	r1, #0
+   8ba38:	a802      	add	r0, sp, #8
+   8ba3a:	e002      	b.n	8ba42 <_stack+0xba42>
+   8ba3c:	2100      	movs	r1, #0
+   8ba3e:	8862      	ldrh	r2, [r4, #2]
+   8ba40:	4608      	mov	r0, r1
+   8ba42:	f7f7 ff96 	bl	83972 <_stack+0x3972>
+   8ba46:	e7a7      	b.n	8b998 <_stack+0xb998>
+   8ba48:	7860      	ldrb	r0, [r4, #1]
+   8ba4a:	b138      	cbz	r0, 8ba5c <_stack+0xba5c>
+   8ba4c:	2801      	cmp	r0, #1
+   8ba4e:	d1a3      	bne.n	8b998 <_stack+0xb998>
+   8ba50:	8860      	ldrh	r0, [r4, #2]
+   8ba52:	b005      	add	sp, #20
+   8ba54:	e8bd 4030 	ldmia.w	sp!, {r4, r5, lr}
+   8ba58:	f000 b848 	b.w	8baec <_stack+0xbaec>
+   8ba5c:	b005      	add	sp, #20
+   8ba5e:	2200      	movs	r2, #0
+   8ba60:	e8bd 4030 	ldmia.w	sp!, {r4, r5, lr}
+   8ba64:	4611      	mov	r1, r2
+   8ba66:	f241 0009 	movw	r0, #4105	@ 0x1009
+   8ba6a:	f001 bf47 	b.w	8d8fc <_stack+0xd8fc>
+   8ba6e:	7860      	ldrb	r0, [r4, #1]
+   8ba70:	2801      	cmp	r0, #1
+   8ba72:	d191      	bne.n	8b998 <_stack+0xb998>
+   8ba74:	8861      	ldrh	r1, [r4, #2]
+   8ba76:	b005      	add	sp, #20
+   8ba78:	e8bd 4030 	ldmia.w	sp!, {r4, r5, lr}
+   8ba7c:	f7ff becc 	b.w	8b818 <_stack+0xb818>

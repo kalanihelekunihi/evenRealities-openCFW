@@ -218,7 +218,8 @@
         "Source graph and relocations link at an experimental placement only.",
         "The text extent exceeds the official CASE payload; section order, native entry addresses, checksums and packaging are not stock-equal.",
         "No device, flash, peripheral timing or physical policy proof.",
-        "The 38 C symbols with explicit stock address suffixes total 4,898 bytes less than their Ghidra function envelopes, while the mixed -Oz CASE load exceeds stock by 7,851 bytes. The candidate .text has 54,320 unique function bytes and 8,951 bytes outside function symbols; the 428-entry native catalogue has 40,664 envelope bytes but may be incomplete. Unmatched code and linker placement require review before assigning the overflow to specific bodies."
+        "The 38 C symbols with explicit stock address suffixes total 4,898 bytes less than their Ghidra function envelopes, while the mixed -Oz CASE load exceeds stock by 7,851 bytes. Of 8,951 .text bytes outside function symbols, the linker map attributes 8,778 to retained .rodata and 2 to alignment at the tail; 171 other bytes remain. The 428-entry native catalogue may be incomplete. Compare the full code/data load against stock before assigning the overflow to specific bodies.",
+        "The isolated clear-LED string reuse C candidate saves 18 linked bytes and leaves 7,833 bytes of CASE payload overflow. A second candidate binds the native CRLF string pointer too, with no further size reduction. Final source selection, full runtime behavior and 33 differing vector words remain open."
       ],
       "gc_size_frontier": {
         "receipt": {
@@ -267,6 +268,14 @@
       "named_function_size_triage": {
         "path": "g2/build/c-firmware/20261016/case-named-function-size/receipt.json",
         "sha256": "a35aefbd2914143015f65949c6dc7d5eaf0b8e300f42b9dbc28f23e8ca008c24"
+      },
+      "text_provenance": {
+        "path": "g2/build/c-firmware/20261016/case-text-provenance/receipt.json",
+        "sha256": "2af3b7b495dc3b90a752693dbfa48614dd4653ff4a2a9fb27aa74ef16620d968"
+      },
+      "shared_string_size_candidate": {
+        "path": "g2/build/c-firmware/20261016/case-shared-string-probe/receipt.json",
+        "sha256": "b1b3d5fbabaf0249386b76b1e04aedb3c1d658f448fcb0f280516ebccdc4f15e"
       }
     },
     "apollo_main": {
@@ -275,8 +284,12 @@
         "sha256": "cff35b99fc8d6cbebe10ba1359384ea6a19ede7196620c05997e6547b849eb56"
       },
       "candidate": {
-        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-agent-done-5e6268/apollo-main-terminal-agent-done-bound.o",
-        "sha256": "58118ab923c6c4b55083d6a8c3e97a6d477e9b994ab4d09e24e269eb3dc13aaa"
+        "path": "g2/build/c-firmware/20261017/main-conn-param-profiles/candidate.o",
+        "sha256": "8a57e42c5991fc7073254f90cf18bdd1e5439cd82435abfad64956965544fa87"
+      },
+      "lv_level_names_ram_contract": {
+        "path": "g2/build/c-firmware/20261016/main-lv-level-names-contract/receipt.json",
+        "sha256": "3c43ef7ad21b2a19afef6dc6bfdbe8171e2d521517eb7d8049cb7fc0301df2a3"
       },
       "prior_dm_registry_extent_gate": {
         "path": "g2/build/c-firmware/20261015/main-dm-registry-extent-gate/receipt.json",
@@ -1659,8 +1672,8 @@
         "sha256": "3bf9d08fbe411688c348a7772ca6eb8848c1c5cac8d559be6642dc473807be73"
       },
       "terminal_session_select_bound": {
-        "path": "g2/build/c-firmware/20261016/main-terminal-session-select-5ecc1a/receipt.json",
-        "sha256": "f2990552d26e2424f14eb2b6f95695baac7b12c23f08841d65488697b181db71"
+        "path": "g2/build/c-firmware/20261016/main-terminal-session-list-select-5ed4f8/receipt.json",
+        "sha256": "f5a047ae1a08267a6eea77f183a8de13c7cf7c190a53327096150a90c0278465"
       },
       "terminal_session_focus_bound": {
         "path": "g2/build/c-firmware/20261016/main-terminal-session-focus-5ecbea/receipt.json",
@@ -1850,6 +1863,226 @@
         "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-agent-done-5e6268/receipt.json",
         "sha256": "4f5abdc413358d189ac71c4399b257e5c3d46c940fbd39da86c423a422676acf"
       },
+      "terminal_query_show_action_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-query-show-5e641c/receipt.json",
+        "sha256": "840f1c0f0388c20dc4a7f5cc628e4db7a1b361dcd4036935da8491491d595311"
+      },
+      "terminal_query_hit_count_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-query-hit-count-5eb576/receipt.json",
+        "sha256": "03c0013f4202c0ee56101c395c98f08958ba33833866d77174c063227fd9942f"
+      },
+      "terminal_query_construct_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-query-construct-5eb8da/receipt.json",
+        "sha256": "49bde2bd439a4e644764ee84e7cccc801f5ea233c5cb5aa6b193688387d2afde"
+      },
+      "terminal_session_list_show_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-session-list-show-5ed208/receipt.json",
+        "sha256": "4dc7916ad50d33f7419f0e91da853f5369ef3614f1e1c290da08c86171ca07e6"
+      },
+      "td_flag_b_set_bound": {
+        "path": "g2/build/c-firmware/20261016/main-td-flag-b-set-597572/receipt.json",
+        "sha256": "b48cde6b99605be476236a94e841ad9ce4b063ffaa6e25ce4d8236f51bc66741"
+      },
+      "terminal_cancel_pending_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-cancel-pending-5cef8c/receipt.json",
+        "sha256": "65d2c82dc11c11e719e7657915aaca9a6f182d572969b4ff0ac7a21d71779079"
+      },
+      "terminal_session_selector_leaf_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-session-selector-leaf/receipt.json",
+        "sha256": "d7e536a615c52a31a5a4c85271d3ca42f15a01b4e8d12ba167669bbee874e0a5"
+      },
+      "terminal_session_list_rebuild_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-session-list-rebuild-5ecef6/receipt.json",
+        "sha256": "cfceadef831da3e5f932b758dc2cd1af388199f04c4dfd1e4e200d3309666209"
+      },
+      "terminal_session_row_factory_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-session-row-factory-5ecd06/receipt.json",
+        "sha256": "15c908020a68b8ea211bd929182506dc7c4c9d60b3584db13f5047e37b49b146"
+      },
+      "terminal_new_session_failed_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-new-session-failed-5ed8e0/receipt.json",
+        "sha256": "100e16bbc7925683047be46a6c7b45c185240008ed448ef07ab5189cb7ed0cd8"
+      },
+      "terminal_session_list_update_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-session-list-update-5ed318/receipt.json",
+        "sha256": "a9b31c83c9f7d08e20b47d795b39a75a7d5020a53f2721f29b8f1402df8a69b9"
+      },
+      "terminal_session_switch_result_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-session-switch-result-5ed758/receipt.json",
+        "sha256": "b9310fba9a1422dc73e36fc48bbfbed4bf3a124495c1f5a39e690212de8748f8"
+      },
+      "terminal_session_select_command_leaves_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-session-select-command-leaves/receipt.json",
+        "sha256": "f8614e7d9aa3e5a914be02f1de26ba603d403eff1eee0498253d27252eb1771e"
+      },
+      "terminal_new_session_request_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-new-session-request-5cef14/receipt.json",
+        "sha256": "ea85c3f852d4fa32a72ba31599549a43af83701b33fdafa5ac063cf6ca919b73"
+      },
+      "terminal_session_pending_prompt_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-session-pending-prompt-5ece4c/receipt.json",
+        "sha256": "560b9ededa54c6c46e951893118da9535e2af1e7e9ee0ce992765254521347a2"
+      },
+      "terminal_session_switch_request_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-session-switch-request-5cee8c/receipt.json",
+        "sha256": "f77b8f77acbb8a5e4d70edbe709eaecec17c1c1b3c010772c572302acea50a42"
+      },
+      "terminal_session_list_select_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-session-list-select-5ed4f8/receipt.json",
+        "sha256": "f5a047ae1a08267a6eea77f183a8de13c7cf7c190a53327096150a90c0278465"
+      },
+      "terminal_session_id_changed_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-session-id-changed-5e5580/receipt.json",
+        "sha256": "94e8328df8349a260dfd3b25f8d763d220afc53c827a801a52f8fd715ad545bb"
+      },
+      "terminal_query_notification_activate_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-query-notification-activate-5e66d8/receipt.json",
+        "sha256": "6259b3eb4b7d42d34b79c12680301657af8bcebcc60340af90fe76b601b63266"
+      },
+      "terminal_query_reply_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-query-reply-5e69a0/receipt.json",
+        "sha256": "9d81353e25ef95f90b4c727057c26eb35b9aa5cf0f9a22a8f2864033c5d7fd77"
+      },
+      "terminal_rx_frame_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-rx-frame-5ce990/receipt.json",
+        "sha256": "1206e5a9642f2492c6372a214e16301cda6031d7e40d09e49b522ca3e0886e6f"
+      },
+      "registry_ring_connect_ram_bound": {
+        "path": "g2/build/c-firmware/20261016/main-registry-ring-connect-ram/receipt.json",
+        "sha256": "833855dc5525f0a27b3591188235b2b373fcd4b1caae0a7f615217f86c28af6a"
+      },
+      "combined_ram_early_replay": {
+        "path": "g2/build/c-firmware/20261016/main-combined-ram-early-replay/receipt.json",
+        "sha256": "e9c114ab9c4da0fee5226bec8f06272516baee9f33d8db06dc81901c2874f508"
+      },
+      "combined_ram_root_replay": {
+        "path": "g2/build/c-firmware/20261016/main-combined-ram-root-replay/receipt.json",
+        "sha256": "0a66a6f1b16155fb85d486ae188333f0cfdef3c62dddd68f4ebd8be0a5651c10"
+      },
+      "combined_ram_late_replay": {
+        "path": "g2/build/c-firmware/20261016/main-combined-ram-late-replay/receipt.json",
+        "sha256": "a33e841aee2f0bf1573e58f0b97df4094260b6ddb5667266496a56e89c1dcaeb"
+      },
+      "combined_ram_post_tail_replay": {
+        "path": "g2/build/c-firmware/20261016/main-combined-ram-post-tail-replay/receipt.json",
+        "sha256": "d543ce937f2651007675f939ce1e2a390bd01bdffaf8b3b19e862f27b5742012"
+      },
+      "combined_ram_current_replay": {
+        "path": "g2/build/c-firmware/20261016/main-combined-ram-current-replay/receipt.json",
+        "sha256": "6ff2b5980d2c5fa53388e8cba372a41530fb89452702360187dddf5c326dd572"
+      },
+      "file_lfs_context_bound": {
+        "path": "g2/build/c-firmware/20261016/main-file-lfs-context-20071ac8/receipt.json",
+        "sha256": "646cf474b9e5782067a17bec2cfd957e064198dac595c98dc4f1bfcdfb8fa6a6"
+      },
+      "codec_watchdog_timer_bound": {
+        "path": "g2/build/c-firmware/20261016/main-codec-check-timer-20074a98/receipt.json",
+        "sha256": "13594058ab97131d04462e7d612bccd3b7dfcd61c865d691bcc4e8a6553780e8"
+      },
+      "codec_shared_enable_mask_bound": {
+        "path": "g2/build/c-firmware/20261016/main-codec-shared-mask-2007436c/receipt.json",
+        "sha256": "c46bfc5bccdbd533ca6ad14f263664c454a7292e1aedeffdf612685956fb932a"
+      },
+      "codec_power_state_bound": {
+        "path": "g2/build/c-firmware/20261016/main-codec-power-state-20074fb6/receipt.json",
+        "sha256": "4e6ea3796520a4dc1a71defa4557345f6f33d0addd66f12b7caab890f4da59c4"
+      },
+      "codec_i2s_handle_bound": {
+        "path": "g2/build/c-firmware/20261016/main-codec-i2s-handle-2007450c/receipt.json",
+        "sha256": "5b136bb126545391fd957e40fcd885a39cd0acdb82ce00773827b30d0970fcf3"
+      },
+      "codec_i2s_pool_bound": {
+        "path": "g2/build/c-firmware/20261016/main-codec-i2s-pool-20071114/receipt.json",
+        "sha256": "a6654b8582c4099b823ec5b9830b934661610292c5923b564ccc3a10862d2d21"
+      },
+      "voltage_routes_bound": {
+        "path": "g2/build/c-firmware/20261016/main-voltage-routes-2005665c/receipt.json",
+        "sha256": "e210ed0fdc8a583ad8fcceae9bbe46159df09d56b1c424b3f02e6a17c5b5bce6"
+      },
+      "ble_vendor_itcm_delay_bound": {
+        "path": "g2/build/c-firmware/20261016/main-ble-vendor-itcm-delay-00000040/receipt.json",
+        "sha256": "22671fc9169c018ff1743e07f0785d8342462016de8921d28039b63f10d5ea9b"
+      },
+      "codec_clock_pin_words_bound": {
+        "path": "g2/build/c-firmware/20261016/main-codec-clock-pin-words-20000114/receipt.json",
+        "sha256": "a6fec2b8857764ef968acf5b040e30408707b630b61fc6a82132db0323e737bc"
+      },
+      "pdm_config_words_bound": {
+        "path": "g2/build/c-firmware/20261016/main-pdm-config-words-20000900/receipt.json",
+        "sha256": "25b8c709adcacf7468f3a9d5181d1e759ae0b5a56ea54bf8ac4baa5d97a24f27"
+      },
+      "i2s_config_words_bound": {
+        "path": "g2/build/c-firmware/20261016/main-i2s-config-words-20000000/receipt.json",
+        "sha256": "7886b0872bf4621a6ea1f598a5296b90fa0de20522c48e81be47e1f16cdfccf1"
+      },
+      "pdm_handle_ram_bound": {
+        "path": "g2/build/c-firmware/20261016/main-pdm-handle-ram/receipt.json",
+        "sha256": "85f047d1c2d94b0ccd91d706710b1786fa274cf57b27bdb1c8ff23eb6600a94a"
+      },
+      "ring_descriptor_data_bound": {
+        "path": "g2/build/c-firmware/20261016/main-ring-descriptor-data-20002c48/receipt.json",
+        "sha256": "70b56bf3b2c52cccd32feb22cfb92c7ccf6a1faa29e4c52d6cc81ebdada800de"
+      },
+      "font_active_collision_repair": {
+        "path": "g2/build/c-firmware/20261016/main-font-active-collision-repair/receipt.json",
+        "sha256": "4c177202318f78c167e366e0e95b47839ca14693adf4f129fb96125c8bb79221"
+      },
+      "font_active_corrected_input_archive": {
+        "path": "g2/build/c-firmware/20261016/main-font-active-archive-refresh/receipt.json",
+        "sha256": "d06f13656733ead65b92dd70f0f75cb63f42b451ec9b2c512210bb93bf808fe5"
+      },
+      "combined_ram_settings_font_archive": {
+        "path": "g2/build/c-firmware/20261016/main-combined-ram-settings-font-archive/receipt.json",
+        "sha256": "d584e2a8bb7ee0cea78ce4a5569702916023f4dd07c3aba4c61d479ff997b690"
+      },
+      "combined_ram_settings_font_core_replay": {
+        "path": "g2/build/c-firmware/20261016/main-combined-ram-settings-font-core-replay/receipt.json",
+        "sha256": "d6d6ffe7b665ff955833a54de14a08cdb02756ff4f956e0761ad68b54c35f41d"
+      },
+      "combined_ram_settings_font_feature_replay": {
+        "path": "g2/build/c-firmware/20261016/main-combined-ram-settings-font-feature-replay/receipt.json",
+        "sha256": "3b21526f2670926c72608256d45a9df3b040bba8b2a0266a7c3666d9d448a765"
+      },
+      "combined_ram_settings_font_final_replay": {
+        "path": "g2/build/c-firmware/20261016/main-combined-ram-settings-font-final-replay/receipt.json",
+        "sha256": "7371166cf04aeb3f6a72b4239bf9a40a20626f2c9c69729857accaa9d22659de"
+      },
+      "locale_dispatch_stock_data_proof": {
+        "path": "g2/build/c-firmware/20261016/main-locale-dispatch-data-200044c0/receipt.json",
+        "sha256": "a1ef7b2bef21468e6a784310bbc78756893cc1d7e615cab039fe1e8f45e9d986"
+      },
+      "locale_ascii_callbacks": {
+        "path": "g2/build/c-firmware/20261016/main-locale-ascii-callbacks/receipt.json",
+        "sha256": "7b5717004c0307a603a5ffc4edd72f6eec3b21a2de4f1b738d2e616b5b15ccee"
+      },
+      "locale_relocatable_table_proof": {
+        "path": "g2/build/c-firmware/20261016/main-locale-relocatable-source/receipt.json",
+        "sha256": "81fe6a1db2f95b61054f6a14c98c8cba63379b42a3268ee357ad8d797bb29dac"
+      },
+      "locale_relocatable_archive": {
+        "path": "g2/build/c-firmware/20261016/main-locale-relocatable-archive/receipt.json",
+        "sha256": "9a0842944b9c52bc1ee8adbb6e67e40ae6106f0dfde9db2182d9a40d01200a61"
+      },
+      "locale_relocatable_current_replay": {
+        "path": "g2/build/c-firmware/20261016/main-locale-relocatable-current-replay/receipt.json",
+        "sha256": "03d15f5ae6a2d102f2672142f7a8418e644fd43dd7ca4c6cbd6f9628274e52be"
+      },
+      "locale_classify_callbacks": {
+        "path": "g2/build/c-firmware/20261016/main-locale-classify-callbacks/receipt.json",
+        "sha256": "996403e1546d55a2eae39a11c86e0406ea45b3940f934b59abb58370cf175183"
+      },
+      "locale_five_callback_table_proof": {
+        "path": "g2/build/c-firmware/20261016/main-locale-five-callback-table/receipt.json",
+        "sha256": "fb3d8c66ea7fe67ca50932f4c0d8044b3cbde3e19e447a8f89650abd98a664b2"
+      },
+      "locale_five_callback_archive": {
+        "path": "g2/build/c-firmware/20261016/main-locale-five-archive/receipt.json",
+        "sha256": "239613d1f38c600bc74634dd7e0a0eb6b4663705633b6749d501b8847f22d1a2"
+      },
+      "locale_five_callback_current_replay": {
+        "path": "g2/build/c-firmware/20261016/main-locale-five-current-replay/receipt.json",
+        "sha256": "bd2528eeba953f6eafb7f6a082aedd4a7e67152c23f80e7959cd02ea0432e009"
+      },
       "settings_last_message_ram_extent": {
         "current_source_receipt": {
           "path": "g2/build/c-firmware/settings-live-buffers-round1007/receipt.json",
@@ -1859,51 +2092,22 @@
         "required_minimum_bytes": 104,
         "integrated": true
       },
-      "unresolved_count": 176,
+      "unresolved_count": 83,
       "unresolved_symbols": [
-        "audio_ble_att_table_main",
-        "audio_ble_att_table_secondary",
-        "audio_ble_attc_table",
-        "audio_ble_atts_ind_table",
-        "audio_ble_atts_table",
         "audio_ble_comm_slave_dispatch",
-        "audio_ble_dm_master_table_a",
-        "audio_ble_dm_master_table_b",
-        "audio_ble_dm_slave_table_a",
-        "audio_ble_dm_slave_table_b",
         "audio_ble_hci_radio_boot_config",
         "audio_ble_hci_radio_dispatch_contexts_20068928",
         "audio_ble_hci_radio_dispatch_handlers_20068228",
         "audio_ble_hci_radio_scheduler_config",
-        "audio_ble_master_message",
         "audio_ble_master_message_preprocess",
-        "audio_ble_master_registration_table",
         "audio_ble_msgtx_message",
-        "audio_ble_ota_route_context",
         "audio_ble_profile_handler_entry_5fa056",
-        "audio_ble_registration_records",
         "audio_ble_scan_core_full",
-        "audio_ble_slave_connection_info",
-        "audio_ble_slave_profile_table",
-        "audio_ble_vendor_cycle_delay_rom_00000040",
-        "audio_ble_vendor_stack_rows_2003b558",
-        "audio_ble_whitelist_info",
-        "audio_file_lfs_context",
-        "audio_registry_ring_connect_buffer",
-        "audio_registry_ring_connect_parse_5ce990",
-        "audio_setting_handle_command5_46bbb4",
+        "audio_conversate_ui_route_5b5f44",
+        "audio_conversate_ui_route_5b6688",
+        "audio_conversate_ui_route_5b7138",
         "audio_terminal_fsm_prepare_5eae94",
         "audio_terminal_interrupt_confirm_prepare_5ec446",
-        "audio_terminal_ui_action_5e5580",
-        "audio_terminal_ui_action_5e641c",
-        "audio_terminal_ui_action_5e66d8",
-        "audio_terminal_ui_action_5e69a0",
-        "audio_terminal_ui_action_5ed208",
-        "audio_terminal_ui_action_5ed318",
-        "audio_terminal_ui_action_5ed4f8",
-        "audio_terminal_ui_action_5ed758",
-        "audio_terminal_ui_action_5ed8e0",
-        "audio_terminal_ui_state_base",
         "audio_uart_ambiq_draw_arc_53f09c",
         "audio_uart_ambiq_draw_border_53df00",
         "audio_uart_ambiq_draw_box_shadow_540036",
@@ -1912,22 +2116,8 @@
         "audio_uart_ambiq_draw_mask_5409f0",
         "audio_uart_ambiq_draw_triangle_53e728",
         "audio_uart_ambiq_vector_shape_draw_5202ec",
-        "audio_uart_display_current_set",
-        "audio_uart_display_draw_buffer",
         "audio_uart_display_input_check",
-        "audio_uart_display_layer_prepare",
-        "audio_uart_display_platform_bind",
-        "audio_uart_display_sync_info",
         "audio_uart_display_upgrade",
-        "audio_uart_locale_data_de",
-        "audio_uart_locale_data_en",
-        "audio_uart_locale_data_es",
-        "audio_uart_locale_data_fr",
-        "audio_uart_locale_data_it",
-        "audio_uart_locale_data_ja",
-        "audio_uart_locale_data_zh_cn",
-        "audio_uart_locale_data_zh_hk",
-        "audio_uart_lv_heap_pool",
         "audio_uart_lv_level_names",
         "audio_uart_lv_page_build_484a98",
         "audio_uart_lv_page_callback_487188",
@@ -1941,14 +2131,12 @@
         "audio_uart_registry_callback_469580",
         "audio_uart_registry_callback_46aeea",
         "audio_uart_registry_callback_4716ba",
-        "audio_uart_registry_callback_472102",
         "audio_uart_registry_callback_47cf60",
         "audio_uart_registry_callback_492f8c",
         "audio_uart_registry_callback_492fdc",
         "audio_uart_registry_callback_49ddb8",
         "audio_uart_registry_callback_49e68c",
         "audio_uart_registry_callback_49ed04",
-        "audio_uart_registry_callback_4acb40",
         "audio_uart_registry_callback_4c5dbc",
         "audio_uart_registry_callback_4e1192",
         "audio_uart_registry_callback_4e1490",
@@ -1962,15 +2150,12 @@
         "audio_uart_registry_callback_58a130",
         "audio_uart_registry_callback_59f0ea",
         "audio_uart_registry_callback_59f236",
-        "audio_uart_registry_callback_5b0476",
-        "audio_uart_registry_callback_5b06aa",
         "audio_uart_registry_callback_5f958c",
         "audio_uart_registry_callback_5f9924",
         "audio_uart_registry_callback_5f9ce0",
         "audio_uart_registry_child_497960",
         "audio_uart_registry_child_5872f4",
         "audio_uart_registry_context_20000044",
-        "audio_uart_registry_context_200004d8",
         "audio_uart_registry_context_200005bc",
         "audio_uart_registry_context_200009a4",
         "audio_uart_registry_context_20000b1c",
@@ -1990,58 +2175,13 @@
         "audio_uart_registry_context_2000418c",
         "audio_uart_ring_config_primary",
         "audio_uart_ring_config_secondary",
-        "audio_uart_ring_locale_dispatch_200044c0",
-        "audio_uart_ring_primary_descriptors",
-        "audio_uart_ring_secondary_active",
-        "audio_uart_ring_secondary_descriptors",
-        "g2_audio_codec_check_timer",
-        "g2_audio_dispatch_state",
-        "g2_audio_transaction_transport",
-        "g2_audio_tx_packet",
-        "g2_audio_voltage_routes",
-        "g2_codec_clock_pin_0a",
-        "g2_codec_clock_pin_0b",
-        "g2_codec_clock_pin_0c",
-        "g2_codec_clock_pin_0d",
-        "g2_codec_clock_pin_1a",
-        "g2_codec_clock_pin_1b",
-        "g2_codec_clock_pin_1c",
-        "g2_codec_clock_pin_1d",
-        "g2_codec_clock_pin_1e",
-        "g2_codec_i2s_config_base",
-        "g2_codec_i2s_dma_descriptor",
-        "g2_codec_i2s_handle",
-        "g2_codec_i2s_handle_pool",
-        "g2_codec_power_state",
-        "g2_codec_shared_enable_mask",
-        "g2_extended_log_fatal_callback",
         "g2_extended_log_product",
-        "g2_flashdb_db_rows",
-        "g2_flashdb_print_buffer",
-        "g2_flashdb_print_sink",
-        "g2_log_process_string",
-        "g2_log_thread_string",
-        "g2_log_time_string",
-        "g2_pcm_registration_rows",
-        "g2_pdm_alternate_config",
-        "g2_pdm_alternate_descriptor",
-        "g2_pdm_alternate_handle",
-        "g2_pdm_clock_pin_50",
-        "g2_pdm_clock_pin_51",
-        "g2_pdm_handle_rows",
-        "g2_pdm_production_config",
-        "g2_pdm_production_descriptor",
-        "g2_pdm_production_handle",
-        "g2_uart_sync_buffer",
-        "offline_assert",
-        "platform_log_error",
-        "stock_clock_mux_reset",
-        "stock_register_callbacks"
+        "g2_flashdb_db_rows"
       ],
       "source_complete": false,
       "full_payload_linked": false,
       "remaining_gate": [
-        "176 current imports; agent-done FSM action is C-bound after 75 controlled stock comparisons. Session-status FSM action is C-bound after 1920 controlled stock comparisons. Agent-interrupt FSM action and its one-byte packet encoder are C-bound after 25 and 15 controlled stock comparisons. Agent-reset FSM action is C-bound after 75 controlled stock comparisons. ASR-failure FSM action is C-bound after 75 controlled stock comparisons. Input-cancel FSM action is C-bound after 150 controlled stock comparisons. Input-confirm FSM action and its two TD children are C-bound after 25, 216 and 60 controlled stock comparisons. Terminal result-area constructor 0x5ebff8 is C-bound after 48 controlled cases, with exact source-owned 16x16 icon bytes. Terminal voice-stop action and processing-label helper are C-bound after 100 and four controlled stock comparisons. ASR-final action and timeout-stop helper are C-bound after 150 and 15 controlled comparisons; Terminal query session-name lookup, visibility constructor, two LVGL style wrappers and root constructor are C-bound after 120, 32, 48 and 30 controlled cases, with exact source-owned icon bytes. Terminal voice-start action and timeout child are C-bound after 25 and 24 controlled cases with exact source-owned voice icon. Voice-prepare constructor, five style wrappers, animimage class/factory, constructor and frame callback are C-bound after 16, 80, 3, 12 and 36 controlled cases. The stock scatter-executed 19-frame voice style table at RAM 0x200014e8 and its exact 4864 pixel bytes are C-owned with a bounded placement fragment; complete main scatter/linker integration remains open. LVGL effects and final object graph remain open. Terminal UI callback, exit-sync, teardown, result-area cleanup and timer/object cleanup are C-bound after 224, 16, 9, 12 and 27 controlled stock comparisons. LVGL object membership 0x43e2ea and recursive descendant 0x43ee54 are C-bound after 144 and 60 controlled cases. List animation deinit 0x5896b4 is C-bound after four controlled cases with its 0xd0-byte state at observed RAM 0x20070ea8. Terminal timer clear 0x5e7ec4 is C-bound after four controlled cases with its 0x18-byte state at observed RAM 0x20073c38. Terminal UI start 0x5e716c, its list animation initializer 0x58966c and theme wrapper 0x5e47cc are C-bound after 9, 4 and 4 controlled cases. Terminal tick 0x5e8008 and its deadline, voice-input and elapsed-record children are C-bound after 96, 252, 24 and 160 controlled cases. Terminal status FSM 0x5e7b74 and its exact 4160-byte dispatch table at 0x650430 are C-bound after 775 controlled cases. This exposes 50 distinct action callback targets, of which ten actions are now C-bound: two ASR actions after 54 controlled cases, two exit actions after 108 controlled cases, two payload actions after 48 controlled cases query-dismiss action after 160 controlled cases status action with its two payload helpers after 72 controlled cases and two reset actions after 32 controlled cases, with notification-restore, LVGL scroll and fade-out children C-bound after 24, 18 and 300 controlled cases; the two FSM name lookups are C-bound after 2048 controlled cases with source-owned RAM pointer slots at 0x20003ea4 and 0x20003edc, while the other 21 callback bodies and name RAM initialization remain open. Reset mode 0x5eae2c and display 0x5e4c84 are C-bound after 31 controlled cases; mode-set wrapper 0x5eae1e and event emitter 0x5eadd4 are C-bound after 25 and 144 controlled cases. Event type 4 child 0x5ea9f6 and its list-reset child 0x5ea7dc are C-bound after 12 and 48 controlled cases. Default event child 0x5eaad4 and its input selector, input application and view refresh children are C-bound after 96, 36, 36 and 48 controlled cases; its offset recomputation child is C-bound after 128 controlled cases; resource pointer and ring item lookup are C-bound after 120 controlled cases using the existing Terminal-data RAM owner; view-position child 0x5ea926, view-index child 0x5ea8ce and position-index search 0x5ea868 are C-bound after 144, 84 and 330 controlled cases; view-select child 0x5ea810 and row-update child 0x5ea768 are C-bound after 240 and 320 controlled cases; row LVGL flag, clear-flag and position calls reuse existing C-bound providers through three ABI adapters; item-height child 0x5ea67a is C-bound after 96 controlled cases using the existing 0x200746dc font-pointer cell; spacing child 0x5ea2c2 and row text/image binding 0x5ea564 are C-bound after 8 and 128 controlled cases; sixteen of the nineteen row-binding child imports reuse existing C-bound stock-address providers through ABI adapters; Terminal image-y 0x5ea2b0, row-color 0x5ea2f2 and row-image 0x5ea524 children are C-bound after 600 controlled cases; image-hint 0x5ea4f0 is C-bound after 216 controlled cases; event type-two 0x5eabde and its last-record 0x597350 and rollover 0x5eab8e children are C-bound after 288 and 48 controlled cases; type-three indexed event 0x5eaca0 is C-bound after 2048 controlled cases; reset prelude 0x5e51ba, ancillary reset 0x5e65f8 and voice-timeout preclear 0x5e7f26 are C-bound after 156, 32 and 96 controlled cases, with audio-manager app release 0x54f50e C-bound after 560 controlled cases; reset subtree 0x5ea342 and its style/image-Y children are C-bound after 48 and 23 controlled cases, with both stock image descriptors, 1341 image bytes and the 68-byte welcome text source-owned; query restore 0x5e6620, its return-to-input action 0x5e57c6 and image-set child 0x5e47fe are C-bound after 320, 96 and 12 controlled cases; display-status 0x44ea04 reuses the existing C-bound scroll-to-Y provider after a fresh 80-case stock oracle; four Terminal disconnect FSM actions 0x5e522e, 0x5e52c2, 0x5e5320 and 0x5e53b8 are C-bound after 512 stock comparisons with their 256-byte icon and texts source-owned; processing-response action 0x5e583c and event-34 routing action 0x5e54a2 are C-bound after 96 and 336 stock comparisons; BLE display-request action 0x5e576c is C-bound after 336 comparisons while its prepare child remains open and fallback reuses the C-bound current-session index; packed event-word action 0x5e63b4 is C-bound after 48 stock comparisons; paired scroll/status actions 0x5e6dd0 and 0x5e6e30 are C-bound after 320 stock comparisons, with notification parent 0x5ec190 C-bound after 120 stock comparisons and its layout child 0x5ebc9e and overlay-focus publication 0x5e5498/0x5cf134 C-bound after 480 comparisons each; interrupt-confirm scroll 0x5e6cb8 and its toggle child 0x5ec73c are C-bound after 1920 cases, with the list-style and indicator-layout child 0x5ec3c0/0x5ec34e C-bound after 1536 cases; interrupt-confirm-show action 0x5e6b18 is C-bound after 192 cases while its UI constructor 0x5ec446 remains open; interrupt-confirm-cancel action 0x5e6ba0 is C-bound after 192 cases with its cleanup child already source-owned; new-session success action 0x5ed870 is C-bound after 192 cases through its existing event, reset, cleanup and input-return providers; query-notification switch-result action 0x5e68dc is C-bound after 384 cases through its existing restore-query provider; paired query-scroll actions 0x5e6e88/0x5e6f60 are C-bound after 960 cases, with their query-layout child 0x5ebb96 C-bound after 64 cases; item-style child 0x5eb3c6 and its count provider 0x5eb30c are C-bound after 444 cases, with indicator child 0x5eb322 and font offset 0x5eb2ee C-bound after 487 cases; session-list scroll action 0x5ed492 is C-bound after 384 cases and its selection, count, validity and object-lookup subtree 0x5ecc1a/0x5eca48/0x5eca64/0x5ecb52 after 626 cases; session focus 0x5ecbea, ListFocus wrapper 0x5e5490 and protobuf encoder 0x5cf0ba are C-bound after 360 cases, direct-apply 0x5ecb88 after 192 cases and row-style 0x5ecb08 after 42 cases; list-animation elapsed 0x5893f0, timeout poll 0x5893fe and queue add 0x5896fc are C-bound after 304 cases; queue processor 0x58956e and completion callback 0x58949e are C-bound after 312 controlled cases; new-object preparation 0x5894d6 is C-bound after 384 controlled cases; old/new button fade start children 0x58c6c4/0x58c622 are C-bound after 600 controlled cases; their Bezier path 0x450688 is C-bound after 15 controlled cases; row show/hide walkers 0x5897ee/0x589892 and LVGL class ancestry 0x43e2d4 are C-bound after 140 and 30 controlled cases; image class record 0x756108 is source-owned with exact fixed words and five relocations; image constructor/destroyer 0x498bd0/0x498c6c are C-bound after 84 cases; button fade callback 0x58c230 and recursive body 0x58c138 are C-bound after 168 cases; image event 0x498c9c and click-area 0x4408b0 are C-bound after 432 and 36 stock comparisons; image draw 0x498ec0 is C-bound after 220 stock comparisons; image opacity/radius accessors 0x498634/0x49865e are C-bound after 90 cases; descriptor initializer 0x452a34 is C-bound after 216 stock comparisons; its four exposed style getters are C-bound after 180 stock comparisons; draw scheduler 0x488a38 is C-bound after 168 controlled stock comparisons; it reuses five existing C lower providers; allocation-failure trap, real decoder/renderer effects and final placement remain open; decoder-info helper 0x488f6a and source-type/zero children were already C-bound in the prior image-header chain; Terminal label-text alias for 0x49942e is C-bound after 48 forwarding cases using the existing stock-compared label provider; formatted label 0x49954c is C-bound after 36 variadic stock comparisons and exposes lower formatter 0x489ad2 while real formatter effects remain open; null fatal branches are independently stock-compared in the five-case label fatal-path oracle; lower two-pass formatted text allocator 0x489ad2 is C-bound after 60 stock comparisons through the existing C-owned vsnprintf provider, with allocation-failure trap stock-compared by the five-case label fatal-path oracle and real formatter effects remaining open; Terminal clear-flag alias for stock 0x43dfa4 is C-bound after 48 forwarding cases using the existing C provider; five more Terminal LVGL object ABI aliases are C-bound after 135 forwarding cases through existing stock-address providers; four LVGL animimage setters/start 0x597ea6/0x597ee0/0x597f10/0x597f52 are C-bound after 68 controlled stock cases including null-object assertions, with animation lower effects and final placement open; query-notification-show FSM action 0x5e6548 is C-bound after 200 stock comparisons including enabled logging, exposing counter getter 0x5973dc and query visibility 0x5ec82a; counter getter 0x5973dc is C-bound after 7 direct stock comparisons through the existing source-owned TD-state provider, while query visibility remains open; 0x20000032 is the confirmed encoded 50 percent image pivot; interrupt-confirm defer-query action 0x5e6d58 is C-bound after 192 stock comparisons including enabled logging, with its output-style 24-byte startup pointer table and six image descriptors/1536 pixel bytes now C-owned; final source-resource linker relocation remains open; row resource placement and lower effects remain open; selector and refresh reuse existing C-bound LVGL object-y and object-height providers. Payload control-flags child 0x5e4a6e is C-bound after 240 controlled cases, and elapsed-text child 0x5e48b8 is C-bound after 36 cases; output-start child 0x5e4920 is C-bound after 25 controlled cases; processing-object child 0x5e4878 and processing-state clear child 0x5ea30c are C-bound after 5 and 12 controlled cases; elapsed-refresh child 0x5e4902 and its fallback clear 0x5e4894 are C-bound after 48 and 4 controlled cases; the elapsed counter uses an existing C-owned provider. Set-output child 0x5e49b0 is C-bound after 100 controlled cases; three of its four exposed RAM cells are source-owned at 0x20074a94 and 0x2007502c-0x2007502d; label-style child 0x5e482a is C-bound after 16 controlled cases; output-mode selector/hash and exact ten-phrase table are C-bound after 240 controlled cases; style runtime writes, animation and LVGL lower-call effects remain. The three exposed teardown service children are C-bound after 24 controlled cases; the event call 0x5e5484 and its display-state protobuf encoder are C-bound after 48 controlled cases, while a 0x2a0-byte state-base import remains; exact RAM ownership, lower effects and final placement are open. Cyclic or malformed LVGL trees and concurrent mutation remain open. Enabled callback logging remains open. The thirteen terminal event-name pointer slots are C-owned at the observed RAM address, but runtime initialization and strings remain open. The fault lookup provider covers all 195 matchable stock codes, but 152 overrun matches use absolute stock pointer values whose relocation and validity as strings remain open. The tracepoint slave file-list handler is C-bound after 6480 logging-disabled stock comparisons. Its nanopb, copy and send lower-call effects and enabled logging remain open. Tracepoint file-list-ready has the stock four-byte section extent in the relocatable chain, while its original one-byte provider declaration still needs a from-stage rebuild. The exposed MessageNotify callback, startup state writer, frame decoder, three validators and four encoders are C-bound, with no audio_message_notify_* imports remaining. Frame enabled logging, real nanopb/BLE child effects, CRC cache initialization and source-owned packet/state final RAM placement remain open. The exposed EvenAI display-control, ANCC clear/sync, callback-list display and state packet branches are C-bound. The app-acquire path through state, count, setup, queue facade, hardware descriptor and index helpers is C-bound. The bounded app, first-hardware, audio-thread and ANCC contexts still need final RAM placement, and lower-call side effects plus callback-list concurrency remain open. The text-stream dispatch, begin, finish, schedule and timer callback have C-bound decisions, while lower-call side effects and concurrency remain open. The dominant-hand subtree has C-bound handlers and descendants, need source ownership or attributed external contracts; advertising logging branches and final RAM placement remain outside their bounded oracles. Onboarding event packet, state and sequence RAM and silent-mode showing-UI RAM need final placement. HUB threshold double arithmetic remains controlled in the bounded oracle because Unicorn M-class rejects it.",
+        "132 current imports; all five function slots in the 44-byte accessed locale dispatch RAM extent at 0x200044c0 are C-relocated. The two character conversion leaves pass 534 direct stock comparisons, three classification leaves pass 801 direct comparisons, their two C wrappers pass 534 comparisons, and five indirect slots pass 80 cases. Two data pointer fields, full native allocation, runtime mutation and final placement remain open. The font configuration loader function/data symbol collision is corrected through the current Main partial link, with two seven-word initialized RAM objects and all 801 receipt-linked replay stages. The 104-byte settings RAM extent is preserved. Full native font allocations, startup copy and final RAM placement remain open. Both four-entry display ring descriptor tables at 0x20002c48 and 0x20002c78 match the official initialized low-RAM record and have isolated C placement. Final startup copy, pointer relocation and complete RAM layout remain open. Four PDM handle rows at 0x200718c8 and two PDM handle pointer cells at 0x2007454c/0x20074550 have C-owned reservations with isolated placement and bounded acquire/init comparisons. Initialization and full lifetime remain open. I2S base configuration and DMA descriptor selected extents at 0x20000000 and 0x20000740 match the official low-RAM startup record. Original full configuration allocation, float configure paths, startup copy and physical DMA effects remain open. The alternate and production PDM configuration/descriptor objects at 0x20000900..0x2000094f match the official low-RAM startup record and have 210 controlled configure/start/init comparisons. Final startup copy and physical DMA behavior remain open. Nine codec clock pin words at 0x20000114..0x20000137 match the official low-RAM startup record byte-for-byte and pass a 20-case clock-enable oracle. Final C startup copy and RAM layout remain open. The BLE vendor delay provider emits the exact six Thumb bytes decoded from the official ITCM record for 0x40 and has isolated placement plus 16 call-boundary comparisons. Boot copy, executable placement and physical timing remain open. The 27-word voltage route table at 0x2005665c has a C-owned reservation backed by the current 120-case callback oracle and archived source-hash-matched producer/ITCM receipts. Real calibration values, startup order and exact producer rebuild remain open. Two 100-byte codec I2S handle rows at 0x20071114 have a C-owned reservation and isolated placement check after 32 stock acquire comparisons. Pool initialization and full handle lifetime remain open. Codec power-state byte at 0x20074fb6 and I2S handle at 0x2007450c have C-owned reservations and isolated placement checks, after 56-case power and 21-case I2S initializer comparisons. Their startup state and final RAM map remain open. Codec shared enable mask at 0x2007436c has a four-byte C-owned reservation and isolated placement proof after the codec GPIO oracle. Startup value remains open. Codec watchdog timer at 0x20074a98 has a four-byte C-owned reservation and isolated placement proof after 42 controlled watchdog-start cases. Timer creation and startup value remain open. LittleFS context at 0x20071ac8 has a 128-byte C-owned reservation sized from the pinned upstream lfs_t and an isolated placement proof. Final configuration, startup and complete RAM map remain open. Ring-connect RX buffer at 0x2010f4cc has a 0x850-byte C-owned reservation ending at the separately C-owned state byte at 0x2010fd1c. Final RAM placement and initialization remain open. The combined Terminal/ring RAM archive has replayed all 444 post-tail C stages and 239 later receipt-linked stages through the current RX-frame branch, leaving 164 imports. Terminal RX frame parser 0x5ce990 is C-bound after 40 controlled stock comparisons across decode/null, duplicate timeout, wrap and enabled logging. Its last-tick RAM cell is C-owned but final 0x20074874 placement remains open. Query-reply FSM action 0x5e69a0 and its packet sender 0x5ced38 are C-bound after 360 and 30 controlled stock comparisons, including packet fields, sequence wrap, UI state cells and enabled logging. Query-notification activation FSM action 0x5e66d8 is C-bound after 480 controlled stock comparisons across no-target, current, unavailable and switch-request paths with enabled logging. Session-id-change FSM action 0x5e5580 is C-bound after 640 controlled stock comparisons across blocked, notification activation, dispatch and enabled logging paths. Session-list selector action 0x5ed4f8 is C-bound after 1440 controlled stock comparisons across all four command modes, active/valid gates and enabled logging. Session-switch request packet encoder 0x5cee8c is C-bound after 90 controlled stock comparisons of its eight-byte payload, sequence wrap and enabled logging. Pending selector prompt 0x5ece4c is C-bound after 15 controlled stock comparisons across the four-widget gate and pending flag. New-session request packet encoder 0x5cef14 is C-bound after 60 controlled stock comparisons, including sequence wrap and enabled logging. Selector command-byte and TD host-counter leaves are C-bound after 20 direct stock comparisons, preparing action 0x5ed4f8. Session-switch result action 0x5ed758 and its event/root-hide leaves are C-bound after 540 and 10 controlled stock comparisons. Session-list update action 0x5ed318 is C-bound after 480 controlled stock comparisons across payload bits, deferred/rebuild paths and logging. New-session-failure action 0x5ed8e0 is C-bound after 120 controlled stock comparisons including enabled logging. Session-list selector rebuild 0x5ecef6 is C-bound after 60 controlled stock comparisons; its two leaf helpers are C-bound after 44 comparisons. Selector row factory 0x5ecd06 and icon choice 0x5eccc2 are C-bound after 45 and 40 controlled stock comparisons with exact source-owned 16x16 icon pixels. New-session-cancel packet encoder is C-bound after 15 controlled stock comparisons. Session-list-show FSM action and two small children are C-bound after 256 and 16 controlled stock comparisons, exposing cancellation sender and selector rebuild; TD flag-B setter is C-bound after 20 full-state stock comparisons. Query constructor and its two style helpers are C-bound after 48 and 32 controlled stock comparisons. Query hit-count, height and two style getters are C-bound after 1920 and 384 controlled stock comparisons; query constructor remains exposed. Query-show FSM action and its hit-test facade are C-bound after 840 and 72 controlled stock comparisons; the constructor and hit-count children are newly exposed. Agent-done FSM action is C-bound after 75 controlled stock comparisons. Session-status FSM action is C-bound after 1920 controlled stock comparisons. Agent-interrupt FSM action and its one-byte packet encoder are C-bound after 25 and 15 controlled stock comparisons. Agent-reset FSM action is C-bound after 75 controlled stock comparisons. ASR-failure FSM action is C-bound after 75 controlled stock comparisons. Input-cancel FSM action is C-bound after 150 controlled stock comparisons. Input-confirm FSM action and its two TD children are C-bound after 25, 216 and 60 controlled stock comparisons. Terminal result-area constructor 0x5ebff8 is C-bound after 48 controlled cases, with exact source-owned 16x16 icon bytes. Terminal voice-stop action and processing-label helper are C-bound after 100 and four controlled stock comparisons. ASR-final action and timeout-stop helper are C-bound after 150 and 15 controlled comparisons; Terminal query session-name lookup, visibility constructor, two LVGL style wrappers and root constructor are C-bound after 120, 32, 48 and 30 controlled cases, with exact source-owned icon bytes. Terminal voice-start action and timeout child are C-bound after 25 and 24 controlled cases with exact source-owned voice icon. Voice-prepare constructor, five style wrappers, animimage class/factory, constructor and frame callback are C-bound after 16, 80, 3, 12 and 36 controlled cases. The stock scatter-executed 19-frame voice style table at RAM 0x200014e8 and its exact 4864 pixel bytes are C-owned with a bounded placement fragment; complete main scatter/linker integration remains open. LVGL effects and final object graph remain open. Terminal UI callback, exit-sync, teardown, result-area cleanup and timer/object cleanup are C-bound after 224, 16, 9, 12 and 27 controlled stock comparisons. LVGL object membership 0x43e2ea and recursive descendant 0x43ee54 are C-bound after 144 and 60 controlled cases. List animation deinit 0x5896b4 is C-bound after four controlled cases with its 0xd0-byte state at observed RAM 0x20070ea8. Terminal timer clear 0x5e7ec4 is C-bound after four controlled cases with its 0x18-byte state at observed RAM 0x20073c38. Terminal UI start 0x5e716c, its list animation initializer 0x58966c and theme wrapper 0x5e47cc are C-bound after 9, 4 and 4 controlled cases. Terminal tick 0x5e8008 and its deadline, voice-input and elapsed-record children are C-bound after 96, 252, 24 and 160 controlled cases. Terminal status FSM 0x5e7b74 and its exact 4160-byte dispatch table at 0x650430 are C-bound after 775 controlled cases. This exposes 50 distinct action callback targets, of which ten actions are now C-bound: two ASR actions after 54 controlled cases, two exit actions after 108 controlled cases, two payload actions after 48 controlled cases query-dismiss action after 160 controlled cases status action with its two payload helpers after 72 controlled cases and two reset actions after 32 controlled cases, with notification-restore, LVGL scroll and fade-out children C-bound after 24, 18 and 300 controlled cases; the two FSM name lookups are C-bound after 2048 controlled cases with source-owned RAM pointer slots at 0x20003ea4 and 0x20003edc, while the other 21 callback bodies and name RAM initialization remain open. Reset mode 0x5eae2c and display 0x5e4c84 are C-bound after 31 controlled cases; mode-set wrapper 0x5eae1e and event emitter 0x5eadd4 are C-bound after 25 and 144 controlled cases. Event type 4 child 0x5ea9f6 and its list-reset child 0x5ea7dc are C-bound after 12 and 48 controlled cases. Default event child 0x5eaad4 and its input selector, input application and view refresh children are C-bound after 96, 36, 36 and 48 controlled cases; its offset recomputation child is C-bound after 128 controlled cases; resource pointer and ring item lookup are C-bound after 120 controlled cases using the existing Terminal-data RAM owner; view-position child 0x5ea926, view-index child 0x5ea8ce and position-index search 0x5ea868 are C-bound after 144, 84 and 330 controlled cases; view-select child 0x5ea810 and row-update child 0x5ea768 are C-bound after 240 and 320 controlled cases; row LVGL flag, clear-flag and position calls reuse existing C-bound providers through three ABI adapters; item-height child 0x5ea67a is C-bound after 96 controlled cases using the existing 0x200746dc font-pointer cell; spacing child 0x5ea2c2 and row text/image binding 0x5ea564 are C-bound after 8 and 128 controlled cases; sixteen of the nineteen row-binding child imports reuse existing C-bound stock-address providers through ABI adapters; Terminal image-y 0x5ea2b0, row-color 0x5ea2f2 and row-image 0x5ea524 children are C-bound after 600 controlled cases; image-hint 0x5ea4f0 is C-bound after 216 controlled cases; event type-two 0x5eabde and its last-record 0x597350 and rollover 0x5eab8e children are C-bound after 288 and 48 controlled cases; type-three indexed event 0x5eaca0 is C-bound after 2048 controlled cases; reset prelude 0x5e51ba, ancillary reset 0x5e65f8 and voice-timeout preclear 0x5e7f26 are C-bound after 156, 32 and 96 controlled cases, with audio-manager app release 0x54f50e C-bound after 560 controlled cases; reset subtree 0x5ea342 and its style/image-Y children are C-bound after 48 and 23 controlled cases, with both stock image descriptors, 1341 image bytes and the 68-byte welcome text source-owned; query restore 0x5e6620, its return-to-input action 0x5e57c6 and image-set child 0x5e47fe are C-bound after 320, 96 and 12 controlled cases; display-status 0x44ea04 reuses the existing C-bound scroll-to-Y provider after a fresh 80-case stock oracle; four Terminal disconnect FSM actions 0x5e522e, 0x5e52c2, 0x5e5320 and 0x5e53b8 are C-bound after 512 stock comparisons with their 256-byte icon and texts source-owned; processing-response action 0x5e583c and event-34 routing action 0x5e54a2 are C-bound after 96 and 336 stock comparisons; BLE display-request action 0x5e576c is C-bound after 336 comparisons while its prepare child remains open and fallback reuses the C-bound current-session index; packed event-word action 0x5e63b4 is C-bound after 48 stock comparisons; paired scroll/status actions 0x5e6dd0 and 0x5e6e30 are C-bound after 320 stock comparisons, with notification parent 0x5ec190 C-bound after 120 stock comparisons and its layout child 0x5ebc9e and overlay-focus publication 0x5e5498/0x5cf134 C-bound after 480 comparisons each; interrupt-confirm scroll 0x5e6cb8 and its toggle child 0x5ec73c are C-bound after 1920 cases, with the list-style and indicator-layout child 0x5ec3c0/0x5ec34e C-bound after 1536 cases; interrupt-confirm-show action 0x5e6b18 is C-bound after 192 cases while its UI constructor 0x5ec446 remains open; interrupt-confirm-cancel action 0x5e6ba0 is C-bound after 192 cases with its cleanup child already source-owned; new-session success action 0x5ed870 is C-bound after 192 cases through its existing event, reset, cleanup and input-return providers; query-notification switch-result action 0x5e68dc is C-bound after 384 cases through its existing restore-query provider; paired query-scroll actions 0x5e6e88/0x5e6f60 are C-bound after 960 cases, with their query-layout child 0x5ebb96 C-bound after 64 cases; item-style child 0x5eb3c6 and its count provider 0x5eb30c are C-bound after 444 cases, with indicator child 0x5eb322 and font offset 0x5eb2ee C-bound after 487 cases; session-list scroll action 0x5ed492 is C-bound after 384 cases and its selection, count, validity and object-lookup subtree 0x5ecc1a/0x5eca48/0x5eca64/0x5ecb52 after 626 cases; session focus 0x5ecbea, ListFocus wrapper 0x5e5490 and protobuf encoder 0x5cf0ba are C-bound after 360 cases, direct-apply 0x5ecb88 after 192 cases and row-style 0x5ecb08 after 42 cases; list-animation elapsed 0x5893f0, timeout poll 0x5893fe and queue add 0x5896fc are C-bound after 304 cases; queue processor 0x58956e and completion callback 0x58949e are C-bound after 312 controlled cases; new-object preparation 0x5894d6 is C-bound after 384 controlled cases; old/new button fade start children 0x58c6c4/0x58c622 are C-bound after 600 controlled cases; their Bezier path 0x450688 is C-bound after 15 controlled cases; row show/hide walkers 0x5897ee/0x589892 and LVGL class ancestry 0x43e2d4 are C-bound after 140 and 30 controlled cases; image class record 0x756108 is source-owned with exact fixed words and five relocations; image constructor/destroyer 0x498bd0/0x498c6c are C-bound after 84 cases; button fade callback 0x58c230 and recursive body 0x58c138 are C-bound after 168 cases; image event 0x498c9c and click-area 0x4408b0 are C-bound after 432 and 36 stock comparisons; image draw 0x498ec0 is C-bound after 220 stock comparisons; image opacity/radius accessors 0x498634/0x49865e are C-bound after 90 cases; descriptor initializer 0x452a34 is C-bound after 216 stock comparisons; its four exposed style getters are C-bound after 180 stock comparisons; draw scheduler 0x488a38 is C-bound after 168 controlled stock comparisons; it reuses five existing C lower providers; allocation-failure trap, real decoder/renderer effects and final placement remain open; decoder-info helper 0x488f6a and source-type/zero children were already C-bound in the prior image-header chain; Terminal label-text alias for 0x49942e is C-bound after 48 forwarding cases using the existing stock-compared label provider; formatted label 0x49954c is C-bound after 36 variadic stock comparisons and exposes lower formatter 0x489ad2 while real formatter effects remain open; null fatal branches are independently stock-compared in the five-case label fatal-path oracle; lower two-pass formatted text allocator 0x489ad2 is C-bound after 60 stock comparisons through the existing C-owned vsnprintf provider, with allocation-failure trap stock-compared by the five-case label fatal-path oracle and real formatter effects remaining open; Terminal clear-flag alias for stock 0x43dfa4 is C-bound after 48 forwarding cases using the existing C provider; five more Terminal LVGL object ABI aliases are C-bound after 135 forwarding cases through existing stock-address providers; four LVGL animimage setters/start 0x597ea6/0x597ee0/0x597f10/0x597f52 are C-bound after 68 controlled stock cases including null-object assertions, with animation lower effects and final placement open; query-notification-show FSM action 0x5e6548 is C-bound after 200 stock comparisons including enabled logging, exposing counter getter 0x5973dc and query visibility 0x5ec82a; counter getter 0x5973dc is C-bound after 7 direct stock comparisons through the existing source-owned TD-state provider, while query visibility remains open; 0x20000032 is the confirmed encoded 50 percent image pivot; interrupt-confirm defer-query action 0x5e6d58 is C-bound after 192 stock comparisons including enabled logging, with its output-style 24-byte startup pointer table and six image descriptors/1536 pixel bytes now C-owned; final source-resource linker relocation remains open; row resource placement and lower effects remain open; selector and refresh reuse existing C-bound LVGL object-y and object-height providers. Payload control-flags child 0x5e4a6e is C-bound after 240 controlled cases, and elapsed-text child 0x5e48b8 is C-bound after 36 cases; output-start child 0x5e4920 is C-bound after 25 controlled cases; processing-object child 0x5e4878 and processing-state clear child 0x5ea30c are C-bound after 5 and 12 controlled cases; elapsed-refresh child 0x5e4902 and its fallback clear 0x5e4894 are C-bound after 48 and 4 controlled cases; the elapsed counter uses an existing C-owned provider. Set-output child 0x5e49b0 is C-bound after 100 controlled cases; three of its four exposed RAM cells are source-owned at 0x20074a94 and 0x2007502c-0x2007502d; label-style child 0x5e482a is C-bound after 16 controlled cases; output-mode selector/hash and exact ten-phrase table are C-bound after 240 controlled cases; style runtime writes, animation and LVGL lower-call effects remain. The three exposed teardown service children are C-bound after 24 controlled cases; the event call 0x5e5484 and its display-state protobuf encoder are C-bound after 48 controlled cases, while the 0x2a0-byte state-base and ten field aliases are C-owned; exact RAM ownership, lower effects and final placement are open. Cyclic or malformed LVGL trees and concurrent mutation remain open. Enabled callback logging remains open. The thirteen terminal event-name pointer slots are C-owned at the observed RAM address, but runtime initialization and strings remain open. The fault lookup provider covers all 195 matchable stock codes, but 152 overrun matches use absolute stock pointer values whose relocation and validity as strings remain open. The tracepoint slave file-list handler is C-bound after 6480 logging-disabled stock comparisons. Its nanopb, copy and send lower-call effects and enabled logging remain open. Tracepoint file-list-ready has the stock four-byte section extent in the relocatable chain, while its original one-byte provider declaration still needs a from-stage rebuild. The exposed MessageNotify callback, startup state writer, frame decoder, three validators and four encoders are C-bound, with no audio_message_notify_* imports remaining. Frame enabled logging, real nanopb/BLE child effects, CRC cache initialization and source-owned packet/state final RAM placement remain open. The exposed EvenAI display-control, ANCC clear/sync, callback-list display and state packet branches are C-bound. The app-acquire path through state, count, setup, queue facade, hardware descriptor and index helpers is C-bound. The bounded app, first-hardware, audio-thread and ANCC contexts still need final RAM placement, and lower-call side effects plus callback-list concurrency remain open. The text-stream dispatch, begin, finish, schedule and timer callback have C-bound decisions, while lower-call side effects and concurrency remain open. The dominant-hand subtree has C-bound handlers and descendants, need source ownership or attributed external contracts; advertising logging branches and final RAM placement remain outside their bounded oracles. Onboarding event packet, state and sequence RAM and silent-mode showing-UI RAM need final placement. HUB threshold double arithmetic remains controlled in the bounded oracle because Unicorn M-class rejects it.",
         "All eight DM dispatch entries and the exposed security children now have C bodies; whole-image source and placement remain open.",
         "DM storage is a 196-byte bounded C-owned block with a registry alias; full allocation extent and final RAM placement remain open.",
         "Gray and production-test UI registry contexts each have only an observed eight-byte C reservation; full allocation extent, initialization and final RAM placement remain open.",
@@ -2074,8 +2214,1554 @@
         "Text-stream set-text 0x552c20 matches stock in 288 controlled five-argument validation, append/replace, capacity, dispatch and return cases. It is C-bound; four helper routines are now explicit imports. Helper effects and malformed inputs remain open.",
         "Text-stream validation 0x5533cc and next-interval 0x5532f8 match stock in 120 controlled mode/string and signed-arithmetic cases. They are C-bound; restart and dispatch remain unresolved.",
         "Text-stream restart 0x552db2 matches stock in 64 signed-length, mutex, timer and state-byte cases and is C-bound. Dispatch remains unresolved; timer and mutex effects remain external.",
-        "Complete data/startup/layout and physical execution remain unproved."
-      ]
+        "Complete data/startup/layout and physical execution remain unproved.",
+        "Logger task-context wrappers at 0x44ab14 and 0x44ab1c now have connected C bodies and eight stock/C non-null path comparisons. The null-TCB interrupt-mask/fault branch and broader date/time logger behavior remain open.",
+        "Logger time string at 0x44aaa8 now has a C outer body with three native/C call-frame cases. The native date record's first formatted word is at provider offset 12; source uses offsets 12..32. Final 28-byte output-buffer placement remains open.",
+        "Logger datetime outer path at 0x44a19a now reuses source-owned snapshot, epoch and timezone logic with five native/C call-order and signed-zone cases. RTC hardware and final layout remain unproved.",
+        "Seconds-to-calendar 0x449fda now has C for seven assigned record fields with 39 native/C boundary and clock-mode cases. Native also copies three stack words it does not initialize; their full-byte equivalence and final RAM layout remain open.",
+        "PDM pin cells 0x2007421c/0x20074220 now have an eight-byte C-owned NOLOAD span and 15 native/C clock-call cases; their runtime writer and values, final RAM collision checks and hardware behavior remain open.",
+        "Audio dispatch state and audio control context now alias one C-owned 16-byte record with native queue +12 and task +8 offsets. The alias closes one import; final 0x20003f98 RAM placement, startup writer and complete object extent remain open.",
+        "FlashDB print sink and board display callback now alias the same C-owned four-byte cell at stock RAM 0x200742f0. Final RAM placement and callback installation remain open; print buffer and formatter remain separate lower contracts.",
+        "The generic invalid-input assertion boundary now aliases the C-owned scheduler fatal-store body, closing one import. Individual callers' diagnostic prefixes and invalid branches are not comprehensively compared; the invalid-address write is unexecuted.",
+        "GX8002 receive scratch at 0x2007397c now has a C-owned 30-byte NOLOAD span, matching the selected receive capacity and ending before the adjacent TX packet base. Runtime UART behavior, full allocation extent and whole-image RAM collision checks remain open.",
+        "GX8002 TX scratch at 0x2007399c now has a C-owned nominal 30-byte NOLOAD span and preserves the adjacent 30-byte RX placement. Five native constructor cases confirm that a 16-bit declared-length wrap can request a 65535-byte copy while reporting a 17-byte packet; arbitrary-input correctness remains open.",
+        "The pinned SDK default and adjacent dump-buffer base support a C-owned 1024-byte stdio print buffer at 0x2006b930. A combined linker script restores PDM pin placement and checks six fixed RAM sections for mutual overlap. Formatter capacity, other RAM allocations, startup initialization and hardware behavior remain open.",
+        "UART instance detailed-error logging now aliases the selected extended logger at the same ARM call ABI. Prior 16 original/source UART wrapper cases are reused; logger product state, full formatting and output remain open.",
+        "Extended logger, WSF assert and display fatal paths now share the C-owned four-byte callback cell at 0x2007456c. The callback installer, actual target and all fatal continuations remain open.",
+        "REA/Ghidra found 32 direct references to fatal callback RAM 0x2007456c, all reads. The installer is still unlocated; indirect writes, startup data movement and unanalyzed code remain possible.",
+        "SyncInfo common-data callback 0x472102 is integrated as C and passes 40 bounded native/C cases. Its command child is covered by the subsequent response-handler integration; the protobuf descriptor remains an import.",
+        "SyncInfo inquiry-response handler 0x471ee8 is integrated as C and passes 80 bounded native/C cases. Its descriptor is covered by the subsequent authenticated descriptor integration.",
+        "SyncInfo two-node nanopb descriptor graph is C-owned with six stock-matched data spans and five authenticated pointer edges. Arbitrary protobuf behavior and full payload coverage remain unverified.",
+        "SyncInfo Notify 0x471fa4 is C-owned and passes 25 bounded native/C cases. Allocator, BLE runtime, arbitrary protobuf data and full payload coverage remain separate gates.",
+        "Conversate common-data callback 0x5b0476 and success-tick helper 0x5b03c2 are C-owned with 80 and 16 bounded native/C cases. Their deeper receive/handler/response/enter functions and two RAM objects remain explicit; leave is covered by the subsequent mutex-unlock integration.",
+        "Conversate mutex-unlock 0x5b0284 is C-owned with 30 bounded native/C cases and a fixed 0x20074398 handle cell. Remaining Conversate children and full payload remain open.",
+        "Conversate action-lock 0x5b01ca and mutex initializer 0x5b0120 are C-owned with 60 and 20 bounded native/C cases. Conversate receive, handler and two RAM objects remain; response is covered by the subsequent encoder and descriptor integration.",
+        "Conversate response encoder 0x5b200e passes 120 bounded native/C cases, and its 15-node protobuf descriptor graph has stock-matched fields and 44 pointer edges. Conversate receive and two RAM objects remain; the handler is covered by the subsequent integration.",
+        "Conversate data handler 0x5b08a2 passes 160 bounded native/C routes, including the unsupported subtype fallthrough. Main remains at 122 unresolved imports because dispatcher 0x5b4904 is newly exposed; receive and two RAM objects remain.",
+        "Conversate receive 0x5b1b4c passes 303 bounded native/C cases, including decode failure and duplicate timing. Two observed RAM cells are fixed in the relocatable candidate. Deeper dispatcher and nanopb/logging lowers remain.",
+        "Conversate dispatcher 0x5b4904 passes 160 bounded native/C cases and exposes ten action bodies, event-name lookup and machine-context RAM. The newly exposed action frontier raises current Main imports to 132.",
+        "Conversate event-name helper 0x5b48f8 passes 18 bounded native/C cases. Its RAM pointer table at 0x200004f4 is now an explicit import; contents and startup initializer remain unauthenticated.",
+        "Conversate app-pause action 0x5b4cc8 passes 14 bounded native/C cases and closes one action import. Nine action bodies remain in this dispatch table.",
+        "Conversate app-resume action 0x5b4d10 passes 28 bounded native/C cases. Page show/hide lowers are newly exposed; eight action bodies remain in this dispatch table.",
+        "Conversate app-config action 0x5b4dba passes 40 bounded native/C cases. Config apply/report lowers are newly exposed; seven action bodies remain in this dispatch table.",
+        "Conversate app-close action 0x5b4e98 passes 90 bounded native/C cases, including role-dependent descriptor send. Six action bodies remain in this dispatch table.",
+        "Conversate heartbeat action 0x5b55b4 passes 55 bounded native/C cases. UI state getter/name lowers are newly exposed; five action bodies remain in this dispatch table.",
+        "Conversate UI-state getter/name helpers pass 28 bounded native/C cases. Their RAM byte and seven-entry pointer table are covered by the next authenticated table integration.",
+        "Main low-RAM decoder authenticates all 13 Conversate event names and seven UI-state names. C-owned fixed RAM tables have 20 pointer relocations and close three imports; whole-image startup relocation remains open.",
+        "Conversate transcribe-data action 0x5b5428 passes 40 bounded native/C cases. Transcribe-update lower is newly exposed; four action bodies remain in this dispatch table.",
+        "Conversate prep-note packet action 0x5b52e0 passes 35 bounded native/C cases. Packet update/finish lowers are newly exposed; three action bodies remain in this dispatch table.",
+        "Conversate prep-note list action 0x5b5150 passes 45 bounded native/C cases. List-update and enter-loading lowers are newly exposed; two action bodies remain in this dispatch table.",
+        "Conversate tag-data action 0x5b4f72 passes 45 bounded native/C cases. Tag-store lower is newly exposed; one action body remains in this dispatch table.",
+        "All ten Conversate dispatcher actions have bounded C bodies. App-open 0x5b4a90 passes 50 native/C cases; lower providers and broader Main coverage remain.",
+        "Conversate tag-storage initializer 0x59619e passes 20 native/C cases and owns its 12-byte RAM state. Other lower providers, startup initialization and broader Main coverage remain.",
+        "Conversate prep-note update 0x5b43ee passes 35 native/C cases and owns the overlapping RAM span. Startup initialization and broader Main coverage remain.",
+        "Conversate tag insertion 0x596360 passes 35 native/C cases. Node creation/allocation and broader Main coverage remain.",
+        "Conversate tag-node creation 0x5960c2 passes 20 native/C cases. Protobuf-to-node conversion and broader Main coverage remain.",
+        "Conversate protobuf-to-node conversion 0x595f4c passes 40 native/C cases. Allocator behavior and broader Main coverage remain.",
+        "Composed Conversate tag-store replay passes nine stock/C cases through action, add, node creation and conversion. Helper behavior and whole Main image remain open.",
+        "Conversate UI settings update 0x5b133c passes 30 native/C cases and sources adjacent UI/machine RAM cells. Startup initialization and whole Main coverage remain.",
+        "Composed Conversate app-config replay passes seven stock/C cases through config copy and UI settings update. Startup and whole Main image remain open.",
+        "Conversate prep-note finish-byte accessor 0x5b476a matches seven direct stock/C cases. Wider prep-note and Main coverage remain.",
+        "Conversate prep-note list update 0x5b4378 passes 20 native/C cases and sources its adjacent reply/list RAM. Startup and wider Main behavior remain.",
+        "Conversate prep-note packet update 0x5b44d8 passes 55 bounded stock/C cases. Its text commit lower 0x5b4164 and wider Main behavior remain.",
+        "Conversate prep-note layout-rebuild guard 0x5b4164 passes 35 bounded stock/C cases. Layout parse 0x5b4000 and wider Main behavior remain.",
+        "Conversate prep-note line layout 0x5b4000 passes 45 bounded stock/C cases. Line measurement 0x5b3f94 and wider Main behavior remain.",
+        "Conversate prep-note line measurement 0x5b3f94 passes 84 bounded stock/C cases and pins the ring font cell. UTF-8 fallback 0x5b3ef8 and wider Main behavior remain.",
+        "Conversate prep-note UTF-8 prefix 0x5b3ef8 passes 117 direct stock/C cases and removes its import. Startup and wider Main behavior remain.",
+        "Conversate transcribe ring update 0x5b41be passes 26 bounded stock/C cases with source-owned ring-adjacent scratch, length and flag RAM. Startup and wider Main behavior remain.",
+        "Conversate start-request selection 0x5b57ac passes 35 bounded stock/C cases. Request construction 0x5b1f2e and wider Main behavior remain.",
+        "Conversate prep-note selection encoder 0x5b1f2e passes 120 bounded stock/C cases and removes its import. Startup and wider Main behavior remain.",
+        "Conversate acquire/release calls bind directly to existing C audio-manager bodies at native 0x54f380 and 0x54f50e. Underlying provider and wider Main gates remain.",
+        "Conversate decoded-message context 0x200d5bd8..0x200d6b83 is C-owned and contiguous with reply-status RAM; its common callback passes 80 bounded stock/C cases. Startup and full lifetime remain open.",
+        "Six Conversate data clear/accessor leaves pass 60 direct stock/C cases and are linked. Wider callback composition and startup remain open.",
+        "Conversate UI callback owns the observed eight-byte registry-context prefix and two four-byte tick/app cells. Full context allocation and startup remain open.",
+        "Conversate UI event callback passes 210 bounded stock/C cases and is linked; eight child providers are now explicit imports. Incidental return register and wider composition remain open.",
+        "Conversate heartbeat stop/check passes 90 bounded stock/C cases and is linked; seven UI event child providers remain open.",
+        "Conversate UI cleanup wrapper passes 16 bounded stock/C cases and is linked; three lower cleanup providers are newly explicit.",
+        "Native Conversate UI deinit 0x5b156c passes 15 bounded stock/C cases over the full observed 0xac-byte clear and is linked. Child 0x5b3d04, wider callback composition and allocation beyond that clear remain open.",
+        "Conversate timer-manager deinit 0x5b3d04 passes 20 bounded stock/C cases and is linked; remove 0x5b36be and clear 0x5b38cc are now explicit lower contracts.",
+        "Conversate timer-manager clear 0x5b38cc passes five direct stock/C RAM comparisons and is linked with a 0x1c-byte pinned RAM section. Timer removal and full timer-manager extent remain open.",
+        "Conversate timer callback dispatch 0x5b36be passes 80 bounded stock/C cases and is linked with its six-pointer source table at 0x75ea90. Six callback bodies and wider timer lifecycle remain open.",
+        "Conversate timer loading/selection stop wrappers pass six direct stock/C cases and are linked. Shared stop helper 0x5b35d0 and four callback bodies remain open.",
+        "Shared Conversate timer stop 0x5b35d0 passes 60 direct stock/C cases and is linked. Four timer table callback bodies and composed lifecycle remain open.",
+        "Conversate auto-extend timer stop 0x5b38b6 passes five direct stock/C cases and is linked. Three timer start callback bodies remain open.",
+        "All three Conversate timer start callbacks pass 180 direct stock/C cases and are linked. Shared timer start 0x5b3570 and composed lifecycle remain open.",
+        "Shared Conversate timer start 0x5b3570 passes 600 direct stock/C cases and is linked. Timer table branch has no unresolved callback/start/stop bodies; wider lifecycle and image gates remain open.",
+        "Conversate UI initialization 0x5b14ce passes 45 bounded stock/C cases and is linked. Style 0x5b0ac4, timer-manager init 0x5b3cba and wider UI composition remain open.",
+        "Conversate timer-manager init 0x5b3cba passes 60 composed stock/C cases with its clear leaf and is linked. UI style 0x5b0ac4 and wider UI composition remain open.",
+        "Conversate UI style 0x5b0ac4 passes 27 direct stock/C cases and is linked. UI startup's direct children are source-linked; wider UI composition and image gates remain open.",
+        "Conversate UI cancel/minute-update 0x5b23ae passes 105 direct stock/C cases and is linked. Wider UI composition and image gates remain open.",
+        "Conversate cleanup timer predicate 0x5b3628 passes 240 stock/C boundary cases and is now linked with the loading-timeout callback. Other cleanup callers remain open.",
+        "Conversate loading-timeout callback 0x5b38ee passes 1080 stock/C cases with its timer predicate and is linked. Cleanup flush and commit callbacks and image gates remain open.",
+        "Conversate selection-timeout callback 0x5b39b4 passes 540 stock/C cases with its timer predicate and is linked. Cleanup commit and image gates remain open.",
+        "Conversate auto-extend callback 0x5b3a88 passes 2592 stock/C cases with its timer predicate and is linked. All three direct cleanup callbacks are now linked, while wider UI and image gates remain open.",
+        "Conversate display report 0x5b02e4 passes 900 stock/C cases; UI event-name lookup 0x5b16fc passes 261 synthetic-table stock/C cases. Both are linked, but the 21-entry RAM table at 0x20000560 and its initializer remain unauthenticated; one import replaces one import.",
+        "The stock payload contains 21 unique CONVERSATE_UI_EVENT names, matching lookup capacity. Their RAM index order and initializer remain unauthenticated, so the table import remains open.",
+        "Conversate UI action dispatcher 0x5b1724 indexes a stock ROM matrix at 0x686920: seven 21-event rows, 50 populated handler slots. Its handler bodies and source-owned route representation remain open.",
+        "Conversate UI action dispatcher 0x5b1724 passes 1440 stock/C cases with controlled routes and is linked. The source-owned route matrix and state-transition helper are new direct dependencies; current Main imports rise from 120 to 121.",
+        "Conversate timer transition wrapper 0x5b3d86 and its three predicate/scan helpers pass 1215 stock/C cases; the six native rule rows are source-owned and linked. UI action route ownership remains open, while Main returns to 120 imports.",
+        "Conversate UI action matrix is source-owned C and resolves byte-for-byte to stock's 1176-byte table when native handler addresses are bound. Its 26 distinct handler bodies are now explicit imports; Main imports rise to 145 until they are reconstructed.",
+        "Conversate route handlers 0x5b34a0 and 0x5b34b4 pass 256 stock/C cases and are linked. Their direct scroll/release children replace the two route imports; total Main imports stay at 145.",
+        "Conversate release child 0x58c84e passes 20 stock/C cases and is linked. Its three direct children are explicit imports; Main has 147 current imports.",
+        "Conversate pre-release child 0x58c836 passes 64 stock/C cases and is linked. Its pair dispatcher binds to the existing LVGL C provider; its getter remains an import, leaving Main at 147 imports.",
+        "Conversate release-pair getter 0x597f82 passes 20 stock/C cases and is linked. Its fatal logger strings and invalid-address fault match stock; those strings are source-owned. Main has 146 imports.",
+        "Conversate release cleanup 0x597ee0 passes 20 stock/C cases through the existing source-owned animimage start provider, including fatal logger strings and invalid-address fault. Main has 145 imports.",
+        "Conversate release property setter 0x597f52 passes 12 stock/C cases through the existing source-owned animimage provider. Its write at handle+0xa0, fatal logger strings, and invalid-address fault match stock. Main has 144 imports.",
+        "Conversate UI routes 0x5b5ed2 and 0x5b5ef6 pass 288 stock/C cases and link to existing child-get and scroll-to-Y providers. Main imports fall from 144 to 142; remaining route handlers stay open.",
+        "Conversate previous-item UI route 0x5b5b96 passes 128 stock/C cases and links to existing reply getter, child lookup and animation scheduler. Main has 141 imports; other route handlers remain open.",
+        "Conversate saved/network-error UI route 0x5b1a14 passes 180 stock/C cases with source-owned keys and existing locale helpers. Its message-sender child 0x58bfb2 replaces the route import, leaving Main at 141 imports.",
+        "Conversate disconnect/saved UI route 0x5b1998 passes 384 stock/C cases with source-owned keys and existing role/display/locale helpers. Its sender child was already an import, reducing Main from 141 to 140 imports.",
+        "Conversate exit-prompt sender 0x58bfb2 passes 360 stock/C cases with source-owned strings and RAM cells. Prompt prepare/show children replace the sender import, raising Main from 140 to 141 imports. Final RAM placement remains open.",
+        "Conversate foreground-app preparation 0x58bda8 passes 120 stock/C cases and links through existing role, app-query, log and display-stop providers. Main returns to 140 imports; prompt show remains open.",
+        "Conversate exit-prompt step-one display 0x58bf12 passes 160 stock/C cases through existing LVGL providers. Step-two fade callback replaces the show import, leaving Main at 140 imports.",
+        "Conversate exit-prompt step-two callback 0x58bebc passes 40 stock/C cases with source-owned log strings. Fade scheduler and step-three callback replace the step-two import, raising Main to 141 imports.",
+        "Conversate exit-prompt completion callback 0x58be1a passes 180 stock/C cases, including optional app close and RAM clear. Main returns to 140 imports; fade scheduler 0x58c516 remains open.",
+        "Fade scheduler 0x58c516 passes 320 stock/C cases including descriptor fields and log branches. The exit-prompt callback chain is now source-linked; Main has 139 remaining imports.",
+        "Conversate close timer label 0x5b68d6 passes 64 stock/C cases for object validity, localization, and return status. Main has 138 remaining imports.",
+        "Conversate note collapse route 0x5b7556 passes 32 stock/C cases; its animation scheduler and completion callback replace the route import.",
+        "Conversate note collapse completion 0x5b7518 passes 24 stock/C cases; LVGL asynchronous delete 0x44d90e and scheduler 0x5b7704 remain open.",
+        "LVGL async object delete entry 0x44d90e passes 12 stock/C call-boundary cases; its queue helper replaces the import.",
+        "LVGL async queue 0x484014 and timer repeat setter 0x4645ac pass 19 stock/C cases. Main returns to 138 imports; Conversate expand scheduler 0x5b7704 remains open.",
+        "Conversate expand scheduler 0x5b7704 and four update callbacks pass 336 stock/C cases across validity, logging and animation descriptor branches. Main has 137 remaining imports.",
+        "Conversate prep-note line count, scroll maximum, clamp and route pass 2220 stock/C cases; Main has 136 remaining imports.",
+        "Conversate content-ready route, prep-note refresh and style helper pass 540 stock/C cases; pool bind and show remain open, leaving Main with 137 imports.",
+        "Conversate prep-note pool bind and scrollbar show pass 244 stock/C cases; indexed line text is the newly exposed child, leaving Main with 136 imports.",
+        "Conversate indexed prep-note line text passes 180 stock/C cases across metadata, trimming and bounded copy; Main has 135 imports.",
+        "Conversate transcribe-label route passes 120 stock/C cases across child lookup, text, scroll and log branches; Main has 134 imports.",
+        "Conversate main-page unselect passes 80 stock/C cases; its three child helpers are exposed and Main has 136 imports.",
+        "Conversate tag-head reset passes 45 stock/C cases across storage and log branches; Main has 135 imports.",
+        "Conversate list count and main-page oldest-tag deletion pass 328 stock/C cases; Main has 134 imports.",
+        "Conversate list-view mode mapping, immediate apply and mode setter pass 2186 stock/C cases; alpha and fade children are exposed and Main has 135 imports.",
+        "Conversate list-slot opacity callback, direct alpha and fade scheduler pass 576 stock/C cases; Main has 133 imports.",
+        "Conversate main-page scroll-up passes 320 stock/C cases; Main has 132 imports.",
+        "Conversate main-page scroll-down passes 1920 stock/C cases; bounce animation remains its exposed child and Main has 132 imports.",
+        "Bounce play and stop pass 675 stock/C cases; the two animation callbacks and final bounce state placement remain open. Main has 133 imports.",
+        "Bounce phase-1 and phase-2 callbacks pass 240 stock/C cases; callback Y setters are source-backed and final bounce state placement remains open. Main has 131 imports.",
+        "Conversate main-page selection passes 80 stock/C cases; Main has 130 imports.",
+        "Conversate main-list constructor passes 9 stock/C cases; its display-main-page caller at 0x5b2d64 remains open.",
+        "Conversate list layout refresh passes 48 stock/C cases; display-main-page caller at 0x5b2d64 remains open.",
+        "Conversate display style quartet passes 27 stock/C cases; display-main-page caller at 0x5b2d64 remains open.",
+        "Conversate pre-notes animation passes 16 stock/C cases; its six-frame RAM pointer array at 0x20000bf4 needs source ownership. Main has 131 imports.",
+        "Conversate prep-notes button factory passes 40 stock/C cases; display-main-page caller at 0x5b2d64 remains open.",
+        "Conversate display-main-page route passes 160 stock/C cases; its callback, title/icon data and one LVGL provider are exposed. Main has 134 imports.",
+        "Display animation completion and LVGL label rule pass 16 stock/C cases; title/icon data and six-frame RAM array remain open. Main has 132 imports.",
+        "Conversate prep icon descriptor, 576 pixel bytes and title cell match stock source data; the six-frame RAM pointer array at 0x20000bf4 remains open. Main has 130 imports.",
+        "Conversate six-frame RAM table, ROM descriptors and 2400 pixel bytes match authenticated startup and payload data. Main has 129 imports.",
+        "Conversate 21 UI event-name pointers and string bytes match authenticated startup and ROM data. Main has 128 imports.",
+        "Eight 157-pointer locale RAM tables and 1034 distinct ROM strings now have verified relocatable C ownership. Main has 120 imports; final placement and runtime locale use remain open.",
+        "Conversate menu scroll-down route 0x5b5bf0 passes 128 direct stock/C cases; called helpers and logging remain bounded lower contracts. Main has 119 imports.",
+        "Conversate recursive child style clear 0x5b3340 passes 96 direct stock/C cases and is linked for route 0x5b3398. Main remains at 119 imports.",
+        "Conversate display-config route 0x5b3398 and list-button setter 0x5b1072 pass 224 combined direct stock/C cases; Main has 118 imports.",
+        "Exact stock RAM allocation, final placement, oversized snprintf return behavior, called lower contracts, other Main imports, whole-image source and hardware behavior remain open.",
+        "Menu route 0x5b58e8 and its command sender 0x5b1e52 still need source ownership; other Main imports, exact placement, whole-image source and hardware behavior remain open.",
+        "Menu prep-note request sender 0x5b1e52 needs source ownership; called lower contracts, other Main imports, exact placement, whole-image source and hardware behavior remain open.",
+        "Nanopb encode, BLE sender and role lookup are bounded lower contracts; other Main imports, exact placement, whole-image source and hardware behavior remain open.",
+        "Exact final ROM placement, enclosing menu route and hardware rendering remain open.",
+        "LVGL, locale, list getter and button factory are bounded lower contracts; other Main imports, exact placement, whole-image source and hardware behavior remain open.",
+        "Tag-update route 0x5b6426 and its other helpers remain open; other Main imports, exact placement, whole-image source and hardware behavior remain open.",
+        "Tag-update route 0x5b6426 and further tag helpers remain open; LVGL, logging, other Main imports, exact placement, whole-image source and hardware behavior remain open.",
+        "Tag lookup 0x5964e2, icon mapping 0x5b0af6 and LVGL page positioning 0x44daca need source ownership; other Main imports, exact placement, whole-image source and hardware behavior remain open.",
+        "Tag lookup 0x5964e2 and LVGL positioning 0x44daca remain open; final initialized RAM placement and adjacent icon-table words, other Main imports, whole-image source and hardware behavior remain open.",
+        "LVGL positioning 0x44daca remains the tag-update route's unresolved lower provider; other Main imports, exact placement, whole-image source and hardware behavior remain open.",
+        "Null and fatal LVGL child-move branches remain bounded by stock disassembly; other Main imports, exact placement, whole-image source and hardware behavior remain open.",
+        "Tag-node cleanup providers are linked, but the list-exit caller at 0x59624e remains unresolved; other Main imports, exact placement, whole-image source and hardware behavior remain open.",
+        "Conversate tag storage exit is checked for initialized and finite valid circular lists; malformed list behavior, other Main imports, exact placement, whole-image source and hardware behavior remain open.",
+        "Conversate notify framing is checked under controlled nanopb, role and BLE lower contracts; other Main imports, exact placement, whole-image source and hardware behavior remain open.",
+        "Calendar and elapsed-label fields are checked under controlled formatter and LVGL lower contracts; whole-image linker integration, other Main imports, whole-image source and hardware behavior remain open.",
+        "The isolated NOLOAD slot is exact; whole-image linker integration, other Main imports and hardware behavior remain open.",
+        "Foreground registry selection is checked for bounded rows with controlled callback and PageManager enqueue contracts; exact RAM placement, other Main imports, whole-image source and hardware behavior remain open.",
+        "Layer MMIO and pin grouping match emulated stock paths with controlled mux/critical lower calls; board electrical behavior, other Main imports, whole-image source and hardware behavior remain open.",
+        "LVGL draw-buffer initialization matches non-null stock fixtures under controlled stride, align and logging contracts; null fatal path, other Main imports, whole-image source and hardware behavior remain open.",
+        "Display constructor matches 32 successful stock fixtures under controlled callees; its refresh callback at 0x45360c, allocation-failure behavior, remaining Main imports, whole-image source and hardware behavior remain open.",
+        "LVGL refresh callback matches 128 stock/C fixtures under controlled lower calls; nested collect/layout/render passes at 0x45377a, 0x45383c, 0x4539b6, other Main imports, whole-image source and hardware behavior remain open.",
+        "Refresh-area coalescing matches 300 stock/C cases; layout/render passes, remaining Main imports, whole-image source and hardware behavior remain open.",
+        "Pre-refresh hook matches 12 stock/C callback and event cases; layout caller, other Main imports, whole-image source and hardware behavior remain open.",
+        "Area subtraction matches 1000 stock/C rectangle cases; layout caller, other Main imports, whole-image source and hardware behavior remain open.",
+        "LVGL list insertion matches 14 stock/C fixtures under controlled allocation; layout caller, other Main imports, whole-image source and hardware behavior remain open.",
+        "Refresh layout matches 256 stock/C fixtures under controlled subtraction, allocation, event, copy and free callees; multi-node initial lists, render pass, other Main imports, whole-image source and hardware behavior remain open.",
+        "Refresh render loop matches 480 stock/C fixtures under controlled lower calls; render-area, flush and chunk-height bodies, other Main imports, whole-image source and hardware behavior remain open.",
+        "Refresh chunk-height selector matches 1296 stock/C cases under controlled stride, event and logging callees; render-area/flush bodies, other Main imports, whole-image source and hardware behavior remain open.",
+        "LVGL display flush and callback bridge match 192 stock/C cases under controlled lower calls; render-area body, other Main imports, whole-image source and hardware behavior remain open.",
+        "Reshape call frames and failure log match stock; deliberate fault loop, refresh-area body, other Main imports, whole-image source and hardware behavior remain open.",
+        "Refresh-area scheduling and allocation assertion log match stock under controlled lower calls. Render layer 0x453e10, layer init 0x4847c4, wait 0x484622, other Main imports, whole-image source and hardware behavior remain open.",
+        "Render-thread wait argument matches stock under controlled synchronization. Render layer 0x453e10, layer init 0x4847c4, other Main imports, whole-image source and hardware behavior remain open.",
+        "Layer base initialization, display-list insertion and null assertion log match stock under controlled lower calls. Render layer 0x453e10, other Main imports, whole-image source and hardware behavior remain open.",
+        "Render-layer ordering, alpha clear call frames and reset assertion log match stock under controlled lower calls. Cover finder 0x453f2e, object-chain renderer 0x453fce, other Main imports, whole-image source and hardware behavior remain open.",
+        "Cover-finder early exits and two-child reverse recursion match stock under controlled lower calls. Object-chain renderer 0x453fce, deeper trees, other Main imports, whole-image source and hardware behavior remain open.",
+        "Object-chain ancestor sibling and event ordering match stock under controlled lower calls. Draw-object body 0x4541b6, deeper hierarchies, other Main imports, whole-image source and hardware behavior remain open.",
+        "Render-area type and clipping branches plus cover event match stock under controlled lower calls. Draw-object 0x4541b6 and three newly exposed geometry providers, other Main imports, whole-image source and hardware behavior remain open.",
+        "Area overlap and extra draw-size getter match direct stock instructions. Area adjust transform 0x440494, draw-object 0x4541b6, other Main imports, whole-image source and hardware behavior remain open.",
+        "Area-adjust alias and existing C owner match stock under controlled parent/clip calls. Draw-object 0x4541b6, other Main imports, whole-image source and hardware behavior remain open.",
+        "Fourteen draw-object style/color leaf providers match stock under controlled lower calls. Draw-object 0x4541b6 task assembly, other Main imports, whole-image source and hardware behavior remain open.",
+        "Draw-object direct and tiled branches match stock in 15 controlled cases. Three new layer/redraw imports and other Main imports remain; whole-image source and hardware behavior are open.",
+        "Layer create matches stock in 40 controlled success/failure cases. Allocator and initializer are existing candidate providers; draw-layer, object-redraw and other Main imports remain open.",
+        "Layer drawing matches stock in 64 controlled cases. Object redraw and other Main imports remain; whole-image source and hardware behavior are open.",
+        "Object redraw matches stock in 56 controlled cases. Two mask helpers and other Main imports remain; whole-image source and hardware behavior are open.",
+        "Mask descriptor initializer matches stock in 32 controlled cases. Mask task construction and other Main imports remain open.",
+        "Mask rectangle task matches stock in 32 controlled cases. The draw-object dependency chain is now internally linked; other Main imports, whole-image source and hardware behavior remain open.",
+        "The LVGL heap pool fixed SRAM cell is source-bound at stock address 0x20000338. Heap initialization and physical RAM placement still require whole-image link and hardware evidence; other Main imports remain.",
+        "Two source-owned ATT no-op dispatch tables match eight stock pointers and four BX LR bodies. Other BLE tables, callbacks and Main imports remain; whole-image source and hardware behavior are open.",
+        "Three Cordio ATT interface tables match stock pointer order and pinned upstream initializers. Eleven callback bodies are now explicit imports; other Main imports, whole-image source and hardware behavior remain open.",
+        "Three ATT control callbacks match stock in 30 controlled cases. Their three pending-indication/write helpers and other Main imports remain open.",
+        "The ATTS pending callback matches stock for 120 valid-ABI cases; other ATT and Main imports remain open.",
+        "The ATT client pending write callback matches stock for 48 valid-ABI cases; other ATT and Main imports remain open.",
+        "The ATT server message dispatcher matches stock for 24 controlled cases; its database-hash-update callee remains open. ATT control-block RAM placement remains an independent gate.",
+        "The ATT server database-hash-update handler matches stock for 12 controlled cases; attribute lookup and write providers remain open. ATT RAM placement remains an independent gate.",
+        "The ATT server attribute writer matches stock for 48 controlled cases; UUID range lookup and other Main imports remain open.",
+        "The ATT server UUID search and comparator match stock for 360 and 12 controlled cases; 16-to-128 conversion remains open.",
+        "The ATT 16-to-128 UUID conversion matches stock for 18 controlled cases; other Main imports and final RAM placement remain open.",
+        "The ATT indication message callback matches stock for 64 controlled cases; three lower helpers and other Main imports remain open.",
+        "The ATT encoded connection-slot decoder matches stock for 261 direct cases; indication pending and setup helpers remain open.",
+        "The ATTS pending indication/notification check matches stock for 54 bounded cases; message setup and other Main imports remain open.",
+        "The ATTS setup path matches stock for 48 controlled cases; ATT config-pointer RAM ownership and other Main imports remain open.",
+        "The ATT config-pointer initial word matches authenticated startup scatter; final RAM placement, target lifetime and other Main imports remain open.",
+        "The ATTS CCB queue cleanup matches stock for 16 controlled cases; its parent connection callback and final RAM placement remain open.",
+        "The ATTS idle timer setup matches stock for 36 controlled cases; its parent connection callback and final RAM placement remain open.",
+        "Four Cordio DM connection action tables match stock pointer order; ten action bodies and final ROM placement remain open.",
+        "Four DM connection actions match stock call boundaries; six table actions, lower providers, and final ROM placement remain open.",
+        "Nine DM connection actions match stock call boundaries; one slave update action, lower providers, and final ROM placement remain open.",
+        "All ten DM table action bodies match bounded stock call behavior; lower providers and final ROM placement remain open.",
+        "HCI LE feature mask and connection-cancel bodies are C-owned; command transport, controller-state placement and broader DM lower providers remain gated.",
+        "HCI LE connection-update command buffer matches bounded stock behavior; lower command transport and remaining DM/L2CAP providers remain gated.",
+        "DM update callback event layout matches bounded stock behavior; callback lifecycle and final RAM placement remain gated.",
+        "Cordio dmConnOpen matches bounded stock call and argument behavior; scan PHY and HCI create connection lower providers remain open.",
+        "Cordio scan PHY index helper and wrapper match stock input/output mappings; HCI create connection and other lower providers remain open.",
+        "HCI LE create-connection packet matches bounded stock behavior; command transport and remaining DM/L2CAP providers remain gated.",
+        "L2CAP connection-update request state and packet match bounded stock behavior; remaining DM advertising and product providers remain open.",
+        "Directed-advertising connected/failed logging, timer, privacy, and state changes match bounded stock behavior; start/stop directed advertising and final RAM placement remain open.",
+        "Directed-advertising stop logging, state transition, and disable command match bounded stock behavior; directed start and final RAM placement remain open.",
+        "Directed-advertising start logging, enable command, and peer-state writes match bounded stock behavior; final RAM placement and remaining ATT/product providers remain open.",
+        "ATT client CCB handle lookup matches bounded stock behavior; pending indication-confirm caller and final RAM placement remain open.",
+        "ATT client indication-confirm diagnostic and packet paths match bounded stock behavior; remaining ATT callbacks and final RAM placement remain open.",
+        "ATT client data dispatch matches bounded stock behavior; three downstream ATT procedures, other callbacks, and final RAM placement remain open.",
+        "ATT multiple-variable notification event and control paths match bounded stock behavior; other ATT procedures and final RAM placement remain open.",
+        "ATT indication/notification event and confirmation paths match bounded stock behavior; ATT response processing and final RAM placement remain open.",
+        "ATT response dispatch matches bounded stock behavior; twelve child providers, malformed method-17 edge, and final RAM placement remain open.",
+        "Three ATT response leaf handlers match stock state effects; remaining ATT procedures and final RAM placement remain open.",
+        "ATT error response and queued-packet free match bounded stock effects; remaining ATT handlers and final RAM placement remain open.",
+        "ATT MTU response arguments match bounded stock behavior; HCI ACL-length and negotiated-MTU setters remain imports.",
+        "HCI maximum RX ACL length accessor matches bounded stock behavior; negotiated ATT MTU setter remains an import.",
+        "Negotiated ATT MTU update and callback match bounded stock behavior; final placement and hardware runtime remain open.",
+        "ATT prepare-write response state and event adjustments match stock; other ATT request handlers remain open.",
+        "ATT request setup copies and sender handoff match bounded stock behavior; request sender and other ATT handlers remain open.",
+        "ATT request send-table dispatch matches bounded stock behavior; five child send routines and final placement remain open.",
+        "ATT simple request timer and L2CAP handoff match bounded stock behavior; four child send routines remain open.",
+        "One-slot pending write-command storage matches bounded stock behavior; its sender caller remains open.",
+        "ATT write-command callback and pending-slot routing match bounded stock behavior; three child send routines remain open.",
+        "Find By Type and Read Long response state paths match bounded stock behavior; Find or Read and three child send routines remain open.",
+        "Continuing ATT request send paths match bounded stock behavior; request-clear helper and two child send routines remain open.",
+        "ATT request-clear helper and callback path match bounded stock behavior; remaining ATT response and send child routines remain open.",
+        "ATT Find/Read response parser matches bounded stock behavior; remaining ATT sender and unrelated Main routines remain open.",
+        "ATT Prepare Write sender matches bounded stock behavior; remaining ATT MTU sender and unrelated Main routines remain open.",
+        "ATT MTU sender and warning trace match bounded stock behavior; ATT connection/message dispatch and unrelated Main routines remain open.",
+        "ATT client message callback and pending Write Command slot match bounded stock behavior; stock timeout dispatch differs from pinned upstream and other Main handlers remain open.",
+        "ATT client connection callback matches bounded stock behavior for valid connection IDs 1-2; invalid-ID diagnostic and remaining server/Main handlers remain open.",
+        "ATT server data dispatcher matches bounded stock opcode, length, client-state and error paths; server CCB lookup, CSF state gate and source-owned process table are now explicit child gates.",
+        "ATT server handle-to-CCB lookup matches bounded stock pointer behavior; CSF gate and process table still gate server data dispatch.",
+        "ATT server CSF client-state gate matches bounded stock behavior; mutable process table and server connection handlers remain open.",
+        "ATT server connection callback matches bounded stock close and indication paths for valid IDs; DM idle-mask accessor is an explicit child, invalid-ID diagnostic remains open.",
+        "DM connection idle-mask accessor matches bounded stock behavior; ATT server indication connection handler and mutable process table remain open.",
+        "ATT indication connection handler matches bounded stock behavior for valid connection IDs; invalid-ID diagnostic and mutable ATT process table remain open.",
+        "Whitelist C storage provides the first 0x100 RAM bytes used by the 35-case native oracle. Stock capacity, startup initializer, and placement at 0x20054718 remain unverified; this is not a complete product data reconstruction.",
+        "The stock UART configuration RAM object at 0x20000d9c has no authenticated extent or initialization bytes; this prefix compilation does not rebind the previously linked Main candidate.",
+        "C RAM backing supplies a 16-byte provisional object for the 13-byte observed UART config prefix. Stock object extent, initialization bytes and placement at 0x20000d9c remain unknown. The earlier Main driver/reset objects have not been rebound to their refined sources.",
+        "Verify exact function bounds and behavior before implementing any callback; avoid EvenHub SDK owner candidates.",
+        "Case sync data handler matches 85 bounded stock cases. Three lower product handlers are now explicit imports; their behavior, broader packet coverage and physical Case transport remain open.",
+        "Case force-out flag handler matches 75 bounded stock cases and shares the existing 0x20075012 cell with Case status. Four lower product calls remain explicit imports; their source and hardware effects remain open.",
+        "Case display refresh matched 27 bounded stock predicate combinations; underlying graphics actions and physical display behavior remain separately gated.",
+        "Case nonce state updater matches 75 bounded stock cases. Persistent four-byte RAM cell 0x200036d8 now requires source ownership, initialization and final placement.",
+        "Case notification sender matches 60 bounded stock packet/log/send cases. Three product status getters and the send routine 0x510dec are now explicit imports; actual transport remains untested.",
+        "Three Case status getters match 81 bounded stock cases. SOC and charge C cells are provisional source-owned RAM at 0x2007418c/8d; stock startup values and final placement remain open. Lid getter shares existing 0x2007418e cell.",
+        "Case nanopb sender matches 135 bounded stock null/success/failure cases. Two product buffers, a magic cell and protobuf descriptor are now explicit data imports; startup values, final placement and physical BLE delivery remain open.",
+        "C backing matches observed minimum extents for Case nanopb frame/output/magic. Stock startup values, final RAM placement and descriptor 0x77793c remain unverified.",
+        "Two-node Case nanopb descriptor graph matches authenticated stock field words and pointers. Final ROM layout, full encode behavior and physical delivery remain open.",
+        "Case reconnect matches 400 bounded stock cases. The lower reconnect attempt at 0x4a316c and source ownership for two RAM state bytes remain unresolved.",
+        "Two one-byte stock Case reconnect cells have C storage; final linker placement, startup initialization and external mutations remain unresolved.",
+        "BLE reconnect policy matches 156 bounded stock cases. Its lower connected predicate at 0x4a22c6 and final state/startup contracts remain open.",
+        "BLE connected predicate matches all 256 possible context-byte values. Master context allocation and pointer startup remain separate contracts.",
+        "Case sync response matches 1280 bounded stock cases. Four raw peer status bytes at 0x20074188 and in-case side effect 0x5130a6 remain.",
+        "Four stock Case peer bytes have C storage. Final linker placement, adjacent cell layout and startup initialization remain open.",
+        "Case in-case wrapper matches its 12-byte stock input record. Lower input queue and final hardware behavior remain separate contracts.",
+        "Case nanopb RX dispatch matches 1008 bounded stock cases. Decoded info handler, response encoder, and 10-byte RX frame storage remain at this stage.",
+        "Ten-byte stock Case RX frame has C storage; final RAM placement, adjacency to TX frame and startup initialization remain open.",
+        "Case info RX child matches 40 bounded stock cases. Response encoder 0x510c70 remains.",
+        "Case response encoder and three local status getters match 360 bounded stock cases. Whole-image RAM placement, startup and BLE transport remain open.",
+        "Case nonce state now has stock-matched initialized C bytes. Final linker address, startup copy order, mutations beyond the bounded updater and hardware behavior remain open.",
+        "Cordio ATTS table row order and stock initialized words are source-backed. Thirteen handler bodies are now explicit imports; whole-image relocation/startup remain open.",
+        "Thirteen tracked Cordio ATTS handler bodies compile and link. Their stock behavioral and ABI equivalence is not established; 115 Main imports and whole-image startup/relocation remain.",
+        "Two ATT UUID imports resolve to tracked Cordio constants. Exact stock addresses and complete Main relocation/startup remain unverified.",
+        "Four ATT CSF imports resolve to a compiled Cordio file. Its three lower-level dependencies were already in the Main frontier; stock behavior and whole-image startup/relocation remain.",
+        "Eight ATT core imports resolve to tracked Cordio source, with four prior Main providers retaining precedence. Lower-level imports were already present in the frontier; stock ABI/behavior and whole-image gates remain.",
+        "Cordio ATT server core compiles and uses the stock-word-matched procedure table symbol. The tracked source differs behaviorally from the downloaded Ambiq variant; stock ABI/behavior and whole-image gates remain.",
+        "Three queue imports resolve to tracked Cordio queue source; prior Count/Enq providers retain precedence. Vendor FreeRTOS queue variant and stock behavioral equivalence remain unverified, as do whole-image gates.",
+        "ATT config and RAM pointer exactly match authenticated stock bytes. Whole-image relocation and remaining 96 Main imports remain.",
+        "Cordio DM idle and HCI maximum RX ACL API names delegate to bounded stock-oracled providers. Whole-image ABI, layout, startup and remaining imports stay open.",
+        "All eight bytes and Cordio appMasterCfg_t field meanings are source-owned and stock matched. Whole-image placement and hardware behavior remain unproven.",
+        "Eight complete radio-stack row storage extents compile as BSS. Stock pointer and adjacent daemon-stack boundary agree; startup zeroing, final placement and whole-image behavior remain unproven.",
+        "Registration records and ATTS state now share one C-owned BSS allocation at the authenticated native base. Final absolute RAM placement, startup zeroing and whole-image behavior remain open.",
+        "Two complete PCM registration row extents compile as BSS, adjacent to the known timer state. Initializer, final RAM placement, concurrent lifetime and whole-image behavior remain open.",
+        "OTA route context now aliases the existing DM handler state; bounded stock comparison confirms its handler byte at offset 12. Final RAM placement, startup and whole-image behavior remain open.",
+        "The one-byte Cordio slave connMax config is source-owned and matches authenticated ROM. Final placement, adjacent product data ownership and whole-image behavior remain open.",
+        "Slave connection-info and mode-context names share the same C-owned pointer cell at native 0x20074330. Final absolute RAM placement, runtime pointer lifetime and whole-image gates remain.",
+        "Clock-reset entry and helper match 120 bounded stock cases under modeled peripheral readiness. Absolute placement, unmodeled provider behavior, startup composition and device behavior remain unproven.",
+        "The C callback registration table/flags match 168 bounded stock cases and the adapter binds its startup name. Selected function-pointer targets remain stock addresses; their complete C bodies, absolute placement, startup composition and device behavior remain open.",
+        "The full settings sync dispatcher C body matches 1200 bounded stock cases. Left-version update and version-only send are new explicit unresolved child imports; peer delivery, persistence, absolute placement and whole-image behavior remain open.",
+        "Both version child bodies match 60 bounded stock cases and resolve the dispatcher imports. Peer transport, status notification, logging children, absolute placement and whole-image behavior remain gated.",
+        "The dispatcher and both version children compose across 2400 stock/C cases. Lower level send, notification, logging and copy services remain controlled, and final layout and device behavior are unproven.",
+        "The Cordio ATT write-command C body matches 60 bounded stock allocation, frame and send cases. The ring dispatcher that calls it remains unresolved; real ATT transport, final placement and device behavior remain open.",
+        "The ring token, CCCD enable, receive and message dispatcher C bodies match 5760 bounded stock cases. ATT, event-loop, ring-task, logging and DM lower children were controlled; full runtime and image gates remain.",
+        "All three bounded 16-byte connection-parameter profile records are source-owned and stock-byte matched. The APP_ConnectParamHandler dispatcher and its children still need C bodies and composition checks; final placement and hardware behavior remain open.",
+        "An exact-name scan of current g2/components C global function bodies found no prewritten provider for the 83 remaining imports. The ring client dispatcher and ATT write-command body are now compiled; other aliases, data objects and generated sources still require separate checks, as do whole-image gates.",
+        "Level 5 reads the adjacent font-record word, not a sixth string pointer. Preserve native layout or establish a proven correction before binding the import; runtime use of level 5 is unverified."
+      ],
+      "prior_candidate_134_imports": {
+        "path": "g2/build/c-firmware/20261016/main-locale-five-current-replay/801-final-final-main-ring-descriptor-data-20002c48.o",
+        "sha256": "b9181409a5519140b1816b2f47e9a3caa48de686332ca0b4586f42beb69b21b4"
+      },
+      "log_task_context_c": {
+        "path": "g2/build/c-firmware/20261016/main-log-task-context/receipt.json",
+        "sha256": "ec219fd90f7016b1aa8c810f643f5c133457dd9e8277376a54e376fb0b129a56"
+      },
+      "prior_log_task_candidate": {
+        "path": "g2/build/c-firmware/20261016/main-log-task-context/candidate.o",
+        "sha256": "8bdb1194a181c557cf26d8eefab1a2f941eb82d60ba9c94d093c023ae8bfc5ee"
+      },
+      "log_time_string_c": {
+        "path": "g2/build/c-firmware/20261016/main-log-time-string/receipt.json",
+        "sha256": "15d3eed54848139e147398a2fa8bdf1e54c292f8414b4b49857e4d3cc21f5e46"
+      },
+      "prior_time_string_candidate": {
+        "path": "g2/build/c-firmware/20261016/main-log-time-string/candidate.o",
+        "sha256": "02ea0a74d23139cb0e96a501313b35b64f4b1357645828b58d20c0ed85b07b88"
+      },
+      "log_datetime_now_c": {
+        "path": "g2/build/c-firmware/20261016/main-log-datetime-now/receipt.json",
+        "sha256": "e08c23955bb121da4561d568847867e67af4acba90b40c5aedd3f8b0365f1ac8"
+      },
+      "prior_datetime_candidate": {
+        "path": "g2/build/c-firmware/20261016/main-log-datetime-now/candidate.o",
+        "sha256": "49d89581d0f7d58e4cc6f7877352b128b78ee7e58a7b885283d490bbb8403c67"
+      },
+      "epoch_calendar_c": {
+        "path": "g2/build/c-firmware/20261016/main-epoch-calendar/receipt.json",
+        "sha256": "0a286341bf8d1840c5bbfb5b34f1b9e73ac573255b00919d5e3b9f5c5e4b3b71"
+      },
+      "prior_calendar_candidate": {
+        "path": "g2/build/c-firmware/20261016/main-epoch-calendar/candidate.o",
+        "sha256": "0c1d6eb1db175b2e5cec2d48d25e28f71d476871def3634c81344a40ef84c4fd"
+      },
+      "pdm_clock_pin_words_c": {
+        "path": "g2/build/c-firmware/20261016/main-pdm-clock-pin-words/receipt.json",
+        "sha256": "02173688e1e9c64d200a097ddc3309fa358f8833ca40c3faf247ff29aad76b06"
+      },
+      "prior_pdm_pin_candidate": {
+        "path": "g2/build/c-firmware/20261016/main-pdm-clock-pin-words/candidate.o",
+        "sha256": "10e786d697c1202dffdf28b0fbc49c069bc5d3ca516af09b47f8442af1b0f454"
+      },
+      "audio_dispatch_shared_ram_alias": {
+        "path": "g2/build/c-firmware/20261016/main-audio-dispatch-alias/receipt.json",
+        "sha256": "b37eb0b82322ee09143397199fe92f137c779451ccf802f27f4cc1342ad7d45c"
+      },
+      "prior_audio_dispatch_candidate": {
+        "path": "g2/build/c-firmware/20261016/main-audio-dispatch-alias/candidate.o",
+        "sha256": "e6880c079b5d0e7ff30ddd464f6869d3e896b90f73e03a1908600a9217134ce9"
+      },
+      "flashdb_print_sink_shared_ram_alias": {
+        "path": "g2/build/c-firmware/20261016/main-flashdb-print-sink-alias/receipt.json",
+        "sha256": "e265ea76ccd69f1aecd32bf94b46370a56c1673cbf215b6c941228d555ad957a"
+      },
+      "prior_print_sink_candidate": {
+        "path": "g2/build/c-firmware/20261016/main-flashdb-print-sink-alias/candidate.o",
+        "sha256": "73b36930148a05cf9b9e84bbda7e9807c359e3f88c124f79afeeefae9b16db14"
+      },
+      "shared_nonreturning_assert_fault_alias": {
+        "path": "g2/build/c-firmware/20261016/main-offline-assert-fault-alias/receipt.json",
+        "sha256": "737b3478c7234a50549fc1752e976b6f419c092a21a8c1e31631a385c04f9e45"
+      },
+      "prior_assert_candidate": {
+        "path": "g2/build/c-firmware/20261016/main-offline-assert-fault-alias/candidate.o",
+        "sha256": "eb950d05a8576be16e20f4efcb370b42135992d50f7005ea8c823a86f0afa096"
+      },
+      "gx8002_receive_scratch_c": {
+        "path": "g2/build/c-firmware/20261016/main-transaction-transport/receipt.json",
+        "sha256": "0c87ee9d520611c7f15b6a3c47fa7ed94184f4b30e7f3609800ee2127d1955ba"
+      },
+      "prior_rx_transport_candidate": {
+        "path": "g2/build/c-firmware/20261016/main-transaction-transport/candidate.o",
+        "sha256": "bda5da75c7e3965cf3fa6e80b37bab5f19977f731f5b9a3730a02ba69dc1650f"
+      },
+      "gx8002_nominal_tx_packet_c": {
+        "path": "g2/build/c-firmware/20261016/main-tx-packet/receipt.json",
+        "sha256": "f80f3109f86bc2700fffdbc242096c41d17d23dced2b847fe8c70b81f88db2de"
+      },
+      "prior_tx_packet_candidate": {
+        "path": "g2/build/c-firmware/20261016/main-tx-packet/candidate.o",
+        "sha256": "0c1beec767b9846f566a27329bd2f330e57af3303ef5f2e005912b39ae896e30"
+      },
+      "combined_ram_scratch_c": {
+        "path": "g2/build/c-firmware/20261016/main-combined-ram-scratch/receipt.json",
+        "sha256": "86faa8de03bb602b1179404d72412562442420442b629a5e75bf3bbdbf04ff18"
+      },
+      "prior_combined_ram_candidate": {
+        "path": "g2/build/c-firmware/20261016/main-combined-ram-scratch/candidate.o",
+        "sha256": "7fa286ecd96db883271071e23c8c4d08bce44324737585f9965e65a7dd6dae22"
+      },
+      "uart_detailed_logger_alias": {
+        "path": "g2/build/c-firmware/20261016/main-platform-log-error-alias/receipt.json",
+        "sha256": "f746c8eaa8fc23e641a5099ba41c1c1485cfead93fe351675ada67c600c2c54b"
+      },
+      "prior_uart_log_candidate": {
+        "path": "g2/build/c-firmware/20261016/main-platform-log-error-alias/candidate.o",
+        "sha256": "459cade5a9e441ae79be28a6a50d0d163193e75f4ba5a6c8c4daeffd9d44b0a8"
+      },
+      "shared_fatal_hook_ram_alias": {
+        "path": "g2/build/c-firmware/20261016/main-fatal-hook-alias/receipt.json",
+        "sha256": "329ccf5bf712d64436003aa6d16577b4480dc446ffeac4fb59e7e6f64d41b63e"
+      },
+      "fatal_hook_direct_xref_inventory": {
+        "path": "g2/analysis/c-source-completion-20261011/apollo/fatal-hook-direct-xrefs-20261016.json",
+        "sha256": "21811e1cc0cf8406b3d226e1275fe87c945607dd42c0238b2305782b7745f3a1"
+      },
+      "sync_info_common_472102": {
+        "path": "g2/build/c-firmware/20261016/main-sync-info-common-472102/receipt.json",
+        "sha256": "25da645a4b2177d5588dab026f85076aa0906ac2d71cb054cec74ff2f22a1b3c"
+      },
+      "sync_info_response_471ee8": {
+        "path": "g2/build/c-firmware/20261016/main-sync-info-response-471ee8/receipt.json",
+        "sha256": "c38f1b765b1a52868c09ccad73e199dd07ae39de898ec82f8218068f74c2ab83"
+      },
+      "sync_info_descriptor_77c1cc": {
+        "path": "g2/build/c-firmware/20261016/main-sync-info-descriptor-77c1cc/receipt.json",
+        "sha256": "9e56e8d1f8a7242accfa2d57c7ac5fccb2dbad7bb0a30b582ca69e9edc117362"
+      },
+      "sync_info_notify_471fa4": {
+        "path": "g2/build/c-firmware/20261016/main-sync-info-notify-471fa4/receipt.json",
+        "sha256": "84fb28e9060eebe05ca11b6df43d84912000c08c6438d3068cd1e43d58d264aa"
+      },
+      "conversate_common_tick": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-success-tick-5b03c2/receipt.json",
+        "sha256": "14489f3ce981339db81c1b9055949ff88e737bfe891dc0a40cacf27da483c630"
+      },
+      "conversate_unlock_5b0284": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-unlock-5b0284/receipt.json",
+        "sha256": "b9ed85067a17ef18d18a62c6136b2c24bfe46dc78d6d19d7833d16157bb1c2cd"
+      },
+      "conversate_lock_init": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-mutex-init-5b0120/receipt.json",
+        "sha256": "e16d9910330c5afcc5ed6e24c66c715fd19ef82ac86070bb0a664708aaf67379"
+      },
+      "conversate_response_descriptor": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-descriptor-775b24/receipt.json",
+        "sha256": "486a915b0675f4e0b7c544b928550d11f22e0c4e37d45ec6efa4da5daa3205e6"
+      },
+      "conversate_data_handler_5b08a2": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-data-handler-5b08a2/receipt.json",
+        "sha256": "92be9d9cc59b087cb1e6d2484e9ed8095fe49ee45fc9d704dd511e22cfc778bb"
+      },
+      "conversate_receive_5b1b4c": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-receive-5b1b4c/receipt.json",
+        "sha256": "77b503eddfd6d5f3ea3dbea913e19694c54905b17fc81554f9f6b2de9c6a79ac"
+      },
+      "conversate_dispatch_5b4904": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-dispatch-5b4904/receipt.json",
+        "sha256": "15bf23a8becfc26da3c2f35f2ebbe83ce8bb5a650f9019ce0ecd3cd961f51232"
+      },
+      "conversate_event_name_5b48f8": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-event-name-5b48f8/receipt.json",
+        "sha256": "9cf52bb7118441254dbe090b53453a31cc2bdb1050bade5edebf35f65c07cdb2"
+      },
+      "conversate_app_pause_5b4cc8": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-app-pause-5b4cc8/receipt.json",
+        "sha256": "7851144909761b4e84f7c1aa0ce97703f8923bf5f860a14dda685ab4834b9325"
+      },
+      "conversate_app_resume_5b4d10": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-app-resume-5b4d10/receipt.json",
+        "sha256": "e1c48a99b86257f41a37d794712bf780561b6ce4bd351fedffb20e12bae44630"
+      },
+      "conversate_app_config_5b4dba": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-app-config-5b4dba/receipt.json",
+        "sha256": "d90c736855dc239c25d1008fb96f14bbb005116e35f02fd3ac48c3a0aaf59dc7"
+      },
+      "conversate_app_close_5b4e98": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-app-close-5b4e98/receipt.json",
+        "sha256": "8b6cc1ff377d01b072f28844f0f652937e66574dad1d6570aefc73b4c39578e0"
+      },
+      "conversate_heartbeat_5b55b4": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-heartbeat-5b55b4/receipt.json",
+        "sha256": "15b587377e3ba4aad31ce3f89e04dcbc00c588bf0752ee3ebb8a42e7c4a5ffb5"
+      },
+      "conversate_ui_state_helpers": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-state-helpers/receipt.json",
+        "sha256": "734ac49161b485d459075e33d15303a3b6f063e53306bd3a3c9631e3681391b4"
+      },
+      "conversate_name_tables": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-name-tables/receipt.json",
+        "sha256": "686b512f4b5946cd5abd0ab201ad80d5a00a470d9843f531f7106dd2a49ef8fe"
+      },
+      "conversate_transcribe_data_5b5428": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-transcribe-data-5b5428/receipt.json",
+        "sha256": "d1a40aac1c755eedef975ae724236be42bb703ace9fa6f6961f2f29bfd7aeba7"
+      },
+      "conversate_prep_note_packet_5b52e0": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-prep-note-packet-5b52e0/receipt.json",
+        "sha256": "0edd0c588fa1cad3ebdcf876213211bb931b811ba32371535b027559dcf9bf53"
+      },
+      "conversate_prep_note_list_5b5150": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-prep-note-list-5b5150/receipt.json",
+        "sha256": "a293fa5dd6ee233f0060673d1a788d5835bb6b708257c36ed43ba637c40e1d7b"
+      },
+      "conversate_tag_data_5b4f72": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-tag-data-5b4f72/receipt.json",
+        "sha256": "24056ecce9de6306592a55947833f8d855720ceec03c7bb65e8c7389081f9ee3"
+      },
+      "conversate_app_open_5b4a90": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-app-open-5b4a90/receipt.json",
+        "sha256": "3135dc99064ac1b860ecb8389bbb60cc8a4301e075cdd4f59c525228b71345e6"
+      },
+      "conversate_tag_storage_init_59619e": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-tag-storage-59619e/receipt.json",
+        "sha256": "50a0c4f81fb1c12f751b18a4f42e921b231f9b088b24ea8d015f17ed6f7b2147"
+      },
+      "conversate_prep_note_update_5b43ee": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-prep-note-update-5b43ee/receipt.json",
+        "sha256": "d387031900e04c0d6890ef23cd284888fcc34df3ba8396850eb710b2814380b0"
+      },
+      "conversate_tag_add_596360": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-tag-add-596360/receipt.json",
+        "sha256": "a2af60b786cef2a1fdc506348a0d36bea54f5875b1d51c08078ab7127da13d5f"
+      },
+      "conversate_tag_node_create_5960c2": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-tag-node-create-5960c2/receipt.json",
+        "sha256": "2a0e82902e50865319d02b9b00136a013732e367dbcd87849018f09f86b40cc0"
+      },
+      "conversate_tag_node_from_pb_595f4c": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-tag-node-from-pb-595f4c/receipt.json",
+        "sha256": "359607cd651559565c9aeaa441adb2180605ee0f521419916ef4bd0bd66a9139"
+      },
+      "conversate_tag_store_composed": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-tag-store-composed/receipt.json",
+        "sha256": "62eae20612098107d465a4fbc92ce21aed8e061bf19d51581d16e4d43632c4e3"
+      },
+      "conversate_ui_settings_5b133c": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-settings-5b133c/receipt.json",
+        "sha256": "751f5b26d403ce6bc8c2211712bab86911c79b231d900f304caa5aa70d391a8c"
+      },
+      "conversate_app_config_composed": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-app-config-composed/receipt.json",
+        "sha256": "2d12ec54b8f338c477ec8450a1560294c75605b4812b83ba6133f020551f675e"
+      },
+      "conversate_prep_note_finish_5b476a": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-prep-note-finish-5b476a/receipt.json",
+        "sha256": "0c856919f4fa4d7e99ffbb18f8e7dec765f1cf8bfe8f758c72cd239b62d8a740"
+      },
+      "conversate_prep_note_list_update_5b4378": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-prep-note-list-update-5b4378/receipt.json",
+        "sha256": "19cb05da1428ac9c11acd91dfd81f3ba1960297066155d82d1a8a1bdc1da93de"
+      },
+      "conversate_prep_note_packet_update_5b44d8": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-prep-note-packet-update-5b44d8/receipt.json",
+        "sha256": "bbeb38034ee28560ef795e6613846ecce4737d17bfc1852a46e85608c8b99aa2"
+      },
+      "conversate_prep_note_text_commit_5b4164": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-prep-note-text-commit-5b4164/receipt.json",
+        "sha256": "58bc2b4f88ef93bf9f5d03d9a81333d17f7832f420353704333e6dce388897fe"
+      },
+      "conversate_prep_note_layout_parse_5b4000": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-prep-note-layout-parse-5b4000/receipt.json",
+        "sha256": "f6dbd3b8a6b2048f9b044e338d93c559bc814683dbbdf61d314f29cdce33f97b"
+      },
+      "conversate_prep_note_measure_line_5b3f94": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-prep-note-measure-line-5b3f94/receipt.json",
+        "sha256": "3d1b859431ca398690b541a8063751ac656e4bbedc3df9b93f7ab371727d1db9"
+      },
+      "conversate_prep_note_utf8_prefix_5b3ef8": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-prep-note-utf8-prefix-5b3ef8/receipt.json",
+        "sha256": "1b063e8a5e37865843f7dbf6715e9af23666227e18fd0b96f9fab699f89c421b"
+      },
+      "conversate_transcribe_update_5b41be": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-transcribe-update-5b41be/receipt.json",
+        "sha256": "1a70c3d74821a025b7828a1e8bd434f89c7d810c0dd481a337b46c4d274f6bfc"
+      },
+      "conversate_enter_loading_5b57ac": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-enter-loading-5b57ac/receipt.json",
+        "sha256": "dd5d8e42fb9be252331478a096b095fd8d1a95e62c00b5dfc739d55ecd04a63c"
+      },
+      "conversate_start_request_5b1f2e": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-start-request-5b1f2e/receipt.json",
+        "sha256": "0c542d7b53181edb1d2d27d39d340f79c1ad1e34e6caecd3320613cd9bb33ab0"
+      },
+      "conversate_audio_manager_aliases": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-audio-manager-aliases/receipt.json",
+        "sha256": "0b9d2ecb5f83ffd89d15edd46877ab85b69d3381875d4e21c36d07de26464453"
+      },
+      "conversate_context_ram_200d5bd8": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-context-ram/receipt.json",
+        "sha256": "02ab9f548ad53a7665f30f82bf209852d22f545ea640e850ce41fa74bd59789b"
+      },
+      "conversate_data_reset_helpers": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-data-reset-helpers/receipt.json",
+        "sha256": "d3a54fe511c3462829f4221432598fca93be2081183367b36c21be0e3e9018f1"
+      },
+      "conversate_ui_callback_ram": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-callback-ram/receipt.json",
+        "sha256": "b400d5c5a0672295e9bc3991162f5a2413f0c12789a868a3c8fd48694056d65e"
+      },
+      "conversate_ui_event_callback": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-event-5b06aa/receipt.json",
+        "sha256": "8623608414833fec78401caa95005a289826352a7f9dcbb5e524f1449d6e500c"
+      },
+      "conversate_ui_stop": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-stop-5b03d8/receipt.json",
+        "sha256": "210ce2a606897101a9648ccde2e3383a55cb79c1b565a51f0d6d4c47f57b703b"
+      },
+      "conversate_ui_cleanup": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-cleanup-5b3d62/receipt.json",
+        "sha256": "43d194fed864e5eb049fd992b2acd6bee6f15ab450395df0713e2e57e3d01017"
+      },
+      "conversate_ui_deinit_ram_span": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-deinit-tail-ram/receipt.json",
+        "sha256": "8272ed92818a1047d19b4698b2b7746d7cab86247e599306353ece8443be316c"
+      },
+      "conversate_ui_deinit": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-exit-finalize-5b156c/receipt.json",
+        "sha256": "6c8d91724490c8c1811ee597e5ea8c25a43ae83958a1f780a56a959e530aab71"
+      },
+      "conversate_timer_deinit": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-deinit-child-5b3d04/receipt.json",
+        "sha256": "30992e7346534c5e6ef8059a758431756e05e450a0a901406cef50526174e9a7"
+      },
+      "conversate_timer_clear": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-timer-clear-5b38cc/receipt.json",
+        "sha256": "fe5ffa68eaa927b4e62a284480498cb231f62c95988a8bc2b1c8ec1021233804"
+      },
+      "conversate_timer_remove": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-timer-remove-5b36be/receipt.json",
+        "sha256": "c5a225a4eefa6eb2065aa2fc4c01741e67504a2e09a579a333964ed8ba0afe5e"
+      },
+      "conversate_timer_stop_wrappers": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-timer-stop-wrappers/receipt.json",
+        "sha256": "4eb783bbc7e7db7e02448449076531c26220587f3813f996bb694b715e7a0dfd"
+      },
+      "conversate_timer_stop": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-timer-stop-5b35d0/receipt.json",
+        "sha256": "c2bab8b9787a84b82e2931e22b68e22370cf0ed14a4fb646f591563adbd27ac8"
+      },
+      "conversate_timer_3_stop": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-timer-3-stop-5b38b6/receipt.json",
+        "sha256": "7c1822aacc176c7018b43efa84cd3c06999b69c911600ce83bc53def3a80cca6"
+      },
+      "conversate_timer_start_callbacks": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-timer-start-callbacks/receipt.json",
+        "sha256": "5e2ed1767946f617db7330930a6da505714618b1fbd76123d6cca12ed0c5f189"
+      },
+      "conversate_timer_start": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-timer-start-5b3570/receipt.json",
+        "sha256": "6e0b865a3e641734b18beada1aa4b323102f1f1488957d9f81d4969d46f75023"
+      },
+      "conversate_ui_init": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-init-5b14ce/receipt.json",
+        "sha256": "88f8fadc200772371de6e45659b7a83c065ede00141117467aaa240d7b843ddb"
+      },
+      "conversate_timer_init": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-timer-init-5b3cba/receipt.json",
+        "sha256": "ba89c653096884b85359a2d66366054661c835ea58bb937bb361b3bc7f53a216"
+      },
+      "conversate_ui_style": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-style-5b0ac4/receipt.json",
+        "sha256": "12c9d9e1179357645447a3d999d0cbfd1f95d51c8c91e8a0f55635a3229bffeb"
+      },
+      "conversate_ui_cancel": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-cancel-5b23ae/receipt.json",
+        "sha256": "c08bc4fed16858b2fd5c24d7877bd4e7c91956e0226d488c81a93d2c6a9f9145"
+      },
+      "conversate_timer_expired": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-timer-expired-5b3628/oracle-receipt.json",
+        "sha256": "4425259978414f74e371c5f37b64b29e98765d826e78587bed262427c2db931e"
+      },
+      "conversate_ui_cleanup_child": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-cleanup-child-5b38ee/receipt.json",
+        "sha256": "cfd2626a42a8c929f5133c2bbe3bad9cf90f9f8cc04642551b4cb8a82e1974f4"
+      },
+      "conversate_ui_cleanup_flush": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-cleanup-flush-5b39b4/receipt.json",
+        "sha256": "196158af3fe54233e3a4703c7626ebdd8debed7e7c2d469eaf359d1fdd080f63"
+      },
+      "conversate_ui_cleanup_commit": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-cleanup-commit-5b3a88/receipt.json",
+        "sha256": "3cbfd6a713ae89fc8a1b901965ff46320642f9b403363ea18a5a3d5007c9f988"
+      },
+      "conversate_report_chain": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-event-name-5b16fc/receipt.json",
+        "sha256": "737d53c07788ada873d3fc0e5e9b9cfbb1c3b19d53758203c0a0333d0a873e59"
+      },
+      "conversate_ui_event_name_candidates": {
+        "path": "g2/analysis/c-source-completion-20261011/apollo/main-conversate-ui-event-name-table-20261016.json",
+        "sha256": "0ec08778f71cba59dc62cb9cd1030d963c81d7055db36c0f3e85d4332e2ce0af"
+      },
+      "conversate_ui_action_matrix": {
+        "path": "g2/analysis/c-source-completion-20261011/apollo/main-conversate-ui-action-matrix-20261016.json",
+        "sha256": "47d7260a1ce4fdeda3ac56e217b1f2b23f1e28d28ea1538022d1e3585929538d"
+      },
+      "conversate_ui_action": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-action-5b1724/receipt.json",
+        "sha256": "00f02d6d185df908ae73b2cf0cc6fbe506081caafcbed262118bb261ead12320"
+      },
+      "conversate_timer_transition": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-timer-transition/receipt.json",
+        "sha256": "c07691c28a3e54e5e208514063c362d09745ba25d1760d2cca7403c54ff14109"
+      },
+      "conversate_ui_action_matrix_c": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-action-matrix-686920/receipt.json",
+        "sha256": "198c9d4c515717867d79d73b99685d0efc77485b84dccd2269b9f07ca3f5435d"
+      },
+      "conversate_ui_route_pair": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-route-5b34a0-5b34b4/receipt.json",
+        "sha256": "2bf0d616e0426d2a6129ddcb07a626b8ba189fa63b2e446eb502a9b06430b65f"
+      },
+      "conversate_route_release": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-route-release-58c84e/receipt.json",
+        "sha256": "cb54268df9a78b11a44e6d566a4947db7c39992989b0e3ce93741b8c491b83c9"
+      },
+      "conversate_route_before_release": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-route-before-release-58c836/receipt.json",
+        "sha256": "3d0a4b4acd4b2ecd51d5422b59fcf64b0075cb6202bd6f69ee1fdb5339ec6ea9"
+      },
+      "conversate_route_get_release_pair": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-route-get-release-pair-597f82/receipt.json",
+        "sha256": "c5fe6fa7f42599b174eefa3782833e0916074110ca67d3093d0a34cb9fc5d928"
+      },
+      "conversate_route_cleanup": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-route-cleanup-597ee0/receipt.json",
+        "sha256": "6cd1bda28602a4d617b728eecdccca90a98f06eab428fca501109b4624449e61"
+      },
+      "conversate_route_set_property": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-route-set-property-597f52/receipt.json",
+        "sha256": "0f6853873f906acef70eacaa59429a6bec71988e69a5e6c2bf4276f4249dd08a"
+      },
+      "conversate_ui_scroll_routes": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-route-5b5ed2-5b5ef6/receipt.json",
+        "sha256": "b0cb02da5910cae577383407bcdc87584b20889fa35da86c609b897111be5fc9"
+      },
+      "conversate_ui_previous_route": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-route-5b5b96/receipt.json",
+        "sha256": "4653ecd67436b14b2192eb2d60179b55855f40a932aee3f94e51e9f68a698a6e"
+      },
+      "conversate_ui_saved_route": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-route-5b1a14/receipt.json",
+        "sha256": "18e991bafbce394068e5e119f5021db66c1938015b47fc97afe662b1115bfcc9"
+      },
+      "conversate_ui_disconnect_route": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-route-5b1998/receipt.json",
+        "sha256": "e01a84ffbf59ab663d0c8b324687245a59ba96255acf12f8701d61ba38ada5c2"
+      },
+      "conversate_ui_message_sender": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-ui-message-send-58bfb2/receipt.json",
+        "sha256": "b20d39489c12e574437768f1230272cb0e423b7ab7b6e09eb1477c180e7c6c79"
+      },
+      "conversate_exit_prompt_prepare": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-exit-prompt-prepare-58bda8/receipt.json",
+        "sha256": "5bf810e80e88a3cf5bf4160ceaba89f3a5d3f3766450c67dffefa05089ba9846"
+      },
+      "conversate_exit_prompt_show": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-exit-prompt-show-58bf12/receipt.json",
+        "sha256": "e8137588c4e5e8bb280c1c8c833c9f793a90a064c82ca8d8d222d29da18d9f94"
+      },
+      "conversate_exit_prompt_step_two": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-exit-prompt-fade-step-58bebc/receipt.json",
+        "sha256": "8638858d2c53a5e7470ab432c875a9a3612a2c5ae2bad42e4adae1570fe6950a"
+      },
+      "conversate_exit_prompt_completion": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-exit-prompt-fade-step3-58be1a/receipt.json",
+        "sha256": "946f45325b9e63514166d4931208d109f64be615605fa4d949c2cdc70bdc7363"
+      },
+      "conversate_exit_prompt_fade_scheduler": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-exit-prompt-fade-schedule-58c516/receipt.json",
+        "sha256": "47a55b61dc7bea9ae819c9e8aaa09f3c6bdbbd9f2511f487d921b1b79a421f3e"
+      },
+      "conversate_auto_duration_label": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-auto-duration-label-5b68d6/receipt.json",
+        "sha256": "cc8a4f6ed627d9008d42d44bbb4a718fe265ea14dcc073b2a3a37bbe8179c941"
+      },
+      "conversate_note_collapse": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-note-collapse-5b7556/receipt.json",
+        "sha256": "a1d73d6728cce0f217803114d2603c703efb99b2b9ee12d9d565a983b99559fd"
+      },
+      "conversate_note_collapse_completion": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-note-collapse-complete-5b7518/receipt.json",
+        "sha256": "866b52cb084216cf8a8fda777bd9c213c28ab79d4f3c5b4ede474eba3b8105b6"
+      },
+      "lv_async_object_delete": {
+        "path": "g2/build/c-firmware/20261016/main-lv-object-delete-async-44d90e/receipt.json",
+        "sha256": "a6fd8ba3bc717b80f4cf5ec7d1fa9908b9455349059a4f48e3dec2cfe1d64a01"
+      },
+      "lv_async_post": {
+        "path": "g2/build/c-firmware/20261016/main-lv-async-post-484014/receipt.json",
+        "sha256": "ad7418244da79549e7dbdc594dca4d594deb8fef49bb3b3d6c9e4d09e349ac60"
+      },
+      "conversate_expand_animation": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-expand-animation-5b7704/receipt.json",
+        "sha256": "0cd2af65645032fe20d290cfe1a4b3e301b2b77e5596e23cdd2a21b8422c6b11"
+      },
+      "conversate_prep_scroll": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-prep-scroll-route-5b6f8e/receipt.json",
+        "sha256": "51feca5536e6b566cd1e5f849f6c56157b75aceee458b094a3ba7165b4ee9a75"
+      },
+      "conversate_prep_note_refresh": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-prep-note-refresh-5b6cd0/receipt.json",
+        "sha256": "067356ebb14ecee7d388e2d3272265d3cb6be2f34039831010601c145624a9a1"
+      },
+      "conversate_prep_note_pool": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-prep-note-pool-5b6ac0/receipt.json",
+        "sha256": "5f8246db51519be9d92f95fdbc87408626c1b2c3801903aad6bea864c2cb5be9"
+      },
+      "conversate_prep_note_line_text": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-prep-note-line-text-5b4776/receipt.json",
+        "sha256": "520873df07b00085152a5dce05e7bad3fabb7904255eaed7c60da2b5e853ad40"
+      },
+      "conversate_transcribe_label_update": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-transcribe-label-update-5b32b4/receipt.json",
+        "sha256": "02627c1bf341434b03f3baa6a3cef665de3c9c0694dba069c6bd60a0b8ea2033"
+      },
+      "conversate_main_unselected": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-main-unselected-5b2c68/receipt.json",
+        "sha256": "e6b673c8bc4a8eb1e6eefa62beadb163ab0b654ea6168a19c84da1a35d7f1f21"
+      },
+      "conversate_tag_unselect": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-tag-unselect-5969a4/receipt.json",
+        "sha256": "262860b359ba78fec924793aec13b5d0eeb0ca18c6df1c76e049664c0ca7d99a"
+      },
+      "conversate_main_page_refresh": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-main-page-refresh-5b13fe/receipt.json",
+        "sha256": "1b20b6a3bfcc5314c5ca77e42d6eaf9910a73775538a34d76b1ef46cb4ba51fd"
+      },
+      "conversate_list_view_mode": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-list-view-mode-5b0edc/receipt.json",
+        "sha256": "9a006b9d9840ca65385d3a4908e4a2fdb8f99a52ea76e49efa7a9d24533c8b7c"
+      },
+      "conversate_list_slot_alpha_fade": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-list-slot-alpha-fade-5b0c72/receipt.json",
+        "sha256": "8d77a1146b8c8e65c4e8c4d7bbbf0252bf482261f1c39fa9911da4d6a1d159c6"
+      },
+      "conversate_main_scroll_up": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-main-scroll-up-5b29bc/receipt.json",
+        "sha256": "fc54a5e3c732c7cd99e96fae08642006043151967858813d76a3e6d68c7d18b0"
+      },
+      "conversate_main_scroll_down": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-main-scroll-down-5b2a64/receipt.json",
+        "sha256": "081e74a754af3c9ab08fc3d51816f2bcbfe3d979902914f7e05e5f897960f96f"
+      },
+      "conversate_bounce_play": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-bounce-play-58a680/receipt.json",
+        "sha256": "65dd5d4ff93b3a89ec3ee6e6d07ce7a44bc71bb774d9b5fdc988ce655ec387cd"
+      },
+      "conversate_bounce_callbacks": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-bounce-phase2-58a5a4/receipt.json",
+        "sha256": "6d046a4d7f50f80ad99007e43e2e38e613cc23bb55edbf499fdf41ebe6722160"
+      },
+      "conversate_main_selected": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-main-selected-5b2b74/receipt.json",
+        "sha256": "0e0d640abc6637a0691d5a4007bc39ad766da5ddba5a2ab778bb8d9c8d563dc1"
+      },
+      "conversate_main_list_container": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-list-container-5b12ba/receipt.json",
+        "sha256": "98c4c7fecbd3cd9337c1d5d90b032ee601575f7c20dc4a76c4a68a5d3ecfeb91"
+      },
+      "conversate_main_list_layout": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-list-layout-5b0d86/receipt.json",
+        "sha256": "c06b2396e434c3755ac076b763af6c1467328c4bfd147895b6a82c382a773b59"
+      },
+      "conversate_display_style": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-display-style-5b22bc/receipt.json",
+        "sha256": "5e72594f100617445e731d35a9e877f6c475ab98f61e0ed605a9bbb49ee37bf3"
+      },
+      "conversate_pre_notes_anim": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-pre-notes-anim-58c7a0/receipt.json",
+        "sha256": "bfd4bbb7ef50458da9e7939b82935af7b095a60308e61f1b2b588551fafd217b"
+      },
+      "conversate_prep_button": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-prep-button-5b1150/receipt.json",
+        "sha256": "5f112602b1048c874b790fedfe48d0f5ed9c3914999c1a4f4c7dca5e54106bd3"
+      },
+      "conversate_display_main_page": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-display-main-page-5b2d64/receipt.json",
+        "sha256": "21a57e9399b3c8c2cf603624aee5c4c3ee644aeb4f0c409148d61cd39937af16"
+      },
+      "conversate_display_children": {
+        "path": "g2/build/c-firmware/20261016/main-lv-label-rule-43f6ac/receipt.json",
+        "sha256": "74bda20d649eaa2440c00558e3f175a35d3c39302ea4339768f42e992ab8fe6a"
+      },
+      "conversate_prep_icon": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-prep-icon-76a47c/receipt.json",
+        "sha256": "82381a45e3bd22d0f42d9de23bb18cbf52b6a8c7da76d0e93cf3fc17ca05d2d0"
+      },
+      "conversate_anim_frames": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-anim-frames-20000bf4/receipt.json",
+        "sha256": "63ef8b3aaccaac23c03f274a134e308c62a9878a7738343148d11a0f80e01f4a"
+      },
+      "conversate_event_names": {
+        "path": "g2/build/c-firmware/20261016/main-conversate-event-names-20000560/receipt.json",
+        "sha256": "8ee77fe01c4a0e632a0bed89a756b1f43b839a1a966bca85edc31efb47e7636f"
+      },
+      "locale_data": {
+        "path": "g2/build/c-firmware/20261017/main-locale-data-20001588/receipt.json",
+        "sha256": "6308773fb563549872329cb59a50c9f5717e925dd70f48ffac931fe880f000ab"
+      },
+      "conversate_menu_scroll_down": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-ui-menu-scroll-down-5b5bf0/receipt.json",
+        "sha256": "ee8da1a28b812bf0ea81c92e434760dc5262c5fedc748ca3162ece79a57dff99"
+      },
+      "conversate_child_style_clear": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-ui-child-style-clear-5b3340/receipt.json",
+        "sha256": "bae1a162ded1d32590ab287e44a764b9dd590e0318936e33ccdab0df4e230612"
+      },
+      "conversate_display_config_pair": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-ui-slot-fade-5b1072/receipt.json",
+        "sha256": "46ab5ca814c837547e0e918995a96dab8b10551ed8c76d23a042e8d1a19f2a94"
+      },
+      "conversate_display_loading": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-ui-display-loading-5b30c8/receipt.json",
+        "sha256": "e5bda63a14db99e752acbf3fdea28a7a90f488fe98fc5b75bebc537a01ce691c"
+      },
+      "conversate_menu_style": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-menu-style-5b5720/receipt.json",
+        "sha256": "97ee8e757e6b214e408c3ec411f05a22ccd542d32b72574bd52104fe833bc89e"
+      },
+      "conversate_menu_page": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-menu-page-5b58e8/receipt.json",
+        "sha256": "fd12794a8922fe66a131df649b015849f3800ac41ed9a498dc23ea399de9a498"
+      },
+      "conversate_menu_request": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-menu-request-5b1e52/receipt.json",
+        "sha256": "19e81e6a18400d30835e58f33d98eb405559b4a39785b9d98ad6b5dc5e4bf81b"
+      },
+      "conversate_menu_icon": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-menu-icon-76a2a0/receipt.json",
+        "sha256": "d63b53995b35315767e42750e4a283c505c76505956fd7b4316a8873a0422f8d"
+      },
+      "conversate_menu_list": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-menu-list-5b59fa/receipt.json",
+        "sha256": "c4e86fb41676381f61712606b528041351195e75806d92c2663acc90124e1a29"
+      },
+      "conversate_tag_count": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-tag-count-59674e/receipt.json",
+        "sha256": "c4d05a23b2030715e63b8b186b0a061d008e629068fa3489a5de62ba34e2c69c"
+      },
+      "conversate_tag_scroll_pair": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-tag-scroll-5b63d4/receipt.json",
+        "sha256": "9218433d6380f1d3815b095a3b3c4d2b514a7dafb3540efb9b586139c23ea2dd"
+      },
+      "conversate_tag_update_auto_pop": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-auto-pop-5967bc/receipt.json",
+        "sha256": "94a95a5b8eb51f2d74e1dc90c0f440aa49626ae918becd0fc69222c17fe63221"
+      },
+      "conversate_tag_icon_map": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-tag-icon-get-5b0af6/receipt.json",
+        "sha256": "34b70d8ab51141e9c820eb7631884ddb887e7b6b9fac890e583bb5464867d513"
+      },
+      "conversate_tag_lookup": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-tag-lookup-5964e2/receipt.json",
+        "sha256": "17b33b9fc629fe59fabe0ac734a77aebe5065c803ca8fa495de5adc05a3537c2"
+      },
+      "lv_child_move": {
+        "path": "g2/build/c-firmware/20261017/main-lv-child-move-44daca/receipt.json",
+        "sha256": "6366d0dfa7265d4bab444a511031c87e5e2e5d8181c672cee5299d34df72a909"
+      },
+      "conversate_tag_node_free": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-tag-node-free-596188/receipt.json",
+        "sha256": "bb1e731c5f2f9f62a5d4056d7efe12ae967eb620430a2d44ea32df72fab3857f"
+      },
+      "conversate_tag_storage_deinit": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-tag-storage-deinit-59624e/receipt.json",
+        "sha256": "611500fd1488a796c7f662bcd32738e4032f2b8b83736fdb2d69c733ada9d2c7"
+      },
+      "conversate_notify": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-notify-5b1d2a/receipt.json",
+        "sha256": "712c76da7c0c4deb6c65a38e884e85aeecdb0fe1af68d2b07fcfc6c869bc7fb4"
+      },
+      "conversate_elapsed_label": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-elapsed-label-5b22fa/receipt.json",
+        "sha256": "e09cd0a12f47dd72f413db1dc75d5519529fb920b3cf06978fb614eb19cc6a23"
+      },
+      "conversate_clock_label_placement": {
+        "path": "g2/build/c-firmware/20261017/main-conversate-elapsed-label-5b22fa/placement-receipt.json",
+        "sha256": "a45cbaa3fd83da59a5adf96a914eed0a6736be04086e4aa8357e0b0e55f4248f"
+      },
+      "display_current_set": {
+        "path": "g2/build/c-firmware/20261017/main-display-current-set-442456/receipt.json",
+        "sha256": "6fbaf9c6d245401ebcfc998839aaf0fab64e3170a2f7d997392d049be406c2a7"
+      },
+      "display_layer_prepare": {
+        "path": "g2/build/c-firmware/20261017/main-display-layer-prepare-471cd6/receipt.json",
+        "sha256": "b842514b538274fd6fe40f191e356727af0355e8db8e7685f67c9f399fc72e87"
+      },
+      "display_platform_bind": {
+        "path": "g2/build/c-firmware/20261017/main-display-platform-bind-48aef8/receipt.json",
+        "sha256": "f18250bae96f9627dd34b0ef9b5442c802ae8e2d6d20e061355066d1c6152db2"
+      },
+      "display_draw_buffer": {
+        "path": "g2/build/c-firmware/20261017/main-display-draw-buffer-44f7c0/receipt.json",
+        "sha256": "b80ef8b704fb4df1da7a8e38232cb5e087a768f943d7a7b24bab9020d69e111f"
+      },
+      "display_refresh_timer": {
+        "path": "g2/build/c-firmware/20261017/main-display-refresh-timer-45360c/receipt.json",
+        "sha256": "2bba2b876a436e40f115cde491b4a3b93d1f71a4a26bff24428497b46bd5bdab"
+      },
+      "display_refresh_collect": {
+        "path": "g2/build/c-firmware/20261017/main-display-refresh-collect-45377a/receipt.json",
+        "sha256": "3809a9ac87f1913c11e12eddb88d61e49e00c746fd8150bd2447d32f85daf484"
+      },
+      "display_pre_refresh": {
+        "path": "g2/build/c-firmware/20261017/main-display-pre-refresh-454692/receipt.json",
+        "sha256": "d27012a5787e2d1d1d78e41f74241ef89ce22fd66dd8ed7a300fa897dfb478fe"
+      },
+      "display_area_subtract": {
+        "path": "g2/build/c-firmware/20261017/main-display-area-subtract-450c2a/receipt.json",
+        "sha256": "668a70c0280a98aa176b3bf5bccd462f0f5aa6ac3adc492eef9bfbc103231ebf"
+      },
+      "display_lv_list_insert_before": {
+        "path": "g2/build/c-firmware/20261017/main-display-lv-list-insert-before-482b56/receipt.json",
+        "sha256": "bba915d94a27adf588692589b936af872a13e2b02e78b88d8d3f417a3f9c2ab3"
+      },
+      "display_refresh_layout": {
+        "path": "g2/build/c-firmware/20261017/main-display-refresh-layout-45383c/receipt.json",
+        "sha256": "1cc0c3b231b09ae37fec1fd43ed4810302ecbd2dac7ea8f5785e16367224ce23"
+      },
+      "display_refresh_render": {
+        "path": "g2/build/c-firmware/20261017/main-display-refresh-render-4539b6/receipt.json",
+        "sha256": "1740a8a5f441ccb923c2ec6f1de5fb16a92d1d12075239120e63ed025037e8d2"
+      },
+      "display_refresh_chunk_height": {
+        "path": "g2/build/c-firmware/20261017/main-display-refresh-chunk-height-4544ae/receipt.json",
+        "sha256": "ac87cee5bc6f95b1b05d740ae4b290099ebda8a7c35a351135caade5553f1f5c"
+      },
+      "display_refresh_flush": {
+        "path": "g2/build/c-firmware/20261017/main-display-refresh-flush-454574/receipt.json",
+        "sha256": "ac27014871b6a42033bbc6badb0af1a6aa19288048b4e84f97dd301d46114d68"
+      },
+      "display_refresh_layer_reshape": {
+        "path": "g2/build/c-firmware/20261017/main-display-refresh-layer-reshape-453b78/receipt.json",
+        "sha256": "9663c91dbe5d4737fe45c9bdceff91509946ac820d9257e0514c427d8f9a8cb3"
+      },
+      "display_refresh_area": {
+        "path": "g2/build/c-firmware/20261017/main-display-refresh-area-453bce/receipt.json",
+        "sha256": "3fdc5693f193b6ac7d9496592c0c8b7bd8b4a69815eddd37ba512d979f63f257"
+      },
+      "display_render_wait": {
+        "path": "g2/build/c-firmware/20261017/main-display-render-wait-484622/receipt.json",
+        "sha256": "34a684518f92ed59df75a57dfb1a3e0a6e191c946a1d4d1466f3efd0ca3a5bd5"
+      },
+      "display_render_layer_init": {
+        "path": "g2/build/c-firmware/20261017/main-display-render-layer-init-4847c4/receipt.json",
+        "sha256": "a8c5b1b5b27a541dc8c454600775eac921774a6b93a0803820b90e4b2c9caf75"
+      },
+      "display_render_layer": {
+        "path": "g2/build/c-firmware/20261017/main-display-render-layer-453e10/receipt.json",
+        "sha256": "49614037869dbbb2a84993cd97766f49463f9de3e074198abac34edd6f3b5eda"
+      },
+      "display_render_find_cover": {
+        "path": "g2/build/c-firmware/20261017/main-display-render-find-cover-453f2e/receipt.json",
+        "sha256": "6f396a32d65008cb40536289cd9db2dcbf863c35f8f7d8e9873b8528f08787ec"
+      },
+      "display_render_object_chain": {
+        "path": "g2/build/c-firmware/20261017/main-display-render-object-chain-453fce/receipt.json",
+        "sha256": "23489d72f27fb830273d4202c7e400ecc4f6c23c44ba612dfb34adb7787cff68"
+      },
+      "display_render_area_helpers": {
+        "path": "g2/build/c-firmware/20261017/main-display-render-area-helpers-454074/receipt.json",
+        "sha256": "615980ef86c37fdc07337e50d5c71a7460d851aa11304bbe33db9530a407c298"
+      },
+      "display_render_geometry_leaf": {
+        "path": "g2/build/c-firmware/20261017/main-display-render-geometry-leaf-450f00/receipt.json",
+        "sha256": "4c7dc93e4d35ef39fa5becfd6c99627a9dbf1486e9f8b78cedf34a926c12a554"
+      },
+      "display_render_area_adjust": {
+        "path": "g2/build/c-firmware/20261017/main-display-render-area-adjust-alias-440494/receipt.json",
+        "sha256": "89761e38b48436bf33bc96f002a4c484afaf6d1e987fcf4eb5703b6671f1f363"
+      },
+      "display_draw_object_style_accessors": {
+        "path": "g2/build/c-firmware/20261017/main-display-draw-object-style-accessors-45311a/receipt.json",
+        "sha256": "4e5cdd01ff2753cb2d6d3f3bd028028dbc9c14c2e312fe8f7c7d355df3163713"
+      },
+      "display_draw_object": {
+        "path": "g2/build/c-firmware/20261017/main-display-draw-object-4541b6/receipt.json",
+        "sha256": "9afd772242a1691dc0a23721ae2b45b40cf7ce1d473cfa216cf95c6130269e88"
+      },
+      "display_draw_layer_create": {
+        "path": "g2/build/c-firmware/20261017/main-display-draw-layer-create-48475e/receipt.json",
+        "sha256": "249d4c5e01d46f56cccf4968597353abea65a71837fc5b54001b4d63738d4450"
+      },
+      "display_draw_layer": {
+        "path": "g2/build/c-firmware/20261017/main-display-draw-layer-48895e/receipt.json",
+        "sha256": "7291275a022f805c985bc8b7103822d0e10a6be469c22800c55ab80f71b4a67d"
+      },
+      "display_obj_redraw": {
+        "path": "g2/build/c-firmware/20261017/main-display-obj-redraw-4531ae/receipt.json",
+        "sha256": "4cf58c31b18d3bc36e30eb975d56511a9d3fc11e53baaf812a4e87b13740b3ec"
+      },
+      "display_mask_rect_dsc_init": {
+        "path": "g2/build/c-firmware/20261017/main-display-mask-rect-dsc-init-48a984/receipt.json",
+        "sha256": "9d299fcba66474f698b9a3c495174d712469427fe927f9597f9f5444d83676cf"
+      },
+      "display_draw_mask_rect": {
+        "path": "g2/build/c-firmware/20261017/main-display-draw-mask-rect-48a98e/receipt.json",
+        "sha256": "5a194adb2acf3e2f7f5f6142c1d7270f71a0d02b6ecd42ab12ab07252f8b36b7"
+      },
+      "lv_heap_pool_ram_contract": {
+        "path": "g2/build/c-firmware/20261017/main-lv-heap-pool-20000338/receipt.json",
+        "sha256": "2c642d1ce7b769559c5f022b41ae167b3f47fe2d08cfbe7642a3a56c2b767859"
+      },
+      "ble_att_dispatch_tables": {
+        "path": "g2/build/c-firmware/20261017/main-ble-att-dispatch-tables-7851e0/receipt.json",
+        "sha256": "ffbeec210a3242af43850f78234ff7d3176d1528d1e3091688a081eb7a08d0f2"
+      },
+      "ble_att_interface_tables": {
+        "path": "g2/build/c-firmware/20261017/main-ble-att-interface-tables-785250/receipt.json",
+        "sha256": "6c8fa927d62903bc50b9ff17978e7c421a925a14d24884be7507c58e6f31acbb"
+      },
+      "ble_att_control_callbacks": {
+        "path": "g2/build/c-firmware/20261017/main-ble-att-control-callbacks/receipt.json",
+        "sha256": "1c987bd4a33d9ccfc20b645d6345b223820ec0eaa9fd10de09e824f50e31ad95"
+      },
+      "ble_atts_ind_pending": {
+        "path": "g2/build/c-firmware/20261017/main-ble-atts-ind-pending/receipt.json",
+        "sha256": "758db8ef1e6781d389867859a6c0fe189ca1ec7733e28f8da1bafed9dda2e1e8"
+      },
+      "ble_attc_write_cmd_callback": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-write-cmd-callback/receipt.json",
+        "sha256": "3783907ef927a364ef277e650242a4ffd209e6463e3e560724c385ccd6ccc9d3"
+      },
+      "ble_atts_msg_dispatch": {
+        "path": "g2/build/c-firmware/20261017/main-ble-atts-msg-dispatch/receipt.json",
+        "sha256": "752aa668b932bd7c8034228b65303d243ec6b9a404ad94e80b12d3f66581acf2"
+      },
+      "ble_atts_database_hash_update": {
+        "path": "g2/build/c-firmware/20261017/main-ble-atts-database-hash-update/receipt.json",
+        "sha256": "7620a91768483f6d8f2e703d7f2f931ac13ec00d17229558b766a14dff084396"
+      },
+      "ble_atts_set_attr": {
+        "path": "g2/build/c-firmware/20261017/main-ble-atts-set-attr/receipt.json",
+        "sha256": "c3a63060f577df812ac66badd5c654221ffa2abacaf7916648a4abece40a887b"
+      },
+      "ble_atts_uuid_search_chain": {
+        "path": "g2/build/c-firmware/20261017/main-ble-atts-uuid-search-chain/receipt.json",
+        "sha256": "727be9b1143d2ec3416b6182b6052d9ab43e8835c95c06450079321183048033"
+      },
+      "ble_att_uuid_16_to_128": {
+        "path": "g2/build/c-firmware/20261017/main-ble-att-uuid-16-to-128/receipt.json",
+        "sha256": "decfc8bb8eec46686336b7f72aaa7d9ad6c018f239b4a138c9344f7e3a6006af"
+      },
+      "ble_atts_ind_msg": {
+        "path": "g2/build/c-firmware/20261017/main-ble-atts-ind-msg/receipt.json",
+        "sha256": "941aad2326250509bacef4efa154c81f34dfdb8cf87e0fd8d617c561418f227a"
+      },
+      "ble_att_decode_msg_param": {
+        "path": "g2/build/c-firmware/20261017/main-ble-att-decode-msg-param/receipt.json",
+        "sha256": "b23b935a4dc282e61bb187256fed5a8639a3de5f1eff156b96833689fcadd0b1"
+      },
+      "ble_atts_pend_ind_ntf": {
+        "path": "g2/build/c-firmware/20261017/main-ble-atts-pend-ind-ntf/receipt.json",
+        "sha256": "78744bb956582524ad232639afc4ec5eeaed850f19b76c5dde6afc9464b3777e"
+      },
+      "ble_atts_setup_msg": {
+        "path": "g2/build/c-firmware/20261017/main-ble-atts-setup-msg/receipt.json",
+        "sha256": "efd045e3603881ea5d0d863910a737750ec67a437f2f227b618b712dc671e694"
+      },
+      "ble_att_cfg_ptr_ram": {
+        "path": "g2/build/c-firmware/20261017/main-ble-att-cfg-ptr-ram/receipt.json",
+        "sha256": "0f8e8ef2fbb87a686d4ca8168fae7871891569694d4acb33176cb96fba755aaf"
+      },
+      "ble_atts_ccb_queue_cleanup": {
+        "path": "g2/build/c-firmware/20261017/main-ble-atts-ccb-queue-cleanup/receipt.json",
+        "sha256": "47e1349fa354547ba6db696b340fec6c28255295ed12731bf9277ab26910d17d"
+      },
+      "ble_atts_start_idle_timer": {
+        "path": "g2/build/c-firmware/20261017/main-ble-atts-start-idle-timer/receipt.json",
+        "sha256": "ded775e05f234eade41b4b7268536f529895f453df321a805d421ce5064e229f"
+      },
+      "ble_dm_connection_action_tables": {
+        "path": "g2/build/c-firmware/20261017/main-ble-dm-connection-action-tables/receipt.json",
+        "sha256": "650954a050623ef84252c20b0c5d071290b4918a9bc8359d1e868587e984e408"
+      },
+      "ble_dm_connection_actions_small": {
+        "path": "g2/build/c-firmware/20261017/main-ble-dm-connection-actions-small/receipt.json",
+        "sha256": "d4d3b49f925365fcc142f93b0962eb47ebb1a5ca53a04a6c6b44346f60213366"
+      },
+      "ble_dm_connection_actions_followup": {
+        "path": "g2/build/c-firmware/20261017/main-ble-dm-connection-actions-followup/receipt.json",
+        "sha256": "597bd04b85edb2c802b3dcc189572498020a075814c9860d1a4c08f59d5f3da3"
+      },
+      "ble_dm_slave_update_action": {
+        "path": "g2/build/c-firmware/20261017/main-ble-dm-slave-update-action/receipt.json",
+        "sha256": "409f4176e5e3623fadeb55366aa5db132fa6dde46be79838aec11953056c1de9"
+      },
+      "ble_hci_le_features_cancel": {
+        "path": "g2/build/c-firmware/20261017/main-ble-hci-le-features-cancel/receipt.json",
+        "sha256": "c629c54c6779014c8d42d8970376e25bcbd9958bdbd728fff3db71097b308ef2"
+      },
+      "ble_hci_conn_update": {
+        "path": "g2/build/c-firmware/20261017/main-ble-hci-conn-update/receipt.json",
+        "sha256": "d6b66c71e2dfb174a9dbb8e685f656bca48b256007cbc8a043399f70305c67d0"
+      },
+      "ble_dm_update_callback": {
+        "path": "g2/build/c-firmware/20261017/main-ble-dm-update-callback/receipt.json",
+        "sha256": "bb7b6f33eaaa631e7abfa1e84f305192cbba328aa5967bebe33bd12ca3cf7c69"
+      },
+      "ble_dm_conn_open": {
+        "path": "g2/build/c-firmware/20261017/main-ble-dm-conn-open/receipt.json",
+        "sha256": "39b6f893cb41ced7fb1a34620949e5ed232c6bdcd45a95db06c8b87f8de8043e"
+      },
+      "ble_dm_scan_phy_index": {
+        "path": "g2/build/c-firmware/20261017/main-ble-dm-scan-phy-index/receipt.json",
+        "sha256": "c39b0c921e3828dc8c18fc8c0a6bef2c648f01cb3b74d5b22ea0e5b26f7d89b4"
+      },
+      "ble_hci_create_conn": {
+        "path": "g2/build/c-firmware/20261017/main-ble-hci-create-conn/receipt.json",
+        "sha256": "031338f3825adbd69d0567377dce6f3092a96c40fb96b2c293231ec628b49223"
+      },
+      "ble_l2c_conn_update_request": {
+        "path": "g2/build/c-firmware/20261017/main-ble-l2c-conn-update-request/receipt.json",
+        "sha256": "5954343d5f57a747a343b1c30a70770e040dcb50236eeb9b6dc8828cdffe13b9"
+      },
+      "ble_dm_adv_connection_outcomes": {
+        "path": "g2/build/c-firmware/20261017/main-ble-dm-adv-connection-outcomes/receipt.json",
+        "sha256": "dc67ed0ea4b465047dad66cfc84436a0a900a6ad70bb097dd6653834920563dc"
+      },
+      "ble_dm_adv_stop_directed": {
+        "path": "g2/build/c-firmware/20261017/main-ble-dm-adv-stop-directed/receipt.json",
+        "sha256": "304519603e0ec7cf397b6a9a3417dd13ed853f335bc0c9a8812e20e4d06883ff"
+      },
+      "ble_dm_adv_start_directed": {
+        "path": "g2/build/c-firmware/20261017/main-ble-dm-adv-start-directed/receipt.json",
+        "sha256": "e25ce9e52c245fcc18cd2a0c4bb7d6778e3d6cb3c7593cb2435a0ce618b21d8a"
+      },
+      "ble_attc_ccb_by_handle": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-ccb-by-handle/receipt.json",
+        "sha256": "d2a936f56fd00e1bd314436920ef2bee12561db19a201a0586fd0c02ae84c040"
+      },
+      "ble_attc_ind_confirm": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-ind-confirm/receipt.json",
+        "sha256": "60799d11df90b6fb90c62398d9137c928979b71f5508b30d137825299585fc69"
+      },
+      "ble_attc_data": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-data/receipt.json",
+        "sha256": "466caefd822653df43dbede88da73e5c99eb028e49215f2ee743a663191f6a60"
+      },
+      "ble_attc_multi_var_ntf": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-multi-var-ntf/receipt.json",
+        "sha256": "b357d19d9098dcf4313ecab755ffcf0f034ffc55f7b8f28b361039da331cd4b0"
+      },
+      "ble_attc_proc_ind": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-proc-ind/receipt.json",
+        "sha256": "4903d05962cbd4991b5fe91890f9bc13ef97303902b663d8dc2743f245da2814"
+      },
+      "ble_attc_proc_rsp": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-proc-rsp/receipt.json",
+        "sha256": "5ed4757d84cd75ef4176e4bcf0f187dde8e7595bdfa6f596aab302b2020eaab6"
+      },
+      "ble_attc_rsp_leaves": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-rsp-leaves/receipt.json",
+        "sha256": "b8a4d3f88df45c17589518ab4cefaeaf89208eb090c17a72d632fb9e64455b6d"
+      },
+      "ble_attc_error_free": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-error-free/receipt.json",
+        "sha256": "be3963bfa95eba009c4da55d746d9d8333a967f05307960d2e63bc303f06744a"
+      },
+      "ble_attc_rsp_mtu": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-rsp-mtu/receipt.json",
+        "sha256": "2642aebacf8afcbfe8927d06fa4523e256434ff53704430d68eaeecf81560327"
+      },
+      "ble_hci_max_rx_acl_len": {
+        "path": "g2/build/c-firmware/20261017/main-ble-hci-max-rx-acl-len/receipt.json",
+        "sha256": "90a5ffd6c8ed29bdfa7c5de4f533a2cfbd41b228872eeb705b82f8567e109905"
+      },
+      "ble_att_set_mtu": {
+        "path": "g2/build/c-firmware/20261017/main-ble-att-set-mtu/receipt.json",
+        "sha256": "3767876efda0826558644e620ac21353fd1b36b959bd30ae1f2e9f6dfac972e0"
+      },
+      "ble_attc_rsp_prepare_write": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-rsp-prepare-write/receipt.json",
+        "sha256": "0a686b37bf0d24ebb83adf9c13af6f5704f6d86a13ee12d93a0640c4037ec2ed"
+      },
+      "ble_attc_setup_req": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-setup-req/receipt.json",
+        "sha256": "aae97b3a16c90664fd312e5624743f91149472d421a5960f1932c36c552023c2"
+      },
+      "ble_attc_send_req": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-send-req/receipt.json",
+        "sha256": "2135a6a74ddaaac2dddcddc5f3155e48aae2c42788fb847d5dea21a4795702e2"
+      },
+      "ble_attc_send_simple": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-send-simple/receipt.json",
+        "sha256": "73d75f144233719f6ec779886b489f2b501d72c8ce2eb52c6a801c610c209558"
+      },
+      "ble_attc_set_pending_write": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-set-pending-write/receipt.json",
+        "sha256": "6ac53c7244e09742a86c7acd99218d85bee096fdba11e5e3d2ea8671fce1e147"
+      },
+      "ble_attc_send_write_cmd": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-send-write-cmd/receipt.json",
+        "sha256": "fa36a26cb0cd5d5f5b66fdcdaab1d4b32b6abe1478b225c643afe45606cf211f"
+      },
+      "ble_attc_rsp_find_type_read_long": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-rsp-find-type-read-long/receipt.json",
+        "sha256": "e77a6cd2d94a8004e6101e8501584b8fbe6a9b0b26775e92cd16785cb4e0c731"
+      },
+      "ble_attc_send_continuing": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-send-continuing/receipt.json",
+        "sha256": "e7a8accc400bdbd75eb6dc0cfb37f710efd7125898dc41b674550b187fe5a1ad"
+      },
+      "ble_attc_req_clear": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-req-clear/receipt.json",
+        "sha256": "1cd2dc43b795cac34434d67210a9a4fb727c8fc9bdbaa76762dd9fc0b9f1b368"
+      },
+      "ble_attc_rsp_find_read": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-rsp-find-read/receipt.json",
+        "sha256": "64556a7468d74e0adce346f52941c736fd75a09c8328c80c56906f23b4d4e8db"
+      },
+      "ble_attc_send_prepare_write": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-send-prepare-write/receipt.json",
+        "sha256": "f98a335cb46d936c1152221aa5abdaa7a080976dbb8b6df847054c7676305bbc"
+      },
+      "ble_attc_send_mtu": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-send-mtu/receipt.json",
+        "sha256": "866e07e9571af85266c998a3b2fbd6a9dd23c7c877b0506e3406df56b717e722"
+      },
+      "ble_attc_msg": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-msg/receipt.json",
+        "sha256": "e7e7ccbf2cfb95be207758a073e061f33e5a78597c51f612b925e744ce41ba26"
+      },
+      "ble_attc_conn": {
+        "path": "g2/build/c-firmware/20261017/main-ble-attc-conn/receipt.json",
+        "sha256": "0d197a59ba0b4dfa0824acd8a5f95065a36bee2205561a504da6c734e98d3b9a"
+      },
+      "ble_atts_data": {
+        "path": "g2/build/c-firmware/20261017/main-ble-atts-data/receipt.json",
+        "sha256": "af44321cac6d0bf715f863140be1b6bf39692627c1d744a428c30b1ea39e08ad"
+      },
+      "ble_atts_ccb_by_handle": {
+        "path": "g2/build/c-firmware/20261017/main-ble-atts-ccb-by-handle/receipt.json",
+        "sha256": "38725cb5112a1a32b3d1c32092892dbb7bf0e1a93bff6296447381afd36eefe4"
+      },
+      "ble_atts_csf_act_client_state": {
+        "path": "g2/build/c-firmware/20261017/main-ble-atts-csf-act-client-state/receipt.json",
+        "sha256": "d61cf29c03c1b854e978968819d04d5a5b12ae1b45a181119a6dc893ad8588ba"
+      },
+      "ble_atts_conn": {
+        "path": "g2/build/c-firmware/20261017/main-ble-atts-conn/receipt.json",
+        "sha256": "a517748dbfb8d53c6ed26870c6c7ca5757369b9e7537620826286276e43c2fbb"
+      },
+      "ble_dm_conn_check_idle": {
+        "path": "g2/build/c-firmware/20261017/main-ble-dm-conn-check-idle/receipt.json",
+        "sha256": "9d87b7175a0e07bf92eb14ceb4f8163effc1f8316bb700508bd07cfe4216896f"
+      },
+      "ble_atts_ind_conn": {
+        "path": "g2/build/c-firmware/20261017/main-ble-atts-ind-conn/receipt.json",
+        "sha256": "07af7ac1e0fd907d894fabdbdf381b96723cb75b5bdd970d9af5f2796652066f"
+      },
+      "ble_whitelist_storage": {
+        "path": "g2/build/c-firmware/20261017/main-ble-whitelist-storage/receipt.json",
+        "sha256": "f8166582f9b871007dc7db3b803b32df7393ac8d31b5e049b414ffbc88afd23b"
+      },
+      "uart_sync_config_prefix": {
+        "path": "g2/build/c-firmware/20261017/uart-sync-config-contract/receipt.json",
+        "sha256": "3379dd1cd2b490cbb7aa4a083a4c2057c8e3432cedec0af55526b954fd862bb0"
+      },
+      "uart_sync_storage": {
+        "path": "g2/build/c-firmware/20261017/main-uart-sync-storage/receipt.json",
+        "sha256": "058c2f0730de71e41d50ca7fe9f9070deb745c6862fd313fef1542454f7e78a2"
+      },
+      "registry_callback_triage": {
+        "path": "g2/analysis/c-source-completion-20261011/apollo/main-registry-callback-priorities-20261017.json",
+        "sha256": "765cbe00f76355f9095d39f183bc41690bc2f2bca0f5456f3425b2019756c975"
+      },
+      "case_sync_data_handler": {
+        "path": "g2/build/c-firmware/20261017/main-case-sync-data/receipt.json",
+        "sha256": "eeac2ed8eed090225a39417057244787402667e2ef5699c18f521dbd37d7c977"
+      },
+      "case_force_out_handler": {
+        "path": "g2/build/c-firmware/20261017/main-case-force-out/receipt.json",
+        "sha256": "b3b97a3b657ca7455e5978c17150367a39926d012f72895642fdacfdd7671263"
+      },
+      "case_display_refresh": {
+        "path": "g2/build/c-firmware/20261017/main-case-refresh/receipt.json",
+        "sha256": "0decf386f317a903d9ab965f131374f01c415e47ba9da992e1d391b17da50d0a"
+      },
+      "case_nonce_updater": {
+        "path": "g2/build/c-firmware/20261017/main-case-nonce-change/receipt.json",
+        "sha256": "10b6d7b46a465a0e20e6925f1999c1aedbeacc0b58947b5aec679ef86dde9520"
+      },
+      "case_notification_sender": {
+        "path": "g2/build/c-firmware/20261017/main-case-notify/receipt.json",
+        "sha256": "412ac1ba4ea1a802e9dab464372a05f218b5c813b18b9d85ffbd8bc61dddeb32"
+      },
+      "case_status_getters": {
+        "path": "g2/build/c-firmware/20261017/main-case-status-getters/receipt.json",
+        "sha256": "055c52d84c2f06a258bd0dcc006181b00d970e84d5e42d43bb3585ac09d791c3"
+      },
+      "case_status_sender": {
+        "path": "g2/build/c-firmware/20261017/main-case-status-send/receipt.json",
+        "sha256": "d4709b80ea3d66bf554b8d28b63f7e0434501fc362840e488f1a8a4c7cce8c3a"
+      },
+      "case_send_storage": {
+        "path": "g2/build/c-firmware/20261017/main-case-status-send-storage/receipt.json",
+        "sha256": "773d05731a9445347f372c36f2d83550a946235fc9a454d10f736407af785805"
+      },
+      "case_nanopb_descriptor": {
+        "path": "g2/build/c-firmware/20261017/main-case-descriptor/receipt.json",
+        "sha256": "27c7139ec64ddd4735b247031ab3993959aac77b24856fe0eb76692be5d0ba03"
+      },
+      "case_reconnect": {
+        "path": "g2/build/c-firmware/20261017/main-case-reconnect/receipt.json",
+        "sha256": "1e64d72093634f9b64ff5270d74d486f6e72827998d3d68ac1ca82f2994dceaa"
+      },
+      "case_reconnect_state": {
+        "path": "g2/build/c-firmware/20261017/main-case-reconnect-state/receipt.json",
+        "sha256": "04b2ed406828eb3f176f5f3a9be8f76ff7caa57b1c5053d2c98cb22670e350f1"
+      },
+      "ble_try_reconnect": {
+        "path": "g2/build/c-firmware/20261017/main-ble-try-reconnect/receipt.json",
+        "sha256": "f61585b86225aad3292c757da7dcf3a18202299d06ffa007e3974a3eb411bed3"
+      },
+      "ble_is_connected": {
+        "path": "g2/build/c-firmware/20261017/main-ble-is-connected/receipt.json",
+        "sha256": "0457fc9464eff6f4b6ec6cd1caab53551de44300608d45e790640bfeb5e4360c"
+      },
+      "case_sync_response": {
+        "path": "g2/build/c-firmware/20261017/main-case-sync-response/receipt.json",
+        "sha256": "dfd67a20a1481828def38522e1589b8f7c9aa612fd5b15bec4d03e8a361217c8"
+      },
+      "case_peer_raw": {
+        "path": "g2/build/c-firmware/20261017/main-case-peer-raw/receipt.json",
+        "sha256": "ea2557eab194c1561f5b8a1835d53818e9865a9ec7bf58e31bcbd736394c1b58"
+      },
+      "case_in_case": {
+        "path": "g2/build/c-firmware/20261017/main-case-in-case/receipt.json",
+        "sha256": "98e1ec8e86adca7365d749c7d83301d29a2dfa2aa6f24ade20c11ec59ad82465"
+      },
+      "case_sync_event": {
+        "path": "g2/build/c-firmware/20261017/main-case-sync-event/receipt.json",
+        "sha256": "c6360e8b3ce8b5cab252d3bc83efa4f4237058f7eccc3c2f5bbfca2bdd0707dc"
+      },
+      "case_rx_frame": {
+        "path": "g2/build/c-firmware/20261017/main-case-rx-frame/receipt.json",
+        "sha256": "69894231e18d7becb874b889a375d0113763fe38475af7df2097a919b702eab8"
+      },
+      "case_rx_info": {
+        "path": "g2/build/c-firmware/20261017/main-case-rx-info/receipt.json",
+        "sha256": "ba8d94e02cec171df0f8977f067e20f5cbd60df4deaf14f30bb7f44f596c643b"
+      },
+      "case_send_response": {
+        "path": "g2/build/c-firmware/20261017/main-case-send-response/receipt.json",
+        "sha256": "ea70a4dc3f9e5f48f718212ff12d4a2321261f7f1a470e3b53ca921c42e701af"
+      },
+      "case_nonce_state": {
+        "path": "g2/build/c-firmware/20261017/main-case-nonce-state/receipt.json",
+        "sha256": "a407c19a9522de36dff9d060fea399565ae08f6d716c0602fed8df21523fdfd4"
+      },
+      "atts_proc_table": {
+        "path": "g2/build/c-firmware/20261017/main-atts-proc-table/receipt.json",
+        "sha256": "28e5e9595cab50c09215c96d55b7e9ff31b97a38d81e1e2c4902472887572843"
+      },
+      "atts_handlers": {
+        "path": "g2/build/c-firmware/20261017/main-atts-handlers/receipt.json",
+        "sha256": "98b1036ae253faf0d7becde8a3a7b011092f2e785d83e1de60b65cb4dc8f3a44"
+      },
+      "att_uuid": {
+        "path": "g2/build/c-firmware/20261017/main-att-uuid/receipt.json",
+        "sha256": "7ced2f9993fa1f962e4c6a703c58c4593b0f2e58e0bb078ed3084e6764c7dddf"
+      },
+      "atts_csf": {
+        "path": "g2/build/c-firmware/20261017/main-atts-csf/receipt.json",
+        "sha256": "84447603dcc58ee2d0346307912c50de4ad3361a4b39a9741feaa1684ae88111"
+      },
+      "att_core": {
+        "path": "g2/build/c-firmware/20261017/main-att-core/receipt.json",
+        "sha256": "72954620ba17df549be9f2859384480aa9daa260f61b37511176878c1ac98313"
+      },
+      "atts_core": {
+        "path": "g2/build/c-firmware/20261017/main-atts-core/receipt.json",
+        "sha256": "f4a52f059959d7ca63cf439a7a769177436b0dcab884c9e1bbdd178ad296b218"
+      },
+      "wsf_queue": {
+        "path": "g2/build/c-firmware/20261017/main-wsf-queue/receipt.json",
+        "sha256": "f0db34376b9f40dc4a31cc5494a13e7b9ecdd4b1a22bce79db1c1d727760c7d0"
+      },
+      "att_cfg": {
+        "path": "g2/build/c-firmware/20261017/main-att-cfg/receipt.json",
+        "sha256": "f82812cf1c0e563efc20c147e408013b64519be1d67e0bc80d7633e17eb04902"
+      },
+      "ble_cordio_api_aliases": {
+        "path": "g2/build/c-firmware/20261017/main-ble-cordio-api-aliases/receipt.json",
+        "sha256": "d797d281540cf0130a9ea409ebd019d4edd56ac1954a82f512fc117b4ccdfe10"
+      },
+      "ble_master_registration_table": {
+        "path": "g2/build/c-firmware/20261017/main-ble-master-registration-table/receipt.json",
+        "sha256": "afbc5b0e54bc87ed43099d226e006d1d7400ae85fa15ef84a8824779b2c14f86"
+      },
+      "ble_vendor_stack_rows": {
+        "path": "g2/build/c-firmware/20261017/main-ble-vendor-stack-rows/receipt.json",
+        "sha256": "3834f0309166747dba7c46bcc2a0aee7dbbafce41566151e5f4cbbc56190f13e"
+      },
+      "ble_registration_state_alias": {
+        "path": "g2/build/c-firmware/20261017/main-ble-registration-state-alias/receipt.json",
+        "sha256": "d6492209dff03b90433fe0c3c04497ec22fdd31d90daa938c3fb2f56e9ab59ab"
+      },
+      "pcm_registration_rows": {
+        "path": "g2/build/c-firmware/20261017/main-pcm-registration-rows/receipt.json",
+        "sha256": "fcc766387cd58834864ffe2f3050a106b8cf8860d9495f071f0d093de86e993b"
+      },
+      "ble_ota_dm_state_alias": {
+        "path": "g2/build/c-firmware/20261017/main-ble-ota-dm-state-alias/receipt.json",
+        "sha256": "77fe3fb3fcf0522220cab3e297aeee61ff5032b7fbbcff924945a51d14cd38d5"
+      },
+      "ble_slave_profile_table": {
+        "path": "g2/build/c-firmware/20261017/main-ble-slave-profile-table/receipt.json",
+        "sha256": "2fb88adbaf96a9c218efa6dbf2b4a3f88b0e2a5c28e2d71977386507a53657a2"
+      },
+      "ble_slave_connection_alias": {
+        "path": "g2/build/c-firmware/20261017/main-ble-slave-connection-alias/receipt.json",
+        "sha256": "ca283535459ca89f6219a2417fd84f7c56cf5f99f2c2c0bd9e77f58d441515b1"
+      },
+      "clock_mux_entry_adapter": {
+        "path": "g2/build/c-firmware/20261017/main-clock-mux-entry/receipt.json",
+        "sha256": "615bcf7f005bad559aa021a721026377295a0a8fe3c7f9c904c90ea447a454df"
+      },
+      "register_callbacks_entry_adapter": {
+        "path": "g2/build/c-firmware/20261017/main-register-callbacks-entry/receipt.json",
+        "sha256": "141d49261a5d6717c1bbb3293ba8189035f73ca2853af96c330151a48b3c582f"
+      },
+      "settings_sync_handler": {
+        "path": "g2/build/c-firmware/20261017/main-settings-sync-handler/receipt.json",
+        "sha256": "5d0e3d68a6678fe11babafb72de5a50e7f989cf91508ba706d59e843dcc584fb"
+      },
+      "settings_version_children": {
+        "path": "g2/build/c-firmware/20261017/main-settings-version-children/receipt.json",
+        "sha256": "cd660365bf306a478faa668aa5ad0aed61ac5dce48dcc10aaad4167303fac1ae"
+      },
+      "settings_sync_composed": {
+        "path": "g2/build/c-firmware/20261017/main-settings-sync-composed/receipt.json",
+        "sha256": "5d0635663e5c95e6a7cbc3a17bb6b74ef5c65d1a3e662960f090f622441f4b6b"
+      },
+      "attc_write_command": {
+        "path": "g2/build/c-firmware/20261017/main-attc-write-command/receipt.json",
+        "sha256": "c3599e1e3fc3b1190164e32c15ca570e5baf246cd4f79216264a1325ba5dca6e"
+      },
+      "ble_ring_message": {
+        "path": "g2/build/c-firmware/20261017/main-ble-ring-proc-msg/receipt.json",
+        "sha256": "94daf84b7d8aa69189044967dad778d402b272d1a1412829bb8b6eca2c2e5e54"
+      },
+      "conn_param_profiles": {
+        "path": "g2/build/c-firmware/20261017/main-conn-param-profiles/receipt.json",
+        "sha256": "0a56556eb7f433a29966a48076b08497b376b37a02b0bbdbf65237f3e8455b5b"
+      },
+      "remaining_provider_source_inventory": {
+        "path": "g2/analysis/c-source-completion-20261011/apollo/main-unresolved-provider-sources-20261016.json",
+        "sha256": "6317c9f19ff2dcae9c1005760753f4c5c552af59b7db1891f2ccae565c1e8655"
+      },
+      "lv_level_name_boundary": {
+        "path": "g2/analysis/c-source-completion-20261011/apollo/main-lv-level-name-boundary-20261017.json",
+        "sha256": "0755adf5785411aea3676e5aa0f981235683663789d2f55172caeee2cfe7aba8"
+      }
     }
   },
   "complete_source_payloads": 0,

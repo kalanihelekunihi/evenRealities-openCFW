@@ -1,0 +1,74 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0008d40c <r1_stock_gpio_pin_set+0x13fd8>:
+   8d40c:	b5fe      	push	{r1, r2, r3, r4, r5, r6, r7, lr}
+   8d40e:	f7cd fc67 	bl	5ace0 <r1_stock_i2c5_acquire+0xa808>
+   8d412:	0004      	movs	r4, r0
+   8d414:	d054      	beq.n	8d4c0 <_stack+0xd4c0>
+   8d416:	f004 f869 	bl	914ec <_stack+0x114ec>
+   8d41a:	07c0      	lsls	r0, r0, #31
+   8d41c:	d103      	bne.n	8d426 <_stack+0xd426>
+   8d41e:	f004 f865 	bl	914ec <_stack+0x114ec>
+   8d422:	0740      	lsls	r0, r0, #29
+   8d424:	d509      	bpl.n	8d43a <_stack+0xd43a>
+   8d426:	6ce0      	ldr	r0, [r4, #76]	@ 0x4c
+   8d428:	9000      	str	r0, [sp, #0]
+   8d42a:	f894 304b 	ldrb.w	r3, [r4, #75]	@ 0x4b
+   8d42e:	a225      	add	r2, pc, #148	@ (adr r2, 8d4c4 <_stack+0xd4c4>)
+   8d430:	a124      	add	r1, pc, #144	@ (adr r1, 8d4c4 <_stack+0xd4c4>)
+   8d432:	f04f 6048 	mov.w	r0, #209715200	@ 0xc800000
+   8d436:	f004 f8ff 	bl	91638 <_stack+0x11638>
+   8d43a:	f004 f857 	bl	914ec <_stack+0x114ec>
+   8d43e:	0781      	lsls	r1, r0, #30
+   8d440:	4829      	ldr	r0, [pc, #164]	@ (8d4e8 <_stack+0xd4e8>)
+   8d442:	4a2a      	ldr	r2, [pc, #168]	@ (8d4ec <_stack+0xd4ec>)
+   8d444:	eba0 0002 	sub.w	r0, r0, r2
+   8d448:	ea4f 00d0 	mov.w	r0, r0, lsr #3
+   8d44c:	f04f 0203 	mov.w	r2, #3
+   8d450:	eb02 4600 	add.w	r6, r2, r0, lsl #16
+   8d454:	d506      	bpl.n	8d464 <_stack+0xd464>
+   8d456:	f894 204b 	ldrb.w	r2, [r4, #75]	@ 0x4b
+   8d45a:	4630      	mov	r0, r6
+   8d45c:	a124      	add	r1, pc, #144	@ (adr r1, 8d4f0 <_stack+0xd4f0>)
+   8d45e:	6ce3      	ldr	r3, [r4, #76]	@ 0x4c
+   8d460:	f7ec fab9 	bl	799d6 <r1_stock_gpio_pin_set+0x5a2>
+   8d464:	f05f 0500 	movs.w	r5, #0
+   8d468:	f004 f840 	bl	914ec <_stack+0x114ec>
+   8d46c:	07c0      	lsls	r0, r0, #31
+   8d46e:	d103      	bne.n	8d478 <_stack+0xd478>
+   8d470:	f004 f83c 	bl	914ec <_stack+0x114ec>
+   8d474:	0740      	lsls	r0, r0, #29
+   8d476:	d50e      	bpl.n	8d496 <_stack+0xd496>
+   8d478:	eb05 0045 	add.w	r0, r5, r5, lsl #1
+   8d47c:	1901      	adds	r1, r0, r4
+   8d47e:	5c20      	ldrb	r0, [r4, r0]
+   8d480:	784a      	ldrb	r2, [r1, #1]
+   8d482:	7889      	ldrb	r1, [r1, #2]
+   8d484:	e88d 0007 	stmia.w	sp, {r0, r1, r2}
+   8d488:	462b      	mov	r3, r5
+   8d48a:	a220      	add	r2, pc, #128	@ (adr r2, 8d50c <_stack+0xd50c>)
+   8d48c:	a11f      	add	r1, pc, #124	@ (adr r1, 8d50c <_stack+0xd50c>)
+   8d48e:	f04f 6050 	mov.w	r0, #218103808	@ 0xd000000
+   8d492:	f004 f8d1 	bl	91638 <_stack+0x11638>
+   8d496:	f004 f829 	bl	914ec <_stack+0x114ec>
+   8d49a:	0780      	lsls	r0, r0, #30
+   8d49c:	d50c      	bpl.n	8d4b8 <_stack+0xd4b8>
+   8d49e:	eb05 0045 	add.w	r0, r5, r5, lsl #1
+   8d4a2:	1901      	adds	r1, r0, r4
+   8d4a4:	784a      	ldrb	r2, [r1, #1]
+   8d4a6:	7889      	ldrb	r1, [r1, #2]
+   8d4a8:	e9cd 1200 	strd	r1, r2, [sp]
+   8d4ac:	5c23      	ldrb	r3, [r4, r0]
+   8d4ae:	4630      	mov	r0, r6
+   8d4b0:	462a      	mov	r2, r5
+   8d4b2:	a11c      	add	r1, pc, #112	@ (adr r1, 8d524 <_stack+0xd524>)
+   8d4b4:	f7ec faa0 	bl	799f8 <r1_stock_gpio_pin_set+0x5c4>
+   8d4b8:	1c6d      	adds	r5, r5, #1
+   8d4ba:	b2ed      	uxtb	r5, r5
+   8d4bc:	2d18      	cmp	r5, #24
+   8d4be:	d3d3      	bcc.n	8d468 <_stack+0xd468>
+   8d4c0:	bdfe      	pop	{r1, r2, r3, r4, r5, r6, r7, pc}

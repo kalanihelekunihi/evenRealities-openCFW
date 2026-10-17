@@ -1,5 +1,5 @@
 /* Apollo locale registry at flash 0x7560e4 and plural callbacks 0x45fec0-0x45fffa.
- * Translation-data RAM regions still require final startup ownership. */
+ * Translation-data pointer tables are initialized from authenticated Main startup RAM. */
 #include <stdint.h>
 #include <stddef.h>
 
@@ -13,14 +13,14 @@ typedef struct {
 _Static_assert(sizeof(display_locale_record)==36u,"Apollo locale record size");
 _Static_assert(offsetof(display_locale_record,plural_rule)==32u,"Apollo plural callback offset");
 
-extern uint8_t audio_uart_locale_data_en[]; /* RAM 0x20001588 */
-extern uint8_t audio_uart_locale_data_de[]; /* RAM 0x200017fc */
-extern uint8_t audio_uart_locale_data_es[]; /* RAM 0x20001a70 */
-extern uint8_t audio_uart_locale_data_fr[]; /* RAM 0x20001ce4 */
-extern uint8_t audio_uart_locale_data_it[]; /* RAM 0x20001f58 */
-extern uint8_t audio_uart_locale_data_ja[]; /* RAM 0x200021cc */
-extern uint8_t audio_uart_locale_data_zh_cn[]; /* RAM 0x20002440 */
-extern uint8_t audio_uart_locale_data_zh_hk[]; /* RAM 0x200026b4 */
+extern const char *audio_uart_locale_data_en[157]; /* RAM 0x20001588 */
+extern const char *audio_uart_locale_data_de[157]; /* RAM 0x200017fc */
+extern const char *audio_uart_locale_data_es[157]; /* RAM 0x20001a70 */
+extern const char *audio_uart_locale_data_fr[157]; /* RAM 0x20001ce4 */
+extern const char *audio_uart_locale_data_it[157]; /* RAM 0x20001f58 */
+extern const char *audio_uart_locale_data_ja[157]; /* RAM 0x200021cc */
+extern const char *audio_uart_locale_data_zh_cn[157]; /* RAM 0x20002440 */
+extern const char *audio_uart_locale_data_zh_hk[157]; /* RAM 0x200026b4 */
 
 static uint32_t magnitude(int32_t value)
 {

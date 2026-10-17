@@ -1,0 +1,76 @@
+{
+  "comparisons": 948,
+  "counts": {
+    "direct": 480,
+    "count_composed": 468
+  },
+  "observations": {
+    "callbacks": 1576,
+    "reads": 12894,
+    "locks": 1632,
+    "unlocks": 1632,
+    "logs": 456
+  },
+  "trace_sha256": "098af14c04c1c84ff87f5f90b3586bfa9b2b545eb6ea29b2d494a8bd32b4a190",
+  "exact_spans": [
+    {
+      "symbol": "r1_health_sync_provider_00063ad8",
+      "address": "0x63ad8",
+      "size": 476,
+      "sha256": "1d999ad7664ff1bc99bf154d93b593832692eb7e033f2a9c0ba803361848468d"
+    },
+    {
+      "symbol": "r1_fdb_native_last_sector",
+      "address": "0x6a158",
+      "size": 30,
+      "sha256": "af7988d9e85304f6f4ca091de640dd56a45f6940fdfd6012ce41a5aa4b933d12"
+    },
+    {
+      "symbol": "r1_fdb_native_last_tsl",
+      "address": "0x6a176",
+      "size": 30,
+      "sha256": "25b7a8aed4da289dc6cdf852078b4c0d098a130b17afb948f720cf23ac3b8bc6"
+    },
+    {
+      "symbol": "r1_fdb_native_next_sector",
+      "address": "0x6a194",
+      "size": 30,
+      "sha256": "bfafe1f14cec4f3add686021b037d3d72d873d46f41446794d9d19c9f4c743e7"
+    },
+    {
+      "symbol": "r1_fdb_native_next_tsl",
+      "address": "0x6a1b2",
+      "size": 26,
+      "sha256": "2c3999b234c24b33b7021952aeb64b951c90aa727fc87e5383800d8109e23fb0"
+    },
+    {
+      "symbol": "r1_health_sync_provider_00063cb4",
+      "address": "0x63cb4",
+      "size": 139,
+      "sha256": "44dc037eda8919ad38534e20b25ecf16ddcaf5870cbaa7e7d7cf2c824723f203"
+    },
+    {
+      "symbol": "r1_fdb_native_query_count_cb",
+      "address": "0x87428",
+      "size": 18,
+      "sha256": "c2d3ab8bf5e3e823fbfe012cce4613e911c156788d125a069d7b78ac61668067"
+    },
+    {
+      "symbol": "r1_fdb_native_db_path",
+      "address": "0x3f014",
+      "size": 14,
+      "sha256": "1557f1359b30086a3ac71a771ca77acc7b78432a01688fac9e17a39ca2a27709"
+    }
+  ],
+  "exact_bytes": 763,
+  "report_sha256": "56819d5f976beffa030b556a6fb78fbb4da9be84c8c903842da93498c9d4ef4a",
+  "object_sha256": "9ae3dfcb52a629de674a45a548dafe092ad97368e701206b36137d821a5f5777",
+  "count_object_sha256": "4f7983bf6d6b0a57b3818b0355007ba88d0877fd5cc396f89f2789a468e1975f",
+  "driver_sha256": "91031617e207cb2d9defa7683d72bf0a59653512802241524f72e502b13ec20d",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "actual_count_iterator_navigation_and_count_callback_execute": true,
+  "sector_log_reads_memory_copy_lock_custom_callback_and_printf_are_fixtures": true,
+  "full_private_history_or_raw_abi_verified": false,
+  "whole_image_complete": false,
+  "hardware_write_executed": false
+}

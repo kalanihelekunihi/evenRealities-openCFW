@@ -19,7 +19,7 @@ extern void audio_log_extended(uint8_t,const char *,const char *,const char *,
 extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
 
 /* Native RAM 0x2006e345; final linker placement remains open. */
-uint8_t audio_terminal_ui_mode;
+extern uint8_t audio_terminal_ui_mode; /* state-base +0x275 */
 
 static const char module[]="terminal.pb";
 static const char path[]="D:\\01_workspace\\s200_ap510b_iar_git\\app\\gui\\terminal\\terminal_pb_msg_handler.c";

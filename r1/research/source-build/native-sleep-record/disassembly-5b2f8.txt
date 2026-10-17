@@ -1,0 +1,26 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0005b2f8 <r1_stock_i2c5_acquire+0xae20>:
+   5b2f8:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+   5b2fc:	f034 fd8a 	bl	8fe14 <_stack+0xfe14>
+   5b300:	4605      	mov	r5, r0
+   5b302:	2400      	movs	r4, #0
+   5b304:	4e08      	ldr	r6, [pc, #32]	@ (5b328 <r1_stock_i2c5_acquire+0xae50>)
+   5b306:	f44f 5780 	mov.w	r7, #4096	@ 0x1000
+   5b30a:	e009      	b.n	5b320 <r1_stock_i2c5_acquire+0xae48>
+   5b30c:	6870      	ldr	r0, [r6, #4]
+   5b30e:	68b1      	ldr	r1, [r6, #8]
+   5b310:	6b40      	ldr	r0, [r0, #52]	@ 0x34
+   5b312:	6b0a      	ldr	r2, [r1, #48]	@ 0x30
+   5b314:	eb00 3004 	add.w	r0, r0, r4, lsl #12
+   5b318:	4639      	mov	r1, r7
+   5b31a:	4790      	blx	r2
+   5b31c:	1c64      	adds	r4, r4, #1
+   5b31e:	b2e4      	uxtb	r4, r4
+   5b320:	42ac      	cmp	r4, r5
+   5b322:	d3f3      	bcc.n	5b30c <r1_stock_i2c5_acquire+0xae34>
+   5b324:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}

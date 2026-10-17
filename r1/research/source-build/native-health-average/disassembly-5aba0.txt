@@ -1,0 +1,67 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0005aba0 <r1_stock_i2c5_acquire+0xa6c8>:
+   5aba0:	b570      	push	{r4, r5, r6, lr}
+   5aba2:	460d      	mov	r5, r1
+   5aba4:	4604      	mov	r4, r0
+   5aba6:	2805      	cmp	r0, #5
+   5aba8:	d91f      	bls.n	5abea <r1_stock_i2c5_acquire+0xa712>
+   5abaa:	f036 fc9f 	bl	914ec <_stack+0x114ec>
+   5abae:	07c0      	lsls	r0, r0, #31
+   5abb0:	d103      	bne.n	5abba <r1_stock_i2c5_acquire+0xa6e2>
+   5abb2:	f036 fc9b 	bl	914ec <_stack+0x114ec>
+   5abb6:	0740      	lsls	r0, r0, #29
+   5abb8:	d506      	bpl.n	5abc8 <r1_stock_i2c5_acquire+0xa6f0>
+   5abba:	4623      	mov	r3, r4
+   5abbc:	a21e      	add	r2, pc, #120	@ (adr r2, 5ac38 <r1_stock_i2c5_acquire+0xa760>)
+   5abbe:	a11e      	add	r1, pc, #120	@ (adr r1, 5ac38 <r1_stock_i2c5_acquire+0xa760>)
+   5abc0:	f04f 6088 	mov.w	r0, #71303168	@ 0x4400000
+   5abc4:	f036 fd38 	bl	91638 <_stack+0x11638>
+   5abc8:	f036 fc90 	bl	914ec <_stack+0x114ec>
+   5abcc:	0780      	lsls	r0, r0, #30
+   5abce:	d50a      	bpl.n	5abe6 <r1_stock_i2c5_acquire+0xa70e>
+   5abd0:	4820      	ldr	r0, [pc, #128]	@ (5ac54 <r1_stock_i2c5_acquire+0xa77c>)
+   5abd2:	4921      	ldr	r1, [pc, #132]	@ (5ac58 <r1_stock_i2c5_acquire+0xa780>)
+   5abd4:	4622      	mov	r2, r4
+   5abd6:	1a40      	subs	r0, r0, r1
+   5abd8:	08c0      	lsrs	r0, r0, #3
+   5abda:	2101      	movs	r1, #1
+   5abdc:	eb01 4000 	add.w	r0, r1, r0, lsl #16
+   5abe0:	a11e      	add	r1, pc, #120	@ (adr r1, 5ac5c <r1_stock_i2c5_acquire+0xa784>)
+   5abe2:	f01e fef1 	bl	799c8 <r1_stock_gpio_pin_set+0x594>
+   5abe6:	2000      	movs	r0, #0
+   5abe8:	bd70      	pop	{r4, r5, r6, pc}
+   5abea:	4610      	mov	r0, r2
+   5abec:	f000 f85b 	bl	5aca6 <r1_stock_i2c5_acquire+0xa7ce>
+   5abf0:	4602      	mov	r2, r0
+   5abf2:	481f      	ldr	r0, [pc, #124]	@ (5ac70 <r1_stock_i2c5_acquire+0xa798>)
+   5abf4:	eb00 00c4 	add.w	r0, r0, r4, lsl #3
+   5abf8:	8841      	ldrh	r1, [r0, #2]
+   5abfa:	b111      	cbz	r1, 5ac02 <r1_stock_i2c5_acquire+0xa72a>
+   5abfc:	7801      	ldrb	r1, [r0, #0]
+   5abfe:	4291      	cmp	r1, r2
+   5ac00:	d003      	beq.n	5ac0a <r1_stock_i2c5_acquire+0xa732>
+   5ac02:	2100      	movs	r1, #0
+   5ac04:	6001      	str	r1, [r0, #0]
+   5ac06:	6041      	str	r1, [r0, #4]
+   5ac08:	7002      	strb	r2, [r0, #0]
+   5ac0a:	8841      	ldrh	r1, [r0, #2]
+   5ac0c:	1c49      	adds	r1, r1, #1
+   5ac0e:	8041      	strh	r1, [r0, #2]
+   5ac10:	6841      	ldr	r1, [r0, #4]
+   5ac12:	4429      	add	r1, r5
+   5ac14:	ee00 1a10 	vmov	s0, r1
+   5ac18:	6041      	str	r1, [r0, #4]
+   5ac1a:	8840      	ldrh	r0, [r0, #2]
+   5ac1c:	eef8 0a40 	vcvt.f32.u32	s1, s0
+   5ac20:	ee00 0a10 	vmov	s0, r0
+   5ac24:	eeb8 0a40 	vcvt.f32.u32	s0, s0
+   5ac28:	ee80 1a80 	vdiv.f32	s2, s1, s0
+   5ac2c:	eebc 0ac1 	vcvt.u32.f32	s0, s2
+   5ac30:	ee10 0a10 	vmov	r0, s0
+   5ac34:	b280      	uxth	r0, r0
+   5ac36:	bd70      	pop	{r4, r5, r6, pc}

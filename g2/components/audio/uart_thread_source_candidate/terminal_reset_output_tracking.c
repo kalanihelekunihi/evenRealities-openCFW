@@ -7,7 +7,7 @@ struct audio_terminal_output_tracking {
     uint8_t reserved[3];
     uint32_t count;
 };
-struct audio_terminal_output_tracking audio_terminal_output_tracking;
+extern struct audio_terminal_output_tracking audio_terminal_output_tracking; /* state-base +0x294 */
 
 void audio_terminal_reset_output_tracking(void) {
     audio_terminal_output_tracking.active=0;

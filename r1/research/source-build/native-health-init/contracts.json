@@ -1,0 +1,237 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "analysis_elf_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "frozen_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "generator_sha256": "91ff06d1218d4d2b0dfb932dc76c75d49be9e3361d8da93b11d16bea5b663132",
+  "source_sha256": "ad49868663b18fd8832b13974f29851d3deff393c19e8407d94351b45f0fbee2",
+  "bodies": [
+    {
+      "address": "0x8d380",
+      "code_bytes": 68,
+      "source_span_bytes": 140,
+      "symbol": "r1_event_service_0008d380",
+      "instructions": [
+        {
+          "address": "0x8d380",
+          "size": 2,
+          "assembly": "push\t{r4, lr}"
+        },
+        {
+          "address": "0x8d382",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x8d386",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #31"
+        },
+        {
+          "address": "0x8d388",
+          "size": 2,
+          "assembly": "bne.n\t8d392 <_stack+0xd392>"
+        },
+        {
+          "address": "0x8d38a",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x8d38e",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #29"
+        },
+        {
+          "address": "0x8d390",
+          "size": 2,
+          "assembly": "bpl.n\t8d39e <_stack+0xd39e>"
+        },
+        {
+          "address": "0x8d392",
+          "size": 2,
+          "assembly": "add\tr2, pc, #48"
+        },
+        {
+          "address": "0x8d394",
+          "size": 2,
+          "assembly": "add\tr1, pc, #44"
+        },
+        {
+          "address": "0x8d396",
+          "size": 4,
+          "assembly": "mov.w\tr0, #201326592"
+        },
+        {
+          "address": "0x8d39a",
+          "size": 4,
+          "assembly": "bl\t91638 <_stack+0x11638>"
+        },
+        {
+          "address": "0x8d39e",
+          "size": 4,
+          "assembly": "bl\t914ec <_stack+0x114ec>"
+        },
+        {
+          "address": "0x8d3a2",
+          "size": 2,
+          "assembly": "lsls\tr0, r0, #30"
+        },
+        {
+          "address": "0x8d3a4",
+          "size": 2,
+          "assembly": "bpl.n\t8d3ba <_stack+0xd3ba>"
+        },
+        {
+          "address": "0x8d3a6",
+          "size": 2,
+          "assembly": "ldr\tr0, [pc, #64]"
+        },
+        {
+          "address": "0x8d3a8",
+          "size": 2,
+          "assembly": "ldr\tr1, [pc, #64]"
+        },
+        {
+          "address": "0x8d3aa",
+          "size": 2,
+          "assembly": "subs\tr0, r0, r1"
+        },
+        {
+          "address": "0x8d3ac",
+          "size": 2,
+          "assembly": "lsrs\tr0, r0, #3"
+        },
+        {
+          "address": "0x8d3ae",
+          "size": 2,
+          "assembly": "movs\tr1, #3"
+        },
+        {
+          "address": "0x8d3b0",
+          "size": 4,
+          "assembly": "add.w\tr0, r1, r0, lsl #16"
+        },
+        {
+          "address": "0x8d3b4",
+          "size": 2,
+          "assembly": "add\tr1, pc, #56"
+        },
+        {
+          "address": "0x8d3b6",
+          "size": 4,
+          "assembly": "bl\t799c0 <r1_stock_gpio_pin_set+0x58c>"
+        },
+        {
+          "address": "0x8d3ba",
+          "size": 4,
+          "assembly": "ldmia.w\tsp!, {r4, lr}"
+        },
+        {
+          "address": "0x8d3be",
+          "size": 2,
+          "assembly": "movs\tr0, #1"
+        },
+        {
+          "address": "0x8d3c0",
+          "size": 4,
+          "assembly": "b.w\t8a866 <_stack+0xa866>"
+        }
+      ],
+      "data": [
+        {
+          "address": "0x8d3c4",
+          "size": 34,
+          "kind": "text",
+          "value": "[RING]service heartrate algo init"
+        },
+        {
+          "address": "0x8d3e8",
+          "size": 4,
+          "kind": "word",
+          "value": "__start_log_const_data+224"
+        },
+        {
+          "address": "0x8d3ec",
+          "size": 4,
+          "kind": "word",
+          "value": "__start_log_const_data"
+        },
+        {
+          "address": "0x8d3f0",
+          "size": 28,
+          "kind": "text",
+          "value": "service heartrate algo init"
+        }
+      ],
+      "disassembly_sha256": "aac27b0758446ed3ec9892b65452ba190bffdff0b009c08dc4e2e71de1ce64ee"
+    },
+    {
+      "address": "0x8a866",
+      "code_bytes": 24,
+      "source_span_bytes": 24,
+      "symbol": "r1_health_init_publish",
+      "instructions": [
+        {
+          "address": "0x8a866",
+          "size": 2,
+          "assembly": "push\t{r0, lr}"
+        },
+        {
+          "address": "0x8a868",
+          "size": 4,
+          "assembly": "ldrb.w\tr0, [sp]"
+        },
+        {
+          "address": "0x8a86c",
+          "size": 2,
+          "assembly": "cmp\tr0, #4"
+        },
+        {
+          "address": "0x8a86e",
+          "size": 2,
+          "assembly": "bcs.n\t8a87c <_stack+0xa87c>"
+        },
+        {
+          "address": "0x8a870",
+          "size": 2,
+          "assembly": "movs\tr2, #1"
+        },
+        {
+          "address": "0x8a872",
+          "size": 2,
+          "assembly": "mov\tr1, sp"
+        },
+        {
+          "address": "0x8a874",
+          "size": 4,
+          "assembly": "movw\tr0, #4097"
+        },
+        {
+          "address": "0x8a878",
+          "size": 4,
+          "assembly": "bl\t8d8fc <_stack+0xd8fc>"
+        },
+        {
+          "address": "0x8a87c",
+          "size": 2,
+          "assembly": "pop\t{r3, pc}"
+        }
+      ],
+      "data": [],
+      "disassembly_sha256": "abf5008212790e9df36da1afc961a82b8485ea8809c65128566f9785c8cc027d"
+    }
+  ],
+  "providers": {
+    "0x914ec": "r1_structured_log_mode_get",
+    "0x91638": "r1_structured_log_format",
+    "0x799c0": "nrf_log_frontend_std_0",
+    "0x8a866": "r1_health_init_publish",
+    "0x8d8fc": "r1_event_publish"
+  },
+  "native_code_bytes": 92,
+  "native_span_bytes": 164,
+  "new_ram_state_bytes": 0,
+  "full_context_extent_owned": false,
+  "publish_and_storage_execution_gated": true,
+  "whole_image_complete": false
+}

@@ -1,0 +1,42 @@
+{
+  "comparisons": 4800,
+  "counts": {
+    "returned": 3816,
+    "allocation_faults": 984,
+    "lock_calls": 5760,
+    "unlock_calls": 3792,
+    "allocations": 5424
+  },
+  "trace_sha256": "cb16d3091c1bbc98a38432558c3adb368052f721bfcb17c5c183510022aa444e",
+  "exact_spans": [
+    {
+      "section": ".body",
+      "address": "0x8af8c",
+      "size": 156,
+      "sha256": "1bd01a41761a94c7dadf99dd78495944631b5f5e7b197f7ec7a3853a9121fd52"
+    },
+    {
+      "section": ".routes",
+      "address": "0x99ba8",
+      "size": 16,
+      "sha256": "f984a50e5af41624b886763ab7b1b0cc114e382d7786c13f91917f6ce9688d71"
+    },
+    {
+      "section": ".roots",
+      "address": "0x20015708",
+      "size": 20,
+      "sha256": "de47c9b27eb8d300dbb5f2c353e632c393262cf06340c4fa7f1b40c4cbd36f90"
+    }
+  ],
+  "exact_rom_bytes": 172,
+  "typed_ram_bytes": 20,
+  "object_sha256": "4e6f9c2f34d62259054ef423a6bf439681145207b7c07c8a091b108365a15224",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "e69c3dc6b48dcec9ac2bbbd62cda2fb5123173d025ceb225627e1fd80ae9fd60",
+  "driver_sha256": "3fb6408be90fb3835f99c9ebccc9c2c7b1e38fe3e58495689c2cf54ea43259f9",
+  "independent_list_allocation_and_callback_oracle": true,
+  "lock_unlock_and_heap_are_fixtures": true,
+  "full_raw_abi_or_private_histories_verified": false,
+  "whole_image_complete": false,
+  "hardware_write_executed": false
+}

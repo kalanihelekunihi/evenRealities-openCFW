@@ -1,0 +1,63 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0008aeb0 <r1_stock_gpio_pin_set+0x11a7c>:
+   8aeb0:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
+   8aeb4:	4d20      	ldr	r5, [pc, #128]	@ (8af38 <_stack+0xaf38>)
+   8aeb6:	4682      	mov	sl, r0
+   8aeb8:	b086      	sub	sp, #24
+   8aeba:	7aa8      	ldrb	r0, [r5, #10]
+   8aebc:	460c      	mov	r4, r1
+   8aebe:	2800      	cmp	r0, #0
+   8aec0:	d034      	beq.n	8af2c <_stack+0xaf2c>
+   8aec2:	4669      	mov	r1, sp
+   8aec4:	a801      	add	r0, sp, #4
+   8aec6:	f7cf fd63 	bl	5a990 <r1_stock_i2c5_acquire+0xa4b8>
+   8aeca:	2800      	cmp	r0, #0
+   8aecc:	d02e      	beq.n	8af2c <_stack+0xaf2c>
+   8aece:	9e01      	ldr	r6, [sp, #4]
+   8aed0:	b37e      	cbz	r6, 8af32 <_stack+0xaf32>
+   8aed2:	6930      	ldr	r0, [r6, #16]
+   8aed4:	b368      	cbz	r0, 8af32 <_stack+0xaf32>
+   8aed6:	f9b5 1008 	ldrsh.w	r1, [r5, #8]
+   8aeda:	f105 000c 	add.w	r0, r5, #12
+   8aede:	4681      	mov	r9, r0
+   8aee0:	42a1      	cmp	r1, r4
+   8aee2:	d003      	beq.n	8aeec <_stack+0xaeec>
+   8aee4:	812c      	strh	r4, [r5, #8]
+   8aee6:	2114      	movs	r1, #20
+   8aee8:	f79c fc5f 	bl	277aa <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x7aa>
+   8aeec:	f8df 804c 	ldr.w	r8, [pc, #76]	@ 8af3c <_stack+0xaf3c>
+   8aef0:	2500      	movs	r5, #0
+   8aef2:	f898 0000 	ldrb.w	r0, [r8]
+   8aef6:	f090 0701 	eors.w	r7, r0, #1
+   8aefa:	d004      	beq.n	8af06 <_stack+0xaf06>
+   8aefc:	68b1      	ldr	r1, [r6, #8]
+   8aefe:	b111      	cbz	r1, 8af06 <_stack+0xaf06>
+   8af00:	9800      	ldr	r0, [sp, #0]
+   8af02:	4788      	blx	r1
+   8af04:	4605      	mov	r5, r0
+   8af06:	9801      	ldr	r0, [sp, #4]
+   8af08:	4621      	mov	r1, r4
+   8af0a:	9a00      	ldr	r2, [sp, #0]
+   8af0c:	6903      	ldr	r3, [r0, #16]
+   8af0e:	4650      	mov	r0, sl
+   8af10:	4798      	blx	r3
+   8af12:	0004      	movs	r4, r0
+   8af14:	d009      	beq.n	8af2a <_stack+0xaf2a>
+   8af16:	2114      	movs	r1, #20
+   8af18:	4648      	mov	r0, r9
+   8af1a:	f79c fc46 	bl	277aa <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x7aa>
+   8af1e:	b127      	cbz	r7, 8af2a <_stack+0xaf2a>
+   8af20:	2101      	movs	r1, #1
+   8af22:	f8c8 5004 	str.w	r5, [r8, #4]
+   8af26:	f888 1000 	strb.w	r1, [r8]
+   8af2a:	4620      	mov	r0, r4
+   8af2c:	b006      	add	sp, #24
+   8af2e:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
+   8af32:	e7ff      	b.n	8af34 <_stack+0xaf34>
+   8af34:	2000      	movs	r0, #0
+   8af36:	e7f9      	b.n	8af2c <_stack+0xaf2c>

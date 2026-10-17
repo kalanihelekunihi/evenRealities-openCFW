@@ -1,0 +1,649 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "analysis_elf_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "frozen_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "generator_sha256": "64e208ec400f58b6e71948104dcd07924d43da5dc70a3dde0a24dc07611b299c",
+  "source_sha256": "0489b1c4b9c968be07a5a031bff927f9279b5bfd8e8702e061381b65d0039993",
+  "bodies": [
+    {
+      "address": "0x8adb4",
+      "code_bytes": 8,
+      "source_span_bytes": 12,
+      "symbol": "r1_time_utc_offset_get",
+      "instructions": [
+        {
+          "address": "0x8adb4",
+          "size": 2,
+          "assembly": "ldr\tr0, [pc, #4]"
+        },
+        {
+          "address": "0x8adb6",
+          "size": 4,
+          "assembly": "ldrsh.w\tr0, [r0, #8]"
+        },
+        {
+          "address": "0x8adba",
+          "size": 2,
+          "assembly": "bx\tlr"
+        }
+      ],
+      "disassembly_sha256": "fa80ae17733360eaba1cb1f2332d2d96d87f53c756c9463a0b9cd0cf669f5e81"
+    },
+    {
+      "address": "0x8af40",
+      "code_bytes": 74,
+      "source_span_bytes": 76,
+      "symbol": "time_calendar_utc_to_calendar",
+      "instructions": [
+        {
+          "address": "0x8af40",
+          "size": 2,
+          "assembly": "push\t{r4, lr}"
+        },
+        {
+          "address": "0x8af42",
+          "size": 2,
+          "assembly": "sub\tsp, #40"
+        },
+        {
+          "address": "0x8af44",
+          "size": 2,
+          "assembly": "movs\tr4, r2"
+        },
+        {
+          "address": "0x8af46",
+          "size": 2,
+          "assembly": "beq.n\t8af86 <_stack+0xaf86>"
+        },
+        {
+          "address": "0x8af48",
+          "size": 4,
+          "assembly": "rsb\tr1, r1, r1, lsl #4"
+        },
+        {
+          "address": "0x8af4c",
+          "size": 4,
+          "assembly": "add.w\tr0, r0, r1, lsl #2"
+        },
+        {
+          "address": "0x8af50",
+          "size": 2,
+          "assembly": "str\tr0, [sp, #36]"
+        },
+        {
+          "address": "0x8af52",
+          "size": 2,
+          "assembly": "mov\tr1, sp"
+        },
+        {
+          "address": "0x8af54",
+          "size": 2,
+          "assembly": "add\tr0, sp, #36"
+        },
+        {
+          "address": "0x8af56",
+          "size": 4,
+          "assembly": "bl\t5a7bc <r1_stock_i2c5_acquire+0xa2e4>"
+        },
+        {
+          "address": "0x8af5a",
+          "size": 2,
+          "assembly": "cmp\tr0, #0"
+        },
+        {
+          "address": "0x8af5c",
+          "size": 2,
+          "assembly": "beq.n\t8af82 <_stack+0xaf82>"
+        },
+        {
+          "address": "0x8af5e",
+          "size": 2,
+          "assembly": "ldrh\tr1, [r0, #20]"
+        },
+        {
+          "address": "0x8af60",
+          "size": 4,
+          "assembly": "addw\tr1, r1, #1900"
+        },
+        {
+          "address": "0x8af64",
+          "size": 2,
+          "assembly": "strh\tr1, [r4, #0]"
+        },
+        {
+          "address": "0x8af66",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r0, #16]"
+        },
+        {
+          "address": "0x8af68",
+          "size": 2,
+          "assembly": "adds\tr1, r1, #1"
+        },
+        {
+          "address": "0x8af6a",
+          "size": 2,
+          "assembly": "strb\tr1, [r4, #2]"
+        },
+        {
+          "address": "0x8af6c",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r0, #12]"
+        },
+        {
+          "address": "0x8af6e",
+          "size": 2,
+          "assembly": "strb\tr1, [r4, #3]"
+        },
+        {
+          "address": "0x8af70",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r0, #8]"
+        },
+        {
+          "address": "0x8af72",
+          "size": 2,
+          "assembly": "strb\tr1, [r4, #4]"
+        },
+        {
+          "address": "0x8af74",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r0, #4]"
+        },
+        {
+          "address": "0x8af76",
+          "size": 2,
+          "assembly": "strb\tr1, [r4, #5]"
+        },
+        {
+          "address": "0x8af78",
+          "size": 2,
+          "assembly": "ldrb\tr1, [r0, #0]"
+        },
+        {
+          "address": "0x8af7a",
+          "size": 2,
+          "assembly": "strb\tr1, [r4, #6]"
+        },
+        {
+          "address": "0x8af7c",
+          "size": 2,
+          "assembly": "ldrb\tr0, [r0, #24]"
+        },
+        {
+          "address": "0x8af7e",
+          "size": 2,
+          "assembly": "strb\tr0, [r4, #7]"
+        },
+        {
+          "address": "0x8af80",
+          "size": 2,
+          "assembly": "movs\tr0, #1"
+        },
+        {
+          "address": "0x8af82",
+          "size": 2,
+          "assembly": "add\tsp, #40"
+        },
+        {
+          "address": "0x8af84",
+          "size": 2,
+          "assembly": "pop\t{r4, pc}"
+        },
+        {
+          "address": "0x8af86",
+          "size": 2,
+          "assembly": "movs\tr0, #0"
+        },
+        {
+          "address": "0x8af88",
+          "size": 2,
+          "assembly": "b.n\t8af82 <_stack+0xaf82>"
+        }
+      ],
+      "disassembly_sha256": "d73fffa023f13b8921079b5b34a7775f47a20c86e499662facf36f6b89cf21ff"
+    },
+    {
+      "address": "0x5a7bc",
+      "code_bytes": 228,
+      "source_span_bytes": 240,
+      "symbol": "time_calendar_unix_to_broken_down",
+      "instructions": [
+        {
+          "address": "0x5a7bc",
+          "size": 2,
+          "assembly": "push\t{r4, r5, r6, r7, lr}"
+        },
+        {
+          "address": "0x5a7be",
+          "size": 2,
+          "assembly": "mov\tr4, r0"
+        },
+        {
+          "address": "0x5a7c0",
+          "size": 2,
+          "assembly": "cbnz\tr1, 5a7c4 <r1_stock_i2c5_acquire+0xa2ec>"
+        },
+        {
+          "address": "0x5a7c2",
+          "size": 2,
+          "assembly": "ldr\tr1, [pc, #220]"
+        },
+        {
+          "address": "0x5a7c4",
+          "size": 2,
+          "assembly": "ldr\tr3, [pc, #220]"
+        },
+        {
+          "address": "0x5a7c6",
+          "size": 2,
+          "assembly": "mov\tr0, r1"
+        },
+        {
+          "address": "0x5a7c8",
+          "size": 2,
+          "assembly": "ldr\tr1, [r4, #0]"
+        },
+        {
+          "address": "0x5a7ca",
+          "size": 4,
+          "assembly": "mov.w\tr6, #3600"
+        },
+        {
+          "address": "0x5a7ce",
+          "size": 4,
+          "assembly": "udiv\tr5, r1, r3"
+        },
+        {
+          "address": "0x5a7d2",
+          "size": 4,
+          "assembly": "udiv\tr2, r1, r3"
+        },
+        {
+          "address": "0x5a7d6",
+          "size": 4,
+          "assembly": "mls\tr5, r3, r5, r1"
+        },
+        {
+          "address": "0x5a7da",
+          "size": 4,
+          "assembly": "udiv\tr1, r5, r6"
+        },
+        {
+          "address": "0x5a7de",
+          "size": 2,
+          "assembly": "str\tr1, [r0, #8]"
+        },
+        {
+          "address": "0x5a7e0",
+          "size": 4,
+          "assembly": "udiv\tr1, r5, r6"
+        },
+        {
+          "address": "0x5a7e4",
+          "size": 4,
+          "assembly": "mls\tr1, r6, r1, r5"
+        },
+        {
+          "address": "0x5a7e8",
+          "size": 2,
+          "assembly": "movs\tr6, #60"
+        },
+        {
+          "address": "0x5a7ea",
+          "size": 4,
+          "assembly": "udiv\tr1, r1, r6"
+        },
+        {
+          "address": "0x5a7ee",
+          "size": 2,
+          "assembly": "str\tr1, [r0, #4]"
+        },
+        {
+          "address": "0x5a7f0",
+          "size": 4,
+          "assembly": "udiv\tr1, r5, r6"
+        },
+        {
+          "address": "0x5a7f4",
+          "size": 4,
+          "assembly": "mls\tr1, r6, r1, r5"
+        },
+        {
+          "address": "0x5a7f8",
+          "size": 2,
+          "assembly": "str\tr1, [r0, #0]"
+        },
+        {
+          "address": "0x5a7fa",
+          "size": 2,
+          "assembly": "movs\tr6, #100"
+        },
+        {
+          "address": "0x5a7fc",
+          "size": 4,
+          "assembly": "movw\tr1, #1970"
+        },
+        {
+          "address": "0x5a800",
+          "size": 2,
+          "assembly": "lsls\tr5, r6, #2"
+        },
+        {
+          "address": "0x5a802",
+          "size": 4,
+          "assembly": "mov.w\tlr, #366"
+        },
+        {
+          "address": "0x5a806",
+          "size": 4,
+          "assembly": "mov.w\tr7, #364"
+        },
+        {
+          "address": "0x5a80a",
+          "size": 2,
+          "assembly": "b.n\t5a834 <r1_stock_i2c5_acquire+0xa35c>"
+        },
+        {
+          "address": "0x5a80c",
+          "size": 4,
+          "assembly": "movs.w\tip, r1, lsl #30"
+        },
+        {
+          "address": "0x5a810",
+          "size": 2,
+          "assembly": "bne.n\t5a820 <r1_stock_i2c5_acquire+0xa348>"
+        },
+        {
+          "address": "0x5a812",
+          "size": 4,
+          "assembly": "udiv\tip, r1, r6"
+        },
+        {
+          "address": "0x5a816",
+          "size": 4,
+          "assembly": "mls\tip, r6, ip, r1"
+        },
+        {
+          "address": "0x5a81a",
+          "size": 4,
+          "assembly": "cmp.w\tip, #0"
+        },
+        {
+          "address": "0x5a81e",
+          "size": 2,
+          "assembly": "bne.n\t5a844 <r1_stock_i2c5_acquire+0xa36c>"
+        },
+        {
+          "address": "0x5a820",
+          "size": 4,
+          "assembly": "udiv\tip, r1, r5"
+        },
+        {
+          "address": "0x5a824",
+          "size": 4,
+          "assembly": "mls\tip, r5, ip, r1"
+        },
+        {
+          "address": "0x5a828",
+          "size": 4,
+          "assembly": "cmp.w\tip, #0"
+        },
+        {
+          "address": "0x5a82c",
+          "size": 2,
+          "assembly": "beq.n\t5a844 <r1_stock_i2c5_acquire+0xa36c>"
+        },
+        {
+          "address": "0x5a82e",
+          "size": 2,
+          "assembly": "adds\tr1, r1, #1"
+        },
+        {
+          "address": "0x5a830",
+          "size": 4,
+          "assembly": "subw\tr2, r2, #365"
+        },
+        {
+          "address": "0x5a834",
+          "size": 2,
+          "assembly": "cmp\tr2, r7"
+        },
+        {
+          "address": "0x5a836",
+          "size": 2,
+          "assembly": "bhi.n\t5a80c <r1_stock_i2c5_acquire+0xa334>"
+        },
+        {
+          "address": "0x5a838",
+          "size": 4,
+          "assembly": "subw\tr7, r1, #1900"
+        },
+        {
+          "address": "0x5a83c",
+          "size": 2,
+          "assembly": "str\tr7, [r0, #20]"
+        },
+        {
+          "address": "0x5a83e",
+          "size": 2,
+          "assembly": "lsls\tr7, r1, #30"
+        },
+        {
+          "address": "0x5a840",
+          "size": 2,
+          "assembly": "beq.n\t5a850 <r1_stock_i2c5_acquire+0xa378>"
+        },
+        {
+          "address": "0x5a842",
+          "size": 2,
+          "assembly": "b.n\t5a85a <r1_stock_i2c5_acquire+0xa382>"
+        },
+        {
+          "address": "0x5a844",
+          "size": 2,
+          "assembly": "cmp\tr2, lr"
+        },
+        {
+          "address": "0x5a846",
+          "size": 2,
+          "assembly": "bcc.n\t5a838 <r1_stock_i2c5_acquire+0xa360>"
+        },
+        {
+          "address": "0x5a848",
+          "size": 2,
+          "assembly": "adds\tr1, r1, #1"
+        },
+        {
+          "address": "0x5a84a",
+          "size": 4,
+          "assembly": "sub.w\tr2, r2, #366"
+        },
+        {
+          "address": "0x5a84e",
+          "size": 2,
+          "assembly": "b.n\t5a834 <r1_stock_i2c5_acquire+0xa35c>"
+        },
+        {
+          "address": "0x5a850",
+          "size": 4,
+          "assembly": "udiv\tr7, r1, r6"
+        },
+        {
+          "address": "0x5a854",
+          "size": 4,
+          "assembly": "mls\tr6, r6, r7, r1"
+        },
+        {
+          "address": "0x5a858",
+          "size": 2,
+          "assembly": "cbnz\tr6, 5a86c <r1_stock_i2c5_acquire+0xa394>"
+        },
+        {
+          "address": "0x5a85a",
+          "size": 4,
+          "assembly": "udiv\tr6, r1, r5"
+        },
+        {
+          "address": "0x5a85e",
+          "size": 4,
+          "assembly": "mls\tr1, r5, r6, r1"
+        },
+        {
+          "address": "0x5a862",
+          "size": 2,
+          "assembly": "cbz\tr1, 5a86c <r1_stock_i2c5_acquire+0xa394>"
+        },
+        {
+          "address": "0x5a864",
+          "size": 2,
+          "assembly": "ldr\tr5, [pc, #64]"
+        },
+        {
+          "address": "0x5a866",
+          "size": 2,
+          "assembly": "movs\tr1, #0"
+        },
+        {
+          "address": "0x5a868",
+          "size": 2,
+          "assembly": "mov\tr7, r2"
+        },
+        {
+          "address": "0x5a86a",
+          "size": 2,
+          "assembly": "b.n\t5a878 <r1_stock_i2c5_acquire+0xa3a0>"
+        },
+        {
+          "address": "0x5a86c",
+          "size": 2,
+          "assembly": "ldr\tr5, [pc, #56]"
+        },
+        {
+          "address": "0x5a86e",
+          "size": 2,
+          "assembly": "adds\tr5, #12"
+        },
+        {
+          "address": "0x5a870",
+          "size": 2,
+          "assembly": "b.n\t5a866 <r1_stock_i2c5_acquire+0xa38e>"
+        },
+        {
+          "address": "0x5a872",
+          "size": 2,
+          "assembly": "subs\tr7, r7, r6"
+        },
+        {
+          "address": "0x5a874",
+          "size": 2,
+          "assembly": "adds\tr1, r1, #1"
+        },
+        {
+          "address": "0x5a876",
+          "size": 2,
+          "assembly": "uxtb\tr1, r1"
+        },
+        {
+          "address": "0x5a878",
+          "size": 2,
+          "assembly": "ldrb\tr6, [r5, r1]"
+        },
+        {
+          "address": "0x5a87a",
+          "size": 2,
+          "assembly": "cmp\tr6, r7"
+        },
+        {
+          "address": "0x5a87c",
+          "size": 2,
+          "assembly": "bls.n\t5a872 <r1_stock_i2c5_acquire+0xa39a>"
+        },
+        {
+          "address": "0x5a87e",
+          "size": 2,
+          "assembly": "str\tr2, [r0, #28]"
+        },
+        {
+          "address": "0x5a880",
+          "size": 2,
+          "assembly": "adds\tr7, r7, #1"
+        },
+        {
+          "address": "0x5a882",
+          "size": 4,
+          "assembly": "strd\tr7, r1, [r0, #12]"
+        },
+        {
+          "address": "0x5a886",
+          "size": 2,
+          "assembly": "ldr\tr1, [r4, #0]"
+        },
+        {
+          "address": "0x5a888",
+          "size": 2,
+          "assembly": "movs\tr2, #7"
+        },
+        {
+          "address": "0x5a88a",
+          "size": 4,
+          "assembly": "udiv\tr1, r1, r3"
+        },
+        {
+          "address": "0x5a88e",
+          "size": 2,
+          "assembly": "adds\tr1, r1, #4"
+        },
+        {
+          "address": "0x5a890",
+          "size": 4,
+          "assembly": "udiv\tr3, r1, r2"
+        },
+        {
+          "address": "0x5a894",
+          "size": 4,
+          "assembly": "mls\tr1, r2, r3, r1"
+        },
+        {
+          "address": "0x5a898",
+          "size": 2,
+          "assembly": "str\tr1, [r0, #24]"
+        },
+        {
+          "address": "0x5a89a",
+          "size": 2,
+          "assembly": "movs\tr1, #0"
+        },
+        {
+          "address": "0x5a89c",
+          "size": 2,
+          "assembly": "str\tr1, [r0, #32]"
+        },
+        {
+          "address": "0x5a89e",
+          "size": 2,
+          "assembly": "pop\t{r4, r5, r6, r7, pc}"
+        }
+      ],
+      "disassembly_sha256": "e2473abc12ac785c7502408b02ea9bc22c082b350a302d106925405f8b4f0bc5"
+    }
+  ],
+  "native_code_bytes": 310,
+  "native_span_bytes": 328,
+  "shared_config": {
+    "r1_time_state": {
+      "address": "0x20016ac4",
+      "size": 32
+    },
+    "unix_to_broken_down_fallback": {
+      "address": "0x20016ae4",
+      "size": 36
+    },
+    "month_days_forward": {
+      "address": "0x99c5c",
+      "size": 24
+    }
+  },
+  "new_ram_state_bytes": 0,
+  "whole_image_complete": false
+}

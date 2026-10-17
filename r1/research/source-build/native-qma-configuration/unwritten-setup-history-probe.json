@@ -1,0 +1,60 @@
+{
+  "case": {
+    "kind": "setup",
+    "args": [
+      25,
+      305419896,
+      2882400001,
+      2557891634
+    ],
+    "chip": 144,
+    "byte": 165,
+    "ready": 0,
+    "failure": "none",
+    "written": 0,
+    "mutation": 0,
+    "bus": 2,
+    "seed": 0
+  },
+  "native_return": 1,
+  "source_return": 1,
+  "first_trace_difference": {
+    "index": 1698,
+    "native": [
+      "write",
+      [
+        536944640,
+        0,
+        537120648,
+        0
+      ],
+      "12001900b4cf0320010000000000000000000000",
+      "fb",
+      0
+    ],
+    "source": [
+      "write",
+      [
+        536944640,
+        0,
+        537120648,
+        0
+      ],
+      "12001900b4cf0320010000000000000000000000",
+      "f3",
+      0
+    ]
+  },
+  "full_private_frame_history_verified": false,
+  "resolved": false,
+  "preserved_files": {
+    "r1-qma-configuration-verification.log": "be832c42ffc1d348b33ae2b3ca37a3c98ba5496524c3b24161e7a0d924f10ec4",
+    "native_qma_configuration.o": "295d52aba21fffc1b29f2e24701500974bd06563e5c5717538187df755e930e6",
+    "verify_native_qma_configuration.py": "aab6c057cc80af27130df774240e5fbd7ab110b519bc8634ff27a6a3d7593019",
+    "qma-source.o": "9f8583849f3638e1d5926ef41743bebc9da741f436b51267bc13a484e6c00b3f",
+    "report.json": "89f4b0fa88753ff5a1c6ef3f5ee40565d25c018dac4eaeb434257f0c3ea9274f",
+    "build_native_qma_configuration.py": "e3374b8296008d89a2608e4c93da52ff26db8c90cd7edb527adec4d34a7e64f3",
+    "native-qma-configuration-runtime.o": "98e23c14564c1f4f111a68813697d81c5ce53798eca1a5ed68bd08ea642b51e7",
+    "native_qma_configuration.c": "45acdac99ea8973cc681acd8bc2c3996ee4d05c2ca4aac3c2687a4a360982d62"
+  }
+}

@@ -1,0 +1,333 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "analysis_elf_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "frozen_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "generator_sha256": "9b7a3a1ad98c7094b179516d275851d9c7c0eadaafb3fe3a106fbdc78835bda6",
+  "source_sha256": "7bcb1a0b043319a669b929375b244024aa2dd2822ca1c123f37173814b4308d5",
+  "bodies": [
+    {
+      "address": "0x87e14",
+      "code_bytes": 68,
+      "source_span_bytes": 68,
+      "symbol": "r1_fdb_native_read_tsl",
+      "instructions": [
+        {
+          "address": "0x87e14",
+          "size": 2,
+          "assembly": "push\t{r4, r5, lr}"
+        },
+        {
+          "address": "0x87e16",
+          "size": 2,
+          "assembly": "sub\tsp, #36"
+        },
+        {
+          "address": "0x87e18",
+          "size": 2,
+          "assembly": "mov\tr4, r1"
+        },
+        {
+          "address": "0x87e1a",
+          "size": 2,
+          "assembly": "mov\tr5, r0"
+        },
+        {
+          "address": "0x87e1c",
+          "size": 2,
+          "assembly": "ldr\tr1, [r1, #12]"
+        },
+        {
+          "address": "0x87e1e",
+          "size": 2,
+          "assembly": "movs\tr3, #32"
+        },
+        {
+          "address": "0x87e20",
+          "size": 2,
+          "assembly": "mov\tr2, sp"
+        },
+        {
+          "address": "0x87e22",
+          "size": 4,
+          "assembly": "bl\t3f03e <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x1803e>"
+        },
+        {
+          "address": "0x87e26",
+          "size": 2,
+          "assembly": "movs\tr1, #6"
+        },
+        {
+          "address": "0x87e28",
+          "size": 2,
+          "assembly": "mov\tr0, sp"
+        },
+        {
+          "address": "0x87e2a",
+          "size": 4,
+          "assembly": "bl\t3f076 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x18076>"
+        },
+        {
+          "address": "0x87e2e",
+          "size": 2,
+          "assembly": "uxtb\tr1, r0"
+        },
+        {
+          "address": "0x87e30",
+          "size": 2,
+          "assembly": "strb\tr1, [r4, #0]"
+        },
+        {
+          "address": "0x87e32",
+          "size": 2,
+          "assembly": "cmp\tr1, #1"
+        },
+        {
+          "address": "0x87e34",
+          "size": 2,
+          "assembly": "beq.n\t87e4a <_stack+0x7e4a>"
+        },
+        {
+          "address": "0x87e36",
+          "size": 2,
+          "assembly": "cbz\tr1, 87e4a <_stack+0x7e4a>"
+        },
+        {
+          "address": "0x87e38",
+          "size": 2,
+          "assembly": "ldr\tr0, [sp, #24]"
+        },
+        {
+          "address": "0x87e3a",
+          "size": 2,
+          "assembly": "str\tr0, [r4, #8]"
+        },
+        {
+          "address": "0x87e3c",
+          "size": 2,
+          "assembly": "ldr\tr0, [sp, #28]"
+        },
+        {
+          "address": "0x87e3e",
+          "size": 2,
+          "assembly": "str\tr0, [r4, #16]"
+        },
+        {
+          "address": "0x87e40",
+          "size": 2,
+          "assembly": "ldr\tr0, [sp, #20]"
+        },
+        {
+          "address": "0x87e42",
+          "size": 2,
+          "assembly": "str\tr0, [r4, #4]"
+        },
+        {
+          "address": "0x87e44",
+          "size": 2,
+          "assembly": "add\tsp, #36"
+        },
+        {
+          "address": "0x87e46",
+          "size": 2,
+          "assembly": "movs\tr0, #0"
+        },
+        {
+          "address": "0x87e48",
+          "size": 2,
+          "assembly": "pop\t{r4, r5, pc}"
+        },
+        {
+          "address": "0x87e4a",
+          "size": 2,
+          "assembly": "ldr\tr0, [r5, #88]"
+        },
+        {
+          "address": "0x87e4c",
+          "size": 2,
+          "assembly": "str\tr0, [r4, #8]"
+        },
+        {
+          "address": "0x87e4e",
+          "size": 4,
+          "assembly": "mov.w\tr0, #4294967295"
+        },
+        {
+          "address": "0x87e52",
+          "size": 2,
+          "assembly": "str\tr0, [r4, #16]"
+        },
+        {
+          "address": "0x87e54",
+          "size": 2,
+          "assembly": "movs\tr0, #0"
+        },
+        {
+          "address": "0x87e56",
+          "size": 2,
+          "assembly": "b.n\t87e42 <_stack+0x7e42>"
+        }
+      ],
+      "disassembly_sha256": "8874c90b281fb308ff3e0577305b3d32eb67450f94ba4120ea92a5018c1bd72c"
+    },
+    {
+      "address": "0x3f03e",
+      "code_bytes": 28,
+      "source_span_bytes": 28,
+      "symbol": "r1_fdb_native_flash_read",
+      "instructions": [
+        {
+          "address": "0x3f03e",
+          "size": 2,
+          "assembly": "push\t{r4, r5, r6, lr}"
+        },
+        {
+          "address": "0x3f040",
+          "size": 2,
+          "assembly": "ldrb\tr5, [r0, #25]"
+        },
+        {
+          "address": "0x3f042",
+          "size": 2,
+          "assembly": "movs\tr4, #0"
+        },
+        {
+          "address": "0x3f044",
+          "size": 2,
+          "assembly": "cbz\tr5, 3f04a <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x1804a>"
+        },
+        {
+          "address": "0x3f046",
+          "size": 2,
+          "assembly": "movs\tr0, #2"
+        },
+        {
+          "address": "0x3f048",
+          "size": 2,
+          "assembly": "pop\t{r4, r5, r6, pc}"
+        },
+        {
+          "address": "0x3f04a",
+          "size": 2,
+          "assembly": "ldr\tr0, [r0, #8]"
+        },
+        {
+          "address": "0x3f04c",
+          "size": 4,
+          "assembly": "bl\t631e8 <r1_stock_i2c5_acquire+0x12d10>"
+        },
+        {
+          "address": "0x3f050",
+          "size": 2,
+          "assembly": "cmp\tr0, #0"
+        },
+        {
+          "address": "0x3f052",
+          "size": 2,
+          "assembly": "bge.n\t3f056 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x18056>"
+        },
+        {
+          "address": "0x3f054",
+          "size": 2,
+          "assembly": "movs\tr4, #2"
+        },
+        {
+          "address": "0x3f056",
+          "size": 2,
+          "assembly": "mov\tr0, r4"
+        },
+        {
+          "address": "0x3f058",
+          "size": 2,
+          "assembly": "pop\t{r4, r5, r6, pc}"
+        }
+      ],
+      "disassembly_sha256": "23867fa74a04be7cac6d693457a01f4301592c75f8c710f8c205444ec52b17a7"
+    },
+    {
+      "address": "0x3f076",
+      "code_bytes": 30,
+      "source_span_bytes": 30,
+      "symbol": "r1_fdb_native_get_status",
+      "instructions": [
+        {
+          "address": "0x3f076",
+          "size": 2,
+          "assembly": "movs\tr2, #0"
+        },
+        {
+          "address": "0x3f078",
+          "size": 2,
+          "assembly": "push\t{r4, lr}"
+        },
+        {
+          "address": "0x3f07a",
+          "size": 2,
+          "assembly": "subs\tr1, r1, #1"
+        },
+        {
+          "address": "0x3f07c",
+          "size": 2,
+          "assembly": "mov\tr3, r1"
+        },
+        {
+          "address": "0x3f07e",
+          "size": 2,
+          "assembly": "b.n\t3f08c <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x1808c>"
+        },
+        {
+          "address": "0x3f080",
+          "size": 2,
+          "assembly": "lsls\tr4, r1, #5"
+        },
+        {
+          "address": "0x3f082",
+          "size": 4,
+          "assembly": "add.w\tr4, r0, r4, lsr #3"
+        },
+        {
+          "address": "0x3f086",
+          "size": 2,
+          "assembly": "ldrb\tr4, [r4, #0]"
+        },
+        {
+          "address": "0x3f088",
+          "size": 2,
+          "assembly": "cbz\tr4, 3f090 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x18090>"
+        },
+        {
+          "address": "0x3f08a",
+          "size": 2,
+          "assembly": "adds\tr2, r2, #1"
+        },
+        {
+          "address": "0x3f08c",
+          "size": 2,
+          "assembly": "subs\tr1, r1, #1"
+        },
+        {
+          "address": "0x3f08e",
+          "size": 2,
+          "assembly": "bcs.n\t3f080 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x18080>"
+        },
+        {
+          "address": "0x3f090",
+          "size": 2,
+          "assembly": "subs\tr0, r3, r2"
+        },
+        {
+          "address": "0x3f092",
+          "size": 2,
+          "assembly": "pop\t{r4, pc}"
+        }
+      ],
+      "disassembly_sha256": "6aebd8b368b7ed216e431984777f19abd2df4ae8cdf36411fab81eb494623add"
+    }
+  ],
+  "providers": {
+    "0x3f03e": "r1_fdb_native_flash_read",
+    "0x3f076": "r1_fdb_native_get_status",
+    "0x631e8": "r1_fdb_native_partition_read"
+  },
+  "native_code_bytes": 126,
+  "whole_image_complete": false
+}

@@ -1,0 +1,108 @@
+{
+  "comparisons": 948,
+  "counts": {
+    "direct": 480,
+    "count_composed": 468
+  },
+  "observations": {
+    "callbacks": 1964,
+    "reads": 16160,
+    "locks": 1632,
+    "unlocks": 1632,
+    "logs": 456
+  },
+  "trace_sha256": "67e475f08201cd396de57213dea1a20fb3c5b9572b59b7509f5780f02679c42d",
+  "exact_spans": [
+    {
+      "symbol": "r1_fdb_native_read_sector",
+      "address": "0x87c24",
+      "size": 496,
+      "sha256": "9cb24c5f49d1e783d056be701ac364f635564b6b255afb89813788a0b0d026d0"
+    },
+    {
+      "symbol": "r1_fdb_sector_function_name",
+      "address": "0x9bdb9",
+      "size": 17,
+      "sha256": "f5b5fec95ff9fa65a4a4666781c45f34b01f734ae7836935799673124106375f"
+    },
+    {
+      "symbol": "r1_fdb_native_read_tsl",
+      "address": "0x87e14",
+      "size": 68,
+      "sha256": "a20c27bdcac0817173ab2c9d6f088e5dcb439c992806e0b9ab0fce25423b1a04"
+    },
+    {
+      "symbol": "r1_fdb_native_flash_read",
+      "address": "0x3f03e",
+      "size": 28,
+      "sha256": "a3484fa939473ac465c24cb0c2e3a1784c6f13bffc5b9f5e19cc8fd9636bcfb3"
+    },
+    {
+      "symbol": "r1_fdb_native_get_status",
+      "address": "0x3f076",
+      "size": 30,
+      "sha256": "43806ea5941295030f237f11ba224b51c5130935978d23beccb7fe29a5ea4e21"
+    },
+    {
+      "symbol": "r1_health_sync_provider_00063ad8",
+      "address": "0x63ad8",
+      "size": 476,
+      "sha256": "1d999ad7664ff1bc99bf154d93b593832692eb7e033f2a9c0ba803361848468d"
+    },
+    {
+      "symbol": "r1_fdb_native_last_sector",
+      "address": "0x6a158",
+      "size": 30,
+      "sha256": "af7988d9e85304f6f4ca091de640dd56a45f6940fdfd6012ce41a5aa4b933d12"
+    },
+    {
+      "symbol": "r1_fdb_native_last_tsl",
+      "address": "0x6a176",
+      "size": 30,
+      "sha256": "25b7a8aed4da289dc6cdf852078b4c0d098a130b17afb948f720cf23ac3b8bc6"
+    },
+    {
+      "symbol": "r1_fdb_native_next_sector",
+      "address": "0x6a194",
+      "size": 30,
+      "sha256": "bfafe1f14cec4f3add686021b037d3d72d873d46f41446794d9d19c9f4c743e7"
+    },
+    {
+      "symbol": "r1_fdb_native_next_tsl",
+      "address": "0x6a1b2",
+      "size": 26,
+      "sha256": "2c3999b234c24b33b7021952aeb64b951c90aa727fc87e5383800d8109e23fb0"
+    },
+    {
+      "symbol": "r1_health_sync_provider_00063cb4",
+      "address": "0x63cb4",
+      "size": 139,
+      "sha256": "44dc037eda8919ad38534e20b25ecf16ddcaf5870cbaa7e7d7cf2c824723f203"
+    },
+    {
+      "symbol": "r1_fdb_native_query_count_cb",
+      "address": "0x87428",
+      "size": 18,
+      "sha256": "c2d3ab8bf5e3e823fbfe012cce4613e911c156788d125a069d7b78ac61668067"
+    },
+    {
+      "symbol": "r1_fdb_native_db_path",
+      "address": "0x3f014",
+      "size": 14,
+      "sha256": "1557f1359b30086a3ac71a771ca77acc7b78432a01688fac9e17a39ca2a27709"
+    }
+  ],
+  "exact_bytes": 1402,
+  "report_sha256": "6540588f24515cf19206adf3ee5d421f56a2a7f555681eaa3458fc839ddf948a",
+  "object_sha256": "a95c5b59727b1ae27d5da10548c5a374d51e07ff20bd8ed1af8d3549311103d5",
+  "log_object_sha256": "3445e691b7cb53bdb9138d6de6f38ef2c54c87934e4988cc36eb686f61805655",
+  "count_object_sha256": "4f7983bf6d6b0a57b3818b0355007ba88d0877fd5cc396f89f2789a468e1975f",
+  "iterator_object_sha256": "9ae3dfcb52a629de674a45a548dafe092ad97368e701206b36137d821a5f5777",
+  "driver_sha256": "04e4ec2285f185bf334eb0e4836fab37ea90a10e3242d9aad5b3a570b92fe371",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "actual_count_iterator_sector_log_flash_adapter_status_decoder_and_callback_execute": true,
+  "partition_io_memory_copy_lock_custom_callback_and_printf_are_fixtures": true,
+  "full_private_history_or_raw_abi_verified": false,
+  "whole_image_complete": false,
+  "hardware_write_executed": false
+}

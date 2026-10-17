@@ -1,0 +1,190 @@
+{
+  "address": "0x8b138",
+  "size": 72,
+  "symbol": "r1_health_event_notification_throttle",
+  "instructions": [
+    {
+      "address": "0x8b138",
+      "size": 2,
+      "mnemonic": "push",
+      "operands": "{r4, r5, r6, lr}"
+    },
+    {
+      "address": "0x8b13a",
+      "size": 4,
+      "mnemonic": "bl",
+      "operands": "4cbb0 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x25bb0>"
+    },
+    {
+      "address": "0x8b13e",
+      "size": 2,
+      "mnemonic": "cmp",
+      "operands": "r0, #0"
+    },
+    {
+      "address": "0x8b140",
+      "size": 2,
+      "mnemonic": "beq.n",
+      "operands": "8b17e <_stack+0xb17e>"
+    },
+    {
+      "address": "0x8b142",
+      "size": 4,
+      "mnemonic": "bl",
+      "operands": "8ada4 <_stack+0xada4>"
+    },
+    {
+      "address": "0x8b146",
+      "size": 2,
+      "mnemonic": "ldr",
+      "operands": "r5, [pc, #56]\t@ (8b180 <_stack+0xb180>)"
+    },
+    {
+      "address": "0x8b148",
+      "size": 2,
+      "mnemonic": "mov",
+      "operands": "r4, r0"
+    },
+    {
+      "address": "0x8b14a",
+      "size": 2,
+      "mnemonic": "ldr",
+      "operands": "r0, [r5, #4]"
+    },
+    {
+      "address": "0x8b14c",
+      "size": 2,
+      "mnemonic": "cbz",
+      "operands": "r0, 8b15c <_stack+0xb15c>"
+    },
+    {
+      "address": "0x8b14e",
+      "size": 2,
+      "mnemonic": "cmp",
+      "operands": "r4, r0"
+    },
+    {
+      "address": "0x8b150",
+      "size": 2,
+      "mnemonic": "bcc.n",
+      "operands": "8b15c <_stack+0xb15c>"
+    },
+    {
+      "address": "0x8b152",
+      "size": 2,
+      "mnemonic": "subs",
+      "operands": "r0, r4, r0"
+    },
+    {
+      "address": "0x8b154",
+      "size": 4,
+      "mnemonic": "movw",
+      "operands": "r1, #10800\t@ 0x2a30"
+    },
+    {
+      "address": "0x8b158",
+      "size": 2,
+      "mnemonic": "cmp",
+      "operands": "r0, r1"
+    },
+    {
+      "address": "0x8b15a",
+      "size": 2,
+      "mnemonic": "bcc.n",
+      "operands": "8b17e <_stack+0xb17e>"
+    },
+    {
+      "address": "0x8b15c",
+      "size": 2,
+      "mnemonic": "movs",
+      "operands": "r0, #0"
+    },
+    {
+      "address": "0x8b15e",
+      "size": 4,
+      "mnemonic": "bl",
+      "operands": "8c150 <_stack+0xc150>"
+    },
+    {
+      "address": "0x8b162",
+      "size": 2,
+      "mnemonic": "movs",
+      "operands": "r0, #0"
+    },
+    {
+      "address": "0x8b164",
+      "size": 4,
+      "mnemonic": "bl",
+      "operands": "8cd60 <_stack+0xcd60>"
+    },
+    {
+      "address": "0x8b168",
+      "size": 2,
+      "mnemonic": "movs",
+      "operands": "r0, #0"
+    },
+    {
+      "address": "0x8b16a",
+      "size": 4,
+      "mnemonic": "bl",
+      "operands": "8c750 <_stack+0xc750>"
+    },
+    {
+      "address": "0x8b16e",
+      "size": 2,
+      "mnemonic": "movs",
+      "operands": "r0, #0"
+    },
+    {
+      "address": "0x8b170",
+      "size": 4,
+      "mnemonic": "bl",
+      "operands": "8baec <_stack+0xbaec>"
+    },
+    {
+      "address": "0x8b174",
+      "size": 2,
+      "mnemonic": "movs",
+      "operands": "r1, #0"
+    },
+    {
+      "address": "0x8b176",
+      "size": 2,
+      "mnemonic": "movs",
+      "operands": "r0, #1"
+    },
+    {
+      "address": "0x8b178",
+      "size": 4,
+      "mnemonic": "bl",
+      "operands": "8b818 <_stack+0xb818>"
+    },
+    {
+      "address": "0x8b17c",
+      "size": 2,
+      "mnemonic": "str",
+      "operands": "r4, [r5, #4]"
+    },
+    {
+      "address": "0x8b17e",
+      "size": 2,
+      "mnemonic": "pop",
+      "operands": "{r4, r5, r6, pc}"
+    }
+  ],
+  "providers": {
+    "0x4cbb0": "r1_authenticated_phone_connection_gate",
+    "0x8ada4": "r1_time_backend_timestamp",
+    "0x8c150": "r1_health_notification_stage_0008c150",
+    "0x8cd60": "r1_health_notification_stage_0008cd60",
+    "0x8c750": "r1_health_notification_stage_0008c750",
+    "0x8baec": "r1_health_notification_stage_0008baec",
+    "0x8b818": "r1_health_notification_stage_0008b818"
+  },
+  "source_owned_cell_address": "0x200067a4",
+  "source_owned_cell_bytes": 4,
+  "full_native_context_extent_proven": false,
+  "analysis_elf_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "disassembly_sha256": "99290b9309d15d5e244048838a5aee3d2e13b940825a95eeb25bf8196bac2522",
+  "frozen_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968"
+}

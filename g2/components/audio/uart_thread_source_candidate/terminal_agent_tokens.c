@@ -1,10 +1,8 @@
 /* Native terminal agent event-token helpers 0x5e5166 and 0x5e51b0. */
 #include <stdint.h>
 
-void *audio_terminal_agent_session_ptr
-    __attribute__((section(".g2.ram.terminal_agent_session_ptr"),used,aligned(4))); /* RAM 0x2006e0d4 */
-uint8_t audio_terminal_agent_special_flag
-    __attribute__((section(".g2.ram.terminal_agent_special_flag"),used)); /* RAM 0x2006e35c */
+extern void *audio_terminal_agent_session_ptr; /* RAM 0x2006e0d4, state-base +4 */
+extern uint8_t audio_terminal_agent_special_flag; /* RAM 0x2006e35c, +0x28c */
 extern int32_t audio_uart_lv_obj_y_44e498(void *);
 
 uint32_t audio_terminal_agent_text_token(uint8_t kind, uint16_t length) {

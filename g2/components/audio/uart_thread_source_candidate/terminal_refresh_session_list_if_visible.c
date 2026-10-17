@@ -1,7 +1,7 @@
 /* Apollo terminal_refresh_session_list_if_visible, native 0x5e8208. */
 #include <stdint.h>
 extern uint8_t audio_terminal_ui_mode; /* native RAM 0x2006e345 */
-uint8_t audio_terminal_selector_loading; /* native RAM 0x2006e34d */
+extern uint8_t audio_terminal_selector_loading; /* native RAM 0x2006e34d, state-base +0x27d */
 extern uint32_t audio_terminal_request_display(uint8_t,uint32_t);
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,

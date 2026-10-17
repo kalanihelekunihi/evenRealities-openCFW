@@ -1,0 +1,50 @@
+{
+  "comparisons": 5728,
+  "counts": {
+    "returned": 4734,
+    "assertion_loop": 971,
+    "fault": 23
+  },
+  "commands_checked": 259,
+  "trace_sha256": "814e87fe3ac9cb12b7fc873d8c50c89cbbe67a8d8142ea681fb22caf5b9df4fd",
+  "exact_spans": [
+    {
+      "section": "control",
+      "address": "0x63694",
+      "size": 384,
+      "sha256": "54a7f8c2dd68f35a46cb4d71d220ad3d95a8f6f3ce48e45dd12345d9ea771804"
+    },
+    {
+      "section": "name",
+      "address": "0x9bdd8",
+      "size": 17,
+      "sha256": "e6e7dd0cde8b73b529520814b6c6d3fa2c8487a6cde6c6202aa914a9693d826a"
+    },
+    {
+      "section": "error",
+      "address": "0xc0a68",
+      "size": 75,
+      "sha256": "d1bf411a635158c80dce54bcac979df938723eb5d47eddaa86b6dd55a944139f"
+    },
+    {
+      "section": "path",
+      "address": "0x3f014",
+      "size": 14,
+      "sha256": "1557f1359b30086a3ac71a771ca77acc7b78432a01688fac9e17a39ca2a27709"
+    }
+  ],
+  "exact_bytes": 490,
+  "object_sha256": "787104836667b1048c1878de8737bdf9d2b0fa355b552c2301709f4d690d186d",
+  "count_object_sha256": "4f7983bf6d6b0a57b3818b0355007ba88d0877fd5cc396f89f2789a468e1975f",
+  "driver_sha256": "3b15af6d41873d9c767b90a7715ba4d546bc471e52e77a149451d26c0f971e8d",
+  "report_sha256": "57fb4bb59a4e3b17794d8fbe00c0e029e01f9e582cc4070bb28b526933e4ce60",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "all_256_init_bytes_and_all_256_command_bytes_checked": true,
+  "independent_control_memory_mutation_oracle": true,
+  "actual_db_path_executes": true,
+  "printf_and_zero_low_rom_are_fixtures": true,
+  "jump_table_entries_are_symbolic_data_not_instruction_arrays": true,
+  "full_private_history_or_raw_abi_verified": false,
+  "whole_image_complete": false,
+  "hardware_write_executed": false
+}

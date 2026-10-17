@@ -1,0 +1,35 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0008b138 <r1_stock_gpio_pin_set+0x11d04>:
+   8b138:	b570      	push	{r4, r5, r6, lr}
+   8b13a:	f7c1 fd39 	bl	4cbb0 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x25bb0>
+   8b13e:	2800      	cmp	r0, #0
+   8b140:	d01d      	beq.n	8b17e <_stack+0xb17e>
+   8b142:	f7ff fe2f 	bl	8ada4 <_stack+0xada4>
+   8b146:	4d0e      	ldr	r5, [pc, #56]	@ (8b180 <_stack+0xb180>)
+   8b148:	4604      	mov	r4, r0
+   8b14a:	6868      	ldr	r0, [r5, #4]
+   8b14c:	b130      	cbz	r0, 8b15c <_stack+0xb15c>
+   8b14e:	4284      	cmp	r4, r0
+   8b150:	d304      	bcc.n	8b15c <_stack+0xb15c>
+   8b152:	1a20      	subs	r0, r4, r0
+   8b154:	f642 2130 	movw	r1, #10800	@ 0x2a30
+   8b158:	4288      	cmp	r0, r1
+   8b15a:	d310      	bcc.n	8b17e <_stack+0xb17e>
+   8b15c:	2000      	movs	r0, #0
+   8b15e:	f000 fff7 	bl	8c150 <_stack+0xc150>
+   8b162:	2000      	movs	r0, #0
+   8b164:	f001 fdfc 	bl	8cd60 <_stack+0xcd60>
+   8b168:	2000      	movs	r0, #0
+   8b16a:	f001 faf1 	bl	8c750 <_stack+0xc750>
+   8b16e:	2000      	movs	r0, #0
+   8b170:	f000 fcbc 	bl	8baec <_stack+0xbaec>
+   8b174:	2100      	movs	r1, #0
+   8b176:	2001      	movs	r0, #1
+   8b178:	f000 fb4e 	bl	8b818 <_stack+0xb818>
+   8b17c:	606c      	str	r4, [r5, #4]
+   8b17e:	bd70      	pop	{r4, r5, r6, pc}

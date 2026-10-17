@@ -1,0 +1,213 @@
+{
+  "status": "analysis_retained_with_scoped_compiled_candidate",
+  "body_dossiers": {
+    "rea-6f826.json": {
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x6f826",
+            "end": "0x6f82b"
+          }
+        ],
+        "total_bytes": 6,
+        "span_bytes": 6,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "callees": []
+    },
+    "rea-50f88.json": {
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x50f88",
+            "end": "0x50f99"
+          },
+          {
+            "start": "0x6f648",
+            "end": "0x6f6b1"
+          }
+        ],
+        "total_bytes": 124,
+        "span_bytes": 124714,
+        "non_contiguous": true,
+        "contains_entry": true
+      },
+      "callees": [
+        "0x6f644",
+        "0x6f804",
+        "0x6f81e",
+        "0x799c8",
+        "0x914ec",
+        "0x91638"
+      ]
+    },
+    "rea-50e4c.json": {
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x50e4c",
+            "end": "0x50ec7"
+          }
+        ],
+        "total_bytes": 124,
+        "span_bytes": 124,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "callees": [
+        "0x50efc",
+        "0x50f28",
+        "0x50f88",
+        "0x50f9c",
+        "0x6f80c",
+        "0x6f818",
+        "0x6f826",
+        "0x6f832",
+        "0x7badc",
+        "0x7d154"
+      ]
+    },
+    "rea-50f9c.json": {
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x50f9c",
+            "end": "0x51025"
+          }
+        ],
+        "total_bytes": 138,
+        "span_bytes": 138,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "callees": [
+        "0x6f804",
+        "0x6f81e",
+        "0x799c0",
+        "0x914ec",
+        "0x91638"
+      ]
+    },
+    "rea-6f818.json": {
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x6f738",
+            "end": "0x6f793"
+          },
+          {
+            "start": "0x6f818",
+            "end": "0x6f81d"
+          }
+        ],
+        "total_bytes": 98,
+        "span_bytes": 230,
+        "non_contiguous": true,
+        "contains_entry": true
+      },
+      "callees": [
+        "0x6f644",
+        "0x799c8",
+        "0x914ec",
+        "0x91638"
+      ]
+    },
+    "rea-6f80c.json": {
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x6f600",
+            "end": "0x6f637"
+          },
+          {
+            "start": "0x6f80c",
+            "end": "0x6f811"
+          }
+        ],
+        "total_bytes": 62,
+        "span_bytes": 530,
+        "non_contiguous": true,
+        "contains_entry": true
+      },
+      "callees": [
+        "0x6f640"
+      ]
+    },
+    "rea-6f832.json": {
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x6f832",
+            "end": "0x6f837"
+          }
+        ],
+        "total_bytes": 6,
+        "span_bytes": 6,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "callees": []
+    },
+    "rea-50f28.json": {
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x50f28",
+            "end": "0x50f2f"
+          }
+        ],
+        "total_bytes": 8,
+        "span_bytes": 8,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "callees": [
+        "0x85d1a"
+      ]
+    },
+    "rea-50efc.json": {
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x50efc",
+            "end": "0x50f03"
+          }
+        ],
+        "total_bytes": 8,
+        "span_bytes": 8,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "callees": [
+        "0x85cba"
+      ]
+    }
+  },
+  "gates": [
+    "Non-contiguous shared bodies must be included, not only six-byte public veneers.",
+    "Complete sensor dispatch/configuration and calibration reader are required before composed temperature proof.",
+    "No source completeness, instruction identity or sensor hardware execution is established."
+  ],
+  "source_report": "../native-temperature/report.json",
+  "scoped_verification": "../native-temperature/verification.json",
+  "composed_gate": "../native-temperature/composed-history-probe.json"
+}

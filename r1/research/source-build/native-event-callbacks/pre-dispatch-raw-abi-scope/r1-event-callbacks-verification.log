@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_event_callbacks.py", line 62, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_event_callbacks.py", line 58, in main
+    if results[0]!=results[1]:(OUT/'counterexample.json').write_text(json.dumps(dict(case=c,results=results),indent=2)+'\n');raise AssertionError(c)
+                                                                                                                             ^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'row': {'address': '0x42856', 'symbol': 'r1_event_callback_00042856', 'instructions': [{'address': '0x42856', 'size': 2, 'mnemonic': 'cmp', 'operands': 'r0, #0'}, {'address': '0x42858', 'size': 2, 'mnemonic': 'beq.n', 'operands': '4285e <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x1b85e>'}, {'address': '0x4285a', 'size': 4, 'mnemonic': 'b.w', 'operands': '8b0fc <_stack+0xb0fc>'}, {'address': '0x4285e', 'size': 2, 'mnemonic': 'bx', 'operands': 'lr'}], 'dependencies': ['0x8b0fc'], 'reachable_bytes': 10, 'next_observed_entry_bound': '0x42860', 'original_ghidra_body_available': False}, 'payload': 536936448, 'length': 0, 'result': 0, 'modes': [0], 'mutation': 0, 'data': '0001020380ff007fff7f', 'composed': True, 'event_id': 2}

@@ -1,0 +1,90 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0005a7bc <r1_stock_i2c5_acquire+0xa2e4>:
+   5a7bc:	b5f0      	push	{r4, r5, r6, r7, lr}
+   5a7be:	4604      	mov	r4, r0
+   5a7c0:	b901      	cbnz	r1, 5a7c4 <r1_stock_i2c5_acquire+0xa2ec>
+   5a7c2:	4937      	ldr	r1, [pc, #220]	@ (5a8a0 <r1_stock_i2c5_acquire+0xa3c8>)
+   5a7c4:	4b37      	ldr	r3, [pc, #220]	@ (5a8a4 <r1_stock_i2c5_acquire+0xa3cc>)
+   5a7c6:	4608      	mov	r0, r1
+   5a7c8:	6821      	ldr	r1, [r4, #0]
+   5a7ca:	f44f 6661 	mov.w	r6, #3600	@ 0xe10
+   5a7ce:	fbb1 f5f3 	udiv	r5, r1, r3
+   5a7d2:	fbb1 f2f3 	udiv	r2, r1, r3
+   5a7d6:	fb03 1515 	mls	r5, r3, r5, r1
+   5a7da:	fbb5 f1f6 	udiv	r1, r5, r6
+   5a7de:	6081      	str	r1, [r0, #8]
+   5a7e0:	fbb5 f1f6 	udiv	r1, r5, r6
+   5a7e4:	fb06 5111 	mls	r1, r6, r1, r5
+   5a7e8:	263c      	movs	r6, #60	@ 0x3c
+   5a7ea:	fbb1 f1f6 	udiv	r1, r1, r6
+   5a7ee:	6041      	str	r1, [r0, #4]
+   5a7f0:	fbb5 f1f6 	udiv	r1, r5, r6
+   5a7f4:	fb06 5111 	mls	r1, r6, r1, r5
+   5a7f8:	6001      	str	r1, [r0, #0]
+   5a7fa:	2664      	movs	r6, #100	@ 0x64
+   5a7fc:	f240 71b2 	movw	r1, #1970	@ 0x7b2
+   5a800:	00b5      	lsls	r5, r6, #2
+   5a802:	f44f 7eb7 	mov.w	lr, #366	@ 0x16e
+   5a806:	f44f 77b6 	mov.w	r7, #364	@ 0x16c
+   5a80a:	e013      	b.n	5a834 <r1_stock_i2c5_acquire+0xa35c>
+   5a80c:	ea5f 7c81 	movs.w	ip, r1, lsl #30
+   5a810:	d106      	bne.n	5a820 <r1_stock_i2c5_acquire+0xa348>
+   5a812:	fbb1 fcf6 	udiv	ip, r1, r6
+   5a816:	fb06 1c1c 	mls	ip, r6, ip, r1
+   5a81a:	f1bc 0f00 	cmp.w	ip, #0
+   5a81e:	d111      	bne.n	5a844 <r1_stock_i2c5_acquire+0xa36c>
+   5a820:	fbb1 fcf5 	udiv	ip, r1, r5
+   5a824:	fb05 1c1c 	mls	ip, r5, ip, r1
+   5a828:	f1bc 0f00 	cmp.w	ip, #0
+   5a82c:	d00a      	beq.n	5a844 <r1_stock_i2c5_acquire+0xa36c>
+   5a82e:	1c49      	adds	r1, r1, #1
+   5a830:	f2a2 126d 	subw	r2, r2, #365	@ 0x16d
+   5a834:	42ba      	cmp	r2, r7
+   5a836:	d8e9      	bhi.n	5a80c <r1_stock_i2c5_acquire+0xa334>
+   5a838:	f2a1 776c 	subw	r7, r1, #1900	@ 0x76c
+   5a83c:	6147      	str	r7, [r0, #20]
+   5a83e:	078f      	lsls	r7, r1, #30
+   5a840:	d006      	beq.n	5a850 <r1_stock_i2c5_acquire+0xa378>
+   5a842:	e00a      	b.n	5a85a <r1_stock_i2c5_acquire+0xa382>
+   5a844:	4572      	cmp	r2, lr
+   5a846:	d3f7      	bcc.n	5a838 <r1_stock_i2c5_acquire+0xa360>
+   5a848:	1c49      	adds	r1, r1, #1
+   5a84a:	f5a2 72b7 	sub.w	r2, r2, #366	@ 0x16e
+   5a84e:	e7f1      	b.n	5a834 <r1_stock_i2c5_acquire+0xa35c>
+   5a850:	fbb1 f7f6 	udiv	r7, r1, r6
+   5a854:	fb06 1617 	mls	r6, r6, r7, r1
+   5a858:	b946      	cbnz	r6, 5a86c <r1_stock_i2c5_acquire+0xa394>
+   5a85a:	fbb1 f6f5 	udiv	r6, r1, r5
+   5a85e:	fb05 1116 	mls	r1, r5, r6, r1
+   5a862:	b119      	cbz	r1, 5a86c <r1_stock_i2c5_acquire+0xa394>
+   5a864:	4d10      	ldr	r5, [pc, #64]	@ (5a8a8 <r1_stock_i2c5_acquire+0xa3d0>)
+   5a866:	2100      	movs	r1, #0
+   5a868:	4617      	mov	r7, r2
+   5a86a:	e005      	b.n	5a878 <r1_stock_i2c5_acquire+0xa3a0>
+   5a86c:	4d0e      	ldr	r5, [pc, #56]	@ (5a8a8 <r1_stock_i2c5_acquire+0xa3d0>)
+   5a86e:	350c      	adds	r5, #12
+   5a870:	e7f9      	b.n	5a866 <r1_stock_i2c5_acquire+0xa38e>
+   5a872:	1bbf      	subs	r7, r7, r6
+   5a874:	1c49      	adds	r1, r1, #1
+   5a876:	b2c9      	uxtb	r1, r1
+   5a878:	5c6e      	ldrb	r6, [r5, r1]
+   5a87a:	42be      	cmp	r6, r7
+   5a87c:	d9f9      	bls.n	5a872 <r1_stock_i2c5_acquire+0xa39a>
+   5a87e:	61c2      	str	r2, [r0, #28]
+   5a880:	1c7f      	adds	r7, r7, #1
+   5a882:	e9c0 7103 	strd	r7, r1, [r0, #12]
+   5a886:	6821      	ldr	r1, [r4, #0]
+   5a888:	2207      	movs	r2, #7
+   5a88a:	fbb1 f1f3 	udiv	r1, r1, r3
+   5a88e:	1d09      	adds	r1, r1, #4
+   5a890:	fbb1 f3f2 	udiv	r3, r1, r2
+   5a894:	fb02 1113 	mls	r1, r2, r3, r1
+   5a898:	6181      	str	r1, [r0, #24]
+   5a89a:	2100      	movs	r1, #0
+   5a89c:	6201      	str	r1, [r0, #32]
+   5a89e:	bdf0      	pop	{r4, r5, r6, r7, pc}

@@ -1,13 +1,14 @@
 /* Native sync transport setup0x584bc0, callback cell0x584c8c and
  * receiver restart0x584db6. ROM pin configuration words0x78f108/10 are4. */
 #include <stdint.h>
+#include "sync_uart_config_contract.h"
 
 extern void *g2_uart_sync_driver; /* pointer cell0x20074610 */
 extern volatile uint8_t g2_uart_sync_started; /* cell0x20074fc9 */
 extern void *g2_uart_sync_semaphore_handle; /* cell0x2007461c */
 extern void *g2_uart_sync_mutex; /* cell0x20074620 */
 extern void (*g2_uart_sync_callback_cell)(void); /* cell0x20074618 */
-extern uint8_t g2_uart_sync_buffer[]; /* object0x20000d9c */
+extern g2_sync_uart_config_prefix_t g2_uart_sync_buffer; /* observed prefix at 0x20000d9c */
 extern void *audio_uart_sync_sem_new(uint32_t,uint32_t,const void *); /* 0x44989a */
 extern void *audio_uart_mutex_new(uint32_t); /* selected0x44971c */
 extern uint32_t audio_uart_sync_driver_bind(uint32_t,void **); /* 0x58dae4 */
@@ -36,7 +37,7 @@ uint32_t audio_uart_sync_reset0(void) {
     uint32_t pin2=g2_codec_pin_function(2u,4u);
     uint32_t mode=audio_uart_sync_driver_mode(g2_uart_sync_driver,0u,0u);
     uint32_t buffer=audio_uart_sync_driver_buffer(g2_uart_sync_driver,
-                                                   g2_uart_sync_buffer);
+                                                   &g2_uart_sync_buffer);
     uint32_t prep=audio_uart_sync_driver_prepare(g2_uart_sync_driver,0u,0u,0u,0u);
     audio_uart_sync_hal0(15u);
     audio_uart_sync_hal1(15u,3u);

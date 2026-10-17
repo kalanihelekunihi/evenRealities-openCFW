@@ -440,8 +440,38 @@ def main():
         raise RuntimeError("CASE named function size triage changed")
     file_checked(case_named["catalogue"], case_named["catalogue_sha256"])
     images["case"]["named_function_size_triage"] = case_named_ref
+    case_text_path = G2 / "build/c-firmware/20261016/case-text-provenance/receipt.json"
+    case_text, case_text_ref = receipt(case_text_path)
+    if case_text["status"] != "PASS_EXPERIMENTAL_CASE_TEXT_PROVENANCE" or \
+            case_text["baseline_receipt_sha256"] != case_oz_ref["sha256"] or \
+            case_text["named_receipt_sha256"] != case_named_ref["sha256"] or \
+            case_text["experimental_elf_sha256"] != case_oz["elf_sha256"] or \
+            case_text["retained_rodata_bytes"] != 8778 or \
+            case_text["tail_alignment_bytes"] != 1 or \
+            case_text["tail_internal_alignment_bytes"] != 1 or \
+            case_text["other_outside_function_bytes"] != 171:
+        raise RuntimeError("CASE text provenance changed")
+    file_checked(case_text["map"], case_text["map_sha256"])
+    file_checked(case_text["replayed_elf"], case_text["replayed_elf_sha256"])
+    images["case"]["text_provenance"] = case_text_ref
+    case_shared_path = G2 / "build/c-firmware/20261016/case-shared-string-probe/receipt.json"
+    case_shared, case_shared_ref = receipt(case_shared_path)
+    if case_shared["status"] != "PASS_EXPERIMENTAL_CASE_SHARED_STRING_SIZE_REDUCTION" or \
+            case_shared["baseline_receipt_sha256"] != case_oz_ref["sha256"] or \
+            case_shared["bytes_saved"] != 18 or \
+            case_shared["v2_additional_bytes_saved"] != 0 or \
+            case_shared["remaining_overflow_bytes"] != 7833 or \
+            len(case_shared["matching_vector_words"]) != 13:
+        raise RuntimeError("CASE shared string size experiment changed")
+    file_checked(case_shared["candidate_source"], case_shared["candidate_source_sha256"])
+    file_checked(case_shared["candidate_elf"], case_shared["candidate_elf_sha256"])
+    file_checked(case_shared["v2_candidate_source"], case_shared["v2_candidate_source_sha256"])
+    file_checked(case_shared["v2_candidate_elf"], case_shared["v2_candidate_elf_sha256"])
+    images["case"]["shared_string_size_candidate"] = case_shared_ref
     images["case"]["remaining_gate"].append(
-        "The 38 C symbols with explicit stock address suffixes total 4,898 bytes less than their Ghidra function envelopes, while the mixed -Oz CASE load exceeds stock by 7,851 bytes. The candidate .text has 54,320 unique function bytes and 8,951 bytes outside function symbols; the 428-entry native catalogue has 40,664 envelope bytes but may be incomplete. Unmatched code and linker placement require review before assigning the overflow to specific bodies.")
+        "The 38 C symbols with explicit stock address suffixes total 4,898 bytes less than their Ghidra function envelopes, while the mixed -Oz CASE load exceeds stock by 7,851 bytes. Of 8,951 .text bytes outside function symbols, the linker map attributes 8,778 to retained .rodata and 2 to alignment at the tail; 171 other bytes remain. The 428-entry native catalogue may be incomplete. Compare the full code/data load against stock before assigning the overflow to specific bodies.")
+    images["case"]["remaining_gate"].append(
+        "The isolated clear-LED string reuse C candidate saves 18 linked bytes and leaves 7,833 bytes of CASE payload overflow. A second candidate binds the native CRLF string pointer too, with no further size reduction. Final source selection, full runtime behavior and 33 differing vector words remain open.")
     main_path = BUILD / "main-post-tail-c-replay/receipt.json"
     main, main_ref = receipt(main_path)
     if main["status"] != "PASS_EXPERIMENTAL_MAIN_POST_TAIL_C_REPLAY" or main["unresolved_after"] != 183:
@@ -450,6 +480,16 @@ def main():
     actual = undefined(ROOT / main_obj["path"])
     if len(actual) != 183:
         raise RuntimeError("Apollo Main unresolved set changed")
+    lv_names_path = G2 / "build/c-firmware/20261016/main-lv-level-names-contract/receipt.json"
+    lv_names, lv_names_ref = receipt(lv_names_path)
+    if lv_names["status"] != "PASS_BOUNDED_MAIN_LV_LEVEL_NAMES_RAM_CONTRACT" or \
+            lv_names["native_table_base"] != "0x20002bec" or \
+            lv_names["minimum_pointer_slots"] != 6 or \
+            lv_names["minimum_ram_span_bytes"] != 24 or \
+            lv_names["initializer_authenticated"] or \
+            "audio_uart_lv_level_names" not in actual:
+        raise RuntimeError("Apollo Main LV level-name RAM contract changed")
+    file_checked(lv_names["source"], lv_names["source_sha256"])
     ram_path = G2 / "build/c-firmware/settings-live-buffers-round1007/receipt.json"
     ram, ram_ref = receipt(ram_path)
     ram_source = ROOT / "g2/components/audio/uart_thread_source_candidate/settings_live_buffers.c"
@@ -5025,8 +5065,982 @@ def main():
     actual = undefined(ROOT / main_obj["path"])
     if len(actual) != 176 or "audio_terminal_ui_action_5e6268" in actual:
         raise RuntimeError("Apollo Main Terminal agent-done frontier changed")
+    query_show_action_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-query-show-5e641c/receipt.json"
+    query_show_action, query_show_action_ref = receipt(query_show_action_path)
+    if query_show_action["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_QUERY_SHOW_C" or \
+            query_show_action["base_sha256"] != main_obj["sha256"] or \
+            query_show_action["unresolved_before"] != 176 or query_show_action["unresolved_after"] != 177 or \
+            query_show_action["imports_resolved"] != ["audio_terminal_ui_action_5e641c"] or \
+            query_show_action["imports_added"] != ["audio_terminal_query_construct_5eb8da", "audio_terminal_query_hit_count_5eb576"]:
+        raise RuntimeError("Apollo Main Terminal query-show action binding changed")
+    for source, digest in zip(query_show_action["sources"], query_show_action["source_sha256"]):
+        file_checked(source, digest)
+    for oracle_path, digest in zip(query_show_action["oracle_receipts"], query_show_action["oracle_receipt_sha256"]):
+        file_checked(oracle_path, digest)
+    main_obj = file_checked(query_show_action["linked_object"], query_show_action["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 177 or "audio_terminal_ui_action_5e641c" in actual:
+        raise RuntimeError("Apollo Main Terminal query-show action frontier changed")
+    query_hit_count_path = G2 / "build/c-firmware/20261016/main-terminal-query-hit-count-5eb576/receipt.json"
+    query_hit_count, query_hit_count_ref = receipt(query_hit_count_path)
+    if query_hit_count["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_QUERY_HIT_COUNT_C" or \
+            query_hit_count["base_sha256"] != main_obj["sha256"] or \
+            query_hit_count["unresolved_before"] != 177 or query_hit_count["unresolved_after"] != 176 or \
+            query_hit_count["imports_resolved"] != ["audio_terminal_query_hit_count_5eb576"] or \
+            query_hit_count["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal query-hit-count binding changed")
+    for source, digest in zip(query_hit_count["sources"], query_hit_count["source_sha256"]):
+        file_checked(source, digest)
+    for oracle_path, digest in zip(query_hit_count["oracle_receipts"], query_hit_count["oracle_receipt_sha256"]):
+        file_checked(oracle_path, digest)
+    main_obj = file_checked(query_hit_count["linked_object"], query_hit_count["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 176 or "audio_terminal_query_hit_count_5eb576" in actual:
+        raise RuntimeError("Apollo Main Terminal query-hit-count frontier changed")
+    query_construct_path = G2 / "build/c-firmware/20261016/main-terminal-query-construct-5eb8da/receipt.json"
+    query_construct, query_construct_ref = receipt(query_construct_path)
+    if query_construct["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_QUERY_CONSTRUCT_C" or \
+            query_construct["base_sha256"] != main_obj["sha256"] or \
+            query_construct["unresolved_before"] != 176 or query_construct["unresolved_after"] != 175 or \
+            query_construct["imports_resolved"] != ["audio_terminal_query_construct_5eb8da"] or \
+            query_construct["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal query-constructor binding changed")
+    for source, digest in zip(query_construct["sources"], query_construct["source_sha256"]):
+        file_checked(source, digest)
+    for oracle_path, digest in zip(query_construct["oracle_receipts"], query_construct["oracle_receipt_sha256"]):
+        file_checked(oracle_path, digest)
+    main_obj = file_checked(query_construct["linked_object"], query_construct["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 175 or "audio_terminal_query_construct_5eb8da" in actual:
+        raise RuntimeError("Apollo Main Terminal query-constructor frontier changed")
+    session_list_show_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-session-list-show-5ed208/receipt.json"
+    session_list_show, session_list_show_ref = receipt(session_list_show_path)
+    if session_list_show["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_LIST_SHOW_C" or \
+            session_list_show["base_sha256"] != main_obj["sha256"] or \
+            session_list_show["unresolved_before"] != 175 or session_list_show["unresolved_after"] != 177 or \
+            session_list_show["imports_resolved"] != ["audio_terminal_ui_action_5ed208"] or \
+            session_list_show["imports_added"] != ["audio_td_flag_b_set_597572", "audio_terminal_cancel_pending_5cef8c", "audio_terminal_session_list_rebuild_5ecef6"]:
+        raise RuntimeError("Apollo Main Terminal session-list-show binding changed")
+    for source, digest in zip(session_list_show["sources"], session_list_show["source_sha256"]):
+        file_checked(source, digest)
+    for oracle_path, digest in zip(session_list_show["oracle_receipts"], session_list_show["oracle_receipt_sha256"]):
+        file_checked(oracle_path, digest)
+    main_obj = file_checked(session_list_show["linked_object"], session_list_show["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 177 or "audio_terminal_ui_action_5ed208" in actual:
+        raise RuntimeError("Apollo Main Terminal session-list-show frontier changed")
+    td_flag_b_path = G2 / "build/c-firmware/20261016/main-td-flag-b-set-597572/receipt.json"
+    td_flag_b, td_flag_b_ref = receipt(td_flag_b_path)
+    if td_flag_b["status"] != "PASS_EXPERIMENTAL_MAIN_TD_FLAG_B_SET_C" or \
+            td_flag_b["base_sha256"] != main_obj["sha256"] or \
+            td_flag_b["unresolved_before"] != 177 or td_flag_b["unresolved_after"] != 176 or \
+            td_flag_b["imports_resolved"] != ["audio_td_flag_b_set_597572"] or \
+            td_flag_b["imports_added"] != []:
+        raise RuntimeError("Apollo Main TD flag-B setter binding changed")
+    file_checked(td_flag_b["source"], td_flag_b["source_sha256"])
+    file_checked(td_flag_b["provider"], td_flag_b["provider_sha256"])
+    file_checked(td_flag_b["oracle_receipt"], td_flag_b["oracle_receipt_sha256"])
+    file_checked(td_flag_b["object"], td_flag_b["object_sha256"])
+    main_obj = file_checked(td_flag_b["linked_object"], td_flag_b["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 176 or "audio_td_flag_b_set_597572" in actual:
+        raise RuntimeError("Apollo Main TD flag-B setter frontier changed")
+    cancel_pending_path = G2 / "build/c-firmware/20261016/main-terminal-cancel-pending-5cef8c/receipt.json"
+    cancel_pending, cancel_pending_ref = receipt(cancel_pending_path)
+    if cancel_pending["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_CANCEL_PENDING_C" or \
+            cancel_pending["base_sha256"] != main_obj["sha256"] or \
+            cancel_pending["unresolved_before"] != 176 or cancel_pending["unresolved_after"] != 175 or \
+            cancel_pending["imports_resolved"] != ["audio_terminal_cancel_pending_5cef8c"] or \
+            cancel_pending["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal cancellation binding changed")
+    file_checked(cancel_pending["source"], cancel_pending["source_sha256"])
+    file_checked(cancel_pending["oracle_receipt"], cancel_pending["oracle_receipt_sha256"])
+    file_checked(cancel_pending["object"], cancel_pending["object_sha256"])
+    main_obj = file_checked(cancel_pending["linked_object"], cancel_pending["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 175 or "audio_terminal_cancel_pending_5cef8c" in actual:
+        raise RuntimeError("Apollo Main Terminal cancellation frontier changed")
+    selector_leaf_path = G2 / "build/c-firmware/20261016/main-terminal-session-selector-leaf/receipt.json"
+    selector_leaf, selector_leaf_ref = receipt(selector_leaf_path)
+    if selector_leaf["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_SELECTOR_LEAF_C" or \
+            selector_leaf["base_sha256"] != main_obj["sha256"] or \
+            selector_leaf["unresolved_before"] != 175 or selector_leaf["unresolved_after"] != 175 or \
+            selector_leaf["imports_resolved"] != [] or selector_leaf["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal selector leaf binding changed")
+    file_checked(selector_leaf["source"], selector_leaf["source_sha256"])
+    file_checked(selector_leaf["oracle_receipt"], selector_leaf["oracle_receipt_sha256"])
+    file_checked(selector_leaf["object"], selector_leaf["object_sha256"])
+    main_obj = file_checked(selector_leaf["linked_object"], selector_leaf["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 175:
+        raise RuntimeError("Apollo Main Terminal selector leaf frontier changed")
+    selector_rebuild_path = G2 / "build/c-firmware/20261016/main-terminal-session-list-rebuild-5ecef6/receipt.json"
+    selector_rebuild, selector_rebuild_ref = receipt(selector_rebuild_path)
+    if selector_rebuild["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_LIST_REBUILD_C" or \
+            selector_rebuild["base_sha256"] != main_obj["sha256"] or \
+            selector_rebuild["unresolved_before"] != 175 or selector_rebuild["unresolved_after"] != 175 or \
+            selector_rebuild["imports_resolved"] != ["audio_terminal_session_list_rebuild_5ecef6"] or \
+            selector_rebuild["imports_added"] != ["audio_terminal_session_row_factory_5ecd06"]:
+        raise RuntimeError("Apollo Main Terminal selector rebuild binding changed")
+    file_checked(selector_rebuild["source"], selector_rebuild["source_sha256"])
+    file_checked(selector_rebuild["oracle_receipt"], selector_rebuild["oracle_receipt_sha256"])
+    file_checked(selector_rebuild["object"], selector_rebuild["object_sha256"])
+    main_obj = file_checked(selector_rebuild["linked_object"], selector_rebuild["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 175 or "audio_terminal_session_list_rebuild_5ecef6" in actual or \
+            "audio_terminal_session_row_factory_5ecd06" not in actual:
+        raise RuntimeError("Apollo Main Terminal selector rebuild frontier changed")
+    selector_row_path = G2 / "build/c-firmware/20261016/main-terminal-session-row-factory-5ecd06/receipt.json"
+    selector_row, selector_row_ref = receipt(selector_row_path)
+    if selector_row["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_ROW_FACTORY_C" or \
+            selector_row["base_sha256"] != main_obj["sha256"] or \
+            selector_row["unresolved_before"] != 175 or selector_row["unresolved_after"] != 174 or \
+            selector_row["imports_resolved"] != ["audio_terminal_session_row_factory_5ecd06"] or \
+            selector_row["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal selector row binding changed")
+    for path, digest in zip(selector_row["sources"], selector_row["source_sha256"]):
+        file_checked(path, digest)
+    for path, digest in zip(selector_row["oracle_receipts"], selector_row["oracle_receipt_sha256"]):
+        file_checked(path, digest)
+    for path, digest in zip(selector_row["objects"], selector_row["object_sha256"]):
+        file_checked(path, digest)
+    main_obj = file_checked(selector_row["linked_object"], selector_row["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 174 or "audio_terminal_session_row_factory_5ecd06" in actual:
+        raise RuntimeError("Apollo Main Terminal selector row frontier changed")
+    new_session_failed_path = G2 / "build/c-firmware/20261016/main-terminal-new-session-failed-5ed8e0/receipt.json"
+    new_session_failed, new_session_failed_ref = receipt(new_session_failed_path)
+    if new_session_failed["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_NEW_SESSION_FAILED_C" or \
+            new_session_failed["base_sha256"] != main_obj["sha256"] or \
+            new_session_failed["unresolved_before"] != 174 or new_session_failed["unresolved_after"] != 173 or \
+            new_session_failed["imports_resolved"] != ["audio_terminal_ui_action_5ed8e0"] or \
+            new_session_failed["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal new-session failure binding changed")
+    file_checked(new_session_failed["source"], new_session_failed["source_sha256"])
+    file_checked(new_session_failed["oracle_receipt"], new_session_failed["oracle_receipt_sha256"])
+    file_checked(new_session_failed["object"], new_session_failed["object_sha256"])
+    main_obj = file_checked(new_session_failed["linked_object"], new_session_failed["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 173 or "audio_terminal_ui_action_5ed8e0" in actual:
+        raise RuntimeError("Apollo Main Terminal new-session failure frontier changed")
+    session_update_path = G2 / "build/c-firmware/20261016/main-terminal-session-list-update-5ed318/receipt.json"
+    session_update, session_update_ref = receipt(session_update_path)
+    if session_update["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_LIST_UPDATE_C" or \
+            session_update["base_sha256"] != main_obj["sha256"] or \
+            session_update["unresolved_before"] != 173 or session_update["unresolved_after"] != 172 or \
+            session_update["imports_resolved"] != ["audio_terminal_ui_action_5ed318"] or \
+            session_update["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal session-list update binding changed")
+    file_checked(session_update["source"], session_update["source_sha256"])
+    file_checked(session_update["oracle_receipt"], session_update["oracle_receipt_sha256"])
+    file_checked(session_update["object"], session_update["object_sha256"])
+    main_obj = file_checked(session_update["linked_object"], session_update["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 172 or "audio_terminal_ui_action_5ed318" in actual:
+        raise RuntimeError("Apollo Main Terminal session-list update frontier changed")
+    session_switch_path = G2 / "build/c-firmware/20261016/main-terminal-session-switch-result-5ed758/receipt.json"
+    session_switch, session_switch_ref = receipt(session_switch_path)
+    if session_switch["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_SWITCH_RESULT_C" or \
+            session_switch["base_sha256"] != main_obj["sha256"] or \
+            session_switch["unresolved_before"] != 172 or session_switch["unresolved_after"] != 171 or \
+            session_switch["imports_resolved"] != ["audio_terminal_ui_action_5ed758"] or \
+            session_switch["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal session-switch binding changed")
+    for path, digest in zip(session_switch["sources"], session_switch["source_sha256"]):
+        file_checked(path, digest)
+    for path, digest in zip(session_switch["oracle_receipts"], session_switch["oracle_receipt_sha256"]):
+        file_checked(path, digest)
+    for path, digest in zip(session_switch["objects"], session_switch["object_sha256"]):
+        file_checked(path, digest)
+    main_obj = file_checked(session_switch["linked_object"], session_switch["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 171 or "audio_terminal_ui_action_5ed758" in actual:
+        raise RuntimeError("Apollo Main Terminal session-switch frontier changed")
+    select_leaves_path = G2 / "build/c-firmware/20261016/main-terminal-session-select-command-leaves/receipt.json"
+    select_leaves, select_leaves_ref = receipt(select_leaves_path)
+    if select_leaves["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_SELECT_COMMAND_LEAVES_C" or \
+            select_leaves["base_sha256"] != main_obj["sha256"] or \
+            select_leaves["unresolved_before"] != 171 or select_leaves["unresolved_after"] != 171 or \
+            select_leaves["imports_resolved"] != [] or select_leaves["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal selector command leaf binding changed")
+    file_checked(select_leaves["source"], select_leaves["source_sha256"])
+    file_checked(select_leaves["oracle_receipt"], select_leaves["oracle_receipt_sha256"])
+    file_checked(select_leaves["object"], select_leaves["object_sha256"])
+    main_obj = file_checked(select_leaves["linked_object"], select_leaves["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 171:
+        raise RuntimeError("Apollo Main Terminal selector command leaf frontier changed")
+    new_session_request_path = G2 / "build/c-firmware/20261016/main-terminal-new-session-request-5cef14/receipt.json"
+    new_session_request, new_session_request_ref = receipt(new_session_request_path)
+    if new_session_request["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_NEW_SESSION_REQUEST_C" or \
+            new_session_request["base_sha256"] != main_obj["sha256"] or \
+            new_session_request["unresolved_before"] != 171 or new_session_request["unresolved_after"] != 171 or \
+            new_session_request["imports_resolved"] != [] or new_session_request["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal new-session request binding changed")
+    file_checked(new_session_request["source"], new_session_request["source_sha256"])
+    file_checked(new_session_request["oracle_receipt"], new_session_request["oracle_receipt_sha256"])
+    file_checked(new_session_request["object"], new_session_request["object_sha256"])
+    main_obj = file_checked(new_session_request["linked_object"], new_session_request["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 171:
+        raise RuntimeError("Apollo Main Terminal new-session request frontier changed")
+    pending_prompt_path = G2 / "build/c-firmware/20261016/main-terminal-session-pending-prompt-5ece4c/receipt.json"
+    pending_prompt, pending_prompt_ref = receipt(pending_prompt_path)
+    if pending_prompt["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_PENDING_PROMPT_C" or \
+            pending_prompt["base_sha256"] != main_obj["sha256"] or \
+            pending_prompt["unresolved_before"] != 171 or pending_prompt["unresolved_after"] != 171 or \
+            pending_prompt["imports_resolved"] != [] or pending_prompt["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal pending-prompt binding changed")
+    file_checked(pending_prompt["source"], pending_prompt["source_sha256"])
+    file_checked(pending_prompt["oracle_receipt"], pending_prompt["oracle_receipt_sha256"])
+    file_checked(pending_prompt["object"], pending_prompt["object_sha256"])
+    main_obj = file_checked(pending_prompt["linked_object"], pending_prompt["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 171:
+        raise RuntimeError("Apollo Main Terminal pending-prompt frontier changed")
+    switch_request_path = G2 / "build/c-firmware/20261016/main-terminal-session-switch-request-5cee8c/receipt.json"
+    switch_request, switch_request_ref = receipt(switch_request_path)
+    if switch_request["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_SWITCH_REQUEST_C" or \
+            switch_request["base_sha256"] != main_obj["sha256"] or \
+            switch_request["unresolved_before"] != 171 or switch_request["unresolved_after"] != 171 or \
+            switch_request["imports_resolved"] != [] or switch_request["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal switch-request binding changed")
+    file_checked(switch_request["source"], switch_request["source_sha256"])
+    file_checked(switch_request["oracle_receipt"], switch_request["oracle_receipt_sha256"])
+    file_checked(switch_request["object"], switch_request["object_sha256"])
+    main_obj = file_checked(switch_request["linked_object"], switch_request["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 171:
+        raise RuntimeError("Apollo Main Terminal switch-request frontier changed")
+    session_select_path = G2 / "build/c-firmware/20261016/main-terminal-session-list-select-5ed4f8/receipt.json"
+    session_select, session_select_ref = receipt(session_select_path)
+    if session_select["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_LIST_SELECT_C" or \
+            session_select["base_sha256"] != main_obj["sha256"] or \
+            session_select["unresolved_before"] != 171 or session_select["unresolved_after"] != 170 or \
+            session_select["imports_resolved"] != ["audio_terminal_ui_action_5ed4f8"] or \
+            session_select["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal selector action binding changed")
+    file_checked(session_select["source"], session_select["source_sha256"])
+    file_checked(session_select["oracle_receipt"], session_select["oracle_receipt_sha256"])
+    file_checked(session_select["object"], session_select["object_sha256"])
+    main_obj = file_checked(session_select["linked_object"], session_select["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 170 or "audio_terminal_ui_action_5ed4f8" in actual:
+        raise RuntimeError("Apollo Main Terminal selector action frontier changed")
+    session_id_path = G2 / "build/c-firmware/20261016/main-terminal-session-id-changed-5e5580/receipt.json"
+    session_id, session_id_ref = receipt(session_id_path)
+    if session_id["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_ID_CHANGED_C" or \
+            session_id["base_sha256"] != main_obj["sha256"] or \
+            session_id["unresolved_before"] != 170 or session_id["unresolved_after"] != 169 or \
+            session_id["imports_resolved"] != ["audio_terminal_ui_action_5e5580"] or \
+            session_id["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal session-id-change binding changed")
+    file_checked(session_id["source"], session_id["source_sha256"])
+    file_checked(session_id["oracle_receipt"], session_id["oracle_receipt_sha256"])
+    file_checked(session_id["object"], session_id["object_sha256"])
+    main_obj = file_checked(session_id["linked_object"], session_id["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 169 or "audio_terminal_ui_action_5e5580" in actual:
+        raise RuntimeError("Apollo Main Terminal session-id-change frontier changed")
+    query_activate_path = G2 / "build/c-firmware/20261016/main-terminal-query-notification-activate-5e66d8/receipt.json"
+    query_activate, query_activate_ref = receipt(query_activate_path)
+    if query_activate["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_QUERY_NOTIFICATION_ACTIVATE_C" or \
+            query_activate["base_sha256"] != main_obj["sha256"] or \
+            query_activate["unresolved_before"] != 169 or query_activate["unresolved_after"] != 168 or \
+            query_activate["imports_resolved"] != ["audio_terminal_ui_action_5e66d8"] or \
+            query_activate["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal query-notification activation binding changed")
+    file_checked(query_activate["source"], query_activate["source_sha256"])
+    file_checked(query_activate["oracle_receipt"], query_activate["oracle_receipt_sha256"])
+    file_checked(query_activate["object"], query_activate["object_sha256"])
+    main_obj = file_checked(query_activate["linked_object"], query_activate["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 168 or "audio_terminal_ui_action_5e66d8" in actual:
+        raise RuntimeError("Apollo Main Terminal query-notification activation frontier changed")
+    query_reply_path = G2 / "build/c-firmware/20261016/main-terminal-query-reply-5e69a0/receipt.json"
+    query_reply, query_reply_ref = receipt(query_reply_path)
+    if query_reply["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_QUERY_REPLY_C" or \
+            query_reply["base_sha256"] != main_obj["sha256"] or \
+            query_reply["unresolved_before"] != 168 or query_reply["unresolved_after"] != 167 or \
+            query_reply["imports_resolved"] != ["audio_terminal_ui_action_5e69a0"] or \
+            query_reply["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal query-reply binding changed")
+    for item in query_reply["sources"] + query_reply["oracle_receipts"] + query_reply["objects"]:
+        file_checked(item["path"], item["sha256"])
+    main_obj = file_checked(query_reply["linked_object"], query_reply["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 167 or "audio_terminal_ui_action_5e69a0" in actual:
+        raise RuntimeError("Apollo Main Terminal query-reply frontier changed")
+    rx_frame_path = G2 / "build/c-firmware/20261016/main-terminal-rx-frame-5ce990/receipt.json"
+    rx_frame, rx_frame_ref = receipt(rx_frame_path)
+    if rx_frame["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_RX_FRAME_C" or \
+            rx_frame["base_sha256"] != main_obj["sha256"] or \
+            rx_frame["unresolved_before"] != 167 or rx_frame["unresolved_after"] != 166 or \
+            rx_frame["imports_resolved"] != ["audio_registry_ring_connect_parse_5ce990"] or \
+            rx_frame["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal RX parser binding changed")
+    file_checked(rx_frame["source"], rx_frame["source_sha256"])
+    file_checked(rx_frame["oracle_receipt"], rx_frame["oracle_receipt_sha256"])
+    file_checked(rx_frame["object"], rx_frame["object_sha256"])
+    main_obj = file_checked(rx_frame["linked_object"], rx_frame["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 166 or "audio_registry_ring_connect_parse_5ce990" in actual:
+        raise RuntimeError("Apollo Main Terminal RX parser frontier changed")
+    ring_ram_path = G2 / "build/c-firmware/20261016/main-registry-ring-connect-ram/receipt.json"
+    ring_ram, ring_ram_ref = receipt(ring_ram_path)
+    if ring_ram["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_AND_RING_RAM_C_ARCHIVE" or \
+            ring_ram["base_sha256"] != main_obj["sha256"] or \
+            ring_ram["unresolved_before"] != 166 or ring_ram["unresolved_after"] != 165 or \
+            ring_ram["imports_resolved"] != ["audio_registry_ring_connect_buffer"] or \
+            ring_ram["imports_added"] != [] or \
+            ring_ram["stock_ram_addresses"] != ["0x2010f4cc", "0x2010fd1c"]:
+        raise RuntimeError("Apollo Main registry ring-connect RAM binding changed")
+    for source_key, hash_key in (("source", "source_sha256"),
+                                 ("state_source", "state_source_sha256"),
+                                 ("linker", "linker_sha256"),
+                                 ("object", "object_sha256"),
+                                 ("state_object", "state_object_sha256"),
+                                 ("placed_object", "placed_sha256"),
+                                 ("combined_archive", "combined_archive_sha256"),
+                                 ("combined_linked_object", "combined_linked_sha256"),
+                                 ("combined_prior_archive", "combined_prior_archive_sha256")):
+        file_checked(ring_ram[source_key], ring_ram[hash_key])
+    if ring_ram["combined_input_imports_removed"] != ["audio_registry_ring_connect_buffer"] or \
+            ring_ram["combined_input_providers_added"] != ["audio_registry_ring_connect_buffer", "audio_terminal_ui_state_base"] or \
+            ring_ram["combined_input_provider_removals"] != [] or \
+            ring_ram["combined_archive_duplicate_field_definitions"] is not False:
+        raise RuntimeError("Apollo Main combined RAM archive changed")
+    main_obj = file_checked(ring_ram["linked_object"], ring_ram["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 165 or "audio_registry_ring_connect_buffer" in actual:
+        raise RuntimeError("Apollo Main registry ring-connect RAM frontier changed")
+    combined_replay_refs = {}
+    prior_sha = ring_ram["combined_linked_sha256"]
+    for label, status, count in (
+            ("early", "PASS_EXPERIMENTAL_MAIN_COMBINED_RAM_EARLY_REPLAY_C", 5),
+            ("root", "PASS_EXPERIMENTAL_MAIN_COMBINED_RAM_ROOT_REPLAY_C", 6),
+            ("late", "PASS_EXPERIMENTAL_MAIN_COMBINED_RAM_LATE_REPLAY_C", 94)):
+        replay_path = G2 / f"build/c-firmware/20261016/main-combined-ram-{label}-replay/receipt.json"
+        replay, replay_ref = receipt(replay_path)
+        if replay["status"] != status or len(replay["stages"]) != count:
+            raise RuntimeError(f"Apollo Main combined RAM {label} replay changed")
+        if label == "early" and replay["combined_ram_receipt_sha256"] != sha(ring_ram_path):
+            raise RuntimeError("Apollo Main combined RAM early input changed")
+        if label == "root" and replay["early_receipt_sha256"] != combined_replay_refs["early"]["sha256"]:
+            raise RuntimeError("Apollo Main combined RAM root handoff changed")
+        if label == "late" and replay["root_receipt_sha256"] != combined_replay_refs["root"]["sha256"]:
+            raise RuntimeError("Apollo Main combined RAM late handoff changed")
+        for stage in replay["stages"]:
+            file_checked(stage["linked"], stage["linked_sha256"])
+            if stage["providers_added_vs_baseline"] != ["audio_registry_ring_connect_buffer", "audio_terminal_ui_state_base"]:
+                raise RuntimeError(f"Apollo Main combined RAM {label} provider delta changed")
+        file_checked(replay["linked_object"], replay["linked_sha256"])
+        if replay["stages"][0]["linked_sha256"] == prior_sha:
+            raise RuntimeError(f"Apollo Main combined RAM {label} did not advance")
+        combined_replay_refs[label] = replay_ref
+        prior_sha = replay["linked_sha256"]
+    if replay["unresolved_after"] != 366 or len(undefined(ROOT / replay["linked_object"])) != 366:
+        raise RuntimeError("Apollo Main combined RAM tail frontier changed")
+    prefix_path = G2 / "build/c-firmware/20261016/main-combined-ram-post-tail-replay/receipt.json"
+    prefix, prefix_ref = receipt(prefix_path)
+    if prefix["status"] != "PASS_EXPERIMENTAL_MAIN_COMBINED_RAM_POST_TAIL_REPLAY_C" or \
+            prefix["tail_receipt_sha256"] != combined_replay_refs["late"]["sha256"] or \
+            prefix["stage_count"] != 444 or prefix["unresolved_after"] != 182:
+        raise RuntimeError("Apollo Main combined RAM post-tail replay changed")
+    for stage in prefix["stages"]:
+        file_checked(stage["linked"], stage["linked_sha256"])
+        if stage["providers_added_vs_baseline"] != ["audio_registry_ring_connect_buffer", "audio_terminal_ui_state_base"]:
+            raise RuntimeError("Apollo Main combined RAM post-tail provider delta changed")
+    file_checked(prefix["linked_object"], prefix["linked_sha256"])
+    if len(undefined(ROOT / prefix["linked_object"])) != 182:
+        raise RuntimeError("Apollo Main combined RAM post-tail import frontier changed")
+    current_replay_path = G2 / "build/c-firmware/20261016/main-combined-ram-current-replay/receipt.json"
+    current_replay, current_replay_ref = receipt(current_replay_path)
+    if current_replay["status"] != "PASS_EXPERIMENTAL_MAIN_COMBINED_RAM_CURRENT_REPLAY_C" or \
+            current_replay["post_tail_receipt_sha256"] != sha(prefix_path) or \
+            current_replay["stage_count"] != 239 or current_replay["unresolved_after"] != 164:
+        raise RuntimeError("Apollo Main combined RAM current replay changed")
+    file_checked(current_replay["replay_script"], current_replay["replay_script_sha256"])
+    for stage in current_replay["stages"]:
+        file_checked(stage["linked"], stage["linked_sha256"])
+        if stage["providers_added_vs_baseline"] != ["audio_registry_ring_connect_buffer", "audio_terminal_ui_state_base"]:
+            raise RuntimeError("Apollo Main combined RAM current provider delta changed")
+    main_obj = file_checked(current_replay["linked_object"], current_replay["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 164 or {"audio_registry_ring_connect_buffer", "audio_terminal_ui_state_base"} & set(actual):
+        raise RuntimeError("Apollo Main combined RAM current import frontier changed")
+    expected_ram = {"audio_terminal_ui_state_base": (0, 0x2a0),
+                    "audio_terminal_agent_session_ptr": (4, 4),
+                    "audio_terminal_mode_sync_pending": (0x274, 1),
+                    "audio_terminal_ui_mode": (0x275, 1),
+                    "audio_terminal_runtime_flag_277": (0x277, 1),
+                    "audio_terminal_selector_loading": (0x27d, 1),
+                    "audio_terminal_runtime_flag_27f": (0x27f, 1),
+                    "audio_terminal_runtime_saved_session": (0x288, 4),
+                    "audio_terminal_agent_special_flag": (0x28c, 1),
+                    "audio_terminal_output_tracking": (0x294, 8),
+                    "audio_terminal_session_switch_tick": (0x29c, 4),
+                    "audio_registry_ring_connect_buffer": (0, 0x850),
+                    "audio_registry_ring_connect_state": (0, 1)}
+    observed_ram = {}
+    for line in subprocess.check_output(["arm-none-eabi-nm", "-S", str(ROOT / main_obj["path"])],
+                                        text=True).splitlines():
+        fields = line.split()
+        if len(fields) == 4 and fields[3] in expected_ram:
+            if fields[3] in observed_ram:
+                raise RuntimeError("Apollo Main combined RAM symbol duplicated")
+            observed_ram[fields[3]] = (int(fields[0], 16), int(fields[1], 16))
+    if observed_ram != expected_ram:
+        raise RuntimeError("Apollo Main combined RAM alias offsets or extents changed")
+    lfs_context_path = G2 / "build/c-firmware/20261016/main-file-lfs-context-20071ac8/receipt.json"
+    lfs_context, lfs_context_ref = receipt(lfs_context_path)
+    if lfs_context["status"] != "PASS_EXPERIMENTAL_MAIN_FILE_LFS_CONTEXT_C" or \
+            lfs_context["base_sha256"] != main_obj["sha256"] or \
+            lfs_context["context_bytes"] != 128 or \
+            lfs_context["stock_ram_address"] != "0x20071ac8" or \
+            lfs_context["unresolved_before"] != 164 or \
+            lfs_context["unresolved_after"] != 163 or \
+            lfs_context["imports_resolved"] != ["audio_file_lfs_context"] or \
+            lfs_context["imports_added"] != []:
+        raise RuntimeError("Apollo Main LittleFS context binding changed")
+    for path_key, hash_key in (("source", "source_sha256"),
+                               ("linker", "linker_sha256"),
+                               ("upstream_header", "upstream_header_sha256"),
+                               ("upstream_provider_receipt", "upstream_provider_receipt_sha256"),
+                               ("object", "object_sha256"),
+                               ("placed_object", "placed_sha256")):
+        file_checked(lfs_context[path_key], lfs_context[hash_key])
+    main_obj = file_checked(lfs_context["linked_object"], lfs_context["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 163 or "audio_file_lfs_context" in actual:
+        raise RuntimeError("Apollo Main LittleFS context frontier changed")
+    codec_timer_path = G2 / "build/c-firmware/20261016/main-codec-check-timer-20074a98/receipt.json"
+    codec_timer, codec_timer_ref = receipt(codec_timer_path)
+    if codec_timer["status"] != "PASS_EXPERIMENTAL_MAIN_CODEC_CHECK_TIMER_RAM_C" or \
+            codec_timer["base_sha256"] != main_obj["sha256"] or \
+            codec_timer["cell_bytes"] != 4 or \
+            codec_timer["stock_ram_address"] != "0x20074a98" or \
+            codec_timer["unresolved_before"] != 163 or \
+            codec_timer["unresolved_after"] != 162 or \
+            codec_timer["imports_resolved"] != ["g2_audio_codec_check_timer"] or \
+            codec_timer["imports_added"] != []:
+        raise RuntimeError("Apollo Main codec watchdog timer binding changed")
+    for path_key, hash_key in (("source", "source_sha256"),
+                               ("linker", "linker_sha256"),
+                               ("oracle_receipt", "oracle_receipt_sha256"),
+                               ("object", "object_sha256"),
+                               ("placed_object", "placed_sha256")):
+        file_checked(codec_timer[path_key], codec_timer[hash_key])
+    main_obj = file_checked(codec_timer["linked_object"], codec_timer["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 162 or "g2_audio_codec_check_timer" in actual:
+        raise RuntimeError("Apollo Main codec watchdog timer frontier changed")
+    codec_mask_path = G2 / "build/c-firmware/20261016/main-codec-shared-mask-2007436c/receipt.json"
+    codec_mask, codec_mask_ref = receipt(codec_mask_path)
+    if codec_mask["status"] != "PASS_EXPERIMENTAL_MAIN_CODEC_SHARED_MASK_RAM_C" or \
+            codec_mask["base_sha256"] != main_obj["sha256"] or \
+            codec_mask["cell_bytes"] != 4 or \
+            codec_mask["stock_ram_address"] != "0x2007436c" or \
+            codec_mask["unresolved_before"] != 162 or \
+            codec_mask["unresolved_after"] != 161 or \
+            codec_mask["imports_resolved"] != ["g2_codec_shared_enable_mask"] or \
+            codec_mask["imports_added"] != []:
+        raise RuntimeError("Apollo Main codec shared mask binding changed")
+    for path_key, hash_key in (("source", "source_sha256"),
+                               ("linker", "linker_sha256"),
+                               ("oracle_receipt", "oracle_receipt_sha256"),
+                               ("object", "object_sha256"),
+                               ("placed_object", "placed_sha256")):
+        file_checked(codec_mask[path_key], codec_mask[hash_key])
+    main_obj = file_checked(codec_mask["linked_object"], codec_mask["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 161 or "g2_codec_shared_enable_mask" in actual:
+        raise RuntimeError("Apollo Main codec shared mask frontier changed")
+    codec_power_path = G2 / "build/c-firmware/20261016/main-codec-power-state-20074fb6/receipt.json"
+    codec_power, codec_power_ref = receipt(codec_power_path)
+    if codec_power["status"] != "PASS_EXPERIMENTAL_MAIN_CODEC_POWER_STATE_RAM_C" or \
+            codec_power["base_sha256"] != main_obj["sha256"] or \
+            codec_power["cell_bytes"] != 1 or \
+            codec_power["stock_ram_address"] != "0x20074fb6" or \
+            codec_power["unresolved_before"] != 161 or \
+            codec_power["unresolved_after"] != 160 or \
+            codec_power["imports_resolved"] != ["g2_codec_power_state"] or \
+            codec_power["imports_added"] != []:
+        raise RuntimeError("Apollo Main codec power state binding changed")
+    for path_key, hash_key in (("source", "source_sha256"),
+                               ("linker", "linker_sha256"),
+                               ("oracle_receipt", "oracle_receipt_sha256"),
+                               ("object", "object_sha256"),
+                               ("placed_object", "placed_sha256")):
+        file_checked(codec_power[path_key], codec_power[hash_key])
+    main_obj = file_checked(codec_power["linked_object"], codec_power["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 160 or "g2_codec_power_state" in actual:
+        raise RuntimeError("Apollo Main codec power state frontier changed")
+    codec_i2s_handle_path = G2 / "build/c-firmware/20261016/main-codec-i2s-handle-2007450c/receipt.json"
+    codec_i2s_handle, codec_i2s_handle_ref = receipt(codec_i2s_handle_path)
+    if codec_i2s_handle["status"] != "PASS_EXPERIMENTAL_MAIN_CODEC_I2S_HANDLE_RAM_C" or \
+            codec_i2s_handle["base_sha256"] != main_obj["sha256"] or \
+            codec_i2s_handle["cell_bytes"] != 4 or \
+            codec_i2s_handle["stock_ram_address"] != "0x2007450c" or \
+            codec_i2s_handle["unresolved_before"] != 160 or \
+            codec_i2s_handle["unresolved_after"] != 159 or \
+            codec_i2s_handle["imports_resolved"] != ["g2_codec_i2s_handle"] or \
+            codec_i2s_handle["imports_added"] != []:
+        raise RuntimeError("Apollo Main codec I2S handle binding changed")
+    for path_key, hash_key in (("source", "source_sha256"),
+                               ("linker", "linker_sha256"),
+                               ("oracle_receipt", "oracle_receipt_sha256"),
+                               ("object", "object_sha256"),
+                               ("placed_object", "placed_sha256")):
+        file_checked(codec_i2s_handle[path_key], codec_i2s_handle[hash_key])
+    main_obj = file_checked(codec_i2s_handle["linked_object"], codec_i2s_handle["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 159 or "g2_codec_i2s_handle" in actual:
+        raise RuntimeError("Apollo Main codec I2S handle frontier changed")
+    codec_i2s_pool_path = G2 / "build/c-firmware/20261016/main-codec-i2s-pool-20071114/receipt.json"
+    codec_i2s_pool, codec_i2s_pool_ref = receipt(codec_i2s_pool_path)
+    if codec_i2s_pool["status"] != "PASS_EXPERIMENTAL_MAIN_CODEC_I2S_POOL_RAM_C" or \
+            codec_i2s_pool["base_sha256"] != main_obj["sha256"] or \
+            codec_i2s_pool["cell_bytes"] != 200 or \
+            codec_i2s_pool["stock_ram_address"] != "0x20071114" or \
+            codec_i2s_pool["unresolved_before"] != 159 or \
+            codec_i2s_pool["unresolved_after"] != 158 or \
+            codec_i2s_pool["imports_resolved"] != ["g2_codec_i2s_handle_pool"] or \
+            codec_i2s_pool["imports_added"] != []:
+        raise RuntimeError("Apollo Main codec I2S pool binding changed")
+    for path_key, hash_key in (("source", "source_sha256"),
+                               ("linker", "linker_sha256"),
+                               ("oracle_receipt", "oracle_receipt_sha256"),
+                               ("object", "object_sha256"),
+                               ("placed_object", "placed_sha256")):
+        file_checked(codec_i2s_pool[path_key], codec_i2s_pool[hash_key])
+    main_obj = file_checked(codec_i2s_pool["linked_object"], codec_i2s_pool["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 158 or "g2_codec_i2s_handle_pool" in actual:
+        raise RuntimeError("Apollo Main codec I2S pool frontier changed")
+    voltage_routes_path = G2 / "build/c-firmware/20261016/main-voltage-routes-2005665c/receipt.json"
+    voltage_routes, voltage_routes_ref = receipt(voltage_routes_path)
+    if voltage_routes["status"] != "PASS_EXPERIMENTAL_MAIN_VOLTAGE_ROUTES_RAM_C" or \
+            voltage_routes["base_sha256"] != main_obj["sha256"] or \
+            voltage_routes["table_bytes"] != 108 or \
+            voltage_routes["stock_ram_address"] != "0x2005665c" or \
+            voltage_routes["unresolved_before"] != 158 or \
+            voltage_routes["unresolved_after"] != 157 or \
+            voltage_routes["imports_resolved"] != ["g2_audio_voltage_routes"] or \
+            voltage_routes["imports_added"] != []:
+        raise RuntimeError("Apollo Main voltage route table binding changed")
+    for path_key, hash_key in (("source", "source_sha256"),
+                               ("linker", "linker_sha256"),
+                               ("oracle_receipt", "oracle_receipt_sha256"),
+                               ("object", "object_sha256"),
+                               ("placed_object", "placed_sha256")):
+        file_checked(voltage_routes[path_key], voltage_routes[hash_key])
+    voltage_oracle = json.loads((ROOT / voltage_routes["oracle_receipt"]).read_text())
+    for item, digest in (("caller", "caller_sha256"),
+                         ("producer", "producer_sha256"),
+                         ("archived_reproduction", "archived_reproduction_sha256"),
+                         ("archived_read_init", "archived_read_init_sha256"),
+                         ("archived_itcm", "archived_itcm_sha256")):
+        file_checked(voltage_oracle[item], voltage_oracle[digest])
+    main_obj = file_checked(voltage_routes["linked_object"], voltage_routes["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 157 or "g2_audio_voltage_routes" in actual:
+        raise RuntimeError("Apollo Main voltage route table frontier changed")
+    itcm_delay_path = G2 / "build/c-firmware/20261016/main-ble-vendor-itcm-delay-00000040/receipt.json"
+    itcm_delay, itcm_delay_ref = receipt(itcm_delay_path)
+    if itcm_delay["status"] != "PASS_EXPERIMENTAL_MAIN_BLE_VENDOR_ITCM_DELAY_C" or \
+            itcm_delay["base_sha256"] != main_obj["sha256"] or \
+            itcm_delay["function_bytes"] != 6 or \
+            itcm_delay["stock_itcm_address"] != "0x40" or \
+            itcm_delay["unresolved_before"] != 157 or \
+            itcm_delay["unresolved_after"] != 156 or \
+            itcm_delay["imports_resolved"] != ["audio_ble_vendor_cycle_delay_rom_00000040"] or \
+            itcm_delay["imports_added"] != []:
+        raise RuntimeError("Apollo Main BLE vendor ITCM delay binding changed")
+    for path_key, hash_key in (("source", "source_sha256"),
+                               ("linker", "linker_sha256"),
+                               ("oracle_receipt", "oracle_receipt_sha256"),
+                               ("emitted_binary", "emitted_sha256"),
+                               ("object", "object_sha256"),
+                               ("placed_object", "placed_sha256")):
+        file_checked(itcm_delay[path_key], itcm_delay[hash_key])
+    itcm_oracle = json.loads((ROOT / itcm_delay["oracle_receipt"]).read_text())
+    for item, digest in (("caller", "caller_sha256"),
+                         ("itcm_decoder", "itcm_decoder_sha256")):
+        file_checked(itcm_oracle[item], itcm_oracle[digest])
+    main_obj = file_checked(itcm_delay["linked_object"], itcm_delay["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 156 or "audio_ble_vendor_cycle_delay_rom_00000040" in actual:
+        raise RuntimeError("Apollo Main BLE vendor ITCM delay frontier changed")
+    codec_pins_path = G2 / "build/c-firmware/20261016/main-codec-clock-pin-words-20000114/receipt.json"
+    codec_pins, codec_pins_ref = receipt(codec_pins_path)
+    expected_pins = {"g2_codec_clock_pin_" + suffix for suffix in
+                     ("0a", "0b", "0c", "0d", "1a", "1b", "1c", "1d", "1e")}
+    if codec_pins["status"] != "PASS_EXPERIMENTAL_MAIN_CODEC_CLOCK_PIN_WORDS_C" or \
+            codec_pins["base_sha256"] != main_obj["sha256"] or \
+            codec_pins["stock_ram_span"] != ["0x20000114", "0x20000138"] or \
+            codec_pins["unresolved_before"] != 156 or \
+            codec_pins["unresolved_after"] != 147 or \
+            set(codec_pins["imports_resolved"]) != expected_pins or \
+            set(codec_pins["pin_values"]) != expected_pins or \
+            codec_pins["imports_added"] != []:
+        raise RuntimeError("Apollo Main codec clock pin words binding changed")
+    for path_key, hash_key in (("source", "source_sha256"),
+                               ("linker", "linker_sha256"),
+                               ("oracle_receipt", "oracle_receipt_sha256"),
+                               ("object", "object_sha256"),
+                               ("placed_object", "placed_sha256")):
+        file_checked(codec_pins[path_key], codec_pins[hash_key])
+    codec_pins_oracle = json.loads((ROOT / codec_pins["oracle_receipt"]).read_text())
+    for item, digest in (("caller", "caller_sha256"),
+                         ("decoder", "decoder_sha256"),
+                         ("prior_decode", "prior_decode_sha256")):
+        file_checked(codec_pins_oracle[item], codec_pins_oracle[digest])
+    main_obj = file_checked(codec_pins["linked_object"], codec_pins["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 147 or expected_pins & set(actual):
+        raise RuntimeError("Apollo Main codec clock pin words frontier changed")
+    pdm_config_path = G2 / "build/c-firmware/20261016/main-pdm-config-words-20000900/receipt.json"
+    pdm_config, pdm_config_ref = receipt(pdm_config_path)
+    expected_pdm = {"g2_pdm_alternate_config", "g2_pdm_alternate_descriptor",
+                    "g2_pdm_production_config", "g2_pdm_production_descriptor"}
+    if pdm_config["status"] != "PASS_EXPERIMENTAL_MAIN_PDM_CONFIG_WORDS_C" or \
+            pdm_config["base_sha256"] != main_obj["sha256"] or \
+            pdm_config["unresolved_before"] != 147 or \
+            pdm_config["unresolved_after"] != 143 or \
+            set(pdm_config["imports_resolved"]) != expected_pdm or \
+            set(pdm_config["objects"]) != expected_pdm or \
+            pdm_config["imports_added"] != []:
+        raise RuntimeError("Apollo Main PDM configuration binding changed")
+    for path_key, hash_key in (("source", "source_sha256"),
+                               ("linker", "linker_sha256"),
+                               ("oracle_receipt", "oracle_receipt_sha256"),
+                               ("object", "object_sha256"),
+                               ("placed_object", "placed_sha256")):
+        file_checked(pdm_config[path_key], pdm_config[hash_key])
+    pdm_oracle = json.loads((ROOT / pdm_config["oracle_receipt"]).read_text())
+    for item, digest in (("init", "init_sha256"),
+                         ("configure", "configure_sha256"),
+                         ("start", "start_sha256"),
+                         ("decoder", "decoder_sha256"),
+                         ("prior_decode", "prior_decode_sha256")):
+        file_checked(pdm_oracle[item], pdm_oracle[digest])
+    for item in pdm_oracle["oracles"]:
+        file_checked(item["script"], item["script_sha256"])
+    main_obj = file_checked(pdm_config["linked_object"], pdm_config["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 143 or expected_pdm & set(actual):
+        raise RuntimeError("Apollo Main PDM configuration frontier changed")
+    i2s_config_path = G2 / "build/c-firmware/20261016/main-i2s-config-words-20000000/receipt.json"
+    i2s_config, i2s_config_ref = receipt(i2s_config_path)
+    expected_i2s = {"g2_codec_i2s_config_base", "g2_codec_i2s_dma_descriptor"}
+    if i2s_config["status"] != "PASS_EXPERIMENTAL_MAIN_I2S_CONFIG_WORDS_C" or \
+            i2s_config["base_sha256"] != main_obj["sha256"] or \
+            i2s_config["unresolved_before"] != 143 or \
+            i2s_config["unresolved_after"] != 141 or \
+            set(i2s_config["imports_resolved"]) != expected_i2s or \
+            set(i2s_config["objects"]) != expected_i2s or \
+            i2s_config["imports_added"] != []:
+        raise RuntimeError("Apollo Main I2S configuration binding changed")
+    for path_key, hash_key in (("source", "source_sha256"),
+                               ("linker", "linker_sha256"),
+                               ("oracle_receipt", "oracle_receipt_sha256"),
+                               ("object", "object_sha256"),
+                               ("placed_object", "placed_sha256")):
+        file_checked(i2s_config[path_key], i2s_config[hash_key])
+    i2s_oracle = json.loads((ROOT / i2s_config["oracle_receipt"]).read_text())
+    for item, digest in (("decoder", "decoder_sha256"),
+                         ("prior_decode", "prior_decode_sha256")):
+        file_checked(i2s_oracle[item], i2s_oracle[digest])
+    for item in i2s_oracle["oracles"]:
+        file_checked(item["script"], item["script_sha256"])
+    for item in i2s_oracle["consumers"]:
+        file_checked(item["path"], item["sha256"])
+    main_obj = file_checked(i2s_config["linked_object"], i2s_config["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 141 or expected_i2s & set(actual):
+        raise RuntimeError("Apollo Main I2S configuration frontier changed")
+    pdm_handles_path = G2 / "build/c-firmware/20261016/main-pdm-handle-ram/receipt.json"
+    pdm_handles, pdm_handles_ref = receipt(pdm_handles_path)
+    expected_pdm_handles = {"g2_pdm_handle_rows", "g2_pdm_alternate_handle",
+                            "g2_pdm_production_handle"}
+    if pdm_handles["status"] != "PASS_EXPERIMENTAL_MAIN_PDM_HANDLE_RAM_C" or \
+            pdm_handles["base_sha256"] != main_obj["sha256"] or \
+            pdm_handles["unresolved_before"] != 141 or \
+            pdm_handles["unresolved_after"] != 138 or \
+            set(pdm_handles["imports_resolved"]) != expected_pdm_handles or \
+            set(pdm_handles["cells"]) != expected_pdm_handles or \
+            pdm_handles["imports_added"] != []:
+        raise RuntimeError("Apollo Main PDM handle binding changed")
+    for item in pdm_handles["sources"] + pdm_handles["linkers"]:
+        file_checked(item["path"], item["sha256"])
+    file_checked(pdm_handles["oracle_receipt"], pdm_handles["oracle_receipt_sha256"])
+    for path, digest in pdm_handles["objects"].items():
+        file_checked(path, digest)
+    for path, digest in pdm_handles["placed_objects"].items():
+        file_checked(path, digest)
+    pdm_handles_oracle = json.loads((ROOT / pdm_handles["oracle_receipt"]).read_text())
+    for item in pdm_handles_oracle["oracles"] + pdm_handles_oracle["consumers"]:
+        file_checked(item["path"], item["sha256"])
+    main_obj = file_checked(pdm_handles["linked_object"], pdm_handles["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 138 or expected_pdm_handles & set(actual):
+        raise RuntimeError("Apollo Main PDM handle frontier changed")
+    ring_descriptors_path = G2 / "build/c-firmware/20261016/main-ring-descriptor-data-20002c48/receipt.json"
+    ring_descriptors, ring_descriptors_ref = receipt(ring_descriptors_path)
+    expected_ring_descriptors = {"audio_uart_ring_primary_descriptors",
+                                 "audio_uart_ring_secondary_descriptors"}
+    if ring_descriptors["status"] != "PASS_EXPERIMENTAL_MAIN_RING_DESCRIPTOR_DATA_C" or \
+            ring_descriptors["base_sha256"] != main_obj["sha256"] or \
+            ring_descriptors["unresolved_before"] != 138 or \
+            ring_descriptors["unresolved_after"] != 136 or \
+            set(ring_descriptors["imports_resolved"]) != expected_ring_descriptors or \
+            set(ring_descriptors["tables"]) != expected_ring_descriptors or \
+            ring_descriptors["imports_added"] != []:
+        raise RuntimeError("Apollo Main ring descriptor binding changed")
+    file_checked(ring_descriptors["source"], ring_descriptors["source_sha256"])
+    file_checked(ring_descriptors["linker"], ring_descriptors["linker_sha256"])
+    file_checked(ring_descriptors["oracle_receipt"], ring_descriptors["oracle_receipt_sha256"])
+    for key in ("object", "placed_object"):
+        file_checked(ring_descriptors[key], ring_descriptors["object_sha256" if key == "object" else "placed_sha256"])
+    ring_oracle = json.loads((ROOT / ring_descriptors["oracle_receipt"]).read_text())
+    for key in ("oracle", "init", "constructor", "decoder", "prior_decode"):
+        file_checked(ring_oracle[key], ring_oracle[key + "_sha256"])
+    main_obj = file_checked(ring_descriptors["linked_object"], ring_descriptors["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 136 or expected_ring_descriptors & set(actual):
+        raise RuntimeError("Apollo Main ring descriptor frontier changed")
+    font_active_path = G2 / "build/c-firmware/20261016/main-font-active-collision-repair/receipt.json"
+    font_active, font_active_ref = receipt(font_active_path)
+    if font_active["status"] != "PASS_EXPERIMENTAL_MAIN_FONT_ACTIVE_COLLISION_REPAIR_C" or \
+            set(font_active["selected_extents"]) != {"audio_uart_font_primary_active",
+                                                      "audio_uart_font_secondary_active"} or \
+            font_active["full_payload_linked"] is not False:
+        raise RuntimeError("Apollo Main font active collision gate changed")
+    for key in ("source", "loader", "active_function_source", "linker", "decoder",
+                "prior_decode", "old_compile_manifest", "old_loader_object"):
+        file_checked(font_active[key], font_active[key + "_sha256"])
+    for path, digest in font_active["objects"].items():
+        file_checked(path, digest)
+    font_archive_path = G2 / "build/c-firmware/20261016/main-font-active-archive-refresh/receipt.json"
+    font_archive, font_archive_ref = receipt(font_archive_path)
+    if font_archive["status"] != "PASS_EXPERIMENTAL_MAIN_FONT_ACTIVE_ARCHIVE_REFRESH_C" or \
+            font_archive["repair_sha256"] != font_active_ref["sha256"] or \
+            font_archive["unresolved_before"] != 637 or \
+            font_archive["unresolved_after"] != 636 or \
+            font_archive["imports_resolved"] != ["audio_uart_ring_secondary_active"] or \
+            set(font_archive["providers_added"]) != {"audio_uart_font_primary_active",
+                                                     "audio_uart_font_secondary_active"} or \
+            font_archive["full_payload_linked"] is not False:
+        raise RuntimeError("Apollo Main corrected font archive gate changed")
+    for key in ("repair", "prior_archive", "prior_object", "main_archive", "manifest",
+                "replacement_object", "data_object", "archive", "linked_object"):
+        file_checked(font_archive[key], font_archive[key + "_sha256"])
+    combined_font_path = G2 / "build/c-firmware/20261016/main-combined-ram-settings-font-archive/receipt.json"
+    combined_font, combined_font_ref = receipt(combined_font_path)
+    if combined_font["status"] != "PASS_EXPERIMENTAL_MAIN_COMBINED_RAM_SETTINGS_FONT_ARCHIVE_C" or \
+            combined_font["font_receipt_sha256"] != font_archive_ref["sha256"] or \
+            combined_font["settings_extent_bytes"] != 104 or \
+            combined_font["unresolved_before"] != 636 or \
+            combined_font["unresolved_after"] != 635:
+        raise RuntimeError("Apollo Main combined RAM/settings/font archive changed")
+    for key in ("ram_receipt", "settings_receipt", "font_receipt", "prior_archive",
+                "prior_object", "main_archive", "archive", "linked_object"):
+        file_checked(combined_font[key], combined_font[key + "_sha256"])
+    for path, digest in combined_font["source_objects"].items():
+        file_checked(path, digest)
+    core_font_path = G2 / "build/c-firmware/20261016/main-combined-ram-settings-font-core-replay/receipt.json"
+    core_font, core_font_ref = receipt(core_font_path)
+    if core_font["status"] != "PASS_EXPERIMENTAL_MAIN_COMBINED_RAM_SETTINGS_FONT_CORE_REPLAY_C" or \
+            core_font["archive_receipt_sha256"] != combined_font_ref["sha256"] or \
+            core_font["stages_replayed"] != 105 or core_font["unresolved_after"] != 365:
+        raise RuntimeError("Apollo Main corrected core replay changed")
+    file_checked(core_font["linked_object"], core_font["linked_sha256"])
+    feature_font_path = G2 / "build/c-firmware/20261016/main-combined-ram-settings-font-feature-replay/receipt.json"
+    feature_font, feature_font_ref = receipt(feature_font_path)
+    if feature_font["status"] != "PASS_EXPERIMENTAL_MAIN_COMBINED_RAM_SETTINGS_FONT_FEATURE_REPLAY_C" or \
+            feature_font["core_receipt_sha256"] != core_font_ref["sha256"] or \
+            feature_font["stages_replayed"] != 683 or feature_font["unresolved_after"] != 163:
+        raise RuntimeError("Apollo Main corrected feature replay changed")
+    file_checked(feature_font["linked_object"], feature_font["linked_sha256"])
+    final_font_path = G2 / "build/c-firmware/20261016/main-combined-ram-settings-font-final-replay/receipt.json"
+    final_font, final_font_ref = receipt(final_font_path)
+    if final_font["status"] != "PASS_EXPERIMENTAL_MAIN_COMBINED_RAM_SETTINGS_FONT_FINAL_REPLAY_C" or \
+            final_font["feature_receipt_sha256"] != feature_font_ref["sha256"] or \
+            final_font["stages_replayed"] != 13 or final_font["unresolved_after"] != 135 or \
+            final_font["settings_extent_bytes"] != 104 or \
+            final_font["stages"][-1]["prior_sha256"] != main_obj["sha256"] or \
+            final_font["imports_resolved"] != ["audio_uart_ring_secondary_active"]:
+        raise RuntimeError("Apollo Main corrected final replay changed")
+    main_obj = file_checked(final_font["linked_object"], final_font["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 135 or "audio_uart_ring_secondary_active" in actual:
+        raise RuntimeError("Apollo Main corrected font frontier changed")
+    corrected_symbols = {}
+    for line in subprocess.check_output(["arm-none-eabi-nm", "-S", str(ROOT / main_obj["path"])],
+                                        text=True).splitlines():
+        row = line.split()
+        if len(row) == 4 and row[3] in ("audio_settings_last_message_state",
+                                           "audio_uart_font_primary_active",
+                                           "audio_uart_font_secondary_active",
+                                           "audio_uart_ring_active"):
+            corrected_symbols[row[3]] = (int(row[1], 16), row[2])
+    if corrected_symbols != {"audio_settings_last_message_state": (104, "D"),
+                             "audio_uart_font_primary_active": (28, "D"),
+                             "audio_uart_font_secondary_active": (28, "D"),
+                             "audio_uart_ring_active": (50, "T")}:
+        raise RuntimeError("Apollo Main corrected RAM/function extents changed")
+    ring_relocations = [line for line in subprocess.check_output(
+        ["arm-none-eabi-objdump", "-r", str(ROOT / main_obj["path"])],
+        text=True).splitlines() if line.endswith(" audio_uart_ring_active")]
+    if not ring_relocations or any(" R_ARM_THM_CALL " not in line
+                                   for line in ring_relocations):
+        raise RuntimeError("Apollo Main still has a font RAM relocation to the ring-active function")
+    locale_dispatch_path = G2 / "build/c-firmware/20261016/main-locale-dispatch-data-200044c0/receipt.json"
+    locale_dispatch, locale_dispatch_ref = receipt(locale_dispatch_path)
+    if locale_dispatch["status"] != "PASS_EXPERIMENTAL_MAIN_LOCALE_DISPATCH_DATA_C" or \
+            locale_dispatch["base_sha256"] != main_obj["sha256"] or \
+            locale_dispatch["selected_address"] != "0x200044c0" or \
+            locale_dispatch["selected_bytes"] != 44 or \
+            locale_dispatch["callback_slots"] != {"0x20": "0x4d4385",
+                                                   "0x28": "0x4d4399"} or \
+            locale_dispatch["unresolved_before"] != 135 or \
+            locale_dispatch["unresolved_after"] != 134 or \
+            locale_dispatch["imports_resolved"] != ["audio_uart_ring_locale_dispatch_200044c0"] or \
+            locale_dispatch["imports_added"]:
+        raise RuntimeError("Apollo Main locale dispatch binding changed")
+    for key in ("source", "linker", "decoder", "prior_decode", "object",
+                "placed_object"):
+        file_checked(locale_dispatch[key], locale_dispatch[
+            "placed_sha256" if key == "placed_object" else key + "_sha256"])
+    file_checked(locale_dispatch["linked_object"], locale_dispatch["linked_sha256"])
+    locale_callbacks_path = G2 / "build/c-firmware/20261016/main-locale-ascii-callbacks/receipt.json"
+    locale_callbacks, locale_callbacks_ref = receipt(locale_callbacks_path)
+    if locale_callbacks["status"] != "PASS_EXPERIMENTAL_MAIN_LOCALE_ASCII_CALLBACKS_C" or \
+            locale_callbacks["comparisons"] != 534:
+        raise RuntimeError("Apollo Main locale callback proof changed")
+    for key in ("source", "package", "decoder", "object", "elf"):
+        file_checked(locale_callbacks[key], locale_callbacks[key + "_sha256"])
+    locale_reloc_path = G2 / "build/c-firmware/20261016/main-locale-relocatable-source/receipt.json"
+    locale_reloc, locale_reloc_ref = receipt(locale_reloc_path)
+    if locale_reloc["status"] != "PASS_EXPERIMENTAL_MAIN_LOCALE_RELOCATABLE_TABLE_C" or \
+            locale_reloc["callback_receipt_sha256"] != locale_callbacks_ref["sha256"] or \
+            locale_reloc["comparisons"] != 534 or locale_reloc["selected_bytes"] != 44:
+        raise RuntimeError("Apollo Main relocatable locale proof changed")
+    for path, digest in locale_reloc["sources"].items():
+        file_checked(path, digest)
+    for path, digest in locale_reloc["objects"].items():
+        file_checked(path, digest)
+    for key in ("decoder", "package", "callback_receipt", "table_raw", "placed_object", "elf"):
+        file_checked(locale_reloc[key], locale_reloc[
+            "placed_sha256" if key == "placed_object" else key + "_sha256"])
+    locale_archive_path = G2 / "build/c-firmware/20261016/main-locale-relocatable-archive/receipt.json"
+    locale_archive, locale_archive_ref = receipt(locale_archive_path)
+    if locale_archive["status"] != "PASS_EXPERIMENTAL_MAIN_LOCALE_RELOCATABLE_ARCHIVE_C" or \
+            locale_archive["evidence_receipt_sha256"] != locale_reloc_ref["sha256"] or \
+            locale_archive["base_receipt_sha256"] != combined_font_ref["sha256"] or \
+            locale_archive["unresolved_before"] != 635 or \
+            locale_archive["unresolved_after"] != 634:
+        raise RuntimeError("Apollo Main relocatable locale archive changed")
+    for key in ("base_receipt", "evidence_receipt", "manifest", "prior_archive",
+                "prior_object", "main_archive", "archive", "linked_object"):
+        file_checked(locale_archive[key], locale_archive[key + "_sha256"])
+    for item in locale_archive["source_objects"].values():
+        file_checked(item["object"], item["object_sha256"])
+    locale_current_path = G2 / "build/c-firmware/20261016/main-locale-relocatable-current-replay/receipt.json"
+    locale_current, locale_current_ref = receipt(locale_current_path)
+    if locale_current["status"] != "PASS_EXPERIMENTAL_MAIN_LOCALE_RELOCATABLE_CURRENT_REPLAY_C" or \
+            locale_current["archive_receipt_sha256"] != locale_archive_ref["sha256"] or \
+            locale_current["stages_replayed"] != 801 or \
+            locale_current["unresolved_after"] != 134 or \
+            locale_current["stages"][-1]["prior_sha256"] != main_obj["sha256"]:
+        raise RuntimeError("Apollo Main relocatable locale replay changed")
+    main_obj = file_checked(locale_current["linked_object"], locale_current["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 134 or "audio_uart_ring_locale_dispatch_200044c0" in actual:
+        raise RuntimeError("Apollo Main relocatable locale frontier changed")
+    locale_symbols = {}
+    for line in subprocess.check_output(["arm-none-eabi-nm", "-S", str(ROOT / main_obj["path"])],
+                                        text=True).splitlines():
+        row = line.split()
+        if len(row) == 4 and row[3] in ("audio_uart_ring_locale_dispatch_200044c0",
+                                           "audio_uart_locale_ascii_space_4d4384",
+                                           "audio_uart_locale_ascii_lower_4d4398"):
+            locale_symbols[row[3]] = (int(row[1], 16), row[2])
+    if locale_symbols.get("audio_uart_ring_locale_dispatch_200044c0") != (44, "D") or \
+            any(locale_symbols.get(name, (0, ""))[1] != "T" for name in
+                ("audio_uart_locale_ascii_space_4d4384",
+                 "audio_uart_locale_ascii_lower_4d4398")):
+        raise RuntimeError("Apollo Main C locale table/callback providers changed")
+    locale_relocations = [line.strip() for line in subprocess.check_output(
+        ["arm-none-eabi-objdump", "-r", str(ROOT / main_obj["path"])],
+        text=True).splitlines() if "R_ARM_ABS32" in line and
+        "audio_uart_locale_ascii_" in line]
+    if locale_relocations != locale_reloc["callback_relocations"]:
+        raise RuntimeError("Apollo Main locale callback relocations changed")
+    locale_classify_path = G2 / "build/c-firmware/20261016/main-locale-classify-callbacks/receipt.json"
+    locale_classify, locale_classify_ref = receipt(locale_classify_path)
+    if locale_classify["status"] != "PASS_EXPERIMENTAL_MAIN_LOCALE_CLASSIFY_CALLBACKS_C" or \
+            locale_classify["prior_receipt_sha256"] != locale_callbacks_ref["sha256"] or \
+            locale_classify["comparisons"] != 801:
+        raise RuntimeError("Apollo Main locale classifier proof changed")
+    for key in ("source", "package", "prior_script", "prior_receipt", "object", "elf"):
+        file_checked(locale_classify[key], locale_classify[key + "_sha256"])
+    locale_five_table_path = G2 / "build/c-firmware/20261016/main-locale-five-callback-table/receipt.json"
+    locale_five_table, locale_five_table_ref = receipt(locale_five_table_path)
+    if locale_five_table["status"] != "PASS_EXPERIMENTAL_MAIN_LOCALE_FIVE_CALLBACK_TABLE_C" or \
+            locale_five_table["lower_receipt_sha256"] != locale_callbacks_ref["sha256"] or \
+            locale_five_table["classify_receipt_sha256"] != locale_classify_ref["sha256"] or \
+            locale_five_table["indirect_comparisons"] != 80 or \
+            locale_five_table["selected_bytes"] != 44 or \
+            len(locale_five_table["callback_relocations"]) != 5:
+        raise RuntimeError("Apollo Main five-slot locale table proof changed")
+    for path, digest in locale_five_table["sources"].items():
+        file_checked(path, digest)
+    for path, digest in locale_five_table["objects"].items():
+        file_checked(path, digest)
+    for key in ("decoder", "prior_oracle", "lower_receipt", "classify_receipt",
+                "table_raw", "placed_object", "elf"):
+        file_checked(locale_five_table[key], locale_five_table[
+            "placed_sha256" if key == "placed_object" else key + "_sha256"])
+    locale_five_archive_path = G2 / "build/c-firmware/20261016/main-locale-five-archive/receipt.json"
+    locale_five_archive, locale_five_archive_ref = receipt(locale_five_archive_path)
+    if locale_five_archive["status"] != "PASS_EXPERIMENTAL_MAIN_LOCALE_FIVE_ARCHIVE_C" or \
+            locale_five_archive["base_receipt_sha256"] != locale_archive_ref["sha256"] or \
+            locale_five_archive["evidence_receipt_sha256"] != locale_five_table_ref["sha256"] or \
+            locale_five_archive["unresolved_before"] != 634 or \
+            locale_five_archive["unresolved_after"] != 634 or \
+            len(locale_five_archive["providers_added"]) != 3:
+        raise RuntimeError("Apollo Main five-slot locale archive changed")
+    for key in ("base_receipt", "evidence_receipt", "classify_receipt", "prior_archive",
+                "prior_object", "main_archive", "archive", "linked_object"):
+        file_checked(locale_five_archive[key], locale_five_archive[key + "_sha256"])
+    for item in locale_five_archive["source_objects"].values():
+        file_checked(item["object"], item["object_sha256"])
+    locale_five_current_path = G2 / "build/c-firmware/20261016/main-locale-five-current-replay/receipt.json"
+    locale_five_current, locale_five_current_ref = receipt(locale_five_current_path)
+    if locale_five_current["status"] != "PASS_EXPERIMENTAL_MAIN_LOCALE_FIVE_CURRENT_REPLAY_C" or \
+            locale_five_current["archive_receipt_sha256"] != locale_five_archive_ref["sha256"] or \
+            locale_five_current["stages_replayed"] != 801 or \
+            locale_five_current["unresolved_after"] != 134 or \
+            locale_five_current["stages"][-1]["prior_sha256"] != final_font["linked_sha256"] or \
+            len(locale_five_current["providers_added"]) != 6:
+        raise RuntimeError("Apollo Main five-slot locale replay changed")
+    main_obj = file_checked(locale_five_current["linked_object"],
+                            locale_five_current["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 134 or "audio_uart_ring_locale_dispatch_200044c0" in actual:
+        raise RuntimeError("Apollo Main five-slot locale frontier changed")
+    five_relocations = [line.strip() for line in subprocess.check_output(
+        ["arm-none-eabi-objdump", "-r", str(ROOT / main_obj["path"])],
+        text=True).splitlines() if "R_ARM_ABS32" in line and
+        "audio_uart_locale_ascii_" in line]
+    if five_relocations != locale_five_table["callback_relocations"]:
+        raise RuntimeError("Apollo Main five locale callback relocations changed")
     images["apollo_main"] = {
         "receipt": main_ref, "candidate": main_obj,
+        "lv_level_names_ram_contract": lv_names_ref,
         "prior_dm_registry_extent_gate": registry_ref,
         "dm_registry_storage": storage_ref,
         "dm_connection_pair_storage": pair_ref,
@@ -5420,10 +6434,65 @@ def main():
         "terminal_agent_interrupt_bound": agent_interrupt_ref,
         "terminal_session_status_bound": session_status_ref,
         "terminal_agent_done_bound": agent_done_ref,
+        "terminal_query_show_action_bound": query_show_action_ref,
+        "terminal_query_hit_count_bound": query_hit_count_ref,
+        "terminal_query_construct_bound": query_construct_ref,
+        "terminal_session_list_show_bound": session_list_show_ref,
+        "td_flag_b_set_bound": td_flag_b_ref,
+        "terminal_cancel_pending_bound": cancel_pending_ref,
+        "terminal_session_selector_leaf_bound": selector_leaf_ref,
+        "terminal_session_list_rebuild_bound": selector_rebuild_ref,
+        "terminal_session_row_factory_bound": selector_row_ref,
+        "terminal_new_session_failed_bound": new_session_failed_ref,
+        "terminal_session_list_update_bound": session_update_ref,
+        "terminal_session_switch_result_bound": session_switch_ref,
+        "terminal_session_select_command_leaves_bound": select_leaves_ref,
+        "terminal_new_session_request_bound": new_session_request_ref,
+        "terminal_session_pending_prompt_bound": pending_prompt_ref,
+        "terminal_session_switch_request_bound": switch_request_ref,
+        "terminal_session_list_select_bound": session_select_ref,
+        "terminal_session_id_changed_bound": session_id_ref,
+        "terminal_query_notification_activate_bound": query_activate_ref,
+        "terminal_query_reply_bound": query_reply_ref,
+        "terminal_rx_frame_bound": rx_frame_ref,
+        "registry_ring_connect_ram_bound": ring_ram_ref,
+        "combined_ram_early_replay": combined_replay_refs["early"],
+        "combined_ram_root_replay": combined_replay_refs["root"],
+        "combined_ram_late_replay": combined_replay_refs["late"],
+        "combined_ram_post_tail_replay": prefix_ref,
+        "combined_ram_current_replay": current_replay_ref,
+        "file_lfs_context_bound": lfs_context_ref,
+        "codec_watchdog_timer_bound": codec_timer_ref,
+        "codec_shared_enable_mask_bound": codec_mask_ref,
+        "codec_power_state_bound": codec_power_ref,
+        "codec_i2s_handle_bound": codec_i2s_handle_ref,
+        "codec_i2s_pool_bound": codec_i2s_pool_ref,
+        "voltage_routes_bound": voltage_routes_ref,
+        "ble_vendor_itcm_delay_bound": itcm_delay_ref,
+        "codec_clock_pin_words_bound": codec_pins_ref,
+        "pdm_config_words_bound": pdm_config_ref,
+        "i2s_config_words_bound": i2s_config_ref,
+        "pdm_handle_ram_bound": pdm_handles_ref,
+        "ring_descriptor_data_bound": ring_descriptors_ref,
+        "font_active_collision_repair": font_active_ref,
+        "font_active_corrected_input_archive": font_archive_ref,
+        "combined_ram_settings_font_archive": combined_font_ref,
+        "combined_ram_settings_font_core_replay": core_font_ref,
+        "combined_ram_settings_font_feature_replay": feature_font_ref,
+        "combined_ram_settings_font_final_replay": final_font_ref,
+        "locale_dispatch_stock_data_proof": locale_dispatch_ref,
+        "locale_ascii_callbacks": locale_callbacks_ref,
+        "locale_relocatable_table_proof": locale_reloc_ref,
+        "locale_relocatable_archive": locale_archive_ref,
+        "locale_relocatable_current_replay": locale_current_ref,
+        "locale_classify_callbacks": locale_classify_ref,
+        "locale_five_callback_table_proof": locale_five_table_ref,
+        "locale_five_callback_archive": locale_five_archive_ref,
+        "locale_five_callback_current_replay": locale_five_current_ref,
         "settings_last_message_ram_extent": {"current_source_receipt": ram_ref, "selected_object_bytes": selected_ram_bytes, "required_minimum_bytes": 104, "integrated": selected_ram_bytes == 104},
         "unresolved_count": len(actual), "unresolved_symbols": actual,
         "source_complete": False, "full_payload_linked": False,
-        "remaining_gate": ["176 current imports; agent-done FSM action is C-bound after 75 controlled stock comparisons. Session-status FSM action is C-bound after 1920 controlled stock comparisons. Agent-interrupt FSM action and its one-byte packet encoder are C-bound after 25 and 15 controlled stock comparisons. Agent-reset FSM action is C-bound after 75 controlled stock comparisons. ASR-failure FSM action is C-bound after 75 controlled stock comparisons. Input-cancel FSM action is C-bound after 150 controlled stock comparisons. Input-confirm FSM action and its two TD children are C-bound after 25, 216 and 60 controlled stock comparisons. Terminal result-area constructor 0x5ebff8 is C-bound after 48 controlled cases, with exact source-owned 16x16 icon bytes. Terminal voice-stop action and processing-label helper are C-bound after 100 and four controlled stock comparisons. ASR-final action and timeout-stop helper are C-bound after 150 and 15 controlled comparisons; Terminal query session-name lookup, visibility constructor, two LVGL style wrappers and root constructor are C-bound after 120, 32, 48 and 30 controlled cases, with exact source-owned icon bytes. Terminal voice-start action and timeout child are C-bound after 25 and 24 controlled cases with exact source-owned voice icon. Voice-prepare constructor, five style wrappers, animimage class/factory, constructor and frame callback are C-bound after 16, 80, 3, 12 and 36 controlled cases. The stock scatter-executed 19-frame voice style table at RAM 0x200014e8 and its exact 4864 pixel bytes are C-owned with a bounded placement fragment; complete main scatter/linker integration remains open. LVGL effects and final object graph remain open. Terminal UI callback, exit-sync, teardown, result-area cleanup and timer/object cleanup are C-bound after 224, 16, 9, 12 and 27 controlled stock comparisons. LVGL object membership 0x43e2ea and recursive descendant 0x43ee54 are C-bound after 144 and 60 controlled cases. List animation deinit 0x5896b4 is C-bound after four controlled cases with its 0xd0-byte state at observed RAM 0x20070ea8. Terminal timer clear 0x5e7ec4 is C-bound after four controlled cases with its 0x18-byte state at observed RAM 0x20073c38. Terminal UI start 0x5e716c, its list animation initializer 0x58966c and theme wrapper 0x5e47cc are C-bound after 9, 4 and 4 controlled cases. Terminal tick 0x5e8008 and its deadline, voice-input and elapsed-record children are C-bound after 96, 252, 24 and 160 controlled cases. Terminal status FSM 0x5e7b74 and its exact 4160-byte dispatch table at 0x650430 are C-bound after 775 controlled cases. This exposes 50 distinct action callback targets, of which ten actions are now C-bound: two ASR actions after 54 controlled cases, two exit actions after 108 controlled cases, two payload actions after 48 controlled cases query-dismiss action after 160 controlled cases status action with its two payload helpers after 72 controlled cases and two reset actions after 32 controlled cases, with notification-restore, LVGL scroll and fade-out children C-bound after 24, 18 and 300 controlled cases; the two FSM name lookups are C-bound after 2048 controlled cases with source-owned RAM pointer slots at 0x20003ea4 and 0x20003edc, while the other 21 callback bodies and name RAM initialization remain open. Reset mode 0x5eae2c and display 0x5e4c84 are C-bound after 31 controlled cases; mode-set wrapper 0x5eae1e and event emitter 0x5eadd4 are C-bound after 25 and 144 controlled cases. Event type 4 child 0x5ea9f6 and its list-reset child 0x5ea7dc are C-bound after 12 and 48 controlled cases. Default event child 0x5eaad4 and its input selector, input application and view refresh children are C-bound after 96, 36, 36 and 48 controlled cases; its offset recomputation child is C-bound after 128 controlled cases; resource pointer and ring item lookup are C-bound after 120 controlled cases using the existing Terminal-data RAM owner; view-position child 0x5ea926, view-index child 0x5ea8ce and position-index search 0x5ea868 are C-bound after 144, 84 and 330 controlled cases; view-select child 0x5ea810 and row-update child 0x5ea768 are C-bound after 240 and 320 controlled cases; row LVGL flag, clear-flag and position calls reuse existing C-bound providers through three ABI adapters; item-height child 0x5ea67a is C-bound after 96 controlled cases using the existing 0x200746dc font-pointer cell; spacing child 0x5ea2c2 and row text/image binding 0x5ea564 are C-bound after 8 and 128 controlled cases; sixteen of the nineteen row-binding child imports reuse existing C-bound stock-address providers through ABI adapters; Terminal image-y 0x5ea2b0, row-color 0x5ea2f2 and row-image 0x5ea524 children are C-bound after 600 controlled cases; image-hint 0x5ea4f0 is C-bound after 216 controlled cases; event type-two 0x5eabde and its last-record 0x597350 and rollover 0x5eab8e children are C-bound after 288 and 48 controlled cases; type-three indexed event 0x5eaca0 is C-bound after 2048 controlled cases; reset prelude 0x5e51ba, ancillary reset 0x5e65f8 and voice-timeout preclear 0x5e7f26 are C-bound after 156, 32 and 96 controlled cases, with audio-manager app release 0x54f50e C-bound after 560 controlled cases; reset subtree 0x5ea342 and its style/image-Y children are C-bound after 48 and 23 controlled cases, with both stock image descriptors, 1341 image bytes and the 68-byte welcome text source-owned; query restore 0x5e6620, its return-to-input action 0x5e57c6 and image-set child 0x5e47fe are C-bound after 320, 96 and 12 controlled cases; display-status 0x44ea04 reuses the existing C-bound scroll-to-Y provider after a fresh 80-case stock oracle; four Terminal disconnect FSM actions 0x5e522e, 0x5e52c2, 0x5e5320 and 0x5e53b8 are C-bound after 512 stock comparisons with their 256-byte icon and texts source-owned; processing-response action 0x5e583c and event-34 routing action 0x5e54a2 are C-bound after 96 and 336 stock comparisons; BLE display-request action 0x5e576c is C-bound after 336 comparisons while its prepare child remains open and fallback reuses the C-bound current-session index; packed event-word action 0x5e63b4 is C-bound after 48 stock comparisons; paired scroll/status actions 0x5e6dd0 and 0x5e6e30 are C-bound after 320 stock comparisons, with notification parent 0x5ec190 C-bound after 120 stock comparisons and its layout child 0x5ebc9e and overlay-focus publication 0x5e5498/0x5cf134 C-bound after 480 comparisons each; interrupt-confirm scroll 0x5e6cb8 and its toggle child 0x5ec73c are C-bound after 1920 cases, with the list-style and indicator-layout child 0x5ec3c0/0x5ec34e C-bound after 1536 cases; interrupt-confirm-show action 0x5e6b18 is C-bound after 192 cases while its UI constructor 0x5ec446 remains open; interrupt-confirm-cancel action 0x5e6ba0 is C-bound after 192 cases with its cleanup child already source-owned; new-session success action 0x5ed870 is C-bound after 192 cases through its existing event, reset, cleanup and input-return providers; query-notification switch-result action 0x5e68dc is C-bound after 384 cases through its existing restore-query provider; paired query-scroll actions 0x5e6e88/0x5e6f60 are C-bound after 960 cases, with their query-layout child 0x5ebb96 C-bound after 64 cases; item-style child 0x5eb3c6 and its count provider 0x5eb30c are C-bound after 444 cases, with indicator child 0x5eb322 and font offset 0x5eb2ee C-bound after 487 cases; session-list scroll action 0x5ed492 is C-bound after 384 cases and its selection, count, validity and object-lookup subtree 0x5ecc1a/0x5eca48/0x5eca64/0x5ecb52 after 626 cases; session focus 0x5ecbea, ListFocus wrapper 0x5e5490 and protobuf encoder 0x5cf0ba are C-bound after 360 cases, direct-apply 0x5ecb88 after 192 cases and row-style 0x5ecb08 after 42 cases; list-animation elapsed 0x5893f0, timeout poll 0x5893fe and queue add 0x5896fc are C-bound after 304 cases; queue processor 0x58956e and completion callback 0x58949e are C-bound after 312 controlled cases; new-object preparation 0x5894d6 is C-bound after 384 controlled cases; old/new button fade start children 0x58c6c4/0x58c622 are C-bound after 600 controlled cases; their Bezier path 0x450688 is C-bound after 15 controlled cases; row show/hide walkers 0x5897ee/0x589892 and LVGL class ancestry 0x43e2d4 are C-bound after 140 and 30 controlled cases; image class record 0x756108 is source-owned with exact fixed words and five relocations; image constructor/destroyer 0x498bd0/0x498c6c are C-bound after 84 cases; button fade callback 0x58c230 and recursive body 0x58c138 are C-bound after 168 cases; image event 0x498c9c and click-area 0x4408b0 are C-bound after 432 and 36 stock comparisons; image draw 0x498ec0 is C-bound after 220 stock comparisons; image opacity/radius accessors 0x498634/0x49865e are C-bound after 90 cases; descriptor initializer 0x452a34 is C-bound after 216 stock comparisons; its four exposed style getters are C-bound after 180 stock comparisons; draw scheduler 0x488a38 is C-bound after 168 controlled stock comparisons; it reuses five existing C lower providers; allocation-failure trap, real decoder/renderer effects and final placement remain open; decoder-info helper 0x488f6a and source-type/zero children were already C-bound in the prior image-header chain; Terminal label-text alias for 0x49942e is C-bound after 48 forwarding cases using the existing stock-compared label provider; formatted label 0x49954c is C-bound after 36 variadic stock comparisons and exposes lower formatter 0x489ad2 while real formatter effects remain open; null fatal branches are independently stock-compared in the five-case label fatal-path oracle; lower two-pass formatted text allocator 0x489ad2 is C-bound after 60 stock comparisons through the existing C-owned vsnprintf provider, with allocation-failure trap stock-compared by the five-case label fatal-path oracle and real formatter effects remaining open; Terminal clear-flag alias for stock 0x43dfa4 is C-bound after 48 forwarding cases using the existing C provider; five more Terminal LVGL object ABI aliases are C-bound after 135 forwarding cases through existing stock-address providers; four LVGL animimage setters/start 0x597ea6/0x597ee0/0x597f10/0x597f52 are C-bound after 68 controlled stock cases including null-object assertions, with animation lower effects and final placement open; query-notification-show FSM action 0x5e6548 is C-bound after 200 stock comparisons including enabled logging, exposing counter getter 0x5973dc and query visibility 0x5ec82a; counter getter 0x5973dc is C-bound after 7 direct stock comparisons through the existing source-owned TD-state provider, while query visibility remains open; 0x20000032 is the confirmed encoded 50 percent image pivot; interrupt-confirm defer-query action 0x5e6d58 is C-bound after 192 stock comparisons including enabled logging, with its output-style 24-byte startup pointer table and six image descriptors/1536 pixel bytes now C-owned; final source-resource linker relocation remains open; row resource placement and lower effects remain open; selector and refresh reuse existing C-bound LVGL object-y and object-height providers. Payload control-flags child 0x5e4a6e is C-bound after 240 controlled cases, and elapsed-text child 0x5e48b8 is C-bound after 36 cases; output-start child 0x5e4920 is C-bound after 25 controlled cases; processing-object child 0x5e4878 and processing-state clear child 0x5ea30c are C-bound after 5 and 12 controlled cases; elapsed-refresh child 0x5e4902 and its fallback clear 0x5e4894 are C-bound after 48 and 4 controlled cases; the elapsed counter uses an existing C-owned provider. Set-output child 0x5e49b0 is C-bound after 100 controlled cases; three of its four exposed RAM cells are source-owned at 0x20074a94 and 0x2007502c-0x2007502d; label-style child 0x5e482a is C-bound after 16 controlled cases; output-mode selector/hash and exact ten-phrase table are C-bound after 240 controlled cases; style runtime writes, animation and LVGL lower-call effects remain. The three exposed teardown service children are C-bound after 24 controlled cases; the event call 0x5e5484 and its display-state protobuf encoder are C-bound after 48 controlled cases, while a 0x2a0-byte state-base import remains; exact RAM ownership, lower effects and final placement are open. Cyclic or malformed LVGL trees and concurrent mutation remain open. Enabled callback logging remains open. The thirteen terminal event-name pointer slots are C-owned at the observed RAM address, but runtime initialization and strings remain open. The fault lookup provider covers all 195 matchable stock codes, but 152 overrun matches use absolute stock pointer values whose relocation and validity as strings remain open. The tracepoint slave file-list handler is C-bound after 6480 logging-disabled stock comparisons. Its nanopb, copy and send lower-call effects and enabled logging remain open. Tracepoint file-list-ready has the stock four-byte section extent in the relocatable chain, while its original one-byte provider declaration still needs a from-stage rebuild. The exposed MessageNotify callback, startup state writer, frame decoder, three validators and four encoders are C-bound, with no audio_message_notify_* imports remaining. Frame enabled logging, real nanopb/BLE child effects, CRC cache initialization and source-owned packet/state final RAM placement remain open. The exposed EvenAI display-control, ANCC clear/sync, callback-list display and state packet branches are C-bound. The app-acquire path through state, count, setup, queue facade, hardware descriptor and index helpers is C-bound. The bounded app, first-hardware, audio-thread and ANCC contexts still need final RAM placement, and lower-call side effects plus callback-list concurrency remain open. The text-stream dispatch, begin, finish, schedule and timer callback have C-bound decisions, while lower-call side effects and concurrency remain open. The dominant-hand subtree has C-bound handlers and descendants, need source ownership or attributed external contracts; advertising logging branches and final RAM placement remain outside their bounded oracles. Onboarding event packet, state and sequence RAM and silent-mode showing-UI RAM need final placement. HUB threshold double arithmetic remains controlled in the bounded oracle because Unicorn M-class rejects it.",
+        "remaining_gate": ["134 current imports; all five function slots in the 44-byte accessed locale dispatch RAM extent at 0x200044c0 are C-relocated. The two character conversion leaves pass 534 direct stock comparisons, three classification leaves pass 801 direct comparisons, their two C wrappers pass 534 comparisons, and five indirect slots pass 80 cases. Two data pointer fields, full native allocation, runtime mutation and final placement remain open. The font configuration loader function/data symbol collision is corrected through the current Main partial link, with two seven-word initialized RAM objects and all 801 receipt-linked replay stages. The 104-byte settings RAM extent is preserved. Full native font allocations, startup copy and final RAM placement remain open. Both four-entry display ring descriptor tables at 0x20002c48 and 0x20002c78 match the official initialized low-RAM record and have isolated C placement. Final startup copy, pointer relocation and complete RAM layout remain open. Four PDM handle rows at 0x200718c8 and two PDM handle pointer cells at 0x2007454c/0x20074550 have C-owned reservations with isolated placement and bounded acquire/init comparisons. Initialization and full lifetime remain open. I2S base configuration and DMA descriptor selected extents at 0x20000000 and 0x20000740 match the official low-RAM startup record. Original full configuration allocation, float configure paths, startup copy and physical DMA effects remain open. The alternate and production PDM configuration/descriptor objects at 0x20000900..0x2000094f match the official low-RAM startup record and have 210 controlled configure/start/init comparisons. Final startup copy and physical DMA behavior remain open. Nine codec clock pin words at 0x20000114..0x20000137 match the official low-RAM startup record byte-for-byte and pass a 20-case clock-enable oracle. Final C startup copy and RAM layout remain open. The BLE vendor delay provider emits the exact six Thumb bytes decoded from the official ITCM record for 0x40 and has isolated placement plus 16 call-boundary comparisons. Boot copy, executable placement and physical timing remain open. The 27-word voltage route table at 0x2005665c has a C-owned reservation backed by the current 120-case callback oracle and archived source-hash-matched producer/ITCM receipts. Real calibration values, startup order and exact producer rebuild remain open. Two 100-byte codec I2S handle rows at 0x20071114 have a C-owned reservation and isolated placement check after 32 stock acquire comparisons. Pool initialization and full handle lifetime remain open. Codec power-state byte at 0x20074fb6 and I2S handle at 0x2007450c have C-owned reservations and isolated placement checks, after 56-case power and 21-case I2S initializer comparisons. Their startup state and final RAM map remain open. Codec shared enable mask at 0x2007436c has a four-byte C-owned reservation and isolated placement proof after the codec GPIO oracle. Startup value remains open. Codec watchdog timer at 0x20074a98 has a four-byte C-owned reservation and isolated placement proof after 42 controlled watchdog-start cases. Timer creation and startup value remain open. LittleFS context at 0x20071ac8 has a 128-byte C-owned reservation sized from the pinned upstream lfs_t and an isolated placement proof. Final configuration, startup and complete RAM map remain open. Ring-connect RX buffer at 0x2010f4cc has a 0x850-byte C-owned reservation ending at the separately C-owned state byte at 0x2010fd1c. Final RAM placement and initialization remain open. The combined Terminal/ring RAM archive has replayed all 444 post-tail C stages and 239 later receipt-linked stages through the current RX-frame branch, leaving 164 imports. Terminal RX frame parser 0x5ce990 is C-bound after 40 controlled stock comparisons across decode/null, duplicate timeout, wrap and enabled logging. Its last-tick RAM cell is C-owned but final 0x20074874 placement remains open. Query-reply FSM action 0x5e69a0 and its packet sender 0x5ced38 are C-bound after 360 and 30 controlled stock comparisons, including packet fields, sequence wrap, UI state cells and enabled logging. Query-notification activation FSM action 0x5e66d8 is C-bound after 480 controlled stock comparisons across no-target, current, unavailable and switch-request paths with enabled logging. Session-id-change FSM action 0x5e5580 is C-bound after 640 controlled stock comparisons across blocked, notification activation, dispatch and enabled logging paths. Session-list selector action 0x5ed4f8 is C-bound after 1440 controlled stock comparisons across all four command modes, active/valid gates and enabled logging. Session-switch request packet encoder 0x5cee8c is C-bound after 90 controlled stock comparisons of its eight-byte payload, sequence wrap and enabled logging. Pending selector prompt 0x5ece4c is C-bound after 15 controlled stock comparisons across the four-widget gate and pending flag. New-session request packet encoder 0x5cef14 is C-bound after 60 controlled stock comparisons, including sequence wrap and enabled logging. Selector command-byte and TD host-counter leaves are C-bound after 20 direct stock comparisons, preparing action 0x5ed4f8. Session-switch result action 0x5ed758 and its event/root-hide leaves are C-bound after 540 and 10 controlled stock comparisons. Session-list update action 0x5ed318 is C-bound after 480 controlled stock comparisons across payload bits, deferred/rebuild paths and logging. New-session-failure action 0x5ed8e0 is C-bound after 120 controlled stock comparisons including enabled logging. Session-list selector rebuild 0x5ecef6 is C-bound after 60 controlled stock comparisons; its two leaf helpers are C-bound after 44 comparisons. Selector row factory 0x5ecd06 and icon choice 0x5eccc2 are C-bound after 45 and 40 controlled stock comparisons with exact source-owned 16x16 icon pixels. New-session-cancel packet encoder is C-bound after 15 controlled stock comparisons. Session-list-show FSM action and two small children are C-bound after 256 and 16 controlled stock comparisons, exposing cancellation sender and selector rebuild; TD flag-B setter is C-bound after 20 full-state stock comparisons. Query constructor and its two style helpers are C-bound after 48 and 32 controlled stock comparisons. Query hit-count, height and two style getters are C-bound after 1920 and 384 controlled stock comparisons; query constructor remains exposed. Query-show FSM action and its hit-test facade are C-bound after 840 and 72 controlled stock comparisons; the constructor and hit-count children are newly exposed. Agent-done FSM action is C-bound after 75 controlled stock comparisons. Session-status FSM action is C-bound after 1920 controlled stock comparisons. Agent-interrupt FSM action and its one-byte packet encoder are C-bound after 25 and 15 controlled stock comparisons. Agent-reset FSM action is C-bound after 75 controlled stock comparisons. ASR-failure FSM action is C-bound after 75 controlled stock comparisons. Input-cancel FSM action is C-bound after 150 controlled stock comparisons. Input-confirm FSM action and its two TD children are C-bound after 25, 216 and 60 controlled stock comparisons. Terminal result-area constructor 0x5ebff8 is C-bound after 48 controlled cases, with exact source-owned 16x16 icon bytes. Terminal voice-stop action and processing-label helper are C-bound after 100 and four controlled stock comparisons. ASR-final action and timeout-stop helper are C-bound after 150 and 15 controlled comparisons; Terminal query session-name lookup, visibility constructor, two LVGL style wrappers and root constructor are C-bound after 120, 32, 48 and 30 controlled cases, with exact source-owned icon bytes. Terminal voice-start action and timeout child are C-bound after 25 and 24 controlled cases with exact source-owned voice icon. Voice-prepare constructor, five style wrappers, animimage class/factory, constructor and frame callback are C-bound after 16, 80, 3, 12 and 36 controlled cases. The stock scatter-executed 19-frame voice style table at RAM 0x200014e8 and its exact 4864 pixel bytes are C-owned with a bounded placement fragment; complete main scatter/linker integration remains open. LVGL effects and final object graph remain open. Terminal UI callback, exit-sync, teardown, result-area cleanup and timer/object cleanup are C-bound after 224, 16, 9, 12 and 27 controlled stock comparisons. LVGL object membership 0x43e2ea and recursive descendant 0x43ee54 are C-bound after 144 and 60 controlled cases. List animation deinit 0x5896b4 is C-bound after four controlled cases with its 0xd0-byte state at observed RAM 0x20070ea8. Terminal timer clear 0x5e7ec4 is C-bound after four controlled cases with its 0x18-byte state at observed RAM 0x20073c38. Terminal UI start 0x5e716c, its list animation initializer 0x58966c and theme wrapper 0x5e47cc are C-bound after 9, 4 and 4 controlled cases. Terminal tick 0x5e8008 and its deadline, voice-input and elapsed-record children are C-bound after 96, 252, 24 and 160 controlled cases. Terminal status FSM 0x5e7b74 and its exact 4160-byte dispatch table at 0x650430 are C-bound after 775 controlled cases. This exposes 50 distinct action callback targets, of which ten actions are now C-bound: two ASR actions after 54 controlled cases, two exit actions after 108 controlled cases, two payload actions after 48 controlled cases query-dismiss action after 160 controlled cases status action with its two payload helpers after 72 controlled cases and two reset actions after 32 controlled cases, with notification-restore, LVGL scroll and fade-out children C-bound after 24, 18 and 300 controlled cases; the two FSM name lookups are C-bound after 2048 controlled cases with source-owned RAM pointer slots at 0x20003ea4 and 0x20003edc, while the other 21 callback bodies and name RAM initialization remain open. Reset mode 0x5eae2c and display 0x5e4c84 are C-bound after 31 controlled cases; mode-set wrapper 0x5eae1e and event emitter 0x5eadd4 are C-bound after 25 and 144 controlled cases. Event type 4 child 0x5ea9f6 and its list-reset child 0x5ea7dc are C-bound after 12 and 48 controlled cases. Default event child 0x5eaad4 and its input selector, input application and view refresh children are C-bound after 96, 36, 36 and 48 controlled cases; its offset recomputation child is C-bound after 128 controlled cases; resource pointer and ring item lookup are C-bound after 120 controlled cases using the existing Terminal-data RAM owner; view-position child 0x5ea926, view-index child 0x5ea8ce and position-index search 0x5ea868 are C-bound after 144, 84 and 330 controlled cases; view-select child 0x5ea810 and row-update child 0x5ea768 are C-bound after 240 and 320 controlled cases; row LVGL flag, clear-flag and position calls reuse existing C-bound providers through three ABI adapters; item-height child 0x5ea67a is C-bound after 96 controlled cases using the existing 0x200746dc font-pointer cell; spacing child 0x5ea2c2 and row text/image binding 0x5ea564 are C-bound after 8 and 128 controlled cases; sixteen of the nineteen row-binding child imports reuse existing C-bound stock-address providers through ABI adapters; Terminal image-y 0x5ea2b0, row-color 0x5ea2f2 and row-image 0x5ea524 children are C-bound after 600 controlled cases; image-hint 0x5ea4f0 is C-bound after 216 controlled cases; event type-two 0x5eabde and its last-record 0x597350 and rollover 0x5eab8e children are C-bound after 288 and 48 controlled cases; type-three indexed event 0x5eaca0 is C-bound after 2048 controlled cases; reset prelude 0x5e51ba, ancillary reset 0x5e65f8 and voice-timeout preclear 0x5e7f26 are C-bound after 156, 32 and 96 controlled cases, with audio-manager app release 0x54f50e C-bound after 560 controlled cases; reset subtree 0x5ea342 and its style/image-Y children are C-bound after 48 and 23 controlled cases, with both stock image descriptors, 1341 image bytes and the 68-byte welcome text source-owned; query restore 0x5e6620, its return-to-input action 0x5e57c6 and image-set child 0x5e47fe are C-bound after 320, 96 and 12 controlled cases; display-status 0x44ea04 reuses the existing C-bound scroll-to-Y provider after a fresh 80-case stock oracle; four Terminal disconnect FSM actions 0x5e522e, 0x5e52c2, 0x5e5320 and 0x5e53b8 are C-bound after 512 stock comparisons with their 256-byte icon and texts source-owned; processing-response action 0x5e583c and event-34 routing action 0x5e54a2 are C-bound after 96 and 336 stock comparisons; BLE display-request action 0x5e576c is C-bound after 336 comparisons while its prepare child remains open and fallback reuses the C-bound current-session index; packed event-word action 0x5e63b4 is C-bound after 48 stock comparisons; paired scroll/status actions 0x5e6dd0 and 0x5e6e30 are C-bound after 320 stock comparisons, with notification parent 0x5ec190 C-bound after 120 stock comparisons and its layout child 0x5ebc9e and overlay-focus publication 0x5e5498/0x5cf134 C-bound after 480 comparisons each; interrupt-confirm scroll 0x5e6cb8 and its toggle child 0x5ec73c are C-bound after 1920 cases, with the list-style and indicator-layout child 0x5ec3c0/0x5ec34e C-bound after 1536 cases; interrupt-confirm-show action 0x5e6b18 is C-bound after 192 cases while its UI constructor 0x5ec446 remains open; interrupt-confirm-cancel action 0x5e6ba0 is C-bound after 192 cases with its cleanup child already source-owned; new-session success action 0x5ed870 is C-bound after 192 cases through its existing event, reset, cleanup and input-return providers; query-notification switch-result action 0x5e68dc is C-bound after 384 cases through its existing restore-query provider; paired query-scroll actions 0x5e6e88/0x5e6f60 are C-bound after 960 cases, with their query-layout child 0x5ebb96 C-bound after 64 cases; item-style child 0x5eb3c6 and its count provider 0x5eb30c are C-bound after 444 cases, with indicator child 0x5eb322 and font offset 0x5eb2ee C-bound after 487 cases; session-list scroll action 0x5ed492 is C-bound after 384 cases and its selection, count, validity and object-lookup subtree 0x5ecc1a/0x5eca48/0x5eca64/0x5ecb52 after 626 cases; session focus 0x5ecbea, ListFocus wrapper 0x5e5490 and protobuf encoder 0x5cf0ba are C-bound after 360 cases, direct-apply 0x5ecb88 after 192 cases and row-style 0x5ecb08 after 42 cases; list-animation elapsed 0x5893f0, timeout poll 0x5893fe and queue add 0x5896fc are C-bound after 304 cases; queue processor 0x58956e and completion callback 0x58949e are C-bound after 312 controlled cases; new-object preparation 0x5894d6 is C-bound after 384 controlled cases; old/new button fade start children 0x58c6c4/0x58c622 are C-bound after 600 controlled cases; their Bezier path 0x450688 is C-bound after 15 controlled cases; row show/hide walkers 0x5897ee/0x589892 and LVGL class ancestry 0x43e2d4 are C-bound after 140 and 30 controlled cases; image class record 0x756108 is source-owned with exact fixed words and five relocations; image constructor/destroyer 0x498bd0/0x498c6c are C-bound after 84 cases; button fade callback 0x58c230 and recursive body 0x58c138 are C-bound after 168 cases; image event 0x498c9c and click-area 0x4408b0 are C-bound after 432 and 36 stock comparisons; image draw 0x498ec0 is C-bound after 220 stock comparisons; image opacity/radius accessors 0x498634/0x49865e are C-bound after 90 cases; descriptor initializer 0x452a34 is C-bound after 216 stock comparisons; its four exposed style getters are C-bound after 180 stock comparisons; draw scheduler 0x488a38 is C-bound after 168 controlled stock comparisons; it reuses five existing C lower providers; allocation-failure trap, real decoder/renderer effects and final placement remain open; decoder-info helper 0x488f6a and source-type/zero children were already C-bound in the prior image-header chain; Terminal label-text alias for 0x49942e is C-bound after 48 forwarding cases using the existing stock-compared label provider; formatted label 0x49954c is C-bound after 36 variadic stock comparisons and exposes lower formatter 0x489ad2 while real formatter effects remain open; null fatal branches are independently stock-compared in the five-case label fatal-path oracle; lower two-pass formatted text allocator 0x489ad2 is C-bound after 60 stock comparisons through the existing C-owned vsnprintf provider, with allocation-failure trap stock-compared by the five-case label fatal-path oracle and real formatter effects remaining open; Terminal clear-flag alias for stock 0x43dfa4 is C-bound after 48 forwarding cases using the existing C provider; five more Terminal LVGL object ABI aliases are C-bound after 135 forwarding cases through existing stock-address providers; four LVGL animimage setters/start 0x597ea6/0x597ee0/0x597f10/0x597f52 are C-bound after 68 controlled stock cases including null-object assertions, with animation lower effects and final placement open; query-notification-show FSM action 0x5e6548 is C-bound after 200 stock comparisons including enabled logging, exposing counter getter 0x5973dc and query visibility 0x5ec82a; counter getter 0x5973dc is C-bound after 7 direct stock comparisons through the existing source-owned TD-state provider, while query visibility remains open; 0x20000032 is the confirmed encoded 50 percent image pivot; interrupt-confirm defer-query action 0x5e6d58 is C-bound after 192 stock comparisons including enabled logging, with its output-style 24-byte startup pointer table and six image descriptors/1536 pixel bytes now C-owned; final source-resource linker relocation remains open; row resource placement and lower effects remain open; selector and refresh reuse existing C-bound LVGL object-y and object-height providers. Payload control-flags child 0x5e4a6e is C-bound after 240 controlled cases, and elapsed-text child 0x5e48b8 is C-bound after 36 cases; output-start child 0x5e4920 is C-bound after 25 controlled cases; processing-object child 0x5e4878 and processing-state clear child 0x5ea30c are C-bound after 5 and 12 controlled cases; elapsed-refresh child 0x5e4902 and its fallback clear 0x5e4894 are C-bound after 48 and 4 controlled cases; the elapsed counter uses an existing C-owned provider. Set-output child 0x5e49b0 is C-bound after 100 controlled cases; three of its four exposed RAM cells are source-owned at 0x20074a94 and 0x2007502c-0x2007502d; label-style child 0x5e482a is C-bound after 16 controlled cases; output-mode selector/hash and exact ten-phrase table are C-bound after 240 controlled cases; style runtime writes, animation and LVGL lower-call effects remain. The three exposed teardown service children are C-bound after 24 controlled cases; the event call 0x5e5484 and its display-state protobuf encoder are C-bound after 48 controlled cases, while the 0x2a0-byte state-base and ten field aliases are C-owned; exact RAM ownership, lower effects and final placement are open. Cyclic or malformed LVGL trees and concurrent mutation remain open. Enabled callback logging remains open. The thirteen terminal event-name pointer slots are C-owned at the observed RAM address, but runtime initialization and strings remain open. The fault lookup provider covers all 195 matchable stock codes, but 152 overrun matches use absolute stock pointer values whose relocation and validity as strings remain open. The tracepoint slave file-list handler is C-bound after 6480 logging-disabled stock comparisons. Its nanopb, copy and send lower-call effects and enabled logging remain open. Tracepoint file-list-ready has the stock four-byte section extent in the relocatable chain, while its original one-byte provider declaration still needs a from-stage rebuild. The exposed MessageNotify callback, startup state writer, frame decoder, three validators and four encoders are C-bound, with no audio_message_notify_* imports remaining. Frame enabled logging, real nanopb/BLE child effects, CRC cache initialization and source-owned packet/state final RAM placement remain open. The exposed EvenAI display-control, ANCC clear/sync, callback-list display and state packet branches are C-bound. The app-acquire path through state, count, setup, queue facade, hardware descriptor and index helpers is C-bound. The bounded app, first-hardware, audio-thread and ANCC contexts still need final RAM placement, and lower-call side effects plus callback-list concurrency remain open. The text-stream dispatch, begin, finish, schedule and timer callback have C-bound decisions, while lower-call side effects and concurrency remain open. The dominant-hand subtree has C-bound handlers and descendants, need source ownership or attributed external contracts; advertising logging branches and final RAM placement remain outside their bounded oracles. Onboarding event packet, state and sequence RAM and silent-mode showing-UI RAM need final placement. HUB threshold double arithmetic remains controlled in the bounded oracle because Unicorn M-class rejects it.",
                            "All eight DM dispatch entries and the exposed security children now have C bodies; whole-image source and placement remain open.",
                            "DM storage is a 196-byte bounded C-owned block with a registry alias; full allocation extent and final RAM placement remain open.",
                            "Gray and production-test UI registry contexts each have only an observed eight-byte C reservation; full allocation extent, initialization and final RAM placement remain open.",
@@ -5458,6 +6527,6957 @@ def main():
                            "Text-stream restart 0x552db2 matches stock in 64 signed-length, mutex, timer and state-byte cases and is C-bound. Dispatch remains unresolved; timer and mutex effects remain external.",
                            "Complete data/startup/layout and physical execution remain unproved."],
     }
+    log_task_path = G2 / "build/c-firmware/20261016/main-log-task-context/receipt.json"
+    log_task, log_task_ref = receipt(log_task_path)
+    if log_task["status"] != "PASS_BOUNDED_MAIN_LOG_TASK_CONTEXT_C" or \
+            log_task["base_object_sha256"] != main_obj["sha256"] or \
+            log_task["unresolved_before"] != 134 or \
+            log_task["unresolved_after"] != 132 or \
+            log_task["case_count"] != 8:
+        raise RuntimeError("Apollo Main logger task-context source changed")
+    file_checked(log_task["source"], log_task["source_sha256"])
+    log_candidate = file_checked(log_task["candidate_object"], log_task["candidate_object_sha256"])
+    log_unresolved = undefined(ROOT / log_candidate["path"])
+    if len(log_unresolved) != 132 or \
+            "g2_log_process_string" in log_unresolved or \
+            "g2_log_thread_string" in log_unresolved:
+        raise RuntimeError("Apollo Main logger task-context link changed")
+    images["apollo_main"]["prior_candidate_134_imports"] = images["apollo_main"]["candidate"]
+    images["apollo_main"]["candidate"] = log_candidate
+    images["apollo_main"]["log_task_context_c"] = log_task_ref
+    images["apollo_main"]["unresolved_count"] = len(log_unresolved)
+    images["apollo_main"]["unresolved_symbols"] = log_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "134 current imports", "132 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Logger task-context wrappers at 0x44ab14 and 0x44ab1c now have connected C bodies and eight stock/C non-null path comparisons. The null-TCB interrupt-mask/fault branch and broader date/time logger behavior remain open.")
+    log_time_path = G2 / "build/c-firmware/20261016/main-log-time-string/receipt.json"
+    log_time, log_time_ref = receipt(log_time_path)
+    if log_time["status"] != "PASS_BOUNDED_MAIN_LOG_TIME_STRING_C" or \
+            log_time["baseline_object_sha256"] != log_candidate["sha256"] or \
+            log_time["case_count"] != 3 or \
+            log_time["unresolved_before"] != 132 or \
+            log_time["unresolved_after"] != 132:
+        raise RuntimeError("Apollo Main time-string C source changed")
+    file_checked(log_time["source"], log_time["source_sha256"])
+    time_candidate = file_checked(log_time["candidate_object"], log_time["candidate_object_sha256"])
+    time_unresolved = undefined(ROOT / time_candidate["path"])
+    if (len(time_unresolved) != 132 or
+            set(log_unresolved) - set(time_unresolved) != {"g2_log_time_string"} or
+            set(time_unresolved) - set(log_unresolved) != {"g2_log_datetime_now_44a19a"}):
+        raise RuntimeError("Apollo Main time-string import substitution changed")
+    images["apollo_main"]["prior_log_task_candidate"] = log_candidate
+    images["apollo_main"]["candidate"] = time_candidate
+    images["apollo_main"]["log_time_string_c"] = log_time_ref
+    images["apollo_main"]["unresolved_symbols"] = time_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Logger time string at 0x44aaa8 now has a C outer body with three native/C call-frame cases. The native date record's first formatted word is at provider offset 12; source uses offsets 12..32. Final 28-byte output-buffer placement remains open.")
+    datetime_path = G2 / "build/c-firmware/20261016/main-log-datetime-now/receipt.json"
+    datetime, datetime_ref = receipt(datetime_path)
+    if datetime["status"] != "PASS_BOUNDED_MAIN_LOG_DATETIME_NOW_C" or \
+            datetime["baseline_object_sha256"] != time_candidate["sha256"] or \
+            datetime["case_count"] != 5 or \
+            datetime["unresolved_after"] != 132:
+        raise RuntimeError("Apollo Main datetime C source changed")
+    file_checked(datetime["source"], datetime["source_sha256"])
+    file_checked(datetime["context_source"], datetime["context_source_sha256"])
+    datetime_candidate = file_checked(datetime["candidate_object"], datetime["candidate_object_sha256"])
+    datetime_unresolved = undefined(ROOT / datetime_candidate["path"])
+    if (len(datetime_unresolved) != 132 or
+            set(time_unresolved) - set(datetime_unresolved) != {"g2_log_datetime_now_44a19a"} or
+            set(datetime_unresolved) - set(time_unresolved) != {"audio_time_epoch_to_calendar_449fda"}):
+        raise RuntimeError("Apollo Main datetime import substitution changed")
+    images["apollo_main"]["prior_time_string_candidate"] = time_candidate
+    images["apollo_main"]["candidate"] = datetime_candidate
+    images["apollo_main"]["log_datetime_now_c"] = datetime_ref
+    images["apollo_main"]["unresolved_symbols"] = datetime_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Logger datetime outer path at 0x44a19a now reuses source-owned snapshot, epoch and timezone logic with five native/C call-order and signed-zone cases. RTC hardware and final layout remain unproved.")
+    calendar_path = G2 / "build/c-firmware/20261016/main-epoch-calendar/receipt.json"
+    calendar, calendar_ref = receipt(calendar_path)
+    if calendar["status"] != "PASS_BOUNDED_MAIN_EPOCH_CALENDAR_C" or \
+            calendar["baseline_object_sha256"] != datetime_candidate["sha256"] or \
+            calendar["case_count"] != 39 or \
+            calendar["unresolved_after"] != 131:
+        raise RuntimeError("Apollo Main calendar C source changed")
+    file_checked(calendar["source"], calendar["source_sha256"])
+    calendar_candidate = file_checked(calendar["candidate_object"], calendar["candidate_object_sha256"])
+    calendar_unresolved = undefined(ROOT / calendar_candidate["path"])
+    if (len(calendar_unresolved) != 131 or
+            set(datetime_unresolved) - set(calendar_unresolved) !=
+            {"audio_time_epoch_to_calendar_449fda"} or
+            set(calendar_unresolved) - set(datetime_unresolved)):
+        raise RuntimeError("Apollo Main calendar import closure changed")
+    images["apollo_main"]["prior_datetime_candidate"] = datetime_candidate
+    images["apollo_main"]["candidate"] = calendar_candidate
+    images["apollo_main"]["epoch_calendar_c"] = calendar_ref
+    images["apollo_main"]["unresolved_count"] = len(calendar_unresolved)
+    images["apollo_main"]["unresolved_symbols"] = calendar_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "132 current imports", "131 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Seconds-to-calendar 0x449fda now has C for seven assigned record fields with 39 native/C boundary and clock-mode cases. Native also copies three stack words it does not initialize; their full-byte equivalence and final RAM layout remain open.")
+    pdm_pin_path = G2 / "build/c-firmware/20261016/main-pdm-clock-pin-words/receipt.json"
+    pdm_pin, pdm_pin_ref = receipt(pdm_pin_path)
+    if pdm_pin["status"] != "PASS_BOUNDED_MAIN_PDM_CLOCK_PIN_WORDS_C" or \
+            pdm_pin["baseline_object_sha256"] != calendar_candidate["sha256"] or \
+            pdm_pin["case_count"] != 15 or \
+            pdm_pin["unresolved_after"] != 129:
+        raise RuntimeError("Apollo Main PDM clock pin C ownership changed")
+    file_checked(pdm_pin["source"], pdm_pin["source_sha256"])
+    file_checked(pdm_pin["clock_source"], pdm_pin["clock_source_sha256"])
+    file_checked(pdm_pin["linker_script"], pdm_pin["linker_script_sha256"])
+    file_checked(pdm_pin["placement_elf"], pdm_pin["placement_elf_sha256"])
+    pdm_pin_candidate = file_checked(pdm_pin["candidate_object"], pdm_pin["candidate_object_sha256"])
+    pdm_pin_unresolved = undefined(ROOT / pdm_pin_candidate["path"])
+    if (len(pdm_pin_unresolved) != 129 or
+            set(calendar_unresolved) - set(pdm_pin_unresolved) !=
+            {"g2_pdm_clock_pin_50", "g2_pdm_clock_pin_51"} or
+            set(pdm_pin_unresolved) - set(calendar_unresolved)):
+        raise RuntimeError("Apollo Main PDM clock pin imports changed")
+    images["apollo_main"]["prior_calendar_candidate"] = calendar_candidate
+    images["apollo_main"]["candidate"] = pdm_pin_candidate
+    images["apollo_main"]["pdm_clock_pin_words_c"] = pdm_pin_ref
+    images["apollo_main"]["unresolved_count"] = len(pdm_pin_unresolved)
+    images["apollo_main"]["unresolved_symbols"] = pdm_pin_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "131 current imports", "129 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "PDM pin cells 0x2007421c/0x20074220 now have an eight-byte C-owned NOLOAD span and 15 native/C clock-call cases; their runtime writer and values, final RAM collision checks and hardware behavior remain open.")
+    dispatch_alias_path = G2 / "build/c-firmware/20261016/main-audio-dispatch-alias/receipt.json"
+    dispatch_alias, dispatch_alias_ref = receipt(dispatch_alias_path)
+    if dispatch_alias["status"] != "PASS_BOUNDED_MAIN_AUDIO_DISPATCH_SHARED_RAM_ALIAS" or \
+            dispatch_alias["baseline_object_sha256"] != pdm_pin_candidate["sha256"] or \
+            dispatch_alias["source_record_bytes"] != 16 or \
+            dispatch_alias["unresolved_after"] != 128:
+        raise RuntimeError("Apollo Main audio dispatch RAM alias changed")
+    file_checked(dispatch_alias["owner_source"], dispatch_alias["owner_source_sha256"])
+    file_checked(dispatch_alias["submit_source"], dispatch_alias["submit_source_sha256"])
+    file_checked(dispatch_alias["linker_script"], dispatch_alias["linker_script_sha256"])
+    dispatch_candidate = file_checked(dispatch_alias["candidate_object"],
+                                      dispatch_alias["candidate_object_sha256"])
+    dispatch_unresolved = undefined(ROOT / dispatch_candidate["path"])
+    if (len(dispatch_unresolved) != 128 or
+            set(pdm_pin_unresolved) - set(dispatch_unresolved) != {"g2_audio_dispatch_state"} or
+            set(dispatch_unresolved) - set(pdm_pin_unresolved)):
+        raise RuntimeError("Apollo Main audio dispatch import closure changed")
+    images["apollo_main"]["prior_pdm_pin_candidate"] = pdm_pin_candidate
+    images["apollo_main"]["candidate"] = dispatch_candidate
+    images["apollo_main"]["audio_dispatch_shared_ram_alias"] = dispatch_alias_ref
+    images["apollo_main"]["unresolved_count"] = len(dispatch_unresolved)
+    images["apollo_main"]["unresolved_symbols"] = dispatch_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "129 current imports", "128 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Audio dispatch state and audio control context now alias one C-owned 16-byte record with native queue +12 and task +8 offsets. The alias closes one import; final 0x20003f98 RAM placement, startup writer and complete object extent remain open.")
+    print_sink_path = G2 / "build/c-firmware/20261016/main-flashdb-print-sink-alias/receipt.json"
+    print_sink, print_sink_ref = receipt(print_sink_path)
+    if (print_sink["status"] != "PASS_BOUNDED_MAIN_FLASHDB_PRINT_SINK_SHARED_RAM_ALIAS" or
+            print_sink["baseline_object_sha256"] != dispatch_candidate["sha256"] or
+            print_sink["source_cell_bytes"] != 4 or print_sink["unresolved_after"] != 127):
+        raise RuntimeError("Apollo Main FlashDB print sink alias changed")
+    file_checked(print_sink["owner_source"], print_sink["owner_source_sha256"])
+    file_checked(print_sink["reader_source"], print_sink["reader_source_sha256"])
+    file_checked(print_sink["linker_script"], print_sink["linker_script_sha256"])
+    print_sink_candidate = file_checked(print_sink["candidate_object"],
+                                        print_sink["candidate_object_sha256"])
+    print_sink_unresolved = undefined(ROOT / print_sink_candidate["path"])
+    if (len(print_sink_unresolved) != 127 or
+            set(dispatch_unresolved) - set(print_sink_unresolved) != {"g2_flashdb_print_sink"} or
+            set(print_sink_unresolved) - set(dispatch_unresolved)):
+        raise RuntimeError("Apollo Main FlashDB print sink import closure changed")
+    images["apollo_main"]["prior_audio_dispatch_candidate"] = dispatch_candidate
+    images["apollo_main"]["candidate"] = print_sink_candidate
+    images["apollo_main"]["flashdb_print_sink_shared_ram_alias"] = print_sink_ref
+    images["apollo_main"]["unresolved_count"] = len(print_sink_unresolved)
+    images["apollo_main"]["unresolved_symbols"] = print_sink_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "128 current imports", "127 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "FlashDB print sink and board display callback now alias the same C-owned four-byte cell at stock RAM 0x200742f0. Final RAM placement and callback installation remain open; print buffer and formatter remain separate lower contracts.")
+    assert_alias_path = G2 / "build/c-firmware/20261016/main-offline-assert-fault-alias/receipt.json"
+    assert_alias, assert_alias_ref = receipt(assert_alias_path)
+    if (assert_alias["status"] != "PASS_BOUNDED_MAIN_SHARED_NONRETURNING_ASSERT_FAULT_ALIAS" or
+            assert_alias["baseline_object_sha256"] != print_sink_candidate["sha256"] or
+            assert_alias["unresolved_after"] != 126):
+        raise RuntimeError("Apollo Main shared assertion fault alias changed")
+    file_checked(assert_alias["owner_source"], assert_alias["owner_source_sha256"])
+    file_checked(assert_alias["linker_script"], assert_alias["linker_script_sha256"])
+    assert_candidate = file_checked(assert_alias["candidate_object"],
+                                    assert_alias["candidate_object_sha256"])
+    assert_unresolved = undefined(ROOT / assert_candidate["path"])
+    if (len(assert_unresolved) != 126 or
+            set(print_sink_unresolved) - set(assert_unresolved) != {"offline_assert"} or
+            set(assert_unresolved) - set(print_sink_unresolved)):
+        raise RuntimeError("Apollo Main assertion fault import closure changed")
+    images["apollo_main"]["prior_print_sink_candidate"] = print_sink_candidate
+    images["apollo_main"]["candidate"] = assert_candidate
+    images["apollo_main"]["shared_nonreturning_assert_fault_alias"] = assert_alias_ref
+    images["apollo_main"]["unresolved_count"] = len(assert_unresolved)
+    images["apollo_main"]["unresolved_symbols"] = assert_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "127 current imports", "126 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "The generic invalid-input assertion boundary now aliases the C-owned scheduler fatal-store body, closing one import. Individual callers' diagnostic prefixes and invalid branches are not comprehensively compared; the invalid-address write is unexecuted.")
+    transport_path = G2 / "build/c-firmware/20261016/main-transaction-transport/receipt.json"
+    transport, transport_ref = receipt(transport_path)
+    if (transport["status"] != "PASS_BOUNDED_MAIN_GX8002_RECEIVE_SCRATCH_C" or
+            transport["baseline_object_sha256"] != assert_candidate["sha256"] or
+            transport["receive_bytes"] != 30 or transport["unresolved_after"] != 125):
+        raise RuntimeError("Apollo Main GX8002 receive scratch changed")
+    file_checked(transport["source"], transport["source_sha256"])
+    file_checked(transport["linker_script"], transport["linker_script_sha256"])
+    transport_candidate = file_checked(transport["candidate_object"],
+                                       transport["candidate_object_sha256"])
+    transport_unresolved = undefined(ROOT / transport_candidate["path"])
+    if (len(transport_unresolved) != 125 or
+            set(assert_unresolved) - set(transport_unresolved) != {"g2_audio_transaction_transport"} or
+            set(transport_unresolved) - set(assert_unresolved)):
+        raise RuntimeError("Apollo Main GX8002 receive scratch import closure changed")
+    images["apollo_main"]["prior_assert_candidate"] = assert_candidate
+    images["apollo_main"]["candidate"] = transport_candidate
+    images["apollo_main"]["gx8002_receive_scratch_c"] = transport_ref
+    images["apollo_main"]["unresolved_count"] = len(transport_unresolved)
+    images["apollo_main"]["unresolved_symbols"] = transport_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "126 current imports", "125 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "GX8002 receive scratch at 0x2007397c now has a C-owned 30-byte NOLOAD span, matching the selected receive capacity and ending before the adjacent TX packet base. Runtime UART behavior, full allocation extent and whole-image RAM collision checks remain open.")
+    tx_packet_path = G2 / "build/c-firmware/20261016/main-tx-packet/receipt.json"
+    tx_packet, tx_packet_ref = receipt(tx_packet_path)
+    if (tx_packet["status"] != "PASS_BOUNDED_MAIN_GX8002_NOMINAL_TX_PACKET_C" or
+            tx_packet["baseline_object_sha256"] != transport_candidate["sha256"] or
+            tx_packet["nominal_packet_bytes"] != 30 or tx_packet["unresolved_after"] != 124):
+        raise RuntimeError("Apollo Main GX8002 nominal TX packet changed")
+    file_checked(tx_packet["source"], tx_packet["source_sha256"])
+    file_checked(tx_packet["linker_script"], tx_packet["linker_script_sha256"])
+    file_checked(tx_packet["native_wrap_receipt"], tx_packet["native_wrap_receipt_sha256"])
+    tx_packet_candidate = file_checked(tx_packet["candidate_object"],
+                                       tx_packet["candidate_object_sha256"])
+    tx_packet_unresolved = undefined(ROOT / tx_packet_candidate["path"])
+    if (len(tx_packet_unresolved) != 124 or
+            set(transport_unresolved) - set(tx_packet_unresolved) != {"g2_audio_tx_packet"} or
+            set(tx_packet_unresolved) - set(transport_unresolved)):
+        raise RuntimeError("Apollo Main GX8002 nominal TX import closure changed")
+    images["apollo_main"]["prior_rx_transport_candidate"] = transport_candidate
+    images["apollo_main"]["candidate"] = tx_packet_candidate
+    images["apollo_main"]["gx8002_nominal_tx_packet_c"] = tx_packet_ref
+    images["apollo_main"]["unresolved_count"] = len(tx_packet_unresolved)
+    images["apollo_main"]["unresolved_symbols"] = tx_packet_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "125 current imports", "124 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "GX8002 TX scratch at 0x2007399c now has a C-owned nominal 30-byte NOLOAD span and preserves the adjacent 30-byte RX placement. Five native constructor cases confirm that a 16-bit declared-length wrap can request a 65535-byte copy while reporting a 17-byte packet; arbitrary-input correctness remains open.")
+    scratch_path = G2 / "build/c-firmware/20261016/main-combined-ram-scratch/receipt.json"
+    scratch, scratch_ref = receipt(scratch_path)
+    if (scratch["status"] != "PASS_BOUNDED_MAIN_COMBINED_RAM_SCRATCH_C" or
+            scratch["baseline_object_sha256"] != tx_packet_candidate["sha256"] or
+            scratch["unresolved_after"] != 123 or len(scratch["fixed_ram_sections"]) != 6):
+        raise RuntimeError("Apollo Main composed RAM scratch changed")
+    for path_key, sha_key in (("source", "source_sha256"), ("sdk_header", "sdk_header_sha256"),
+                              ("sdk_source", "sdk_source_sha256"), ("linker_script", "linker_script_sha256")):
+        file_checked(scratch[path_key], scratch[sha_key])
+    scratch_candidate = file_checked(scratch["candidate_object"],
+                                     scratch["candidate_object_sha256"])
+    scratch_unresolved = undefined(ROOT / scratch_candidate["path"])
+    if (len(scratch_unresolved) != 123 or
+            set(tx_packet_unresolved) - set(scratch_unresolved) != {"g2_flashdb_print_buffer"} or
+            set(scratch_unresolved) - set(tx_packet_unresolved)):
+        raise RuntimeError("Apollo Main stdio buffer import closure changed")
+    images["apollo_main"]["prior_tx_packet_candidate"] = tx_packet_candidate
+    images["apollo_main"]["candidate"] = scratch_candidate
+    images["apollo_main"]["combined_ram_scratch_c"] = scratch_ref
+    images["apollo_main"]["unresolved_count"] = len(scratch_unresolved)
+    images["apollo_main"]["unresolved_symbols"] = scratch_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "124 current imports", "123 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "The pinned SDK default and adjacent dump-buffer base support a C-owned 1024-byte stdio print buffer at 0x2006b930. A combined linker script restores PDM pin placement and checks six fixed RAM sections for mutual overlap. Formatter capacity, other RAM allocations, startup initialization and hardware behavior remain open.")
+    uart_log_path = G2 / "build/c-firmware/20261016/main-platform-log-error-alias/receipt.json"
+    uart_log, uart_log_ref = receipt(uart_log_path)
+    if (uart_log["status"] != "PASS_BOUNDED_MAIN_UART_DETAILED_LOGGER_ALIAS" or
+            uart_log["baseline_object_sha256"] != scratch_candidate["sha256"] or
+            uart_log["reused_original_source_cases"] != 16 or uart_log["unresolved_after"] != 122):
+        raise RuntimeError("Apollo Main UART detailed logger alias changed")
+    for path_key, sha_key in (("source", "source_sha256"), ("linker_script", "linker_script_sha256"),
+                              ("prior_reproduction", "prior_reproduction_sha256"),
+                              ("prior_results", "prior_results_sha256")):
+        file_checked(uart_log[path_key], uart_log[sha_key])
+    uart_log_candidate = file_checked(uart_log["candidate_object"],
+                                      uart_log["candidate_object_sha256"])
+    uart_log_unresolved = undefined(ROOT / uart_log_candidate["path"])
+    if (len(uart_log_unresolved) != 122 or
+            set(scratch_unresolved) - set(uart_log_unresolved) != {"platform_log_error"} or
+            set(uart_log_unresolved) - set(scratch_unresolved)):
+        raise RuntimeError("Apollo Main UART detailed logger import closure changed")
+    images["apollo_main"]["prior_combined_ram_candidate"] = scratch_candidate
+    images["apollo_main"]["candidate"] = uart_log_candidate
+    images["apollo_main"]["uart_detailed_logger_alias"] = uart_log_ref
+    images["apollo_main"]["unresolved_count"] = len(uart_log_unresolved)
+    images["apollo_main"]["unresolved_symbols"] = uart_log_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "123 current imports", "122 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "UART instance detailed-error logging now aliases the selected extended logger at the same ARM call ABI. Prior 16 original/source UART wrapper cases are reused; logger product state, full formatting and output remain open.")
+    fatal_hook_path = G2 / "build/c-firmware/20261016/main-fatal-hook-alias/receipt.json"
+    fatal_hook, fatal_hook_ref = receipt(fatal_hook_path)
+    if (fatal_hook["status"] != "PASS_BOUNDED_MAIN_SHARED_FATAL_HOOK_RAM_ALIAS" or
+            fatal_hook["baseline_object_sha256"] != uart_log_candidate["sha256"] or
+            fatal_hook["unresolved_after"] != 121):
+        raise RuntimeError("Apollo Main shared fatal callback cell changed")
+    file_checked(fatal_hook["owner_source"], fatal_hook["owner_source_sha256"])
+    file_checked(fatal_hook["linker_script"], fatal_hook["linker_script_sha256"])
+    fatal_hook_candidate = file_checked(fatal_hook["candidate_object"],
+                                        fatal_hook["candidate_object_sha256"])
+    fatal_hook_unresolved = undefined(ROOT / fatal_hook_candidate["path"])
+    if (len(fatal_hook_unresolved) != 121 or
+            set(uart_log_unresolved) - set(fatal_hook_unresolved) != {"g2_extended_log_fatal_callback"} or
+            set(fatal_hook_unresolved) - set(uart_log_unresolved)):
+        raise RuntimeError("Apollo Main fatal callback import closure changed")
+    images["apollo_main"]["prior_uart_log_candidate"] = uart_log_candidate
+    images["apollo_main"]["candidate"] = fatal_hook_candidate
+    images["apollo_main"]["shared_fatal_hook_ram_alias"] = fatal_hook_ref
+    images["apollo_main"]["unresolved_count"] = len(fatal_hook_unresolved)
+    images["apollo_main"]["unresolved_symbols"] = fatal_hook_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "122 current imports", "121 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Extended logger, WSF assert and display fatal paths now share the C-owned four-byte callback cell at 0x2007456c. The callback installer, actual target and all fatal continuations remain open.")
+    fatal_xrefs_path = G2 / "analysis/c-source-completion-20261011/apollo/fatal-hook-direct-xrefs-20261016.json"
+    fatal_xrefs, fatal_xrefs_ref = receipt(fatal_xrefs_path)
+    if (fatal_xrefs["status"] != "PASS_BOUNDED_MAIN_FATAL_HOOK_DIRECT_XREF_READ_INVENTORY" or
+            fatal_xrefs["stock_payload_sha256"] != "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701" or
+            fatal_xrefs["target_ram"] != "0x2007456c" or
+            fatal_xrefs["direct_reference_count"] != 32 or fatal_xrefs["direct_write_count"] != 0 or
+            len(fatal_xrefs["direct_references"]) != 32 or
+            any(row["reference_type"] != "READ" for row in fatal_xrefs["direct_references"])):
+        raise RuntimeError("Apollo Main fatal callback direct-xref inventory changed")
+    images["apollo_main"]["fatal_hook_direct_xref_inventory"] = fatal_xrefs_ref
+    images["apollo_main"]["remaining_gate"].append(
+        "REA/Ghidra found 32 direct references to fatal callback RAM 0x2007456c, all reads. The installer is still unlocated; indirect writes, startup data movement and unanalyzed code remain possible.")
+    sync_path = G2 / "build/c-firmware/20261016/main-sync-info-common-472102/receipt.json"
+    sync, sync_ref = receipt(sync_path)
+    if (sync["status"] != "PASS_BOUNDED_MAIN_SYNC_INFO_COMMON_INTEGRATION" or
+            sync["oracle_cases"] != 40 or sync["native_body_bytes"] != 242 or
+            sync["unresolved_before"] != 121 or sync["unresolved_after"] != 122 or
+            sync["removed_imports"] != ["audio_uart_registry_callback_472102"] or
+            sync["new_imports"] != ["audio_sync_info_command_471ee8", "audio_sync_info_pb_descriptor_77c1cc"] or
+            sync["source_complete"] or sync["flashable"]):
+        raise RuntimeError("Apollo Main SyncInfo integration changed")
+    sync_candidate = file_checked(sync["candidate_object"]["path"], sync["candidate_object"]["sha256"])
+    if undefined(ROOT / sync_candidate["path"]) != sorted(
+            (set(fatal_hook_unresolved) - set(sync["removed_imports"])) | set(sync["new_imports"])):
+        raise RuntimeError("Apollo Main SyncInfo import frontier changed")
+    images["apollo_main"]["candidate"] = sync_candidate
+    images["apollo_main"]["sync_info_common_472102"] = sync_ref
+    images["apollo_main"]["unresolved_count"] = 122
+    images["apollo_main"]["unresolved_symbols"] = undefined(ROOT / sync_candidate["path"])
+    images["apollo_main"]["remaining_gate"].append(
+        "SyncInfo common-data callback 0x472102 is integrated as C and passes 40 bounded native/C cases. Its command child is covered by the subsequent response-handler integration; the protobuf descriptor remains an import.")
+    response_path = G2 / "build/c-firmware/20261016/main-sync-info-response-471ee8/receipt.json"
+    response, response_ref = receipt(response_path)
+    if (response["status"] != "PASS_BOUNDED_MAIN_SYNC_INFO_RESPONSE_INTEGRATION" or
+            response["oracle_cases"] != 80 or response["native_body_bytes"] != 188 or
+            response["unresolved_before"] != 122 or response["unresolved_after"] != 121 or
+            response["removed_imports"] != ["audio_sync_info_command_471ee8"] or
+            response["new_imports"] or response["source_complete"] or response["flashable"]):
+        raise RuntimeError("Apollo Main SyncInfo response integration changed")
+    response_candidate = file_checked(response["candidate_object"]["path"],
+                                      response["candidate_object"]["sha256"])
+    response_unresolved = undefined(ROOT / response_candidate["path"])
+    if response_unresolved != sorted(set(images["apollo_main"]["unresolved_symbols"]) -
+                                     set(response["removed_imports"])):
+        raise RuntimeError("Apollo Main SyncInfo response import frontier changed")
+    images["apollo_main"]["candidate"] = response_candidate
+    images["apollo_main"]["sync_info_response_471ee8"] = response_ref
+    images["apollo_main"]["unresolved_count"] = 121
+    images["apollo_main"]["unresolved_symbols"] = response_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "SyncInfo inquiry-response handler 0x471ee8 is integrated as C and passes 80 bounded native/C cases. Its descriptor is covered by the subsequent authenticated descriptor integration.")
+    descriptor_path = G2 / "build/c-firmware/20261016/main-sync-info-descriptor-77c1cc/receipt.json"
+    descriptor, descriptor_ref = receipt(descriptor_path)
+    if (descriptor["status"] != "PASS_AUTHENTICATED_MAIN_SYNC_INFO_PB_DESCRIPTOR_C" or
+            descriptor["stock_payload_sha256"] != "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701" or
+            len(descriptor["spans"]) != 6 or descriptor["authenticated_pointer_edges"] != 5 or
+            descriptor["unresolved_before"] != 121 or descriptor["unresolved_after"] != 120 or
+            descriptor["removed_imports"] != ["audio_sync_info_pb_descriptor_77c1cc"] or
+            descriptor["source_complete"] or descriptor["flashable"]):
+        raise RuntimeError("Apollo Main SyncInfo descriptor integration changed")
+    descriptor_candidate = file_checked(descriptor["candidate_object"]["path"],
+                                        descriptor["candidate_object"]["sha256"])
+    descriptor_unresolved = undefined(ROOT / descriptor_candidate["path"])
+    if descriptor_unresolved != sorted(set(response_unresolved) - set(descriptor["removed_imports"])):
+        raise RuntimeError("Apollo Main SyncInfo descriptor import frontier changed")
+    images["apollo_main"]["candidate"] = descriptor_candidate
+    images["apollo_main"]["sync_info_descriptor_77c1cc"] = descriptor_ref
+    images["apollo_main"]["unresolved_count"] = 120
+    images["apollo_main"]["unresolved_symbols"] = descriptor_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "SyncInfo two-node nanopb descriptor graph is C-owned with six stock-matched data spans and five authenticated pointer edges. Arbitrary protobuf behavior and full payload coverage remain unverified.")
+    notify_path = G2 / "build/c-firmware/20261016/main-sync-info-notify-471fa4/receipt.json"
+    notify, notify_ref = receipt(notify_path)
+    if (notify["status"] != "PASS_BOUNDED_MAIN_SYNC_INFO_NOTIFY_INTEGRATION" or
+            notify["oracle_cases"] != 25 or notify["native_body_bytes"] != 350 or
+            notify["unresolved_before"] != 120 or notify["unresolved_after"] != 119 or
+            notify["removed_imports"] != ["audio_uart_display_sync_info"] or
+            notify["new_imports"] or notify["source_complete"] or notify["flashable"]):
+        raise RuntimeError("Apollo Main SyncInfo Notify integration changed")
+    notify_candidate = file_checked(notify["candidate_object"]["path"],
+                                    notify["candidate_object"]["sha256"])
+    notify_unresolved = undefined(ROOT / notify_candidate["path"])
+    if notify_unresolved != sorted(set(descriptor_unresolved) - set(notify["removed_imports"])):
+        raise RuntimeError("Apollo Main SyncInfo Notify import frontier changed")
+    images["apollo_main"]["candidate"] = notify_candidate
+    images["apollo_main"]["sync_info_notify_471fa4"] = notify_ref
+    images["apollo_main"]["unresolved_count"] = 119
+    images["apollo_main"]["unresolved_symbols"] = notify_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "SyncInfo Notify 0x471fa4 is C-owned and passes 25 bounded native/C cases. Allocator, BLE runtime, arbitrary protobuf data and full payload coverage remain separate gates.")
+    conversate_path = G2 / "build/c-firmware/20261016/main-conversate-success-tick-5b03c2/receipt.json"
+    conversate, conversate_ref = receipt(conversate_path)
+    if (conversate["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_COMMON_TICK_INTEGRATION" or
+            conversate["common_oracle_cases"] != 80 or conversate["tick_oracle_cases"] != 16 or
+            conversate["common_native_bytes"] != 346 or conversate["tick_native_bytes"] != 22 or
+            conversate["unresolved_before"] != 119 or conversate["unresolved_common"] != 126 or
+            conversate["unresolved_after"] != 125 or
+            conversate["common_removed_import"] != "audio_uart_registry_callback_5b0476" or
+            conversate["tick_removed_import"] != "audio_conversate_success_5b03c2" or
+            len(conversate["common_added_imports"]) != 8 or
+            conversate["source_complete"] or conversate["flashable"]):
+        raise RuntimeError("Apollo Main Conversate integration changed")
+    conversate_candidate = file_checked(conversate["candidate_object"]["path"],
+                                        conversate["candidate_object"]["sha256"])
+    conversate_unresolved = undefined(ROOT / conversate_candidate["path"])
+    if conversate_unresolved != sorted(
+            (set(notify_unresolved) - {conversate["common_removed_import"]}) |
+            (set(conversate["common_added_imports"]) - {conversate["tick_removed_import"]})):
+        raise RuntimeError("Apollo Main Conversate import frontier changed")
+    images["apollo_main"]["candidate"] = conversate_candidate
+    images["apollo_main"]["conversate_common_tick"] = conversate_ref
+    images["apollo_main"]["unresolved_count"] = 125
+    images["apollo_main"]["unresolved_symbols"] = conversate_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate common-data callback 0x5b0476 and success-tick helper 0x5b03c2 are C-owned with 80 and 16 bounded native/C cases. Their deeper receive/handler/response/enter functions and two RAM objects remain explicit; leave is covered by the subsequent mutex-unlock integration.")
+    unlock_path = G2 / "build/c-firmware/20261016/main-conversate-unlock-5b0284/receipt.json"
+    unlock, unlock_ref = receipt(unlock_path)
+    if (unlock["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_UNLOCK_INTEGRATION" or
+            unlock["oracle_cases"] != 30 or unlock["native_body_bytes"] != 96 or
+            unlock["unresolved_before"] != 125 or unlock["unresolved_after"] != 124 or
+            unlock["removed_imports"] != ["audio_conversate_leave_5b0284"] or
+            unlock["source_complete"] or unlock["flashable"]):
+        raise RuntimeError("Apollo Main Conversate unlock integration changed")
+    unlock_candidate = file_checked(unlock["candidate_object"]["path"],
+                                    unlock["candidate_object"]["sha256"])
+    unlock_unresolved = undefined(ROOT / unlock_candidate["path"])
+    if unlock_unresolved != sorted(set(conversate_unresolved) - set(unlock["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate unlock import frontier changed")
+    images["apollo_main"]["candidate"] = unlock_candidate
+    images["apollo_main"]["conversate_unlock_5b0284"] = unlock_ref
+    images["apollo_main"]["unresolved_count"] = 124
+    images["apollo_main"]["unresolved_symbols"] = unlock_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate mutex-unlock 0x5b0284 is C-owned with 30 bounded native/C cases and a fixed 0x20074398 handle cell. Remaining Conversate children and full payload remain open.")
+    lock_path = G2 / "build/c-firmware/20261016/main-conversate-mutex-init-5b0120/receipt.json"
+    lock, lock_ref = receipt(lock_path)
+    if (lock["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_LOCK_INIT_INTEGRATION" or
+            lock["lock_oracle_cases"] != 60 or lock["init_oracle_cases"] != 20 or
+            lock["lock_native_bytes"] != 186 or lock["init_native_bytes"] != 170 or
+            lock["unresolved_before"] != 124 or lock["unresolved_after"] != 123 or
+            lock["removed_imports"] != ["audio_conversate_enter_5b01ca"] or
+            lock["source_complete"] or lock["flashable"]):
+        raise RuntimeError("Apollo Main Conversate lock/initializer integration changed")
+    lock_candidate = file_checked(lock["candidate_object"]["path"],
+                                  lock["candidate_object"]["sha256"])
+    lock_unresolved = undefined(ROOT / lock_candidate["path"])
+    if lock_unresolved != sorted(set(unlock_unresolved) - set(lock["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate lock import frontier changed")
+    images["apollo_main"]["candidate"] = lock_candidate
+    images["apollo_main"]["conversate_lock_init"] = lock_ref
+    images["apollo_main"]["unresolved_count"] = 123
+    images["apollo_main"]["unresolved_symbols"] = lock_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate action-lock 0x5b01ca and mutex initializer 0x5b0120 are C-owned with 60 and 20 bounded native/C cases. Conversate receive, handler and two RAM objects remain; response is covered by the subsequent encoder and descriptor integration.")
+    response_desc_path = G2 / "build/c-firmware/20261016/main-conversate-descriptor-775b24/receipt.json"
+    response_desc, response_desc_ref = receipt(response_desc_path)
+    if (response_desc["status"] != "PASS_AUTHENTICATED_MAIN_CONVERSATE_RESPONSE_DESCRIPTOR_C" or
+            response_desc["response_oracle_cases"] != 120 or
+            response_desc["response_native_bytes"] != 288 or
+            response_desc["descriptor_nodes"] != 15 or
+            response_desc["authenticated_pointer_edges"] != 44 or
+            response_desc["unresolved_before"] != 123 or
+            response_desc["unresolved_response"] != 123 or
+            response_desc["unresolved_after"] != 122 or
+            response_desc["response_removed_import"] != "audio_conversate_respond_5b200e" or
+            response_desc["descriptor_removed_import"] != "audio_conversate_response_descriptor_775b24" or
+            response_desc["source_complete"] or response_desc["flashable"]):
+        raise RuntimeError("Apollo Main Conversate response/descriptor integration changed")
+    response_desc_candidate = file_checked(response_desc["candidate_object"]["path"],
+                                           response_desc["candidate_object"]["sha256"])
+    response_desc_unresolved = undefined(ROOT / response_desc_candidate["path"])
+    if response_desc_unresolved != sorted(set(lock_unresolved) -
+                                          {response_desc["response_removed_import"]}):
+        raise RuntimeError("Apollo Main Conversate response import frontier changed")
+    images["apollo_main"]["candidate"] = response_desc_candidate
+    images["apollo_main"]["conversate_response_descriptor"] = response_desc_ref
+    images["apollo_main"]["unresolved_count"] = 122
+    images["apollo_main"]["unresolved_symbols"] = response_desc_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate response encoder 0x5b200e passes 120 bounded native/C cases, and its 15-node protobuf descriptor graph has stock-matched fields and 44 pointer edges. Conversate receive and two RAM objects remain; the handler is covered by the subsequent integration.")
+    conv_handler_path = G2 / "build/c-firmware/20261016/main-conversate-data-handler-5b08a2/receipt.json"
+    conv_handler, conv_handler_ref = receipt(conv_handler_path)
+    if (conv_handler["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_DATA_HANDLER_INTEGRATION" or
+            conv_handler["oracle_cases"] != 160 or
+            conv_handler["native_body_bytes"] != 316 or
+            conv_handler["unresolved_before"] != 122 or
+            conv_handler["unresolved_after"] != 122 or
+            conv_handler["removed_imports"] != ["audio_conversate_data_handler_5b08a2"] or
+            conv_handler["new_imports"] != ["audio_conversate_dispatch_5b4904"] or
+            conv_handler["source_complete"] or conv_handler["flashable"]):
+        raise RuntimeError("Apollo Main Conversate data-handler integration changed")
+    conv_handler_candidate = file_checked(conv_handler["candidate_object"]["path"],
+                                          conv_handler["candidate_object"]["sha256"])
+    conv_handler_unresolved = undefined(ROOT / conv_handler_candidate["path"])
+    if conv_handler_unresolved != sorted(
+            (set(response_desc_unresolved) - set(conv_handler["removed_imports"])) |
+            set(conv_handler["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate handler import frontier changed")
+    images["apollo_main"]["candidate"] = conv_handler_candidate
+    images["apollo_main"]["conversate_data_handler_5b08a2"] = conv_handler_ref
+    images["apollo_main"]["unresolved_count"] = 122
+    images["apollo_main"]["unresolved_symbols"] = conv_handler_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate data handler 0x5b08a2 passes 160 bounded native/C routes, including the unsupported subtype fallthrough. Main remains at 122 unresolved imports because dispatcher 0x5b4904 is newly exposed; receive and two RAM objects remain.")
+    conv_receive_path = G2 / "build/c-firmware/20261016/main-conversate-receive-5b1b4c/receipt.json"
+    conv_receive, conv_receive_ref = receipt(conv_receive_path)
+    if (conv_receive["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_RECEIVE_INTEGRATION" or
+            conv_receive["oracle_cases"] != 303 or
+            conv_receive["native_body_bytes"] != 478 or
+            conv_receive["unresolved_before"] != 122 or
+            conv_receive["unresolved_after"] != 121 or
+            conv_receive["removed_imports"] != ["audio_conversate_receive_5b1b4c"] or
+            conv_receive["new_imports"] or
+            conv_receive["source_complete"] or conv_receive["flashable"]):
+        raise RuntimeError("Apollo Main Conversate receive integration changed")
+    conv_receive_candidate = file_checked(conv_receive["candidate_object"]["path"],
+                                          conv_receive["candidate_object"]["sha256"])
+    conv_receive_unresolved = undefined(ROOT / conv_receive_candidate["path"])
+    if conv_receive_unresolved != sorted(set(conv_handler_unresolved) -
+                                         set(conv_receive["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate receive import frontier changed")
+    images["apollo_main"]["candidate"] = conv_receive_candidate
+    images["apollo_main"]["conversate_receive_5b1b4c"] = conv_receive_ref
+    images["apollo_main"]["unresolved_count"] = 121
+    images["apollo_main"]["unresolved_symbols"] = conv_receive_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate receive 0x5b1b4c passes 303 bounded native/C cases, including decode failure and duplicate timing. Two observed RAM cells are fixed in the relocatable candidate. Deeper dispatcher and nanopb/logging lowers remain.")
+    conv_dispatch_path = G2 / "build/c-firmware/20261016/main-conversate-dispatch-5b4904/receipt.json"
+    conv_dispatch, conv_dispatch_ref = receipt(conv_dispatch_path)
+    if (conv_dispatch["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_DISPATCH_INTEGRATION" or
+            conv_dispatch["oracle_cases"] != 160 or
+            conv_dispatch["native_body_bytes"] != 396 or
+            conv_dispatch["unresolved_before"] != 121 or
+            conv_dispatch["unresolved_after"] != 132 or
+            conv_dispatch["removed_imports"] != ["audio_conversate_dispatch_5b4904"] or
+            len(conv_dispatch["new_imports"]) != 12 or
+            conv_dispatch["source_complete"] or conv_dispatch["flashable"]):
+        raise RuntimeError("Apollo Main Conversate dispatcher integration changed")
+    conv_dispatch_candidate = file_checked(conv_dispatch["candidate_object"]["path"],
+                                           conv_dispatch["candidate_object"]["sha256"])
+    conv_dispatch_unresolved = undefined(ROOT / conv_dispatch_candidate["path"])
+    if conv_dispatch_unresolved != sorted(
+            (set(conv_receive_unresolved) - set(conv_dispatch["removed_imports"])) |
+            set(conv_dispatch["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate dispatcher import frontier changed")
+    images["apollo_main"]["candidate"] = conv_dispatch_candidate
+    images["apollo_main"]["conversate_dispatch_5b4904"] = conv_dispatch_ref
+    images["apollo_main"]["unresolved_count"] = 132
+    images["apollo_main"]["unresolved_symbols"] = conv_dispatch_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate dispatcher 0x5b4904 passes 160 bounded native/C cases and exposes ten action bodies, event-name lookup and machine-context RAM. The newly exposed action frontier raises current Main imports to 132.")
+    conv_event_name_path = G2 / "build/c-firmware/20261016/main-conversate-event-name-5b48f8/receipt.json"
+    conv_event_name, conv_event_name_ref = receipt(conv_event_name_path)
+    if (conv_event_name["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_EVENT_NAME_INTEGRATION" or
+            conv_event_name["oracle_cases"] != 18 or
+            conv_event_name["native_body_bytes"] != 12 or
+            conv_event_name["unresolved_before"] != 132 or
+            conv_event_name["unresolved_after"] != 132 or
+            conv_event_name["removed_imports"] != ["audio_conversate_event_name_5b48f8"] or
+            conv_event_name["new_imports"] != ["audio_conversate_event_names_200004f4"] or
+            conv_event_name["source_complete"] or conv_event_name["flashable"]):
+        raise RuntimeError("Apollo Main Conversate event-name integration changed")
+    conv_event_name_candidate = file_checked(conv_event_name["candidate_object"]["path"],
+                                             conv_event_name["candidate_object"]["sha256"])
+    conv_event_name_unresolved = undefined(ROOT / conv_event_name_candidate["path"])
+    if conv_event_name_unresolved != sorted(
+            (set(conv_dispatch_unresolved) - set(conv_event_name["removed_imports"])) |
+            set(conv_event_name["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate event-name import frontier changed")
+    images["apollo_main"]["candidate"] = conv_event_name_candidate
+    images["apollo_main"]["conversate_event_name_5b48f8"] = conv_event_name_ref
+    images["apollo_main"]["unresolved_count"] = 132
+    images["apollo_main"]["unresolved_symbols"] = conv_event_name_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate event-name helper 0x5b48f8 passes 18 bounded native/C cases. Its RAM pointer table at 0x200004f4 is now an explicit import; contents and startup initializer remain unauthenticated.")
+    conv_pause_path = G2 / "build/c-firmware/20261016/main-conversate-app-pause-5b4cc8/receipt.json"
+    conv_pause, conv_pause_ref = receipt(conv_pause_path)
+    if (conv_pause["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_APP_PAUSE_INTEGRATION" or
+            conv_pause["oracle_cases"] != 14 or
+            conv_pause["native_body_bytes"] != 72 or
+            conv_pause["unresolved_before"] != 132 or
+            conv_pause["unresolved_after"] != 131 or
+            conv_pause["removed_imports"] != ["audio_conversate_action_5b4cc8"] or
+            conv_pause["new_imports"] or
+            conv_pause["source_complete"] or conv_pause["flashable"]):
+        raise RuntimeError("Apollo Main Conversate app-pause integration changed")
+    conv_pause_candidate = file_checked(conv_pause["candidate_object"]["path"],
+                                        conv_pause["candidate_object"]["sha256"])
+    conv_pause_unresolved = undefined(ROOT / conv_pause_candidate["path"])
+    if conv_pause_unresolved != sorted(set(conv_event_name_unresolved) -
+                                       set(conv_pause["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate app-pause import frontier changed")
+    images["apollo_main"]["candidate"] = conv_pause_candidate
+    images["apollo_main"]["conversate_app_pause_5b4cc8"] = conv_pause_ref
+    images["apollo_main"]["unresolved_count"] = 131
+    images["apollo_main"]["unresolved_symbols"] = conv_pause_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate app-pause action 0x5b4cc8 passes 14 bounded native/C cases and closes one action import. Nine action bodies remain in this dispatch table.")
+    conv_resume_path = G2 / "build/c-firmware/20261016/main-conversate-app-resume-5b4d10/receipt.json"
+    conv_resume, conv_resume_ref = receipt(conv_resume_path)
+    if (conv_resume["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_APP_RESUME_INTEGRATION" or
+            conv_resume["oracle_cases"] != 28 or
+            conv_resume["native_body_bytes"] != 170 or
+            conv_resume["unresolved_before"] != 131 or
+            conv_resume["unresolved_after"] != 132 or
+            conv_resume["removed_imports"] != ["audio_conversate_action_5b4d10"] or
+            conv_resume["new_imports"] != ["audio_conversate_page_hide_54f50e", "audio_conversate_page_show_54f380"] or
+            conv_resume["source_complete"] or conv_resume["flashable"]):
+        raise RuntimeError("Apollo Main Conversate app-resume integration changed")
+    conv_resume_candidate = file_checked(conv_resume["candidate_object"]["path"],
+                                         conv_resume["candidate_object"]["sha256"])
+    conv_resume_unresolved = undefined(ROOT / conv_resume_candidate["path"])
+    if conv_resume_unresolved != sorted(
+            (set(conv_pause_unresolved) - set(conv_resume["removed_imports"])) |
+            set(conv_resume["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate app-resume import frontier changed")
+    images["apollo_main"]["candidate"] = conv_resume_candidate
+    images["apollo_main"]["conversate_app_resume_5b4d10"] = conv_resume_ref
+    images["apollo_main"]["unresolved_count"] = 132
+    images["apollo_main"]["unresolved_symbols"] = conv_resume_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate app-resume action 0x5b4d10 passes 28 bounded native/C cases. Page show/hide lowers are newly exposed; eight action bodies remain in this dispatch table.")
+    conv_config_path = G2 / "build/c-firmware/20261016/main-conversate-app-config-5b4dba/receipt.json"
+    conv_config, conv_config_ref = receipt(conv_config_path)
+    if (conv_config["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_APP_CONFIG_INTEGRATION" or
+            conv_config["oracle_cases"] != 40 or
+            conv_config["native_body_bytes"] != 222 or
+            conv_config["unresolved_before"] != 132 or
+            conv_config["unresolved_after"] != 133 or
+            conv_config["removed_imports"] != ["audio_conversate_action_5b4dba"] or
+            conv_config["new_imports"] != ["audio_conversate_apply_config_5b133c", "audio_conversate_report_5b02e4"] or
+            conv_config["source_complete"] or conv_config["flashable"]):
+        raise RuntimeError("Apollo Main Conversate app-config integration changed")
+    conv_config_candidate = file_checked(conv_config["candidate_object"]["path"],
+                                         conv_config["candidate_object"]["sha256"])
+    conv_config_unresolved = undefined(ROOT / conv_config_candidate["path"])
+    if conv_config_unresolved != sorted(
+            (set(conv_resume_unresolved) - set(conv_config["removed_imports"])) |
+            set(conv_config["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate app-config import frontier changed")
+    images["apollo_main"]["candidate"] = conv_config_candidate
+    images["apollo_main"]["conversate_app_config_5b4dba"] = conv_config_ref
+    images["apollo_main"]["unresolved_count"] = 133
+    images["apollo_main"]["unresolved_symbols"] = conv_config_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate app-config action 0x5b4dba passes 40 bounded native/C cases. Config apply/report lowers are newly exposed; seven action bodies remain in this dispatch table.")
+    conv_close_path = G2 / "build/c-firmware/20261016/main-conversate-app-close-5b4e98/receipt.json"
+    conv_close, conv_close_ref = receipt(conv_close_path)
+    if (conv_close["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_APP_CLOSE_INTEGRATION" or
+            conv_close["oracle_cases"] != 90 or
+            conv_close["native_body_bytes"] != 218 or
+            conv_close["unresolved_before"] != 133 or
+            conv_close["unresolved_after"] != 132 or
+            conv_close["removed_imports"] != ["audio_conversate_action_5b4e98"] or
+            conv_close["new_imports"] or
+            conv_close["source_complete"] or conv_close["flashable"]):
+        raise RuntimeError("Apollo Main Conversate app-close integration changed")
+    conv_close_candidate = file_checked(conv_close["candidate_object"]["path"],
+                                        conv_close["candidate_object"]["sha256"])
+    conv_close_unresolved = undefined(ROOT / conv_close_candidate["path"])
+    if conv_close_unresolved != sorted(set(conv_config_unresolved) -
+                                       set(conv_close["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate app-close import frontier changed")
+    images["apollo_main"]["candidate"] = conv_close_candidate
+    images["apollo_main"]["conversate_app_close_5b4e98"] = conv_close_ref
+    images["apollo_main"]["unresolved_count"] = 132
+    images["apollo_main"]["unresolved_symbols"] = conv_close_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate app-close action 0x5b4e98 passes 90 bounded native/C cases, including role-dependent descriptor send. Six action bodies remain in this dispatch table.")
+    conv_heartbeat_path = G2 / "build/c-firmware/20261016/main-conversate-heartbeat-5b55b4/receipt.json"
+    conv_heartbeat, conv_heartbeat_ref = receipt(conv_heartbeat_path)
+    if (conv_heartbeat["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_HEARTBEAT_INTEGRATION" or
+            conv_heartbeat["oracle_cases"] != 55 or
+            conv_heartbeat["native_body_bytes"] != 124 or
+            conv_heartbeat["unresolved_before"] != 132 or
+            conv_heartbeat["unresolved_after"] != 133 or
+            conv_heartbeat["removed_imports"] != ["audio_conversate_action_5b55b4"] or
+            conv_heartbeat["new_imports"] != ["audio_conversate_ui_state_get_5b16d0", "audio_conversate_ui_state_name_5b16dc"] or
+            conv_heartbeat["source_complete"] or conv_heartbeat["flashable"]):
+        raise RuntimeError("Apollo Main Conversate heartbeat integration changed")
+    conv_heartbeat_candidate = file_checked(conv_heartbeat["candidate_object"]["path"],
+                                            conv_heartbeat["candidate_object"]["sha256"])
+    conv_heartbeat_unresolved = undefined(ROOT / conv_heartbeat_candidate["path"])
+    if conv_heartbeat_unresolved != sorted(
+            (set(conv_close_unresolved) - set(conv_heartbeat["removed_imports"])) |
+            set(conv_heartbeat["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate heartbeat import frontier changed")
+    images["apollo_main"]["candidate"] = conv_heartbeat_candidate
+    images["apollo_main"]["conversate_heartbeat_5b55b4"] = conv_heartbeat_ref
+    images["apollo_main"]["unresolved_count"] = 133
+    images["apollo_main"]["unresolved_symbols"] = conv_heartbeat_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate heartbeat action 0x5b55b4 passes 55 bounded native/C cases. UI state getter/name lowers are newly exposed; five action bodies remain in this dispatch table.")
+    conv_ui_state_path = G2 / "build/c-firmware/20261016/main-conversate-ui-state-helpers/receipt.json"
+    conv_ui_state, conv_ui_state_ref = receipt(conv_ui_state_path)
+    if (conv_ui_state["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_UI_STATE_HELPERS_INTEGRATION" or
+            conv_ui_state["oracle_cases"] != 28 or
+            conv_ui_state["native_body_bytes"] != 34 or
+            conv_ui_state["unresolved_before"] != 133 or
+            conv_ui_state["unresolved_after"] != 133 or
+            conv_ui_state["removed_imports"] != ["audio_conversate_ui_state_get_5b16d0", "audio_conversate_ui_state_name_5b16dc"] or
+            conv_ui_state["new_imports"] != ["audio_conversate_ui_state_20071368", "audio_conversate_ui_state_names_20000540"] or
+            conv_ui_state["source_complete"] or conv_ui_state["flashable"]):
+        raise RuntimeError("Apollo Main Conversate UI-state helpers integration changed")
+    conv_ui_state_candidate = file_checked(conv_ui_state["candidate_object"]["path"],
+                                           conv_ui_state["candidate_object"]["sha256"])
+    conv_ui_state_unresolved = undefined(ROOT / conv_ui_state_candidate["path"])
+    if conv_ui_state_unresolved != sorted(
+            (set(conv_heartbeat_unresolved) - set(conv_ui_state["removed_imports"])) |
+            set(conv_ui_state["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate UI-state helper import frontier changed")
+    images["apollo_main"]["candidate"] = conv_ui_state_candidate
+    images["apollo_main"]["conversate_ui_state_helpers"] = conv_ui_state_ref
+    images["apollo_main"]["unresolved_count"] = 133
+    images["apollo_main"]["unresolved_symbols"] = conv_ui_state_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate UI-state getter/name helpers pass 28 bounded native/C cases. Their RAM byte and seven-entry pointer table are covered by the next authenticated table integration.")
+    conv_names_path = G2 / "build/c-firmware/20261016/main-conversate-name-tables/receipt.json"
+    conv_names, conv_names_ref = receipt(conv_names_path)
+    if (conv_names["status"] != "PASS_AUTHENTICATED_MAIN_CONVERSATE_NAME_TABLES_C" or
+            sum(len(v) for v in conv_names["stock_matched_entries"].values()) != 20 or
+            conv_names["unresolved_before"] != 133 or
+            conv_names["unresolved_after"] != 130 or
+            conv_names["removed_imports"] != ["audio_conversate_event_names_200004f4", "audio_conversate_ui_state_20071368", "audio_conversate_ui_state_names_20000540"] or
+            conv_names["new_imports"] or
+            conv_names["source_complete"] or conv_names["flashable"]):
+        raise RuntimeError("Apollo Main Conversate name tables changed")
+    conv_names_candidate = file_checked(conv_names["candidate_object"]["path"],
+                                        conv_names["candidate_object"]["sha256"])
+    conv_names_unresolved = undefined(ROOT / conv_names_candidate["path"])
+    if conv_names_unresolved != sorted(set(conv_ui_state_unresolved) -
+                                       set(conv_names["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate name-table import frontier changed")
+    images["apollo_main"]["candidate"] = conv_names_candidate
+    images["apollo_main"]["conversate_name_tables"] = conv_names_ref
+    images["apollo_main"]["unresolved_count"] = 130
+    images["apollo_main"]["unresolved_symbols"] = conv_names_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Main low-RAM decoder authenticates all 13 Conversate event names and seven UI-state names. C-owned fixed RAM tables have 20 pointer relocations and close three imports; whole-image startup relocation remains open.")
+    conv_transcribe_path = G2 / "build/c-firmware/20261016/main-conversate-transcribe-data-5b5428/receipt.json"
+    conv_transcribe, conv_transcribe_ref = receipt(conv_transcribe_path)
+    if (conv_transcribe["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_TRANSCRIBE_DATA_INTEGRATION" or
+            conv_transcribe["oracle_cases"] != 40 or
+            conv_transcribe["native_body_bytes"] != 384 or
+            conv_transcribe["unresolved_before"] != 130 or
+            conv_transcribe["unresolved_after"] != 130 or
+            conv_transcribe["removed_imports"] != ["audio_conversate_action_5b5428"] or
+            conv_transcribe["new_imports"] != ["audio_conversate_transcribe_update_5b41be"] or
+            conv_transcribe["source_complete"] or conv_transcribe["flashable"]):
+        raise RuntimeError("Apollo Main Conversate transcribe-data integration changed")
+    conv_transcribe_candidate = file_checked(conv_transcribe["candidate_object"]["path"],
+                                             conv_transcribe["candidate_object"]["sha256"])
+    conv_transcribe_unresolved = undefined(ROOT / conv_transcribe_candidate["path"])
+    if conv_transcribe_unresolved != sorted(
+            (set(conv_names_unresolved) - set(conv_transcribe["removed_imports"])) |
+            set(conv_transcribe["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate transcribe import frontier changed")
+    images["apollo_main"]["candidate"] = conv_transcribe_candidate
+    images["apollo_main"]["conversate_transcribe_data_5b5428"] = conv_transcribe_ref
+    images["apollo_main"]["unresolved_count"] = 130
+    images["apollo_main"]["unresolved_symbols"] = conv_transcribe_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate transcribe-data action 0x5b5428 passes 40 bounded native/C cases. Transcribe-update lower is newly exposed; four action bodies remain in this dispatch table.")
+    conv_prep_packet_path = G2 / "build/c-firmware/20261016/main-conversate-prep-note-packet-5b52e0/receipt.json"
+    conv_prep_packet, conv_prep_packet_ref = receipt(conv_prep_packet_path)
+    if (conv_prep_packet["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_PREP_NOTE_PACKET_INTEGRATION" or
+            conv_prep_packet["oracle_cases"] != 35 or
+            conv_prep_packet["native_body_bytes"] != 278 or
+            conv_prep_packet["unresolved_before"] != 130 or
+            conv_prep_packet["unresolved_after"] != 131 or
+            conv_prep_packet["removed_imports"] != ["audio_conversate_action_5b52e0"] or
+            conv_prep_packet["new_imports"] != ["audio_conversate_prep_note_finish_5b476a", "audio_conversate_prep_note_packet_update_5b44d8"] or
+            conv_prep_packet["source_complete"] or conv_prep_packet["flashable"]):
+        raise RuntimeError("Apollo Main Conversate prep-note packet integration changed")
+    conv_prep_packet_candidate = file_checked(conv_prep_packet["candidate_object"]["path"],
+                                              conv_prep_packet["candidate_object"]["sha256"])
+    conv_prep_packet_unresolved = undefined(ROOT / conv_prep_packet_candidate["path"])
+    if conv_prep_packet_unresolved != sorted(
+            (set(conv_transcribe_unresolved) - set(conv_prep_packet["removed_imports"])) |
+            set(conv_prep_packet["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate prep-note packet import frontier changed")
+    images["apollo_main"]["candidate"] = conv_prep_packet_candidate
+    images["apollo_main"]["conversate_prep_note_packet_5b52e0"] = conv_prep_packet_ref
+    images["apollo_main"]["unresolved_count"] = 131
+    images["apollo_main"]["unresolved_symbols"] = conv_prep_packet_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate prep-note packet action 0x5b52e0 passes 35 bounded native/C cases. Packet update/finish lowers are newly exposed; three action bodies remain in this dispatch table.")
+    conv_prep_list_path = G2 / "build/c-firmware/20261016/main-conversate-prep-note-list-5b5150/receipt.json"
+    conv_prep_list, conv_prep_list_ref = receipt(conv_prep_list_path)
+    if (conv_prep_list["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_PREP_NOTE_LIST_INTEGRATION" or
+            conv_prep_list["oracle_cases"] != 45 or
+            conv_prep_list["native_body_bytes"] != 378 or
+            conv_prep_list["unresolved_before"] != 131 or
+            conv_prep_list["unresolved_after"] != 132 or
+            conv_prep_list["removed_imports"] != ["audio_conversate_action_5b5150"] or
+            conv_prep_list["new_imports"] != ["audio_conversate_enter_loading_5b57ac", "audio_conversate_prep_note_list_update_5b4378"] or
+            conv_prep_list["source_complete"] or conv_prep_list["flashable"]):
+        raise RuntimeError("Apollo Main Conversate prep-note list integration changed")
+    conv_prep_list_candidate = file_checked(conv_prep_list["candidate_object"]["path"],
+                                            conv_prep_list["candidate_object"]["sha256"])
+    conv_prep_list_unresolved = undefined(ROOT / conv_prep_list_candidate["path"])
+    if conv_prep_list_unresolved != sorted(
+            (set(conv_prep_packet_unresolved) - set(conv_prep_list["removed_imports"])) |
+            set(conv_prep_list["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate prep-note list import frontier changed")
+    images["apollo_main"]["candidate"] = conv_prep_list_candidate
+    images["apollo_main"]["conversate_prep_note_list_5b5150"] = conv_prep_list_ref
+    images["apollo_main"]["unresolved_count"] = 132
+    images["apollo_main"]["unresolved_symbols"] = conv_prep_list_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate prep-note list action 0x5b5150 passes 45 bounded native/C cases. List-update and enter-loading lowers are newly exposed; two action bodies remain in this dispatch table.")
+    conv_tag_path = G2 / "build/c-firmware/20261016/main-conversate-tag-data-5b4f72/receipt.json"
+    conv_tag, conv_tag_ref = receipt(conv_tag_path)
+    if (conv_tag["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_TAG_DATA_INTEGRATION" or
+            conv_tag["oracle_cases"] != 45 or
+            conv_tag["native_body_bytes"] != 478 or
+            conv_tag["unresolved_before"] != 132 or
+            conv_tag["unresolved_after"] != 132 or
+            conv_tag["removed_imports"] != ["audio_conversate_action_5b4f72"] or
+            conv_tag["new_imports"] != ["audio_conversate_store_tag_596360"] or
+            conv_tag["source_complete"] or conv_tag["flashable"]):
+        raise RuntimeError("Apollo Main Conversate tag-data integration changed")
+    conv_tag_candidate = file_checked(conv_tag["candidate_object"]["path"],
+                                      conv_tag["candidate_object"]["sha256"])
+    conv_tag_unresolved = undefined(ROOT / conv_tag_candidate["path"])
+    if conv_tag_unresolved != sorted(
+            (set(conv_prep_list_unresolved) - set(conv_tag["removed_imports"])) |
+            set(conv_tag["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate tag-data import frontier changed")
+    images["apollo_main"]["candidate"] = conv_tag_candidate
+    images["apollo_main"]["conversate_tag_data_5b4f72"] = conv_tag_ref
+    images["apollo_main"]["unresolved_count"] = 132
+    images["apollo_main"]["unresolved_symbols"] = conv_tag_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate tag-data action 0x5b4f72 passes 45 bounded native/C cases. Tag-store lower is newly exposed; one action body remains in this dispatch table.")
+    conv_open_path = G2 / "build/c-firmware/20261016/main-conversate-app-open-5b4a90/receipt.json"
+    conv_open, conv_open_ref = receipt(conv_open_path)
+    if (conv_open["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_APP_OPEN_INTEGRATION" or
+            conv_open["oracle_cases"] != 50 or
+            conv_open["native_body_bytes"] != 568 or
+            conv_open["unresolved_before"] != 132 or
+            conv_open["unresolved_after"] != 133 or
+            conv_open["removed_imports"] != ["audio_conversate_action_5b4a90"] or
+            conv_open["new_imports"] != ["audio_conversate_prep_note_update_5b43ee",
+                                          "audio_conversate_tag_storage_init_59619e"] or
+            conv_open["source_complete"] or conv_open["flashable"]):
+        raise RuntimeError("Apollo Main Conversate app-open integration changed")
+    conv_open_candidate = file_checked(conv_open["candidate_object"]["path"],
+                                       conv_open["candidate_object"]["sha256"])
+    conv_open_unresolved = undefined(ROOT / conv_open_candidate["path"])
+    if conv_open_unresolved != sorted(
+            (set(conv_tag_unresolved) - set(conv_open["removed_imports"])) |
+            set(conv_open["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate app-open import frontier changed")
+    images["apollo_main"]["candidate"] = conv_open_candidate
+    images["apollo_main"]["conversate_app_open_5b4a90"] = conv_open_ref
+    images["apollo_main"]["unresolved_count"] = 133
+    images["apollo_main"]["unresolved_symbols"] = conv_open_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "All ten Conversate dispatcher actions have bounded C bodies. App-open 0x5b4a90 passes 50 native/C cases; lower providers and broader Main coverage remain.")
+    conv_storage_path = G2 / "build/c-firmware/20261016/main-conversate-tag-storage-59619e/receipt.json"
+    conv_storage, conv_storage_ref = receipt(conv_storage_path)
+    if (conv_storage["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_TAG_STORAGE_INIT_INTEGRATION" or
+            conv_storage["oracle_cases"] != 20 or
+            conv_storage["native_body_bytes"] != 176 or
+            conv_storage["unresolved_before"] != 133 or
+            conv_storage["unresolved_after"] != 132 or
+            conv_storage["removed_imports"] != ["audio_conversate_tag_storage_init_59619e"] or
+            conv_storage["new_imports"] or
+            conv_storage["tag_storage_state"] != {"address": "0x200e3af4", "size": 12, "type": "SHT_NOBITS"} or
+            conv_storage["source_complete"] or conv_storage["flashable"]):
+        raise RuntimeError("Apollo Main Conversate tag-storage integration changed")
+    conv_storage_candidate = file_checked(conv_storage["candidate_object"]["path"],
+                                          conv_storage["candidate_object"]["sha256"])
+    conv_storage_unresolved = undefined(ROOT / conv_storage_candidate["path"])
+    if conv_storage_unresolved != sorted(set(conv_open_unresolved) -
+                                         set(conv_storage["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate tag-storage import frontier changed")
+    images["apollo_main"]["candidate"] = conv_storage_candidate
+    images["apollo_main"]["conversate_tag_storage_init_59619e"] = conv_storage_ref
+    images["apollo_main"]["unresolved_count"] = 132
+    images["apollo_main"]["unresolved_symbols"] = conv_storage_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate tag-storage initializer 0x59619e passes 20 native/C cases and owns its 12-byte RAM state. Other lower providers, startup initialization and broader Main coverage remain.")
+    conv_update_path = G2 / "build/c-firmware/20261016/main-conversate-prep-note-update-5b43ee/receipt.json"
+    conv_update, conv_update_ref = receipt(conv_update_path)
+    if (conv_update["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_PREP_NOTE_UPDATE_INTEGRATION" or
+            conv_update["oracle_cases"] != 35 or
+            conv_update["native_body_bytes"] != 234 or
+            conv_update["unresolved_before"] != 132 or
+            conv_update["unresolved_after"] != 131 or
+            conv_update["removed_imports"] != ["audio_conversate_prep_note_update_5b43ee"] or
+            conv_update["new_imports"] or
+            conv_update["prep_note_ram"]["overlap_bytes"] != 4 or
+            conv_update["source_complete"] or conv_update["flashable"]):
+        raise RuntimeError("Apollo Main Conversate prep-note update integration changed")
+    conv_update_candidate = file_checked(conv_update["candidate_object"]["path"],
+                                         conv_update["candidate_object"]["sha256"])
+    conv_update_unresolved = undefined(ROOT / conv_update_candidate["path"])
+    if conv_update_unresolved != sorted(set(conv_storage_unresolved) -
+                                        set(conv_update["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate prep-note update import frontier changed")
+    images["apollo_main"]["candidate"] = conv_update_candidate
+    images["apollo_main"]["conversate_prep_note_update_5b43ee"] = conv_update_ref
+    images["apollo_main"]["unresolved_count"] = 131
+    images["apollo_main"]["unresolved_symbols"] = conv_update_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate prep-note update 0x5b43ee passes 35 native/C cases and owns the overlapping RAM span. Startup initialization and broader Main coverage remain.")
+    conv_tag_add_path = G2 / "build/c-firmware/20261016/main-conversate-tag-add-596360/receipt.json"
+    conv_tag_add, conv_tag_add_ref = receipt(conv_tag_add_path)
+    if (conv_tag_add["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_TAG_ADD_INTEGRATION" or
+            conv_tag_add["oracle_cases"] != 35 or
+            conv_tag_add["native_body_bytes"] != 386 or
+            conv_tag_add["unresolved_before"] != 131 or
+            conv_tag_add["unresolved_after"] != 131 or
+            conv_tag_add["removed_imports"] != ["audio_conversate_store_tag_596360"] or
+            conv_tag_add["new_imports"] != ["audio_conversate_tag_node_create_5960c2"] or
+            conv_tag_add["source_complete"] or conv_tag_add["flashable"]):
+        raise RuntimeError("Apollo Main Conversate tag-add integration changed")
+    conv_tag_add_candidate = file_checked(conv_tag_add["candidate_object"]["path"],
+                                          conv_tag_add["candidate_object"]["sha256"])
+    conv_tag_add_unresolved = undefined(ROOT / conv_tag_add_candidate["path"])
+    if conv_tag_add_unresolved != sorted(
+            (set(conv_update_unresolved) - set(conv_tag_add["removed_imports"])) |
+            set(conv_tag_add["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate tag-add import frontier changed")
+    images["apollo_main"]["candidate"] = conv_tag_add_candidate
+    images["apollo_main"]["conversate_tag_add_596360"] = conv_tag_add_ref
+    images["apollo_main"]["unresolved_count"] = 131
+    images["apollo_main"]["unresolved_symbols"] = conv_tag_add_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate tag insertion 0x596360 passes 35 native/C cases. Node creation/allocation and broader Main coverage remain.")
+    conv_node_path = G2 / "build/c-firmware/20261016/main-conversate-tag-node-create-5960c2/receipt.json"
+    conv_node, conv_node_ref = receipt(conv_node_path)
+    if (conv_node["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_TAG_NODE_CREATE_INTEGRATION" or
+            conv_node["oracle_cases"] != 20 or
+            conv_node["native_body_bytes"] != 198 or
+            conv_node["unresolved_before"] != 131 or
+            conv_node["unresolved_after"] != 131 or
+            conv_node["removed_imports"] != ["audio_conversate_tag_node_create_5960c2"] or
+            conv_node["new_imports"] != ["audio_conversate_tag_node_from_pb_595f4c"] or
+            conv_node["source_complete"] or conv_node["flashable"]):
+        raise RuntimeError("Apollo Main Conversate tag-node integration changed")
+    conv_node_candidate = file_checked(conv_node["candidate_object"]["path"],
+                                       conv_node["candidate_object"]["sha256"])
+    conv_node_unresolved = undefined(ROOT / conv_node_candidate["path"])
+    if conv_node_unresolved != sorted(
+            (set(conv_tag_add_unresolved) - set(conv_node["removed_imports"])) |
+            set(conv_node["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate tag-node import frontier changed")
+    images["apollo_main"]["candidate"] = conv_node_candidate
+    images["apollo_main"]["conversate_tag_node_create_5960c2"] = conv_node_ref
+    images["apollo_main"]["unresolved_count"] = 131
+    images["apollo_main"]["unresolved_symbols"] = conv_node_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate tag-node creation 0x5960c2 passes 20 native/C cases. Protobuf-to-node conversion and broader Main coverage remain.")
+    conv_convert_path = G2 / "build/c-firmware/20261016/main-conversate-tag-node-from-pb-595f4c/receipt.json"
+    conv_convert, conv_convert_ref = receipt(conv_convert_path)
+    if (conv_convert["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_TAG_NODE_FROM_PB_INTEGRATION" or
+            conv_convert["oracle_cases"] != 40 or
+            conv_convert["native_body_bytes"] != 328 or
+            conv_convert["unresolved_before"] != 131 or
+            conv_convert["unresolved_after"] != 130 or
+            conv_convert["removed_imports"] != ["audio_conversate_tag_node_from_pb_595f4c"] or
+            conv_convert["new_imports"] or
+            conv_convert["source_complete"] or conv_convert["flashable"]):
+        raise RuntimeError("Apollo Main Conversate protobuf-to-node integration changed")
+    conv_convert_candidate = file_checked(conv_convert["candidate_object"]["path"],
+                                          conv_convert["candidate_object"]["sha256"])
+    conv_convert_unresolved = undefined(ROOT / conv_convert_candidate["path"])
+    if conv_convert_unresolved != sorted(set(conv_node_unresolved) -
+                                        set(conv_convert["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate protobuf-to-node import frontier changed")
+    images["apollo_main"]["candidate"] = conv_convert_candidate
+    images["apollo_main"]["conversate_tag_node_from_pb_595f4c"] = conv_convert_ref
+    images["apollo_main"]["unresolved_count"] = 130
+    images["apollo_main"]["unresolved_symbols"] = conv_convert_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate protobuf-to-node conversion 0x595f4c passes 40 native/C cases. Allocator behavior and broader Main coverage remain.")
+    conv_composed_path = G2 / "build/c-firmware/20261016/main-conversate-tag-store-composed/receipt.json"
+    conv_composed, conv_composed_ref = receipt(conv_composed_path)
+    if (conv_composed["status"] != "PASS_COMPOSED_MAIN_CONVERSATE_TAG_STORE_C" or
+            conv_composed["cases"] != 9 or
+            len(conv_composed["sources"]) != 4 or
+            conv_composed["source_complete"] or conv_composed["flashable"]):
+        raise RuntimeError("Apollo Main composed Conversate tag-store replay changed")
+    for source in conv_composed["sources"]:
+        file_checked(source["path"], source["sha256"])
+    images["apollo_main"]["conversate_tag_store_composed"] = conv_composed_ref
+    images["apollo_main"]["remaining_gate"].append(
+        "Composed Conversate tag-store replay passes nine stock/C cases through action, add, node creation and conversion. Helper behavior and whole Main image remain open.")
+    conv_ui_path = G2 / "build/c-firmware/20261016/main-conversate-ui-settings-5b133c/receipt.json"
+    conv_ui, conv_ui_ref = receipt(conv_ui_path)
+    if (conv_ui["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_UI_SETTINGS_INTEGRATION" or
+            conv_ui["oracle_cases"] != 30 or
+            conv_ui["native_body_bytes"] != 194 or
+            conv_ui["unresolved_before"] != 130 or
+            conv_ui["unresolved_after"] != 128 or
+            conv_ui["removed_imports"] != ["audio_conversate_apply_config_5b133c",
+                                           "audio_conversate_machine_context_200e3aec"] or
+            conv_ui["new_imports"] or
+            conv_ui["source_complete"] or conv_ui["flashable"]):
+        raise RuntimeError("Apollo Main Conversate UI settings integration changed")
+    conv_ui_candidate = file_checked(conv_ui["candidate_object"]["path"],
+                                     conv_ui["candidate_object"]["sha256"])
+    conv_ui_unresolved = undefined(ROOT / conv_ui_candidate["path"])
+    if conv_ui_unresolved != sorted(set(conv_convert_unresolved) -
+                                    set(conv_ui["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate UI settings import frontier changed")
+    images["apollo_main"]["candidate"] = conv_ui_candidate
+    images["apollo_main"]["conversate_ui_settings_5b133c"] = conv_ui_ref
+    images["apollo_main"]["unresolved_count"] = 128
+    images["apollo_main"]["unresolved_symbols"] = conv_ui_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate UI settings update 0x5b133c passes 30 native/C cases and sources adjacent UI/machine RAM cells. Startup initialization and whole Main coverage remain.")
+    conv_config_composed_path = G2 / "build/c-firmware/20261016/main-conversate-app-config-composed/receipt.json"
+    conv_config_composed, conv_config_composed_ref = receipt(conv_config_composed_path)
+    if (conv_config_composed["status"] != "PASS_COMPOSED_MAIN_CONVERSATE_APP_CONFIG_C" or
+            conv_config_composed["cases"] != 7 or
+            len(conv_config_composed["sources"]) != 2 or
+            conv_config_composed["source_complete"] or conv_config_composed["flashable"]):
+        raise RuntimeError("Apollo Main composed Conversate app-config replay changed")
+    for source in conv_config_composed["sources"]:
+        file_checked(source["path"], source["sha256"])
+    images["apollo_main"]["conversate_app_config_composed"] = conv_config_composed_ref
+    images["apollo_main"]["remaining_gate"].append(
+        "Composed Conversate app-config replay passes seven stock/C cases through config copy and UI settings update. Startup and whole Main image remain open.")
+    conv_finish_path = G2 / "build/c-firmware/20261016/main-conversate-prep-note-finish-5b476a/receipt.json"
+    conv_finish, conv_finish_ref = receipt(conv_finish_path)
+    if (conv_finish["status"] != "PASS_DIRECT_MAIN_CONVERSATE_PREP_NOTE_FINISH_INTEGRATION" or
+            conv_finish["oracle_cases"] != 7 or
+            conv_finish["native_body_bytes"] != 6 or
+            conv_finish["native_read_address"] != "0x200d86cc" or
+            conv_finish["unresolved_before"] != 128 or
+            conv_finish["unresolved_after"] != 127 or
+            conv_finish["removed_imports"] != ["audio_conversate_prep_note_finish_5b476a"] or
+            conv_finish["new_imports"] or
+            conv_finish["source_complete"] or conv_finish["flashable"]):
+        raise RuntimeError("Apollo Main Conversate prep-note accessor integration changed")
+    conv_finish_candidate = file_checked(conv_finish["candidate_object"]["path"],
+                                         conv_finish["candidate_object"]["sha256"])
+    conv_finish_unresolved = undefined(ROOT / conv_finish_candidate["path"])
+    if conv_finish_unresolved != sorted(set(conv_ui_unresolved) -
+                                        set(conv_finish["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate prep-note accessor import frontier changed")
+    images["apollo_main"]["candidate"] = conv_finish_candidate
+    images["apollo_main"]["conversate_prep_note_finish_5b476a"] = conv_finish_ref
+    images["apollo_main"]["unresolved_count"] = 127
+    images["apollo_main"]["unresolved_symbols"] = conv_finish_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate prep-note finish-byte accessor 0x5b476a matches seven direct stock/C cases. Wider prep-note and Main coverage remain.")
+    conv_list_update_path = G2 / "build/c-firmware/20261016/main-conversate-prep-note-list-update-5b4378/receipt.json"
+    conv_list_update, conv_list_update_ref = receipt(conv_list_update_path)
+    if (conv_list_update["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_PREP_NOTE_LIST_UPDATE_INTEGRATION" or
+            conv_list_update["oracle_cases"] != 20 or
+            conv_list_update["native_body_bytes"] != 92 or
+            conv_list_update["unresolved_before"] != 127 or
+            conv_list_update["unresolved_after"] != 125 or
+            conv_list_update["removed_imports"] != ["audio_conversate_prep_note_list_update_5b4378",
+                                             "audio_conversate_reply_status_200d6b84"] or
+            conv_list_update["new_imports"] or
+            conv_list_update["reply_list_ram"]["list_bytes"] != 2728 or
+            conv_list_update["source_complete"] or conv_list_update["flashable"]):
+        raise RuntimeError("Apollo Main Conversate prep-note list integration changed")
+    conv_list_update_candidate = file_checked(conv_list_update["candidate_object"]["path"],
+                                              conv_list_update["candidate_object"]["sha256"])
+    conv_list_update_unresolved = undefined(ROOT / conv_list_update_candidate["path"])
+    if conv_list_update_unresolved != sorted(set(conv_finish_unresolved) -
+                                             set(conv_list_update["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate prep-note list import frontier changed")
+    images["apollo_main"]["candidate"] = conv_list_update_candidate
+    images["apollo_main"]["conversate_prep_note_list_update_5b4378"] = conv_list_update_ref
+    images["apollo_main"]["unresolved_count"] = 125
+    images["apollo_main"]["unresolved_symbols"] = conv_list_update_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate prep-note list update 0x5b4378 passes 20 native/C cases and sources its adjacent reply/list RAM. Startup and wider Main behavior remain.")
+    conv_packet_update_path = G2 / "build/c-firmware/20261016/main-conversate-prep-note-packet-update-5b44d8/receipt.json"
+    conv_packet_update, conv_packet_update_ref = receipt(conv_packet_update_path)
+    if (conv_packet_update["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_PREP_NOTE_PACKET_UPDATE_INTEGRATION" or
+            conv_packet_update["oracle_cases"] != 55 or
+            conv_packet_update["native_body_bytes"] != 610 or
+            conv_packet_update["unresolved_before"] != 125 or
+            conv_packet_update["unresolved_after"] != 125 or
+            conv_packet_update["removed_imports"] != ["audio_conversate_prep_note_packet_update_5b44d8"] or
+            conv_packet_update["new_imports"] != ["audio_conversate_prep_note_text_commit_5b4164"] or
+            conv_packet_update["source_complete"] or conv_packet_update["flashable"]):
+        raise RuntimeError("Apollo Main Conversate prep-note packet update integration changed")
+    conv_packet_update_candidate = file_checked(conv_packet_update["candidate_object"]["path"],
+                                                conv_packet_update["candidate_object"]["sha256"])
+    conv_packet_update_unresolved = undefined(ROOT / conv_packet_update_candidate["path"])
+    if conv_packet_update_unresolved != sorted((set(conv_list_update_unresolved) -
+                                                set(conv_packet_update["removed_imports"])) |
+                                               set(conv_packet_update["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate prep-note packet import frontier changed")
+    images["apollo_main"]["candidate"] = conv_packet_update_candidate
+    images["apollo_main"]["conversate_prep_note_packet_update_5b44d8"] = conv_packet_update_ref
+    images["apollo_main"]["unresolved_count"] = 125
+    images["apollo_main"]["unresolved_symbols"] = conv_packet_update_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate prep-note packet update 0x5b44d8 passes 55 bounded stock/C cases. Its text commit lower 0x5b4164 and wider Main behavior remain.")
+    conv_text_commit_path = G2 / "build/c-firmware/20261016/main-conversate-prep-note-text-commit-5b4164/receipt.json"
+    conv_text_commit, conv_text_commit_ref = receipt(conv_text_commit_path)
+    if (conv_text_commit["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_PREP_NOTE_TEXT_COMMIT_INTEGRATION" or
+            conv_text_commit["oracle_cases"] != 35 or
+            conv_text_commit["native_body_bytes"] != 90 or
+            conv_text_commit["unresolved_before"] != 125 or
+            conv_text_commit["unresolved_after"] != 125 or
+            conv_text_commit["removed_imports"] != ["audio_conversate_prep_note_text_commit_5b4164"] or
+            conv_text_commit["new_imports"] != ["audio_conversate_prep_note_layout_parse_5b4000"] or
+            conv_text_commit["source_complete"] or conv_text_commit["flashable"]):
+        raise RuntimeError("Apollo Main Conversate prep-note text commit integration changed")
+    conv_text_commit_candidate = file_checked(conv_text_commit["candidate_object"]["path"],
+                                              conv_text_commit["candidate_object"]["sha256"])
+    conv_text_commit_unresolved = undefined(ROOT / conv_text_commit_candidate["path"])
+    if conv_text_commit_unresolved != sorted((set(conv_packet_update_unresolved) -
+                                              set(conv_text_commit["removed_imports"])) |
+                                             set(conv_text_commit["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate prep-note text commit import frontier changed")
+    images["apollo_main"]["candidate"] = conv_text_commit_candidate
+    images["apollo_main"]["conversate_prep_note_text_commit_5b4164"] = conv_text_commit_ref
+    images["apollo_main"]["unresolved_count"] = 125
+    images["apollo_main"]["unresolved_symbols"] = conv_text_commit_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate prep-note layout-rebuild guard 0x5b4164 passes 35 bounded stock/C cases. Layout parse 0x5b4000 and wider Main behavior remain.")
+    conv_layout_parse_path = G2 / "build/c-firmware/20261016/main-conversate-prep-note-layout-parse-5b4000/receipt.json"
+    conv_layout_parse, conv_layout_parse_ref = receipt(conv_layout_parse_path)
+    if (conv_layout_parse["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_PREP_NOTE_LAYOUT_PARSE_INTEGRATION" or
+            conv_layout_parse["oracle_cases"] != 45 or
+            conv_layout_parse["native_body_bytes"] != 356 or
+            conv_layout_parse["unresolved_before"] != 125 or
+            conv_layout_parse["unresolved_after"] != 125 or
+            conv_layout_parse["removed_imports"] != ["audio_conversate_prep_note_layout_parse_5b4000"] or
+            conv_layout_parse["new_imports"] != ["audio_conversate_prep_note_measure_line_5b3f94"] or
+            conv_layout_parse["source_complete"] or conv_layout_parse["flashable"]):
+        raise RuntimeError("Apollo Main Conversate prep-note layout parse integration changed")
+    conv_layout_parse_candidate = file_checked(conv_layout_parse["candidate_object"]["path"],
+                                              conv_layout_parse["candidate_object"]["sha256"])
+    conv_layout_parse_unresolved = undefined(ROOT / conv_layout_parse_candidate["path"])
+    if conv_layout_parse_unresolved != sorted((set(conv_text_commit_unresolved) -
+                                              set(conv_layout_parse["removed_imports"])) |
+                                             set(conv_layout_parse["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate prep-note layout parse import frontier changed")
+    images["apollo_main"]["candidate"] = conv_layout_parse_candidate
+    images["apollo_main"]["conversate_prep_note_layout_parse_5b4000"] = conv_layout_parse_ref
+    images["apollo_main"]["unresolved_count"] = 125
+    images["apollo_main"]["unresolved_symbols"] = conv_layout_parse_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate prep-note line layout 0x5b4000 passes 45 bounded stock/C cases. Line measurement 0x5b3f94 and wider Main behavior remain.")
+    conv_measure_path = G2 / "build/c-firmware/20261016/main-conversate-prep-note-measure-line-5b3f94/receipt.json"
+    conv_measure, conv_measure_ref = receipt(conv_measure_path)
+    if (conv_measure["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_PREP_NOTE_MEASURE_LINE_INTEGRATION" or
+            conv_measure["oracle_cases"] != 84 or
+            conv_measure["native_body_bytes"] != 108 or
+            conv_measure["unresolved_before"] != 125 or
+            conv_measure["unresolved_after"] != 125 or
+            conv_measure["removed_imports"] != ["audio_conversate_prep_note_measure_line_5b3f94"] or
+            conv_measure["new_imports"] != ["audio_conversate_prep_note_utf8_prefix_5b3ef8"] or
+            conv_measure["source_complete"] or conv_measure["flashable"]):
+        raise RuntimeError("Apollo Main Conversate prep-note measure integration changed")
+    conv_measure_candidate = file_checked(conv_measure["candidate_object"]["path"],
+                                          conv_measure["candidate_object"]["sha256"])
+    conv_measure_unresolved = undefined(ROOT / conv_measure_candidate["path"])
+    if conv_measure_unresolved != sorted((set(conv_layout_parse_unresolved) -
+                                          set(conv_measure["removed_imports"])) |
+                                         set(conv_measure["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate prep-note measure import frontier changed")
+    images["apollo_main"]["candidate"] = conv_measure_candidate
+    images["apollo_main"]["conversate_prep_note_measure_line_5b3f94"] = conv_measure_ref
+    images["apollo_main"]["unresolved_count"] = 125
+    images["apollo_main"]["unresolved_symbols"] = conv_measure_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate prep-note line measurement 0x5b3f94 passes 84 bounded stock/C cases and pins the ring font cell. UTF-8 fallback 0x5b3ef8 and wider Main behavior remain.")
+    conv_utf8_path = G2 / "build/c-firmware/20261016/main-conversate-prep-note-utf8-prefix-5b3ef8/receipt.json"
+    conv_utf8, conv_utf8_ref = receipt(conv_utf8_path)
+    if (conv_utf8["status"] != "PASS_DIRECT_MAIN_CONVERSATE_PREP_NOTE_UTF8_PREFIX_INTEGRATION" or
+            conv_utf8["oracle_cases"] != 117 or
+            conv_utf8["native_body_bytes"] != 156 or
+            conv_utf8["unresolved_before"] != 125 or
+            conv_utf8["unresolved_after"] != 124 or
+            conv_utf8["removed_imports"] != ["audio_conversate_prep_note_utf8_prefix_5b3ef8"] or
+            conv_utf8["new_imports"] or
+            conv_utf8["source_complete"] or conv_utf8["flashable"]):
+        raise RuntimeError("Apollo Main Conversate prep-note UTF-8 integration changed")
+    conv_utf8_candidate = file_checked(conv_utf8["candidate_object"]["path"],
+                                       conv_utf8["candidate_object"]["sha256"])
+    conv_utf8_unresolved = undefined(ROOT / conv_utf8_candidate["path"])
+    if conv_utf8_unresolved != sorted(set(conv_measure_unresolved) -
+                                     set(conv_utf8["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate prep-note UTF-8 import frontier changed")
+    images["apollo_main"]["candidate"] = conv_utf8_candidate
+    images["apollo_main"]["conversate_prep_note_utf8_prefix_5b3ef8"] = conv_utf8_ref
+    images["apollo_main"]["unresolved_count"] = 124
+    images["apollo_main"]["unresolved_symbols"] = conv_utf8_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate prep-note UTF-8 prefix 0x5b3ef8 passes 117 direct stock/C cases and removes its import. Startup and wider Main behavior remain.")
+    conv_transcribe_path = G2 / "build/c-firmware/20261016/main-conversate-transcribe-update-5b41be/receipt.json"
+    conv_transcribe, conv_transcribe_ref = receipt(conv_transcribe_path)
+    if (conv_transcribe["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_TRANSCRIBE_UPDATE_INTEGRATION" or
+            conv_transcribe["oracle_cases"] != 26 or
+            conv_transcribe["native_body_bytes"] != 336 or
+            conv_transcribe["unresolved_before"] != 124 or
+            conv_transcribe["unresolved_after"] != 123 or
+            conv_transcribe["removed_imports"] != ["audio_conversate_transcribe_update_5b41be"] or
+            conv_transcribe["new_imports"] or
+            conv_transcribe["transcribe_ram"]["output_bytes"] != 0x1008 or
+            conv_transcribe["source_complete"] or conv_transcribe["flashable"]):
+        raise RuntimeError("Apollo Main Conversate transcribe integration changed")
+    conv_transcribe_candidate = file_checked(conv_transcribe["candidate_object"]["path"],
+                                            conv_transcribe["candidate_object"]["sha256"])
+    conv_transcribe_unresolved = undefined(ROOT / conv_transcribe_candidate["path"])
+    if conv_transcribe_unresolved != sorted(set(conv_utf8_unresolved) -
+                                           set(conv_transcribe["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate transcribe import frontier changed")
+    images["apollo_main"]["candidate"] = conv_transcribe_candidate
+    images["apollo_main"]["conversate_transcribe_update_5b41be"] = conv_transcribe_ref
+    images["apollo_main"]["unresolved_count"] = 123
+    images["apollo_main"]["unresolved_symbols"] = conv_transcribe_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate transcribe ring update 0x5b41be passes 26 bounded stock/C cases with source-owned ring-adjacent scratch, length and flag RAM. Startup and wider Main behavior remain.")
+    conv_enter_path = G2 / "build/c-firmware/20261016/main-conversate-enter-loading-5b57ac/receipt.json"
+    conv_enter, conv_enter_ref = receipt(conv_enter_path)
+    if (conv_enter["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_ENTER_LOADING_INTEGRATION" or
+            conv_enter["oracle_cases"] != 35 or
+            conv_enter["native_body_bytes"] != 218 or
+            conv_enter["unresolved_before"] != 123 or
+            conv_enter["unresolved_after"] != 123 or
+            conv_enter["removed_imports"] != ["audio_conversate_enter_loading_5b57ac"] or
+            conv_enter["new_imports"] != ["audio_conversate_start_request_5b1f2e"] or
+            conv_enter["source_complete"] or conv_enter["flashable"]):
+        raise RuntimeError("Apollo Main Conversate start-request integration changed")
+    conv_enter_candidate = file_checked(conv_enter["candidate_object"]["path"],
+                                        conv_enter["candidate_object"]["sha256"])
+    conv_enter_unresolved = undefined(ROOT / conv_enter_candidate["path"])
+    if conv_enter_unresolved != sorted((set(conv_transcribe_unresolved) -
+                                       set(conv_enter["removed_imports"])) |
+                                      set(conv_enter["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate start-request import frontier changed")
+    images["apollo_main"]["candidate"] = conv_enter_candidate
+    images["apollo_main"]["conversate_enter_loading_5b57ac"] = conv_enter_ref
+    images["apollo_main"]["unresolved_count"] = 123
+    images["apollo_main"]["unresolved_symbols"] = conv_enter_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate start-request selection 0x5b57ac passes 35 bounded stock/C cases. Request construction 0x5b1f2e and wider Main behavior remain.")
+    conv_start_path = G2 / "build/c-firmware/20261016/main-conversate-start-request-5b1f2e/receipt.json"
+    conv_start, conv_start_ref = receipt(conv_start_path)
+    if (conv_start["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_START_REQUEST_INTEGRATION" or
+            conv_start["oracle_cases"] != 120 or
+            conv_start["native_body_bytes"] != 224 or
+            conv_start["unresolved_before"] != 123 or
+            conv_start["unresolved_after"] != 122 or
+            conv_start["removed_imports"] != ["audio_conversate_start_request_5b1f2e"] or
+            conv_start["new_imports"] or
+            conv_start["source_complete"] or conv_start["flashable"]):
+        raise RuntimeError("Apollo Main Conversate request construction integration changed")
+    conv_start_candidate = file_checked(conv_start["candidate_object"]["path"],
+                                        conv_start["candidate_object"]["sha256"])
+    conv_start_unresolved = undefined(ROOT / conv_start_candidate["path"])
+    if conv_start_unresolved != sorted(set(conv_enter_unresolved) -
+                                      set(conv_start["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate request construction import frontier changed")
+    images["apollo_main"]["candidate"] = conv_start_candidate
+    images["apollo_main"]["conversate_start_request_5b1f2e"] = conv_start_ref
+    images["apollo_main"]["unresolved_count"] = 122
+    images["apollo_main"]["unresolved_symbols"] = conv_start_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate prep-note selection encoder 0x5b1f2e passes 120 bounded stock/C cases and removes its import. Startup and wider Main behavior remain.")
+    conv_audio_aliases_path = G2 / "build/c-firmware/20261016/main-conversate-audio-manager-aliases/receipt.json"
+    conv_audio_aliases, conv_audio_aliases_ref = receipt(conv_audio_aliases_path)
+    if (conv_audio_aliases["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_AUDIO_MANAGER_ALIASES_INTEGRATION" or
+            conv_audio_aliases["unresolved_before"] != 122 or
+            conv_audio_aliases["unresolved_after"] != 120 or
+            conv_audio_aliases["removed_imports"] != ["audio_conversate_page_hide_54f50e",
+                                                       "audio_conversate_page_show_54f380"] or
+            conv_audio_aliases["new_imports"] or
+            conv_audio_aliases["source_complete"] or conv_audio_aliases["flashable"]):
+        raise RuntimeError("Apollo Main Conversate audio-manager aliases changed")
+    conv_audio_aliases_candidate = file_checked(conv_audio_aliases["candidate_object"]["path"],
+                                                conv_audio_aliases["candidate_object"]["sha256"])
+    conv_audio_aliases_unresolved = undefined(ROOT / conv_audio_aliases_candidate["path"])
+    if conv_audio_aliases_unresolved != sorted(set(conv_start_unresolved) -
+                                              set(conv_audio_aliases["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate audio-manager alias frontier changed")
+    images["apollo_main"]["candidate"] = conv_audio_aliases_candidate
+    images["apollo_main"]["conversate_audio_manager_aliases"] = conv_audio_aliases_ref
+    images["apollo_main"]["unresolved_count"] = 120
+    images["apollo_main"]["unresolved_symbols"] = conv_audio_aliases_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate acquire/release calls bind directly to existing C audio-manager bodies at native 0x54f380 and 0x54f50e. Underlying provider and wider Main gates remain.")
+    conv_context_path = G2 / "build/c-firmware/20261016/main-conversate-context-ram/receipt.json"
+    conv_context, conv_context_ref = receipt(conv_context_path)
+    if (conv_context["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_CONTEXT_RAM_INTEGRATION" or
+            conv_context["callback_oracle_cases"] != 80 or
+            conv_context["native_address"] != "0x200d5bd8" or
+            conv_context["size"] != 0xfac or
+            conv_context["next_region_address"] != "0x200d6b84" or
+            conv_context["unresolved_before"] != 120 or
+            conv_context["unresolved_after"] != 119 or
+            conv_context["removed_imports"] != ["audio_conversate_context_200d5bd8"] or
+            conv_context["new_imports"] or
+            conv_context["source_complete"] or conv_context["flashable"]):
+        raise RuntimeError("Apollo Main Conversate context RAM integration changed")
+    conv_context_candidate = file_checked(conv_context["candidate_object"]["path"],
+                                          conv_context["candidate_object"]["sha256"])
+    conv_context_unresolved = undefined(ROOT / conv_context_candidate["path"])
+    if conv_context_unresolved != sorted(set(conv_audio_aliases_unresolved) -
+                                        set(conv_context["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate context import frontier changed")
+    images["apollo_main"]["candidate"] = conv_context_candidate
+    images["apollo_main"]["conversate_context_ram_200d5bd8"] = conv_context_ref
+    images["apollo_main"]["unresolved_count"] = 119
+    images["apollo_main"]["unresolved_symbols"] = conv_context_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate decoded-message context 0x200d5bd8..0x200d6b83 is C-owned and contiguous with reply-status RAM; its common callback passes 80 bounded stock/C cases. Startup and full lifetime remain open.")
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "121 current imports", "119 current imports")
+    conv_reset_path = G2 / "build/c-firmware/20261016/main-conversate-data-reset-helpers/receipt.json"
+    conv_reset, conv_reset_ref = receipt(conv_reset_path)
+    if (conv_reset["status"] != "PASS_DIRECT_MAIN_CONVERSATE_DATA_RESET_HELPERS_INTEGRATION" or
+            conv_reset["oracle_cases"] != 60 or
+            len(conv_reset["native_bodies"]) != 6 or
+            len(conv_reset["provider_symbols"]) != 6 or
+            conv_reset["unresolved_before"] != 119 or
+            conv_reset["unresolved_after"] != 119 or
+            conv_reset["removed_imports"] or conv_reset["new_imports"] or
+            conv_reset["source_complete"] or conv_reset["flashable"]):
+        raise RuntimeError("Apollo Main Conversate reset helpers changed")
+    conv_reset_candidate = file_checked(conv_reset["candidate_object"]["path"],
+                                        conv_reset["candidate_object"]["sha256"])
+    conv_reset_unresolved = undefined(ROOT / conv_reset_candidate["path"])
+    if conv_reset_unresolved != conv_context_unresolved:
+        raise RuntimeError("Apollo Main Conversate reset helpers import frontier changed")
+    images["apollo_main"]["candidate"] = conv_reset_candidate
+    images["apollo_main"]["conversate_data_reset_helpers"] = conv_reset_ref
+    images["apollo_main"]["unresolved_count"] = 119
+    images["apollo_main"]["unresolved_symbols"] = conv_reset_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Six Conversate data clear/accessor leaves pass 60 direct stock/C cases and are linked. Wider callback composition and startup remain open.")
+    conv_ui_callback_ram_path = G2 / "build/c-firmware/20261016/main-conversate-ui-callback-ram/receipt.json"
+    conv_ui_callback_ram, conv_ui_callback_ram_ref = receipt(conv_ui_callback_ram_path)
+    if (conv_ui_callback_ram["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_UI_CALLBACK_RAM_INTEGRATION" or
+            conv_ui_callback_ram["registry_context_address"] != "0x200004d8" or
+            conv_ui_callback_ram["registry_context_accessed_prefix"] != 8 or
+            conv_ui_callback_ram["start_tick_address"] != "0x20074390" or
+            conv_ui_callback_ram["app_id_address"] != "0x200743a0" or
+            conv_ui_callback_ram["unresolved_before"] != 119 or
+            conv_ui_callback_ram["unresolved_after"] != 118 or
+            conv_ui_callback_ram["removed_imports"] != ["audio_uart_registry_context_200004d8"] or
+            conv_ui_callback_ram["new_imports"] or
+            conv_ui_callback_ram["source_complete"] or conv_ui_callback_ram["flashable"]):
+        raise RuntimeError("Apollo Main Conversate UI callback RAM changed")
+    conv_ui_callback_ram_candidate = file_checked(conv_ui_callback_ram["candidate_object"]["path"],
+                                                 conv_ui_callback_ram["candidate_object"]["sha256"])
+    conv_ui_callback_ram_unresolved = undefined(ROOT / conv_ui_callback_ram_candidate["path"])
+    if conv_ui_callback_ram_unresolved != sorted(set(conv_reset_unresolved) -
+                                                set(conv_ui_callback_ram["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate UI callback RAM frontier changed")
+    images["apollo_main"]["candidate"] = conv_ui_callback_ram_candidate
+    images["apollo_main"]["conversate_ui_callback_ram"] = conv_ui_callback_ram_ref
+    images["apollo_main"]["unresolved_count"] = 118
+    images["apollo_main"]["unresolved_symbols"] = conv_ui_callback_ram_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "119 current imports", "118 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate UI callback owns the observed eight-byte registry-context prefix and two four-byte tick/app cells. Full context allocation and startup remain open.")
+    conv_ui_event_path = G2 / "build/c-firmware/20261016/main-conversate-ui-event-5b06aa/receipt.json"
+    conv_ui_event, conv_ui_event_ref = receipt(conv_ui_event_path)
+    if (conv_ui_event["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_UI_EVENT_INTEGRATION" or
+            conv_ui_event["native_body"] != "0x5b06aa..0x5b08a1" or
+            conv_ui_event["oracle_cases"] != 210 or
+            conv_ui_event["unresolved_before"] != 118 or
+            conv_ui_event["unresolved_after"] != 125 or
+            conv_ui_event["removed_imports"] != ["audio_uart_registry_callback_5b06aa"] or
+            len(conv_ui_event["new_imports"]) != 8 or
+            conv_ui_event["source_complete"] or conv_ui_event["flashable"]):
+        raise RuntimeError("Apollo Main Conversate UI event callback changed")
+    conv_ui_event_candidate = file_checked(conv_ui_event["candidate_object"]["path"],
+                                           conv_ui_event["candidate_object"]["sha256"])
+    conv_ui_event_unresolved = undefined(ROOT / conv_ui_event_candidate["path"])
+    if conv_ui_event_unresolved != sorted((set(conv_ui_callback_ram_unresolved) -
+                                          set(conv_ui_event["removed_imports"])) |
+                                         set(conv_ui_event["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate UI event frontier changed")
+    images["apollo_main"]["candidate"] = conv_ui_event_candidate
+    images["apollo_main"]["conversate_ui_event_callback"] = conv_ui_event_ref
+    images["apollo_main"]["unresolved_count"] = 125
+    images["apollo_main"]["unresolved_symbols"] = conv_ui_event_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "118 current imports", "125 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate UI event callback passes 210 bounded stock/C cases and is linked; eight child providers are now explicit imports. Incidental return register and wider composition remain open.")
+    conv_ui_stop_path = G2 / "build/c-firmware/20261016/main-conversate-ui-stop-5b03d8/receipt.json"
+    conv_ui_stop, conv_ui_stop_ref = receipt(conv_ui_stop_path)
+    if (conv_ui_stop["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_UI_STOP_INTEGRATION" or
+            conv_ui_stop["native_body"] != "0x5b03d8..0x5b0475" or
+            conv_ui_stop["oracle_cases"] != 90 or
+            conv_ui_stop["unresolved_before"] != 125 or
+            conv_ui_stop["unresolved_after"] != 124 or
+            conv_ui_stop["removed_imports"] != ["audio_conversate_ui_stop_5b03d8"] or
+            conv_ui_stop["new_imports"] or
+            conv_ui_stop["source_complete"] or conv_ui_stop["flashable"]):
+        raise RuntimeError("Apollo Main Conversate UI stop changed")
+    conv_ui_stop_candidate = file_checked(conv_ui_stop["candidate_object"]["path"],
+                                          conv_ui_stop["candidate_object"]["sha256"])
+    conv_ui_stop_unresolved = undefined(ROOT / conv_ui_stop_candidate["path"])
+    if conv_ui_stop_unresolved != sorted(set(conv_ui_event_unresolved) -
+                                        set(conv_ui_stop["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate UI stop frontier changed")
+    images["apollo_main"]["candidate"] = conv_ui_stop_candidate
+    images["apollo_main"]["conversate_ui_stop"] = conv_ui_stop_ref
+    images["apollo_main"]["unresolved_count"] = 124
+    images["apollo_main"]["unresolved_symbols"] = conv_ui_stop_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "125 current imports", "124 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate heartbeat stop/check passes 90 bounded stock/C cases and is linked; seven UI event child providers remain open.")
+    conv_ui_cleanup_path = G2 / "build/c-firmware/20261016/main-conversate-ui-cleanup-5b3d62/receipt.json"
+    conv_ui_cleanup, conv_ui_cleanup_ref = receipt(conv_ui_cleanup_path)
+    if (conv_ui_cleanup["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_UI_CLEANUP_INTEGRATION" or
+            conv_ui_cleanup["native_body"] != "0x5b3d62..0x5b3d85" or
+            conv_ui_cleanup["oracle_cases"] != 16 or
+            conv_ui_cleanup["unresolved_before"] != 124 or
+            conv_ui_cleanup["unresolved_after"] != 126 or
+            conv_ui_cleanup["removed_imports"] != ["audio_conversate_ui_cleanup_5b3d62"] or
+            len(conv_ui_cleanup["new_imports"]) != 3 or
+            conv_ui_cleanup["source_complete"] or conv_ui_cleanup["flashable"]):
+        raise RuntimeError("Apollo Main Conversate UI cleanup changed")
+    conv_ui_cleanup_candidate = file_checked(conv_ui_cleanup["candidate_object"]["path"],
+                                             conv_ui_cleanup["candidate_object"]["sha256"])
+    conv_ui_cleanup_unresolved = undefined(ROOT / conv_ui_cleanup_candidate["path"])
+    if conv_ui_cleanup_unresolved != sorted((set(conv_ui_stop_unresolved) -
+                                            set(conv_ui_cleanup["removed_imports"])) |
+                                           set(conv_ui_cleanup["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate UI cleanup frontier changed")
+    images["apollo_main"]["candidate"] = conv_ui_cleanup_candidate
+    images["apollo_main"]["conversate_ui_cleanup"] = conv_ui_cleanup_ref
+    images["apollo_main"]["unresolved_count"] = 126
+    images["apollo_main"]["unresolved_symbols"] = conv_ui_cleanup_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "124 current imports", "126 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate UI cleanup wrapper passes 16 bounded stock/C cases and is linked; three lower cleanup providers are newly explicit.")
+    images["apollo_main"]["remaining_gate"].append(
+        "Native Conversate UI deinit at 0x5b156c clears 0xac bytes from 0x20071368. Current linked state and settings sections cover the contiguous first 0x95 bytes through 0x200713fc, leaving 0x17 bytes through 0x20071413 unowned. Extend the RAM layout with overlap checks before composing deinit or its 0x20071404 field users.")
+    conv_ui_tail_path = G2 / "build/c-firmware/20261016/main-conversate-ui-deinit-tail-ram/receipt.json"
+    conv_ui_tail, conv_ui_tail_ref = receipt(conv_ui_tail_path)
+    if (conv_ui_tail["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_UI_DEINIT_RAM_SPAN" or
+            conv_ui_tail["clear_start"] != "0x20071368" or
+            conv_ui_tail["clear_size"] != 172 or
+            conv_ui_tail["unresolved_before"] != 126 or
+            conv_ui_tail["unresolved_after"] != 126 or
+            conv_ui_tail["removed_imports"] or conv_ui_tail["new_imports"] or
+            conv_ui_tail["source_complete"] or conv_ui_tail["flashable"]):
+        raise RuntimeError("Apollo Main Conversate UI deinit RAM span changed")
+    conv_ui_tail_candidate = file_checked(conv_ui_tail["candidate_object"]["path"],
+                                           conv_ui_tail["candidate_object"]["sha256"])
+    conv_ui_tail_unresolved = undefined(ROOT / conv_ui_tail_candidate["path"])
+    if conv_ui_tail_unresolved != conv_ui_cleanup_unresolved:
+        raise RuntimeError("Apollo Main Conversate UI deinit RAM frontier changed")
+    images["apollo_main"]["candidate"] = conv_ui_tail_candidate
+    images["apollo_main"]["conversate_ui_deinit_ram_span"] = conv_ui_tail_ref
+    images["apollo_main"]["remaining_gate"][-1] = (
+        "Native Conversate UI deinit at 0x5b156c clears 0xac bytes from 0x20071368; linked state, settings and tail sections now own that full observed span. Deinit behavior and full allocation beyond the observed clear remain open.")
+    conv_ui_deinit_path = G2 / "build/c-firmware/20261016/main-conversate-ui-exit-finalize-5b156c/receipt.json"
+    conv_ui_deinit, conv_ui_deinit_ref = receipt(conv_ui_deinit_path)
+    if (conv_ui_deinit["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_UI_DEINIT_INTEGRATION" or
+            conv_ui_deinit["native_body"] != "0x5b156c..0x5b15c3" or
+            conv_ui_deinit["oracle_cases"] != 15 or
+            conv_ui_deinit["unresolved_before"] != 126 or
+            conv_ui_deinit["unresolved_after"] != 126 or
+            conv_ui_deinit["removed_imports"] != ["audio_conversate_ui_exit_finalize_5b156c"] or
+            conv_ui_deinit["new_imports"] != ["audio_conversate_ui_deinit_child_5b3d04"] or
+            conv_ui_deinit["source_complete"] or conv_ui_deinit["flashable"]):
+        raise RuntimeError("Apollo Main Conversate UI deinit changed")
+    conv_ui_deinit_candidate = file_checked(conv_ui_deinit["candidate_object"]["path"],
+                                             conv_ui_deinit["candidate_object"]["sha256"])
+    conv_ui_deinit_unresolved = undefined(ROOT / conv_ui_deinit_candidate["path"])
+    if conv_ui_deinit_unresolved != sorted((set(conv_ui_tail_unresolved) -
+                                           set(conv_ui_deinit["removed_imports"])) |
+                                          set(conv_ui_deinit["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate UI deinit frontier changed")
+    images["apollo_main"]["candidate"] = conv_ui_deinit_candidate
+    images["apollo_main"]["conversate_ui_deinit"] = conv_ui_deinit_ref
+    images["apollo_main"]["unresolved_count"] = 126
+    images["apollo_main"]["unresolved_symbols"] = conv_ui_deinit_unresolved
+    images["apollo_main"]["remaining_gate"][-1] = (
+        "Native Conversate UI deinit 0x5b156c passes 15 bounded stock/C cases over the full observed 0xac-byte clear and is linked. Child 0x5b3d04, wider callback composition and allocation beyond that clear remain open.")
+    conv_timer_deinit_path = G2 / "build/c-firmware/20261016/main-conversate-ui-deinit-child-5b3d04/receipt.json"
+    conv_timer_deinit, conv_timer_deinit_ref = receipt(conv_timer_deinit_path)
+    if (conv_timer_deinit["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_TIMER_DEINIT_INTEGRATION" or
+            conv_timer_deinit["native_body"] != "0x5b3d04..0x5b3d61" or
+            conv_timer_deinit["oracle_cases"] != 20 or
+            conv_timer_deinit["unresolved_before"] != 126 or
+            conv_timer_deinit["unresolved_after"] != 127 or
+            conv_timer_deinit["removed_imports"] != ["audio_conversate_ui_deinit_child_5b3d04"] or
+            conv_timer_deinit["new_imports"] != ["audio_conversate_timer_clear_5b38cc", "audio_conversate_timer_remove_5b36be"] or
+            conv_timer_deinit["source_complete"] or conv_timer_deinit["flashable"]):
+        raise RuntimeError("Apollo Main Conversate timer deinit changed")
+    conv_timer_deinit_candidate = file_checked(conv_timer_deinit["candidate_object"]["path"],
+                                                conv_timer_deinit["candidate_object"]["sha256"])
+    conv_timer_deinit_unresolved = undefined(ROOT / conv_timer_deinit_candidate["path"])
+    if conv_timer_deinit_unresolved != sorted((set(conv_ui_deinit_unresolved) -
+                                              set(conv_timer_deinit["removed_imports"])) |
+                                             set(conv_timer_deinit["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate timer deinit frontier changed")
+    images["apollo_main"]["candidate"] = conv_timer_deinit_candidate
+    images["apollo_main"]["conversate_timer_deinit"] = conv_timer_deinit_ref
+    images["apollo_main"]["unresolved_count"] = 127
+    images["apollo_main"]["unresolved_symbols"] = conv_timer_deinit_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "126 current imports", "127 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate timer-manager deinit 0x5b3d04 passes 20 bounded stock/C cases and is linked; remove 0x5b36be and clear 0x5b38cc are now explicit lower contracts.")
+    conv_timer_clear_path = G2 / "build/c-firmware/20261016/main-conversate-timer-clear-5b38cc/receipt.json"
+    conv_timer_clear, conv_timer_clear_ref = receipt(conv_timer_clear_path)
+    if (conv_timer_clear["status"] != "PASS_DIRECT_MAIN_CONVERSATE_TIMER_CLEAR_INTEGRATION" or
+            conv_timer_clear["native_body"] != "0x5b38cc..0x5b38ed" or
+            conv_timer_clear["oracle_cases"] != 5 or
+            conv_timer_clear["ram_start"] != "0x20073a3c" or
+            conv_timer_clear["ram_size"] != 28 or
+            conv_timer_clear["unresolved_before"] != 127 or
+            conv_timer_clear["unresolved_after"] != 126 or
+            conv_timer_clear["removed_imports"] != ["audio_conversate_timer_clear_5b38cc"] or
+            conv_timer_clear["new_imports"] or
+            conv_timer_clear["source_complete"] or conv_timer_clear["flashable"]):
+        raise RuntimeError("Apollo Main Conversate timer clear changed")
+    conv_timer_clear_candidate = file_checked(conv_timer_clear["candidate_object"]["path"],
+                                               conv_timer_clear["candidate_object"]["sha256"])
+    conv_timer_clear_unresolved = undefined(ROOT / conv_timer_clear_candidate["path"])
+    if conv_timer_clear_unresolved != sorted(set(conv_timer_deinit_unresolved) -
+                                            set(conv_timer_clear["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate timer clear frontier changed")
+    images["apollo_main"]["candidate"] = conv_timer_clear_candidate
+    images["apollo_main"]["conversate_timer_clear"] = conv_timer_clear_ref
+    images["apollo_main"]["unresolved_count"] = 126
+    images["apollo_main"]["unresolved_symbols"] = conv_timer_clear_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "127 current imports", "126 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate timer-manager clear 0x5b38cc passes five direct stock/C RAM comparisons and is linked with a 0x1c-byte pinned RAM section. Timer removal and full timer-manager extent remain open.")
+    conv_timer_remove_path = G2 / "build/c-firmware/20261016/main-conversate-timer-remove-5b36be/receipt.json"
+    conv_timer_remove, conv_timer_remove_ref = receipt(conv_timer_remove_path)
+    if (conv_timer_remove["status"] != "PASS_DIRECT_MAIN_CONVERSATE_TIMER_REMOVE_INTEGRATION" or
+            conv_timer_remove["native_body"] != "0x5b36be..0x5b3717" or
+            conv_timer_remove["oracle_cases"] != 80 or
+            conv_timer_remove["callback_table"] != "0x75ea90..0x75eaaf" or
+            conv_timer_remove["callback_entries"] != 6 or
+            conv_timer_remove["unresolved_before"] != 126 or
+            conv_timer_remove["unresolved_after"] != 131 or
+            conv_timer_remove["removed_imports"] != ["audio_conversate_timer_remove_5b36be"] or
+            len(conv_timer_remove["new_imports"]) != 6 or
+            conv_timer_remove["source_complete"] or conv_timer_remove["flashable"]):
+        raise RuntimeError("Apollo Main Conversate timer callback dispatch changed")
+    conv_timer_remove_candidate = file_checked(conv_timer_remove["candidate_object"]["path"],
+                                                conv_timer_remove["candidate_object"]["sha256"])
+    conv_timer_remove_unresolved = undefined(ROOT / conv_timer_remove_candidate["path"])
+    if conv_timer_remove_unresolved != sorted((set(conv_timer_clear_unresolved) -
+                                              set(conv_timer_remove["removed_imports"])) |
+                                             set(conv_timer_remove["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate timer callback frontier changed")
+    images["apollo_main"]["candidate"] = conv_timer_remove_candidate
+    images["apollo_main"]["conversate_timer_remove"] = conv_timer_remove_ref
+    images["apollo_main"]["unresolved_count"] = 131
+    images["apollo_main"]["unresolved_symbols"] = conv_timer_remove_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "126 current imports", "131 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate timer callback dispatch 0x5b36be passes 80 bounded stock/C cases and is linked with its six-pointer source table at 0x75ea90. Six callback bodies and wider timer lifecycle remain open.")
+    conv_timer_stops_path = G2 / "build/c-firmware/20261016/main-conversate-timer-stop-wrappers/receipt.json"
+    conv_timer_stops, conv_timer_stops_ref = receipt(conv_timer_stops_path)
+    if (conv_timer_stops["status"] != "PASS_DIRECT_MAIN_CONVERSATE_TIMER_STOP_WRAPPERS_INTEGRATION" or
+            len(conv_timer_stops["native_bodies"]) != 2 or
+            conv_timer_stops["oracle_cases"] != 6 or
+            conv_timer_stops["unresolved_before"] != 131 or
+            conv_timer_stops["unresolved_after"] != 130 or
+            conv_timer_stops["removed_imports"] != ["audio_conversate_timer_1_stop_5b37c8", "audio_conversate_timer_2_stop_5b383c"] or
+            conv_timer_stops["new_imports"] != ["audio_conversate_timer_stop_5b35d0"] or
+            conv_timer_stops["source_complete"] or conv_timer_stops["flashable"]):
+        raise RuntimeError("Apollo Main Conversate timer stop wrappers changed")
+    conv_timer_stops_candidate = file_checked(conv_timer_stops["candidate_object"]["path"],
+                                               conv_timer_stops["candidate_object"]["sha256"])
+    conv_timer_stops_unresolved = undefined(ROOT / conv_timer_stops_candidate["path"])
+    if conv_timer_stops_unresolved != sorted((set(conv_timer_remove_unresolved) -
+                                             set(conv_timer_stops["removed_imports"])) |
+                                            set(conv_timer_stops["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate timer stop wrapper frontier changed")
+    images["apollo_main"]["candidate"] = conv_timer_stops_candidate
+    images["apollo_main"]["conversate_timer_stop_wrappers"] = conv_timer_stops_ref
+    images["apollo_main"]["unresolved_count"] = 130
+    images["apollo_main"]["unresolved_symbols"] = conv_timer_stops_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "131 current imports", "130 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate timer loading/selection stop wrappers pass six direct stock/C cases and are linked. Shared stop helper 0x5b35d0 and four callback bodies remain open.")
+    conv_timer_stop_path = G2 / "build/c-firmware/20261016/main-conversate-timer-stop-5b35d0/receipt.json"
+    conv_timer_stop, conv_timer_stop_ref = receipt(conv_timer_stop_path)
+    if (conv_timer_stop["status"] != "PASS_DIRECT_MAIN_CONVERSATE_TIMER_STOP_INTEGRATION" or
+            conv_timer_stop["native_body"] != "0x5b35d0..0x5b3627" or
+            conv_timer_stop["oracle_cases"] != 60 or
+            conv_timer_stop["unresolved_before"] != 130 or
+            conv_timer_stop["unresolved_after"] != 129 or
+            conv_timer_stop["removed_imports"] != ["audio_conversate_timer_stop_5b35d0"] or
+            conv_timer_stop["new_imports"] or
+            conv_timer_stop["source_complete"] or conv_timer_stop["flashable"]):
+        raise RuntimeError("Apollo Main Conversate shared timer stop changed")
+    conv_timer_stop_candidate = file_checked(conv_timer_stop["candidate_object"]["path"],
+                                              conv_timer_stop["candidate_object"]["sha256"])
+    conv_timer_stop_unresolved = undefined(ROOT / conv_timer_stop_candidate["path"])
+    if conv_timer_stop_unresolved != sorted(set(conv_timer_stops_unresolved) -
+                                           set(conv_timer_stop["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate shared timer stop frontier changed")
+    images["apollo_main"]["candidate"] = conv_timer_stop_candidate
+    images["apollo_main"]["conversate_timer_stop"] = conv_timer_stop_ref
+    images["apollo_main"]["unresolved_count"] = 129
+    images["apollo_main"]["unresolved_symbols"] = conv_timer_stop_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "130 current imports", "129 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Shared Conversate timer stop 0x5b35d0 passes 60 direct stock/C cases and is linked. Four timer table callback bodies and composed lifecycle remain open.")
+    conv_timer_3_stop_path = G2 / "build/c-firmware/20261016/main-conversate-timer-3-stop-5b38b6/receipt.json"
+    conv_timer_3_stop, conv_timer_3_stop_ref = receipt(conv_timer_3_stop_path)
+    if (conv_timer_3_stop["status"] != "PASS_DIRECT_MAIN_CONVERSATE_TIMER_3_STOP_INTEGRATION" or
+            conv_timer_3_stop["native_body"] != "0x5b38b6..0x5b38cb" or
+            conv_timer_3_stop["oracle_cases"] != 5 or
+            conv_timer_3_stop["unresolved_before"] != 129 or
+            conv_timer_3_stop["unresolved_after"] != 128 or
+            conv_timer_3_stop["removed_imports"] != ["audio_conversate_timer_3_stop_5b38b6"] or
+            conv_timer_3_stop["new_imports"] or
+            conv_timer_3_stop["source_complete"] or conv_timer_3_stop["flashable"]):
+        raise RuntimeError("Apollo Main Conversate auto-extend timer stop changed")
+    conv_timer_3_stop_candidate = file_checked(conv_timer_3_stop["candidate_object"]["path"],
+                                               conv_timer_3_stop["candidate_object"]["sha256"])
+    conv_timer_3_stop_unresolved = undefined(ROOT / conv_timer_3_stop_candidate["path"])
+    if conv_timer_3_stop_unresolved != sorted(set(conv_timer_stop_unresolved) -
+                                             set(conv_timer_3_stop["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate auto-extend timer stop frontier changed")
+    images["apollo_main"]["candidate"] = conv_timer_3_stop_candidate
+    images["apollo_main"]["conversate_timer_3_stop"] = conv_timer_3_stop_ref
+    images["apollo_main"]["unresolved_count"] = 128
+    images["apollo_main"]["unresolved_symbols"] = conv_timer_3_stop_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "129 current imports", "128 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate auto-extend timer stop 0x5b38b6 passes five direct stock/C cases and is linked. Three timer start callback bodies remain open.")
+    conv_timer_starts_path = G2 / "build/c-firmware/20261016/main-conversate-timer-start-callbacks/receipt.json"
+    conv_timer_starts, conv_timer_starts_ref = receipt(conv_timer_starts_path)
+    if (conv_timer_starts["status"] != "PASS_DIRECT_MAIN_CONVERSATE_TIMER_START_CALLBACKS_INTEGRATION" or
+            len(conv_timer_starts["native_bodies"]) != 3 or
+            conv_timer_starts["oracle_cases"] != 180 or
+            conv_timer_starts["unresolved_before"] != 128 or
+            conv_timer_starts["unresolved_after"] != 126 or
+            conv_timer_starts["removed_imports"] != ["audio_conversate_timer_1_start_5b3766", "audio_conversate_timer_2_start_5b37d8", "audio_conversate_timer_3_start_5b384c"] or
+            conv_timer_starts["new_imports"] != ["audio_conversate_timer_start_5b3570"] or
+            conv_timer_starts["source_complete"] or conv_timer_starts["flashable"]):
+        raise RuntimeError("Apollo Main Conversate timer start callbacks changed")
+    conv_timer_starts_candidate = file_checked(conv_timer_starts["candidate_object"]["path"],
+                                                conv_timer_starts["candidate_object"]["sha256"])
+    conv_timer_starts_unresolved = undefined(ROOT / conv_timer_starts_candidate["path"])
+    if conv_timer_starts_unresolved != sorted((set(conv_timer_3_stop_unresolved) -
+                                              set(conv_timer_starts["removed_imports"])) |
+                                             set(conv_timer_starts["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate timer start callback frontier changed")
+    images["apollo_main"]["candidate"] = conv_timer_starts_candidate
+    images["apollo_main"]["conversate_timer_start_callbacks"] = conv_timer_starts_ref
+    images["apollo_main"]["unresolved_count"] = 126
+    images["apollo_main"]["unresolved_symbols"] = conv_timer_starts_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "128 current imports", "126 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "All three Conversate timer start callbacks pass 180 direct stock/C cases and are linked. Shared timer start 0x5b3570 and composed lifecycle remain open.")
+    conv_timer_start_path = G2 / "build/c-firmware/20261016/main-conversate-timer-start-5b3570/receipt.json"
+    conv_timer_start, conv_timer_start_ref = receipt(conv_timer_start_path)
+    if (conv_timer_start["status"] != "PASS_DIRECT_MAIN_CONVERSATE_TIMER_START_INTEGRATION" or
+            conv_timer_start["native_body"] != "0x5b3570..0x5b35cf" or
+            conv_timer_start["oracle_cases"] != 600 or
+            conv_timer_start["unresolved_before"] != 126 or
+            conv_timer_start["unresolved_after"] != 125 or
+            conv_timer_start["removed_imports"] != ["audio_conversate_timer_start_5b3570"] or
+            conv_timer_start["new_imports"] or
+            conv_timer_start["source_complete"] or conv_timer_start["flashable"]):
+        raise RuntimeError("Apollo Main Conversate shared timer start changed")
+    conv_timer_start_candidate = file_checked(conv_timer_start["candidate_object"]["path"],
+                                               conv_timer_start["candidate_object"]["sha256"])
+    conv_timer_start_unresolved = undefined(ROOT / conv_timer_start_candidate["path"])
+    if conv_timer_start_unresolved != sorted(set(conv_timer_starts_unresolved) -
+                                            set(conv_timer_start["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate shared timer start frontier changed")
+    images["apollo_main"]["candidate"] = conv_timer_start_candidate
+    images["apollo_main"]["conversate_timer_start"] = conv_timer_start_ref
+    images["apollo_main"]["unresolved_count"] = 125
+    images["apollo_main"]["unresolved_symbols"] = conv_timer_start_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "126 current imports", "125 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Shared Conversate timer start 0x5b3570 passes 600 direct stock/C cases and is linked. Timer table branch has no unresolved callback/start/stop bodies; wider lifecycle and image gates remain open.")
+    conv_ui_init_path = G2 / "build/c-firmware/20261016/main-conversate-ui-init-5b14ce/receipt.json"
+    conv_ui_init, conv_ui_init_ref = receipt(conv_ui_init_path)
+    if (conv_ui_init["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_UI_INIT_INTEGRATION" or
+            conv_ui_init["native_body"] != "0x5b14ce..0x5b156b" or
+            conv_ui_init["oracle_cases"] != 45 or
+            conv_ui_init["unresolved_before"] != 125 or
+            conv_ui_init["unresolved_after"] != 126 or
+            conv_ui_init["removed_imports"] != ["audio_conversate_ui_start_5b14ce"] or
+            conv_ui_init["new_imports"] != ["audio_conversate_timer_init_5b3cba", "audio_conversate_ui_style_5b0ac4"] or
+            conv_ui_init["source_complete"] or conv_ui_init["flashable"]):
+        raise RuntimeError("Apollo Main Conversate UI init changed")
+    conv_ui_init_candidate = file_checked(conv_ui_init["candidate_object"]["path"],
+                                          conv_ui_init["candidate_object"]["sha256"])
+    conv_ui_init_unresolved = undefined(ROOT / conv_ui_init_candidate["path"])
+    if conv_ui_init_unresolved != sorted((set(conv_timer_start_unresolved) -
+                                         set(conv_ui_init["removed_imports"])) |
+                                        set(conv_ui_init["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate UI init frontier changed")
+    images["apollo_main"]["candidate"] = conv_ui_init_candidate
+    images["apollo_main"]["conversate_ui_init"] = conv_ui_init_ref
+    images["apollo_main"]["unresolved_count"] = 126
+    images["apollo_main"]["unresolved_symbols"] = conv_ui_init_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "125 current imports", "126 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate UI initialization 0x5b14ce passes 45 bounded stock/C cases and is linked. Style 0x5b0ac4, timer-manager init 0x5b3cba and wider UI composition remain open.")
+    conv_timer_init_path = G2 / "build/c-firmware/20261016/main-conversate-timer-init-5b3cba/receipt.json"
+    conv_timer_init, conv_timer_init_ref = receipt(conv_timer_init_path)
+    if (conv_timer_init["status"] != "PASS_COMPOSED_MAIN_CONVERSATE_TIMER_INIT_INTEGRATION" or
+            conv_timer_init["native_body"] != "0x5b3cba..0x5b3d03" or
+            conv_timer_init["oracle_cases"] != 60 or
+            conv_timer_init["unresolved_before"] != 126 or
+            conv_timer_init["unresolved_after"] != 125 or
+            conv_timer_init["removed_imports"] != ["audio_conversate_timer_init_5b3cba"] or
+            conv_timer_init["new_imports"] or
+            conv_timer_init["source_complete"] or conv_timer_init["flashable"]):
+        raise RuntimeError("Apollo Main Conversate timer-manager init changed")
+    conv_timer_init_candidate = file_checked(conv_timer_init["candidate_object"]["path"],
+                                              conv_timer_init["candidate_object"]["sha256"])
+    conv_timer_init_unresolved = undefined(ROOT / conv_timer_init_candidate["path"])
+    if conv_timer_init_unresolved != sorted(set(conv_ui_init_unresolved) -
+                                           set(conv_timer_init["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate timer-manager init frontier changed")
+    images["apollo_main"]["candidate"] = conv_timer_init_candidate
+    images["apollo_main"]["conversate_timer_init"] = conv_timer_init_ref
+    images["apollo_main"]["unresolved_count"] = 125
+    images["apollo_main"]["unresolved_symbols"] = conv_timer_init_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "126 current imports", "125 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate timer-manager init 0x5b3cba passes 60 composed stock/C cases with its clear leaf and is linked. UI style 0x5b0ac4 and wider UI composition remain open.")
+    conv_ui_style_path = G2 / "build/c-firmware/20261016/main-conversate-ui-style-5b0ac4/receipt.json"
+    conv_ui_style, conv_ui_style_ref = receipt(conv_ui_style_path)
+    if (conv_ui_style["status"] != "PASS_DIRECT_MAIN_CONVERSATE_UI_STYLE_INTEGRATION" or
+            conv_ui_style["native_body"] != "0x5b0ac4..0x5b0af5" or
+            conv_ui_style["oracle_cases"] != 27 or
+            conv_ui_style["unresolved_before"] != 125 or
+            conv_ui_style["unresolved_after"] != 124 or
+            conv_ui_style["removed_imports"] != ["audio_conversate_ui_style_5b0ac4"] or
+            conv_ui_style["new_imports"] or
+            conv_ui_style["source_complete"] or conv_ui_style["flashable"]):
+        raise RuntimeError("Apollo Main Conversate UI style changed")
+    conv_ui_style_candidate = file_checked(conv_ui_style["candidate_object"]["path"],
+                                             conv_ui_style["candidate_object"]["sha256"])
+    conv_ui_style_unresolved = undefined(ROOT / conv_ui_style_candidate["path"])
+    if conv_ui_style_unresolved != sorted(set(conv_timer_init_unresolved) -
+                                         set(conv_ui_style["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate UI style frontier changed")
+    images["apollo_main"]["candidate"] = conv_ui_style_candidate
+    images["apollo_main"]["conversate_ui_style"] = conv_ui_style_ref
+    images["apollo_main"]["unresolved_count"] = 124
+    images["apollo_main"]["unresolved_symbols"] = conv_ui_style_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "125 current imports", "124 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate UI style 0x5b0ac4 passes 27 direct stock/C cases and is linked. UI startup's direct children are source-linked; wider UI composition and image gates remain open.")
+    conv_ui_cancel_path = G2 / "build/c-firmware/20261016/main-conversate-ui-cancel-5b23ae/receipt.json"
+    conv_ui_cancel, conv_ui_cancel_ref = receipt(conv_ui_cancel_path)
+    if (conv_ui_cancel["status"] != "PASS_DIRECT_MAIN_CONVERSATE_UI_CANCEL_INTEGRATION" or
+            conv_ui_cancel["native_body"] != "0x5b23ae..0x5b23e3" or
+            conv_ui_cancel["native_ram_word"] != "0x20071404" or
+            conv_ui_cancel["oracle_cases"] != 105 or
+            conv_ui_cancel["unresolved_before"] != 124 or
+            conv_ui_cancel["unresolved_after"] != 123 or
+            conv_ui_cancel["removed_imports"] != ["audio_conversate_ui_cancel_5b23ae"] or
+            conv_ui_cancel["new_imports"] or
+            conv_ui_cancel["source_complete"] or conv_ui_cancel["flashable"]):
+        raise RuntimeError("Apollo Main Conversate UI cancel changed")
+    conv_ui_cancel_candidate = file_checked(conv_ui_cancel["candidate_object"]["path"],
+                                               conv_ui_cancel["candidate_object"]["sha256"])
+    conv_ui_cancel_unresolved = undefined(ROOT / conv_ui_cancel_candidate["path"])
+    if conv_ui_cancel_unresolved != sorted(set(conv_ui_style_unresolved) -
+                                          set(conv_ui_cancel["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate UI cancel frontier changed")
+    images["apollo_main"]["candidate"] = conv_ui_cancel_candidate
+    images["apollo_main"]["conversate_ui_cancel"] = conv_ui_cancel_ref
+    images["apollo_main"]["unresolved_count"] = 123
+    images["apollo_main"]["unresolved_symbols"] = conv_ui_cancel_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "124 current imports", "123 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate UI cancel/minute-update 0x5b23ae passes 105 direct stock/C cases and is linked. Wider UI composition and image gates remain open.")
+    conv_timer_expired_path = G2 / "build/c-firmware/20261016/main-conversate-timer-expired-5b3628/oracle-receipt.json"
+    conv_timer_expired, conv_timer_expired_ref = receipt(conv_timer_expired_path)
+    if (conv_timer_expired["status"] != "PASS_DIRECT_MAIN_CONVERSATE_TIMER_EXPIRED_C" or
+            conv_timer_expired["native_body"] != "0x5b3628..0x5b3647" or
+            conv_timer_expired["cases"] != 240 or
+            conv_timer_expired["source_complete"] or conv_timer_expired["flashable"]):
+        raise RuntimeError("Apollo Main Conversate timer predicate changed")
+    file_checked(conv_timer_expired["source"], conv_timer_expired["source_sha256"])
+    file_checked(conv_timer_expired["oracle_elf"], conv_timer_expired["oracle_elf_sha256"])
+    images["apollo_main"]["conversate_timer_expired"] = conv_timer_expired_ref
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate cleanup timer predicate 0x5b3628 passes 240 stock/C boundary cases and is now linked with the loading-timeout callback. Other cleanup callers remain open.")
+    conv_cleanup_child_path = G2 / "build/c-firmware/20261016/main-conversate-ui-cleanup-child-5b38ee/receipt.json"
+    conv_cleanup_child, conv_cleanup_child_ref = receipt(conv_cleanup_child_path)
+    if (conv_cleanup_child["status"] != "PASS_DIRECT_MAIN_CONVERSATE_UI_CLEANUP_CHILD_INTEGRATION" or
+            conv_cleanup_child["native_body"] != "0x5b38ee..0x5b39b3" or
+            conv_cleanup_child["oracle_cases"] != 1080 or
+            conv_cleanup_child["unresolved_before"] != 123 or
+            conv_cleanup_child["unresolved_after"] != 122 or
+            conv_cleanup_child["removed_imports"] != ["audio_conversate_ui_cleanup_child_5b38ee"] or
+            conv_cleanup_child["new_imports"] or
+            conv_cleanup_child["source_complete"] or conv_cleanup_child["flashable"]):
+        raise RuntimeError("Apollo Main Conversate cleanup child changed")
+    conv_cleanup_child_candidate = file_checked(conv_cleanup_child["candidate_object"]["path"],
+                                                 conv_cleanup_child["candidate_object"]["sha256"])
+    conv_cleanup_child_unresolved = undefined(ROOT / conv_cleanup_child_candidate["path"])
+    if conv_cleanup_child_unresolved != sorted(set(conv_ui_cancel_unresolved) -
+                                              set(conv_cleanup_child["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate cleanup child frontier changed")
+    images["apollo_main"]["candidate"] = conv_cleanup_child_candidate
+    images["apollo_main"]["conversate_ui_cleanup_child"] = conv_cleanup_child_ref
+    images["apollo_main"]["unresolved_count"] = 122
+    images["apollo_main"]["unresolved_symbols"] = conv_cleanup_child_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "123 current imports", "122 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate loading-timeout callback 0x5b38ee passes 1080 stock/C cases with its timer predicate and is linked. Cleanup flush and commit callbacks and image gates remain open.")
+    conv_cleanup_flush_path = G2 / "build/c-firmware/20261016/main-conversate-ui-cleanup-flush-5b39b4/receipt.json"
+    conv_cleanup_flush, conv_cleanup_flush_ref = receipt(conv_cleanup_flush_path)
+    if (conv_cleanup_flush["status"] != "PASS_DIRECT_MAIN_CONVERSATE_UI_CLEANUP_FLUSH_INTEGRATION" or
+            conv_cleanup_flush["native_body"] != "0x5b39b4..0x5b3a59" or
+            conv_cleanup_flush["oracle_cases"] != 540 or
+            conv_cleanup_flush["unresolved_before"] != 122 or
+            conv_cleanup_flush["unresolved_after"] != 121 or
+            conv_cleanup_flush["removed_imports"] != ["audio_conversate_ui_cleanup_flush_5b39b4"] or
+            conv_cleanup_flush["new_imports"] or
+            conv_cleanup_flush["source_complete"] or conv_cleanup_flush["flashable"]):
+        raise RuntimeError("Apollo Main Conversate cleanup flush changed")
+    conv_cleanup_flush_candidate = file_checked(conv_cleanup_flush["candidate_object"]["path"],
+                                                 conv_cleanup_flush["candidate_object"]["sha256"])
+    conv_cleanup_flush_unresolved = undefined(ROOT / conv_cleanup_flush_candidate["path"])
+    if conv_cleanup_flush_unresolved != sorted(set(conv_cleanup_child_unresolved) -
+                                              set(conv_cleanup_flush["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate cleanup flush frontier changed")
+    images["apollo_main"]["candidate"] = conv_cleanup_flush_candidate
+    images["apollo_main"]["conversate_ui_cleanup_flush"] = conv_cleanup_flush_ref
+    images["apollo_main"]["unresolved_count"] = 121
+    images["apollo_main"]["unresolved_symbols"] = conv_cleanup_flush_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "122 current imports", "121 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate selection-timeout callback 0x5b39b4 passes 540 stock/C cases with its timer predicate and is linked. Cleanup commit and image gates remain open.")
+    conv_cleanup_commit_path = G2 / "build/c-firmware/20261016/main-conversate-ui-cleanup-commit-5b3a88/receipt.json"
+    conv_cleanup_commit, conv_cleanup_commit_ref = receipt(conv_cleanup_commit_path)
+    if (conv_cleanup_commit["status"] != "PASS_DIRECT_MAIN_CONVERSATE_UI_CLEANUP_COMMIT_INTEGRATION" or
+            conv_cleanup_commit["native_body"] != "0x5b3a88..0x5b3c29" or
+            conv_cleanup_commit["oracle_cases"] != 2592 or
+            conv_cleanup_commit["unresolved_before"] != 121 or
+            conv_cleanup_commit["unresolved_after"] != 120 or
+            conv_cleanup_commit["removed_imports"] != ["audio_conversate_ui_cleanup_commit_5b3a88"] or
+            conv_cleanup_commit["new_imports"] or
+            conv_cleanup_commit["source_complete"] or conv_cleanup_commit["flashable"]):
+        raise RuntimeError("Apollo Main Conversate cleanup commit changed")
+    conv_cleanup_commit_candidate = file_checked(conv_cleanup_commit["candidate_object"]["path"],
+                                                  conv_cleanup_commit["candidate_object"]["sha256"])
+    conv_cleanup_commit_unresolved = undefined(ROOT / conv_cleanup_commit_candidate["path"])
+    if conv_cleanup_commit_unresolved != sorted(set(conv_cleanup_flush_unresolved) -
+                                               set(conv_cleanup_commit["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate cleanup commit frontier changed")
+    images["apollo_main"]["candidate"] = conv_cleanup_commit_candidate
+    images["apollo_main"]["conversate_ui_cleanup_commit"] = conv_cleanup_commit_ref
+    images["apollo_main"]["unresolved_count"] = 120
+    images["apollo_main"]["unresolved_symbols"] = conv_cleanup_commit_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "121 current imports", "120 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate auto-extend callback 0x5b3a88 passes 2592 stock/C cases with its timer predicate and is linked. All three direct cleanup callbacks are now linked, while wider UI and image gates remain open.")
+    conv_report_chain_path = G2 / "build/c-firmware/20261016/main-conversate-ui-event-name-5b16fc/receipt.json"
+    conv_report_chain, conv_report_chain_ref = receipt(conv_report_chain_path)
+    if (conv_report_chain["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_REPORT_CHAIN_INTEGRATION" or
+            conv_report_chain["native_bodies"] != ["0x5b02e4..0x5b03c1", "0x5b16fc..0x5b1715"] or
+            conv_report_chain["oracle_cases"] != [900, 261] or
+            conv_report_chain["unresolved_before"] != 120 or
+            conv_report_chain["unresolved_after"] != 120 or
+            conv_report_chain["removed_imports"] != ["audio_conversate_report_5b02e4"] or
+            conv_report_chain["new_imports"] != ["audio_conversate_ui_event_names_20000560"] or
+            conv_report_chain["source_complete"] or conv_report_chain["flashable"]):
+        raise RuntimeError("Apollo Main Conversate report chain changed")
+    conv_report_chain_candidate = file_checked(conv_report_chain["candidate_object"]["path"],
+                                                  conv_report_chain["candidate_object"]["sha256"])
+    conv_report_chain_unresolved = undefined(ROOT / conv_report_chain_candidate["path"])
+    if conv_report_chain_unresolved != sorted((set(conv_cleanup_commit_unresolved) -
+                                              set(conv_report_chain["removed_imports"])) |
+                                             set(conv_report_chain["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate report chain frontier changed")
+    images["apollo_main"]["candidate"] = conv_report_chain_candidate
+    images["apollo_main"]["conversate_report_chain"] = conv_report_chain_ref
+    images["apollo_main"]["unresolved_count"] = 120
+    images["apollo_main"]["unresolved_symbols"] = conv_report_chain_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate display report 0x5b02e4 passes 900 stock/C cases; UI event-name lookup 0x5b16fc passes 261 synthetic-table stock/C cases. Both are linked, but the 21-entry RAM table at 0x20000560 and its initializer remain unauthenticated; one import replaces one import.")
+    conv_ui_names_path = G2 / "analysis/c-source-completion-20261011/apollo/main-conversate-ui-event-name-table-20261016.json"
+    conv_ui_names, conv_ui_names_ref = receipt(conv_ui_names_path)
+    if (conv_ui_names["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_UI_EVENT_NAME_CANDIDATE_SET" or
+            conv_ui_names["table_ram_address"] != "0x20000560" or
+            conv_ui_names["table_entries"] != 21 or
+            len(conv_ui_names["candidate_strings"]) != 21 or
+            not conv_ui_names["candidate_set_complete"] or
+            conv_ui_names["entry_order_authenticated"] or
+            conv_ui_names["initializer_authenticated"] or
+            conv_ui_names["source_complete"] or conv_ui_names["flashable"]):
+        raise RuntimeError("Apollo Main UI event-name table evidence changed")
+    images["apollo_main"]["conversate_ui_event_name_candidates"] = conv_ui_names_ref
+    images["apollo_main"]["remaining_gate"].append(
+        "The stock payload contains 21 unique CONVERSATE_UI_EVENT names, matching lookup capacity. Their RAM index order and initializer remain unauthenticated, so the table import remains open.")
+    conv_action_matrix_path = G2 / "analysis/c-source-completion-20261011/apollo/main-conversate-ui-action-matrix-20261016.json"
+    conv_action_matrix, conv_action_matrix_ref = receipt(conv_action_matrix_path)
+    if (conv_action_matrix["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_UI_ACTION_MATRIX" or
+            conv_action_matrix["matrix_address"] != "0x686920" or
+            conv_action_matrix["row_count"] != 7 or
+            conv_action_matrix["events_per_row"] != 21 or
+            conv_action_matrix["active_routes"] != 50 or
+            len(conv_action_matrix["rows"]) != 7 or
+            any(len(row["routes"]) != 21 for row in conv_action_matrix["rows"]) or
+            conv_action_matrix["source_complete"] or conv_action_matrix["flashable"]):
+        raise RuntimeError("Apollo Main Conversate action matrix evidence changed")
+    images["apollo_main"]["conversate_ui_action_matrix"] = conv_action_matrix_ref
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate UI action dispatcher 0x5b1724 indexes a stock ROM matrix at 0x686920: seven 21-event rows, 50 populated handler slots. Its handler bodies and source-owned route representation remain open.")
+    conv_ui_action_path = G2 / "build/c-firmware/20261016/main-conversate-ui-action-5b1724/receipt.json"
+    conv_ui_action, conv_ui_action_ref = receipt(conv_ui_action_path)
+    if (conv_ui_action["status"] != "PASS_BOUNDED_MAIN_CONVERSATE_UI_ACTION_INTEGRATION" or
+            conv_ui_action["native_body"] != "0x5b1724..0x5b198b" or
+            conv_ui_action["oracle_cases"] != 1440 or
+            conv_ui_action["unresolved_before"] != 120 or
+            conv_ui_action["unresolved_after"] != 121 or
+            conv_ui_action["removed_imports"] != ["audio_conversate_ui_action_5b1724"] or
+            conv_ui_action["new_imports"] != ["audio_conversate_ui_action_matrix_686920",
+                                                 "audio_conversate_ui_transition_5b3d86"] or
+            conv_ui_action["source_complete"] or conv_ui_action["flashable"]):
+        raise RuntimeError("Apollo Main Conversate UI action changed")
+    conv_ui_action_candidate = file_checked(conv_ui_action["candidate_object"]["path"],
+                                              conv_ui_action["candidate_object"]["sha256"])
+    conv_ui_action_unresolved = undefined(ROOT / conv_ui_action_candidate["path"])
+    if conv_ui_action_unresolved != sorted((set(conv_report_chain_unresolved) -
+                                           set(conv_ui_action["removed_imports"])) |
+                                          set(conv_ui_action["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate UI action frontier changed")
+    images["apollo_main"]["candidate"] = conv_ui_action_candidate
+    images["apollo_main"]["conversate_ui_action"] = conv_ui_action_ref
+    images["apollo_main"]["unresolved_count"] = 121
+    images["apollo_main"]["unresolved_symbols"] = conv_ui_action_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "120 current imports", "121 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate UI action dispatcher 0x5b1724 passes 1440 stock/C cases with controlled routes and is linked. The source-owned route matrix and state-transition helper are new direct dependencies; current Main imports rise from 120 to 121.")
+    conv_timer_transition_path = G2 / "build/c-firmware/20261016/main-conversate-timer-transition/receipt.json"
+    conv_timer_transition, conv_timer_transition_ref = receipt(conv_timer_transition_path)
+    if (conv_timer_transition["status"] != "PASS_DIRECT_MAIN_CONVERSATE_TIMER_TRANSITION_INTEGRATION" or
+            conv_timer_transition["oracle_cases"] != 1215 or
+            conv_timer_transition["stock_rule_table"] != "0x775e6c..0x775e83" or
+            conv_timer_transition["unresolved_before"] != 121 or
+            conv_timer_transition["unresolved_after"] != 120 or
+            conv_timer_transition["removed_imports"] != ["audio_conversate_ui_transition_5b3d86"] or
+            conv_timer_transition["new_imports"] or
+            conv_timer_transition["source_complete"] or conv_timer_transition["flashable"]):
+        raise RuntimeError("Apollo Main Conversate timer transition changed")
+    conv_timer_transition_candidate = file_checked(conv_timer_transition["candidate_object"]["path"],
+                                                    conv_timer_transition["candidate_object"]["sha256"])
+    conv_timer_transition_unresolved = undefined(ROOT / conv_timer_transition_candidate["path"])
+    if conv_timer_transition_unresolved != sorted(set(conv_ui_action_unresolved) -
+                                                  set(conv_timer_transition["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate timer transition frontier changed")
+    images["apollo_main"]["candidate"] = conv_timer_transition_candidate
+    images["apollo_main"]["conversate_timer_transition"] = conv_timer_transition_ref
+    images["apollo_main"]["unresolved_count"] = 120
+    images["apollo_main"]["unresolved_symbols"] = conv_timer_transition_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "121 current imports", "120 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate timer transition wrapper 0x5b3d86 and its three predicate/scan helpers pass 1215 stock/C cases; the six native rule rows are source-owned and linked. UI action route ownership remains open, while Main returns to 120 imports.")
+    conv_action_matrix_c_path = G2 / "build/c-firmware/20261016/main-conversate-ui-action-matrix-686920/receipt.json"
+    conv_action_matrix_c, conv_action_matrix_c_ref = receipt(conv_action_matrix_c_path)
+    if (conv_action_matrix_c["status"] != "PASS_EXACT_MAIN_CONVERSATE_UI_ACTION_MATRIX_C_INTEGRATION" or
+            conv_action_matrix_c["native_matrix_address"] != "0x686920" or
+            conv_action_matrix_c["matrix_bytes"] != 1176 or
+            conv_action_matrix_c["matrix_sha256"] != conv_action_matrix["raw_matrix_sha256"] or
+            conv_action_matrix_c["active_routes"] != 50 or
+            conv_action_matrix_c["distinct_native_handlers"] != 26 or
+            conv_action_matrix_c["unresolved_before"] != 120 or
+            conv_action_matrix_c["unresolved_after"] != 145 or
+            conv_action_matrix_c["removed_imports"] != ["audio_conversate_ui_action_matrix_686920"] or
+            len(conv_action_matrix_c["new_imports"]) != 26 or
+            conv_action_matrix_c["source_complete"] or conv_action_matrix_c["flashable"]):
+        raise RuntimeError("Apollo Main source-owned Conversate action matrix changed")
+    conv_action_matrix_c_candidate = file_checked(conv_action_matrix_c["candidate_object"]["path"],
+                                                conv_action_matrix_c["candidate_object"]["sha256"])
+    conv_action_matrix_c_unresolved = undefined(ROOT / conv_action_matrix_c_candidate["path"])
+    if conv_action_matrix_c_unresolved != sorted((set(conv_timer_transition_unresolved) -
+                                                 set(conv_action_matrix_c["removed_imports"])) |
+                                                set(conv_action_matrix_c["new_imports"])):
+        raise RuntimeError("Apollo Main source-owned Conversate action matrix frontier changed")
+    images["apollo_main"]["candidate"] = conv_action_matrix_c_candidate
+    images["apollo_main"]["conversate_ui_action_matrix_c"] = conv_action_matrix_c_ref
+    images["apollo_main"]["unresolved_count"] = 145
+    images["apollo_main"]["unresolved_symbols"] = conv_action_matrix_c_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "120 current imports", "145 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate UI action matrix is source-owned C and resolves byte-for-byte to stock's 1176-byte table when native handler addresses are bound. Its 26 distinct handler bodies are now explicit imports; Main imports rise to 145 until they are reconstructed.")
+    conv_routes_pair_path = G2 / "build/c-firmware/20261016/main-conversate-ui-route-5b34a0-5b34b4/receipt.json"
+    conv_routes_pair, conv_routes_pair_ref = receipt(conv_routes_pair_path)
+    if (conv_routes_pair["status"] != "PASS_DIRECT_MAIN_CONVERSATE_UI_ROUTE_5B34A0_5B34B4_INTEGRATION" or
+            conv_routes_pair["oracle_cases"] != 256 or
+            conv_routes_pair["native_bodies"] != ["0x5b34a0..0x5b34ad", "0x5b34b4..0x5b34cb"] or
+            conv_routes_pair["unresolved_before"] != 145 or
+            conv_routes_pair["unresolved_after"] != 145 or
+            conv_routes_pair["removed_imports"] != ["audio_conversate_ui_route_5b34a0",
+                                               "audio_conversate_ui_route_5b34b4"] or
+            conv_routes_pair["new_imports"] != ["audio_conversate_route_release_58c84e",
+                                           "audio_conversate_route_scroll_5b22fa"] or
+            conv_routes_pair["source_complete"] or conv_routes_pair["flashable"]):
+        raise RuntimeError("Apollo Main Conversate route wrapper pair changed")
+    conv_routes_pair_candidate = file_checked(conv_routes_pair["candidate_object"]["path"],
+                                              conv_routes_pair["candidate_object"]["sha256"])
+    conv_routes_pair_unresolved = undefined(ROOT / conv_routes_pair_candidate["path"])
+    if conv_routes_pair_unresolved != sorted((set(conv_action_matrix_c_unresolved) -
+                                              set(conv_routes_pair["removed_imports"])) |
+                                             set(conv_routes_pair["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate route wrapper pair frontier changed")
+    images["apollo_main"]["candidate"] = conv_routes_pair_candidate
+    images["apollo_main"]["conversate_ui_route_pair"] = conv_routes_pair_ref
+    images["apollo_main"]["unresolved_count"] = 145
+    images["apollo_main"]["unresolved_symbols"] = conv_routes_pair_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate route handlers 0x5b34a0 and 0x5b34b4 pass 256 stock/C cases and are linked. Their direct scroll/release children replace the two route imports; total Main imports stay at 145.")
+    conv_release_path = G2 / "build/c-firmware/20261016/main-conversate-route-release-58c84e/receipt.json"
+    conv_release, conv_release_ref = receipt(conv_release_path)
+    if (conv_release["status"] != "PASS_DIRECT_MAIN_CONVERSATE_ROUTE_RELEASE_58C84E_INTEGRATION" or
+            conv_release["oracle_cases"] != 20 or
+            conv_release["native_body"] != "0x58c84e..0x58c871" or
+            conv_release["unresolved_before"] != 145 or
+            conv_release["unresolved_after"] != 147 or
+            conv_release["removed_imports"] != ["audio_conversate_route_release_58c84e"] or
+            conv_release["new_imports"] != ["audio_conversate_route_before_release_58c836",
+                                            "audio_conversate_route_cleanup_597ee0",
+                                            "audio_conversate_route_set_property_597f52"] or
+            conv_release["source_complete"] or conv_release["flashable"]):
+        raise RuntimeError("Apollo Main Conversate release body changed")
+    conv_release_candidate = file_checked(conv_release["candidate_object"]["path"],
+                                          conv_release["candidate_object"]["sha256"])
+    conv_release_unresolved = undefined(ROOT / conv_release_candidate["path"])
+    if conv_release_unresolved != sorted((set(conv_routes_pair_unresolved) -
+                                          set(conv_release["removed_imports"])) |
+                                         set(conv_release["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate release frontier changed")
+    images["apollo_main"]["candidate"] = conv_release_candidate
+    images["apollo_main"]["conversate_route_release"] = conv_release_ref
+    images["apollo_main"]["unresolved_count"] = 147
+    images["apollo_main"]["unresolved_symbols"] = conv_release_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "145 current imports", "147 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate release child 0x58c84e passes 20 stock/C cases and is linked. Its three direct children are explicit imports; Main has 147 current imports.")
+    conv_before_release_path = G2 / "build/c-firmware/20261016/main-conversate-route-before-release-58c836/receipt.json"
+    conv_before_release, conv_before_release_ref = receipt(conv_before_release_path)
+    if (conv_before_release["status"] != "PASS_DIRECT_MAIN_CONVERSATE_ROUTE_BEFORE_RELEASE_58C836_INTEGRATION" or
+            conv_before_release["oracle_cases"] != 64 or
+            conv_before_release["native_body"] != "0x58c836..0x58c84d" or
+            conv_before_release["unresolved_before"] != 147 or
+            conv_before_release["unresolved_after"] != 147 or
+            conv_before_release["removed_imports"] != ["audio_conversate_route_before_release_58c836"] or
+            conv_before_release["new_imports"] != ["audio_conversate_route_get_release_pair_597f82"] or
+            conv_before_release["source_complete"] or conv_before_release["flashable"]):
+        raise RuntimeError("Apollo Main Conversate pre-release body changed")
+    conv_before_release_candidate = file_checked(conv_before_release["candidate_object"]["path"],
+                                                 conv_before_release["candidate_object"]["sha256"])
+    conv_before_release_unresolved = undefined(ROOT / conv_before_release_candidate["path"])
+    if conv_before_release_unresolved != sorted((set(conv_release_unresolved) -
+                                                 set(conv_before_release["removed_imports"])) |
+                                                set(conv_before_release["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate pre-release frontier changed")
+    images["apollo_main"]["candidate"] = conv_before_release_candidate
+    images["apollo_main"]["conversate_route_before_release"] = conv_before_release_ref
+    images["apollo_main"]["unresolved_count"] = 147
+    images["apollo_main"]["unresolved_symbols"] = conv_before_release_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate pre-release child 0x58c836 passes 64 stock/C cases and is linked. Its pair dispatcher binds to the existing LVGL C provider; its getter remains an import, leaving Main at 147 imports.")
+    conv_pair_getter_path = G2 / "build/c-firmware/20261016/main-conversate-route-get-release-pair-597f82/receipt.json"
+    conv_pair_getter, conv_pair_getter_ref = receipt(conv_pair_getter_path)
+    if (conv_pair_getter["status"] != "PASS_DIRECT_MAIN_CONVERSATE_ROUTE_GET_RELEASE_PAIR_597F82_INTEGRATION" or
+            conv_pair_getter["oracle_cases"] != 20 or
+            conv_pair_getter["native_body"] != "0x597f82..0x597fad" or
+            conv_pair_getter["unresolved_before"] != 147 or
+            conv_pair_getter["unresolved_after"] != 146 or
+            conv_pair_getter["removed_imports"] != ["audio_conversate_route_get_release_pair_597f82"] or
+            conv_pair_getter["new_imports"] or
+            conv_pair_getter["source_complete"] or conv_pair_getter["flashable"]):
+        raise RuntimeError("Apollo Main Conversate release-pair getter changed")
+    conv_pair_getter_candidate = file_checked(conv_pair_getter["candidate_object"]["path"],
+                                              conv_pair_getter["candidate_object"]["sha256"])
+    conv_pair_getter_unresolved = undefined(ROOT / conv_pair_getter_candidate["path"])
+    if conv_pair_getter_unresolved != sorted(set(conv_before_release_unresolved) -
+                                            set(conv_pair_getter["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate release-pair getter frontier changed")
+    images["apollo_main"]["candidate"] = conv_pair_getter_candidate
+    images["apollo_main"]["conversate_route_get_release_pair"] = conv_pair_getter_ref
+    images["apollo_main"]["unresolved_count"] = 146
+    images["apollo_main"]["unresolved_symbols"] = conv_pair_getter_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "147 current imports", "146 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate release-pair getter 0x597f82 passes 20 stock/C cases and is linked. Its fatal logger strings and invalid-address fault match stock; those strings are source-owned. Main has 146 imports.")
+    conv_cleanup_path = G2 / "build/c-firmware/20261016/main-conversate-route-cleanup-597ee0/receipt.json"
+    conv_cleanup, conv_cleanup_ref = receipt(conv_cleanup_path)
+    if (conv_cleanup["status"] != "PASS_DIRECT_MAIN_CONVERSATE_ROUTE_CLEANUP_597EE0_INTEGRATION" or
+            conv_cleanup["oracle_cases"] != 20 or
+            conv_cleanup["native_body"] != "0x597ee0..0x597f0f" or
+            conv_cleanup["unresolved_before"] != 146 or
+            conv_cleanup["unresolved_after"] != 145 or
+            conv_cleanup["removed_imports"] != ["audio_conversate_route_cleanup_597ee0"] or
+            conv_cleanup["new_imports"] or
+            conv_cleanup["source_complete"] or conv_cleanup["flashable"]):
+        raise RuntimeError("Apollo Main Conversate release cleanup changed")
+    conv_cleanup_candidate = file_checked(conv_cleanup["candidate_object"]["path"],
+                                          conv_cleanup["candidate_object"]["sha256"])
+    conv_cleanup_unresolved = undefined(ROOT / conv_cleanup_candidate["path"])
+    if conv_cleanup_unresolved != sorted(set(conv_pair_getter_unresolved) -
+                                         set(conv_cleanup["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate cleanup frontier changed")
+    images["apollo_main"]["candidate"] = conv_cleanup_candidate
+    images["apollo_main"]["conversate_route_cleanup"] = conv_cleanup_ref
+    images["apollo_main"]["unresolved_count"] = 145
+    images["apollo_main"]["unresolved_symbols"] = conv_cleanup_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "146 current imports", "145 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate release cleanup 0x597ee0 passes 20 stock/C cases through the existing source-owned animimage start provider, including fatal logger strings and invalid-address fault. Main has 145 imports.")
+    conv_property_path = G2 / "build/c-firmware/20261016/main-conversate-route-set-property-597f52/receipt.json"
+    conv_property, conv_property_ref = receipt(conv_property_path)
+    if (conv_property["status"] != "PASS_DIRECT_MAIN_CONVERSATE_ROUTE_SET_PROPERTY_597F52_INTEGRATION" or
+            conv_property["oracle_cases"] != 12 or
+            conv_property["native_body"] != "0x597f52..0x597f81" or
+            conv_property["unresolved_before"] != 145 or
+            conv_property["unresolved_after"] != 144 or
+            conv_property["removed_imports"] != ["audio_conversate_route_set_property_597f52"] or
+            conv_property["new_imports"] or
+            conv_property["source_complete"] or conv_property["flashable"]):
+        raise RuntimeError("Apollo Main Conversate release property setter changed")
+    conv_property_candidate = file_checked(conv_property["candidate_object"]["path"],
+                                           conv_property["candidate_object"]["sha256"])
+    conv_property_unresolved = undefined(ROOT / conv_property_candidate["path"])
+    if conv_property_unresolved != sorted(set(conv_cleanup_unresolved) -
+                                          set(conv_property["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate property setter frontier changed")
+    images["apollo_main"]["candidate"] = conv_property_candidate
+    images["apollo_main"]["conversate_route_set_property"] = conv_property_ref
+    images["apollo_main"]["unresolved_count"] = 144
+    images["apollo_main"]["unresolved_symbols"] = conv_property_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "145 current imports", "144 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate release property setter 0x597f52 passes 12 stock/C cases through the existing source-owned animimage provider. Its write at handle+0xa0, fatal logger strings, and invalid-address fault match stock. Main has 144 imports.")
+    conv_scroll_routes_path = G2 / "build/c-firmware/20261016/main-conversate-ui-route-5b5ed2-5b5ef6/receipt.json"
+    conv_scroll_routes, conv_scroll_routes_ref = receipt(conv_scroll_routes_path)
+    if (conv_scroll_routes["status"] != "PASS_DIRECT_MAIN_CONVERSATE_UI_ROUTE_5B5ED2_5B5EF6_INTEGRATION" or
+            conv_scroll_routes["oracle_cases"] != 288 or
+            conv_scroll_routes["native_bodies"] != ["0x5b5ed2..0x5b5ef5", "0x5b5ef6..0x5b5f19"] or
+            conv_scroll_routes["unresolved_before"] != 144 or
+            conv_scroll_routes["unresolved_after"] != 142 or
+            conv_scroll_routes["removed_imports"] != ["audio_conversate_ui_route_5b5ed2",
+                                                       "audio_conversate_ui_route_5b5ef6"] or
+            conv_scroll_routes["new_imports"] or
+            conv_scroll_routes["source_complete"] or conv_scroll_routes["flashable"]):
+        raise RuntimeError("Apollo Main Conversate scroll routes changed")
+    conv_scroll_routes_candidate = file_checked(conv_scroll_routes["candidate_object"]["path"],
+                                                conv_scroll_routes["candidate_object"]["sha256"])
+    conv_scroll_routes_unresolved = undefined(ROOT / conv_scroll_routes_candidate["path"])
+    if conv_scroll_routes_unresolved != sorted(set(conv_property_unresolved) -
+                                               set(conv_scroll_routes["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate scroll route frontier changed")
+    images["apollo_main"]["candidate"] = conv_scroll_routes_candidate
+    images["apollo_main"]["conversate_ui_scroll_routes"] = conv_scroll_routes_ref
+    images["apollo_main"]["unresolved_count"] = 142
+    images["apollo_main"]["unresolved_symbols"] = conv_scroll_routes_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "144 current imports", "142 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate UI routes 0x5b5ed2 and 0x5b5ef6 pass 288 stock/C cases and link to existing child-get and scroll-to-Y providers. Main imports fall from 144 to 142; remaining route handlers stay open.")
+    conv_previous_route_path = G2 / "build/c-firmware/20261016/main-conversate-ui-route-5b5b96/receipt.json"
+    conv_previous_route, conv_previous_route_ref = receipt(conv_previous_route_path)
+    if (conv_previous_route["status"] != "PASS_DIRECT_MAIN_CONVERSATE_UI_ROUTE_5B5B96_INTEGRATION" or
+            conv_previous_route["oracle_cases"] != 128 or
+            conv_previous_route["native_body"] != "0x5b5b96..0x5b5bef" or
+            conv_previous_route["unresolved_before"] != 142 or
+            conv_previous_route["unresolved_after"] != 141 or
+            conv_previous_route["removed_imports"] != ["audio_conversate_ui_route_5b5b96"] or
+            conv_previous_route["new_imports"] or
+            conv_previous_route["source_complete"] or conv_previous_route["flashable"]):
+        raise RuntimeError("Apollo Main Conversate previous-item route changed")
+    conv_previous_route_candidate = file_checked(conv_previous_route["candidate_object"]["path"],
+                                                 conv_previous_route["candidate_object"]["sha256"])
+    conv_previous_route_unresolved = undefined(ROOT / conv_previous_route_candidate["path"])
+    if conv_previous_route_unresolved != sorted(set(conv_scroll_routes_unresolved) -
+                                                set(conv_previous_route["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate previous-item route frontier changed")
+    images["apollo_main"]["candidate"] = conv_previous_route_candidate
+    images["apollo_main"]["conversate_ui_previous_route"] = conv_previous_route_ref
+    images["apollo_main"]["unresolved_count"] = 141
+    images["apollo_main"]["unresolved_symbols"] = conv_previous_route_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "142 current imports", "141 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate previous-item UI route 0x5b5b96 passes 128 stock/C cases and links to existing reply getter, child lookup and animation scheduler. Main has 141 imports; other route handlers remain open.")
+    conv_saved_route_path = G2 / "build/c-firmware/20261016/main-conversate-ui-route-5b1a14/receipt.json"
+    conv_saved_route, conv_saved_route_ref = receipt(conv_saved_route_path)
+    if (conv_saved_route["status"] != "PASS_DIRECT_MAIN_CONVERSATE_UI_ROUTE_5B1A14_INTEGRATION" or
+            conv_saved_route["oracle_cases"] != 180 or
+            conv_saved_route["native_body"] != "0x5b1a14..0x5b1a63" or
+            conv_saved_route["unresolved_before"] != 141 or
+            conv_saved_route["unresolved_after"] != 141 or
+            conv_saved_route["removed_imports"] != ["audio_conversate_ui_route_5b1a14"] or
+            conv_saved_route["new_imports"] != ["audio_conversate_ui_message_send_58bfb2"] or
+            conv_saved_route["source_complete"] or conv_saved_route["flashable"]):
+        raise RuntimeError("Apollo Main Conversate saved/network-error route changed")
+    conv_saved_route_candidate = file_checked(conv_saved_route["candidate_object"]["path"],
+                                              conv_saved_route["candidate_object"]["sha256"])
+    conv_saved_route_unresolved = undefined(ROOT / conv_saved_route_candidate["path"])
+    if conv_saved_route_unresolved != sorted((set(conv_previous_route_unresolved) -
+                                             set(conv_saved_route["removed_imports"])) |
+                                            set(conv_saved_route["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate saved/network-error route frontier changed")
+    images["apollo_main"]["candidate"] = conv_saved_route_candidate
+    images["apollo_main"]["conversate_ui_saved_route"] = conv_saved_route_ref
+    images["apollo_main"]["unresolved_count"] = 141
+    images["apollo_main"]["unresolved_symbols"] = conv_saved_route_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate saved/network-error UI route 0x5b1a14 passes 180 stock/C cases with source-owned keys and existing locale helpers. Its message-sender child 0x58bfb2 replaces the route import, leaving Main at 141 imports.")
+    conv_disconnect_route_path = G2 / "build/c-firmware/20261016/main-conversate-ui-route-5b1998/receipt.json"
+    conv_disconnect_route, conv_disconnect_route_ref = receipt(conv_disconnect_route_path)
+    if (conv_disconnect_route["status"] != "PASS_DIRECT_MAIN_CONVERSATE_UI_ROUTE_5B1998_INTEGRATION" or
+            conv_disconnect_route["oracle_cases"] != 384 or
+            conv_disconnect_route["native_body"] != "0x5b1998..0x5b1a09" or
+            conv_disconnect_route["unresolved_before"] != 141 or
+            conv_disconnect_route["unresolved_after"] != 140 or
+            conv_disconnect_route["removed_imports"] != ["audio_conversate_ui_route_5b1998"] or
+            conv_disconnect_route["new_imports"] or
+            conv_disconnect_route["source_complete"] or conv_disconnect_route["flashable"]):
+        raise RuntimeError("Apollo Main Conversate disconnect/saved route changed")
+    conv_disconnect_route_candidate = file_checked(conv_disconnect_route["candidate_object"]["path"],
+                                                   conv_disconnect_route["candidate_object"]["sha256"])
+    conv_disconnect_route_unresolved = undefined(ROOT / conv_disconnect_route_candidate["path"])
+    if conv_disconnect_route_unresolved != sorted(set(conv_saved_route_unresolved) -
+                                                  set(conv_disconnect_route["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate disconnect/saved route frontier changed")
+    images["apollo_main"]["candidate"] = conv_disconnect_route_candidate
+    images["apollo_main"]["conversate_ui_disconnect_route"] = conv_disconnect_route_ref
+    images["apollo_main"]["unresolved_count"] = 140
+    images["apollo_main"]["unresolved_symbols"] = conv_disconnect_route_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "141 current imports", "140 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate disconnect/saved UI route 0x5b1998 passes 384 stock/C cases with source-owned keys and existing role/display/locale helpers. Its sender child was already an import, reducing Main from 141 to 140 imports.")
+    conv_message_sender_path = G2 / "build/c-firmware/20261016/main-conversate-ui-message-send-58bfb2/receipt.json"
+    conv_message_sender, conv_message_sender_ref = receipt(conv_message_sender_path)
+    if (conv_message_sender["status"] != "PASS_DIRECT_MAIN_CONVERSATE_UI_MESSAGE_SEND_58BFB2_INTEGRATION" or
+            conv_message_sender["oracle_cases"] != 360 or
+            conv_message_sender["native_body"] != "0x58bfb2..0x58c0b5" or
+            conv_message_sender["unresolved_before"] != 140 or
+            conv_message_sender["unresolved_after"] != 141 or
+            conv_message_sender["removed_imports"] != ["audio_conversate_ui_message_send_58bfb2"] or
+            conv_message_sender["new_imports"] != ["audio_conversate_exit_prompt_prepare_58bda8",
+                                                   "audio_conversate_exit_prompt_show_58bf12"] or
+            conv_message_sender["ram_cells"] != {"state": "0x200745d0..0x200745db",
+                                                 "hold": "0x20000be4..0x20000be7"} or
+            conv_message_sender["source_complete"] or conv_message_sender["flashable"]):
+        raise RuntimeError("Apollo Main Conversate message sender changed")
+    conv_message_sender_candidate = file_checked(conv_message_sender["candidate_object"]["path"],
+                                                 conv_message_sender["candidate_object"]["sha256"])
+    conv_message_sender_unresolved = undefined(ROOT / conv_message_sender_candidate["path"])
+    if conv_message_sender_unresolved != sorted((set(conv_disconnect_route_unresolved) -
+                                                set(conv_message_sender["removed_imports"])) |
+                                               set(conv_message_sender["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate message sender frontier changed")
+    images["apollo_main"]["candidate"] = conv_message_sender_candidate
+    images["apollo_main"]["conversate_ui_message_sender"] = conv_message_sender_ref
+    images["apollo_main"]["unresolved_count"] = 141
+    images["apollo_main"]["unresolved_symbols"] = conv_message_sender_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "140 current imports", "141 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate exit-prompt sender 0x58bfb2 passes 360 stock/C cases with source-owned strings and RAM cells. Prompt prepare/show children replace the sender import, raising Main from 140 to 141 imports. Final RAM placement remains open.")
+    conv_prompt_prepare_path = G2 / "build/c-firmware/20261016/main-conversate-exit-prompt-prepare-58bda8/receipt.json"
+    conv_prompt_prepare, conv_prompt_prepare_ref = receipt(conv_prompt_prepare_path)
+    if (conv_prompt_prepare["status"] != "PASS_DIRECT_MAIN_CONVERSATE_EXIT_PROMPT_PREPARE_58BDA8_INTEGRATION" or
+            conv_prompt_prepare["oracle_cases"] != 120 or
+            conv_prompt_prepare["native_body"] != "0x58bda8..0x58be19" or
+            conv_prompt_prepare["unresolved_before"] != 141 or
+            conv_prompt_prepare["unresolved_after"] != 140 or
+            conv_prompt_prepare["removed_imports"] != ["audio_conversate_exit_prompt_prepare_58bda8"] or
+            conv_prompt_prepare["new_imports"] or
+            conv_prompt_prepare["source_complete"] or conv_prompt_prepare["flashable"]):
+        raise RuntimeError("Apollo Main Conversate prompt prepare changed")
+    conv_prompt_prepare_candidate = file_checked(conv_prompt_prepare["candidate_object"]["path"],
+                                                 conv_prompt_prepare["candidate_object"]["sha256"])
+    conv_prompt_prepare_unresolved = undefined(ROOT / conv_prompt_prepare_candidate["path"])
+    if conv_prompt_prepare_unresolved != sorted(set(conv_message_sender_unresolved) -
+                                                set(conv_prompt_prepare["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate prompt prepare frontier changed")
+    images["apollo_main"]["candidate"] = conv_prompt_prepare_candidate
+    images["apollo_main"]["conversate_exit_prompt_prepare"] = conv_prompt_prepare_ref
+    images["apollo_main"]["unresolved_count"] = 140
+    images["apollo_main"]["unresolved_symbols"] = conv_prompt_prepare_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "141 current imports", "140 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate foreground-app preparation 0x58bda8 passes 120 stock/C cases and links through existing role, app-query, log and display-stop providers. Main returns to 140 imports; prompt show remains open.")
+    conv_prompt_show_path = G2 / "build/c-firmware/20261016/main-conversate-exit-prompt-show-58bf12/receipt.json"
+    conv_prompt_show, conv_prompt_show_ref = receipt(conv_prompt_show_path)
+    if (conv_prompt_show["status"] != "PASS_DIRECT_MAIN_CONVERSATE_EXIT_PROMPT_SHOW_58BF12_INTEGRATION" or
+            conv_prompt_show["oracle_cases"] != 160 or
+            conv_prompt_show["native_body"] != "0x58bf12..0x58bfb1" or
+            conv_prompt_show["unresolved_before"] != 140 or
+            conv_prompt_show["unresolved_after"] != 140 or
+            conv_prompt_show["removed_imports"] != ["audio_conversate_exit_prompt_show_58bf12"] or
+            conv_prompt_show["new_imports"] != ["audio_conversate_exit_prompt_fade_step_58bebc"] or
+            conv_prompt_show["source_complete"] or conv_prompt_show["flashable"]):
+        raise RuntimeError("Apollo Main Conversate prompt show changed")
+    conv_prompt_show_candidate = file_checked(conv_prompt_show["candidate_object"]["path"],
+                                              conv_prompt_show["candidate_object"]["sha256"])
+    conv_prompt_show_unresolved = undefined(ROOT / conv_prompt_show_candidate["path"])
+    if conv_prompt_show_unresolved != sorted((set(conv_prompt_prepare_unresolved) -
+                                              set(conv_prompt_show["removed_imports"])) |
+                                             set(conv_prompt_show["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate prompt show frontier changed")
+    images["apollo_main"]["candidate"] = conv_prompt_show_candidate
+    images["apollo_main"]["conversate_exit_prompt_show"] = conv_prompt_show_ref
+    images["apollo_main"]["unresolved_count"] = 140
+    images["apollo_main"]["unresolved_symbols"] = conv_prompt_show_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate exit-prompt step-one display 0x58bf12 passes 160 stock/C cases through existing LVGL providers. Step-two fade callback replaces the show import, leaving Main at 140 imports.")
+    conv_step_two_path = G2 / "build/c-firmware/20261016/main-conversate-exit-prompt-fade-step-58bebc/receipt.json"
+    conv_step_two, conv_step_two_ref = receipt(conv_step_two_path)
+    if (conv_step_two["status"] != "PASS_DIRECT_MAIN_CONVERSATE_EXIT_PROMPT_FADE_STEP_58BEBC_INTEGRATION" or
+            conv_step_two["oracle_cases"] != 40 or
+            conv_step_two["native_body"] != "0x58bebc..0x58bf11" or
+            conv_step_two["unresolved_before"] != 140 or
+            conv_step_two["unresolved_after"] != 141 or
+            conv_step_two["removed_imports"] != ["audio_conversate_exit_prompt_fade_step_58bebc"] or
+            conv_step_two["new_imports"] != ["audio_conversate_exit_prompt_fade_schedule_58c516",
+                                               "audio_conversate_exit_prompt_fade_step3_58be1a"] or
+            conv_step_two["source_complete"] or conv_step_two["flashable"]):
+        raise RuntimeError("Apollo Main Conversate step-two callback changed")
+    conv_step_two_candidate = file_checked(conv_step_two["candidate_object"]["path"],
+                                           conv_step_two["candidate_object"]["sha256"])
+    conv_step_two_unresolved = undefined(ROOT / conv_step_two_candidate["path"])
+    if conv_step_two_unresolved != sorted((set(conv_prompt_show_unresolved) -
+                                          set(conv_step_two["removed_imports"])) |
+                                         set(conv_step_two["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate step-two frontier changed")
+    images["apollo_main"]["candidate"] = conv_step_two_candidate
+    images["apollo_main"]["conversate_exit_prompt_step_two"] = conv_step_two_ref
+    images["apollo_main"]["unresolved_count"] = 141
+    images["apollo_main"]["unresolved_symbols"] = conv_step_two_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "140 current imports", "141 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate exit-prompt step-two callback 0x58bebc passes 40 stock/C cases with source-owned log strings. Fade scheduler and step-three callback replace the step-two import, raising Main to 141 imports.")
+    conv_step_final_path = G2 / "build/c-firmware/20261016/main-conversate-exit-prompt-fade-step3-58be1a/receipt.json"
+    conv_step_final, conv_step_final_ref = receipt(conv_step_final_path)
+    if (conv_step_final["status"] != "PASS_DIRECT_MAIN_CONVERSATE_EXIT_PROMPT_FADE_STEP3_58BE1A_INTEGRATION" or
+            conv_step_final["oracle_cases"] != 180 or
+            conv_step_final["native_body"] != "0x58be1a..0x58bebb" or
+            conv_step_final["unresolved_before"] != 141 or
+            conv_step_final["unresolved_after"] != 140 or
+            conv_step_final["removed_imports"] != ["audio_conversate_exit_prompt_fade_step3_58be1a"] or
+            conv_step_final["new_imports"] or
+            conv_step_final["source_complete"] or conv_step_final["flashable"]):
+        raise RuntimeError("Apollo Main Conversate completion callback changed")
+    conv_step_final_candidate = file_checked(conv_step_final["candidate_object"]["path"],
+                                            conv_step_final["candidate_object"]["sha256"])
+    conv_step_final_unresolved = undefined(ROOT / conv_step_final_candidate["path"])
+    if conv_step_final_unresolved != sorted(set(conv_step_two_unresolved) -
+                                           set(conv_step_final["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate completion callback frontier changed")
+    images["apollo_main"]["candidate"] = conv_step_final_candidate
+    images["apollo_main"]["conversate_exit_prompt_completion"] = conv_step_final_ref
+    images["apollo_main"]["unresolved_count"] = 140
+    images["apollo_main"]["unresolved_symbols"] = conv_step_final_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "141 current imports", "140 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate exit-prompt completion callback 0x58be1a passes 180 stock/C cases, including optional app close and RAM clear. Main returns to 140 imports; fade scheduler 0x58c516 remains open.")
+    conv_fade_scheduler_path = G2 / "build/c-firmware/20261016/main-conversate-exit-prompt-fade-schedule-58c516/receipt.json"
+    conv_fade_scheduler, conv_fade_scheduler_ref = receipt(conv_fade_scheduler_path)
+    if (conv_fade_scheduler["status"] != "PASS_DIRECT_MAIN_CONVERSATE_EXIT_PROMPT_FADE_SCHEDULE_58C516_INTEGRATION" or
+            conv_fade_scheduler["oracle_cases"] != 320 or
+            conv_fade_scheduler["native_body"] != "0x58c516..0x58c621" or
+            conv_fade_scheduler["unresolved_before"] != 140 or
+            conv_fade_scheduler["unresolved_after"] != 139 or
+            conv_fade_scheduler["removed_imports"] != ["audio_conversate_exit_prompt_fade_schedule_58c516"] or
+            conv_fade_scheduler["new_imports"] or
+            conv_fade_scheduler["source_complete"] or conv_fade_scheduler["flashable"]):
+        raise RuntimeError("Apollo Main fade scheduler changed")
+    conv_fade_scheduler_candidate = file_checked(conv_fade_scheduler["candidate_object"]["path"],
+                                                 conv_fade_scheduler["candidate_object"]["sha256"])
+    conv_fade_scheduler_unresolved = undefined(ROOT / conv_fade_scheduler_candidate["path"])
+    if conv_fade_scheduler_unresolved != sorted(set(conv_step_final_unresolved) -
+                                               set(conv_fade_scheduler["removed_imports"])):
+        raise RuntimeError("Apollo Main fade scheduler frontier changed")
+    images["apollo_main"]["candidate"] = conv_fade_scheduler_candidate
+    images["apollo_main"]["conversate_exit_prompt_fade_scheduler"] = conv_fade_scheduler_ref
+    images["apollo_main"]["unresolved_count"] = 139
+    images["apollo_main"]["unresolved_symbols"] = conv_fade_scheduler_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "140 current imports", "139 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Fade scheduler 0x58c516 passes 320 stock/C cases including descriptor fields and log branches. The exit-prompt callback chain is now source-linked; Main has 139 remaining imports.")
+    conv_duration_label_path = G2 / "build/c-firmware/20261016/main-conversate-auto-duration-label-5b68d6/receipt.json"
+    conv_duration_label, conv_duration_label_ref = receipt(conv_duration_label_path)
+    if (conv_duration_label["status"] != "PASS_DIRECT_MAIN_CONVERSATE_AUTO_DURATION_LABEL_5B68D6_INTEGRATION" or
+            conv_duration_label["oracle_cases"] != 64 or
+            conv_duration_label["native_body"] != "0x5b68d6..0x5b6941" or
+            conv_duration_label["unresolved_before"] != 139 or
+            conv_duration_label["unresolved_after"] != 138 or
+            conv_duration_label["removed_imports"] != ["audio_conversate_ui_route_5b68d6"] or
+            conv_duration_label["new_imports"] or
+            conv_duration_label["source_complete"] or conv_duration_label["flashable"]):
+        raise RuntimeError("Apollo Main Conversate duration label changed")
+    conv_duration_label_candidate = file_checked(conv_duration_label["candidate_object"]["path"],
+                                                 conv_duration_label["candidate_object"]["sha256"])
+    conv_duration_label_unresolved = undefined(ROOT / conv_duration_label_candidate["path"])
+    if conv_duration_label_unresolved != sorted(set(conv_fade_scheduler_unresolved) -
+                                               set(conv_duration_label["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate duration label frontier changed")
+    images["apollo_main"]["candidate"] = conv_duration_label_candidate
+    images["apollo_main"]["conversate_auto_duration_label"] = conv_duration_label_ref
+    images["apollo_main"]["unresolved_count"] = 138
+    images["apollo_main"]["unresolved_symbols"] = conv_duration_label_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "139 current imports", "138 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate close timer label 0x5b68d6 passes 64 stock/C cases for object validity, localization, and return status. Main has 138 remaining imports.")
+    conv_note_collapse_path = G2 / "build/c-firmware/20261016/main-conversate-note-collapse-5b7556/receipt.json"
+    conv_note_collapse, conv_note_collapse_ref = receipt(conv_note_collapse_path)
+    if (conv_note_collapse["status"] != "PASS_DIRECT_MAIN_CONVERSATE_NOTE_COLLAPSE_5B7556_INTEGRATION" or
+            conv_note_collapse["oracle_cases"] != 32 or
+            conv_note_collapse["native_body"] != "0x5b7556..0x5b7603" or
+            conv_note_collapse["unresolved_before"] != 138 or
+            conv_note_collapse["unresolved_after"] != 139 or
+            conv_note_collapse["removed_imports"] != ["audio_conversate_ui_route_5b7556"] or
+            conv_note_collapse["new_imports"] != ["audio_conversate_expand_animation_5b7704",
+                                                    "audio_conversate_note_collapse_complete_5b7518"] or
+            conv_note_collapse["source_complete"] or conv_note_collapse["flashable"]):
+        raise RuntimeError("Apollo Main Conversate note collapse changed")
+    conv_note_collapse_candidate = file_checked(conv_note_collapse["candidate_object"]["path"],
+                                                conv_note_collapse["candidate_object"]["sha256"])
+    conv_note_collapse_unresolved = undefined(ROOT / conv_note_collapse_candidate["path"])
+    if conv_note_collapse_unresolved != sorted((set(conv_duration_label_unresolved) -
+                                               set(conv_note_collapse["removed_imports"])) |
+                                              set(conv_note_collapse["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate note collapse frontier changed")
+    images["apollo_main"]["candidate"] = conv_note_collapse_candidate
+    images["apollo_main"]["conversate_note_collapse"] = conv_note_collapse_ref
+    images["apollo_main"]["unresolved_count"] = 139
+    images["apollo_main"]["unresolved_symbols"] = conv_note_collapse_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "138 current imports", "139 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate note collapse route 0x5b7556 passes 32 stock/C cases; its animation scheduler and completion callback replace the route import.")
+    conv_note_complete_path = G2 / "build/c-firmware/20261016/main-conversate-note-collapse-complete-5b7518/receipt.json"
+    conv_note_complete, conv_note_complete_ref = receipt(conv_note_complete_path)
+    if (conv_note_complete["status"] != "PASS_DIRECT_MAIN_CONVERSATE_NOTE_COLLAPSE_COMPLETE_5B7518_INTEGRATION" or
+            conv_note_complete["oracle_cases"] != 24 or
+            conv_note_complete["native_body"] != "0x5b7518..0x5b7555" or
+            conv_note_complete["unresolved_before"] != 139 or
+            conv_note_complete["unresolved_after"] != 139 or
+            conv_note_complete["removed_imports"] != ["audio_conversate_note_collapse_complete_5b7518"] or
+            conv_note_complete["new_imports"] != ["audio_conversate_lv_object_delete_44d90e"] or
+            conv_note_complete["source_complete"] or conv_note_complete["flashable"]):
+        raise RuntimeError("Apollo Main Conversate note completion changed")
+    conv_note_complete_candidate = file_checked(conv_note_complete["candidate_object"]["path"],
+                                                conv_note_complete["candidate_object"]["sha256"])
+    conv_note_complete_unresolved = undefined(ROOT / conv_note_complete_candidate["path"])
+    if conv_note_complete_unresolved != sorted((set(conv_note_collapse_unresolved) -
+                                               set(conv_note_complete["removed_imports"])) |
+                                              set(conv_note_complete["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate note completion frontier changed")
+    images["apollo_main"]["candidate"] = conv_note_complete_candidate
+    images["apollo_main"]["conversate_note_collapse_completion"] = conv_note_complete_ref
+    images["apollo_main"]["unresolved_count"] = 139
+    images["apollo_main"]["unresolved_symbols"] = conv_note_complete_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate note collapse completion 0x5b7518 passes 24 stock/C cases; LVGL asynchronous delete 0x44d90e and scheduler 0x5b7704 remain open.")
+    lv_async_delete_path = G2 / "build/c-firmware/20261016/main-lv-object-delete-async-44d90e/receipt.json"
+    lv_async_delete, lv_async_delete_ref = receipt(lv_async_delete_path)
+    if (lv_async_delete["status"] != "PASS_DIRECT_MAIN_LV_OBJECT_DELETE_ASYNC_44D90E_INTEGRATION" or
+            lv_async_delete["oracle_cases"] != 12 or
+            lv_async_delete["native_body"] != "0x44d90e..0x44d94b" or
+            lv_async_delete["unresolved_before"] != 139 or
+            lv_async_delete["unresolved_after"] != 139 or
+            lv_async_delete["removed_imports"] != ["audio_conversate_lv_object_delete_44d90e"] or
+            lv_async_delete["new_imports"] != ["audio_uart_lv_async_post_484014"] or
+            lv_async_delete["source_complete"] or lv_async_delete["flashable"]):
+        raise RuntimeError("Apollo Main LVGL async delete changed")
+    lv_async_delete_candidate = file_checked(lv_async_delete["candidate_object"]["path"],
+                                             lv_async_delete["candidate_object"]["sha256"])
+    lv_async_delete_unresolved = undefined(ROOT / lv_async_delete_candidate["path"])
+    if lv_async_delete_unresolved != sorted((set(conv_note_complete_unresolved) -
+                                            set(lv_async_delete["removed_imports"])) |
+                                           set(lv_async_delete["new_imports"])):
+        raise RuntimeError("Apollo Main LVGL async delete frontier changed")
+    images["apollo_main"]["candidate"] = lv_async_delete_candidate
+    images["apollo_main"]["lv_async_object_delete"] = lv_async_delete_ref
+    images["apollo_main"]["unresolved_count"] = 139
+    images["apollo_main"]["unresolved_symbols"] = lv_async_delete_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "LVGL async object delete entry 0x44d90e passes 12 stock/C call-boundary cases; its queue helper replaces the import.")
+    lv_async_post_path = G2 / "build/c-firmware/20261016/main-lv-async-post-484014/receipt.json"
+    lv_async_post, lv_async_post_ref = receipt(lv_async_post_path)
+    if (lv_async_post["status"] != "PASS_DIRECT_MAIN_LV_ASYNC_POST_484014_INTEGRATION" or
+            lv_async_post["oracle_cases"] != 19 or
+            lv_async_post["native_bodies"] != ["0x484014..0x484051", "0x4645ac..0x4645d7"] or
+            lv_async_post["unresolved_before"] != 139 or
+            lv_async_post["unresolved_after"] != 138 or
+            lv_async_post["removed_imports"] != ["audio_uart_lv_async_post_484014"] or
+            lv_async_post["new_imports"] or
+            lv_async_post["source_complete"] or lv_async_post["flashable"]):
+        raise RuntimeError("Apollo Main LVGL async queue changed")
+    lv_async_post_candidate = file_checked(lv_async_post["candidate_object"]["path"],
+                                           lv_async_post["candidate_object"]["sha256"])
+    lv_async_post_unresolved = undefined(ROOT / lv_async_post_candidate["path"])
+    if lv_async_post_unresolved != sorted(set(lv_async_delete_unresolved) -
+                                         set(lv_async_post["removed_imports"])):
+        raise RuntimeError("Apollo Main LVGL async queue frontier changed")
+    images["apollo_main"]["candidate"] = lv_async_post_candidate
+    images["apollo_main"]["lv_async_post"] = lv_async_post_ref
+    images["apollo_main"]["unresolved_count"] = 138
+    images["apollo_main"]["unresolved_symbols"] = lv_async_post_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "139 current imports", "138 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "LVGL async queue 0x484014 and timer repeat setter 0x4645ac pass 19 stock/C cases. Main returns to 138 imports; Conversate expand scheduler 0x5b7704 remains open.")
+    conv_expand_path = G2 / "build/c-firmware/20261016/main-conversate-expand-animation-5b7704/receipt.json"
+    conv_expand, conv_expand_ref = receipt(conv_expand_path)
+    if (conv_expand["status"] != "PASS_DIRECT_MAIN_CONVERSATE_EXPAND_ANIMATION_5B7704_INTEGRATION" or
+            conv_expand["oracle_cases"] != 336 or
+            conv_expand["native_bodies"] != ["0x5b7704..0x5b7901", "0x5b7684..0x5b7703"] or
+            conv_expand["unresolved_before"] != 138 or
+            conv_expand["unresolved_after"] != 137 or
+            conv_expand["removed_imports"] != ["audio_conversate_expand_animation_5b7704"] or
+            conv_expand["new_imports"] or
+            conv_expand["source_complete"] or conv_expand["flashable"]):
+        raise RuntimeError("Apollo Main Conversate expand animation changed")
+    conv_expand_candidate = file_checked(conv_expand["candidate_object"]["path"],
+                                         conv_expand["candidate_object"]["sha256"])
+    conv_expand_unresolved = undefined(ROOT / conv_expand_candidate["path"])
+    if conv_expand_unresolved != sorted(set(lv_async_post_unresolved) -
+                                       set(conv_expand["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate expand frontier changed")
+    images["apollo_main"]["candidate"] = conv_expand_candidate
+    images["apollo_main"]["conversate_expand_animation"] = conv_expand_ref
+    images["apollo_main"]["unresolved_count"] = 137
+    images["apollo_main"]["unresolved_symbols"] = conv_expand_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "138 current imports", "137 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate expand scheduler 0x5b7704 and four update callbacks pass 336 stock/C cases across validity, logging and animation descriptor branches. Main has 137 remaining imports.")
+    conv_prep_scroll_path = G2 / "build/c-firmware/20261016/main-conversate-prep-scroll-route-5b6f8e/receipt.json"
+    conv_prep_scroll, conv_prep_scroll_ref = receipt(conv_prep_scroll_path)
+    if (conv_prep_scroll["status"] != "PASS_DIRECT_MAIN_CONVERSATE_PREP_SCROLL_ROUTE_5B6F8E_INTEGRATION" or
+            conv_prep_scroll["oracle_cases"] != 2220 or
+            conv_prep_scroll["native_bodies"] != ["0x5b4770..0x5b4775",
+                                                  "0x5b6a06..0x5b6a39",
+                                                  "0x5b6a3a..0x5b6a51",
+                                                  "0x5b6f8e..0x5b705f"] or
+            conv_prep_scroll["unresolved_before"] != 137 or
+            conv_prep_scroll["unresolved_after"] != 136 or
+            conv_prep_scroll["removed_imports"] != ["audio_conversate_ui_route_5b6f8e"] or
+            conv_prep_scroll["new_imports"] or
+            conv_prep_scroll["source_complete"] or conv_prep_scroll["flashable"]):
+        raise RuntimeError("Apollo Main Conversate prep scroll changed")
+    conv_prep_scroll_candidate = file_checked(conv_prep_scroll["candidate_object"]["path"],
+                                              conv_prep_scroll["candidate_object"]["sha256"])
+    conv_prep_scroll_unresolved = undefined(ROOT / conv_prep_scroll_candidate["path"])
+    if conv_prep_scroll_unresolved != sorted(set(conv_expand_unresolved) -
+                                            set(conv_prep_scroll["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate prep scroll frontier changed")
+    images["apollo_main"]["candidate"] = conv_prep_scroll_candidate
+    images["apollo_main"]["conversate_prep_scroll"] = conv_prep_scroll_ref
+    images["apollo_main"]["unresolved_count"] = 136
+    images["apollo_main"]["unresolved_symbols"] = conv_prep_scroll_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "137 current imports", "136 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate prep-note line count, scroll maximum, clamp and route pass 2220 stock/C cases; Main has 136 remaining imports.")
+    conv_prep_refresh_path = G2 / "build/c-firmware/20261016/main-conversate-prep-note-refresh-5b6cd0/receipt.json"
+    conv_prep_refresh, conv_prep_refresh_ref = receipt(conv_prep_refresh_path)
+    if (conv_prep_refresh["status"] != "PASS_DIRECT_MAIN_CONVERSATE_PREP_NOTE_REFRESH_5B6CD0_INTEGRATION" or
+            conv_prep_refresh["oracle_cases"] != 540 or
+            conv_prep_refresh["native_bodies"] != ["0x5b74ba..0x5b7517",
+                                                     "0x5b6cd0..0x5b6f8d",
+                                                     "0x5b69d4..0x5b6a05"] or
+            conv_prep_refresh["unresolved_before"] != 136 or
+            conv_prep_refresh["unresolved_after"] != 137 or
+            conv_prep_refresh["removed_imports"] != ["audio_conversate_ui_route_5b74ba"] or
+            conv_prep_refresh["new_imports"] != ["audio_conversate_prep_note_pool_bind_5b6ac0",
+                                                "audio_conversate_prep_note_pool_show_5b6b58"] or
+            conv_prep_refresh["source_complete"] or conv_prep_refresh["flashable"] or
+            conv_prep_refresh["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate prep refresh changed")
+    conv_prep_refresh_candidate = file_checked(conv_prep_refresh["candidate_object"]["path"],
+                                               conv_prep_refresh["candidate_object"]["sha256"])
+    conv_prep_refresh_unresolved = undefined(ROOT / conv_prep_refresh_candidate["path"])
+    if conv_prep_refresh_unresolved != sorted((set(conv_prep_scroll_unresolved) -
+                                               set(conv_prep_refresh["removed_imports"])) |
+                                              set(conv_prep_refresh["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate prep refresh frontier changed")
+    images["apollo_main"]["candidate"] = conv_prep_refresh_candidate
+    images["apollo_main"]["conversate_prep_note_refresh"] = conv_prep_refresh_ref
+    images["apollo_main"]["unresolved_count"] = 137
+    images["apollo_main"]["unresolved_symbols"] = conv_prep_refresh_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "136 current imports", "137 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate content-ready route, prep-note refresh and style helper pass 540 stock/C cases; pool bind and show remain open, leaving Main with 137 imports.")
+    conv_prep_pool_path = G2 / "build/c-firmware/20261016/main-conversate-prep-note-pool-5b6ac0/receipt.json"
+    conv_prep_pool, conv_prep_pool_ref = receipt(conv_prep_pool_path)
+    if (conv_prep_pool["status"] != "PASS_DIRECT_MAIN_CONVERSATE_PREP_NOTE_POOL_5B6AC0_INTEGRATION" or
+            conv_prep_pool["oracle_cases"] != 244 or
+            conv_prep_pool["native_bodies"] != ["0x5b6ac0..0x5b6b57", "0x5b6b58..0x5b6c47"] or
+            conv_prep_pool["unresolved_before"] != 137 or
+            conv_prep_pool["unresolved_after"] != 136 or
+            conv_prep_pool["removed_imports"] != ["audio_conversate_prep_note_pool_bind_5b6ac0",
+                                                 "audio_conversate_prep_note_pool_show_5b6b58"] or
+            conv_prep_pool["new_imports"] != ["audio_conversate_prep_note_line_text_5b4776"] or
+            conv_prep_pool["source_complete"] or conv_prep_pool["flashable"] or
+            conv_prep_pool["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate prep pool changed")
+    conv_prep_pool_candidate = file_checked(conv_prep_pool["candidate_object"]["path"],
+                                            conv_prep_pool["candidate_object"]["sha256"])
+    conv_prep_pool_unresolved = undefined(ROOT / conv_prep_pool_candidate["path"])
+    if conv_prep_pool_unresolved != sorted((set(conv_prep_refresh_unresolved) -
+                                            set(conv_prep_pool["removed_imports"])) |
+                                           set(conv_prep_pool["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate prep pool frontier changed")
+    images["apollo_main"]["candidate"] = conv_prep_pool_candidate
+    images["apollo_main"]["conversate_prep_note_pool"] = conv_prep_pool_ref
+    images["apollo_main"]["unresolved_count"] = 136
+    images["apollo_main"]["unresolved_symbols"] = conv_prep_pool_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "137 current imports", "136 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate prep-note pool bind and scrollbar show pass 244 stock/C cases; indexed line text is the newly exposed child, leaving Main with 136 imports.")
+    conv_line_text_path = G2 / "build/c-firmware/20261016/main-conversate-prep-note-line-text-5b4776/receipt.json"
+    conv_line_text, conv_line_text_ref = receipt(conv_line_text_path)
+    if (conv_line_text["status"] != "PASS_DIRECT_MAIN_CONVERSATE_PREP_NOTE_LINE_TEXT_5B4776_INTEGRATION" or
+            conv_line_text["oracle_cases"] != 180 or
+            conv_line_text["native_body"] != "0x5b4776..0x5b4845" or
+            conv_line_text["unresolved_before"] != 136 or
+            conv_line_text["unresolved_after"] != 135 or
+            conv_line_text["removed_imports"] != ["audio_conversate_prep_note_line_text_5b4776"] or
+            conv_line_text["new_imports"] or
+            conv_line_text["source_complete"] or conv_line_text["flashable"] or
+            conv_line_text["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate prep line text changed")
+    conv_line_text_candidate = file_checked(conv_line_text["candidate_object"]["path"],
+                                            conv_line_text["candidate_object"]["sha256"])
+    conv_line_text_unresolved = undefined(ROOT / conv_line_text_candidate["path"])
+    if conv_line_text_unresolved != sorted(set(conv_prep_pool_unresolved) -
+                                           set(conv_line_text["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate prep line-text frontier changed")
+    images["apollo_main"]["candidate"] = conv_line_text_candidate
+    images["apollo_main"]["conversate_prep_note_line_text"] = conv_line_text_ref
+    images["apollo_main"]["unresolved_count"] = 135
+    images["apollo_main"]["unresolved_symbols"] = conv_line_text_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "136 current imports", "135 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate indexed prep-note line text passes 180 stock/C cases across metadata, trimming and bounded copy; Main has 135 imports.")
+    conv_transcribe_label_path = G2 / "build/c-firmware/20261016/main-conversate-transcribe-label-update-5b32b4/receipt.json"
+    conv_transcribe_label, conv_transcribe_label_ref = receipt(conv_transcribe_label_path)
+    if (conv_transcribe_label["status"] != "PASS_DIRECT_MAIN_CONVERSATE_TRANSCRIBE_LABEL_UPDATE_5B32B4_INTEGRATION" or
+            conv_transcribe_label["oracle_cases"] != 120 or
+            conv_transcribe_label["native_body"] != "0x5b32b4..0x5b332d" or
+            conv_transcribe_label["unresolved_before"] != 135 or
+            conv_transcribe_label["unresolved_after"] != 134 or
+            conv_transcribe_label["removed_imports"] != ["audio_conversate_ui_route_5b32b4"] or
+            conv_transcribe_label["new_imports"] or
+            conv_transcribe_label["source_complete"] or conv_transcribe_label["flashable"] or
+            conv_transcribe_label["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate transcribe label changed")
+    conv_transcribe_label_candidate = file_checked(conv_transcribe_label["candidate_object"]["path"],
+                                                 conv_transcribe_label["candidate_object"]["sha256"])
+    conv_transcribe_label_unresolved = undefined(ROOT / conv_transcribe_label_candidate["path"])
+    if conv_transcribe_label_unresolved != sorted(set(conv_line_text_unresolved) -
+                                                  set(conv_transcribe_label["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate transcribe-label frontier changed")
+    images["apollo_main"]["candidate"] = conv_transcribe_label_candidate
+    images["apollo_main"]["conversate_transcribe_label_update"] = conv_transcribe_label_ref
+    images["apollo_main"]["unresolved_count"] = 134
+    images["apollo_main"]["unresolved_symbols"] = conv_transcribe_label_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "135 current imports", "134 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate transcribe-label route passes 120 stock/C cases across child lookup, text, scroll and log branches; Main has 134 imports.")
+    conv_unselect_path = G2 / "build/c-firmware/20261016/main-conversate-main-unselected-5b2c68/receipt.json"
+    conv_unselect, conv_unselect_ref = receipt(conv_unselect_path)
+    if (conv_unselect["status"] != "PASS_DIRECT_MAIN_CONVERSATE_MAIN_UNSELECTED_5B2C68_INTEGRATION" or
+            conv_unselect["oracle_cases"] != 80 or
+            conv_unselect["native_body"] != "0x5b2c68..0x5b2d17" or
+            conv_unselect["unresolved_before"] != 134 or
+            conv_unselect["unresolved_after"] != 136 or
+            conv_unselect["removed_imports"] != ["audio_conversate_ui_route_5b2c68"] or
+            conv_unselect["new_imports"] != ["audio_conversate_tag_unselect_5969a4",
+                                             "audio_conversate_ui_list_view_mode_set_5b0edc",
+                                             "audio_conversate_ui_main_page_refresh_5b13fe"] or
+            conv_unselect["source_complete"] or conv_unselect["flashable"] or
+            conv_unselect["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate main unselect changed")
+    conv_unselect_candidate = file_checked(conv_unselect["candidate_object"]["path"],
+                                           conv_unselect["candidate_object"]["sha256"])
+    conv_unselect_unresolved = undefined(ROOT / conv_unselect_candidate["path"])
+    if conv_unselect_unresolved != sorted((set(conv_transcribe_label_unresolved) -
+                                           set(conv_unselect["removed_imports"])) |
+                                          set(conv_unselect["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate main-unselect frontier changed")
+    images["apollo_main"]["candidate"] = conv_unselect_candidate
+    images["apollo_main"]["conversate_main_unselected"] = conv_unselect_ref
+    images["apollo_main"]["unresolved_count"] = 136
+    images["apollo_main"]["unresolved_symbols"] = conv_unselect_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "134 current imports", "136 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate main-page unselect passes 80 stock/C cases; its three child helpers are exposed and Main has 136 imports.")
+    conv_tag_unselect_path = G2 / "build/c-firmware/20261016/main-conversate-tag-unselect-5969a4/receipt.json"
+    conv_tag_unselect, conv_tag_unselect_ref = receipt(conv_tag_unselect_path)
+    if (conv_tag_unselect["status"] != "PASS_DIRECT_MAIN_CONVERSATE_TAG_UNSELECT_5969A4_INTEGRATION" or
+            conv_tag_unselect["oracle_cases"] != 45 or
+            conv_tag_unselect["native_body"] != "0x5969a4..0x596a29" or
+            conv_tag_unselect["unresolved_before"] != 136 or
+            conv_tag_unselect["unresolved_after"] != 135 or
+            conv_tag_unselect["removed_imports"] != ["audio_conversate_tag_unselect_5969a4"] or
+            conv_tag_unselect["new_imports"] or
+            conv_tag_unselect["source_complete"] or conv_tag_unselect["flashable"] or
+            conv_tag_unselect["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate tag unselect changed")
+    conv_tag_unselect_candidate = file_checked(conv_tag_unselect["candidate_object"]["path"],
+                                               conv_tag_unselect["candidate_object"]["sha256"])
+    conv_tag_unselect_unresolved = undefined(ROOT / conv_tag_unselect_candidate["path"])
+    if conv_tag_unselect_unresolved != sorted(set(conv_unselect_unresolved) -
+                                              set(conv_tag_unselect["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate tag-unselect frontier changed")
+    images["apollo_main"]["candidate"] = conv_tag_unselect_candidate
+    images["apollo_main"]["conversate_tag_unselect"] = conv_tag_unselect_ref
+    images["apollo_main"]["unresolved_count"] = 135
+    images["apollo_main"]["unresolved_symbols"] = conv_tag_unselect_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "136 current imports", "135 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate tag-head reset passes 45 stock/C cases across storage and log branches; Main has 135 imports.")
+    conv_main_refresh_path = G2 / "build/c-firmware/20261016/main-conversate-main-page-refresh-5b13fe/receipt.json"
+    conv_main_refresh, conv_main_refresh_ref = receipt(conv_main_refresh_path)
+    if (conv_main_refresh["status"] != "PASS_DIRECT_MAIN_CONVERSATE_MAIN_PAGE_REFRESH_5B13FE_INTEGRATION" or
+            conv_main_refresh["oracle_cases"] != 328 or
+            conv_main_refresh["native_bodies"] != ["0x5b0c18..0x5b0c2f", "0x5b13fe..0x5b14cd"] or
+            conv_main_refresh["unresolved_before"] != 135 or
+            conv_main_refresh["unresolved_after"] != 134 or
+            conv_main_refresh["removed_imports"] != ["audio_conversate_ui_main_page_refresh_5b13fe"] or
+            conv_main_refresh["new_imports"] or
+            conv_main_refresh["source_complete"] or conv_main_refresh["flashable"] or
+            conv_main_refresh["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate main refresh changed")
+    conv_main_refresh_candidate = file_checked(conv_main_refresh["candidate_object"]["path"],
+                                               conv_main_refresh["candidate_object"]["sha256"])
+    conv_main_refresh_unresolved = undefined(ROOT / conv_main_refresh_candidate["path"])
+    if conv_main_refresh_unresolved != sorted(set(conv_tag_unselect_unresolved) -
+                                              set(conv_main_refresh["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate main-refresh frontier changed")
+    images["apollo_main"]["candidate"] = conv_main_refresh_candidate
+    images["apollo_main"]["conversate_main_page_refresh"] = conv_main_refresh_ref
+    images["apollo_main"]["unresolved_count"] = 134
+    images["apollo_main"]["unresolved_symbols"] = conv_main_refresh_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "135 current imports", "134 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate list count and main-page oldest-tag deletion pass 328 stock/C cases; Main has 134 imports.")
+    conv_list_mode_path = G2 / "build/c-firmware/20261016/main-conversate-list-view-mode-5b0edc/receipt.json"
+    conv_list_mode, conv_list_mode_ref = receipt(conv_list_mode_path)
+    if (conv_list_mode["status"] != "PASS_DIRECT_MAIN_CONVERSATE_LIST_VIEW_MODE_5B0EDC_INTEGRATION" or
+            conv_list_mode["oracle_cases"] != 2186 or
+            conv_list_mode["native_bodies"] != ["0x5b0c30..0x5b0c51", "0x5b0d24..0x5b0d63",
+                                                "0x5b0edc..0x5b1071"] or
+            conv_list_mode["unresolved_before"] != 134 or
+            conv_list_mode["unresolved_after"] != 135 or
+            conv_list_mode["removed_imports"] != ["audio_conversate_ui_list_view_mode_set_5b0edc"] or
+            conv_list_mode["new_imports"] != ["audio_conversate_list_slot_alpha_5b0c72",
+                                               "audio_conversate_list_slot_fade_5b0ca0"] or
+            conv_list_mode["source_complete"] or conv_list_mode["flashable"] or
+            conv_list_mode["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate list-view mode changed")
+    conv_list_mode_candidate = file_checked(conv_list_mode["candidate_object"]["path"],
+                                            conv_list_mode["candidate_object"]["sha256"])
+    conv_list_mode_unresolved = undefined(ROOT / conv_list_mode_candidate["path"])
+    if conv_list_mode_unresolved != sorted((set(conv_main_refresh_unresolved) -
+                                            set(conv_list_mode["removed_imports"])) |
+                                           set(conv_list_mode["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate list-view frontier changed")
+    images["apollo_main"]["candidate"] = conv_list_mode_candidate
+    images["apollo_main"]["conversate_list_view_mode"] = conv_list_mode_ref
+    images["apollo_main"]["unresolved_count"] = 135
+    images["apollo_main"]["unresolved_symbols"] = conv_list_mode_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "134 current imports", "135 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate list-view mode mapping, immediate apply and mode setter pass 2186 stock/C cases; alpha and fade children are exposed and Main has 135 imports.")
+    conv_slot_fade_path = G2 / "build/c-firmware/20261016/main-conversate-list-slot-alpha-fade-5b0c72/receipt.json"
+    conv_slot_fade, conv_slot_fade_ref = receipt(conv_slot_fade_path)
+    if (conv_slot_fade["status"] != "PASS_DIRECT_MAIN_CONVERSATE_LIST_SLOT_ALPHA_FADE_5B0C72_INTEGRATION" or
+            conv_slot_fade["oracle_cases"] != 576 or
+            conv_slot_fade["native_bodies"] != ["0x5b0c4e..0x5b0c71", "0x5b0c72..0x5b0c9f",
+                                                "0x5b0ca0..0x5b0d23"] or
+            conv_slot_fade["unresolved_before"] != 135 or
+            conv_slot_fade["unresolved_after"] != 133 or
+            conv_slot_fade["removed_imports"] != ["audio_conversate_list_slot_alpha_5b0c72",
+                                                  "audio_conversate_list_slot_fade_5b0ca0"] or
+            conv_slot_fade["new_imports"] or
+            conv_slot_fade["source_complete"] or conv_slot_fade["flashable"] or
+            conv_slot_fade["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate slot fade changed")
+    conv_slot_fade_candidate = file_checked(conv_slot_fade["candidate_object"]["path"],
+                                            conv_slot_fade["candidate_object"]["sha256"])
+    conv_slot_fade_unresolved = undefined(ROOT / conv_slot_fade_candidate["path"])
+    if conv_slot_fade_unresolved != sorted(set(conv_list_mode_unresolved) -
+                                           set(conv_slot_fade["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate slot-fade frontier changed")
+    images["apollo_main"]["candidate"] = conv_slot_fade_candidate
+    images["apollo_main"]["conversate_list_slot_alpha_fade"] = conv_slot_fade_ref
+    images["apollo_main"]["unresolved_count"] = 133
+    images["apollo_main"]["unresolved_symbols"] = conv_slot_fade_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "135 current imports", "133 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate list-slot opacity callback, direct alpha and fade scheduler pass 576 stock/C cases; Main has 133 imports.")
+    conv_scroll_up_path = G2 / "build/c-firmware/20261016/main-conversate-main-scroll-up-5b29bc/receipt.json"
+    conv_scroll_up, conv_scroll_up_ref = receipt(conv_scroll_up_path)
+    if (conv_scroll_up["status"] != "PASS_DIRECT_MAIN_CONVERSATE_MAIN_SCROLL_UP_5B29BC_INTEGRATION" or
+            conv_scroll_up["oracle_cases"] != 320 or
+            conv_scroll_up["native_body"] != "0x5b29bc..0x5b2a63" or
+            conv_scroll_up["unresolved_before"] != 133 or
+            conv_scroll_up["unresolved_after"] != 132 or
+            conv_scroll_up["removed_imports"] != ["audio_conversate_ui_route_5b29bc"] or
+            conv_scroll_up["new_imports"] or
+            conv_scroll_up["source_complete"] or conv_scroll_up["flashable"] or
+            conv_scroll_up["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate scroll-up changed")
+    conv_scroll_up_candidate = file_checked(conv_scroll_up["candidate_object"]["path"],
+                                            conv_scroll_up["candidate_object"]["sha256"])
+    conv_scroll_up_unresolved = undefined(ROOT / conv_scroll_up_candidate["path"])
+    if conv_scroll_up_unresolved != sorted(set(conv_slot_fade_unresolved) -
+                                           set(conv_scroll_up["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate scroll-up frontier changed")
+    images["apollo_main"]["candidate"] = conv_scroll_up_candidate
+    images["apollo_main"]["conversate_main_scroll_up"] = conv_scroll_up_ref
+    images["apollo_main"]["unresolved_count"] = 132
+    images["apollo_main"]["unresolved_symbols"] = conv_scroll_up_unresolved
+    images["apollo_main"]["remaining_gate"][0] = images["apollo_main"]["remaining_gate"][0].replace(
+        "133 current imports", "132 current imports")
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate main-page scroll-up passes 320 stock/C cases; Main has 132 imports.")
+    conv_scroll_down_path = G2 / "build/c-firmware/20261016/main-conversate-main-scroll-down-5b2a64/receipt.json"
+    conv_scroll_down, conv_scroll_down_ref = receipt(conv_scroll_down_path)
+    if (conv_scroll_down["status"] != "PASS_DIRECT_MAIN_CONVERSATE_MAIN_SCROLL_DOWN_5B2A64_INTEGRATION" or
+            conv_scroll_down["oracle_cases"] != 1920 or
+            conv_scroll_down["native_body"] != "0x5b2a64..0x5b2b73" or
+            conv_scroll_down["unresolved_before"] != 132 or
+            conv_scroll_down["unresolved_after"] != 132 or
+            conv_scroll_down["removed_imports"] != ["audio_conversate_ui_route_5b2a64"] or
+            conv_scroll_down["new_imports"] != ["audio_conversate_main_list_scroll_58a680"] or
+            conv_scroll_down["source_complete"] or conv_scroll_down["flashable"] or
+            conv_scroll_down["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate scroll-down changed")
+    conv_scroll_down_candidate = file_checked(conv_scroll_down["candidate_object"]["path"],
+                                              conv_scroll_down["candidate_object"]["sha256"])
+    conv_scroll_down_unresolved = undefined(ROOT / conv_scroll_down_candidate["path"])
+    if conv_scroll_down_unresolved != sorted((set(conv_scroll_up_unresolved) -
+                                              set(conv_scroll_down["removed_imports"])) |
+                                             set(conv_scroll_down["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate scroll-down frontier changed")
+    images["apollo_main"]["candidate"] = conv_scroll_down_candidate
+    images["apollo_main"]["conversate_main_scroll_down"] = conv_scroll_down_ref
+    images["apollo_main"]["unresolved_count"] = 132
+    images["apollo_main"]["unresolved_symbols"] = conv_scroll_down_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate main-page scroll-down passes 1920 stock/C cases; bounce animation remains its exposed child and Main has 132 imports.")
+    bounce_play_path = G2 / "build/c-firmware/20261016/main-conversate-bounce-play-58a680/receipt.json"
+    bounce_play, bounce_play_ref = receipt(bounce_play_path)
+    if (bounce_play["status"] != "PASS_DIRECT_MAIN_CONVERSATE_BOUNCE_PLAY_58A680_INTEGRATION" or
+            bounce_play["oracle_cases"] != 675 or
+            bounce_play["native_bodies"] != ["0x58a7d2..0x58a83d", "0x58a680..0x58a7d1"] or
+            bounce_play["unresolved_before"] != 132 or
+            bounce_play["unresolved_after"] != 133 or
+            bounce_play["removed_imports"] != ["audio_conversate_main_list_scroll_58a680"] or
+            bounce_play["new_imports"] != ["audio_conversate_bounce_phase1_done_58a408",
+                                           "audio_conversate_bounce_y_58a3fc"] or
+            bounce_play["source_complete"] or bounce_play["flashable"] or
+            bounce_play["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate bounce play changed")
+    bounce_play_candidate = file_checked(bounce_play["candidate_object"]["path"],
+                                         bounce_play["candidate_object"]["sha256"])
+    bounce_play_unresolved = undefined(ROOT / bounce_play_candidate["path"])
+    if bounce_play_unresolved != sorted((set(conv_scroll_down_unresolved) -
+                                         set(bounce_play["removed_imports"])) |
+                                        set(bounce_play["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate bounce play frontier changed")
+    images["apollo_main"]["candidate"] = bounce_play_candidate
+    images["apollo_main"]["conversate_bounce_play"] = bounce_play_ref
+    images["apollo_main"]["unresolved_count"] = 133
+    images["apollo_main"]["unresolved_symbols"] = bounce_play_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Bounce play and stop pass 675 stock/C cases; the two animation callbacks and final bounce state placement remain open. Main has 133 imports.")
+    bounce_callbacks_path = G2 / "build/c-firmware/20261016/main-conversate-bounce-phase2-58a5a4/receipt.json"
+    bounce_callbacks, bounce_callbacks_ref = receipt(bounce_callbacks_path)
+    if (bounce_callbacks["status"] != "PASS_DIRECT_MAIN_CONVERSATE_BOUNCE_CALLBACKS_INTEGRATION" or
+            bounce_callbacks["oracle_cases"] != 240 or
+            bounce_callbacks["unresolved_before"] != 133 or
+            bounce_callbacks["unresolved_after"] != 131 or
+            bounce_callbacks["removed_imports"] != ["audio_conversate_bounce_phase1_done_58a408",
+                                                "audio_conversate_bounce_y_58a3fc"] or
+            bounce_callbacks["new_imports"] or
+            bounce_callbacks["source_complete"] or bounce_callbacks["flashable"] or
+            bounce_callbacks["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate bounce callbacks changed")
+    bounce_callbacks_candidate = file_checked(bounce_callbacks["candidate_object"]["path"],
+                                              bounce_callbacks["candidate_object"]["sha256"])
+    bounce_callbacks_unresolved = undefined(ROOT / bounce_callbacks_candidate["path"])
+    if bounce_callbacks_unresolved != sorted(set(bounce_play_unresolved) -
+                                             set(bounce_callbacks["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate bounce callback frontier changed")
+    images["apollo_main"]["candidate"] = bounce_callbacks_candidate
+    images["apollo_main"]["conversate_bounce_callbacks"] = bounce_callbacks_ref
+    images["apollo_main"]["unresolved_count"] = 131
+    images["apollo_main"]["unresolved_symbols"] = bounce_callbacks_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Bounce phase-1 and phase-2 callbacks pass 240 stock/C cases; callback Y setters are source-backed and final bounce state placement remains open. Main has 131 imports.")
+    conv_selected_path = G2 / "build/c-firmware/20261016/main-conversate-main-selected-5b2b74/receipt.json"
+    conv_selected, conv_selected_ref = receipt(conv_selected_path)
+    if (conv_selected["status"] != "PASS_DIRECT_MAIN_CONVERSATE_MAIN_SELECTED_5B2B74_INTEGRATION" or
+            conv_selected["oracle_cases"] != 80 or
+            conv_selected["native_body"] != "0x5b2b74..0x5b2c67" or
+            conv_selected["unresolved_before"] != 131 or
+            conv_selected["unresolved_after"] != 130 or
+            conv_selected["removed_imports"] != ["audio_conversate_ui_route_5b2b74"] or
+            conv_selected["new_imports"] or
+            conv_selected["source_complete"] or conv_selected["flashable"] or
+            conv_selected["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate selection changed")
+    conv_selected_candidate = file_checked(conv_selected["candidate_object"]["path"],
+                                           conv_selected["candidate_object"]["sha256"])
+    conv_selected_unresolved = undefined(ROOT / conv_selected_candidate["path"])
+    if conv_selected_unresolved != sorted(set(bounce_callbacks_unresolved) -
+                                          set(conv_selected["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate selection frontier changed")
+    images["apollo_main"]["candidate"] = conv_selected_candidate
+    images["apollo_main"]["conversate_main_selected"] = conv_selected_ref
+    images["apollo_main"]["unresolved_count"] = 130
+    images["apollo_main"]["unresolved_symbols"] = conv_selected_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate main-page selection passes 80 stock/C cases; Main has 130 imports.")
+    conv_list_container_path = G2 / "build/c-firmware/20261016/main-conversate-list-container-5b12ba/receipt.json"
+    conv_list_container, conv_list_container_ref = receipt(conv_list_container_path)
+    if (conv_list_container["status"] != "PASS_DIRECT_MAIN_CONVERSATE_LIST_CONTAINER_5B12BA_INTEGRATION" or
+            conv_list_container["oracle_cases"] != 9 or
+            conv_list_container["native_body"] != "0x5b12ba..0x5b133b" or
+            conv_list_container["unresolved_before"] != 130 or
+            conv_list_container["unresolved_after"] != 130 or
+            conv_list_container["removed_imports"] or conv_list_container["new_imports"] or
+            conv_list_container["source_complete"] or conv_list_container["flashable"] or
+            conv_list_container["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate list constructor changed")
+    conv_list_container_candidate = file_checked(conv_list_container["candidate_object"]["path"],
+                                                 conv_list_container["candidate_object"]["sha256"])
+    conv_list_container_unresolved = undefined(ROOT / conv_list_container_candidate["path"])
+    if conv_list_container_unresolved != conv_selected_unresolved:
+        raise RuntimeError("Apollo Main Conversate list constructor frontier changed")
+    images["apollo_main"]["candidate"] = conv_list_container_candidate
+    images["apollo_main"]["conversate_main_list_container"] = conv_list_container_ref
+    images["apollo_main"]["unresolved_count"] = 130
+    images["apollo_main"]["unresolved_symbols"] = conv_list_container_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate main-list constructor passes 9 stock/C cases; its display-main-page caller at 0x5b2d64 remains open.")
+    conv_list_layout_path = G2 / "build/c-firmware/20261016/main-conversate-list-layout-5b0d86/receipt.json"
+    conv_list_layout, conv_list_layout_ref = receipt(conv_list_layout_path)
+    if (conv_list_layout["status"] != "PASS_DIRECT_MAIN_CONVERSATE_LIST_LAYOUT_5B0D86_INTEGRATION" or
+            conv_list_layout["oracle_cases"] != 48 or
+            conv_list_layout["native_body"] != "0x5b0d86..0x5b0edb" or
+            conv_list_layout["unresolved_before"] != 130 or
+            conv_list_layout["unresolved_after"] != 130 or
+            conv_list_layout["removed_imports"] or conv_list_layout["new_imports"] or
+            conv_list_layout["source_complete"] or conv_list_layout["flashable"] or
+            conv_list_layout["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate list layout changed")
+    conv_list_layout_candidate = file_checked(conv_list_layout["candidate_object"]["path"],
+                                              conv_list_layout["candidate_object"]["sha256"])
+    conv_list_layout_unresolved = undefined(ROOT / conv_list_layout_candidate["path"])
+    if conv_list_layout_unresolved != conv_list_container_unresolved:
+        raise RuntimeError("Apollo Main Conversate list layout frontier changed")
+    images["apollo_main"]["candidate"] = conv_list_layout_candidate
+    images["apollo_main"]["conversate_main_list_layout"] = conv_list_layout_ref
+    images["apollo_main"]["unresolved_count"] = 130
+    images["apollo_main"]["unresolved_symbols"] = conv_list_layout_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate list layout refresh passes 48 stock/C cases; display-main-page caller at 0x5b2d64 remains open.")
+    conv_display_style_path = G2 / "build/c-firmware/20261016/main-conversate-display-style-5b22bc/receipt.json"
+    conv_display_style, conv_display_style_ref = receipt(conv_display_style_path)
+    if (conv_display_style["status"] != "PASS_DIRECT_MAIN_CONVERSATE_DISPLAY_STYLE_5B22BC_INTEGRATION" or
+            conv_display_style["oracle_cases"] != 27 or
+            conv_display_style["native_body"] != "0x5b22bc..0x5b22ed" or
+            conv_display_style["unresolved_before"] != 130 or
+            conv_display_style["unresolved_after"] != 130 or
+            conv_display_style["removed_imports"] or conv_display_style["new_imports"] or
+            conv_display_style["source_complete"] or conv_display_style["flashable"] or
+            conv_display_style["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate display style changed")
+    conv_display_style_candidate = file_checked(conv_display_style["candidate_object"]["path"],
+                                                conv_display_style["candidate_object"]["sha256"])
+    conv_display_style_unresolved = undefined(ROOT / conv_display_style_candidate["path"])
+    if conv_display_style_unresolved != conv_list_layout_unresolved:
+        raise RuntimeError("Apollo Main Conversate display style frontier changed")
+    images["apollo_main"]["candidate"] = conv_display_style_candidate
+    images["apollo_main"]["conversate_display_style"] = conv_display_style_ref
+    images["apollo_main"]["unresolved_count"] = 130
+    images["apollo_main"]["unresolved_symbols"] = conv_display_style_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate display style quartet passes 27 stock/C cases; display-main-page caller at 0x5b2d64 remains open.")
+    conv_pre_notes_anim_path = G2 / "build/c-firmware/20261016/main-conversate-pre-notes-anim-58c7a0/receipt.json"
+    conv_pre_notes_anim, conv_pre_notes_anim_ref = receipt(conv_pre_notes_anim_path)
+    if (conv_pre_notes_anim["status"] != "PASS_DIRECT_MAIN_CONVERSATE_PRE_NOTES_ANIM_58C7A0_INTEGRATION" or
+            conv_pre_notes_anim["oracle_cases"] != 16 or
+            conv_pre_notes_anim["native_bodies"] != ["0x58c7a0..0x58c823", "0x58c824..0x58c835"] or
+            conv_pre_notes_anim["unresolved_before"] != 130 or
+            conv_pre_notes_anim["unresolved_after"] != 131 or
+            conv_pre_notes_anim["removed_imports"] or
+            conv_pre_notes_anim["new_imports"] != ["audio_conversate_anim_frames_20000bf4"] or
+            conv_pre_notes_anim["source_complete"] or conv_pre_notes_anim["flashable"] or
+            conv_pre_notes_anim["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate pre-notes anim changed")
+    conv_pre_notes_anim_candidate = file_checked(conv_pre_notes_anim["candidate_object"]["path"],
+                                                conv_pre_notes_anim["candidate_object"]["sha256"])
+    conv_pre_notes_anim_unresolved = undefined(ROOT / conv_pre_notes_anim_candidate["path"])
+    if conv_pre_notes_anim_unresolved != sorted(set(conv_display_style_unresolved) |
+                                                set(conv_pre_notes_anim["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate pre-notes anim frontier changed")
+    images["apollo_main"]["candidate"] = conv_pre_notes_anim_candidate
+    images["apollo_main"]["conversate_pre_notes_anim"] = conv_pre_notes_anim_ref
+    images["apollo_main"]["unresolved_count"] = 131
+    images["apollo_main"]["unresolved_symbols"] = conv_pre_notes_anim_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate pre-notes animation passes 16 stock/C cases; its six-frame RAM pointer array at 0x20000bf4 needs source ownership. Main has 131 imports.")
+    conv_prep_button_path = G2 / "build/c-firmware/20261016/main-conversate-prep-button-5b1150/receipt.json"
+    conv_prep_button, conv_prep_button_ref = receipt(conv_prep_button_path)
+    if (conv_prep_button["status"] != "PASS_DIRECT_MAIN_CONVERSATE_PREP_BUTTON_5B1150_INTEGRATION" or
+            conv_prep_button["oracle_cases"] != 40 or
+            conv_prep_button["native_body"] != "0x5b1150..0x5b12b9" or
+            conv_prep_button["unresolved_before"] != 131 or
+            conv_prep_button["unresolved_after"] != 131 or
+            conv_prep_button["removed_imports"] or conv_prep_button["new_imports"] or
+            conv_prep_button["source_complete"] or conv_prep_button["flashable"] or
+            conv_prep_button["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate prep button changed")
+    conv_prep_button_candidate = file_checked(conv_prep_button["candidate_object"]["path"],
+                                              conv_prep_button["candidate_object"]["sha256"])
+    conv_prep_button_unresolved = undefined(ROOT / conv_prep_button_candidate["path"])
+    if conv_prep_button_unresolved != conv_pre_notes_anim_unresolved:
+        raise RuntimeError("Apollo Main Conversate prep button frontier changed")
+    images["apollo_main"]["candidate"] = conv_prep_button_candidate
+    images["apollo_main"]["conversate_prep_button"] = conv_prep_button_ref
+    images["apollo_main"]["unresolved_count"] = 131
+    images["apollo_main"]["unresolved_symbols"] = conv_prep_button_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate prep-notes button factory passes 40 stock/C cases; display-main-page caller at 0x5b2d64 remains open.")
+    conv_display_main_path = G2 / "build/c-firmware/20261016/main-conversate-display-main-page-5b2d64/receipt.json"
+    conv_display_main, conv_display_main_ref = receipt(conv_display_main_path)
+    if (conv_display_main["status"] != "PASS_DIRECT_MAIN_CONVERSATE_DISPLAY_MAIN_PAGE_5B2D64_INTEGRATION" or
+            conv_display_main["oracle_cases"] != 160 or
+            conv_display_main["native_body"] != "0x5b2d64..0x5b30c7" or
+            conv_display_main["unresolved_before"] != 131 or
+            conv_display_main["unresolved_after"] != 134 or
+            conv_display_main["removed_imports"] != ["audio_conversate_ui_route_5b2d64"] or
+            conv_display_main["new_imports"] != ["audio_conversate_display_tick_5b22ee",
+                                                "audio_conversate_prep_icon_76a47c",
+                                                "audio_conversate_title_label_5b3334",
+                                                "audio_uart_page_43f6ac"] or
+            conv_display_main["source_complete"] or conv_display_main["flashable"] or
+            conv_display_main["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate display-main-page changed")
+    conv_display_main_candidate = file_checked(conv_display_main["candidate_object"]["path"],
+                                               conv_display_main["candidate_object"]["sha256"])
+    conv_display_main_unresolved = undefined(ROOT / conv_display_main_candidate["path"])
+    if conv_display_main_unresolved != sorted((set(conv_prep_button_unresolved) -
+                                               set(conv_display_main["removed_imports"])) |
+                                              set(conv_display_main["new_imports"])):
+        raise RuntimeError("Apollo Main Conversate display-main-page frontier changed")
+    images["apollo_main"]["candidate"] = conv_display_main_candidate
+    images["apollo_main"]["conversate_display_main_page"] = conv_display_main_ref
+    images["apollo_main"]["unresolved_count"] = 134
+    images["apollo_main"]["unresolved_symbols"] = conv_display_main_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate display-main-page route passes 160 stock/C cases; its callback, title/icon data and one LVGL provider are exposed. Main has 134 imports.")
+    conv_display_children_path = G2 / "build/c-firmware/20261016/main-lv-label-rule-43f6ac/receipt.json"
+    conv_display_children, conv_display_children_ref = receipt(conv_display_children_path)
+    if (conv_display_children["status"] != "PASS_DIRECT_MAIN_CONVERSATE_DISPLAY_CHILDREN_INTEGRATION" or
+            conv_display_children["oracle_cases"] != 16 or
+            conv_display_children["unresolved_before"] != 134 or
+            conv_display_children["unresolved_after"] != 132 or
+            conv_display_children["removed_imports"] != ["audio_conversate_display_tick_5b22ee",
+                                                   "audio_uart_page_43f6ac"] or
+            conv_display_children["new_imports"] or
+            conv_display_children["source_complete"] or conv_display_children["flashable"] or
+            conv_display_children["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate display children changed")
+    conv_display_children_candidate = file_checked(conv_display_children["candidate_object"]["path"],
+                                                   conv_display_children["candidate_object"]["sha256"])
+    conv_display_children_unresolved = undefined(ROOT / conv_display_children_candidate["path"])
+    if conv_display_children_unresolved != sorted(set(conv_display_main_unresolved) -
+                                                  set(conv_display_children["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate display children frontier changed")
+    images["apollo_main"]["candidate"] = conv_display_children_candidate
+    images["apollo_main"]["conversate_display_children"] = conv_display_children_ref
+    images["apollo_main"]["unresolved_count"] = 132
+    images["apollo_main"]["unresolved_symbols"] = conv_display_children_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Display animation completion and LVGL label rule pass 16 stock/C cases; title/icon data and six-frame RAM array remain open. Main has 132 imports.")
+    conv_icon_path = G2 / "build/c-firmware/20261016/main-conversate-prep-icon-76a47c/receipt.json"
+    conv_icon, conv_icon_ref = receipt(conv_icon_path)
+    if (conv_icon["status"] != "PASS_MAIN_CONVERSATE_PREP_ICON_SOURCE_DATA_INTEGRATION" or
+            conv_icon["unresolved_before"] != 132 or
+            conv_icon["unresolved_after"] != 130 or
+            conv_icon["removed_imports"] != ["audio_conversate_prep_icon_76a47c",
+                                            "audio_conversate_title_label_5b3334"] or
+            conv_icon["new_imports"] or
+            conv_icon["source_complete"] or conv_icon["flashable"] or
+            conv_icon["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate prep icon changed")
+    conv_icon_candidate = file_checked(conv_icon["candidate_object"]["path"],
+                                       conv_icon["candidate_object"]["sha256"])
+    conv_icon_unresolved = undefined(ROOT / conv_icon_candidate["path"])
+    if conv_icon_unresolved != sorted(set(conv_display_children_unresolved) -
+                                      set(conv_icon["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate prep icon frontier changed")
+    images["apollo_main"]["candidate"] = conv_icon_candidate
+    images["apollo_main"]["conversate_prep_icon"] = conv_icon_ref
+    images["apollo_main"]["unresolved_count"] = 130
+    images["apollo_main"]["unresolved_symbols"] = conv_icon_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate prep icon descriptor, 576 pixel bytes and title cell match stock source data; the six-frame RAM pointer array at 0x20000bf4 remains open. Main has 130 imports.")
+    conv_frames_path = G2 / "build/c-firmware/20261016/main-conversate-anim-frames-20000bf4/receipt.json"
+    conv_frames, conv_frames_ref = receipt(conv_frames_path)
+    if (conv_frames["status"] != "PASS_MAIN_CONVERSATE_ANIM_FRAME_DATA_INTEGRATION" or
+            conv_frames["unresolved_before"] != 130 or
+            conv_frames["unresolved_after"] != 129 or
+            conv_frames["stock_payload_sha256"] != "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701" or
+            conv_frames["source_complete"] or conv_frames["flashable"] or
+            conv_frames["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate animation frame data changed")
+    conv_frames_candidate = file_checked(conv_frames["candidate_object"]["path"],
+                                         conv_frames["candidate_object"]["sha256"])
+    conv_frames_unresolved = undefined(ROOT / conv_frames_candidate["path"])
+    if conv_frames_unresolved != sorted(set(conv_icon_unresolved) -
+                                       {"audio_conversate_anim_frames_20000bf4"}):
+        raise RuntimeError("Apollo Main Conversate animation frame frontier changed")
+    images["apollo_main"]["candidate"] = conv_frames_candidate
+    images["apollo_main"]["conversate_anim_frames"] = conv_frames_ref
+    images["apollo_main"]["unresolved_count"] = 129
+    images["apollo_main"]["unresolved_symbols"] = conv_frames_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate six-frame RAM table, ROM descriptors and 2400 pixel bytes match authenticated startup and payload data. Main has 129 imports.")
+    conv_names_path = G2 / "build/c-firmware/20261016/main-conversate-event-names-20000560/receipt.json"
+    conv_names, conv_names_ref = receipt(conv_names_path)
+    if (conv_names["status"] != "PASS_MAIN_CONVERSATE_EVENT_NAMES_DATA_INTEGRATION" or
+            conv_names["unresolved_before"] != 129 or
+            conv_names["unresolved_after"] != 128 or
+            conv_names["stock_payload_sha256"] != "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701" or
+            conv_names["source_complete"] or conv_names["flashable"] or
+            conv_names["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate event names changed")
+    conv_names_candidate = file_checked(conv_names["candidate_object"]["path"],
+                                        conv_names["candidate_object"]["sha256"])
+    conv_names_unresolved = undefined(ROOT / conv_names_candidate["path"])
+    if conv_names_unresolved != sorted(set(conv_frames_unresolved) -
+                                      {"audio_conversate_ui_event_names_20000560"}):
+        raise RuntimeError("Apollo Main Conversate event names frontier changed")
+    images["apollo_main"]["candidate"] = conv_names_candidate
+    images["apollo_main"]["conversate_event_names"] = conv_names_ref
+    images["apollo_main"]["unresolved_count"] = 128
+    images["apollo_main"]["unresolved_symbols"] = conv_names_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate 21 UI event-name pointers and string bytes match authenticated startup and ROM data. Main has 128 imports.")
+    locale_path = G2 / "build/c-firmware/20261017/main-locale-data-20001588/receipt.json"
+    locale, locale_ref = receipt(locale_path)
+    if (locale["status"] != "PASS_MAIN_EIGHT_LOCALE_TABLES_SOURCE_DATA_INTEGRATION" or
+            locale["unresolved_before"] != 128 or
+            locale["unresolved_after"] != 120 or
+            locale["pointers_per_table"] != 157 or
+            locale["distinct_stock_string_addresses"] != 1034 or
+            locale["stock_payload_sha256"] != "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701" or
+            locale["source_complete"] or locale["flashable"] or
+            locale["hardware_proof"]):
+        raise RuntimeError("Apollo Main locale source data changed")
+    locale_candidate = file_checked(locale["candidate_object"]["path"],
+                                    locale["candidate_object"]["sha256"])
+    locale_unresolved = undefined(ROOT / locale_candidate["path"])
+    if locale_unresolved != sorted(set(conv_names_unresolved) -
+                                   set(locale["removed_imports"])):
+        raise RuntimeError("Apollo Main locale source data frontier changed")
+    images["apollo_main"]["candidate"] = locale_candidate
+    images["apollo_main"]["locale_data"] = locale_ref
+    images["apollo_main"]["unresolved_count"] = 120
+    images["apollo_main"]["unresolved_symbols"] = locale_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Eight 157-pointer locale RAM tables and 1034 distinct ROM strings now have verified relocatable C ownership. Main has 120 imports; final placement and runtime locale use remain open.")
+    menu_scroll_path = G2 / "build/c-firmware/20261017/main-conversate-ui-menu-scroll-down-5b5bf0/receipt.json"
+    menu_scroll, menu_scroll_ref = receipt(menu_scroll_path)
+    if (menu_scroll["status"] != "PASS_MAIN_CONVERSATE_MENU_SCROLL_DOWN_5B5BF0_INTEGRATION" or
+            menu_scroll["unresolved_before"] != 120 or
+            menu_scroll["unresolved_after"] != 119 or
+            menu_scroll["oracle_cases"] != 128 or
+            menu_scroll["native_body"] != "0x5b5bf0..0x5b5cc7" or
+            menu_scroll["source_complete"] or menu_scroll["flashable"] or
+            menu_scroll["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate menu scroll down changed")
+    menu_scroll_candidate = file_checked(menu_scroll["candidate_object"]["path"],
+                                         menu_scroll["candidate_object"]["sha256"])
+    menu_scroll_unresolved = undefined(ROOT / menu_scroll_candidate["path"])
+    if menu_scroll_unresolved != sorted(set(locale_unresolved) -
+                                       set(menu_scroll["removed_imports"])):
+        raise RuntimeError("Apollo Main menu scroll down frontier changed")
+    images["apollo_main"]["candidate"] = menu_scroll_candidate
+    images["apollo_main"]["conversate_menu_scroll_down"] = menu_scroll_ref
+    images["apollo_main"]["unresolved_count"] = 119
+    images["apollo_main"]["unresolved_symbols"] = menu_scroll_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate menu scroll-down route 0x5b5bf0 passes 128 direct stock/C cases; called helpers and logging remain bounded lower contracts. Main has 119 imports.")
+    child_clear_path = G2 / "build/c-firmware/20261017/main-conversate-ui-child-style-clear-5b3340/receipt.json"
+    child_clear, child_clear_ref = receipt(child_clear_path)
+    if (child_clear["status"] != "PASS_MAIN_CONVERSATE_CHILD_STYLE_CLEAR_5B3340_INTEGRATION" or
+            child_clear["unresolved_before"] != 119 or
+            child_clear["unresolved_after"] != 119 or
+            child_clear["oracle_cases"] != 96 or
+            child_clear["native_body"] != "0x5b3340..0x5b3383" or
+            child_clear["source_complete"] or child_clear["flashable"] or
+            child_clear["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate child style clear changed")
+    child_clear_candidate = file_checked(child_clear["candidate_object"]["path"],
+                                         child_clear["candidate_object"]["sha256"])
+    child_clear_unresolved = undefined(ROOT / child_clear_candidate["path"])
+    if child_clear_unresolved != menu_scroll_unresolved:
+        raise RuntimeError("Apollo Main child style clear frontier changed")
+    images["apollo_main"]["candidate"] = child_clear_candidate
+    images["apollo_main"]["conversate_child_style_clear"] = child_clear_ref
+    images["apollo_main"]["unresolved_symbols"] = child_clear_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate recursive child style clear 0x5b3340 passes 96 direct stock/C cases and is linked for route 0x5b3398. Main remains at 119 imports.")
+    display_pair_path = G2 / "build/c-firmware/20261017/main-conversate-ui-slot-fade-5b1072/receipt.json"
+    display_pair, display_pair_ref = receipt(display_pair_path)
+    if (display_pair["status"] != "PASS_MAIN_CONVERSATE_DISPLAY_CONFIG_PAIR_INTEGRATION" or
+            display_pair["unresolved_before"] != 119 or
+            display_pair["unresolved_after"] != 118 or
+            display_pair["route_cases"] != 160 or
+            display_pair["setter_cases"] != 64 or
+            display_pair["removed_imports"] != ["audio_conversate_ui_route_5b3398"] or
+            display_pair["new_imports"] or display_pair["source_complete"] or
+            display_pair["flashable"] or display_pair["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate display-config pair changed")
+    display_pair_candidate = file_checked(display_pair["candidate_object"]["path"],
+                                          display_pair["candidate_object"]["sha256"])
+    display_pair_unresolved = undefined(ROOT / display_pair_candidate["path"])
+    if display_pair_unresolved != sorted(set(child_clear_unresolved) -
+                                         set(display_pair["removed_imports"])):
+        raise RuntimeError("Apollo Main display-config pair frontier changed")
+    images["apollo_main"]["candidate"] = display_pair_candidate
+    images["apollo_main"]["conversate_display_config_pair"] = display_pair_ref
+    images["apollo_main"]["unresolved_count"] = 118
+    images["apollo_main"]["unresolved_symbols"] = display_pair_unresolved
+    images["apollo_main"]["remaining_gate"].append(
+        "Conversate display-config route 0x5b3398 and list-button setter 0x5b1072 pass 224 combined direct stock/C cases; Main has 118 imports.")
+    loading_path = G2 / "build/c-firmware/20261017/main-conversate-ui-display-loading-5b30c8/receipt.json"
+    loading, loading_ref = receipt(loading_path)
+    if (loading["status"] != "PASS_MAIN_CONVERSATE_DISPLAY_LOADING_MINIMUM_RAM_INTEGRATION" or
+            loading["unresolved_before"] != 118 or loading["unresolved_after"] != 117 or
+            loading["oracle_cases"] != 320 or loading["buffer_minimum_bytes"] != 201 or
+            loading["buffer_section"] != "NOBITS" or
+            loading["removed_imports"] != ["audio_conversate_ui_route_5b30c8"] or
+            loading["new_imports"] or loading["source_complete"] or
+            loading["flashable"] or loading["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate loading route changed")
+    loading_candidate = file_checked(loading["candidate_object"]["path"],
+                                     loading["candidate_object"]["sha256"])
+    loading_unresolved = undefined(ROOT / loading_candidate["path"])
+    if loading_unresolved != sorted(set(display_pair_unresolved) -
+                                    set(loading["removed_imports"])):
+        raise RuntimeError("Apollo Main loading route frontier changed")
+    images["apollo_main"]["candidate"] = loading_candidate
+    images["apollo_main"]["conversate_display_loading"] = loading_ref
+    images["apollo_main"]["unresolved_count"] = 117
+    images["apollo_main"]["unresolved_symbols"] = loading_unresolved
+    images["apollo_main"]["remaining_gate"].append(loading["remaining_gate"])
+    menu_style_path = G2 / "build/c-firmware/20261017/main-conversate-menu-style-5b5720/receipt.json"
+    menu_style, menu_style_ref = receipt(menu_style_path)
+    if (menu_style["status"] != "PASS_MAIN_CONVERSATE_MENU_STYLE_5B5720_INTEGRATION" or
+            menu_style["unresolved_before"] != 117 or menu_style["unresolved_after"] != 117 or
+            menu_style["oracle_cases"] != 18 or menu_style["removed_imports"] or
+            menu_style["new_imports"] or menu_style["source_complete"] or
+            menu_style["flashable"] or menu_style["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate menu style changed")
+    menu_style_candidate = file_checked(menu_style["candidate_object"]["path"],
+                                        menu_style["candidate_object"]["sha256"])
+    menu_style_unresolved = undefined(ROOT / menu_style_candidate["path"])
+    if menu_style_unresolved != loading_unresolved:
+        raise RuntimeError("Apollo Main menu style frontier changed")
+    images["apollo_main"]["candidate"] = menu_style_candidate
+    images["apollo_main"]["conversate_menu_style"] = menu_style_ref
+    images["apollo_main"]["remaining_gate"].append(menu_style["remaining_gate"])
+    menu_page_path = G2 / "build/c-firmware/20261017/main-conversate-menu-page-5b58e8/receipt.json"
+    menu_page, menu_page_ref = receipt(menu_page_path)
+    if (menu_page["status"] != "PASS_MAIN_CONVERSATE_MENU_PAGE_5B58E8_INTEGRATION" or
+            menu_page["unresolved_before"] != 117 or menu_page["unresolved_after"] != 117 or
+            menu_page["oracle_cases"] != 30 or
+            menu_page["removed_imports"] != ["audio_conversate_ui_route_5b58e8"] or
+            menu_page["new_imports"] != ["audio_conversate_menu_request_prep_notes_5b1e52"] or
+            menu_page["source_complete"] or menu_page["flashable"] or
+            menu_page["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate menu page changed")
+    menu_page_candidate = file_checked(menu_page["candidate_object"]["path"],
+                                       menu_page["candidate_object"]["sha256"])
+    menu_page_unresolved = undefined(ROOT / menu_page_candidate["path"])
+    if menu_page_unresolved != sorted((set(menu_style_unresolved) -
+                                      set(menu_page["removed_imports"])) |
+                                     set(menu_page["new_imports"])):
+        raise RuntimeError("Apollo Main menu page frontier changed")
+    images["apollo_main"]["candidate"] = menu_page_candidate
+    images["apollo_main"]["conversate_menu_page"] = menu_page_ref
+    images["apollo_main"]["unresolved_symbols"] = menu_page_unresolved
+    images["apollo_main"]["remaining_gate"].append(menu_page["remaining_gate"])
+    menu_request_path = G2 / "build/c-firmware/20261017/main-conversate-menu-request-5b1e52/receipt.json"
+    menu_request, menu_request_ref = receipt(menu_request_path)
+    if (menu_request["status"] != "PASS_MAIN_CONVERSATE_MENU_REQUEST_5B1E52_INTEGRATION" or
+            menu_request["unresolved_before"] != 117 or
+            menu_request["unresolved_after"] != 116 or
+            menu_request["oracle_cases"] != 120 or
+            menu_request["removed_imports"] !=
+            ["audio_conversate_menu_request_prep_notes_5b1e52"] or
+            menu_request["new_imports"] or menu_request["source_complete"] or
+            menu_request["flashable"] or menu_request["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate menu request changed")
+    menu_request_candidate = file_checked(menu_request["candidate_object"]["path"],
+                                          menu_request["candidate_object"]["sha256"])
+    menu_request_unresolved = undefined(ROOT / menu_request_candidate["path"])
+    if menu_request_unresolved != sorted(set(menu_page_unresolved) -
+                                         set(menu_request["removed_imports"])):
+        raise RuntimeError("Apollo Main menu request frontier changed")
+    images["apollo_main"]["candidate"] = menu_request_candidate
+    images["apollo_main"]["conversate_menu_request"] = menu_request_ref
+    images["apollo_main"]["unresolved_count"] = 116
+    images["apollo_main"]["unresolved_symbols"] = menu_request_unresolved
+    images["apollo_main"]["remaining_gate"].append(menu_request["remaining_gate"])
+    menu_icon_path = G2 / "build/c-firmware/20261017/main-conversate-menu-icon-76a2a0/receipt.json"
+    menu_icon, menu_icon_ref = receipt(menu_icon_path)
+    if (menu_icon["status"] != "PASS_MAIN_CONVERSATE_MENU_ICON_76A2A0_INTEGRATION" or
+            menu_icon["unresolved_before"] != 116 or menu_icon["unresolved_after"] != 116 or
+            menu_icon["pixel_bytes"] != 0x240 or menu_icon["removed_imports"] or
+            menu_icon["new_imports"] or menu_icon["source_complete"] or
+            menu_icon["flashable"] or menu_icon["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate menu icon changed")
+    menu_icon_candidate = file_checked(menu_icon["candidate_object"]["path"],
+                                       menu_icon["candidate_object"]["sha256"])
+    menu_icon_unresolved = undefined(ROOT / menu_icon_candidate["path"])
+    if menu_icon_unresolved != menu_request_unresolved:
+        raise RuntimeError("Apollo Main menu icon frontier changed")
+    images["apollo_main"]["candidate"] = menu_icon_candidate
+    images["apollo_main"]["conversate_menu_icon"] = menu_icon_ref
+    images["apollo_main"]["remaining_gate"].append(menu_icon["remaining_gate"])
+    menu_list_path = G2 / "build/c-firmware/20261017/main-conversate-menu-list-5b59fa/receipt.json"
+    menu_list, menu_list_ref = receipt(menu_list_path)
+    if (menu_list["status"] != "PASS_MAIN_CONVERSATE_MENU_LIST_5B59FA_INTEGRATION" or
+            menu_list["unresolved_before"] != 116 or menu_list["unresolved_after"] != 115 or
+            menu_list["oracle_cases"] != 54 or
+            menu_list["removed_imports"] != ["audio_conversate_ui_route_5b59fa"] or
+            menu_list["new_imports"] or menu_list["source_complete"] or
+            menu_list["flashable"] or menu_list["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate menu list changed")
+    menu_list_candidate = file_checked(menu_list["candidate_object"]["path"],
+                                       menu_list["candidate_object"]["sha256"])
+    menu_list_unresolved = undefined(ROOT / menu_list_candidate["path"])
+    if menu_list_unresolved != sorted(set(menu_icon_unresolved) -
+                                      set(menu_list["removed_imports"])):
+        raise RuntimeError("Apollo Main menu list frontier changed")
+    images["apollo_main"]["candidate"] = menu_list_candidate
+    images["apollo_main"]["conversate_menu_list"] = menu_list_ref
+    images["apollo_main"]["unresolved_count"] = 115
+    images["apollo_main"]["unresolved_symbols"] = menu_list_unresolved
+    images["apollo_main"]["remaining_gate"].append(menu_list["remaining_gate"])
+    tag_count_path = G2 / "build/c-firmware/20261017/main-conversate-tag-count-59674e/receipt.json"
+    tag_count, tag_count_ref = receipt(tag_count_path)
+    if (tag_count["status"] != "PASS_MAIN_CONVERSATE_TAG_COUNT_59674E_INTEGRATION" or
+            tag_count["unresolved_before"] != 115 or tag_count["unresolved_after"] != 115 or
+            tag_count["oracle_cases"] != 60 or tag_count["removed_imports"] or
+            tag_count["new_imports"] or tag_count["source_complete"] or
+            tag_count["flashable"] or tag_count["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate tag count changed")
+    tag_count_candidate = file_checked(tag_count["candidate_object"]["path"],
+                                       tag_count["candidate_object"]["sha256"])
+    tag_count_unresolved = undefined(ROOT / tag_count_candidate["path"])
+    if tag_count_unresolved != menu_list_unresolved:
+        raise RuntimeError("Apollo Main tag count frontier changed")
+    images["apollo_main"]["candidate"] = tag_count_candidate
+    images["apollo_main"]["conversate_tag_count"] = tag_count_ref
+    images["apollo_main"]["remaining_gate"].append(tag_count["remaining_gate"])
+    tag_scroll_path = G2 / "build/c-firmware/20261017/main-conversate-tag-scroll-5b63d4/receipt.json"
+    tag_scroll, tag_scroll_ref = receipt(tag_scroll_path)
+    if (tag_scroll["status"] != "PASS_MAIN_CONVERSATE_TAG_SCROLL_PAIR_INTEGRATION" or
+            tag_scroll["unresolved_before"] != 115 or tag_scroll["unresolved_after"] != 115 or
+            tag_scroll["scroll_cases"] != 80 or tag_scroll["visible_cases"] != 280 or
+            tag_scroll["removed_imports"] or tag_scroll["new_imports"] or
+            tag_scroll["source_complete"] or tag_scroll["flashable"] or
+            tag_scroll["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate tag scroll pair changed")
+    tag_scroll_candidate = file_checked(tag_scroll["candidate_object"]["path"],
+                                        tag_scroll["candidate_object"]["sha256"])
+    tag_scroll_unresolved = undefined(ROOT / tag_scroll_candidate["path"])
+    if tag_scroll_unresolved != tag_count_unresolved:
+        raise RuntimeError("Apollo Main tag scroll frontier changed")
+    images["apollo_main"]["candidate"] = tag_scroll_candidate
+    images["apollo_main"]["conversate_tag_scroll_pair"] = tag_scroll_ref
+    images["apollo_main"]["remaining_gate"].append(tag_scroll["remaining_gate"])
+    tag_update_path = G2 / "build/c-firmware/20261017/main-conversate-auto-pop-5967bc/receipt.json"
+    tag_update, tag_update_ref = receipt(tag_update_path)
+    if (tag_update["status"] != "PASS_MAIN_CONVERSATE_TAG_UPDATE_AUTO_POP_INTEGRATION" or
+            tag_update["unresolved_before"] != 115 or tag_update["unresolved_after"] != 117 or
+            tag_update["route_cases"] != 216 or tag_update["auto_cases"] != 60 or
+            tag_update["removed_imports"] != ["audio_conversate_ui_route_5b6426"] or
+            tag_update["new_imports"] !=
+            ["audio_conversate_tag_get_by_index_5964e2",
+             "audio_conversate_tag_icon_get_5b0af6", "audio_uart_page_44daca"] or
+            tag_update["source_complete"] or tag_update["flashable"] or
+            tag_update["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate tag update changed")
+    tag_update_candidate = file_checked(tag_update["candidate_object"]["path"],
+                                        tag_update["candidate_object"]["sha256"])
+    tag_update_unresolved = undefined(ROOT / tag_update_candidate["path"])
+    if tag_update_unresolved != sorted((set(tag_scroll_unresolved) -
+                                       set(tag_update["removed_imports"])) |
+                                      set(tag_update["new_imports"])):
+        raise RuntimeError("Apollo Main tag update frontier changed")
+    images["apollo_main"]["candidate"] = tag_update_candidate
+    images["apollo_main"]["conversate_tag_update_auto_pop"] = tag_update_ref
+    images["apollo_main"]["unresolved_count"] = 117
+    images["apollo_main"]["unresolved_symbols"] = tag_update_unresolved
+    images["apollo_main"]["remaining_gate"].append(tag_update["remaining_gate"])
+    tag_icon_path = G2 / "build/c-firmware/20261017/main-conversate-tag-icon-get-5b0af6/receipt.json"
+    tag_icon, tag_icon_ref = receipt(tag_icon_path)
+    if (tag_icon["status"] != "PASS_MAIN_CONVERSATE_TAG_ICON_MAP_INTEGRATION" or
+            tag_icon["unresolved_before"] != 117 or tag_icon["unresolved_after"] != 116 or
+            tag_icon["getter_cases"] != 40 or tag_icon["icon_count"] != 4 or
+            tag_icon["pixel_bytes_total"] != 2304 or
+            tag_icon["removed_imports"] != ["audio_conversate_tag_icon_get_5b0af6"] or
+            tag_icon["new_imports"] or tag_icon["source_complete"] or
+            tag_icon["flashable"] or tag_icon["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate tag icon map changed")
+    tag_icon_candidate = file_checked(tag_icon["candidate_object"]["path"],
+                                      tag_icon["candidate_object"]["sha256"])
+    tag_icon_unresolved = undefined(ROOT / tag_icon_candidate["path"])
+    if tag_icon_unresolved != sorted(set(tag_update_unresolved) -
+                                     set(tag_icon["removed_imports"])):
+        raise RuntimeError("Apollo Main tag icon frontier changed")
+    images["apollo_main"]["candidate"] = tag_icon_candidate
+    images["apollo_main"]["conversate_tag_icon_map"] = tag_icon_ref
+    images["apollo_main"]["unresolved_count"] = 116
+    images["apollo_main"]["unresolved_symbols"] = tag_icon_unresolved
+    images["apollo_main"]["remaining_gate"].append(tag_icon["remaining_gate"])
+    tag_lookup_path = G2 / "build/c-firmware/20261017/main-conversate-tag-lookup-5964e2/receipt.json"
+    tag_lookup, tag_lookup_ref = receipt(tag_lookup_path)
+    if (tag_lookup["status"] != "PASS_MAIN_CONVERSATE_TAG_LOOKUP_5964E2_INTEGRATION" or
+            tag_lookup["unresolved_before"] != 116 or tag_lookup["unresolved_after"] != 115 or
+            tag_lookup["oracle_cases"] != 70 or
+            tag_lookup["removed_imports"] != ["audio_conversate_tag_get_by_index_5964e2"] or
+            tag_lookup["new_imports"] or tag_lookup["source_complete"] or
+            tag_lookup["flashable"] or tag_lookup["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate tag lookup changed")
+    tag_lookup_candidate = file_checked(tag_lookup["candidate_object"]["path"],
+                                        tag_lookup["candidate_object"]["sha256"])
+    tag_lookup_unresolved = undefined(ROOT / tag_lookup_candidate["path"])
+    if tag_lookup_unresolved != sorted(set(tag_icon_unresolved) -
+                                       set(tag_lookup["removed_imports"])):
+        raise RuntimeError("Apollo Main tag lookup frontier changed")
+    images["apollo_main"]["candidate"] = tag_lookup_candidate
+    images["apollo_main"]["conversate_tag_lookup"] = tag_lookup_ref
+    images["apollo_main"]["unresolved_count"] = 115
+    images["apollo_main"]["unresolved_symbols"] = tag_lookup_unresolved
+    images["apollo_main"]["remaining_gate"].append(tag_lookup["remaining_gate"])
+    child_move_path = G2 / "build/c-firmware/20261017/main-lv-child-move-44daca/receipt.json"
+    child_move, child_move_ref = receipt(child_move_path)
+    if (child_move["status"] != "PASS_MAIN_LV_CHILD_MOVE_44DACA_INTEGRATION" or
+            child_move["unresolved_before"] != 115 or child_move["unresolved_after"] != 114 or
+            child_move["oracle_cases"] != 48 or
+            child_move["removed_imports"] != ["audio_uart_page_44daca"] or
+            child_move["new_imports"] or child_move["source_complete"] or
+            child_move["flashable"] or child_move["hardware_proof"]):
+        raise RuntimeError("Apollo Main LVGL child move changed")
+    child_move_candidate = file_checked(child_move["candidate_object"]["path"],
+                                        child_move["candidate_object"]["sha256"])
+    child_move_unresolved = undefined(ROOT / child_move_candidate["path"])
+    if child_move_unresolved != sorted(set(tag_lookup_unresolved) -
+                                       set(child_move["removed_imports"])):
+        raise RuntimeError("Apollo Main LVGL child move frontier changed")
+    images["apollo_main"]["candidate"] = child_move_candidate
+    images["apollo_main"]["lv_child_move"] = child_move_ref
+    images["apollo_main"]["unresolved_count"] = 114
+    images["apollo_main"]["unresolved_symbols"] = child_move_unresolved
+    images["apollo_main"]["remaining_gate"].append(child_move["remaining_gate"])
+    node_free_path = G2 / "build/c-firmware/20261017/main-conversate-tag-node-free-596188/receipt.json"
+    node_free, node_free_ref = receipt(node_free_path)
+    if (node_free["status"] != "PASS_MAIN_CONVERSATE_TAG_NODE_FREE_596188_INTEGRATION" or
+            node_free["unresolved_before"] != 114 or node_free["unresolved_after"] != 114 or
+            node_free["oracle_cases"] != 12 or node_free["removed_imports"] or
+            node_free["new_imports"] or node_free["source_complete"] or
+            node_free["flashable"] or node_free["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate tag node cleanup changed")
+    node_free_candidate = file_checked(node_free["candidate_object"]["path"],
+                                      node_free["candidate_object"]["sha256"])
+    node_free_unresolved = undefined(ROOT / node_free_candidate["path"])
+    if node_free_unresolved != child_move_unresolved:
+        raise RuntimeError("Apollo Main tag node cleanup frontier changed")
+    images["apollo_main"]["candidate"] = node_free_candidate
+    images["apollo_main"]["conversate_tag_node_free"] = node_free_ref
+    images["apollo_main"]["unresolved_count"] = 114
+    images["apollo_main"]["unresolved_symbols"] = node_free_unresolved
+    images["apollo_main"]["remaining_gate"].append(node_free["remaining_gate"])
+    tag_deinit_path = G2 / "build/c-firmware/20261017/main-conversate-tag-storage-deinit-59624e/receipt.json"
+    tag_deinit, tag_deinit_ref = receipt(tag_deinit_path)
+    if (tag_deinit["status"] != "PASS_MAIN_CONVERSATE_TAG_STORAGE_DEINIT_59624E_INTEGRATION" or
+            tag_deinit["unresolved_before"] != 114 or tag_deinit["unresolved_after"] != 113 or
+            tag_deinit["oracle_cases"] != 30 or
+            tag_deinit["removed_imports"] != ["audio_conversate_ui_exit_child_59624e"] or
+            tag_deinit["new_imports"] or tag_deinit["source_complete"] or
+            tag_deinit["flashable"] or tag_deinit["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate tag storage exit changed")
+    tag_deinit_candidate = file_checked(tag_deinit["candidate_object"]["path"],
+                                        tag_deinit["candidate_object"]["sha256"])
+    tag_deinit_unresolved = undefined(ROOT / tag_deinit_candidate["path"])
+    if tag_deinit_unresolved != sorted(set(node_free_unresolved) -
+                                       set(tag_deinit["removed_imports"])):
+        raise RuntimeError("Apollo Main tag storage exit frontier changed")
+    images["apollo_main"]["candidate"] = tag_deinit_candidate
+    images["apollo_main"]["conversate_tag_storage_deinit"] = tag_deinit_ref
+    images["apollo_main"]["unresolved_count"] = 113
+    images["apollo_main"]["unresolved_symbols"] = tag_deinit_unresolved
+    images["apollo_main"]["remaining_gate"].append(tag_deinit["remaining_gate"])
+    notify_path = G2 / "build/c-firmware/20261017/main-conversate-notify-5b1d2a/receipt.json"
+    notify, notify_ref = receipt(notify_path)
+    if (notify["status"] != "PASS_MAIN_CONVERSATE_NOTIFY_5B1D2A_INTEGRATION" or
+            notify["unresolved_before"] != 113 or notify["unresolved_after"] != 112 or
+            notify["oracle_cases"] != 180 or
+            notify["removed_imports"] != ["audio_conversate_ui_close_notify_5b1d2a"] or
+            notify["new_imports"] or notify["source_complete"] or
+            notify["flashable"] or notify["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate notify changed")
+    notify_candidate = file_checked(notify["candidate_object"]["path"],
+                                    notify["candidate_object"]["sha256"])
+    notify_unresolved = undefined(ROOT / notify_candidate["path"])
+    if notify_unresolved != sorted(set(tag_deinit_unresolved) -
+                                   set(notify["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate notify frontier changed")
+    images["apollo_main"]["candidate"] = notify_candidate
+    images["apollo_main"]["conversate_notify"] = notify_ref
+    images["apollo_main"]["unresolved_count"] = 112
+    images["apollo_main"]["unresolved_symbols"] = notify_unresolved
+    images["apollo_main"]["remaining_gate"].append(notify["remaining_gate"])
+    elapsed_path = G2 / "build/c-firmware/20261017/main-conversate-elapsed-label-5b22fa/receipt.json"
+    elapsed, elapsed_ref = receipt(elapsed_path)
+    if (elapsed["status"] != "PASS_MAIN_CONVERSATE_ELAPSED_LABEL_5B22FA_INTEGRATION" or
+            elapsed["unresolved_before"] != 112 or elapsed["unresolved_after"] != 111 or
+            elapsed["calendar_cases"] != 52 or elapsed["label_cases"] != 120 or
+            elapsed["removed_imports"] != ["audio_conversate_route_scroll_5b22fa"] or
+            elapsed["new_imports"] or elapsed["source_complete"] or
+            elapsed["flashable"] or elapsed["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate elapsed label changed")
+    elapsed_candidate = file_checked(elapsed["candidate_object"]["path"],
+                                     elapsed["candidate_object"]["sha256"])
+    elapsed_unresolved = undefined(ROOT / elapsed_candidate["path"])
+    if elapsed_unresolved != sorted(set(notify_unresolved) -
+                                    set(elapsed["removed_imports"])):
+        raise RuntimeError("Apollo Main Conversate elapsed label frontier changed")
+    images["apollo_main"]["candidate"] = elapsed_candidate
+    images["apollo_main"]["conversate_elapsed_label"] = elapsed_ref
+    images["apollo_main"]["unresolved_count"] = 111
+    images["apollo_main"]["unresolved_symbols"] = elapsed_unresolved
+    images["apollo_main"]["remaining_gate"].append(elapsed["remaining_gate"])
+    clock_placement_path = G2 / "build/c-firmware/20261017/main-conversate-elapsed-label-5b22fa/placement-receipt.json"
+    clock_placement, clock_placement_ref = receipt(clock_placement_path)
+    if (clock_placement["status"] != "PASS_MAIN_CONVERSATE_CLOCK_LABEL_PLACEMENT" or
+            clock_placement["symbol"] != "audio_conversate_clock_label_buffer_20073cac" or
+            clock_placement["address"] != "0x20073cac" or
+            clock_placement["size"] != 20 or clock_placement["section_type"] != "NOBITS" or
+            clock_placement["adjacent_before_end"] != "0x20073cac" or
+            clock_placement["adjacent_after_start"] != "0x20073cc0" or
+            clock_placement["source_complete"] or clock_placement["flashable"] or
+            clock_placement["hardware_proof"]):
+        raise RuntimeError("Apollo Main Conversate clock label placement changed")
+    file_checked(clock_placement["source"]["path"], clock_placement["source"]["sha256"])
+    file_checked(clock_placement["linker_script"]["path"], clock_placement["linker_script"]["sha256"])
+    file_checked(clock_placement["placement_probe"]["path"], clock_placement["placement_probe"]["sha256"])
+    images["apollo_main"]["conversate_clock_label_placement"] = clock_placement_ref
+    images["apollo_main"]["remaining_gate"].append(clock_placement["remaining_gate"])
+    current_set_path = G2 / "build/c-firmware/20261017/main-display-current-set-442456/receipt.json"
+    current_set, current_set_ref = receipt(current_set_path)
+    if (current_set["status"] != "PASS_MAIN_DISPLAY_CURRENT_SET_442456_INTEGRATION" or
+            current_set["unresolved_before"] != 111 or current_set["unresolved_after"] != 110 or
+            current_set["oracle_cases"] != 600 or
+            current_set["removed_imports"] != ["audio_uart_display_current_set"] or
+            current_set["new_imports"] or current_set["source_complete"] or
+            current_set["flashable"] or current_set["hardware_proof"]):
+        raise RuntimeError("Apollo Main display current selector changed")
+    current_set_candidate = file_checked(current_set["candidate_object"]["path"],
+                                         current_set["candidate_object"]["sha256"])
+    current_set_unresolved = undefined(ROOT / current_set_candidate["path"])
+    if current_set_unresolved != sorted(set(elapsed_unresolved) -
+                                        set(current_set["removed_imports"])):
+        raise RuntimeError("Apollo Main display current selector frontier changed")
+    images["apollo_main"]["candidate"] = current_set_candidate
+    images["apollo_main"]["display_current_set"] = current_set_ref
+    images["apollo_main"]["unresolved_count"] = 110
+    images["apollo_main"]["unresolved_symbols"] = current_set_unresolved
+    images["apollo_main"]["remaining_gate"].append(current_set["remaining_gate"])
+    layer_path = G2 / "build/c-firmware/20261017/main-display-layer-prepare-471cd6/receipt.json"
+    layer, layer_ref = receipt(layer_path)
+    if (layer["status"] != "PASS_MAIN_DISPLAY_LAYER_PREPARE_471CD6_INTEGRATION" or
+            layer["unresolved_before"] != 110 or layer["unresolved_after"] != 109 or
+            layer["oracle_cases"] != 184 or
+            layer["removed_imports"] != ["audio_uart_display_layer_prepare"] or
+            layer["new_imports"] or layer["source_complete"] or
+            layer["flashable"] or layer["hardware_proof"]):
+        raise RuntimeError("Apollo Main display layer prepare changed")
+    layer_candidate = file_checked(layer["candidate_object"]["path"],
+                                   layer["candidate_object"]["sha256"])
+    layer_unresolved = undefined(ROOT / layer_candidate["path"])
+    if layer_unresolved != sorted(set(current_set_unresolved) -
+                                  set(layer["removed_imports"])):
+        raise RuntimeError("Apollo Main display layer prepare frontier changed")
+    images["apollo_main"]["candidate"] = layer_candidate
+    images["apollo_main"]["display_layer_prepare"] = layer_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = layer_unresolved
+    images["apollo_main"]["remaining_gate"].append(layer["remaining_gate"])
+    platform_path = G2 / "build/c-firmware/20261017/main-display-platform-bind-48aef8/receipt.json"
+    platform, platform_ref = receipt(platform_path)
+    if (platform["status"] != "PASS_MAIN_DISPLAY_PLATFORM_BIND_48AEF8_INTEGRATION" or
+            platform["unresolved_before"] != 109 or platform["unresolved_after"] != 108 or
+            platform["oracle_cases"] != 432 or
+            platform["removed_imports"] != ["audio_uart_display_platform_bind"] or
+            platform["new_imports"] or platform["source_complete"] or
+            platform["flashable"] or platform["hardware_proof"]):
+        raise RuntimeError("Apollo Main display platform bind changed")
+    platform_candidate = file_checked(platform["candidate_object"]["path"],
+                                      platform["candidate_object"]["sha256"])
+    platform_unresolved = undefined(ROOT / platform_candidate["path"])
+    if platform_unresolved != sorted(set(layer_unresolved) -
+                                     set(platform["removed_imports"])):
+        raise RuntimeError("Apollo Main display platform bind frontier changed")
+    images["apollo_main"]["candidate"] = platform_candidate
+    images["apollo_main"]["display_platform_bind"] = platform_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = platform_unresolved
+    images["apollo_main"]["remaining_gate"].append(platform["remaining_gate"])
+    draw_buffer_path = G2 / "build/c-firmware/20261017/main-display-draw-buffer-44f7c0/receipt.json"
+    draw_buffer, draw_buffer_ref = receipt(draw_buffer_path)
+    if (draw_buffer["status"] != "PASS_MAIN_DISPLAY_DRAW_BUFFER_44F7C0_INTEGRATION" or
+            draw_buffer["unresolved_before"] != 108 or draw_buffer["unresolved_after"] != 108 or
+            draw_buffer["oracle_cases"] != 32 or
+            draw_buffer["removed_imports"] != ["audio_uart_display_draw_buffer"] or
+            draw_buffer["new_imports"] != ["audio_uart_display_tick_45360c"] or
+            draw_buffer["source_complete"] or draw_buffer["flashable"] or
+            draw_buffer["hardware_proof"]):
+        raise RuntimeError("Apollo Main display draw-buffer constructor changed")
+    draw_buffer_candidate = file_checked(draw_buffer["candidate_object"]["path"],
+                                         draw_buffer["candidate_object"]["sha256"])
+    draw_buffer_unresolved = undefined(ROOT / draw_buffer_candidate["path"])
+    if draw_buffer_unresolved != sorted(
+            (set(platform_unresolved) - set(draw_buffer["removed_imports"])) |
+            set(draw_buffer["new_imports"])):
+        raise RuntimeError("Apollo Main display draw-buffer frontier changed")
+    images["apollo_main"]["candidate"] = draw_buffer_candidate
+    images["apollo_main"]["display_draw_buffer"] = draw_buffer_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = draw_buffer_unresolved
+    images["apollo_main"]["remaining_gate"].append(draw_buffer["remaining_gate"])
+    refresh_path = G2 / "build/c-firmware/20261017/main-display-refresh-timer-45360c/receipt.json"
+    refresh, refresh_ref = receipt(refresh_path)
+    if (refresh["status"] != "PASS_MAIN_DISPLAY_REFRESH_TIMER_45360C_INTEGRATION" or
+            refresh["unresolved_before"] != 108 or refresh["unresolved_after"] != 110 or
+            refresh["oracle_cases"] != 128 or
+            refresh["removed_imports"] != ["audio_uart_display_tick_45360c"] or
+            refresh["new_imports"] != ["audio_uart_lv_refresh_collect_45377a",
+                                       "audio_uart_lv_refresh_layout_45383c",
+                                       "audio_uart_lv_refresh_render_4539b6"] or
+            refresh["source_complete"] or refresh["flashable"] or
+            refresh["hardware_proof"]):
+        raise RuntimeError("Apollo Main display refresh timer changed")
+    refresh_candidate = file_checked(refresh["candidate_object"]["path"],
+                                     refresh["candidate_object"]["sha256"])
+    refresh_unresolved = undefined(ROOT / refresh_candidate["path"])
+    if refresh_unresolved != sorted(
+            (set(draw_buffer_unresolved) - set(refresh["removed_imports"])) |
+            set(refresh["new_imports"])):
+        raise RuntimeError("Apollo Main display refresh timer frontier changed")
+    images["apollo_main"]["candidate"] = refresh_candidate
+    images["apollo_main"]["display_refresh_timer"] = refresh_ref
+    images["apollo_main"]["unresolved_count"] = 110
+    images["apollo_main"]["unresolved_symbols"] = refresh_unresolved
+    images["apollo_main"]["remaining_gate"].append(refresh["remaining_gate"])
+    collect_path = G2 / "build/c-firmware/20261017/main-display-refresh-collect-45377a/receipt.json"
+    collect, collect_ref = receipt(collect_path)
+    if (collect["status"] != "PASS_MAIN_DISPLAY_REFRESH_COLLECT_45377A_INTEGRATION" or
+            collect["unresolved_before"] != 110 or collect["unresolved_after"] != 109 or
+            collect["oracle_cases"] != 300 or
+            collect["removed_imports"] != ["audio_uart_lv_refresh_collect_45377a"] or
+            collect["new_imports"] or collect["source_complete"] or
+            collect["flashable"] or collect["hardware_proof"]):
+        raise RuntimeError("Apollo Main display refresh collect changed")
+    collect_candidate = file_checked(collect["candidate_object"]["path"],
+                                     collect["candidate_object"]["sha256"])
+    collect_unresolved = undefined(ROOT / collect_candidate["path"])
+    if collect_unresolved != sorted(set(refresh_unresolved) -
+                                    set(collect["removed_imports"])):
+        raise RuntimeError("Apollo Main display refresh collect frontier changed")
+    images["apollo_main"]["candidate"] = collect_candidate
+    images["apollo_main"]["display_refresh_collect"] = collect_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = collect_unresolved
+    images["apollo_main"]["remaining_gate"].append(collect["remaining_gate"])
+    pre_refresh_path = G2 / "build/c-firmware/20261017/main-display-pre-refresh-454692/receipt.json"
+    pre_refresh, pre_refresh_ref = receipt(pre_refresh_path)
+    if (pre_refresh["status"] != "PASS_MAIN_DISPLAY_PRE_REFRESH_454692_INTEGRATION" or
+            pre_refresh["unresolved_before"] != 109 or
+            pre_refresh["unresolved_after"] != 109 or
+            pre_refresh["oracle_cases"] != 12 or
+            pre_refresh["new_provider"] != "audio_uart_lv_display_pre_refresh_454692" or
+            pre_refresh["removed_imports"] or pre_refresh["new_imports"] or
+            pre_refresh["source_complete"] or pre_refresh["flashable"] or
+            pre_refresh["hardware_proof"]):
+        raise RuntimeError("Apollo Main display pre-refresh changed")
+    pre_refresh_candidate = file_checked(pre_refresh["candidate_object"]["path"],
+                                         pre_refresh["candidate_object"]["sha256"])
+    pre_refresh_unresolved = undefined(ROOT / pre_refresh_candidate["path"])
+    if pre_refresh_unresolved != collect_unresolved:
+        raise RuntimeError("Apollo Main display pre-refresh frontier changed")
+    images["apollo_main"]["candidate"] = pre_refresh_candidate
+    images["apollo_main"]["display_pre_refresh"] = pre_refresh_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = pre_refresh_unresolved
+    images["apollo_main"]["remaining_gate"].append(pre_refresh["remaining_gate"])
+    subtract_path = G2 / "build/c-firmware/20261017/main-display-area-subtract-450c2a/receipt.json"
+    subtract, subtract_ref = receipt(subtract_path)
+    if (subtract["status"] != "PASS_MAIN_DISPLAY_AREA_SUBTRACT_450C2A_INTEGRATION" or
+            subtract["unresolved_before"] != 109 or
+            subtract["unresolved_after"] != 109 or
+            subtract["oracle_cases"] != 1000 or
+            subtract["new_provider"] != "audio_uart_lv_area_subtract_450c2a" or
+            subtract["removed_imports"] or subtract["new_imports"] or
+            subtract["source_complete"] or subtract["flashable"] or
+            subtract["hardware_proof"]):
+        raise RuntimeError("Apollo Main display area subtraction changed")
+    subtract_candidate = file_checked(subtract["candidate_object"]["path"],
+                                      subtract["candidate_object"]["sha256"])
+    subtract_unresolved = undefined(ROOT / subtract_candidate["path"])
+    if subtract_unresolved != pre_refresh_unresolved:
+        raise RuntimeError("Apollo Main display area subtraction frontier changed")
+    images["apollo_main"]["candidate"] = subtract_candidate
+    images["apollo_main"]["display_area_subtract"] = subtract_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = subtract_unresolved
+    images["apollo_main"]["remaining_gate"].append(subtract["remaining_gate"])
+    insert_path = G2 / "build/c-firmware/20261017/main-display-lv-list-insert-before-482b56/receipt.json"
+    insert, insert_ref = receipt(insert_path)
+    if (insert["status"] != "PASS_MAIN_DISPLAY_LV_LIST_INSERT_BEFORE_482B56_INTEGRATION" or
+            insert["unresolved_before"] != 109 or insert["unresolved_after"] != 109 or
+            insert["oracle_cases"] != 14 or
+            insert["new_provider"] != "audio_uart_lv_list_insert_before_482b56" or
+            insert["removed_imports"] or insert["new_imports"] or
+            insert["source_complete"] or insert["flashable"] or
+            insert["hardware_proof"]):
+        raise RuntimeError("Apollo Main LVGL list insertion changed")
+    insert_candidate = file_checked(insert["candidate_object"]["path"],
+                                    insert["candidate_object"]["sha256"])
+    insert_unresolved = undefined(ROOT / insert_candidate["path"])
+    if insert_unresolved != subtract_unresolved:
+        raise RuntimeError("Apollo Main LVGL list insertion frontier changed")
+    images["apollo_main"]["candidate"] = insert_candidate
+    images["apollo_main"]["display_lv_list_insert_before"] = insert_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = insert_unresolved
+    images["apollo_main"]["remaining_gate"].append(insert["remaining_gate"])
+    layout_path = G2 / "build/c-firmware/20261017/main-display-refresh-layout-45383c/receipt.json"
+    layout, layout_ref = receipt(layout_path)
+    if (layout["status"] != "PASS_MAIN_DISPLAY_REFRESH_LAYOUT_45383C_INTEGRATION" or
+            layout["unresolved_before"] != 109 or layout["unresolved_after"] != 108 or
+            layout["oracle_cases"] != 256 or
+            layout["removed_imports"] != ["audio_uart_lv_refresh_layout_45383c"] or
+            layout["new_imports"] or layout["source_complete"] or
+            layout["flashable"] or layout["hardware_proof"]):
+        raise RuntimeError("Apollo Main display refresh layout changed")
+    layout_candidate = file_checked(layout["candidate_object"]["path"],
+                                    layout["candidate_object"]["sha256"])
+    layout_unresolved = undefined(ROOT / layout_candidate["path"])
+    if layout_unresolved != sorted(set(insert_unresolved) -
+                                   set(layout["removed_imports"])):
+        raise RuntimeError("Apollo Main display refresh layout frontier changed")
+    images["apollo_main"]["candidate"] = layout_candidate
+    images["apollo_main"]["display_refresh_layout"] = layout_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = layout_unresolved
+    images["apollo_main"]["remaining_gate"].append(layout["remaining_gate"])
+    render_path = G2 / "build/c-firmware/20261017/main-display-refresh-render-4539b6/receipt.json"
+    render, render_ref = receipt(render_path)
+    if (render["status"] != "PASS_MAIN_DISPLAY_REFRESH_RENDER_4539B6_INTEGRATION" or
+            render["unresolved_before"] != 108 or render["unresolved_after"] != 110 or
+            render["oracle_cases"] != 480 or
+            render["removed_imports"] != ["audio_uart_lv_refresh_render_4539b6"] or
+            render["new_imports"] != ["audio_uart_lv_display_flush_454574",
+                                       "audio_uart_lv_refresh_area_453bce",
+                                       "audio_uart_lv_refresh_chunk_height_4544ae"] or
+            render["source_complete"] or render["flashable"] or
+            render["hardware_proof"]):
+        raise RuntimeError("Apollo Main display refresh render changed")
+    render_candidate = file_checked(render["candidate_object"]["path"],
+                                    render["candidate_object"]["sha256"])
+    render_unresolved = undefined(ROOT / render_candidate["path"])
+    if render_unresolved != sorted(
+            (set(layout_unresolved) - set(render["removed_imports"])) |
+            set(render["new_imports"])):
+        raise RuntimeError("Apollo Main display refresh render frontier changed")
+    images["apollo_main"]["candidate"] = render_candidate
+    images["apollo_main"]["display_refresh_render"] = render_ref
+    images["apollo_main"]["unresolved_count"] = 110
+    images["apollo_main"]["unresolved_symbols"] = render_unresolved
+    images["apollo_main"]["remaining_gate"].append(render["remaining_gate"])
+    chunk_path = G2 / "build/c-firmware/20261017/main-display-refresh-chunk-height-4544ae/receipt.json"
+    chunk, chunk_ref = receipt(chunk_path)
+    if (chunk["status"] != "PASS_MAIN_DISPLAY_REFRESH_CHUNK_HEIGHT_4544AE_INTEGRATION" or
+            chunk["unresolved_before"] != 110 or chunk["unresolved_after"] != 109 or
+            chunk["oracle_cases"] != 1296 or
+            chunk["removed_imports"] != ["audio_uart_lv_refresh_chunk_height_4544ae"] or
+            chunk["new_imports"] or chunk["source_complete"] or
+            chunk["flashable"] or chunk["hardware_proof"]):
+        raise RuntimeError("Apollo Main display refresh chunk height changed")
+    chunk_candidate = file_checked(chunk["candidate_object"]["path"],
+                                   chunk["candidate_object"]["sha256"])
+    chunk_unresolved = undefined(ROOT / chunk_candidate["path"])
+    if chunk_unresolved != sorted(set(render_unresolved) -
+                                  set(chunk["removed_imports"])):
+        raise RuntimeError("Apollo Main display refresh chunk-height frontier changed")
+    images["apollo_main"]["candidate"] = chunk_candidate
+    images["apollo_main"]["display_refresh_chunk_height"] = chunk_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = chunk_unresolved
+    images["apollo_main"]["remaining_gate"].append(chunk["remaining_gate"])
+    flush_path = G2 / "build/c-firmware/20261017/main-display-refresh-flush-454574/receipt.json"
+    flush, flush_ref = receipt(flush_path)
+    if (flush["status"] != "PASS_MAIN_DISPLAY_REFRESH_FLUSH_454574_INTEGRATION" or
+            flush["unresolved_before"] != 109 or flush["unresolved_after"] != 108 or
+            flush["oracle_cases"] != 192 or
+            flush["removed_imports"] != ["audio_uart_lv_display_flush_454574"] or
+            flush["new_imports"] or
+            flush["new_provider"] != "audio_uart_lv_display_flush_event_454648" or
+            flush["source_complete"] or flush["flashable"] or
+            flush["hardware_proof"]):
+        raise RuntimeError("Apollo Main display refresh flush changed")
+    flush_candidate = file_checked(flush["candidate_object"]["path"],
+                                   flush["candidate_object"]["sha256"])
+    flush_unresolved = undefined(ROOT / flush_candidate["path"])
+    if flush_unresolved != sorted(set(chunk_unresolved) -
+                                  set(flush["removed_imports"])):
+        raise RuntimeError("Apollo Main display refresh flush frontier changed")
+    images["apollo_main"]["candidate"] = flush_candidate
+    images["apollo_main"]["display_refresh_flush"] = flush_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = flush_unresolved
+    images["apollo_main"]["remaining_gate"].append(flush["remaining_gate"])
+    reshape_path = G2 / "build/c-firmware/20261017/main-display-refresh-layer-reshape-453b78/receipt.json"
+    reshape, reshape_ref = receipt(reshape_path)
+    if (reshape["status"] != "PASS_MAIN_DISPLAY_REFRESH_LAYER_RESHAPE_453B78_INTEGRATION" or
+            reshape["unresolved_before"] != 108 or reshape["unresolved_after"] != 108 or
+            reshape["oracle_cases"] != 272 or reshape["removed_imports"] or
+            reshape["new_imports"] or
+            reshape["new_provider"] != "audio_uart_lv_layer_reshape_draw_buf_453b78" or
+            reshape["source_complete"] or reshape["flashable"] or
+            reshape["hardware_proof"]):
+        raise RuntimeError("Apollo Main display refresh layer reshape changed")
+    reshape_candidate = file_checked(reshape["candidate_object"]["path"],
+                                     reshape["candidate_object"]["sha256"])
+    reshape_unresolved = undefined(ROOT / reshape_candidate["path"])
+    if reshape_unresolved != flush_unresolved:
+        raise RuntimeError("Apollo Main display refresh reshape frontier changed")
+    images["apollo_main"]["candidate"] = reshape_candidate
+    images["apollo_main"]["display_refresh_layer_reshape"] = reshape_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = reshape_unresolved
+    images["apollo_main"]["remaining_gate"].append(reshape["remaining_gate"])
+    area_path = G2 / "build/c-firmware/20261017/main-display-refresh-area-453bce/receipt.json"
+    area, area_ref = receipt(area_path)
+    expected_area_imports = ["audio_uart_lv_render_layer_453e10",
+                             "audio_uart_lv_render_layer_init_4847c4",
+                             "audio_uart_lv_render_wait_484622"]
+    if (area["status"] != "PASS_MAIN_DISPLAY_REFRESH_AREA_453BCE_INTEGRATION" or
+            area["unresolved_before"] != 108 or area["unresolved_after"] != 110 or
+            area["oracle_cases"] != 136 or
+            area["removed_imports"] != ["audio_uart_lv_refresh_area_453bce"] or
+            area["new_imports"] != expected_area_imports or
+            area["source_complete"] or area["flashable"] or
+            area["hardware_proof"]):
+        raise RuntimeError("Apollo Main display refresh area changed")
+    area_candidate = file_checked(area["candidate_object"]["path"],
+                                  area["candidate_object"]["sha256"])
+    area_unresolved = undefined(ROOT / area_candidate["path"])
+    if area_unresolved != sorted((set(reshape_unresolved) -
+                                  set(area["removed_imports"])) |
+                                 set(expected_area_imports)):
+        raise RuntimeError("Apollo Main display refresh area frontier changed")
+    images["apollo_main"]["candidate"] = area_candidate
+    images["apollo_main"]["display_refresh_area"] = area_ref
+    images["apollo_main"]["unresolved_count"] = 110
+    images["apollo_main"]["unresolved_symbols"] = area_unresolved
+    images["apollo_main"]["remaining_gate"].append(area["remaining_gate"])
+    wait_path = G2 / "build/c-firmware/20261017/main-display-render-wait-484622/receipt.json"
+    wait, wait_ref = receipt(wait_path)
+    if (wait["status"] != "PASS_MAIN_DISPLAY_RENDER_WAIT_484622_INTEGRATION" or
+            wait["unresolved_before"] != 110 or wait["unresolved_after"] != 109 or
+            wait["oracle_cases"] != 3 or
+            wait["removed_imports"] != ["audio_uart_lv_render_wait_484622"] or
+            wait["new_imports"] or wait["source_complete"] or
+            wait["flashable"] or wait["hardware_proof"]):
+        raise RuntimeError("Apollo Main display render wait changed")
+    wait_candidate = file_checked(wait["candidate_object"]["path"],
+                                  wait["candidate_object"]["sha256"])
+    wait_unresolved = undefined(ROOT / wait_candidate["path"])
+    if wait_unresolved != sorted(set(area_unresolved) - set(wait["removed_imports"])):
+        raise RuntimeError("Apollo Main display render wait frontier changed")
+    images["apollo_main"]["candidate"] = wait_candidate
+    images["apollo_main"]["display_render_wait"] = wait_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = wait_unresolved
+    images["apollo_main"]["remaining_gate"].append(wait["remaining_gate"])
+    layer_init_path = G2 / "build/c-firmware/20261017/main-display-render-layer-init-4847c4/receipt.json"
+    layer_init, layer_init_ref = receipt(layer_init_path)
+    if (layer_init["status"] != "PASS_MAIN_DISPLAY_RENDER_LAYER_INIT_4847C4_INTEGRATION" or
+            layer_init["unresolved_before"] != 109 or
+            layer_init["unresolved_after"] != 108 or
+            layer_init["oracle_cases"] != 37 or
+            layer_init["removed_imports"] != ["audio_uart_lv_render_layer_init_4847c4"] or
+            layer_init["new_imports"] or
+            layer_init["new_provider"] != "audio_uart_lv_render_layer_base_init_4846de" or
+            layer_init["source_complete"] or layer_init["flashable"] or
+            layer_init["hardware_proof"]):
+        raise RuntimeError("Apollo Main display render layer init changed")
+    layer_init_candidate = file_checked(layer_init["candidate_object"]["path"],
+                                        layer_init["candidate_object"]["sha256"])
+    layer_init_unresolved = undefined(ROOT / layer_init_candidate["path"])
+    if layer_init_unresolved != sorted(set(wait_unresolved) -
+                                       set(layer_init["removed_imports"])):
+        raise RuntimeError("Apollo Main display render layer init frontier changed")
+    images["apollo_main"]["candidate"] = layer_init_candidate
+    images["apollo_main"]["display_render_layer_init"] = layer_init_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = layer_init_unresolved
+    images["apollo_main"]["remaining_gate"].append(layer_init["remaining_gate"])
+    render_layer_path = G2 / "build/c-firmware/20261017/main-display-render-layer-453e10/receipt.json"
+    render_layer, render_layer_ref = receipt(render_layer_path)
+    if (render_layer["status"] != "PASS_MAIN_DISPLAY_RENDER_LAYER_453E10_INTEGRATION" or
+            render_layer["unresolved_before"] != 108 or
+            render_layer["unresolved_after"] != 109 or
+            render_layer["oracle_cases"] != 65 or
+            render_layer["removed_imports"] != ["audio_uart_lv_render_layer_453e10"] or
+            render_layer["new_imports"] != ["audio_uart_lv_render_find_cover_453f2e",
+                                           "audio_uart_lv_render_object_chain_453fce"] or
+            render_layer["new_provider"] != "audio_uart_lv_render_layer_reset_48471a" or
+            render_layer["source_complete"] or render_layer["flashable"] or
+            render_layer["hardware_proof"]):
+        raise RuntimeError("Apollo Main display render layer changed")
+    render_layer_candidate = file_checked(render_layer["candidate_object"]["path"],
+                                          render_layer["candidate_object"]["sha256"])
+    render_layer_unresolved = undefined(ROOT / render_layer_candidate["path"])
+    if render_layer_unresolved != sorted((set(layer_init_unresolved) -
+                                         set(render_layer["removed_imports"])) |
+                                        set(render_layer["new_imports"])):
+        raise RuntimeError("Apollo Main display render layer frontier changed")
+    images["apollo_main"]["candidate"] = render_layer_candidate
+    images["apollo_main"]["display_render_layer"] = render_layer_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = render_layer_unresolved
+    images["apollo_main"]["remaining_gate"].append(render_layer["remaining_gate"])
+    cover_path = G2 / "build/c-firmware/20261017/main-display-render-find-cover-453f2e/receipt.json"
+    cover, cover_ref = receipt(cover_path)
+    if (cover["status"] != "PASS_MAIN_DISPLAY_RENDER_FIND_COVER_453F2E_INTEGRATION" or
+            cover["unresolved_before"] != 109 or cover["unresolved_after"] != 108 or
+            cover["oracle_cases"] != 432 or
+            cover["removed_imports"] != ["audio_uart_lv_render_find_cover_453f2e"] or
+            cover["new_imports"] or cover["source_complete"] or
+            cover["flashable"] or cover["hardware_proof"]):
+        raise RuntimeError("Apollo Main display cover finder changed")
+    cover_candidate = file_checked(cover["candidate_object"]["path"],
+                                   cover["candidate_object"]["sha256"])
+    cover_unresolved = undefined(ROOT / cover_candidate["path"])
+    if cover_unresolved != sorted(set(render_layer_unresolved) -
+                                  set(cover["removed_imports"])):
+        raise RuntimeError("Apollo Main display cover finder frontier changed")
+    images["apollo_main"]["candidate"] = cover_candidate
+    images["apollo_main"]["display_render_find_cover"] = cover_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = cover_unresolved
+    images["apollo_main"]["remaining_gate"].append(cover["remaining_gate"])
+    chain_path = G2 / "build/c-firmware/20261017/main-display-render-object-chain-453fce/receipt.json"
+    chain, chain_ref = receipt(chain_path)
+    if (chain["status"] != "PASS_MAIN_DISPLAY_RENDER_OBJECT_CHAIN_453FCE_INTEGRATION" or
+            chain["unresolved_before"] != 108 or chain["unresolved_after"] != 108 or
+            chain["oracle_cases"] != 144 or
+            chain["removed_imports"] != ["audio_uart_lv_render_object_chain_453fce"] or
+            chain["new_imports"] != ["audio_uart_lv_draw_object_4541b6"] or
+            chain["source_complete"] or chain["flashable"] or
+            chain["hardware_proof"]):
+        raise RuntimeError("Apollo Main display object-chain renderer changed")
+    chain_candidate = file_checked(chain["candidate_object"]["path"],
+                                   chain["candidate_object"]["sha256"])
+    chain_unresolved = undefined(ROOT / chain_candidate["path"])
+    if chain_unresolved != sorted((set(cover_unresolved) -
+                                   set(chain["removed_imports"])) |
+                                  set(chain["new_imports"])):
+        raise RuntimeError("Apollo Main display object-chain frontier changed")
+    images["apollo_main"]["candidate"] = chain_candidate
+    images["apollo_main"]["display_render_object_chain"] = chain_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = chain_unresolved
+    images["apollo_main"]["remaining_gate"].append(chain["remaining_gate"])
+    area_helpers_path = G2 / "build/c-firmware/20261017/main-display-render-area-helpers-454074/receipt.json"
+    area_helpers, area_helpers_ref = receipt(area_helpers_path)
+    expected_geometry_imports = ["audio_uart_lv_area_overlap_450f00",
+                                 "audio_uart_lv_obj_adjust_area_440494",
+                                 "audio_uart_lv_obj_ext_draw_size_452dc8"]
+    if (area_helpers["status"] != "PASS_MAIN_DISPLAY_RENDER_AREA_HELPERS_454074_INTEGRATION" or
+            area_helpers["unresolved_before"] != 108 or
+            area_helpers["unresolved_after"] != 111 or
+            area_helpers["oracle_cases"] != 38 or
+            area_helpers["removed_imports"] or
+            area_helpers["new_imports"] != expected_geometry_imports or
+            area_helpers["new_providers"] != ["audio_uart_lv_render_area_select_454074",
+                                              "audio_uart_lv_render_cover_event_45417c"] or
+            area_helpers["source_complete"] or area_helpers["flashable"] or
+            area_helpers["hardware_proof"]):
+        raise RuntimeError("Apollo Main display render area helpers changed")
+    area_helpers_candidate = file_checked(area_helpers["candidate_object"]["path"],
+                                          area_helpers["candidate_object"]["sha256"])
+    area_helpers_unresolved = undefined(ROOT / area_helpers_candidate["path"])
+    if area_helpers_unresolved != sorted(set(chain_unresolved) |
+                                         set(expected_geometry_imports)):
+        raise RuntimeError("Apollo Main display render area helper frontier changed")
+    images["apollo_main"]["candidate"] = area_helpers_candidate
+    images["apollo_main"]["display_render_area_helpers"] = area_helpers_ref
+    images["apollo_main"]["unresolved_count"] = 111
+    images["apollo_main"]["unresolved_symbols"] = area_helpers_unresolved
+    images["apollo_main"]["remaining_gate"].append(area_helpers["remaining_gate"])
+    geometry_leaf_path = G2 / "build/c-firmware/20261017/main-display-render-geometry-leaf-450f00/receipt.json"
+    geometry_leaf, geometry_leaf_ref = receipt(geometry_leaf_path)
+    expected_leaf_removed = ["audio_uart_lv_area_overlap_450f00",
+                             "audio_uart_lv_obj_ext_draw_size_452dc8"]
+    if (geometry_leaf["status"] != "PASS_MAIN_DISPLAY_RENDER_GEOMETRY_LEAF_450F00_INTEGRATION" or
+            geometry_leaf["unresolved_before"] != 111 or
+            geometry_leaf["unresolved_after"] != 109 or
+            geometry_leaf["oracle_cases"] != 157 or
+            geometry_leaf["removed_imports"] != expected_leaf_removed or
+            geometry_leaf["new_imports"] or geometry_leaf["source_complete"] or
+            geometry_leaf["flashable"] or geometry_leaf["hardware_proof"]):
+        raise RuntimeError("Apollo Main display geometry leaf changed")
+    geometry_leaf_candidate = file_checked(geometry_leaf["candidate_object"]["path"],
+                                           geometry_leaf["candidate_object"]["sha256"])
+    geometry_leaf_unresolved = undefined(ROOT / geometry_leaf_candidate["path"])
+    if geometry_leaf_unresolved != sorted(set(area_helpers_unresolved) -
+                                          set(expected_leaf_removed)):
+        raise RuntimeError("Apollo Main display geometry leaf frontier changed")
+    images["apollo_main"]["candidate"] = geometry_leaf_candidate
+    images["apollo_main"]["display_render_geometry_leaf"] = geometry_leaf_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = geometry_leaf_unresolved
+    images["apollo_main"]["remaining_gate"].append(geometry_leaf["remaining_gate"])
+    area_adjust_path = G2 / "build/c-firmware/20261017/main-display-render-area-adjust-alias-440494/receipt.json"
+    area_adjust, area_adjust_ref = receipt(area_adjust_path)
+    if (area_adjust["status"] != "PASS_MAIN_DISPLAY_RENDER_AREA_ADJUST_ALIAS_440494_INTEGRATION" or
+            area_adjust["unresolved_before"] != 109 or
+            area_adjust["unresolved_after"] != 108 or
+            area_adjust["oracle_cases"] != 128 or
+            area_adjust["removed_imports"] != ["audio_uart_lv_obj_adjust_area_440494"] or
+            area_adjust["new_imports"] or area_adjust["source_complete"] or
+            area_adjust["flashable"] or area_adjust["hardware_proof"]):
+        raise RuntimeError("Apollo Main display render area adjust changed")
+    area_adjust_candidate = file_checked(area_adjust["candidate_object"]["path"],
+                                         area_adjust["candidate_object"]["sha256"])
+    area_adjust_unresolved = undefined(ROOT / area_adjust_candidate["path"])
+    if area_adjust_unresolved != sorted(set(geometry_leaf_unresolved) -
+                                        set(area_adjust["removed_imports"])):
+        raise RuntimeError("Apollo Main display render area adjust frontier changed")
+    images["apollo_main"]["candidate"] = area_adjust_candidate
+    images["apollo_main"]["display_render_area_adjust"] = area_adjust_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = area_adjust_unresolved
+    images["apollo_main"]["remaining_gate"].append(area_adjust["remaining_gate"])
+    style_leaves_path = G2 / "build/c-firmware/20261017/main-display-draw-object-style-accessors-45311a/receipt.json"
+    style_leaves, style_leaves_ref = receipt(style_leaves_path)
+    if (style_leaves["status"] != "PASS_MAIN_DISPLAY_DRAW_OBJECT_STYLE_ACCESSORS_45311A_INTEGRATION" or
+            style_leaves["unresolved_before"] != 108 or
+            style_leaves["unresolved_after"] != 108 or
+            style_leaves["oracle_cases"] != 224 or
+            len(style_leaves["new_providers"]) != 14 or
+            style_leaves["removed_imports"] or style_leaves["new_imports"] or
+            style_leaves["source_complete"] or style_leaves["flashable"] or
+            style_leaves["hardware_proof"]):
+        raise RuntimeError("Apollo Main draw-object style leaves changed")
+    style_leaves_candidate = file_checked(style_leaves["candidate_object"]["path"],
+                                          style_leaves["candidate_object"]["sha256"])
+    style_leaves_unresolved = undefined(ROOT / style_leaves_candidate["path"])
+    if style_leaves_unresolved != area_adjust_unresolved:
+        raise RuntimeError("Apollo Main draw-object style leaf frontier changed")
+    images["apollo_main"]["candidate"] = style_leaves_candidate
+    images["apollo_main"]["display_draw_object_style_accessors"] = style_leaves_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = style_leaves_unresolved
+    images["apollo_main"]["remaining_gate"].append(style_leaves["remaining_gate"])
+    draw_object_path = G2 / "build/c-firmware/20261017/main-display-draw-object-4541b6/receipt.json"
+    draw_object, draw_object_ref = receipt(draw_object_path)
+    if (draw_object["status"] != "PASS_MAIN_DISPLAY_DRAW_OBJECT_4541B6_INTEGRATION" or
+            draw_object["unresolved_before"] != 108 or
+            draw_object["unresolved_after"] != 110 or
+            draw_object["oracle_cases"] != 15 or
+            draw_object["removed_imports"] != ["audio_uart_lv_draw_object_4541b6"] or
+            draw_object["new_imports"] != ["audio_uart_lv_draw_layer_48895e",
+                                            "audio_uart_lv_draw_layer_create_48475e",
+                                            "audio_uart_lv_obj_redraw_4531ae"] or
+            draw_object["source_complete"] or draw_object["flashable"] or
+            draw_object["hardware_proof"]):
+        raise RuntimeError("Apollo Main draw-object body changed")
+    draw_object_candidate = file_checked(draw_object["candidate_object"]["path"],
+                                         draw_object["candidate_object"]["sha256"])
+    draw_object_unresolved = undefined(ROOT / draw_object_candidate["path"])
+    if draw_object_unresolved != sorted((set(style_leaves_unresolved) -
+                                         set(draw_object["removed_imports"])) |
+                                        set(draw_object["new_imports"])):
+        raise RuntimeError("Apollo Main draw-object frontier changed")
+    images["apollo_main"]["candidate"] = draw_object_candidate
+    images["apollo_main"]["display_draw_object"] = draw_object_ref
+    images["apollo_main"]["unresolved_count"] = 110
+    images["apollo_main"]["unresolved_symbols"] = draw_object_unresolved
+    images["apollo_main"]["remaining_gate"].append(draw_object["remaining_gate"])
+    layer_create_path = G2 / "build/c-firmware/20261017/main-display-draw-layer-create-48475e/receipt.json"
+    layer_create, layer_create_ref = receipt(layer_create_path)
+    if (layer_create["status"] != "PASS_MAIN_DISPLAY_DRAW_LAYER_CREATE_48475E_INTEGRATION" or
+            layer_create["unresolved_before"] != 110 or
+            layer_create["unresolved_after"] != 109 or
+            layer_create["oracle_cases"] != 40 or
+            layer_create["removed_imports"] != ["audio_uart_lv_draw_layer_create_48475e"] or
+            layer_create["new_imports"] or layer_create["source_complete"] or
+            layer_create["flashable"] or layer_create["hardware_proof"]):
+        raise RuntimeError("Apollo Main layer-create body changed")
+    layer_create_candidate = file_checked(layer_create["candidate_object"]["path"],
+                                          layer_create["candidate_object"]["sha256"])
+    layer_create_unresolved = undefined(ROOT / layer_create_candidate["path"])
+    if layer_create_unresolved != sorted(set(draw_object_unresolved) -
+                                         set(layer_create["removed_imports"])):
+        raise RuntimeError("Apollo Main layer-create frontier changed")
+    images["apollo_main"]["candidate"] = layer_create_candidate
+    images["apollo_main"]["display_draw_layer_create"] = layer_create_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = layer_create_unresolved
+    images["apollo_main"]["remaining_gate"].append(layer_create["remaining_gate"])
+    draw_layer_path = G2 / "build/c-firmware/20261017/main-display-draw-layer-48895e/receipt.json"
+    draw_layer, draw_layer_ref = receipt(draw_layer_path)
+    if (draw_layer["status"] != "PASS_MAIN_DISPLAY_DRAW_LAYER_48895E_INTEGRATION" or
+            draw_layer["unresolved_before"] != 109 or
+            draw_layer["unresolved_after"] != 108 or
+            draw_layer["oracle_cases"] != 64 or
+            draw_layer["removed_imports"] != ["audio_uart_lv_draw_layer_48895e"] or
+            draw_layer["new_imports"] or draw_layer["source_complete"] or
+            draw_layer["flashable"] or draw_layer["hardware_proof"]):
+        raise RuntimeError("Apollo Main draw-layer body changed")
+    draw_layer_candidate = file_checked(draw_layer["candidate_object"]["path"],
+                                        draw_layer["candidate_object"]["sha256"])
+    draw_layer_unresolved = undefined(ROOT / draw_layer_candidate["path"])
+    if draw_layer_unresolved != sorted(set(layer_create_unresolved) -
+                                       set(draw_layer["removed_imports"])):
+        raise RuntimeError("Apollo Main draw-layer frontier changed")
+    images["apollo_main"]["candidate"] = draw_layer_candidate
+    images["apollo_main"]["display_draw_layer"] = draw_layer_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = draw_layer_unresolved
+    images["apollo_main"]["remaining_gate"].append(draw_layer["remaining_gate"])
+    obj_redraw_path = G2 / "build/c-firmware/20261017/main-display-obj-redraw-4531ae/receipt.json"
+    obj_redraw, obj_redraw_ref = receipt(obj_redraw_path)
+    if (obj_redraw["status"] != "PASS_MAIN_DISPLAY_OBJ_REDRAW_4531AE_INTEGRATION" or
+            obj_redraw["unresolved_before"] != 108 or
+            obj_redraw["unresolved_after"] != 109 or
+            obj_redraw["oracle_cases"] != 56 or
+            obj_redraw["removed_imports"] != ["audio_uart_lv_obj_redraw_4531ae"] or
+            obj_redraw["new_imports"] != ["audio_uart_lv_draw_mask_rect_48a98e",
+                                          "audio_uart_lv_mask_rect_dsc_init_48a984"] or
+            obj_redraw["source_complete"] or obj_redraw["flashable"] or
+            obj_redraw["hardware_proof"]):
+        raise RuntimeError("Apollo Main object-redraw body changed")
+    obj_redraw_candidate = file_checked(obj_redraw["candidate_object"]["path"],
+                                        obj_redraw["candidate_object"]["sha256"])
+    obj_redraw_unresolved = undefined(ROOT / obj_redraw_candidate["path"])
+    if obj_redraw_unresolved != sorted((set(draw_layer_unresolved) -
+                                       set(obj_redraw["removed_imports"])) |
+                                      set(obj_redraw["new_imports"])):
+        raise RuntimeError("Apollo Main object-redraw frontier changed")
+    images["apollo_main"]["candidate"] = obj_redraw_candidate
+    images["apollo_main"]["display_obj_redraw"] = obj_redraw_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = obj_redraw_unresolved
+    images["apollo_main"]["remaining_gate"].append(obj_redraw["remaining_gate"])
+    mask_init_path = G2 / "build/c-firmware/20261017/main-display-mask-rect-dsc-init-48a984/receipt.json"
+    mask_init, mask_init_ref = receipt(mask_init_path)
+    if (mask_init["status"] != "PASS_MAIN_DISPLAY_MASK_RECT_DSC_INIT_48A984_INTEGRATION" or
+            mask_init["unresolved_before"] != 109 or
+            mask_init["unresolved_after"] != 108 or
+            mask_init["oracle_cases"] != 32 or
+            mask_init["removed_imports"] != ["audio_uart_lv_mask_rect_dsc_init_48a984"] or
+            mask_init["new_imports"] or mask_init["source_complete"] or
+            mask_init["flashable"] or mask_init["hardware_proof"]):
+        raise RuntimeError("Apollo Main mask descriptor initializer changed")
+    mask_init_candidate = file_checked(mask_init["candidate_object"]["path"],
+                                       mask_init["candidate_object"]["sha256"])
+    mask_init_unresolved = undefined(ROOT / mask_init_candidate["path"])
+    if mask_init_unresolved != sorted(set(obj_redraw_unresolved) -
+                                      set(mask_init["removed_imports"])):
+        raise RuntimeError("Apollo Main mask descriptor frontier changed")
+    images["apollo_main"]["candidate"] = mask_init_candidate
+    images["apollo_main"]["display_mask_rect_dsc_init"] = mask_init_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = mask_init_unresolved
+    images["apollo_main"]["remaining_gate"].append(mask_init["remaining_gate"])
+    mask_draw_path = G2 / "build/c-firmware/20261017/main-display-draw-mask-rect-48a98e/receipt.json"
+    mask_draw, mask_draw_ref = receipt(mask_draw_path)
+    if (mask_draw["status"] != "PASS_MAIN_DISPLAY_DRAW_MASK_RECT_48A98E_INTEGRATION" or
+            mask_draw["unresolved_before"] != 108 or
+            mask_draw["unresolved_after"] != 107 or
+            mask_draw["oracle_cases"] != 32 or
+            mask_draw["removed_imports"] != ["audio_uart_lv_draw_mask_rect_48a98e"] or
+            mask_draw["new_imports"] or mask_draw["source_complete"] or
+            mask_draw["flashable"] or mask_draw["hardware_proof"]):
+        raise RuntimeError("Apollo Main draw-mask body changed")
+    mask_draw_candidate = file_checked(mask_draw["candidate_object"]["path"],
+                                       mask_draw["candidate_object"]["sha256"])
+    mask_draw_unresolved = undefined(ROOT / mask_draw_candidate["path"])
+    if mask_draw_unresolved != sorted(set(mask_init_unresolved) -
+                                      set(mask_draw["removed_imports"])):
+        raise RuntimeError("Apollo Main draw-mask frontier changed")
+    images["apollo_main"]["candidate"] = mask_draw_candidate
+    images["apollo_main"]["display_draw_mask_rect"] = mask_draw_ref
+    images["apollo_main"]["unresolved_count"] = 107
+    images["apollo_main"]["unresolved_symbols"] = mask_draw_unresolved
+    images["apollo_main"]["remaining_gate"].append(mask_draw["remaining_gate"])
+    heap_pool_path = G2 / "build/c-firmware/20261017/main-lv-heap-pool-20000338/receipt.json"
+    heap_pool, heap_pool_ref = receipt(heap_pool_path)
+    if (heap_pool["status"] != "PASS_MAIN_LV_HEAP_POOL_20000338_RAM_CONTRACT_INTEGRATION" or
+            heap_pool["unresolved_before"] != 107 or
+            heap_pool["unresolved_after"] != 106 or
+            heap_pool["stock_ram_cell"] != "0x20000338" or
+            heap_pool["removed_imports"] != ["audio_uart_lv_heap_pool"] or
+            heap_pool["new_imports"] or heap_pool["source_complete"] or
+            heap_pool["flashable"] or heap_pool["hardware_proof"]):
+        raise RuntimeError("Apollo Main LVGL heap-pool RAM contract changed")
+    heap_pool_candidate = file_checked(heap_pool["candidate_object"]["path"],
+                                       heap_pool["candidate_object"]["sha256"])
+    heap_pool_unresolved = undefined(ROOT / heap_pool_candidate["path"])
+    if heap_pool_unresolved != sorted(set(mask_draw_unresolved) -
+                                      set(heap_pool["removed_imports"])):
+        raise RuntimeError("Apollo Main LVGL heap-pool frontier changed")
+    images["apollo_main"]["candidate"] = heap_pool_candidate
+    images["apollo_main"]["lv_heap_pool_ram_contract"] = heap_pool_ref
+    images["apollo_main"]["unresolved_count"] = 106
+    images["apollo_main"]["unresolved_symbols"] = heap_pool_unresolved
+    images["apollo_main"]["remaining_gate"].append(heap_pool["remaining_gate"])
+    att_tables_path = G2 / "build/c-firmware/20261017/main-ble-att-dispatch-tables-7851e0/receipt.json"
+    att_tables, att_tables_ref = receipt(att_tables_path)
+    if (att_tables["status"] != "PASS_MAIN_BLE_ATT_DISPATCH_TABLES_7851E0_C_INTEGRATION" or
+            att_tables["unresolved_before"] != 106 or
+            att_tables["unresolved_after"] != 104 or
+            att_tables["stock_table_span"] != "0x7851e0..0x7851ff" or
+            att_tables["removed_imports"] != ["audio_ble_att_table_main",
+                                              "audio_ble_att_table_secondary"] or
+            att_tables["new_imports"] or att_tables["source_complete"] or
+            att_tables["flashable"] or att_tables["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT dispatch tables changed")
+    att_tables_candidate = file_checked(att_tables["candidate_object"]["path"],
+                                        att_tables["candidate_object"]["sha256"])
+    att_tables_unresolved = undefined(ROOT / att_tables_candidate["path"])
+    if att_tables_unresolved != sorted(set(heap_pool_unresolved) -
+                                       set(att_tables["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT dispatch frontier changed")
+    images["apollo_main"]["candidate"] = att_tables_candidate
+    images["apollo_main"]["ble_att_dispatch_tables"] = att_tables_ref
+    images["apollo_main"]["unresolved_count"] = 104
+    images["apollo_main"]["unresolved_symbols"] = att_tables_unresolved
+    images["apollo_main"]["remaining_gate"].append(att_tables["remaining_gate"])
+    att_if_path = G2 / "build/c-firmware/20261017/main-ble-att-interface-tables-785250/receipt.json"
+    att_if, att_if_ref = receipt(att_if_path)
+    if (att_if["status"] != "PASS_MAIN_BLE_ATT_INTERFACE_TABLES_785250_C_INTEGRATION" or
+            att_if["unresolved_before"] != 104 or
+            att_if["unresolved_after"] != 112 or
+            len(att_if["stock_tables"]) != 3 or
+            att_if["removed_imports"] != ["audio_ble_attc_table",
+                                          "audio_ble_atts_ind_table",
+                                          "audio_ble_atts_table"] or
+            len(att_if["new_imports"]) != 11 or
+            att_if["source_complete"] or att_if["flashable"] or
+            att_if["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio ATT interface tables changed")
+    att_if_candidate = file_checked(att_if["candidate_object"]["path"],
+                                    att_if["candidate_object"]["sha256"])
+    att_if_unresolved = undefined(ROOT / att_if_candidate["path"])
+    if att_if_unresolved != sorted((set(att_tables_unresolved) -
+                                   set(att_if["removed_imports"])) |
+                                  set(att_if["new_imports"])):
+        raise RuntimeError("Apollo Main Cordio ATT interface frontier changed")
+    images["apollo_main"]["candidate"] = att_if_candidate
+    images["apollo_main"]["ble_att_interface_tables"] = att_if_ref
+    images["apollo_main"]["unresolved_count"] = 112
+    images["apollo_main"]["unresolved_symbols"] = att_if_unresolved
+    images["apollo_main"]["remaining_gate"].append(att_if["remaining_gate"])
+    att_ctrl_path = G2 / "build/c-firmware/20261017/main-ble-att-control-callbacks/receipt.json"
+    att_ctrl, att_ctrl_ref = receipt(att_ctrl_path)
+    if (att_ctrl["status"] != "PASS_MAIN_BLE_ATT_CONTROL_CALLBACKS_C_INTEGRATION" or
+            att_ctrl["unresolved_before"] != 112 or
+            att_ctrl["unresolved_after"] != 112 or
+            att_ctrl["oracle_cases"] != 30 or
+            len(att_ctrl["removed_imports"]) != 3 or
+            len(att_ctrl["new_imports"]) != 3 or
+            att_ctrl["source_complete"] or att_ctrl["flashable"] or
+            att_ctrl["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio ATT control callbacks changed")
+    att_ctrl_candidate = file_checked(att_ctrl["candidate_object"]["path"],
+                                      att_ctrl["candidate_object"]["sha256"])
+    att_ctrl_unresolved = undefined(ROOT / att_ctrl_candidate["path"])
+    if att_ctrl_unresolved != sorted((set(att_if_unresolved) -
+                                     set(att_ctrl["removed_imports"])) |
+                                    set(att_ctrl["new_imports"])):
+        raise RuntimeError("Apollo Main Cordio ATT control frontier changed")
+    images["apollo_main"]["candidate"] = att_ctrl_candidate
+    images["apollo_main"]["ble_att_control_callbacks"] = att_ctrl_ref
+    images["apollo_main"]["unresolved_count"] = 112
+    images["apollo_main"]["unresolved_symbols"] = att_ctrl_unresolved
+    images["apollo_main"]["remaining_gate"].append(att_ctrl["remaining_gate"])
+    ind_pending_path = G2 / "build/c-firmware/20261017/main-ble-atts-ind-pending/receipt.json"
+    ind_pending, ind_pending_ref = receipt(ind_pending_path)
+    if (ind_pending["status"] != "PASS_MAIN_BLE_ATTS_IND_PENDING_C_INTEGRATION" or
+            ind_pending["unresolved_before"] != 112 or
+            ind_pending["unresolved_after"] != 111 or
+            ind_pending["oracle_cases"] != 120 or
+            ind_pending["removed_imports"] != ["audio_ble_atts_ind_ntf_callback_53394c"] or
+            ind_pending["new_imports"] or
+            ind_pending["source_complete"] or ind_pending["flashable"] or
+            ind_pending["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio ATTS pending callback changed")
+    ind_pending_candidate = file_checked(ind_pending["candidate_object"]["path"],
+                                         ind_pending["candidate_object"]["sha256"])
+    ind_pending_unresolved = undefined(ROOT / ind_pending_candidate["path"])
+    if ind_pending_unresolved != sorted(set(att_ctrl_unresolved) -
+                                        set(ind_pending["removed_imports"])):
+        raise RuntimeError("Apollo Main Cordio ATTS pending frontier changed")
+    images["apollo_main"]["candidate"] = ind_pending_candidate
+    images["apollo_main"]["ble_atts_ind_pending"] = ind_pending_ref
+    images["apollo_main"]["unresolved_count"] = 111
+    images["apollo_main"]["unresolved_symbols"] = ind_pending_unresolved
+    images["apollo_main"]["remaining_gate"].append(ind_pending["remaining_gate"])
+    write_cmd_path = G2 / "build/c-firmware/20261017/main-ble-attc-write-cmd-callback/receipt.json"
+    write_cmd, write_cmd_ref = receipt(write_cmd_path)
+    if (write_cmd["status"] != "PASS_MAIN_BLE_ATTC_WRITE_CMD_CALLBACK_C_INTEGRATION" or
+            write_cmd["unresolved_before"] != 111 or
+            write_cmd["unresolved_after"] != 110 or
+            write_cmd["oracle_cases"] != 48 or
+            write_cmd["removed_imports"] != ["audio_ble_attc_write_cmd_callback_530de6"] or
+            write_cmd["new_imports"] or
+            write_cmd["source_complete"] or write_cmd["flashable"] or
+            write_cmd["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio ATT client write callback changed")
+    write_cmd_candidate = file_checked(write_cmd["candidate_object"]["path"],
+                                       write_cmd["candidate_object"]["sha256"])
+    write_cmd_unresolved = undefined(ROOT / write_cmd_candidate["path"])
+    if write_cmd_unresolved != sorted(set(ind_pending_unresolved) -
+                                      set(write_cmd["removed_imports"])):
+        raise RuntimeError("Apollo Main Cordio ATT client write frontier changed")
+    images["apollo_main"]["candidate"] = write_cmd_candidate
+    images["apollo_main"]["ble_attc_write_cmd_callback"] = write_cmd_ref
+    images["apollo_main"]["unresolved_count"] = 110
+    images["apollo_main"]["unresolved_symbols"] = write_cmd_unresolved
+    images["apollo_main"]["remaining_gate"].append(write_cmd["remaining_gate"])
+    atts_msg_path = G2 / "build/c-firmware/20261017/main-ble-atts-msg-dispatch/receipt.json"
+    atts_msg, atts_msg_ref = receipt(atts_msg_path)
+    if (atts_msg["status"] != "PASS_MAIN_BLE_ATTS_MSG_DISPATCH_C_INTEGRATION" or
+            atts_msg["unresolved_before"] != 110 or
+            atts_msg["unresolved_after"] != 110 or
+            atts_msg["oracle_cases"] != 24 or
+            atts_msg["removed_imports"] != ["audio_ble_atts_msg_534c42"] or
+            atts_msg["new_imports"] != ["audio_ble_atts_database_hash_update_534d46"] or
+            atts_msg["source_complete"] or atts_msg["flashable"] or
+            atts_msg["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio ATT server dispatcher changed")
+    atts_msg_candidate = file_checked(atts_msg["candidate_object"]["path"],
+                                      atts_msg["candidate_object"]["sha256"])
+    atts_msg_unresolved = undefined(ROOT / atts_msg_candidate["path"])
+    if atts_msg_unresolved != sorted((set(write_cmd_unresolved) -
+                                     set(atts_msg["removed_imports"])) |
+                                    set(atts_msg["new_imports"])):
+        raise RuntimeError("Apollo Main Cordio ATT server dispatcher frontier changed")
+    images["apollo_main"]["candidate"] = atts_msg_candidate
+    images["apollo_main"]["ble_atts_msg_dispatch"] = atts_msg_ref
+    images["apollo_main"]["unresolved_count"] = 110
+    images["apollo_main"]["unresolved_symbols"] = atts_msg_unresolved
+    images["apollo_main"]["remaining_gate"].append(atts_msg["remaining_gate"])
+    hash_update_path = G2 / "build/c-firmware/20261017/main-ble-atts-database-hash-update/receipt.json"
+    hash_update, hash_update_ref = receipt(hash_update_path)
+    if (hash_update["status"] != "PASS_MAIN_BLE_ATTS_DATABASE_HASH_UPDATE_C_INTEGRATION" or
+            hash_update["unresolved_before"] != 110 or
+            hash_update["unresolved_after"] != 111 or
+            hash_update["oracle_cases"] != 12 or
+            hash_update["removed_imports"] != ["audio_ble_atts_database_hash_update_534d46"] or
+            hash_update["new_imports"] != ["AttsSetAttr", "attsFindUuidInRange"] or
+            hash_update["source_complete"] or hash_update["flashable"] or
+            hash_update["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio ATT server hash update changed")
+    hash_update_candidate = file_checked(hash_update["candidate_object"]["path"],
+                                         hash_update["candidate_object"]["sha256"])
+    hash_update_unresolved = undefined(ROOT / hash_update_candidate["path"])
+    if hash_update_unresolved != sorted((set(atts_msg_unresolved) -
+                                        set(hash_update["removed_imports"])) |
+                                       set(hash_update["new_imports"])):
+        raise RuntimeError("Apollo Main Cordio ATT server hash frontier changed")
+    images["apollo_main"]["candidate"] = hash_update_candidate
+    images["apollo_main"]["ble_atts_database_hash_update"] = hash_update_ref
+    images["apollo_main"]["unresolved_count"] = 111
+    images["apollo_main"]["unresolved_symbols"] = hash_update_unresolved
+    images["apollo_main"]["remaining_gate"].append(hash_update["remaining_gate"])
+    set_attr_path = G2 / "build/c-firmware/20261017/main-ble-atts-set-attr/receipt.json"
+    set_attr, set_attr_ref = receipt(set_attr_path)
+    if (set_attr["status"] != "PASS_MAIN_BLE_ATTS_SET_ATTR_C_INTEGRATION" or
+            set_attr["unresolved_before"] != 111 or
+            set_attr["unresolved_after"] != 110 or
+            set_attr["oracle_cases"] != 48 or
+            set_attr["removed_imports"] != ["AttsSetAttr"] or
+            set_attr["new_imports"] or
+            set_attr["source_complete"] or set_attr["flashable"] or
+            set_attr["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio ATT attribute writer changed")
+    set_attr_candidate = file_checked(set_attr["candidate_object"]["path"],
+                                      set_attr["candidate_object"]["sha256"])
+    set_attr_unresolved = undefined(ROOT / set_attr_candidate["path"])
+    if set_attr_unresolved != sorted(set(hash_update_unresolved) -
+                                     set(set_attr["removed_imports"])):
+        raise RuntimeError("Apollo Main Cordio ATT attribute writer frontier changed")
+    images["apollo_main"]["candidate"] = set_attr_candidate
+    images["apollo_main"]["ble_atts_set_attr"] = set_attr_ref
+    images["apollo_main"]["unresolved_count"] = 110
+    images["apollo_main"]["unresolved_symbols"] = set_attr_unresolved
+    images["apollo_main"]["remaining_gate"].append(set_attr["remaining_gate"])
+    uuid_chain_path = G2 / "build/c-firmware/20261017/main-ble-atts-uuid-search-chain/receipt.json"
+    uuid_chain, uuid_chain_ref = receipt(uuid_chain_path)
+    if (uuid_chain["status"] != "PASS_MAIN_BLE_ATTS_UUID_SEARCH_CHAIN_C_INTEGRATION" or
+            uuid_chain["unresolved_before"] != 110 or
+            uuid_chain["unresolved_after"] != 110 or
+            uuid_chain["oracle_cases"] != [360, 12] or
+            uuid_chain["removed_imports"] != ["attsFindUuidInRange"] or
+            uuid_chain["new_imports"] != ["attUuidCmp16to128"] or
+            uuid_chain["source_complete"] or uuid_chain["flashable"] or
+            uuid_chain["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio ATT UUID search changed")
+    uuid_chain_candidate = file_checked(uuid_chain["candidate_object"]["path"],
+                                        uuid_chain["candidate_object"]["sha256"])
+    uuid_chain_unresolved = undefined(ROOT / uuid_chain_candidate["path"])
+    if uuid_chain_unresolved != sorted((set(set_attr_unresolved) -
+                                       set(uuid_chain["removed_imports"])) |
+                                      set(uuid_chain["new_imports"])):
+        raise RuntimeError("Apollo Main Cordio ATT UUID frontier changed")
+    images["apollo_main"]["candidate"] = uuid_chain_candidate
+    images["apollo_main"]["ble_atts_uuid_search_chain"] = uuid_chain_ref
+    images["apollo_main"]["unresolved_count"] = 110
+    images["apollo_main"]["unresolved_symbols"] = uuid_chain_unresolved
+    images["apollo_main"]["remaining_gate"].append(uuid_chain["remaining_gate"])
+    uuid_convert_path = G2 / "build/c-firmware/20261017/main-ble-att-uuid-16-to-128/receipt.json"
+    uuid_convert, uuid_convert_ref = receipt(uuid_convert_path)
+    if (uuid_convert["status"] != "PASS_MAIN_BLE_ATT_UUID_16_TO_128_C_INTEGRATION" or
+            uuid_convert["unresolved_before"] != 110 or
+            uuid_convert["unresolved_after"] != 109 or
+            uuid_convert["oracle_cases"] != 18 or
+            uuid_convert["removed_imports"] != ["attUuidCmp16to128"] or
+            uuid_convert["new_imports"] or
+            uuid_convert["source_complete"] or uuid_convert["flashable"] or
+            uuid_convert["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio ATT UUID conversion changed")
+    uuid_convert_candidate = file_checked(uuid_convert["candidate_object"]["path"],
+                                          uuid_convert["candidate_object"]["sha256"])
+    uuid_convert_unresolved = undefined(ROOT / uuid_convert_candidate["path"])
+    if uuid_convert_unresolved != sorted(set(uuid_chain_unresolved) -
+                                         set(uuid_convert["removed_imports"])):
+        raise RuntimeError("Apollo Main Cordio ATT UUID conversion frontier changed")
+    images["apollo_main"]["candidate"] = uuid_convert_candidate
+    images["apollo_main"]["ble_att_uuid_16_to_128"] = uuid_convert_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = uuid_convert_unresolved
+    images["apollo_main"]["remaining_gate"].append(uuid_convert["remaining_gate"])
+    ind_msg_path = G2 / "build/c-firmware/20261017/main-ble-atts-ind-msg/receipt.json"
+    ind_msg, ind_msg_ref = receipt(ind_msg_path)
+    if (ind_msg["status"] != "PASS_MAIN_BLE_ATTS_IND_MSG_C_INTEGRATION" or
+            ind_msg["unresolved_before"] != 109 or
+            ind_msg["unresolved_after"] != 111 or
+            ind_msg["oracle_cases"] != 64 or
+            ind_msg["removed_imports"] != ["audio_ble_atts_ind_msg_533bcc"] or
+            ind_msg["new_imports"] != ["audio_ble_att_decode_msg_param_4b50fe",
+                                       "audio_ble_atts_pend_ind_ntf_5338ac",
+                                       "audio_ble_atts_setup_msg_5339ac"] or
+            ind_msg["source_complete"] or ind_msg["flashable"] or
+            ind_msg["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio ATT indication message changed")
+    ind_msg_candidate = file_checked(ind_msg["candidate_object"]["path"],
+                                     ind_msg["candidate_object"]["sha256"])
+    ind_msg_unresolved = undefined(ROOT / ind_msg_candidate["path"])
+    if ind_msg_unresolved != sorted((set(uuid_convert_unresolved) -
+                                     set(ind_msg["removed_imports"])) |
+                                    set(ind_msg["new_imports"])):
+        raise RuntimeError("Apollo Main Cordio ATT indication frontier changed")
+    images["apollo_main"]["candidate"] = ind_msg_candidate
+    images["apollo_main"]["ble_atts_ind_msg"] = ind_msg_ref
+    images["apollo_main"]["unresolved_count"] = 111
+    images["apollo_main"]["unresolved_symbols"] = ind_msg_unresolved
+    images["apollo_main"]["remaining_gate"].append(ind_msg["remaining_gate"])
+    decode_path = G2 / "build/c-firmware/20261017/main-ble-att-decode-msg-param/receipt.json"
+    decode, decode_ref = receipt(decode_path)
+    if (decode["status"] != "PASS_MAIN_BLE_ATT_DECODE_MSG_PARAM_C_INTEGRATION" or
+            decode["unresolved_before"] != 111 or
+            decode["unresolved_after"] != 110 or
+            decode["oracle_cases"] != 261 or
+            decode["removed_imports"] != ["audio_ble_att_decode_msg_param_4b50fe"] or
+            decode["new_imports"] or decode["source_complete"] or
+            decode["flashable"] or decode["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio ATT parameter decoder changed")
+    decode_candidate = file_checked(decode["candidate_object"]["path"],
+                                    decode["candidate_object"]["sha256"])
+    decode_unresolved = undefined(ROOT / decode_candidate["path"])
+    if decode_unresolved != sorted(set(ind_msg_unresolved) -
+                                   set(decode["removed_imports"])):
+        raise RuntimeError("Apollo Main Cordio ATT decoder frontier changed")
+    images["apollo_main"]["candidate"] = decode_candidate
+    images["apollo_main"]["ble_att_decode_msg_param"] = decode_ref
+    images["apollo_main"]["unresolved_count"] = 110
+    images["apollo_main"]["unresolved_symbols"] = decode_unresolved
+    images["apollo_main"]["remaining_gate"].append(decode["remaining_gate"])
+    pend_path = G2 / "build/c-firmware/20261017/main-ble-atts-pend-ind-ntf/receipt.json"
+    pend, pend_ref = receipt(pend_path)
+    if (pend["status"] != "PASS_MAIN_BLE_ATTS_PEND_IND_NTF_C_INTEGRATION" or
+            pend["unresolved_before"] != 110 or
+            pend["unresolved_after"] != 109 or
+            pend["oracle_cases"] != 54 or
+            pend["removed_imports"] != ["audio_ble_atts_pend_ind_ntf_5338ac"] or
+            pend["new_imports"] or pend["source_complete"] or
+            pend["flashable"] or pend["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio ATTS pending check changed")
+    pend_candidate = file_checked(pend["candidate_object"]["path"],
+                                  pend["candidate_object"]["sha256"])
+    pend_unresolved = undefined(ROOT / pend_candidate["path"])
+    if pend_unresolved != sorted(set(decode_unresolved) -
+                                 set(pend["removed_imports"])):
+        raise RuntimeError("Apollo Main Cordio ATTS pending frontier changed")
+    images["apollo_main"]["candidate"] = pend_candidate
+    images["apollo_main"]["ble_atts_pend_ind_ntf"] = pend_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = pend_unresolved
+    images["apollo_main"]["remaining_gate"].append(pend["remaining_gate"])
+    setup_path = G2 / "build/c-firmware/20261017/main-ble-atts-setup-msg/receipt.json"
+    setup, setup_ref = receipt(setup_path)
+    if (setup["status"] != "PASS_MAIN_BLE_ATTS_SETUP_MSG_C_INTEGRATION" or
+            setup["unresolved_before"] != 109 or
+            setup["unresolved_after"] != 109 or
+            setup["oracle_cases"] != 48 or
+            setup["removed_imports"] != ["audio_ble_atts_setup_msg_5339ac"] or
+            setup["new_imports"] != ["audio_ble_att_cfg_ptr_200004b4"] or
+            setup["source_complete"] or setup["flashable"] or
+            setup["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio ATTS message setup changed")
+    setup_candidate = file_checked(setup["candidate_object"]["path"],
+                                   setup["candidate_object"]["sha256"])
+    setup_unresolved = undefined(ROOT / setup_candidate["path"])
+    if setup_unresolved != sorted((set(pend_unresolved) -
+                                   set(setup["removed_imports"])) |
+                                  set(setup["new_imports"])):
+        raise RuntimeError("Apollo Main Cordio ATTS setup frontier changed")
+    images["apollo_main"]["candidate"] = setup_candidate
+    images["apollo_main"]["ble_atts_setup_msg"] = setup_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = setup_unresolved
+    images["apollo_main"]["remaining_gate"].append(setup["remaining_gate"])
+    att_cfg_path = G2 / "build/c-firmware/20261017/main-ble-att-cfg-ptr-ram/receipt.json"
+    att_cfg, att_cfg_ref = receipt(att_cfg_path)
+    if (att_cfg["status"] != "PASS_MAIN_BLE_ATT_CFG_PTR_RAM_C_INTEGRATION" or
+            att_cfg["unresolved_before"] != 109 or
+            att_cfg["unresolved_after"] != 108 or
+            att_cfg["native_cell"] != "0x200004b4" or
+            att_cfg["native_initial_value"] != "0x20000414" or
+            att_cfg["removed_imports"] != ["audio_ble_att_cfg_ptr_200004b4"] or
+            att_cfg["new_imports"] or att_cfg["source_complete"] or
+            att_cfg["flashable"] or att_cfg["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT config pointer source changed")
+    att_cfg_candidate = file_checked(att_cfg["candidate_object"]["path"],
+                                     att_cfg["candidate_object"]["sha256"])
+    att_cfg_unresolved = undefined(ROOT / att_cfg_candidate["path"])
+    if att_cfg_unresolved != sorted(set(setup_unresolved) -
+                                    set(att_cfg["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT config pointer frontier changed")
+    images["apollo_main"]["candidate"] = att_cfg_candidate
+    images["apollo_main"]["ble_att_cfg_ptr_ram"] = att_cfg_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = att_cfg_unresolved
+    images["apollo_main"]["remaining_gate"].append(att_cfg["remaining_gate"])
+    queue_cleanup_path = G2 / "build/c-firmware/20261017/main-ble-atts-ccb-queue-cleanup/receipt.json"
+    queue_cleanup, queue_cleanup_ref = receipt(queue_cleanup_path)
+    if (queue_cleanup["status"] != "PASS_MAIN_BLE_ATTS_CCB_QUEUE_CLEANUP_C_INTEGRATION" or
+            queue_cleanup["unresolved_before"] != 108 or
+            queue_cleanup["unresolved_after"] != 108 or
+            queue_cleanup["oracle_cases"] != 16 or
+            queue_cleanup["removed_imports"] or queue_cleanup["new_imports"] or
+            queue_cleanup["new_providers"] != ["audio_ble_atts_ccb_queue_cleanup_534cde"] or
+            queue_cleanup["source_complete"] or queue_cleanup["flashable"] or
+            queue_cleanup["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio ATTS CCB queue cleanup changed")
+    queue_cleanup_candidate = file_checked(queue_cleanup["candidate_object"]["path"],
+                                           queue_cleanup["candidate_object"]["sha256"])
+    queue_cleanup_unresolved = undefined(ROOT / queue_cleanup_candidate["path"])
+    if queue_cleanup_unresolved != att_cfg_unresolved:
+        raise RuntimeError("Apollo Main Cordio ATTS CCB queue frontier changed")
+    images["apollo_main"]["candidate"] = queue_cleanup_candidate
+    images["apollo_main"]["ble_atts_ccb_queue_cleanup"] = queue_cleanup_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = queue_cleanup_unresolved
+    images["apollo_main"]["remaining_gate"].append(queue_cleanup["remaining_gate"])
+    idle_timer_path = G2 / "build/c-firmware/20261017/main-ble-atts-start-idle-timer/receipt.json"
+    idle_timer, idle_timer_ref = receipt(idle_timer_path)
+    if (idle_timer["status"] != "PASS_MAIN_BLE_ATTS_START_IDLE_TIMER_C_INTEGRATION" or
+            idle_timer["unresolved_before"] != 108 or
+            idle_timer["unresolved_after"] != 108 or
+            idle_timer["oracle_cases"] != 36 or
+            idle_timer["removed_imports"] or idle_timer["new_imports"] or
+            idle_timer["new_providers"] != ["audio_ble_atts_start_idle_timer_534d06"] or
+            idle_timer["source_complete"] or idle_timer["flashable"] or
+            idle_timer["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio ATTS idle timer changed")
+    idle_timer_candidate = file_checked(idle_timer["candidate_object"]["path"],
+                                        idle_timer["candidate_object"]["sha256"])
+    idle_timer_unresolved = undefined(ROOT / idle_timer_candidate["path"])
+    if idle_timer_unresolved != queue_cleanup_unresolved:
+        raise RuntimeError("Apollo Main Cordio ATTS idle timer frontier changed")
+    images["apollo_main"]["candidate"] = idle_timer_candidate
+    images["apollo_main"]["ble_atts_start_idle_timer"] = idle_timer_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = idle_timer_unresolved
+    images["apollo_main"]["remaining_gate"].append(idle_timer["remaining_gate"])
+    dm_tables_path = G2 / "build/c-firmware/20261017/main-ble-dm-connection-action-tables/receipt.json"
+    dm_tables, dm_tables_ref = receipt(dm_tables_path)
+    if (dm_tables["status"] != "PASS_MAIN_BLE_DM_CONNECTION_ACTION_TABLES_C_INTEGRATION" or
+            dm_tables["unresolved_before"] != 108 or
+            dm_tables["unresolved_after"] != 114 or
+            len(dm_tables["stock_tables"]) != 4 or
+            len(dm_tables["removed_imports"]) != 4 or
+            len(dm_tables["new_imports"]) != 10 or
+            dm_tables["source_complete"] or dm_tables["flashable"] or
+            dm_tables["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio DM connection tables changed")
+    dm_tables_candidate = file_checked(dm_tables["candidate_object"]["path"],
+                                       dm_tables["candidate_object"]["sha256"])
+    dm_tables_unresolved = undefined(ROOT / dm_tables_candidate["path"])
+    if dm_tables_unresolved != sorted((set(idle_timer_unresolved) -
+                                      set(dm_tables["removed_imports"])) |
+                                     set(dm_tables["new_imports"])):
+        raise RuntimeError("Apollo Main Cordio DM connection frontier changed")
+    images["apollo_main"]["candidate"] = dm_tables_candidate
+    images["apollo_main"]["ble_dm_connection_action_tables"] = dm_tables_ref
+    images["apollo_main"]["unresolved_count"] = 114
+    images["apollo_main"]["unresolved_symbols"] = dm_tables_unresolved
+    images["apollo_main"]["remaining_gate"].append(dm_tables["remaining_gate"])
+    dm_small_path = G2 / "build/c-firmware/20261017/main-ble-dm-connection-actions-small/receipt.json"
+    dm_small, dm_small_ref = receipt(dm_small_path)
+    if (dm_small["status"] != "PASS_MAIN_BLE_DM_CONNECTION_ACTIONS_SMALL_C_INTEGRATION" or
+            dm_small["unresolved_before"] != 114 or
+            dm_small["unresolved_after"] != 114 or
+            len(dm_small["removed_imports"]) != 4 or
+            len(dm_small["new_imports"]) != 4 or
+            dm_small["prior_candidate"]["sha256"] != dm_tables_candidate["sha256"] or
+            dm_small["source_complete"] or dm_small["flashable"] or
+            dm_small["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio DM small actions changed")
+    dm_small_candidate = file_checked(dm_small["candidate_object"]["path"],
+                                      dm_small["candidate_object"]["sha256"])
+    dm_small_unresolved = undefined(ROOT / dm_small_candidate["path"])
+    if dm_small_unresolved != sorted((set(dm_tables_unresolved) -
+                                     set(dm_small["removed_imports"])) |
+                                    set(dm_small["new_imports"])):
+        raise RuntimeError("Apollo Main Cordio DM small-action frontier changed")
+    images["apollo_main"]["candidate"] = dm_small_candidate
+    images["apollo_main"]["ble_dm_connection_actions_small"] = dm_small_ref
+    images["apollo_main"]["unresolved_count"] = 114
+    images["apollo_main"]["unresolved_symbols"] = dm_small_unresolved
+    images["apollo_main"]["remaining_gate"].append(dm_small["remaining_gate"])
+    dm_follow_path = G2 / "build/c-firmware/20261017/main-ble-dm-connection-actions-followup/receipt.json"
+    dm_follow, dm_follow_ref = receipt(dm_follow_path)
+    if (dm_follow["status"] != "PASS_MAIN_BLE_DM_CONNECTION_ACTIONS_FOLLOWUP_C_INTEGRATION" or
+            dm_follow["unresolved_before"] != 114 or
+            dm_follow["unresolved_after"] != 113 or
+            len(dm_follow["removed_imports"]) != 5 or
+            len(dm_follow["new_imports"]) != 4 or
+            dm_follow["prior_candidate"]["sha256"] != dm_small_candidate["sha256"] or
+            dm_follow["source_complete"] or dm_follow["flashable"] or
+            dm_follow["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio DM followup actions changed")
+    dm_follow_candidate = file_checked(dm_follow["candidate_object"]["path"],
+                                       dm_follow["candidate_object"]["sha256"])
+    dm_follow_unresolved = undefined(ROOT / dm_follow_candidate["path"])
+    if dm_follow_unresolved != sorted((set(dm_small_unresolved) -
+                                      set(dm_follow["removed_imports"])) |
+                                     set(dm_follow["new_imports"])):
+        raise RuntimeError("Apollo Main Cordio DM followup frontier changed")
+    images["apollo_main"]["candidate"] = dm_follow_candidate
+    images["apollo_main"]["ble_dm_connection_actions_followup"] = dm_follow_ref
+    images["apollo_main"]["unresolved_count"] = 113
+    images["apollo_main"]["unresolved_symbols"] = dm_follow_unresolved
+    images["apollo_main"]["remaining_gate"].append(dm_follow["remaining_gate"])
+    dm_slave_path = G2 / "build/c-firmware/20261017/main-ble-dm-slave-update-action/receipt.json"
+    dm_slave, dm_slave_ref = receipt(dm_slave_path)
+    if (dm_slave["status"] != "PASS_MAIN_BLE_DM_SLAVE_UPDATE_ACTION_C_INTEGRATION" or
+            dm_slave["unresolved_before"] != 113 or
+            dm_slave["unresolved_after"] != 114 or
+            len(dm_slave["removed_imports"]) != 1 or
+            len(dm_slave["new_imports"]) != 2 or
+            dm_slave["prior_candidate"]["sha256"] != dm_follow_candidate["sha256"] or
+            dm_slave["source_complete"] or dm_slave["flashable"] or
+            dm_slave["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio DM slave update changed")
+    dm_slave_candidate = file_checked(dm_slave["candidate_object"]["path"],
+                                      dm_slave["candidate_object"]["sha256"])
+    dm_slave_unresolved = undefined(ROOT / dm_slave_candidate["path"])
+    if dm_slave_unresolved != sorted((set(dm_follow_unresolved) -
+                                     set(dm_slave["removed_imports"])) |
+                                    set(dm_slave["new_imports"])):
+        raise RuntimeError("Apollo Main Cordio DM slave update frontier changed")
+    images["apollo_main"]["candidate"] = dm_slave_candidate
+    images["apollo_main"]["ble_dm_slave_update_action"] = dm_slave_ref
+    images["apollo_main"]["unresolved_count"] = 114
+    images["apollo_main"]["unresolved_symbols"] = dm_slave_unresolved
+    images["apollo_main"]["remaining_gate"].append(dm_slave["remaining_gate"])
+    hci_fc_path = G2 / "build/c-firmware/20261017/main-ble-hci-le-features-cancel/receipt.json"
+    hci_fc, hci_fc_ref = receipt(hci_fc_path)
+    if (hci_fc["status"] != "PASS_MAIN_BLE_HCI_LE_FEATURES_CANCEL_C_INTEGRATION" or
+            hci_fc["unresolved_before"] != 114 or
+            hci_fc["unresolved_after"] != 112 or
+            len(hci_fc["removed_imports"]) != 2 or
+            hci_fc["new_imports"] or
+            hci_fc["prior_candidate"]["sha256"] != dm_slave_candidate["sha256"] or
+            hci_fc["source_complete"] or hci_fc["flashable"] or
+            hci_fc["hardware_proof"]):
+        raise RuntimeError("Apollo Main HCI feature and cancel bodies changed")
+    hci_fc_candidate = file_checked(hci_fc["candidate_object"]["path"],
+                                    hci_fc["candidate_object"]["sha256"])
+    hci_fc_unresolved = undefined(ROOT / hci_fc_candidate["path"])
+    if hci_fc_unresolved != sorted(set(dm_slave_unresolved) -
+                                  set(hci_fc["removed_imports"])):
+        raise RuntimeError("Apollo Main HCI feature and cancel frontier changed")
+    images["apollo_main"]["candidate"] = hci_fc_candidate
+    images["apollo_main"]["ble_hci_le_features_cancel"] = hci_fc_ref
+    images["apollo_main"]["unresolved_count"] = 112
+    images["apollo_main"]["unresolved_symbols"] = hci_fc_unresolved
+    images["apollo_main"]["remaining_gate"].append(hci_fc["remaining_gate"])
+    hci_update_path = G2 / "build/c-firmware/20261017/main-ble-hci-conn-update/receipt.json"
+    hci_update, hci_update_ref = receipt(hci_update_path)
+    if (hci_update["status"] != "PASS_MAIN_BLE_HCI_CONN_UPDATE_C_INTEGRATION" or
+            hci_update["unresolved_before"] != 112 or
+            hci_update["unresolved_after"] != 111 or
+            hci_update["removed_imports"] != ["audio_ble_hci_conn_update_52af40"] or
+            hci_update["new_imports"] or
+            hci_update["prior_candidate"]["sha256"] != hci_fc_candidate["sha256"] or
+            hci_update["source_complete"] or hci_update["flashable"] or
+            hci_update["hardware_proof"]):
+        raise RuntimeError("Apollo Main HCI connection-update body changed")
+    hci_update_candidate = file_checked(hci_update["candidate_object"]["path"],
+                                        hci_update["candidate_object"]["sha256"])
+    hci_update_unresolved = undefined(ROOT / hci_update_candidate["path"])
+    if hci_update_unresolved != sorted(set(hci_fc_unresolved) -
+                                      set(hci_update["removed_imports"])):
+        raise RuntimeError("Apollo Main HCI connection-update frontier changed")
+    images["apollo_main"]["candidate"] = hci_update_candidate
+    images["apollo_main"]["ble_hci_conn_update"] = hci_update_ref
+    images["apollo_main"]["unresolved_count"] = 111
+    images["apollo_main"]["unresolved_symbols"] = hci_update_unresolved
+    images["apollo_main"]["remaining_gate"].append(hci_update["remaining_gate"])
+    dm_update_cb_path = G2 / "build/c-firmware/20261017/main-ble-dm-update-callback/receipt.json"
+    dm_update_cb, dm_update_cb_ref = receipt(dm_update_cb_path)
+    if (dm_update_cb["status"] != "PASS_MAIN_BLE_DM_UPDATE_CALLBACK_C_INTEGRATION" or
+            dm_update_cb["unresolved_before"] != 111 or
+            dm_update_cb["unresolved_after"] != 110 or
+            dm_update_cb["removed_imports"] != ["audio_ble_dm_slave_update_response_56e4f8"] or
+            dm_update_cb["new_imports"] or
+            dm_update_cb["prior_candidate"]["sha256"] != hci_update_candidate["sha256"] or
+            dm_update_cb["source_complete"] or dm_update_cb["flashable"] or
+            dm_update_cb["hardware_proof"]):
+        raise RuntimeError("Apollo Main DM update callback body changed")
+    dm_update_cb_candidate = file_checked(dm_update_cb["candidate_object"]["path"],
+                                           dm_update_cb["candidate_object"]["sha256"])
+    dm_update_cb_unresolved = undefined(ROOT / dm_update_cb_candidate["path"])
+    if dm_update_cb_unresolved != sorted(set(hci_update_unresolved) -
+                                        set(dm_update_cb["removed_imports"])):
+        raise RuntimeError("Apollo Main DM update callback frontier changed")
+    images["apollo_main"]["candidate"] = dm_update_cb_candidate
+    images["apollo_main"]["ble_dm_update_callback"] = dm_update_cb_ref
+    images["apollo_main"]["unresolved_count"] = 110
+    images["apollo_main"]["unresolved_symbols"] = dm_update_cb_unresolved
+    images["apollo_main"]["remaining_gate"].append(dm_update_cb["remaining_gate"])
+    dm_open_path = G2 / "build/c-firmware/20261017/main-ble-dm-conn-open/receipt.json"
+    dm_open, dm_open_ref = receipt(dm_open_path)
+    if (dm_open["status"] != "PASS_MAIN_BLE_DM_CONN_OPEN_C_INTEGRATION" or
+            dm_open["unresolved_before"] != 110 or
+            dm_open["unresolved_after"] != 111 or
+            dm_open["removed_imports"] != ["audio_ble_dm_conn_open_536a28"] or
+            len(dm_open["new_imports"]) != 2 or
+            dm_open["prior_candidate"]["sha256"] != dm_update_cb_candidate["sha256"] or
+            dm_open["source_complete"] or dm_open["flashable"] or
+            dm_open["hardware_proof"]):
+        raise RuntimeError("Apollo Main DM connection open body changed")
+    dm_open_candidate = file_checked(dm_open["candidate_object"]["path"],
+                                     dm_open["candidate_object"]["sha256"])
+    dm_open_unresolved = undefined(ROOT / dm_open_candidate["path"])
+    if dm_open_unresolved != sorted((set(dm_update_cb_unresolved) -
+                                    set(dm_open["removed_imports"])) |
+                                   set(dm_open["new_imports"])):
+        raise RuntimeError("Apollo Main DM connection open frontier changed")
+    images["apollo_main"]["candidate"] = dm_open_candidate
+    images["apollo_main"]["ble_dm_conn_open"] = dm_open_ref
+    images["apollo_main"]["unresolved_count"] = 111
+    images["apollo_main"]["unresolved_symbols"] = dm_open_unresolved
+    images["apollo_main"]["remaining_gate"].append(dm_open["remaining_gate"])
+    dm_phy_path = G2 / "build/c-firmware/20261017/main-ble-dm-scan-phy-index/receipt.json"
+    dm_phy, dm_phy_ref = receipt(dm_phy_path)
+    if (dm_phy["status"] != "PASS_MAIN_BLE_DM_SCAN_PHY_INDEX_C_INTEGRATION" or
+            dm_phy["unresolved_before"] != 111 or
+            dm_phy["unresolved_after"] != 110 or
+            dm_phy["removed_imports"] != ["audio_ble_dm_scan_phy_index_4d2b3e"] or
+            dm_phy["new_imports"] or
+            dm_phy["prior_candidate"]["sha256"] != dm_open_candidate["sha256"] or
+            dm_phy["source_complete"] or dm_phy["flashable"] or
+            dm_phy["hardware_proof"]):
+        raise RuntimeError("Apollo Main DM scan PHY index body changed")
+    dm_phy_candidate = file_checked(dm_phy["candidate_object"]["path"],
+                                    dm_phy["candidate_object"]["sha256"])
+    dm_phy_unresolved = undefined(ROOT / dm_phy_candidate["path"])
+    if dm_phy_unresolved != sorted(set(dm_open_unresolved) -
+                                  set(dm_phy["removed_imports"])):
+        raise RuntimeError("Apollo Main DM scan PHY frontier changed")
+    images["apollo_main"]["candidate"] = dm_phy_candidate
+    images["apollo_main"]["ble_dm_scan_phy_index"] = dm_phy_ref
+    images["apollo_main"]["unresolved_count"] = 110
+    images["apollo_main"]["unresolved_symbols"] = dm_phy_unresolved
+    images["apollo_main"]["remaining_gate"].append(dm_phy["remaining_gate"])
+    hci_create_path = G2 / "build/c-firmware/20261017/main-ble-hci-create-conn/receipt.json"
+    hci_create, hci_create_ref = receipt(hci_create_path)
+    if (hci_create["status"] != "PASS_MAIN_BLE_HCI_CREATE_CONN_C_INTEGRATION" or
+            hci_create["unresolved_before"] != 110 or
+            hci_create["unresolved_after"] != 109 or
+            hci_create["removed_imports"] != ["audio_ble_hci_create_conn_52afcc"] or
+            hci_create["new_imports"] or
+            hci_create["prior_candidate"]["sha256"] != dm_phy_candidate["sha256"] or
+            hci_create["source_complete"] or hci_create["flashable"] or
+            hci_create["hardware_proof"]):
+        raise RuntimeError("Apollo Main HCI create connection body changed")
+    hci_create_candidate = file_checked(hci_create["candidate_object"]["path"],
+                                        hci_create["candidate_object"]["sha256"])
+    hci_create_unresolved = undefined(ROOT / hci_create_candidate["path"])
+    if hci_create_unresolved != sorted(set(dm_phy_unresolved) -
+                                      set(hci_create["removed_imports"])):
+        raise RuntimeError("Apollo Main HCI create connection frontier changed")
+    images["apollo_main"]["candidate"] = hci_create_candidate
+    images["apollo_main"]["ble_hci_create_conn"] = hci_create_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = hci_create_unresolved
+    images["apollo_main"]["remaining_gate"].append(hci_create["remaining_gate"])
+    l2c_update_path = G2 / "build/c-firmware/20261017/main-ble-l2c-conn-update-request/receipt.json"
+    l2c_update, l2c_update_ref = receipt(l2c_update_path)
+    if (l2c_update["status"] != "PASS_MAIN_BLE_L2C_CONN_UPDATE_REQUEST_C_INTEGRATION" or
+            l2c_update["unresolved_before"] != 109 or
+            l2c_update["unresolved_after"] != 108 or
+            l2c_update["removed_imports"] != ["audio_ble_l2c_conn_update_request_536ea4"] or
+            l2c_update["new_imports"] or
+            l2c_update["prior_candidate"]["sha256"] != hci_create_candidate["sha256"] or
+            l2c_update["source_complete"] or l2c_update["flashable"] or
+            l2c_update["hardware_proof"]):
+        raise RuntimeError("Apollo Main L2CAP connection update body changed")
+    l2c_update_candidate = file_checked(l2c_update["candidate_object"]["path"],
+                                        l2c_update["candidate_object"]["sha256"])
+    l2c_update_unresolved = undefined(ROOT / l2c_update_candidate["path"])
+    if l2c_update_unresolved != sorted(set(hci_create_unresolved) -
+                                      set(l2c_update["removed_imports"])):
+        raise RuntimeError("Apollo Main L2CAP connection update frontier changed")
+    images["apollo_main"]["candidate"] = l2c_update_candidate
+    images["apollo_main"]["ble_l2c_conn_update_request"] = l2c_update_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = l2c_update_unresolved
+    images["apollo_main"]["remaining_gate"].append(l2c_update["remaining_gate"])
+    dm_adv_outcomes_path = G2 / "build/c-firmware/20261017/main-ble-dm-adv-connection-outcomes/receipt.json"
+    dm_adv_outcomes, dm_adv_outcomes_ref = receipt(dm_adv_outcomes_path)
+    if (dm_adv_outcomes["status"] != "PASS_MAIN_BLE_DM_ADV_CONNECTION_OUTCOMES_C_INTEGRATION" or
+            dm_adv_outcomes["unresolved_before"] != 108 or
+            dm_adv_outcomes["unresolved_after"] != 106 or
+            len(dm_adv_outcomes["removed_imports"]) != 2 or
+            dm_adv_outcomes["new_imports"] or
+            dm_adv_outcomes["prior_candidate"]["sha256"] != l2c_update_candidate["sha256"] or
+            dm_adv_outcomes["source_complete"] or dm_adv_outcomes["flashable"] or
+            dm_adv_outcomes["hardware_proof"]):
+        raise RuntimeError("Apollo Main DM advertising outcomes changed")
+    dm_adv_outcomes_candidate = file_checked(dm_adv_outcomes["candidate_object"]["path"],
+                                             dm_adv_outcomes["candidate_object"]["sha256"])
+    dm_adv_outcomes_unresolved = undefined(ROOT / dm_adv_outcomes_candidate["path"])
+    if dm_adv_outcomes_unresolved != sorted(set(l2c_update_unresolved) -
+                                           set(dm_adv_outcomes["removed_imports"])):
+        raise RuntimeError("Apollo Main DM advertising outcome frontier changed")
+    images["apollo_main"]["candidate"] = dm_adv_outcomes_candidate
+    images["apollo_main"]["ble_dm_adv_connection_outcomes"] = dm_adv_outcomes_ref
+    images["apollo_main"]["unresolved_count"] = 106
+    images["apollo_main"]["unresolved_symbols"] = dm_adv_outcomes_unresolved
+    images["apollo_main"]["remaining_gate"].append(dm_adv_outcomes["remaining_gate"])
+    dm_adv_stop_path = G2 / "build/c-firmware/20261017/main-ble-dm-adv-stop-directed/receipt.json"
+    dm_adv_stop, dm_adv_stop_ref = receipt(dm_adv_stop_path)
+    if (dm_adv_stop["status"] != "PASS_MAIN_BLE_DM_ADV_STOP_DIRECTED_C_INTEGRATION" or
+            dm_adv_stop["unresolved_before"] != 106 or
+            dm_adv_stop["unresolved_after"] != 105 or
+            dm_adv_stop["removed_imports"] != ["audio_ble_dm_adv_stop_directed_4ba864"] or
+            dm_adv_stop["new_imports"] or
+            dm_adv_stop["prior_candidate"]["sha256"] != dm_adv_outcomes_candidate["sha256"] or
+            dm_adv_stop["source_complete"] or dm_adv_stop["flashable"] or
+            dm_adv_stop["hardware_proof"]):
+        raise RuntimeError("Apollo Main DM directed advertising stop changed")
+    dm_adv_stop_candidate = file_checked(dm_adv_stop["candidate_object"]["path"],
+                                         dm_adv_stop["candidate_object"]["sha256"])
+    dm_adv_stop_unresolved = undefined(ROOT / dm_adv_stop_candidate["path"])
+    if dm_adv_stop_unresolved != sorted(set(dm_adv_outcomes_unresolved) -
+                                       set(dm_adv_stop["removed_imports"])):
+        raise RuntimeError("Apollo Main DM directed advertising stop frontier changed")
+    images["apollo_main"]["candidate"] = dm_adv_stop_candidate
+    images["apollo_main"]["ble_dm_adv_stop_directed"] = dm_adv_stop_ref
+    images["apollo_main"]["unresolved_count"] = 105
+    images["apollo_main"]["unresolved_symbols"] = dm_adv_stop_unresolved
+    images["apollo_main"]["remaining_gate"].append(dm_adv_stop["remaining_gate"])
+    dm_adv_start_path = G2 / "build/c-firmware/20261017/main-ble-dm-adv-start-directed/receipt.json"
+    dm_adv_start, dm_adv_start_ref = receipt(dm_adv_start_path)
+    if (dm_adv_start["status"] != "PASS_MAIN_BLE_DM_ADV_START_DIRECTED_C_INTEGRATION" or
+            dm_adv_start["unresolved_before"] != 105 or
+            dm_adv_start["unresolved_after"] != 104 or
+            dm_adv_start["removed_imports"] != ["audio_ble_dm_adv_start_directed_4ba6d4"] or
+            dm_adv_start["new_imports"] or
+            dm_adv_start["prior_candidate"]["sha256"] != dm_adv_stop_candidate["sha256"] or
+            dm_adv_start["source_complete"] or dm_adv_start["flashable"] or
+            dm_adv_start["hardware_proof"]):
+        raise RuntimeError("Apollo Main DM directed advertising start changed")
+    dm_adv_start_candidate = file_checked(dm_adv_start["candidate_object"]["path"],
+                                          dm_adv_start["candidate_object"]["sha256"])
+    dm_adv_start_unresolved = undefined(ROOT / dm_adv_start_candidate["path"])
+    if dm_adv_start_unresolved != sorted(set(dm_adv_stop_unresolved) -
+                                        set(dm_adv_start["removed_imports"])):
+        raise RuntimeError("Apollo Main DM directed advertising start frontier changed")
+    images["apollo_main"]["candidate"] = dm_adv_start_candidate
+    images["apollo_main"]["ble_dm_adv_start_directed"] = dm_adv_start_ref
+    images["apollo_main"]["unresolved_count"] = 104
+    images["apollo_main"]["unresolved_symbols"] = dm_adv_start_unresolved
+    images["apollo_main"]["remaining_gate"].append(dm_adv_start["remaining_gate"])
+    attc_lookup_path = G2 / "build/c-firmware/20261017/main-ble-attc-ccb-by-handle/receipt.json"
+    attc_lookup, attc_lookup_ref = receipt(attc_lookup_path)
+    if (attc_lookup["status"] != "PASS_MAIN_BLE_ATTC_CCB_BY_HANDLE_C_INTEGRATION" or
+            attc_lookup["unresolved_before"] != 104 or
+            attc_lookup["unresolved_after"] != 104 or
+            attc_lookup["removed_imports"] or attc_lookup["new_imports"] or
+            attc_lookup["new_providers"] != ["audio_ble_attc_ccb_by_handle_531a7c"] or
+            attc_lookup["prior_candidate"]["sha256"] != dm_adv_start_candidate["sha256"] or
+            attc_lookup["source_complete"] or attc_lookup["flashable"] or
+            attc_lookup["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT client CCB handle lookup changed")
+    attc_lookup_candidate = file_checked(attc_lookup["candidate_object"]["path"],
+                                         attc_lookup["candidate_object"]["sha256"])
+    attc_lookup_unresolved = undefined(ROOT / attc_lookup_candidate["path"])
+    if attc_lookup_unresolved != dm_adv_start_unresolved:
+        raise RuntimeError("Apollo Main ATT client CCB lookup frontier changed")
+    images["apollo_main"]["candidate"] = attc_lookup_candidate
+    images["apollo_main"]["ble_attc_ccb_by_handle"] = attc_lookup_ref
+    images["apollo_main"]["unresolved_count"] = 104
+    images["apollo_main"]["unresolved_symbols"] = attc_lookup_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_lookup["remaining_gate"])
+    attc_confirm_path = G2 / "build/c-firmware/20261017/main-ble-attc-ind-confirm/receipt.json"
+    attc_confirm, attc_confirm_ref = receipt(attc_confirm_path)
+    if (attc_confirm["status"] != "PASS_MAIN_BLE_ATTC_IND_CONFIRM_C_INTEGRATION" or
+            attc_confirm["unresolved_before"] != 104 or
+            attc_confirm["unresolved_after"] != 103 or
+            attc_confirm["removed_imports"] != ["audio_ble_attc_ind_confirm_4b5838"] or
+            attc_confirm["new_imports"] or
+            attc_confirm["prior_candidate"]["sha256"] != attc_lookup_candidate["sha256"] or
+            attc_confirm["source_complete"] or attc_confirm["flashable"] or
+            attc_confirm["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT client indication confirm changed")
+    attc_confirm_candidate = file_checked(attc_confirm["candidate_object"]["path"],
+                                          attc_confirm["candidate_object"]["sha256"])
+    attc_confirm_unresolved = undefined(ROOT / attc_confirm_candidate["path"])
+    if attc_confirm_unresolved != sorted(set(attc_lookup_unresolved) -
+                                        set(attc_confirm["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT client indication-confirm frontier changed")
+    images["apollo_main"]["candidate"] = attc_confirm_candidate
+    images["apollo_main"]["ble_attc_ind_confirm"] = attc_confirm_ref
+    images["apollo_main"]["unresolved_count"] = 103
+    images["apollo_main"]["unresolved_symbols"] = attc_confirm_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_confirm["remaining_gate"])
+    attc_data_path = G2 / "build/c-firmware/20261017/main-ble-attc-data/receipt.json"
+    attc_data, attc_data_ref = receipt(attc_data_path)
+    if (attc_data["status"] != "PASS_MAIN_BLE_ATTC_DATA_C_INTEGRATION" or
+            attc_data["unresolved_before"] != 103 or
+            attc_data["unresolved_after"] != 105 or
+            attc_data["removed_imports"] != ["audio_ble_attc_data_53119c"] or
+            attc_data["new_imports"] != ["audio_ble_attc_proc_ind_4b557a",
+                                         "audio_ble_attc_proc_multi_ntf_4b53e4",
+                                         "audio_ble_attc_proc_rsp_4b5448"] or
+            attc_data["prior_candidate"]["sha256"] != attc_confirm_candidate["sha256"] or
+            attc_data["source_complete"] or attc_data["flashable"] or
+            attc_data["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT client data dispatch changed")
+    attc_data_candidate = file_checked(attc_data["candidate_object"]["path"],
+                                       attc_data["candidate_object"]["sha256"])
+    attc_data_unresolved = undefined(ROOT / attc_data_candidate["path"])
+    if attc_data_unresolved != sorted((set(attc_confirm_unresolved) -
+                                      set(attc_data["removed_imports"])) |
+                                     set(attc_data["new_imports"])):
+        raise RuntimeError("Apollo Main ATT client data frontier changed")
+    images["apollo_main"]["candidate"] = attc_data_candidate
+    images["apollo_main"]["ble_attc_data"] = attc_data_ref
+    images["apollo_main"]["unresolved_count"] = 105
+    images["apollo_main"]["unresolved_symbols"] = attc_data_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_data["remaining_gate"])
+    attc_multi_path = G2 / "build/c-firmware/20261017/main-ble-attc-multi-var-ntf/receipt.json"
+    attc_multi, attc_multi_ref = receipt(attc_multi_path)
+    if (attc_multi["status"] != "PASS_MAIN_BLE_ATTC_MULTI_VAR_NTF_C_INTEGRATION" or
+            attc_multi["unresolved_before"] != 105 or
+            attc_multi["unresolved_after"] != 104 or
+            attc_multi["removed_imports"] != ["audio_ble_attc_proc_multi_ntf_4b53e4"] or
+            attc_multi["new_imports"] or
+            attc_multi["prior_candidate"]["sha256"] != attc_data_candidate["sha256"] or
+            attc_multi["source_complete"] or attc_multi["flashable"] or
+            attc_multi["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT multi-variable notification changed")
+    attc_multi_candidate = file_checked(attc_multi["candidate_object"]["path"],
+                                        attc_multi["candidate_object"]["sha256"])
+    attc_multi_unresolved = undefined(ROOT / attc_multi_candidate["path"])
+    if attc_multi_unresolved != sorted(set(attc_data_unresolved) -
+                                      set(attc_multi["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT multi-variable notification frontier changed")
+    images["apollo_main"]["candidate"] = attc_multi_candidate
+    images["apollo_main"]["ble_attc_multi_var_ntf"] = attc_multi_ref
+    images["apollo_main"]["unresolved_count"] = 104
+    images["apollo_main"]["unresolved_symbols"] = attc_multi_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_multi["remaining_gate"])
+    attc_ind_path = G2 / "build/c-firmware/20261017/main-ble-attc-proc-ind/receipt.json"
+    attc_ind, attc_ind_ref = receipt(attc_ind_path)
+    if (attc_ind["status"] != "PASS_MAIN_BLE_ATTC_PROC_IND_C_INTEGRATION" or
+            attc_ind["unresolved_before"] != 104 or
+            attc_ind["unresolved_after"] != 103 or
+            attc_ind["removed_imports"] != ["audio_ble_attc_proc_ind_4b557a"] or
+            attc_ind["new_imports"] or
+            attc_ind["prior_candidate"]["sha256"] != attc_multi_candidate["sha256"] or
+            attc_ind["source_complete"] or attc_ind["flashable"] or
+            attc_ind["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT indication procedure changed")
+    attc_ind_candidate = file_checked(attc_ind["candidate_object"]["path"],
+                                      attc_ind["candidate_object"]["sha256"])
+    attc_ind_unresolved = undefined(ROOT / attc_ind_candidate["path"])
+    if attc_ind_unresolved != sorted(set(attc_multi_unresolved) -
+                                    set(attc_ind["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT indication frontier changed")
+    images["apollo_main"]["candidate"] = attc_ind_candidate
+    images["apollo_main"]["ble_attc_proc_ind"] = attc_ind_ref
+    images["apollo_main"]["unresolved_count"] = 103
+    images["apollo_main"]["unresolved_symbols"] = attc_ind_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_ind["remaining_gate"])
+    attc_rsp_path = G2 / "build/c-firmware/20261017/main-ble-attc-proc-rsp/receipt.json"
+    attc_rsp, attc_rsp_ref = receipt(attc_rsp_path)
+    if (attc_rsp["status"] != "PASS_MAIN_BLE_ATTC_PROC_RSP_C_INTEGRATION" or
+            attc_rsp["unresolved_before"] != 103 or
+            attc_rsp["unresolved_after"] != 114 or
+            attc_rsp["removed_imports"] != ["audio_ble_attc_proc_rsp_4b5448"] or
+            attc_rsp["new_imports"] != ["audio_attc_rsp_error_4b5230",
+                                        "audio_attc_rsp_find_read_4b52c2",
+                                        "audio_attc_rsp_find_type_56c3b0",
+                                        "audio_attc_rsp_mtu_4b527a",
+                                        "audio_attc_rsp_prepare_write_539dcc",
+                                        "audio_attc_rsp_read_4b53da",
+                                        "audio_attc_rsp_read_long_56c454",
+                                        "audio_attc_rsp_read_multi_var_4b53e2",
+                                        "audio_attc_rsp_write_4b53dc",
+                                        "audio_ble_attc_free_pkt_531ac0",
+                                        "audio_ble_attc_send_req_531144",
+                                        "audio_ble_attc_setup_req_531160"] or
+            attc_rsp["prior_candidate"]["sha256"] != attc_ind_candidate["sha256"] or
+            attc_rsp["source_complete"] or attc_rsp["flashable"] or
+            attc_rsp["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT response dispatcher changed")
+    attc_rsp_candidate = file_checked(attc_rsp["candidate_object"]["path"],
+                                      attc_rsp["candidate_object"]["sha256"])
+    attc_rsp_unresolved = undefined(ROOT / attc_rsp_candidate["path"])
+    if attc_rsp_unresolved != sorted((set(attc_ind_unresolved) -
+                                     set(attc_rsp["removed_imports"])) |
+                                    set(attc_rsp["new_imports"])):
+        raise RuntimeError("Apollo Main ATT response frontier changed")
+    images["apollo_main"]["candidate"] = attc_rsp_candidate
+    images["apollo_main"]["ble_attc_proc_rsp"] = attc_rsp_ref
+    images["apollo_main"]["unresolved_count"] = 114
+    images["apollo_main"]["unresolved_symbols"] = attc_rsp_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_rsp["remaining_gate"])
+    attc_leaf_path = G2 / "build/c-firmware/20261017/main-ble-attc-rsp-leaves/receipt.json"
+    attc_leaf, attc_leaf_ref = receipt(attc_leaf_path)
+    if (attc_leaf["status"] != "PASS_MAIN_BLE_ATTC_RSP_LEAVES_C_INTEGRATION" or
+            attc_leaf["unresolved_before"] != 114 or
+            attc_leaf["unresolved_after"] != 111 or
+            attc_leaf["removed_imports"] != ["audio_attc_rsp_read_4b53da",
+                                         "audio_attc_rsp_read_multi_var_4b53e2",
+                                         "audio_attc_rsp_write_4b53dc"] or
+            attc_leaf["new_imports"] or
+            attc_leaf["prior_candidate"]["sha256"] != attc_rsp_candidate["sha256"] or
+            attc_leaf["source_complete"] or attc_leaf["flashable"] or
+            attc_leaf["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT response leaves changed")
+    attc_leaf_candidate = file_checked(attc_leaf["candidate_object"]["path"],
+                                       attc_leaf["candidate_object"]["sha256"])
+    attc_leaf_unresolved = undefined(ROOT / attc_leaf_candidate["path"])
+    if attc_leaf_unresolved != sorted(set(attc_rsp_unresolved) -
+                                     set(attc_leaf["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT response leaf frontier changed")
+    images["apollo_main"]["candidate"] = attc_leaf_candidate
+    images["apollo_main"]["ble_attc_rsp_leaves"] = attc_leaf_ref
+    images["apollo_main"]["unresolved_count"] = 111
+    images["apollo_main"]["unresolved_symbols"] = attc_leaf_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_leaf["remaining_gate"])
+    attc_error_path = G2 / "build/c-firmware/20261017/main-ble-attc-error-free/receipt.json"
+    attc_error, attc_error_ref = receipt(attc_error_path)
+    if (attc_error["status"] != "PASS_MAIN_BLE_ATTC_ERROR_FREE_C_INTEGRATION" or
+            attc_error["unresolved_before"] != 111 or
+            attc_error["unresolved_after"] != 109 or
+            attc_error["removed_imports"] != ["audio_attc_rsp_error_4b5230",
+                                          "audio_ble_attc_free_pkt_531ac0"] or
+            attc_error["new_imports"] or
+            attc_error["prior_candidate"]["sha256"] != attc_leaf_candidate["sha256"] or
+            attc_error["source_complete"] or attc_error["flashable"] or
+            attc_error["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT error/free providers changed")
+    attc_error_candidate = file_checked(attc_error["candidate_object"]["path"],
+                                        attc_error["candidate_object"]["sha256"])
+    attc_error_unresolved = undefined(ROOT / attc_error_candidate["path"])
+    if attc_error_unresolved != sorted(set(attc_leaf_unresolved) -
+                                      set(attc_error["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT error/free frontier changed")
+    images["apollo_main"]["candidate"] = attc_error_candidate
+    images["apollo_main"]["ble_attc_error_free"] = attc_error_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = attc_error_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_error["remaining_gate"])
+    attc_mtu_path = G2 / "build/c-firmware/20261017/main-ble-attc-rsp-mtu/receipt.json"
+    attc_mtu, attc_mtu_ref = receipt(attc_mtu_path)
+    if (attc_mtu["status"] != "PASS_MAIN_BLE_ATTC_RSP_MTU_C_INTEGRATION" or
+            attc_mtu["unresolved_before"] != 109 or
+            attc_mtu["unresolved_after"] != 110 or
+            attc_mtu["removed_imports"] != ["audio_attc_rsp_mtu_4b527a"] or
+            attc_mtu["new_imports"] != ["audio_ble_att_set_mtu_4b503c",
+                                        "audio_ble_hci_max_rx_acl_len_530d4c"] or
+            attc_mtu["prior_candidate"]["sha256"] != attc_error_candidate["sha256"] or
+            attc_mtu["source_complete"] or attc_mtu["flashable"] or
+            attc_mtu["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT MTU response changed")
+    attc_mtu_candidate = file_checked(attc_mtu["candidate_object"]["path"],
+                                      attc_mtu["candidate_object"]["sha256"])
+    attc_mtu_unresolved = undefined(ROOT / attc_mtu_candidate["path"])
+    if attc_mtu_unresolved != sorted((set(attc_error_unresolved) -
+                                     set(attc_mtu["removed_imports"])) |
+                                    set(attc_mtu["new_imports"])):
+        raise RuntimeError("Apollo Main ATT MTU response frontier changed")
+    images["apollo_main"]["candidate"] = attc_mtu_candidate
+    images["apollo_main"]["ble_attc_rsp_mtu"] = attc_mtu_ref
+    images["apollo_main"]["unresolved_count"] = 110
+    images["apollo_main"]["unresolved_symbols"] = attc_mtu_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_mtu["remaining_gate"])
+    hci_acl_len_path = G2 / "build/c-firmware/20261017/main-ble-hci-max-rx-acl-len/receipt.json"
+    hci_acl_len, hci_acl_len_ref = receipt(hci_acl_len_path)
+    if (hci_acl_len["status"] != "PASS_MAIN_BLE_HCI_MAX_RX_ACL_LEN_C_INTEGRATION" or
+            hci_acl_len["unresolved_before"] != 110 or
+            hci_acl_len["unresolved_after"] != 109 or
+            hci_acl_len["removed_imports"] != ["audio_ble_hci_max_rx_acl_len_530d4c"] or
+            hci_acl_len["new_imports"] or
+            hci_acl_len["prior_candidate"]["sha256"] != attc_mtu_candidate["sha256"] or
+            hci_acl_len["source_complete"] or hci_acl_len["flashable"] or
+            hci_acl_len["hardware_proof"]):
+        raise RuntimeError("Apollo Main HCI maximum ACL length changed")
+    hci_acl_len_candidate = file_checked(hci_acl_len["candidate_object"]["path"],
+                                         hci_acl_len["candidate_object"]["sha256"])
+    hci_acl_len_unresolved = undefined(ROOT / hci_acl_len_candidate["path"])
+    if hci_acl_len_unresolved != sorted(set(attc_mtu_unresolved) -
+                                       set(hci_acl_len["removed_imports"])):
+        raise RuntimeError("Apollo Main HCI maximum ACL frontier changed")
+    images["apollo_main"]["candidate"] = hci_acl_len_candidate
+    images["apollo_main"]["ble_hci_max_rx_acl_len"] = hci_acl_len_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = hci_acl_len_unresolved
+    images["apollo_main"]["remaining_gate"].append(hci_acl_len["remaining_gate"])
+    att_set_mtu_path = G2 / "build/c-firmware/20261017/main-ble-att-set-mtu/receipt.json"
+    att_set_mtu, att_set_mtu_ref = receipt(att_set_mtu_path)
+    if (att_set_mtu["status"] != "PASS_MAIN_BLE_ATT_SET_MTU_C_INTEGRATION" or
+            att_set_mtu["unresolved_before"] != 109 or
+            att_set_mtu["unresolved_after"] != 108 or
+            att_set_mtu["removed_imports"] != ["audio_ble_att_set_mtu_4b503c"] or
+            att_set_mtu["new_imports"] or
+            att_set_mtu["prior_candidate"]["sha256"] != hci_acl_len_candidate["sha256"] or
+            att_set_mtu["source_complete"] or att_set_mtu["flashable"] or
+            att_set_mtu["hardware_proof"]):
+        raise RuntimeError("Apollo Main negotiated ATT MTU setter changed")
+    att_set_mtu_candidate = file_checked(att_set_mtu["candidate_object"]["path"],
+                                         att_set_mtu["candidate_object"]["sha256"])
+    att_set_mtu_unresolved = undefined(ROOT / att_set_mtu_candidate["path"])
+    if att_set_mtu_unresolved != sorted(set(hci_acl_len_unresolved) -
+                                       set(att_set_mtu["removed_imports"])):
+        raise RuntimeError("Apollo Main negotiated ATT MTU frontier changed")
+    images["apollo_main"]["candidate"] = att_set_mtu_candidate
+    images["apollo_main"]["ble_att_set_mtu"] = att_set_mtu_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = att_set_mtu_unresolved
+    images["apollo_main"]["remaining_gate"].append(att_set_mtu["remaining_gate"])
+    attc_prep_path = G2 / "build/c-firmware/20261017/main-ble-attc-rsp-prepare-write/receipt.json"
+    attc_prep, attc_prep_ref = receipt(attc_prep_path)
+    if (attc_prep["status"] != "PASS_MAIN_BLE_ATTC_RSP_PREPARE_WRITE_C_INTEGRATION" or
+            attc_prep["unresolved_before"] != 108 or
+            attc_prep["unresolved_after"] != 107 or
+            attc_prep["removed_imports"] != ["audio_attc_rsp_prepare_write_539dcc"] or
+            attc_prep["new_imports"] or
+            attc_prep["prior_candidate"]["sha256"] != att_set_mtu_candidate["sha256"] or
+            attc_prep["source_complete"] or attc_prep["flashable"] or
+            attc_prep["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT prepare-write response changed")
+    attc_prep_candidate = file_checked(attc_prep["candidate_object"]["path"],
+                                       attc_prep["candidate_object"]["sha256"])
+    attc_prep_unresolved = undefined(ROOT / attc_prep_candidate["path"])
+    if attc_prep_unresolved != sorted(set(att_set_mtu_unresolved) -
+                                     set(attc_prep["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT prepare-write response frontier changed")
+    images["apollo_main"]["candidate"] = attc_prep_candidate
+    images["apollo_main"]["ble_attc_rsp_prepare_write"] = attc_prep_ref
+    images["apollo_main"]["unresolved_count"] = 107
+    images["apollo_main"]["unresolved_symbols"] = attc_prep_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_prep["remaining_gate"])
+    attc_setup_path = G2 / "build/c-firmware/20261017/main-ble-attc-setup-req/receipt.json"
+    attc_setup, attc_setup_ref = receipt(attc_setup_path)
+    if (attc_setup["status"] != "PASS_MAIN_BLE_ATTC_SETUP_REQ_C_INTEGRATION" or
+            attc_setup["unresolved_before"] != 107 or
+            attc_setup["unresolved_after"] != 106 or
+            attc_setup["removed_imports"] != ["audio_ble_attc_setup_req_531160"] or
+            attc_setup["new_imports"] or
+            attc_setup["prior_candidate"]["sha256"] != attc_prep_candidate["sha256"] or
+            attc_setup["source_complete"] or attc_setup["flashable"] or
+            attc_setup["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT request setup changed")
+    attc_setup_candidate = file_checked(attc_setup["candidate_object"]["path"],
+                                        attc_setup["candidate_object"]["sha256"])
+    attc_setup_unresolved = undefined(ROOT / attc_setup_candidate["path"])
+    if attc_setup_unresolved != sorted(set(attc_prep_unresolved) -
+                                      set(attc_setup["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT request setup frontier changed")
+    images["apollo_main"]["candidate"] = attc_setup_candidate
+    images["apollo_main"]["ble_attc_setup_req"] = attc_setup_ref
+    images["apollo_main"]["unresolved_count"] = 106
+    images["apollo_main"]["unresolved_symbols"] = attc_setup_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_setup["remaining_gate"])
+    attc_send_path = G2 / "build/c-firmware/20261017/main-ble-attc-send-req/receipt.json"
+    attc_send, attc_send_ref = receipt(attc_send_path)
+    if (attc_send["status"] != "PASS_MAIN_BLE_ATTC_SEND_REQ_C_INTEGRATION" or
+            attc_send["unresolved_before"] != 106 or
+            attc_send["unresolved_after"] != 110 or
+            attc_send["removed_imports"] != ["audio_ble_attc_send_req_531144"] or
+            attc_send["new_imports"] != ["audio_ble_attc_send_continuing_530e64",
+                                         "audio_ble_attc_send_mtu_530f08",
+                                         "audio_ble_attc_send_prepare_write_531088",
+                                         "audio_ble_attc_send_simple_530e30",
+                                         "audio_ble_attc_send_write_cmd_531054"] or
+            attc_send["prior_candidate"]["sha256"] != attc_setup_candidate["sha256"] or
+            attc_send["source_complete"] or attc_send["flashable"] or
+            attc_send["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT send request table changed")
+    attc_send_candidate = file_checked(attc_send["candidate_object"]["path"],
+                                       attc_send["candidate_object"]["sha256"])
+    attc_send_unresolved = undefined(ROOT / attc_send_candidate["path"])
+    if attc_send_unresolved != sorted((set(attc_setup_unresolved) -
+                                      set(attc_send["removed_imports"])) |
+                                     set(attc_send["new_imports"])):
+        raise RuntimeError("Apollo Main ATT send request frontier changed")
+    images["apollo_main"]["candidate"] = attc_send_candidate
+    images["apollo_main"]["ble_attc_send_req"] = attc_send_ref
+    images["apollo_main"]["unresolved_count"] = 110
+    images["apollo_main"]["unresolved_symbols"] = attc_send_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_send["remaining_gate"])
+    attc_simple_path = G2 / "build/c-firmware/20261017/main-ble-attc-send-simple/receipt.json"
+    attc_simple, attc_simple_ref = receipt(attc_simple_path)
+    if (attc_simple["status"] != "PASS_MAIN_BLE_ATTC_SEND_SIMPLE_C_INTEGRATION" or
+            attc_simple["unresolved_before"] != 110 or
+            attc_simple["unresolved_after"] != 109 or
+            attc_simple["removed_imports"] != ["audio_ble_attc_send_simple_530e30"] or
+            attc_simple["new_imports"] or
+            attc_simple["prior_candidate"]["sha256"] != attc_send_candidate["sha256"] or
+            attc_simple["source_complete"] or attc_simple["flashable"] or
+            attc_simple["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT simple request sender changed")
+    attc_simple_candidate = file_checked(attc_simple["candidate_object"]["path"],
+                                         attc_simple["candidate_object"]["sha256"])
+    attc_simple_unresolved = undefined(ROOT / attc_simple_candidate["path"])
+    if attc_simple_unresolved != sorted(set(attc_send_unresolved) -
+                                       set(attc_simple["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT simple request sender frontier changed")
+    images["apollo_main"]["candidate"] = attc_simple_candidate
+    images["apollo_main"]["ble_attc_send_simple"] = attc_simple_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = attc_simple_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_simple["remaining_gate"])
+    attc_pending_path = G2 / "build/c-firmware/20261017/main-ble-attc-set-pending-write/receipt.json"
+    attc_pending, attc_pending_ref = receipt(attc_pending_path)
+    if (attc_pending["status"] != "PASS_MAIN_BLE_ATTC_SET_PENDING_WRITE_C_INTEGRATION" or
+            attc_pending["unresolved_before"] != 109 or
+            attc_pending["unresolved_after"] != 109 or
+            attc_pending["removed_imports"] or attc_pending["new_imports"] or
+            attc_pending["new_providers"] != ["audio_ble_attc_set_pending_write_530dbe"] or
+            attc_pending["prior_candidate"]["sha256"] != attc_simple_candidate["sha256"] or
+            attc_pending["source_complete"] or attc_pending["flashable"] or
+            attc_pending["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT pending write slot changed")
+    attc_pending_candidate = file_checked(attc_pending["candidate_object"]["path"],
+                                           attc_pending["candidate_object"]["sha256"])
+    attc_pending_unresolved = undefined(ROOT / attc_pending_candidate["path"])
+    if attc_pending_unresolved != attc_simple_unresolved:
+        raise RuntimeError("Apollo Main ATT pending write slot frontier changed")
+    images["apollo_main"]["candidate"] = attc_pending_candidate
+    images["apollo_main"]["ble_attc_set_pending_write"] = attc_pending_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = attc_pending_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_pending["remaining_gate"])
+    attc_write_cmd_path = G2 / "build/c-firmware/20261017/main-ble-attc-send-write-cmd/receipt.json"
+    attc_write_cmd, attc_write_cmd_ref = receipt(attc_write_cmd_path)
+    if (attc_write_cmd["status"] != "PASS_MAIN_BLE_ATTC_SEND_WRITE_CMD_C_INTEGRATION" or
+            attc_write_cmd["unresolved_before"] != 109 or
+            attc_write_cmd["unresolved_after"] != 108 or
+            attc_write_cmd["removed_imports"] != ["audio_ble_attc_send_write_cmd_531054"] or
+            attc_write_cmd["new_imports"] or
+            attc_write_cmd["prior_candidate"]["sha256"] != attc_pending_candidate["sha256"] or
+            attc_write_cmd["source_complete"] or attc_write_cmd["flashable"] or
+            attc_write_cmd["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT write-command sender changed")
+    attc_write_cmd_candidate = file_checked(attc_write_cmd["candidate_object"]["path"],
+                                             attc_write_cmd["candidate_object"]["sha256"])
+    attc_write_cmd_unresolved = undefined(ROOT / attc_write_cmd_candidate["path"])
+    if attc_write_cmd_unresolved != sorted(set(attc_pending_unresolved) -
+                                           set(attc_write_cmd["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT write-command sender frontier changed")
+    images["apollo_main"]["candidate"] = attc_write_cmd_candidate
+    images["apollo_main"]["ble_attc_send_write_cmd"] = attc_write_cmd_ref
+    images["apollo_main"]["unresolved_count"] = 108
+    images["apollo_main"]["unresolved_symbols"] = attc_write_cmd_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_write_cmd["remaining_gate"])
+    attc_read_rsp_path = G2 / "build/c-firmware/20261017/main-ble-attc-rsp-find-type-read-long/receipt.json"
+    attc_read_rsp, attc_read_rsp_ref = receipt(attc_read_rsp_path)
+    if (attc_read_rsp["status"] != "PASS_MAIN_BLE_ATTC_RSP_FIND_TYPE_READ_LONG_C_INTEGRATION" or
+            attc_read_rsp["unresolved_before"] != 108 or
+            attc_read_rsp["unresolved_after"] != 106 or
+            attc_read_rsp["removed_imports"] != ["audio_attc_rsp_find_type_56c3b0",
+                                             "audio_attc_rsp_read_long_56c454"] or
+            attc_read_rsp["new_imports"] or
+            attc_read_rsp["prior_candidate"]["sha256"] != attc_write_cmd_candidate["sha256"] or
+            attc_read_rsp["source_complete"] or attc_read_rsp["flashable"] or
+            attc_read_rsp["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT read response providers changed")
+    attc_read_rsp_candidate = file_checked(attc_read_rsp["candidate_object"]["path"],
+                                           attc_read_rsp["candidate_object"]["sha256"])
+    attc_read_rsp_unresolved = undefined(ROOT / attc_read_rsp_candidate["path"])
+    if attc_read_rsp_unresolved != sorted(set(attc_write_cmd_unresolved) -
+                                         set(attc_read_rsp["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT read response frontier changed")
+    images["apollo_main"]["candidate"] = attc_read_rsp_candidate
+    images["apollo_main"]["ble_attc_rsp_find_type_read_long"] = attc_read_rsp_ref
+    images["apollo_main"]["unresolved_count"] = 106
+    images["apollo_main"]["unresolved_symbols"] = attc_read_rsp_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_read_rsp["remaining_gate"])
+    attc_continue_path = G2 / "build/c-firmware/20261017/main-ble-attc-send-continuing/receipt.json"
+    attc_continue, attc_continue_ref = receipt(attc_continue_path)
+    if (attc_continue["status"] != "PASS_MAIN_BLE_ATTC_SEND_CONTINUING_C_INTEGRATION" or
+            attc_continue["unresolved_before"] != 106 or
+            attc_continue["unresolved_after"] != 106 or
+            attc_continue["removed_imports"] != ["audio_ble_attc_send_continuing_530e64"] or
+            attc_continue["new_imports"] != ["audio_ble_attc_req_clear_531af2"] or
+            attc_continue["prior_candidate"]["sha256"] != attc_read_rsp_candidate["sha256"] or
+            attc_continue["source_complete"] or attc_continue["flashable"] or
+            attc_continue["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT continuing request sender changed")
+    attc_continue_candidate = file_checked(attc_continue["candidate_object"]["path"],
+                                           attc_continue["candidate_object"]["sha256"])
+    attc_continue_unresolved = undefined(ROOT / attc_continue_candidate["path"])
+    if attc_continue_unresolved != sorted((set(attc_read_rsp_unresolved) -
+                                          set(attc_continue["removed_imports"])) |
+                                         set(attc_continue["new_imports"])):
+        raise RuntimeError("Apollo Main ATT continuing request frontier changed")
+    images["apollo_main"]["candidate"] = attc_continue_candidate
+    images["apollo_main"]["ble_attc_send_continuing"] = attc_continue_ref
+    images["apollo_main"]["unresolved_count"] = 106
+    images["apollo_main"]["unresolved_symbols"] = attc_continue_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_continue["remaining_gate"])
+    attc_clear_path = G2 / "build/c-firmware/20261017/main-ble-attc-req-clear/receipt.json"
+    attc_clear, attc_clear_ref = receipt(attc_clear_path)
+    if (attc_clear["status"] != "PASS_MAIN_BLE_ATTC_REQ_CLEAR_C_INTEGRATION" or
+            attc_clear["unresolved_before"] != 106 or
+            attc_clear["unresolved_after"] != 105 or
+            attc_clear["removed_imports"] != ["audio_ble_attc_req_clear_531af2"] or
+            attc_clear["new_imports"] or
+            attc_clear["prior_candidate"]["sha256"] != attc_continue_candidate["sha256"] or
+            attc_clear["source_complete"] or attc_clear["flashable"] or
+            attc_clear["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT request-clear helper changed")
+    attc_clear_candidate = file_checked(attc_clear["candidate_object"]["path"],
+                                        attc_clear["candidate_object"]["sha256"])
+    attc_clear_unresolved = undefined(ROOT / attc_clear_candidate["path"])
+    if attc_clear_unresolved != sorted(set(attc_continue_unresolved) -
+                                      set(attc_clear["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT request-clear frontier changed")
+    images["apollo_main"]["candidate"] = attc_clear_candidate
+    images["apollo_main"]["ble_attc_req_clear"] = attc_clear_ref
+    images["apollo_main"]["unresolved_count"] = 105
+    images["apollo_main"]["unresolved_symbols"] = attc_clear_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_clear["remaining_gate"])
+    attc_find_read_path = G2 / "build/c-firmware/20261017/main-ble-attc-rsp-find-read/receipt.json"
+    attc_find_read, attc_find_read_ref = receipt(attc_find_read_path)
+    if (attc_find_read["status"] != "PASS_MAIN_BLE_ATTC_RSP_FIND_READ_C_INTEGRATION" or
+            attc_find_read["unresolved_before"] != 105 or
+            attc_find_read["unresolved_after"] != 104 or
+            attc_find_read["removed_imports"] != ["audio_attc_rsp_find_read_4b52c2"] or
+            attc_find_read["new_imports"] or
+            attc_find_read["prior_candidate"]["sha256"] != attc_clear_candidate["sha256"] or
+            attc_find_read["source_complete"] or attc_find_read["flashable"] or
+            attc_find_read["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT Find/Read response parser changed")
+    attc_find_read_candidate = file_checked(attc_find_read["candidate_object"]["path"],
+                                            attc_find_read["candidate_object"]["sha256"])
+    attc_find_read_unresolved = undefined(ROOT / attc_find_read_candidate["path"])
+    if attc_find_read_unresolved != sorted(set(attc_clear_unresolved) -
+                                          set(attc_find_read["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT Find/Read response frontier changed")
+    images["apollo_main"]["candidate"] = attc_find_read_candidate
+    images["apollo_main"]["ble_attc_rsp_find_read"] = attc_find_read_ref
+    images["apollo_main"]["unresolved_count"] = 104
+    images["apollo_main"]["unresolved_symbols"] = attc_find_read_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_find_read["remaining_gate"])
+    attc_prep_path = G2 / "build/c-firmware/20261017/main-ble-attc-send-prepare-write/receipt.json"
+    attc_prep, attc_prep_ref = receipt(attc_prep_path)
+    if (attc_prep["status"] != "PASS_MAIN_BLE_ATTC_SEND_PREPARE_WRITE_C_INTEGRATION" or
+            attc_prep["unresolved_before"] != 104 or
+            attc_prep["unresolved_after"] != 103 or
+            attc_prep["removed_imports"] != ["audio_ble_attc_send_prepare_write_531088"] or
+            attc_prep["new_imports"] or
+            attc_prep["prior_candidate"]["sha256"] != attc_find_read_candidate["sha256"] or
+            attc_prep["source_complete"] or attc_prep["flashable"] or
+            attc_prep["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT Prepare Write sender changed")
+    attc_prep_candidate = file_checked(attc_prep["candidate_object"]["path"],
+                                       attc_prep["candidate_object"]["sha256"])
+    attc_prep_unresolved = undefined(ROOT / attc_prep_candidate["path"])
+    if attc_prep_unresolved != sorted(set(attc_find_read_unresolved) -
+                                     set(attc_prep["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT Prepare Write frontier changed")
+    images["apollo_main"]["candidate"] = attc_prep_candidate
+    images["apollo_main"]["ble_attc_send_prepare_write"] = attc_prep_ref
+    images["apollo_main"]["unresolved_count"] = 103
+    images["apollo_main"]["unresolved_symbols"] = attc_prep_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_prep["remaining_gate"])
+    attc_mtu_path = G2 / "build/c-firmware/20261017/main-ble-attc-send-mtu/receipt.json"
+    attc_mtu, attc_mtu_ref = receipt(attc_mtu_path)
+    if (attc_mtu["status"] != "PASS_MAIN_BLE_ATTC_SEND_MTU_C_INTEGRATION" or
+            attc_mtu["unresolved_before"] != 103 or
+            attc_mtu["unresolved_after"] != 102 or
+            attc_mtu["removed_imports"] != ["audio_ble_attc_send_mtu_530f08"] or
+            attc_mtu["new_imports"] or
+            attc_mtu["prior_candidate"]["sha256"] != attc_prep_candidate["sha256"] or
+            attc_mtu["source_complete"] or attc_mtu["flashable"] or
+            attc_mtu["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT MTU sender changed")
+    attc_mtu_candidate = file_checked(attc_mtu["candidate_object"]["path"],
+                                      attc_mtu["candidate_object"]["sha256"])
+    attc_mtu_unresolved = undefined(ROOT / attc_mtu_candidate["path"])
+    if attc_mtu_unresolved != sorted(set(attc_prep_unresolved) -
+                                    set(attc_mtu["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT MTU frontier changed")
+    images["apollo_main"]["candidate"] = attc_mtu_candidate
+    images["apollo_main"]["ble_attc_send_mtu"] = attc_mtu_ref
+    images["apollo_main"]["unresolved_count"] = 102
+    images["apollo_main"]["unresolved_symbols"] = attc_mtu_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_mtu["remaining_gate"])
+    attc_msg_path = G2 / "build/c-firmware/20261017/main-ble-attc-msg/receipt.json"
+    attc_msg, attc_msg_ref = receipt(attc_msg_path)
+    if (attc_msg["status"] != "PASS_MAIN_BLE_ATTC_MSG_C_INTEGRATION" or
+            attc_msg["unresolved_before"] != 102 or
+            attc_msg["unresolved_after"] != 101 or
+            attc_msg["removed_imports"] != ["audio_ble_attc_msg_5315b4"] or
+            attc_msg["new_imports"] or
+            attc_msg["prior_candidate"]["sha256"] != attc_mtu_candidate["sha256"] or
+            attc_msg["source_complete"] or attc_msg["flashable"] or
+            attc_msg["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT client message callback changed")
+    attc_msg_candidate = file_checked(attc_msg["candidate_object"]["path"],
+                                      attc_msg["candidate_object"]["sha256"])
+    attc_msg_unresolved = undefined(ROOT / attc_msg_candidate["path"])
+    if attc_msg_unresolved != sorted(set(attc_mtu_unresolved) -
+                                    set(attc_msg["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT client message frontier changed")
+    images["apollo_main"]["candidate"] = attc_msg_candidate
+    images["apollo_main"]["ble_attc_msg"] = attc_msg_ref
+    images["apollo_main"]["unresolved_count"] = 101
+    images["apollo_main"]["unresolved_symbols"] = attc_msg_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_msg["remaining_gate"])
+    attc_conn_path = G2 / "build/c-firmware/20261017/main-ble-attc-conn/receipt.json"
+    attc_conn, attc_conn_ref = receipt(attc_conn_path)
+    if (attc_conn["status"] != "PASS_MAIN_BLE_ATTC_CONN_C_INTEGRATION" or
+            attc_conn["unresolved_before"] != 101 or
+            attc_conn["unresolved_after"] != 100 or
+            attc_conn["removed_imports"] != ["audio_ble_attc_conn_53135a"] or
+            attc_conn["new_imports"] or
+            attc_conn["prior_candidate"]["sha256"] != attc_msg_candidate["sha256"] or
+            attc_conn["source_complete"] or attc_conn["flashable"] or
+            attc_conn["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT client connection callback changed")
+    attc_conn_candidate = file_checked(attc_conn["candidate_object"]["path"],
+                                       attc_conn["candidate_object"]["sha256"])
+    attc_conn_unresolved = undefined(ROOT / attc_conn_candidate["path"])
+    if attc_conn_unresolved != sorted(set(attc_msg_unresolved) -
+                                     set(attc_conn["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT client connection frontier changed")
+    images["apollo_main"]["candidate"] = attc_conn_candidate
+    images["apollo_main"]["ble_attc_conn"] = attc_conn_ref
+    images["apollo_main"]["unresolved_count"] = 100
+    images["apollo_main"]["unresolved_symbols"] = attc_conn_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_conn["remaining_gate"])
+    atts_data_path = G2 / "build/c-firmware/20261017/main-ble-atts-data/receipt.json"
+    atts_data, atts_data_ref = receipt(atts_data_path)
+    if (atts_data["status"] != "PASS_MAIN_BLE_ATTS_DATA_C_INTEGRATION" or
+            atts_data["unresolved_before"] != 100 or
+            atts_data["unresolved_after"] != 102 or
+            atts_data["removed_imports"] != ["audio_ble_atts_data_53498c"] or
+            atts_data["new_imports"] != ["audio_ble_atts_ccb_by_handle_5351a8",
+                                         "audio_ble_atts_csf_act_client_state_52caa8",
+                                         "audio_ble_atts_proc_table_2000045c"] or
+            atts_data["prior_candidate"]["sha256"] != attc_conn_candidate["sha256"] or
+            atts_data["source_complete"] or atts_data["flashable"] or
+            atts_data["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT server data dispatcher changed")
+    atts_data_candidate = file_checked(atts_data["candidate_object"]["path"],
+                                       atts_data["candidate_object"]["sha256"])
+    atts_data_unresolved = undefined(ROOT / atts_data_candidate["path"])
+    if atts_data_unresolved != sorted((set(attc_conn_unresolved) -
+                                      set(atts_data["removed_imports"])) |
+                                     set(atts_data["new_imports"])):
+        raise RuntimeError("Apollo Main ATT server data frontier changed")
+    images["apollo_main"]["candidate"] = atts_data_candidate
+    images["apollo_main"]["ble_atts_data"] = atts_data_ref
+    images["apollo_main"]["unresolved_count"] = 102
+    images["apollo_main"]["unresolved_symbols"] = atts_data_unresolved
+    images["apollo_main"]["remaining_gate"].append(atts_data["remaining_gate"])
+    atts_lookup_path = G2 / "build/c-firmware/20261017/main-ble-atts-ccb-by-handle/receipt.json"
+    atts_lookup, atts_lookup_ref = receipt(atts_lookup_path)
+    if (atts_lookup["status"] != "PASS_MAIN_BLE_ATTS_CCB_BY_HANDLE_C_INTEGRATION" or
+            atts_lookup["unresolved_before"] != 102 or
+            atts_lookup["unresolved_after"] != 101 or
+            atts_lookup["removed_imports"] != ["audio_ble_atts_ccb_by_handle_5351a8"] or
+            atts_lookup["new_imports"] or
+            atts_lookup["prior_candidate"]["sha256"] != atts_data_candidate["sha256"] or
+            atts_lookup["source_complete"] or atts_lookup["flashable"] or
+            atts_lookup["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT server CCB lookup changed")
+    atts_lookup_candidate = file_checked(atts_lookup["candidate_object"]["path"],
+                                         atts_lookup["candidate_object"]["sha256"])
+    atts_lookup_unresolved = undefined(ROOT / atts_lookup_candidate["path"])
+    if atts_lookup_unresolved != sorted(set(atts_data_unresolved) -
+                                       set(atts_lookup["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT server CCB lookup frontier changed")
+    images["apollo_main"]["candidate"] = atts_lookup_candidate
+    images["apollo_main"]["ble_atts_ccb_by_handle"] = atts_lookup_ref
+    images["apollo_main"]["unresolved_count"] = 101
+    images["apollo_main"]["unresolved_symbols"] = atts_lookup_unresolved
+    images["apollo_main"]["remaining_gate"].append(atts_lookup["remaining_gate"])
+    atts_csf_path = G2 / "build/c-firmware/20261017/main-ble-atts-csf-act-client-state/receipt.json"
+    atts_csf, atts_csf_ref = receipt(atts_csf_path)
+    if (atts_csf["status"] != "PASS_MAIN_BLE_ATTS_CSF_ACT_CLIENT_STATE_C_INTEGRATION" or
+            atts_csf["unresolved_before"] != 101 or
+            atts_csf["unresolved_after"] != 100 or
+            atts_csf["removed_imports"] != ["audio_ble_atts_csf_act_client_state_52caa8"] or
+            atts_csf["new_imports"] or
+            atts_csf["prior_candidate"]["sha256"] != atts_lookup_candidate["sha256"] or
+            atts_csf["source_complete"] or atts_csf["flashable"] or
+            atts_csf["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT server CSF client-state gate changed")
+    atts_csf_candidate = file_checked(atts_csf["candidate_object"]["path"],
+                                      atts_csf["candidate_object"]["sha256"])
+    atts_csf_unresolved = undefined(ROOT / atts_csf_candidate["path"])
+    if atts_csf_unresolved != sorted(set(atts_lookup_unresolved) -
+                                    set(atts_csf["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT server CSF frontier changed")
+    images["apollo_main"]["candidate"] = atts_csf_candidate
+    images["apollo_main"]["ble_atts_csf_act_client_state"] = atts_csf_ref
+    images["apollo_main"]["unresolved_count"] = 100
+    images["apollo_main"]["unresolved_symbols"] = atts_csf_unresolved
+    images["apollo_main"]["remaining_gate"].append(atts_csf["remaining_gate"])
+    atts_conn_path = G2 / "build/c-firmware/20261017/main-ble-atts-conn/receipt.json"
+    atts_conn, atts_conn_ref = receipt(atts_conn_path)
+    if (atts_conn["status"] != "PASS_MAIN_BLE_ATTS_CONN_C_INTEGRATION" or
+            atts_conn["unresolved_before"] != 100 or
+            atts_conn["unresolved_after"] != 100 or
+            atts_conn["removed_imports"] != ["audio_ble_atts_conn_534aba"] or
+            atts_conn["new_imports"] != ["audio_ble_dm_conn_check_idle_4b73a2"] or
+            atts_conn["prior_candidate"]["sha256"] != atts_csf_candidate["sha256"] or
+            atts_conn["source_complete"] or atts_conn["flashable"] or
+            atts_conn["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT server connection callback changed")
+    atts_conn_candidate = file_checked(atts_conn["candidate_object"]["path"],
+                                       atts_conn["candidate_object"]["sha256"])
+    atts_conn_unresolved = undefined(ROOT / atts_conn_candidate["path"])
+    if atts_conn_unresolved != sorted((set(atts_csf_unresolved) -
+                                      set(atts_conn["removed_imports"])) |
+                                     set(atts_conn["new_imports"])):
+        raise RuntimeError("Apollo Main ATT server connection frontier changed")
+    images["apollo_main"]["candidate"] = atts_conn_candidate
+    images["apollo_main"]["ble_atts_conn"] = atts_conn_ref
+    images["apollo_main"]["unresolved_count"] = 100
+    images["apollo_main"]["unresolved_symbols"] = atts_conn_unresolved
+    images["apollo_main"]["remaining_gate"].append(atts_conn["remaining_gate"])
+    dm_idle_path = G2 / "build/c-firmware/20261017/main-ble-dm-conn-check-idle/receipt.json"
+    dm_idle, dm_idle_ref = receipt(dm_idle_path)
+    if (dm_idle["status"] != "PASS_MAIN_BLE_DM_CONN_CHECK_IDLE_C_INTEGRATION" or
+            dm_idle["unresolved_before"] != 100 or
+            dm_idle["unresolved_after"] != 99 or
+            dm_idle["removed_imports"] != ["audio_ble_dm_conn_check_idle_4b73a2"] or
+            dm_idle["new_imports"] or
+            dm_idle["prior_candidate"]["sha256"] != atts_conn_candidate["sha256"] or
+            dm_idle["source_complete"] or dm_idle["flashable"] or
+            dm_idle["hardware_proof"]):
+        raise RuntimeError("Apollo Main DM idle-mask accessor changed")
+    dm_idle_candidate = file_checked(dm_idle["candidate_object"]["path"],
+                                     dm_idle["candidate_object"]["sha256"])
+    dm_idle_unresolved = undefined(ROOT / dm_idle_candidate["path"])
+    if dm_idle_unresolved != sorted(set(atts_conn_unresolved) -
+                                   set(dm_idle["removed_imports"])):
+        raise RuntimeError("Apollo Main DM idle-mask frontier changed")
+    images["apollo_main"]["candidate"] = dm_idle_candidate
+    images["apollo_main"]["ble_dm_conn_check_idle"] = dm_idle_ref
+    images["apollo_main"]["unresolved_count"] = 99
+    images["apollo_main"]["unresolved_symbols"] = dm_idle_unresolved
+    images["apollo_main"]["remaining_gate"].append(dm_idle["remaining_gate"])
+    ind_conn_path = G2 / "build/c-firmware/20261017/main-ble-atts-ind-conn/receipt.json"
+    ind_conn, ind_conn_ref = receipt(ind_conn_path)
+    if (ind_conn["status"] != "PASS_MAIN_BLE_ATTS_IND_CONN_C_INTEGRATION" or
+            ind_conn["unresolved_before"] != 99 or
+            ind_conn["unresolved_after"] != 98 or
+            ind_conn["removed_imports"] != ["audio_ble_atts_ind_conn_533a40"] or
+            ind_conn["new_imports"] or
+            ind_conn["prior_candidate"]["sha256"] != dm_idle_candidate["sha256"] or
+            ind_conn["source_complete"] or ind_conn["flashable"] or
+            ind_conn["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT indication connection callback changed")
+    ind_conn_candidate = file_checked(ind_conn["candidate_object"]["path"],
+                                      ind_conn["candidate_object"]["sha256"])
+    ind_conn_unresolved = undefined(ROOT / ind_conn_candidate["path"])
+    if ind_conn_unresolved != sorted(set(dm_idle_unresolved) -
+                                     set(ind_conn["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT indication connection frontier changed")
+    images["apollo_main"]["candidate"] = ind_conn_candidate
+    images["apollo_main"]["ble_atts_ind_conn"] = ind_conn_ref
+    images["apollo_main"]["unresolved_count"] = 98
+    images["apollo_main"]["unresolved_symbols"] = ind_conn_unresolved
+    images["apollo_main"]["remaining_gate"].append(ind_conn["remaining_gate"])
+    whitelist_path = G2 / "build/c-firmware/20261017/main-ble-whitelist-storage/receipt.json"
+    whitelist, whitelist_ref = receipt(whitelist_path)
+    if (whitelist["status"] != "PASS_MAIN_BLE_WHITELIST_RAM_C_INTEGRATION" or
+            whitelist["unresolved_before"] != 98 or
+            whitelist["unresolved_after"] != 97 or
+            whitelist["removed_imports"] != ["audio_ble_whitelist_info"] or
+            whitelist["new_imports"] or
+            whitelist["native_oracle_result"] != "PASS_BLE_ANCC_WHITELIST_NATIVE 35" or
+            whitelist["prior_candidate"]["sha256"] != ind_conn_candidate["sha256"] or
+            whitelist["source_complete"] or whitelist["flashable"] or
+            whitelist["hardware_proof"]):
+        raise RuntimeError("Apollo Main whitelist RAM candidate changed")
+    whitelist_candidate = file_checked(whitelist["candidate_object"]["path"],
+                                       whitelist["candidate_object"]["sha256"])
+    whitelist_unresolved = undefined(ROOT / whitelist_candidate["path"])
+    if whitelist_unresolved != sorted(set(ind_conn_unresolved) -
+                                      set(whitelist["removed_imports"])):
+        raise RuntimeError("Apollo Main whitelist RAM frontier changed")
+    images["apollo_main"]["candidate"] = whitelist_candidate
+    images["apollo_main"]["ble_whitelist_storage"] = whitelist_ref
+    images["apollo_main"]["unresolved_count"] = 97
+    images["apollo_main"]["unresolved_symbols"] = whitelist_unresolved
+    images["apollo_main"]["remaining_gate"].append(whitelist["remaining_gate"])
+    uart_prefix_path = G2 / "build/c-firmware/20261017/uart-sync-config-contract/receipt.json"
+    uart_prefix, uart_prefix_ref = receipt(uart_prefix_path)
+    if (uart_prefix["status"] != "PASS_MAIN_UART_SYNC_CONFIG_PREFIX_C" or
+            uart_prefix["observed_prefix_bytes"] != 13 or
+            uart_prefix["native_oracle_result"] != "PASS_AUDIO_UART_SYNC_RESET 13" or
+            uart_prefix["source_complete"] or uart_prefix["flashable"] or
+            uart_prefix["hardware_proof"]):
+        raise RuntimeError("Apollo Main UART sync config prefix changed")
+    for entry in [uart_prefix["header"], *uart_prefix["sources"],
+                  *uart_prefix["objects"], uart_prefix["relocatable_object"],
+                  uart_prefix["native_oracle_source"]]:
+        file_checked(entry["path"], entry["sha256"])
+    images["apollo_main"]["uart_sync_config_prefix"] = uart_prefix_ref
+    images["apollo_main"]["remaining_gate"].append(uart_prefix["remaining_gate"])
+    uart_storage_path = G2 / "build/c-firmware/20261017/main-uart-sync-storage/receipt.json"
+    uart_storage, uart_storage_ref = receipt(uart_storage_path)
+    if (uart_storage["status"] != "PASS_MAIN_UART_SYNC_STORAGE_C_INTEGRATION" or
+            uart_storage["unresolved_before"] != 97 or
+            uart_storage["unresolved_after"] != 96 or
+            uart_storage["removed_imports"] != ["g2_uart_sync_buffer"] or
+            uart_storage["new_imports"] or
+            uart_storage["provisional_storage_bytes"] != 16 or
+            uart_storage["observed_prefix_bytes"] != 13 or
+            uart_storage["prior_candidate"]["sha256"] != whitelist_candidate["sha256"] or
+            uart_storage["prefix_receipt"]["sha256"] != uart_prefix_ref["sha256"] or
+            uart_storage["source_complete"] or uart_storage["flashable"] or
+            uart_storage["hardware_proof"]):
+        raise RuntimeError("Apollo Main UART sync storage candidate changed")
+    file_checked(uart_storage["source"]["path"], uart_storage["source"]["sha256"])
+    file_checked(uart_storage["header"]["path"], uart_storage["header"]["sha256"])
+    uart_storage_candidate = file_checked(uart_storage["candidate_object"]["path"],
+                                          uart_storage["candidate_object"]["sha256"])
+    uart_storage_unresolved = undefined(ROOT / uart_storage_candidate["path"])
+    if uart_storage_unresolved != sorted(set(whitelist_unresolved) -
+                                         set(uart_storage["removed_imports"])):
+        raise RuntimeError("Apollo Main UART sync storage frontier changed")
+    images["apollo_main"]["candidate"] = uart_storage_candidate
+    images["apollo_main"]["uart_sync_storage"] = uart_storage_ref
+    images["apollo_main"]["unresolved_count"] = 96
+    images["apollo_main"]["unresolved_symbols"] = uart_storage_unresolved
+    images["apollo_main"]["remaining_gate"].append(uart_storage["remaining_gate"])
+    registry_triage_path = G2 / "analysis/c-source-completion-20261011/apollo/main-registry-callback-priorities-20261017.json"
+    registry_triage, registry_triage_ref = receipt(registry_triage_path)
+    if (registry_triage["status"] != "PASS_MAIN_REGISTRY_CALLBACK_TRIAGE" or
+            registry_triage["candidate_sha256"] != uart_storage_candidate["sha256"] or
+            registry_triage["callback_count"] != 32 or
+            len(registry_triage["callbacks"]) != 32):
+        raise RuntimeError("Apollo Main registry callback triage changed")
+    images["apollo_main"]["registry_callback_triage"] = registry_triage_ref
+    images["apollo_main"]["remaining_gate"].append(registry_triage["remaining_gate"])
+    case_sync_path = G2 / "build/c-firmware/20261017/main-case-sync-data/receipt.json"
+    case_sync, case_sync_ref = receipt(case_sync_path)
+    if (case_sync["status"] != "PASS_MAIN_CASE_SYNC_DATA_C_INTEGRATION" or
+            case_sync["unresolved_before"] != 96 or
+            case_sync["unresolved_after"] != 98 or
+            case_sync["removed_imports"] != ["audio_uart_registry_callback_4acb40"] or
+            case_sync["new_imports"] != ["audio_uart_case_force_out_4ac5a2",
+                                          "audio_uart_case_sync_event_510a0c",
+                                          "audio_uart_case_sync_response_4ac890"] or
+            case_sync["prior_candidate"]["sha256"] != uart_storage_candidate["sha256"] or
+            case_sync["source_complete"] or case_sync["flashable"] or
+            case_sync["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case sync handler changed")
+    file_checked(case_sync["source"]["path"], case_sync["source"]["sha256"])
+    file_checked(case_sync["oracle"]["path"], case_sync["oracle"]["sha256"])
+    case_sync_candidate = file_checked(case_sync["candidate_object"]["path"],
+                                       case_sync["candidate_object"]["sha256"])
+    case_sync_unresolved = undefined(ROOT / case_sync_candidate["path"])
+    if case_sync_unresolved != sorted((set(uart_storage_unresolved) -
+                                      set(case_sync["removed_imports"])) |
+                                      set(case_sync["new_imports"])):
+        raise RuntimeError("Apollo Main Case sync frontier changed")
+    images["apollo_main"]["candidate"] = case_sync_candidate
+    images["apollo_main"]["case_sync_data_handler"] = case_sync_ref
+    images["apollo_main"]["unresolved_count"] = 98
+    images["apollo_main"]["unresolved_symbols"] = case_sync_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_sync["remaining_gate"])
+    case_force_path = G2 / "build/c-firmware/20261017/main-case-force-out/receipt.json"
+    case_force, case_force_ref = receipt(case_force_path)
+    if (case_force["status"] != "PASS_MAIN_CASE_FORCE_OUT_C_INTEGRATION" or
+            case_force["unresolved_before"] != 98 or
+            case_force["unresolved_after"] != 101 or
+            case_force["removed_imports"] != ["audio_uart_case_force_out_4ac5a2"] or
+            case_force["new_imports"] != ["audio_uart_case_display_refresh_4abf86",
+                                          "audio_uart_case_force_out_apply_4ac798",
+                                          "audio_uart_case_force_out_finish_4ac19c",
+                                          "audio_uart_case_notify_4abec8"] or
+            case_force["prior_candidate"]["sha256"] != case_sync_candidate["sha256"] or
+            case_force["source_complete"] or case_force["flashable"] or
+            case_force["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case force-out handler changed")
+    file_checked(case_force["source"]["path"], case_force["source"]["sha256"])
+    file_checked(case_force["oracle"]["path"], case_force["oracle"]["sha256"])
+    case_force_candidate = file_checked(case_force["candidate_object"]["path"],
+                                        case_force["candidate_object"]["sha256"])
+    case_force_unresolved = undefined(ROOT / case_force_candidate["path"])
+    if case_force_unresolved != sorted((set(case_sync_unresolved) -
+                                       set(case_force["removed_imports"])) |
+                                       set(case_force["new_imports"])):
+        raise RuntimeError("Apollo Main Case force-out frontier changed")
+    images["apollo_main"]["candidate"] = case_force_candidate
+    images["apollo_main"]["case_force_out_handler"] = case_force_ref
+    images["apollo_main"]["unresolved_count"] = 101
+    images["apollo_main"]["unresolved_symbols"] = case_force_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_force["remaining_gate"])
+    case_refresh_path = G2 / "build/c-firmware/20261017/main-case-refresh/receipt.json"
+    case_refresh, case_refresh_ref = receipt(case_refresh_path)
+    if (case_refresh["status"] != "PASS_MAIN_CASE_REFRESH_C_INTEGRATION" or
+            case_refresh["unresolved_before"] != 101 or
+            case_refresh["unresolved_after"] != 100 or
+            case_refresh["removed_imports"] != ["audio_uart_case_display_refresh_4abf86"] or
+            case_refresh["new_imports"] or
+            case_refresh["prior_candidate"]["sha256"] != case_force_candidate["sha256"] or
+            case_refresh["source_complete"] or case_refresh["flashable"] or
+            case_refresh["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case display refresh changed")
+    file_checked(case_refresh["source"]["path"], case_refresh["source"]["sha256"])
+    file_checked(case_refresh["oracle"]["path"], case_refresh["oracle"]["sha256"])
+    case_refresh_candidate = file_checked(case_refresh["candidate_object"]["path"],
+                                          case_refresh["candidate_object"]["sha256"])
+    case_refresh_unresolved = undefined(ROOT / case_refresh_candidate["path"])
+    if case_refresh_unresolved != sorted(set(case_force_unresolved) -
+                                         set(case_refresh["removed_imports"])):
+        raise RuntimeError("Apollo Main Case display refresh frontier changed")
+    images["apollo_main"]["candidate"] = case_refresh_candidate
+    images["apollo_main"]["case_display_refresh"] = case_refresh_ref
+    images["apollo_main"]["unresolved_count"] = 100
+    images["apollo_main"]["unresolved_symbols"] = case_refresh_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_refresh["remaining_gate"])
+    case_nonce_path = G2 / "build/c-firmware/20261017/main-case-nonce-change/receipt.json"
+    case_nonce, case_nonce_ref = receipt(case_nonce_path)
+    if (case_nonce["status"] != "PASS_MAIN_CASE_NONCE_CHANGE_C_INTEGRATION" or
+            case_nonce["unresolved_before"] != 100 or
+            case_nonce["unresolved_after"] != 100 or
+            case_nonce["removed_imports"] != ["audio_uart_case_force_out_apply_4ac798"] or
+            case_nonce["new_imports"] != ["audio_uart_case_nonce_state_200036d8"] or
+            case_nonce["prior_candidate"]["sha256"] != case_refresh_candidate["sha256"] or
+            case_nonce["source_complete"] or case_nonce["flashable"] or
+            case_nonce["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case nonce updater changed")
+    file_checked(case_nonce["source"]["path"], case_nonce["source"]["sha256"])
+    file_checked(case_nonce["oracle"]["path"], case_nonce["oracle"]["sha256"])
+    case_nonce_candidate = file_checked(case_nonce["candidate_object"]["path"],
+                                        case_nonce["candidate_object"]["sha256"])
+    case_nonce_unresolved = undefined(ROOT / case_nonce_candidate["path"])
+    if case_nonce_unresolved != sorted((set(case_refresh_unresolved) -
+                                       set(case_nonce["removed_imports"])) |
+                                       set(case_nonce["new_imports"])):
+        raise RuntimeError("Apollo Main Case nonce frontier changed")
+    images["apollo_main"]["candidate"] = case_nonce_candidate
+    images["apollo_main"]["case_nonce_updater"] = case_nonce_ref
+    images["apollo_main"]["unresolved_count"] = 100
+    images["apollo_main"]["unresolved_symbols"] = case_nonce_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_nonce["remaining_gate"])
+    case_notify_path = G2 / "build/c-firmware/20261017/main-case-notify/receipt.json"
+    case_notify, case_notify_ref = receipt(case_notify_path)
+    if (case_notify["status"] != "PASS_MAIN_CASE_NOTIFY_C_INTEGRATION" or
+            case_notify["unresolved_before"] != 100 or
+            case_notify["unresolved_after"] != 103 or
+            case_notify["removed_imports"] != ["audio_uart_case_notify_4abec8"] or
+            case_notify["new_imports"] != ["audio_uart_case_charge_4acaac",
+                                           "audio_uart_case_lid_4acab4",
+                                           "audio_uart_case_send_status_510dec",
+                                           "audio_uart_case_soc_4acaa0"] or
+            case_notify["prior_candidate"]["sha256"] != case_nonce_candidate["sha256"] or
+            case_notify["source_complete"] or case_notify["flashable"] or
+            case_notify["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case notification sender changed")
+    file_checked(case_notify["source"]["path"], case_notify["source"]["sha256"])
+    file_checked(case_notify["oracle"]["path"], case_notify["oracle"]["sha256"])
+    case_notify_candidate = file_checked(case_notify["candidate_object"]["path"],
+                                         case_notify["candidate_object"]["sha256"])
+    case_notify_unresolved = undefined(ROOT / case_notify_candidate["path"])
+    if case_notify_unresolved != sorted((set(case_nonce_unresolved) -
+                                        set(case_notify["removed_imports"])) |
+                                        set(case_notify["new_imports"])):
+        raise RuntimeError("Apollo Main Case notification frontier changed")
+    images["apollo_main"]["candidate"] = case_notify_candidate
+    images["apollo_main"]["case_notification_sender"] = case_notify_ref
+    images["apollo_main"]["unresolved_count"] = 103
+    images["apollo_main"]["unresolved_symbols"] = case_notify_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_notify["remaining_gate"])
+    case_getters_path = G2 / "build/c-firmware/20261017/main-case-status-getters/receipt.json"
+    case_getters, case_getters_ref = receipt(case_getters_path)
+    if (case_getters["status"] != "PASS_MAIN_CASE_STATUS_GETTERS_C_INTEGRATION" or
+            case_getters["unresolved_before"] != 103 or
+            case_getters["unresolved_after"] != 100 or
+            case_getters["removed_imports"] != ["audio_uart_case_charge_4acaac",
+                                            "audio_uart_case_lid_4acab4",
+                                            "audio_uart_case_soc_4acaa0"] or
+            case_getters["new_imports"] or
+            case_getters["prior_candidate"]["sha256"] != case_notify_candidate["sha256"] or
+            case_getters["source_complete"] or case_getters["flashable"] or
+            case_getters["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case status getters changed")
+    file_checked(case_getters["source"]["path"], case_getters["source"]["sha256"])
+    file_checked(case_getters["oracle"]["path"], case_getters["oracle"]["sha256"])
+    case_getters_candidate = file_checked(case_getters["candidate_object"]["path"],
+                                          case_getters["candidate_object"]["sha256"])
+    case_getters_unresolved = undefined(ROOT / case_getters_candidate["path"])
+    if case_getters_unresolved != sorted(set(case_notify_unresolved) -
+                                         set(case_getters["removed_imports"])):
+        raise RuntimeError("Apollo Main Case getter frontier changed")
+    images["apollo_main"]["candidate"] = case_getters_candidate
+    images["apollo_main"]["case_status_getters"] = case_getters_ref
+    images["apollo_main"]["unresolved_count"] = 100
+    images["apollo_main"]["unresolved_symbols"] = case_getters_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_getters["remaining_gate"])
+    case_send_path = G2 / "build/c-firmware/20261017/main-case-status-send/receipt.json"
+    case_send, case_send_ref = receipt(case_send_path)
+    if (case_send["status"] != "PASS_MAIN_CASE_STATUS_SEND_C_INTEGRATION" or
+            case_send["unresolved_before"] != 100 or
+            case_send["unresolved_after"] != 103 or
+            case_send["removed_imports"] != ["audio_uart_case_send_status_510dec"] or
+            case_send["new_imports"] != ["audio_uart_case_descriptor_77793c",
+                                         "audio_uart_case_tx_encoded_2037c5a0",
+                                         "audio_uart_case_tx_frame_200f5a9c",
+                                         "audio_uart_case_tx_magic_20074ffa"] or
+            case_send["prior_candidate"]["sha256"] != case_getters_candidate["sha256"] or
+            case_send["source_complete"] or case_send["flashable"] or
+            case_send["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case status sender changed")
+    file_checked(case_send["source"]["path"], case_send["source"]["sha256"])
+    file_checked(case_send["oracle"]["path"], case_send["oracle"]["sha256"])
+    case_send_candidate = file_checked(case_send["candidate_object"]["path"],
+                                       case_send["candidate_object"]["sha256"])
+    case_send_unresolved = undefined(ROOT / case_send_candidate["path"])
+    if case_send_unresolved != sorted((set(case_getters_unresolved) -
+                                      set(case_send["removed_imports"])) |
+                                      set(case_send["new_imports"])):
+        raise RuntimeError("Apollo Main Case sender frontier changed")
+    images["apollo_main"]["candidate"] = case_send_candidate
+    images["apollo_main"]["case_status_sender"] = case_send_ref
+    images["apollo_main"]["unresolved_count"] = 103
+    images["apollo_main"]["unresolved_symbols"] = case_send_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_send["remaining_gate"])
+    case_send_storage_path = G2 / "build/c-firmware/20261017/main-case-status-send-storage/receipt.json"
+    case_send_storage, case_send_storage_ref = receipt(case_send_storage_path)
+    if (case_send_storage["status"] != "PASS_MAIN_CASE_STATUS_SEND_STORAGE_C_INTEGRATION" or
+            case_send_storage["unresolved_before"] != 103 or
+            case_send_storage["unresolved_after"] != 100 or
+            case_send_storage["removed_imports"] != ["audio_uart_case_tx_encoded_2037c5a0",
+                                                   "audio_uart_case_tx_frame_200f5a9c",
+                                                   "audio_uart_case_tx_magic_20074ffa"] or
+            case_send_storage["new_imports"] or
+            case_send_storage["observed_extents"] != {"frame": 10, "encoded": 256, "magic": 1} or
+            case_send_storage["prior_candidate"]["sha256"] != case_send_candidate["sha256"] or
+            case_send_storage["sender_receipt"]["sha256"] != case_send_ref["sha256"] or
+            case_send_storage["source_complete"] or case_send_storage["flashable"] or
+            case_send_storage["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case send storage changed")
+    file_checked(case_send_storage["source"]["path"], case_send_storage["source"]["sha256"])
+    case_send_storage_candidate = file_checked(case_send_storage["candidate_object"]["path"],
+                                               case_send_storage["candidate_object"]["sha256"])
+    case_send_storage_unresolved = undefined(ROOT / case_send_storage_candidate["path"])
+    if case_send_storage_unresolved != sorted(set(case_send_unresolved) -
+                                              set(case_send_storage["removed_imports"])):
+        raise RuntimeError("Apollo Main Case send storage frontier changed")
+    images["apollo_main"]["candidate"] = case_send_storage_candidate
+    images["apollo_main"]["case_send_storage"] = case_send_storage_ref
+    images["apollo_main"]["unresolved_count"] = 100
+    images["apollo_main"]["unresolved_symbols"] = case_send_storage_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_send_storage["remaining_gate"])
+    case_descriptor_path = G2 / "build/c-firmware/20261017/main-case-descriptor/receipt.json"
+    case_descriptor, case_descriptor_ref = receipt(case_descriptor_path)
+    if (case_descriptor["status"] != "PASS_MAIN_CASE_DESCRIPTOR_C_INTEGRATION" or
+            case_descriptor["unresolved_before"] != 100 or
+            case_descriptor["unresolved_after"] != 99 or
+            case_descriptor["removed_imports"] != ["audio_uart_case_descriptor_77793c"] or
+            case_descriptor["new_imports"] or
+            case_descriptor["prior_candidate"]["sha256"] != case_send_storage_candidate["sha256"] or
+            case_descriptor["source_complete"] or case_descriptor["flashable"] or
+            case_descriptor["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case descriptor changed")
+    for entry in (case_descriptor["source"], case_descriptor["extraction_map"],
+                  case_descriptor["oracle"]):
+        file_checked(entry["path"], entry["sha256"])
+    case_descriptor_candidate = file_checked(case_descriptor["candidate_object"]["path"],
+                                             case_descriptor["candidate_object"]["sha256"])
+    case_descriptor_unresolved = undefined(ROOT / case_descriptor_candidate["path"])
+    if case_descriptor_unresolved != sorted(set(case_send_storage_unresolved) -
+                                            set(case_descriptor["removed_imports"])):
+        raise RuntimeError("Apollo Main Case descriptor frontier changed")
+    images["apollo_main"]["candidate"] = case_descriptor_candidate
+    images["apollo_main"]["case_nanopb_descriptor"] = case_descriptor_ref
+    images["apollo_main"]["unresolved_count"] = 99
+    images["apollo_main"]["unresolved_symbols"] = case_descriptor_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_descriptor["remaining_gate"])
+    case_reconnect_path = G2 / "build/c-firmware/20261017/main-case-reconnect/receipt.json"
+    case_reconnect, case_reconnect_ref = receipt(case_reconnect_path)
+    if (case_reconnect["status"] != "PASS_MAIN_CASE_RECONNECT_C_INTEGRATION" or
+            case_reconnect["unresolved_before"] != 99 or
+            case_reconnect["unresolved_after"] != 101 or
+            case_reconnect["removed_imports"] != ["audio_uart_case_force_out_finish_4ac19c"] or
+            case_reconnect["new_imports"] != ["audio_box_reconnect_pending_20075011",
+                                              "audio_box_reconnect_suppressed_20075010",
+                                              "audio_uart_box_reconnect_attempt_4a316c"] or
+            case_reconnect["prior_candidate"]["sha256"] != case_descriptor_candidate["sha256"] or
+            case_reconnect["source_complete"] or case_reconnect["flashable"] or
+            case_reconnect["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case reconnect changed")
+    for entry in (case_reconnect["source"], case_reconnect["oracle"]):
+        file_checked(entry["path"], entry["sha256"])
+    case_reconnect_candidate = file_checked(case_reconnect["candidate_object"]["path"],
+                                            case_reconnect["candidate_object"]["sha256"])
+    case_reconnect_unresolved = undefined(ROOT / case_reconnect_candidate["path"])
+    if case_reconnect_unresolved != sorted((set(case_descriptor_unresolved) -
+                                           set(case_reconnect["removed_imports"])) |
+                                           set(case_reconnect["new_imports"])):
+        raise RuntimeError("Apollo Main Case reconnect frontier changed")
+    images["apollo_main"]["candidate"] = case_reconnect_candidate
+    images["apollo_main"]["case_reconnect"] = case_reconnect_ref
+    images["apollo_main"]["unresolved_count"] = 101
+    images["apollo_main"]["unresolved_symbols"] = case_reconnect_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_reconnect["remaining_gate"])
+    case_reconnect_state_path = G2 / "build/c-firmware/20261017/main-case-reconnect-state/receipt.json"
+    case_reconnect_state, case_reconnect_state_ref = receipt(case_reconnect_state_path)
+    if (case_reconnect_state["status"] != "PASS_MAIN_CASE_RECONNECT_STATE_C_INTEGRATION" or
+            case_reconnect_state["unresolved_before"] != 101 or
+            case_reconnect_state["unresolved_after"] != 99 or
+            case_reconnect_state["removed_imports"] != ["audio_box_reconnect_pending_20075011",
+                                                    "audio_box_reconnect_suppressed_20075010"] or
+            case_reconnect_state["new_imports"] or
+            case_reconnect_state["stock_cells"] != {"suppressed": "0x20075010",
+                                                     "pending": "0x20075011"} or
+            case_reconnect_state["prior_candidate"]["sha256"] != case_reconnect_candidate["sha256"] or
+            case_reconnect_state["reconnect_receipt"]["sha256"] != case_reconnect_ref["sha256"] or
+            case_reconnect_state["source_complete"] or case_reconnect_state["flashable"] or
+            case_reconnect_state["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case reconnect state changed")
+    file_checked(case_reconnect_state["source"]["path"], case_reconnect_state["source"]["sha256"])
+    case_reconnect_state_candidate = file_checked(case_reconnect_state["candidate_object"]["path"],
+                                                  case_reconnect_state["candidate_object"]["sha256"])
+    case_reconnect_state_unresolved = undefined(ROOT / case_reconnect_state_candidate["path"])
+    if case_reconnect_state_unresolved != sorted(set(case_reconnect_unresolved) -
+                                                 set(case_reconnect_state["removed_imports"])):
+        raise RuntimeError("Apollo Main Case reconnect state frontier changed")
+    images["apollo_main"]["candidate"] = case_reconnect_state_candidate
+    images["apollo_main"]["case_reconnect_state"] = case_reconnect_state_ref
+    images["apollo_main"]["unresolved_count"] = 99
+    images["apollo_main"]["unresolved_symbols"] = case_reconnect_state_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_reconnect_state["remaining_gate"])
+    ble_try_reconnect_path = G2 / "build/c-firmware/20261017/main-ble-try-reconnect/receipt.json"
+    ble_try_reconnect, ble_try_reconnect_ref = receipt(ble_try_reconnect_path)
+    if (ble_try_reconnect["status"] != "PASS_MAIN_BLE_TRY_RECONNECT_C_INTEGRATION" or
+            ble_try_reconnect["unresolved_before"] != 99 or
+            ble_try_reconnect["unresolved_after"] != 99 or
+            ble_try_reconnect["removed_imports"] != ["audio_uart_box_reconnect_attempt_4a316c"] or
+            ble_try_reconnect["new_imports"] != ["audio_ble_master_is_connected_4a22c6"] or
+            ble_try_reconnect["prior_candidate"]["sha256"] != case_reconnect_state_candidate["sha256"] or
+            ble_try_reconnect["source_complete"] or ble_try_reconnect["flashable"] or
+            ble_try_reconnect["hardware_proof"]):
+        raise RuntimeError("Apollo Main BLE reconnect attempt changed")
+    for entry in (ble_try_reconnect["source"], ble_try_reconnect["oracle"]):
+        file_checked(entry["path"], entry["sha256"])
+    ble_try_reconnect_candidate = file_checked(ble_try_reconnect["candidate_object"]["path"],
+                                               ble_try_reconnect["candidate_object"]["sha256"])
+    ble_try_reconnect_unresolved = undefined(ROOT / ble_try_reconnect_candidate["path"])
+    if ble_try_reconnect_unresolved != sorted((set(case_reconnect_state_unresolved) -
+                                              set(ble_try_reconnect["removed_imports"])) |
+                                              set(ble_try_reconnect["new_imports"])):
+        raise RuntimeError("Apollo Main BLE reconnect attempt frontier changed")
+    images["apollo_main"]["candidate"] = ble_try_reconnect_candidate
+    images["apollo_main"]["ble_try_reconnect"] = ble_try_reconnect_ref
+    images["apollo_main"]["unresolved_count"] = 99
+    images["apollo_main"]["unresolved_symbols"] = ble_try_reconnect_unresolved
+    images["apollo_main"]["remaining_gate"].append(ble_try_reconnect["remaining_gate"])
+    ble_is_connected_path = G2 / "build/c-firmware/20261017/main-ble-is-connected/receipt.json"
+    ble_is_connected, ble_is_connected_ref = receipt(ble_is_connected_path)
+    if (ble_is_connected["status"] != "PASS_MAIN_BLE_IS_CONNECTED_C_INTEGRATION" or
+            ble_is_connected["unresolved_before"] != 99 or
+            ble_is_connected["unresolved_after"] != 98 or
+            ble_is_connected["removed_imports"] != ["audio_ble_master_is_connected_4a22c6"] or
+            ble_is_connected["new_imports"] or
+            ble_is_connected["prior_candidate"]["sha256"] != ble_try_reconnect_candidate["sha256"] or
+            ble_is_connected["source_complete"] or ble_is_connected["flashable"] or
+            ble_is_connected["hardware_proof"]):
+        raise RuntimeError("Apollo Main BLE connected predicate changed")
+    for entry in (ble_is_connected["source"], ble_is_connected["oracle"]):
+        file_checked(entry["path"], entry["sha256"])
+    ble_is_connected_candidate = file_checked(ble_is_connected["candidate_object"]["path"],
+                                               ble_is_connected["candidate_object"]["sha256"])
+    ble_is_connected_unresolved = undefined(ROOT / ble_is_connected_candidate["path"])
+    if ble_is_connected_unresolved != sorted(set(ble_try_reconnect_unresolved) -
+                                             set(ble_is_connected["removed_imports"])):
+        raise RuntimeError("Apollo Main BLE connected predicate frontier changed")
+    images["apollo_main"]["candidate"] = ble_is_connected_candidate
+    images["apollo_main"]["ble_is_connected"] = ble_is_connected_ref
+    images["apollo_main"]["unresolved_count"] = 98
+    images["apollo_main"]["unresolved_symbols"] = ble_is_connected_unresolved
+    images["apollo_main"]["remaining_gate"].append(ble_is_connected["remaining_gate"])
+    case_sync_response_path = G2 / "build/c-firmware/20261017/main-case-sync-response/receipt.json"
+    case_sync_response, case_sync_response_ref = receipt(case_sync_response_path)
+    if (case_sync_response["status"] != "PASS_MAIN_CASE_SYNC_RESPONSE_C_INTEGRATION" or
+            case_sync_response["unresolved_before"] != 98 or
+            case_sync_response["unresolved_after"] != 99 or
+            case_sync_response["removed_imports"] != ["audio_uart_case_sync_response_4ac890"] or
+            case_sync_response["new_imports"] != ["audio_uart_case_in_case_side_effect_5130a6",
+                                                   "audio_uart_case_peer_raw_20074188"] or
+            case_sync_response["prior_candidate"]["sha256"] != ble_is_connected_candidate["sha256"] or
+            case_sync_response["source_complete"] or case_sync_response["flashable"] or
+            case_sync_response["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case sync response changed")
+    for entry in (case_sync_response["source"], case_sync_response["oracle"]):
+        file_checked(entry["path"], entry["sha256"])
+    case_sync_response_candidate = file_checked(case_sync_response["candidate_object"]["path"],
+                                                case_sync_response["candidate_object"]["sha256"])
+    case_sync_response_unresolved = undefined(ROOT / case_sync_response_candidate["path"])
+    if case_sync_response_unresolved != sorted((set(ble_is_connected_unresolved) -
+                                                set(case_sync_response["removed_imports"])) |
+                                                set(case_sync_response["new_imports"])):
+        raise RuntimeError("Apollo Main Case sync response frontier changed")
+    images["apollo_main"]["candidate"] = case_sync_response_candidate
+    images["apollo_main"]["case_sync_response"] = case_sync_response_ref
+    images["apollo_main"]["unresolved_count"] = 99
+    images["apollo_main"]["unresolved_symbols"] = case_sync_response_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_sync_response["remaining_gate"])
+    case_peer_raw_path = G2 / "build/c-firmware/20261017/main-case-peer-raw/receipt.json"
+    case_peer_raw, case_peer_raw_ref = receipt(case_peer_raw_path)
+    if (case_peer_raw["status"] != "PASS_MAIN_CASE_PEER_RAW_C_INTEGRATION" or
+            case_peer_raw["unresolved_before"] != 99 or
+            case_peer_raw["unresolved_after"] != 98 or
+            case_peer_raw["removed_imports"] != ["audio_uart_case_peer_raw_20074188"] or
+            case_peer_raw["new_imports"] or case_peer_raw["observed_extent"] != 4 or
+            case_peer_raw["prior_candidate"]["sha256"] != case_sync_response_candidate["sha256"] or
+            case_peer_raw["response_receipt"]["sha256"] != case_sync_response_ref["sha256"] or
+            case_peer_raw["source_complete"] or case_peer_raw["flashable"] or
+            case_peer_raw["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case peer raw storage changed")
+    file_checked(case_peer_raw["source"]["path"], case_peer_raw["source"]["sha256"])
+    case_peer_raw_candidate = file_checked(case_peer_raw["candidate_object"]["path"],
+                                           case_peer_raw["candidate_object"]["sha256"])
+    case_peer_raw_unresolved = undefined(ROOT / case_peer_raw_candidate["path"])
+    if case_peer_raw_unresolved != sorted(set(case_sync_response_unresolved) -
+                                          set(case_peer_raw["removed_imports"])):
+        raise RuntimeError("Apollo Main Case peer raw frontier changed")
+    images["apollo_main"]["candidate"] = case_peer_raw_candidate
+    images["apollo_main"]["case_peer_raw"] = case_peer_raw_ref
+    images["apollo_main"]["unresolved_count"] = 98
+    images["apollo_main"]["unresolved_symbols"] = case_peer_raw_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_peer_raw["remaining_gate"])
+    case_in_case_path = G2 / "build/c-firmware/20261017/main-case-in-case/receipt.json"
+    case_in_case, case_in_case_ref = receipt(case_in_case_path)
+    if (case_in_case["status"] != "PASS_MAIN_CASE_IN_CASE_C_INTEGRATION" or
+            case_in_case["unresolved_before"] != 98 or
+            case_in_case["unresolved_after"] != 97 or
+            case_in_case["removed_imports"] != ["audio_uart_case_in_case_side_effect_5130a6"] or
+            case_in_case["new_imports"] or
+            case_in_case["prior_candidate"]["sha256"] != case_peer_raw_candidate["sha256"] or
+            case_in_case["source_complete"] or case_in_case["flashable"] or
+            case_in_case["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case in-case wrapper changed")
+    for entry in (case_in_case["source"], case_in_case["oracle"]):
+        file_checked(entry["path"], entry["sha256"])
+    case_in_case_candidate = file_checked(case_in_case["candidate_object"]["path"],
+                                          case_in_case["candidate_object"]["sha256"])
+    case_in_case_unresolved = undefined(ROOT / case_in_case_candidate["path"])
+    if case_in_case_unresolved != sorted(set(case_peer_raw_unresolved) -
+                                         set(case_in_case["removed_imports"])):
+        raise RuntimeError("Apollo Main Case in-case wrapper frontier changed")
+    images["apollo_main"]["candidate"] = case_in_case_candidate
+    images["apollo_main"]["case_in_case"] = case_in_case_ref
+    images["apollo_main"]["unresolved_count"] = 97
+    images["apollo_main"]["unresolved_symbols"] = case_in_case_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_in_case["remaining_gate"])
+    case_sync_event_path = G2 / "build/c-firmware/20261017/main-case-sync-event/receipt.json"
+    case_sync_event, case_sync_event_ref = receipt(case_sync_event_path)
+    if (case_sync_event["status"] != "PASS_MAIN_CASE_SYNC_EVENT_C_INTEGRATION" or
+            case_sync_event["unresolved_before"] != 97 or
+            case_sync_event["unresolved_after"] != 99 or
+            case_sync_event["removed_imports"] != ["audio_uart_case_sync_event_510a0c"] or
+            case_sync_event["new_imports"] != ["audio_uart_case_rx_frame_200f5a90",
+                                                "audio_uart_case_rx_info_510bfe",
+                                                "audio_uart_case_send_response_510c70"] or
+            case_sync_event["prior_candidate"]["sha256"] != case_in_case_candidate["sha256"] or
+            case_sync_event["source_complete"] or case_sync_event["flashable"] or
+            case_sync_event["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case sync event changed")
+    for entry in (case_sync_event["source"], case_sync_event["oracle"]):
+        file_checked(entry["path"], entry["sha256"])
+    case_sync_event_candidate = file_checked(case_sync_event["candidate_object"]["path"],
+                                             case_sync_event["candidate_object"]["sha256"])
+    case_sync_event_unresolved = undefined(ROOT / case_sync_event_candidate["path"])
+    if case_sync_event_unresolved != sorted((set(case_in_case_unresolved) -
+                                            set(case_sync_event["removed_imports"])) |
+                                            set(case_sync_event["new_imports"])):
+        raise RuntimeError("Apollo Main Case sync event frontier changed")
+    images["apollo_main"]["candidate"] = case_sync_event_candidate
+    images["apollo_main"]["case_sync_event"] = case_sync_event_ref
+    images["apollo_main"]["unresolved_count"] = 99
+    images["apollo_main"]["unresolved_symbols"] = case_sync_event_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_sync_event["remaining_gate"])
+    case_rx_frame_path = G2 / "build/c-firmware/20261017/main-case-rx-frame/receipt.json"
+    case_rx_frame, case_rx_frame_ref = receipt(case_rx_frame_path)
+    if (case_rx_frame["status"] != "PASS_MAIN_CASE_RX_FRAME_C_INTEGRATION" or
+            case_rx_frame["unresolved_before"] != 99 or
+            case_rx_frame["unresolved_after"] != 98 or
+            case_rx_frame["removed_imports"] != ["audio_uart_case_rx_frame_200f5a90"] or
+            case_rx_frame["new_imports"] or case_rx_frame["observed_extent"] != 10 or
+            case_rx_frame["prior_candidate"]["sha256"] != case_sync_event_candidate["sha256"] or
+            case_rx_frame["sync_event_receipt"]["sha256"] != case_sync_event_ref["sha256"] or
+            case_rx_frame["source_complete"] or case_rx_frame["flashable"] or
+            case_rx_frame["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case RX frame changed")
+    file_checked(case_rx_frame["source"]["path"], case_rx_frame["source"]["sha256"])
+    case_rx_frame_candidate = file_checked(case_rx_frame["candidate_object"]["path"],
+                                           case_rx_frame["candidate_object"]["sha256"])
+    case_rx_frame_unresolved = undefined(ROOT / case_rx_frame_candidate["path"])
+    if case_rx_frame_unresolved != sorted(set(case_sync_event_unresolved) -
+                                          set(case_rx_frame["removed_imports"])):
+        raise RuntimeError("Apollo Main Case RX frame frontier changed")
+    images["apollo_main"]["candidate"] = case_rx_frame_candidate
+    images["apollo_main"]["case_rx_frame"] = case_rx_frame_ref
+    images["apollo_main"]["unresolved_count"] = 98
+    images["apollo_main"]["unresolved_symbols"] = case_rx_frame_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_rx_frame["remaining_gate"])
+    case_rx_info_path = G2 / "build/c-firmware/20261017/main-case-rx-info/receipt.json"
+    case_rx_info, case_rx_info_ref = receipt(case_rx_info_path)
+    if (case_rx_info["status"] != "PASS_MAIN_CASE_RX_INFO_C_INTEGRATION" or
+            case_rx_info["unresolved_before"] != 98 or
+            case_rx_info["unresolved_after"] != 97 or
+            case_rx_info["removed_imports"] != ["audio_uart_case_rx_info_510bfe"] or
+            case_rx_info["new_imports"] or
+            case_rx_info["prior_candidate"]["sha256"] != case_rx_frame_candidate["sha256"] or
+            case_rx_info["source_complete"] or case_rx_info["flashable"] or
+            case_rx_info["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case RX info changed")
+    for entry in (case_rx_info["source"], case_rx_info["oracle"]):
+        file_checked(entry["path"], entry["sha256"])
+    case_rx_info_candidate = file_checked(case_rx_info["candidate_object"]["path"],
+                                          case_rx_info["candidate_object"]["sha256"])
+    case_rx_info_unresolved = undefined(ROOT / case_rx_info_candidate["path"])
+    if case_rx_info_unresolved != sorted(set(case_rx_frame_unresolved) -
+                                         set(case_rx_info["removed_imports"])):
+        raise RuntimeError("Apollo Main Case RX info frontier changed")
+    images["apollo_main"]["candidate"] = case_rx_info_candidate
+    images["apollo_main"]["case_rx_info"] = case_rx_info_ref
+    images["apollo_main"]["unresolved_count"] = 97
+    images["apollo_main"]["unresolved_symbols"] = case_rx_info_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_rx_info["remaining_gate"])
+    case_send_response_path = G2 / "build/c-firmware/20261017/main-case-send-response/receipt.json"
+    case_send_response, case_send_response_ref = receipt(case_send_response_path)
+    if (case_send_response["status"] != "PASS_MAIN_CASE_SEND_RESPONSE_C_INTEGRATION" or
+            case_send_response["unresolved_before"] != 97 or
+            case_send_response["unresolved_after"] != 96 or
+            case_send_response["removed_imports"] != ["audio_uart_case_send_response_510c70"] or
+            case_send_response["new_imports"] or
+            case_send_response["owned_symbols"] != ["audio_uart_case_send_response_510c70",
+                                                    "audio_uart_case_local_soc_4ac726",
+                                                    "audio_uart_case_local_charge_4ac73c",
+                                                    "audio_uart_case_local_lid_4ac752"] or
+            case_send_response["prior_candidate"]["sha256"] != case_rx_info_candidate["sha256"] or
+            case_send_response["source_complete"] or case_send_response["flashable"] or
+            case_send_response["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case response encoder changed")
+    for entry in (case_send_response["source"], case_send_response["oracle"]):
+        file_checked(entry["path"], entry["sha256"])
+    case_send_response_candidate = file_checked(case_send_response["candidate_object"]["path"],
+                                                case_send_response["candidate_object"]["sha256"])
+    case_send_response_unresolved = undefined(ROOT / case_send_response_candidate["path"])
+    if case_send_response_unresolved != sorted(set(case_rx_info_unresolved) -
+                                               set(case_send_response["removed_imports"])):
+        raise RuntimeError("Apollo Main Case response encoder frontier changed")
+    images["apollo_main"]["candidate"] = case_send_response_candidate
+    images["apollo_main"]["case_send_response"] = case_send_response_ref
+    images["apollo_main"]["unresolved_count"] = 96
+    images["apollo_main"]["unresolved_symbols"] = case_send_response_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_send_response["remaining_gate"])
+    case_nonce_state_path = G2 / "build/c-firmware/20261017/main-case-nonce-state/receipt.json"
+    case_nonce_state, case_nonce_state_ref = receipt(case_nonce_state_path)
+    if (case_nonce_state["status"] != "PASS_MAIN_CASE_NONCE_STATE_C_INTEGRATION" or
+            case_nonce_state["stock_initial_bytes"] != "ffff0202" or
+            case_nonce_state["stock_ram_address"] != "0x200036d8" or
+            case_nonce_state["unresolved_before"] != 96 or
+            case_nonce_state["unresolved_after"] != 95 or
+            case_nonce_state["removed_imports"] != ["audio_uart_case_nonce_state_200036d8"] or
+            case_nonce_state["new_imports"] or
+            case_nonce_state["prior_candidate"]["sha256"] != case_send_response_candidate["sha256"] or
+            case_nonce_state["source_complete"] or case_nonce_state["flashable"] or
+            case_nonce_state["hardware_proof"]):
+        raise RuntimeError("Apollo Main Case nonce state changed")
+    for entry in (case_nonce_state["source"], case_nonce_state["low_ram_decoder"]):
+        file_checked(entry["path"], entry["sha256"])
+    case_nonce_state_candidate = file_checked(case_nonce_state["candidate_object"]["path"],
+                                              case_nonce_state["candidate_object"]["sha256"])
+    case_nonce_state_unresolved = undefined(ROOT / case_nonce_state_candidate["path"])
+    if case_nonce_state_unresolved != sorted(set(case_send_response_unresolved) -
+                                             set(case_nonce_state["removed_imports"])):
+        raise RuntimeError("Apollo Main Case nonce state frontier changed")
+    images["apollo_main"]["candidate"] = case_nonce_state_candidate
+    images["apollo_main"]["case_nonce_state"] = case_nonce_state_ref
+    images["apollo_main"]["unresolved_count"] = 95
+    images["apollo_main"]["unresolved_symbols"] = case_nonce_state_unresolved
+    images["apollo_main"]["remaining_gate"].append(case_nonce_state["remaining_gate"])
+    atts_table_path = G2 / "build/c-firmware/20261017/main-atts-proc-table/receipt.json"
+    atts_table, atts_table_ref = receipt(atts_table_path)
+    if (atts_table["status"] != "PASS_MAIN_ATTS_PROC_TABLE_C_INTEGRATION" or
+            atts_table["unresolved_before"] != 95 or
+            atts_table["unresolved_after"] != 107 or
+            atts_table["removed_imports"] != ["audio_ble_atts_proc_table_2000045c"] or
+            len(atts_table["new_imports"]) != 13 or
+            atts_table["prior_candidate"]["sha256"] != case_nonce_state_candidate["sha256"] or
+            atts_table["source_complete"] or atts_table["flashable"] or
+            atts_table["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATTS table changed")
+    for entry in (atts_table["source"], atts_table["vendor_source"], atts_table["oracle"]):
+        file_checked(entry["path"], entry["sha256"])
+    atts_table_candidate = file_checked(atts_table["candidate_object"]["path"],
+                                        atts_table["candidate_object"]["sha256"])
+    atts_table_unresolved = undefined(ROOT / atts_table_candidate["path"])
+    if atts_table_unresolved != sorted((set(case_nonce_state_unresolved) -
+                                       set(atts_table["removed_imports"])) |
+                                      set(atts_table["new_imports"])):
+        raise RuntimeError("Apollo Main ATTS table frontier changed")
+    images["apollo_main"]["candidate"] = atts_table_candidate
+    images["apollo_main"]["atts_proc_table"] = atts_table_ref
+    images["apollo_main"]["unresolved_count"] = 107
+    images["apollo_main"]["unresolved_symbols"] = atts_table_unresolved
+    images["apollo_main"]["remaining_gate"].append(atts_table["remaining_gate"])
+    atts_handlers_path = G2 / "build/c-firmware/20261017/main-atts-handlers/receipt.json"
+    atts_handlers, atts_handlers_ref = receipt(atts_handlers_path)
+    if (atts_handlers["status"] != "PASS_MAIN_ATTS_HANDLERS_C_INTEGRATION" or
+            atts_handlers["cordio_commit"] != "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6" or
+            atts_handlers["unresolved_before"] != 107 or
+            atts_handlers["unresolved_after"] != 115 or
+            set(atts_handlers["removed_imports"]) != set(atts_table["new_imports"]) or
+            atts_handlers["prior_candidate"]["sha256"] != atts_table_candidate["sha256"] or
+            atts_handlers["source_complete"] or atts_handlers["flashable"] or
+            atts_handlers["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATTS handlers changed")
+    for entry in (*atts_handlers["sources"], atts_handlers["compat_header"]):
+        file_checked(entry["path"], entry["sha256"])
+    atts_handlers_candidate = file_checked(atts_handlers["candidate_object"]["path"],
+                                           atts_handlers["candidate_object"]["sha256"])
+    atts_handlers_unresolved = undefined(ROOT / atts_handlers_candidate["path"])
+    if atts_handlers_unresolved != sorted((set(atts_table_unresolved) -
+                                          set(atts_handlers["removed_imports"])) |
+                                         set(atts_handlers["new_imports"])):
+        raise RuntimeError("Apollo Main ATTS handler frontier changed")
+    images["apollo_main"]["candidate"] = atts_handlers_candidate
+    images["apollo_main"]["atts_handlers"] = atts_handlers_ref
+    images["apollo_main"]["unresolved_count"] = 115
+    images["apollo_main"]["unresolved_symbols"] = atts_handlers_unresolved
+    images["apollo_main"]["remaining_gate"].append(atts_handlers["remaining_gate"])
+    att_uuid_path = G2 / "build/c-firmware/20261017/main-att-uuid/receipt.json"
+    att_uuid, att_uuid_ref = receipt(att_uuid_path)
+    if (att_uuid["status"] != "PASS_MAIN_ATT_UUID_C_INTEGRATION" or
+            att_uuid["cordio_commit"] != "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6" or
+            att_uuid["unresolved_before"] != 115 or
+            att_uuid["unresolved_after"] != 113 or
+            att_uuid["removed_imports"] != ["attGattDbhChUuid", "attScChUuid"] or
+            att_uuid["new_imports"] or
+            att_uuid["prior_candidate"]["sha256"] != atts_handlers_candidate["sha256"] or
+            att_uuid["source_complete"] or att_uuid["flashable"] or
+            att_uuid["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT UUID constants changed")
+    file_checked(att_uuid["source"]["path"], att_uuid["source"]["sha256"])
+    att_uuid_candidate = file_checked(att_uuid["candidate_object"]["path"],
+                                      att_uuid["candidate_object"]["sha256"])
+    att_uuid_unresolved = undefined(ROOT / att_uuid_candidate["path"])
+    if att_uuid_unresolved != sorted(set(atts_handlers_unresolved) -
+                                    set(att_uuid["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT UUID frontier changed")
+    images["apollo_main"]["candidate"] = att_uuid_candidate
+    images["apollo_main"]["att_uuid"] = att_uuid_ref
+    images["apollo_main"]["unresolved_count"] = 113
+    images["apollo_main"]["unresolved_symbols"] = att_uuid_unresolved
+    images["apollo_main"]["remaining_gate"].append(att_uuid["remaining_gate"])
+    atts_csf_path = G2 / "build/c-firmware/20261017/main-atts-csf/receipt.json"
+    atts_csf, atts_csf_ref = receipt(atts_csf_path)
+    if (atts_csf["status"] != "PASS_MAIN_ATTS_CSF_C_INTEGRATION" or
+            atts_csf["vendor_difference"] != "Only the documented parameter name differs in a comment." or
+            atts_csf["unresolved_before"] != 113 or
+            atts_csf["unresolved_after"] != 109 or
+            len(atts_csf["removed_imports"]) != 4 or
+            atts_csf["new_imports"] or
+            atts_csf["prior_candidate"]["sha256"] != att_uuid_candidate["sha256"] or
+            atts_csf["source_complete"] or atts_csf["flashable"] or
+            atts_csf["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT CSF changed")
+    if atts_csf["vendor_source_sha256"] != "44be0c2b8ae1bac41a9fa6c5ba43041caed72573cd62e8dde7602edac81608d5":
+        raise RuntimeError("Apollo Main ATT CSF vendor baseline changed")
+    for entry in (atts_csf["source"], atts_csf["compat_header"]):
+        file_checked(entry["path"], entry["sha256"])
+    atts_csf_candidate = file_checked(atts_csf["candidate_object"]["path"],
+                                      atts_csf["candidate_object"]["sha256"])
+    atts_csf_unresolved = undefined(ROOT / atts_csf_candidate["path"])
+    if atts_csf_unresolved != sorted(set(att_uuid_unresolved) -
+                                    set(atts_csf["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT CSF frontier changed")
+    images["apollo_main"]["candidate"] = atts_csf_candidate
+    images["apollo_main"]["atts_csf"] = atts_csf_ref
+    images["apollo_main"]["unresolved_count"] = 109
+    images["apollo_main"]["unresolved_symbols"] = atts_csf_unresolved
+    images["apollo_main"]["remaining_gate"].append(atts_csf["remaining_gate"])
+    att_core_path = G2 / "build/c-firmware/20261017/main-att-core/receipt.json"
+    att_core, att_core_ref = receipt(att_core_path)
+    if (att_core["status"] != "PASS_MAIN_ATT_CORE_C_INTEGRATION" or
+            att_core["vendor_normalized_sha256"] != "424db1e59bef38960d8d84fd1139d31ac338c7ef8334b4cbcbed97edef17fe33" or
+            att_core["unresolved_before"] != 109 or
+            att_core["unresolved_after"] != 101 or
+            len(att_core["removed_imports"]) != 8 or
+            att_core["new_imports"] or
+            att_core["prior_candidate"]["sha256"] != atts_csf_candidate["sha256"] or
+            att_core["source_complete"] or att_core["flashable"] or
+            att_core["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT core changed")
+    file_checked(att_core["source"]["path"], att_core["source"]["sha256"])
+    att_core_candidate = file_checked(att_core["candidate_object"]["path"],
+                                      att_core["candidate_object"]["sha256"])
+    att_core_unresolved = undefined(ROOT / att_core_candidate["path"])
+    if att_core_unresolved != sorted(set(atts_csf_unresolved) -
+                                    set(att_core["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT core frontier changed")
+    images["apollo_main"]["candidate"] = att_core_candidate
+    images["apollo_main"]["att_core"] = att_core_ref
+    images["apollo_main"]["unresolved_count"] = 101
+    images["apollo_main"]["unresolved_symbols"] = att_core_unresolved
+    images["apollo_main"]["remaining_gate"].append(att_core["remaining_gate"])
+    atts_core_path = G2 / "build/c-firmware/20261017/main-atts-core/receipt.json"
+    atts_core, atts_core_ref = receipt(atts_core_path)
+    if (atts_core["status"] != "PASS_MAIN_ATTS_CORE_C_INTEGRATION" or
+            atts_core["stock_table_symbol_alias"] != "audio_ble_atts_proc_table_2000045c -> attsProcFcnTbl" or
+            atts_core["unresolved_before"] != 101 or
+            atts_core["unresolved_after"] != 100 or
+            atts_core["removed_imports"] != ["attsCb", "attsCcbByConnId", "attsClearPrepWrites", "attsDiscBusy"] or
+            atts_core["new_imports"] != ["DmConnCheckIdle", "WsfQueueInsert", "WsfQueueRemove"] or
+            atts_core["prior_candidate"]["sha256"] != att_core_candidate["sha256"] or
+            atts_core["source_complete"] or atts_core["flashable"] or
+            atts_core["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATTS core changed")
+    file_checked(atts_core["source"]["path"], atts_core["source"]["sha256"])
+    atts_core_candidate = file_checked(atts_core["candidate_object"]["path"],
+                                       atts_core["candidate_object"]["sha256"])
+    atts_core_unresolved = undefined(ROOT / atts_core_candidate["path"])
+    if atts_core_unresolved != sorted((set(att_core_unresolved) -
+                                      set(atts_core["removed_imports"])) |
+                                     set(atts_core["new_imports"])):
+        raise RuntimeError("Apollo Main ATTS core frontier changed")
+    images["apollo_main"]["candidate"] = atts_core_candidate
+    images["apollo_main"]["atts_core"] = atts_core_ref
+    images["apollo_main"]["unresolved_count"] = 100
+    images["apollo_main"]["unresolved_symbols"] = atts_core_unresolved
+    images["apollo_main"]["remaining_gate"].append(atts_core["remaining_gate"])
+    wsf_queue_path = G2 / "build/c-firmware/20261017/main-wsf-queue/receipt.json"
+    wsf_queue, wsf_queue_ref = receipt(wsf_queue_path)
+    if (wsf_queue["status"] != "PASS_MAIN_WSF_QUEUE_C_INTEGRATION" or
+            wsf_queue["unresolved_before"] != 100 or
+            wsf_queue["unresolved_after"] != 97 or
+            wsf_queue["removed_imports"] != ["WsfQueueDeq", "WsfQueueInsert", "WsfQueueRemove"] or
+            wsf_queue["new_imports"] or
+            wsf_queue["prior_candidate"]["sha256"] != atts_core_candidate["sha256"] or
+            wsf_queue["source_complete"] or wsf_queue["flashable"] or
+            wsf_queue["hardware_proof"]):
+        raise RuntimeError("Apollo Main WSF queue changed")
+    file_checked(wsf_queue["source"]["path"], wsf_queue["source"]["sha256"])
+    wsf_queue_candidate = file_checked(wsf_queue["candidate_object"]["path"],
+                                       wsf_queue["candidate_object"]["sha256"])
+    wsf_queue_unresolved = undefined(ROOT / wsf_queue_candidate["path"])
+    if wsf_queue_unresolved != sorted(set(atts_core_unresolved) -
+                                     set(wsf_queue["removed_imports"])):
+        raise RuntimeError("Apollo Main WSF queue frontier changed")
+    images["apollo_main"]["candidate"] = wsf_queue_candidate
+    images["apollo_main"]["wsf_queue"] = wsf_queue_ref
+    images["apollo_main"]["unresolved_count"] = 97
+    images["apollo_main"]["unresolved_symbols"] = wsf_queue_unresolved
+    images["apollo_main"]["remaining_gate"].append(wsf_queue["remaining_gate"])
+    att_cfg_path = G2 / "build/c-firmware/20261017/main-att-cfg/receipt.json"
+    att_cfg, att_cfg_ref = receipt(att_cfg_path)
+    if (att_cfg["status"] != "PASS_MAIN_ATT_CFG_C_INTEGRATION" or
+            att_cfg["unresolved_before"] != 97 or
+            att_cfg["unresolved_after"] != 96 or
+            att_cfg["removed_imports"] != ["pAttCfg"] or
+            att_cfg["new_imports"] or
+            att_cfg["prior_candidate"]["sha256"] != wsf_queue_candidate["sha256"] or
+            att_cfg["source_complete"] or att_cfg["flashable"] or
+            att_cfg["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT configuration changed")
+    for entry in (att_cfg["source"], att_cfg["oracle"]):
+        file_checked(entry["path"], entry["sha256"])
+    att_cfg_candidate = file_checked(att_cfg["candidate_object"]["path"],
+                                     att_cfg["candidate_object"]["sha256"])
+    att_cfg_unresolved = undefined(ROOT / att_cfg_candidate["path"])
+    if att_cfg_unresolved != sorted(set(wsf_queue_unresolved) -
+                                   set(att_cfg["removed_imports"])):
+        raise RuntimeError("Apollo Main ATT configuration frontier changed")
+    images["apollo_main"]["candidate"] = att_cfg_candidate
+    images["apollo_main"]["att_cfg"] = att_cfg_ref
+    images["apollo_main"]["unresolved_count"] = 96
+    images["apollo_main"]["unresolved_symbols"] = att_cfg_unresolved
+    images["apollo_main"]["remaining_gate"].append(att_cfg["remaining_gate"])
+    cordio_aliases_path = G2 / "build/c-firmware/20261017/main-ble-cordio-api-aliases/receipt.json"
+    cordio_aliases, cordio_aliases_ref = receipt(cordio_aliases_path)
+    if (cordio_aliases["status"] != "PASS_MAIN_BLE_CORDIO_API_ALIASES_C_INTEGRATION" or
+            cordio_aliases["unresolved_before"] != 96 or
+            cordio_aliases["unresolved_after"] != 94 or
+            cordio_aliases["removed_imports"] != ["DmConnCheckIdle", "HciGetMaxRxAclLen"] or
+            cordio_aliases["new_imports"] or
+            cordio_aliases["prior_candidate"]["sha256"] != att_cfg_candidate["sha256"] or
+            cordio_aliases["source_complete"] or cordio_aliases["flashable"] or
+            cordio_aliases["hardware_proof"]):
+        raise RuntimeError("Apollo Main Cordio API aliases changed")
+    for entry in (cordio_aliases["source"], cordio_aliases["dm_oracle"],
+                  cordio_aliases["hci_oracle"]):
+        file_checked(entry["path"], entry["sha256"])
+    cordio_aliases_candidate = file_checked(cordio_aliases["candidate_object"]["path"],
+                                            cordio_aliases["candidate_object"]["sha256"])
+    cordio_aliases_unresolved = undefined(ROOT / cordio_aliases_candidate["path"])
+    if cordio_aliases_unresolved != sorted(set(att_cfg_unresolved) -
+                                          set(cordio_aliases["removed_imports"])):
+        raise RuntimeError("Apollo Main Cordio API alias frontier changed")
+    images["apollo_main"]["candidate"] = cordio_aliases_candidate
+    images["apollo_main"]["ble_cordio_api_aliases"] = cordio_aliases_ref
+    images["apollo_main"]["unresolved_count"] = 94
+    images["apollo_main"]["unresolved_symbols"] = cordio_aliases_unresolved
+    images["apollo_main"]["remaining_gate"].append(cordio_aliases["remaining_gate"])
+    master_registration_path = G2 / "build/c-firmware/20261017/main-ble-master-registration-table/receipt.json"
+    master_registration, master_registration_ref = receipt(master_registration_path)
+    if (master_registration["status"] != "PASS_MAIN_BLE_MASTER_REGISTRATION_TABLE_C_INTEGRATION" or
+            master_registration["stock_address"] != "0x78c9e4" or
+            master_registration["stock_bytes"] != "a000800010270001" or
+            master_registration["unresolved_before"] != 94 or
+            master_registration["unresolved_after"] != 93 or
+            master_registration["removed_imports"] != ["audio_ble_master_registration_table"] or
+            master_registration["new_imports"] or
+            master_registration["prior_candidate"]["sha256"] != cordio_aliases_candidate["sha256"] or
+            master_registration["source_complete"] or master_registration["flashable"] or
+            master_registration["hardware_proof"]):
+        raise RuntimeError("Apollo Main BLE master registration table changed")
+    file_checked(master_registration["source"]["path"], master_registration["source"]["sha256"])
+    file_checked(master_registration["typed_config_oracle"]["path"],
+                 master_registration["typed_config_oracle"]["sha256"])
+    master_registration_candidate = file_checked(master_registration["candidate_object"]["path"],
+                                                 master_registration["candidate_object"]["sha256"])
+    master_registration_unresolved = undefined(ROOT / master_registration_candidate["path"])
+    if master_registration_unresolved != sorted(set(cordio_aliases_unresolved) -
+                                                set(master_registration["removed_imports"])):
+        raise RuntimeError("Apollo Main BLE master registration frontier changed")
+    images["apollo_main"]["candidate"] = master_registration_candidate
+    images["apollo_main"]["ble_master_registration_table"] = master_registration_ref
+    images["apollo_main"]["unresolved_count"] = 93
+    images["apollo_main"]["unresolved_symbols"] = master_registration_unresolved
+    images["apollo_main"]["remaining_gate"].append(master_registration["remaining_gate"])
+    vendor_rows_path = G2 / "build/c-firmware/20261017/main-ble-vendor-stack-rows/receipt.json"
+    vendor_rows, vendor_rows_ref = receipt(vendor_rows_path)
+    if (vendor_rows["status"] != "PASS_MAIN_BLE_VENDOR_STACK_ROWS_C_INTEGRATION" or
+            vendor_rows["stock_base"] != "0x2003b558" or
+            vendor_rows["exclusive_end"] != "0x2003fa98" or
+            vendor_rows["extent_bytes"] != 0x4540 or
+            vendor_rows["unresolved_before"] != 93 or
+            vendor_rows["unresolved_after"] != 92 or
+            vendor_rows["removed_imports"] != ["audio_ble_vendor_stack_rows_2003b558"] or
+            vendor_rows["new_imports"] or
+            vendor_rows["prior_candidate"]["sha256"] != master_registration_candidate["sha256"] or
+            vendor_rows["source_complete"] or vendor_rows["flashable"] or
+            vendor_rows["hardware_proof"]):
+        raise RuntimeError("Apollo Main BLE vendor stack rows changed")
+    for entry in (vendor_rows["source"], vendor_rows["boundary_source"]):
+        file_checked(entry["path"], entry["sha256"])
+    vendor_rows_candidate = file_checked(vendor_rows["candidate_object"]["path"],
+                                         vendor_rows["candidate_object"]["sha256"])
+    vendor_rows_unresolved = undefined(ROOT / vendor_rows_candidate["path"])
+    if vendor_rows_unresolved != sorted(set(master_registration_unresolved) -
+                                       set(vendor_rows["removed_imports"])):
+        raise RuntimeError("Apollo Main BLE vendor stack row frontier changed")
+    images["apollo_main"]["candidate"] = vendor_rows_candidate
+    images["apollo_main"]["ble_vendor_stack_rows"] = vendor_rows_ref
+    images["apollo_main"]["unresolved_count"] = 92
+    images["apollo_main"]["unresolved_symbols"] = vendor_rows_unresolved
+    images["apollo_main"]["remaining_gate"].append(vendor_rows["remaining_gate"])
+    registration_alias_path = G2 / "build/c-firmware/20261017/main-ble-registration-state-alias/receipt.json"
+    registration_alias, registration_alias_ref = receipt(registration_alias_path)
+    if (registration_alias["status"] != "PASS_MAIN_BLE_REGISTRATION_STATE_ALIAS_INTEGRATION" or
+            registration_alias["stock_ram_base"] != "0x2006e5f0" or
+            registration_alias["state_extent_bytes"] != 0x268 or
+            registration_alias["unresolved_before"] != 92 or
+            registration_alias["unresolved_after"] != 91 or
+            registration_alias["removed_imports"] != ["audio_ble_registration_records"] or
+            registration_alias["new_imports"] or
+            registration_alias["prior_candidate"]["sha256"] != vendor_rows_candidate["sha256"] or
+            registration_alias["source_complete"] or registration_alias["flashable"] or
+            registration_alias["hardware_proof"]):
+        raise RuntimeError("Apollo Main BLE registration state alias changed")
+    file_checked(registration_alias["state_source"]["path"],
+                 registration_alias["state_source"]["sha256"])
+    registration_alias_candidate = file_checked(registration_alias["candidate_object"]["path"],
+                                                registration_alias["candidate_object"]["sha256"])
+    registration_alias_unresolved = undefined(ROOT / registration_alias_candidate["path"])
+    if registration_alias_unresolved != sorted(set(vendor_rows_unresolved) -
+                                               set(registration_alias["removed_imports"])):
+        raise RuntimeError("Apollo Main BLE registration state frontier changed")
+    images["apollo_main"]["candidate"] = registration_alias_candidate
+    images["apollo_main"]["ble_registration_state_alias"] = registration_alias_ref
+    images["apollo_main"]["unresolved_count"] = 91
+    images["apollo_main"]["unresolved_symbols"] = registration_alias_unresolved
+    images["apollo_main"]["remaining_gate"].append(registration_alias["remaining_gate"])
+    pcm_rows_path = G2 / "build/c-firmware/20261017/main-pcm-registration-rows/receipt.json"
+    pcm_rows, pcm_rows_ref = receipt(pcm_rows_path)
+    if (pcm_rows["status"] != "PASS_MAIN_PCM_REGISTRATION_ROWS_C_INTEGRATION" or
+            pcm_rows["stock_base"] != "0x20073c20" or
+            pcm_rows["exclusive_end"] != "0x20073c38" or
+            pcm_rows["row_count"] != 2 or pcm_rows["row_stride"] != 12 or
+            pcm_rows["extent_bytes"] != 24 or
+            pcm_rows["unresolved_before"] != 91 or
+            pcm_rows["unresolved_after"] != 90 or
+            pcm_rows["removed_imports"] != ["g2_pcm_registration_rows"] or
+            pcm_rows["new_imports"] or
+            pcm_rows["prior_candidate"]["sha256"] != registration_alias_candidate["sha256"] or
+            pcm_rows["source_complete"] or pcm_rows["flashable"] or
+            pcm_rows["hardware_proof"]):
+        raise RuntimeError("Apollo Main PCM registration rows changed")
+    for entry in (pcm_rows["source"], pcm_rows["register_source"],
+                  pcm_rows["unregister_source"]):
+        file_checked(entry["path"], entry["sha256"])
+    pcm_rows_candidate = file_checked(pcm_rows["candidate_object"]["path"],
+                                      pcm_rows["candidate_object"]["sha256"])
+    pcm_rows_unresolved = undefined(ROOT / pcm_rows_candidate["path"])
+    if pcm_rows_unresolved != sorted(set(registration_alias_unresolved) -
+                                    set(pcm_rows["removed_imports"])):
+        raise RuntimeError("Apollo Main PCM registration frontier changed")
+    images["apollo_main"]["candidate"] = pcm_rows_candidate
+    images["apollo_main"]["pcm_registration_rows"] = pcm_rows_ref
+    images["apollo_main"]["unresolved_count"] = 90
+    images["apollo_main"]["unresolved_symbols"] = pcm_rows_unresolved
+    images["apollo_main"]["remaining_gate"].append(pcm_rows["remaining_gate"])
+    ota_dm_alias_path = G2 / "build/c-firmware/20261017/main-ble-ota-dm-state-alias/receipt.json"
+    ota_dm_alias, ota_dm_alias_ref = receipt(ota_dm_alias_path)
+    if (ota_dm_alias["status"] != "PASS_MAIN_BLE_OTA_DM_STATE_ALIAS_INTEGRATION" or
+            ota_dm_alias["stock_ram_base"] != "0x20073b78" or
+            ota_dm_alias["state_extent_bytes"] != 0x18 or
+            ota_dm_alias["unresolved_before"] != 90 or
+            ota_dm_alias["unresolved_after"] != 89 or
+            ota_dm_alias["removed_imports"] != ["audio_ble_ota_route_context"] or
+            ota_dm_alias["new_imports"] or
+            ota_dm_alias["prior_candidate"]["sha256"] != pcm_rows_candidate["sha256"] or
+            ota_dm_alias["source_complete"] or ota_dm_alias["flashable"] or
+            ota_dm_alias["hardware_proof"]):
+        raise RuntimeError("Apollo Main BLE OTA DM state alias changed")
+    for entry in (ota_dm_alias["state_source"], ota_dm_alias["route_source"]):
+        file_checked(entry["path"], entry["sha256"])
+    ota_dm_alias_candidate = file_checked(ota_dm_alias["candidate_object"]["path"],
+                                          ota_dm_alias["candidate_object"]["sha256"])
+    ota_dm_alias_unresolved = undefined(ROOT / ota_dm_alias_candidate["path"])
+    if ota_dm_alias_unresolved != sorted(set(pcm_rows_unresolved) -
+                                        set(ota_dm_alias["removed_imports"])):
+        raise RuntimeError("Apollo Main BLE OTA DM state frontier changed")
+    images["apollo_main"]["candidate"] = ota_dm_alias_candidate
+    images["apollo_main"]["ble_ota_dm_state_alias"] = ota_dm_alias_ref
+    images["apollo_main"]["unresolved_count"] = 89
+    images["apollo_main"]["unresolved_symbols"] = ota_dm_alias_unresolved
+    images["apollo_main"]["remaining_gate"].append(ota_dm_alias["remaining_gate"])
+    slave_profile_path = G2 / "build/c-firmware/20261017/main-ble-slave-profile-table/receipt.json"
+    slave_profile, slave_profile_ref = receipt(slave_profile_path)
+    if (slave_profile["status"] != "PASS_MAIN_BLE_SLAVE_PROFILE_TABLE_C_INTEGRATION" or
+            slave_profile["stock_address"] != "0x78f6d2" or
+            slave_profile["stock_byte"] != "01" or
+            slave_profile["type"] != "appSlaveCfg_t" or
+            slave_profile["extent_bytes"] != 1 or
+            slave_profile["unresolved_before"] != 89 or
+            slave_profile["unresolved_after"] != 88 or
+            slave_profile["removed_imports"] != ["audio_ble_slave_profile_table"] or
+            slave_profile["new_imports"] or
+            slave_profile["prior_candidate"]["sha256"] != ota_dm_alias_candidate["sha256"] or
+            slave_profile["source_complete"] or slave_profile["flashable"] or
+            slave_profile["hardware_proof"]):
+        raise RuntimeError("Apollo Main BLE slave profile config changed")
+    for entry in (slave_profile["source"], slave_profile["cordio_header"],
+                  slave_profile["advertising_source"]):
+        file_checked(entry["path"], entry["sha256"])
+    slave_profile_candidate = file_checked(slave_profile["candidate_object"]["path"],
+                                           slave_profile["candidate_object"]["sha256"])
+    slave_profile_unresolved = undefined(ROOT / slave_profile_candidate["path"])
+    if slave_profile_unresolved != sorted(set(ota_dm_alias_unresolved) -
+                                         set(slave_profile["removed_imports"])):
+        raise RuntimeError("Apollo Main BLE slave profile frontier changed")
+    images["apollo_main"]["candidate"] = slave_profile_candidate
+    images["apollo_main"]["ble_slave_profile_table"] = slave_profile_ref
+    images["apollo_main"]["unresolved_count"] = 88
+    images["apollo_main"]["unresolved_symbols"] = slave_profile_unresolved
+    images["apollo_main"]["remaining_gate"].append(slave_profile["remaining_gate"])
+    slave_connection_path = G2 / "build/c-firmware/20261017/main-ble-slave-connection-alias/receipt.json"
+    slave_connection, slave_connection_ref = receipt(slave_connection_path)
+    if (slave_connection["status"] != "PASS_MAIN_BLE_SLAVE_CONNECTION_ALIAS_INTEGRATION" or
+            slave_connection["stock_pointer_cell"] != "0x20074330" or
+            slave_connection["unresolved_before"] != 88 or
+            slave_connection["unresolved_after"] != 87 or
+            slave_connection["removed_imports"] != ["audio_ble_slave_connection_info"] or
+            slave_connection["new_imports"] or
+            slave_connection["prior_candidate"]["sha256"] != slave_profile_candidate["sha256"] or
+            slave_connection["source_complete"] or slave_connection["flashable"] or
+            slave_connection["hardware_proof"]):
+        raise RuntimeError("Apollo Main BLE slave connection alias changed")
+    for entry in (slave_connection["state_source"], slave_connection["producer_source"],
+                  slave_connection["consumer_source"]):
+        file_checked(entry["path"], entry["sha256"])
+    slave_connection_candidate = file_checked(slave_connection["candidate_object"]["path"],
+                                              slave_connection["candidate_object"]["sha256"])
+    slave_connection_unresolved = undefined(ROOT / slave_connection_candidate["path"])
+    if slave_connection_unresolved != sorted(set(slave_profile_unresolved) -
+                                            set(slave_connection["removed_imports"])):
+        raise RuntimeError("Apollo Main BLE slave connection frontier changed")
+    images["apollo_main"]["candidate"] = slave_connection_candidate
+    images["apollo_main"]["ble_slave_connection_alias"] = slave_connection_ref
+    images["apollo_main"]["unresolved_count"] = 87
+    images["apollo_main"]["unresolved_symbols"] = slave_connection_unresolved
+    images["apollo_main"]["remaining_gate"].append(slave_connection["remaining_gate"])
+    clock_entry_path = G2 / "build/c-firmware/20261017/main-clock-mux-entry/receipt.json"
+    clock_entry, clock_entry_ref = receipt(clock_entry_path)
+    if (clock_entry["status"] != "PASS_MAIN_CLOCK_MUX_ENTRY_C_INTEGRATION" or
+            clock_entry["unresolved_before"] != 87 or
+            clock_entry["unresolved_after"] != 86 or
+            clock_entry["removed_imports"] != ["stock_clock_mux_reset"] or
+            clock_entry["new_imports"] or
+            clock_entry["prior_candidate"]["sha256"] != slave_connection_candidate["sha256"] or
+            clock_entry["source_complete"] or clock_entry["flashable"] or
+            clock_entry["hardware_proof"]):
+        raise RuntimeError("Apollo Main clock mux entry integration changed")
+    for entry in (clock_entry["adapter_source"], clock_entry["helper_source"],
+                  clock_entry["adapter_object"], clock_entry["entry_oracle"]):
+        file_checked(entry["path"], entry["sha256"])
+    clock_entry_candidate = file_checked(clock_entry["candidate_object"]["path"],
+                                         clock_entry["candidate_object"]["sha256"])
+    clock_entry_unresolved = undefined(ROOT / clock_entry_candidate["path"])
+    if clock_entry_unresolved != sorted(set(slave_connection_unresolved) -
+                                      set(clock_entry["removed_imports"])):
+        raise RuntimeError("Apollo Main clock mux entry frontier changed")
+    images["apollo_main"]["candidate"] = clock_entry_candidate
+    images["apollo_main"]["clock_mux_entry_adapter"] = clock_entry_ref
+    images["apollo_main"]["unresolved_count"] = 86
+    images["apollo_main"]["unresolved_symbols"] = clock_entry_unresolved
+    images["apollo_main"]["remaining_gate"].append(clock_entry["remaining_gate"])
+    register_entry_path = G2 / "build/c-firmware/20261017/main-register-callbacks-entry/receipt.json"
+    register_entry, register_entry_ref = receipt(register_entry_path)
+    if (register_entry["status"] != "PASS_MAIN_REGISTER_CALLBACKS_ENTRY_C_INTEGRATION" or
+            register_entry["unresolved_before"] != 86 or
+            register_entry["unresolved_after"] != 85 or
+            register_entry["removed_imports"] != ["stock_register_callbacks"] or
+            register_entry["new_imports"] or
+            register_entry["prior_candidate"]["sha256"] != clock_entry_candidate["sha256"] or
+            register_entry["source_complete"] or register_entry["flashable"] or
+            register_entry["hardware_proof"]):
+        raise RuntimeError("Apollo Main callback registration entry integration changed")
+    for entry in (register_entry["adapter_source"], register_entry["body_source"],
+                  register_entry["adapter_object"], register_entry["entry_oracle"]):
+        file_checked(entry["path"], entry["sha256"])
+    register_entry_candidate = file_checked(register_entry["candidate_object"]["path"],
+                                            register_entry["candidate_object"]["sha256"])
+    register_entry_unresolved = undefined(ROOT / register_entry_candidate["path"])
+    if register_entry_unresolved != sorted(set(clock_entry_unresolved) -
+                                         set(register_entry["removed_imports"])):
+        raise RuntimeError("Apollo Main callback registration entry frontier changed")
+    images["apollo_main"]["candidate"] = register_entry_candidate
+    images["apollo_main"]["register_callbacks_entry_adapter"] = register_entry_ref
+    images["apollo_main"]["unresolved_count"] = 85
+    images["apollo_main"]["unresolved_symbols"] = register_entry_unresolved
+    images["apollo_main"]["remaining_gate"].append(register_entry["remaining_gate"])
+    settings_sync_path = G2 / "build/c-firmware/20261017/main-settings-sync-handler/receipt.json"
+    settings_sync, settings_sync_ref = receipt(settings_sync_path)
+    if (settings_sync["status"] != "PASS_MAIN_SETTINGS_SYNC_HANDLER_C_INTEGRATION" or
+            settings_sync["unresolved_before"] != 85 or
+            settings_sync["unresolved_after"] != 86 or
+            settings_sync["removed_imports"] != ["audio_setting_handle_command5_46bbb4"] or
+            settings_sync["new_imports"] != ["audio_settings_sync_version_only_send",
+                                              "audio_settings_update_left_version"] or
+            settings_sync["prior_candidate"]["sha256"] != register_entry_candidate["sha256"] or
+            settings_sync["source_complete"] or settings_sync["flashable"] or
+            settings_sync["hardware_proof"]):
+        raise RuntimeError("Apollo Main settings sync handler integration changed")
+    for entry in (settings_sync["handler_object"], settings_sync["source"],
+                  settings_sync["oracle"], settings_sync["native_decomp"]):
+        file_checked(entry["path"], entry["sha256"])
+    settings_sync_candidate = file_checked(settings_sync["candidate_object"]["path"],
+                                           settings_sync["candidate_object"]["sha256"])
+    settings_sync_unresolved = undefined(ROOT / settings_sync_candidate["path"])
+    if settings_sync_unresolved != sorted((set(register_entry_unresolved) -
+                                         set(settings_sync["removed_imports"])) |
+                                         set(settings_sync["new_imports"])):
+        raise RuntimeError("Apollo Main settings sync handler frontier changed")
+    images["apollo_main"]["candidate"] = settings_sync_candidate
+    images["apollo_main"]["settings_sync_handler"] = settings_sync_ref
+    images["apollo_main"]["unresolved_count"] = 86
+    images["apollo_main"]["unresolved_symbols"] = settings_sync_unresolved
+    images["apollo_main"]["remaining_gate"].append(settings_sync["remaining_gate"])
+    version_children_path = G2 / "build/c-firmware/20261017/main-settings-version-children/receipt.json"
+    version_children, version_children_ref = receipt(version_children_path)
+    if (version_children["status"] != "PASS_MAIN_SETTINGS_VERSION_CHILDREN_C_INTEGRATION" or
+            version_children["unresolved_before"] != 86 or
+            version_children["unresolved_after"] != 84 or
+            version_children["removed_imports"] != ["audio_settings_sync_version_only_send",
+                                                    "audio_settings_update_left_version"] or
+            version_children["new_imports"] or
+            version_children["prior_candidate"]["sha256"] != settings_sync_candidate["sha256"] or
+            version_children["source_complete"] or version_children["flashable"] or
+            version_children["hardware_proof"]):
+        raise RuntimeError("Apollo Main settings version child integration changed")
+    for entry in (version_children["children_object"], version_children["source"],
+                  version_children["version_source"], version_children["oracle"],
+                  version_children["native_decomp_update"],
+                  version_children["native_decomp_send"]):
+        file_checked(entry["path"], entry["sha256"])
+    version_children_candidate = file_checked(version_children["candidate_object"]["path"],
+                                              version_children["candidate_object"]["sha256"])
+    version_children_unresolved = undefined(ROOT / version_children_candidate["path"])
+    if version_children_unresolved != sorted(set(settings_sync_unresolved) -
+                                            set(version_children["removed_imports"])):
+        raise RuntimeError("Apollo Main settings version child frontier changed")
+    images["apollo_main"]["candidate"] = version_children_candidate
+    images["apollo_main"]["settings_version_children"] = version_children_ref
+    images["apollo_main"]["unresolved_count"] = 84
+    images["apollo_main"]["unresolved_symbols"] = version_children_unresolved
+    images["apollo_main"]["remaining_gate"].append(version_children["remaining_gate"])
+    sync_composed_path = G2 / "build/c-firmware/20261017/main-settings-sync-composed/receipt.json"
+    sync_composed, sync_composed_ref = receipt(sync_composed_path)
+    if (sync_composed["status"] != "PASS_MAIN_SETTINGS_SYNC_COMPOSED_C_EVIDENCE" or
+            sync_composed["composed_cases"] != 2400 or
+            sync_composed["unresolved_imports"] != 84 or
+            sync_composed["current_candidate"]["sha256"] != version_children_candidate["sha256"] or
+            sync_composed["prior_integration_receipt"]["sha256"] != version_children_ref["sha256"] or
+            sync_composed["source_complete"] or sync_composed["flashable"] or
+            sync_composed["hardware_proof"]):
+        raise RuntimeError("Apollo Main composed settings sync evidence changed")
+    for entry in (sync_composed["oracle"], sync_composed["dispatcher_source"],
+                  sync_composed["version_children_source"],
+                  sync_composed["version_text_source"]):
+        file_checked(entry["path"], entry["sha256"])
+    images["apollo_main"]["settings_sync_composed"] = sync_composed_ref
+    images["apollo_main"]["remaining_gate"].append(sync_composed["remaining_gate"])
+    attc_command_path = G2 / "build/c-firmware/20261017/main-attc-write-command/receipt.json"
+    attc_command, attc_command_ref = receipt(attc_command_path)
+    if (attc_command["status"] != "PASS_MAIN_ATTC_WRITE_COMMAND_C_INTEGRATION" or
+            attc_command["unresolved_before"] != 84 or
+            attc_command["unresolved_after"] != 84 or
+            attc_command["removed_imports"] or attc_command["new_imports"] or
+            attc_command["prior_candidate"]["sha256"] != version_children_candidate["sha256"] or
+            attc_command["source_complete"] or attc_command["flashable"] or
+            attc_command["hardware_proof"]):
+        raise RuntimeError("Apollo Main ATT write-command integration changed")
+    for entry in (attc_command["command_object"], attc_command["source"],
+                  attc_command["oracle"], attc_command["native_decomp"]):
+        file_checked(entry["path"], entry["sha256"])
+    attc_command_candidate = file_checked(attc_command["candidate_object"]["path"],
+                                          attc_command["candidate_object"]["sha256"])
+    attc_command_unresolved = undefined(ROOT / attc_command_candidate["path"])
+    if attc_command_unresolved != version_children_unresolved:
+        raise RuntimeError("Apollo Main ATT write-command frontier changed")
+    images["apollo_main"]["candidate"] = attc_command_candidate
+    images["apollo_main"]["attc_write_command"] = attc_command_ref
+    images["apollo_main"]["unresolved_symbols"] = attc_command_unresolved
+    images["apollo_main"]["remaining_gate"].append(attc_command["remaining_gate"])
+    ring_proc_path = G2 / "build/c-firmware/20261017/main-ble-ring-proc-msg/receipt.json"
+    ring_proc, ring_proc_ref = receipt(ring_proc_path)
+    if (ring_proc["status"] != "PASS_MAIN_BLE_RING_PROC_MSG_C_INTEGRATION" or
+            ring_proc["unresolved_before"] != 84 or
+            ring_proc["unresolved_after"] != 83 or
+            ring_proc["removed_imports"] != ["audio_ble_master_message"] or
+            ring_proc["new_imports"] or
+            ring_proc["prior_candidate"]["sha256"] != attc_command_candidate["sha256"] or
+            ring_proc["source_complete"] or ring_proc["flashable"] or
+            ring_proc["hardware_proof"]):
+        raise RuntimeError("Apollo Main BLE ring message integration changed")
+    for entry in (ring_proc["ring_object"], ring_proc["source"], ring_proc["oracle"],
+                  *ring_proc["native_decomp"]):
+        file_checked(entry["path"], entry["sha256"])
+    ring_proc_candidate = file_checked(ring_proc["candidate_object"]["path"],
+                                       ring_proc["candidate_object"]["sha256"])
+    ring_proc_unresolved = undefined(ROOT / ring_proc_candidate["path"])
+    if ring_proc_unresolved != sorted(set(attc_command_unresolved) -
+                                     set(ring_proc["removed_imports"])):
+        raise RuntimeError("Apollo Main BLE ring message frontier changed")
+    images["apollo_main"]["candidate"] = ring_proc_candidate
+    images["apollo_main"]["ble_ring_message"] = ring_proc_ref
+    images["apollo_main"]["unresolved_count"] = 83
+    images["apollo_main"]["unresolved_symbols"] = ring_proc_unresolved
+    images["apollo_main"]["remaining_gate"].append(ring_proc["remaining_gate"])
+    profiles_path = G2 / "build/c-firmware/20261017/main-conn-param-profiles/receipt.json"
+    profiles, profiles_ref = receipt(profiles_path)
+    if (profiles["status"] != "PASS_MAIN_CONN_PARAM_PROFILE_RECORDS_C_INTEGRATION" or
+            profiles["unresolved_before"] != 83 or profiles["unresolved_after"] != 83 or
+            profiles["removed_imports"] or profiles["new_imports"] or
+            profiles["prior_candidate"]["sha256"] != ring_proc_candidate["sha256"] or
+            profiles["source_complete"] or profiles["flashable"] or
+            profiles["hardware_proof"]):
+        raise RuntimeError("Apollo Main connection parameter profiles changed")
+    for entry in (profiles["profile_object"], profiles["source"], profiles["existing_middle_source"]):
+        file_checked(entry["path"], entry["sha256"])
+    profiles_candidate = file_checked(profiles["candidate_object"]["path"],
+                                      profiles["candidate_object"]["sha256"])
+    profiles_unresolved = undefined(ROOT / profiles_candidate["path"])
+    if profiles_unresolved != ring_proc_unresolved:
+        raise RuntimeError("Apollo Main connection parameter profile frontier changed")
+    images["apollo_main"]["candidate"] = profiles_candidate
+    images["apollo_main"]["conn_param_profiles"] = profiles_ref
+    images["apollo_main"]["unresolved_symbols"] = profiles_unresolved
+    images["apollo_main"]["remaining_gate"].append(profiles["remaining_gate"])
+    provider_inventory_path = G2 / "analysis/c-source-completion-20261011/apollo/main-unresolved-provider-sources-20261016.json"
+    provider_inventory, provider_inventory_ref = receipt(provider_inventory_path)
+    if (provider_inventory["status"] != "PASS_MAIN_CURRENT_IMPORT_PROVIDER_SOURCE_INVENTORY" or
+            provider_inventory["candidate_sha256"] != profiles_candidate["sha256"] or
+            provider_inventory["unresolved_symbols"] != images["apollo_main"]["unresolved_symbols"] or
+            provider_inventory["exact_global_function_definitions"]):
+        raise RuntimeError("Apollo Main remaining source provider inventory changed")
+    images["apollo_main"]["remaining_provider_source_inventory"] = provider_inventory_ref
+    images["apollo_main"]["remaining_gate"].append(
+        "An exact-name scan of current g2/components C global function bodies found no prewritten provider for the 83 remaining imports. The ring client dispatcher and ATT write-command body are now compiled; other aliases, data objects and generated sources still require separate checks, as do whole-image gates.")
+    lv_names_path = G2 / "analysis/c-source-completion-20261011/apollo/main-lv-level-name-boundary-20261017.json"
+    lv_names, lv_names_ref = receipt(lv_names_path)
+    if (lv_names["status"] != "PASS_MAIN_LV_LEVEL_NAME_BOUNDARY_EVIDENCE" or
+            lv_names["stock_payload_sha256"] != "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701" or
+            lv_names["source_owner_bound"] or lv_names["source_complete"] or
+            lv_names["flashable"] or lv_names["hardware_proof"]):
+        raise RuntimeError("Apollo Main LVGL level-name boundary changed")
+    images["apollo_main"]["lv_level_name_boundary"] = lv_names_ref
+    images["apollo_main"]["remaining_gate"].append(lv_names["remaining_gate"])
     if set(images) != {"codec", "ble_em9305", "touch", "case", "apollo_bootloader", "apollo_main"}:
         raise RuntimeError("six-image set changed")
     record = {

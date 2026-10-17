@@ -1,0 +1,45 @@
+#include <stdint.h>
+/* Bounded observed writable table prefixes, not asserted full extents.
+ * Callbacks are typed unresolved source dependencies, never executable blobs. */
+typedef void (*r1_event_handler)(uint32_t,uint32_t);
+_Static_assert(sizeof(r1_event_handler)==4,"native callback word");
+extern void r1_event_callback_00042856(uint32_t,uint32_t);
+extern void r1_event_callback_00042a20(uint32_t,uint32_t);
+extern void r1_event_callback_000428b4(uint32_t,uint32_t);
+extern void r1_event_callback_00042840(uint32_t,uint32_t);
+extern void r1_event_callback_00042896(uint32_t,uint32_t);
+extern void r1_event_callback_000428a4(uint32_t,uint32_t);
+extern void r1_event_callback_0004296a(uint32_t,uint32_t);
+extern void r1_event_callback_00042a10(uint32_t,uint32_t);
+extern void r1_event_callback_00042978(uint32_t,uint32_t);
+extern void r1_event_callback_00042788(uint32_t,uint32_t);
+extern void r1_event_callback_00042964(uint32_t,uint32_t);
+extern void r1_event_callback_00042960(uint32_t,uint32_t);
+extern void r1_event_callback_0004286e(uint32_t,uint32_t);
+extern void r1_event_callback_00042860(uint32_t,uint32_t);
+extern void r1_event_callback_0004287c(uint32_t,uint32_t);
+extern void r1_event_callback_000428b2(uint32_t,uint32_t);
+r1_event_handler r1_native_event_table_sensor[17] __attribute__((section(".r1.events.sensor"),aligned(4)))={0,r1_event_callback_00042856,r1_event_callback_00042a20,r1_event_callback_000428b4,r1_event_callback_00042840,r1_event_callback_00042896,r1_event_callback_000428a4,r1_event_callback_0004296a,r1_event_callback_00042a10,r1_event_callback_00042978,r1_event_callback_00042788,r1_event_callback_00042964,r1_event_callback_00042960,r1_event_callback_0004286e,r1_event_callback_00042860,r1_event_callback_0004287c,r1_event_callback_000428b2};
+extern void r1_event_callback_00042118(uint32_t,uint32_t);
+extern void r1_event_callback_000421c4(uint32_t,uint32_t);
+extern void r1_event_callback_00042128(uint32_t,uint32_t);
+extern void r1_event_callback_00042244(uint32_t,uint32_t);
+extern void r1_event_callback_000423d8(uint32_t,uint32_t);
+extern void r1_event_callback_00042350(uint32_t,uint32_t);
+extern void r1_event_callback_00042514(uint32_t,uint32_t);
+extern void r1_event_callback_000422c8(uint32_t,uint32_t);
+extern void r1_event_callback_00042474(uint32_t,uint32_t);
+extern void r1_event_callback_00042108(uint32_t,uint32_t);
+extern void r1_event_callback_000425b0(uint32_t,uint32_t);
+extern void r1_event_callback_0004210c(uint32_t,uint32_t);
+extern void r1_event_callback_000421c0(uint32_t,uint32_t);
+extern void r1_event_callback_00042122(uint32_t,uint32_t);
+extern void r1_event_callback_000423d4(uint32_t,uint32_t);
+r1_event_handler r1_native_event_table_system[16] __attribute__((section(".r1.events.system"),aligned(4)))={0,r1_event_callback_00042118,r1_event_callback_000421c4,r1_event_callback_00042128,r1_event_callback_00042244,r1_event_callback_000423d8,r1_event_callback_00042350,r1_event_callback_00042514,r1_event_callback_000422c8,r1_event_callback_00042474,r1_event_callback_00042108,r1_event_callback_000425b0,r1_event_callback_0004210c,r1_event_callback_000421c0,r1_event_callback_00042122,r1_event_callback_000423d4};
+extern void r1_event_callback_00042bc6(uint32_t,uint32_t);
+extern void r1_event_callback_00042bca(uint32_t,uint32_t);
+extern void r1_event_callback_00042bc2(uint32_t,uint32_t);
+extern void r1_event_callback_00042bb0(uint32_t,uint32_t);
+extern void r1_event_callback_00042b20(uint32_t,uint32_t);
+extern void r1_event_callback_00042bbe(uint32_t,uint32_t);
+r1_event_handler r1_native_event_table_storage[8] __attribute__((section(".r1.events.storage"),aligned(4)))={0,r1_event_callback_00042bc6,r1_event_callback_00042bca,r1_event_callback_00042bc2,r1_event_callback_00042bb0,r1_event_callback_00042b20,r1_event_callback_00042bbe,0};

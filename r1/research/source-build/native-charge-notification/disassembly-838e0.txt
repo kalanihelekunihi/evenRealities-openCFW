@@ -1,0 +1,35 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+000838e0 <r1_stock_gpio_pin_set+0xa4ac>:
+   838e0:	b57f      	push	{r0, r1, r2, r3, r4, r5, r6, lr}
+   838e2:	f00d fcc5 	bl	91270 <_stack+0x11270>
+   838e6:	4605      	mov	r5, r0
+   838e8:	f00d fcb5 	bl	91256 <_stack+0x11256>
+   838ec:	4604      	mov	r4, r0
+   838ee:	f00d fca9 	bl	91244 <_stack+0x11244>
+   838f2:	4a0e      	ldr	r2, [pc, #56]	@ (8392c <_stack+0x392c>)
+   838f4:	e9d2 1200 	ldrd	r1, r2, [r2]
+   838f8:	e9cd 1202 	strd	r1, r2, [sp, #8]
+   838fc:	f88d 5008 	strb.w	r5, [sp, #8]
+   83900:	b108      	cbz	r0, 83906 <_stack+0x3906>
+   83902:	2003      	movs	r0, #3
+   83904:	e003      	b.n	8390e <_stack+0x390e>
+   83906:	b10c      	cbz	r4, 8390c <_stack+0x390c>
+   83908:	2001      	movs	r0, #1
+   8390a:	e000      	b.n	8390e <_stack+0x390e>
+   8390c:	2002      	movs	r0, #2
+   8390e:	f88d 0009 	strb.w	r0, [sp, #9]
+   83912:	f7c9 f947 	bl	4cba4 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x25ba4>
+   83916:	2207      	movs	r2, #7
+   83918:	a902      	add	r1, sp, #8
+   8391a:	e9cd 1200 	strd	r1, r2, [sp]
+   8391e:	2300      	movs	r3, #0
+   83920:	2201      	movs	r2, #1
+   83922:	217f      	movs	r1, #127	@ 0x7f
+   83924:	f001 f972 	bl	84c0c <_stack+0x4c0c>
+   83928:	b004      	add	sp, #16
+   8392a:	bd70      	pop	{r4, r5, r6, pc}

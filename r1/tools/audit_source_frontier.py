@@ -9,25 +9,219 @@ import struct
 
 ROOT=Path(__file__).resolve().parents[2]
 BASE=ROOT/'r1/research/source-build'
-REPORTS=['native-lis-registers/report.json','native-lis-identity/report.json','native-lis-fifo/report.json','native-motion-fifo/report.json','native-motion-selection/report.json','native-motion-stream/report.json','native-stream-singletons/report.json','native-stream-objects/report.json','native-stream-poll/report.json','native-stream-bootstrap/report.json','native-crash-payload/report.json','native-crash-initialize-bridge/report.json','native-health-cache/report.json','native-hourly-snapshot/report.json','native-crash-snapshot/report.json','native-crash-initialize/report.json','native-retained-log/report.json','native-dfu-backend/report.json','native-dfu-ble-event/report.json','sdk-ble-service-common/report.json','native-hw-twi-lifecycle/report.json','sdk-legacy-twi/report.json','native-hw-twi-operations/report.json','native-hw-twi-register/report.json','sdk-twim/report.json','native-hw-twi-wait/report.json','native-hw-twi-completion/report.json','native-peripheral-bindings/report.json','native-output-gpio-lifecycle/report.json','native-output-gpio-command/report.json','native-output-gpio-operations/report.json','native-output-gpio-drivers/report.json','native-user-profile-command/report.json','native-health-settings/report.json','native-system-settings/report.json','native-touch-gesture/report.json','native-touch-task-message/report.json','native-touch-release/report.json','native-touch-services/report.json','native-touch-switch/report.json','native-device-id-reader/report.json','native-device-id-command/report.json','native-power-command/report.json','native-time-sync-providers/report.json','native-time-sync-command/report.json','native-nv-recovery-dispatch/report.json','native-nv-recovery-envelope/report.json','native-nv-class-writer/report.json','native-nv-update/report.json','native-system-event-commands/report.json','native-nordic-delay-runtime/report.json','native-phone-role/report.json','native-ble-message/report.json','native-protocol-control/report.json','native-protocol-serial/report.json','native-protocol-ack/report.json','native-health-commands/report.json','native-protocol-reset/report.json','native-daily-metadata/report.json','native-vbat-cache/report.json','native-reset-writer/report.json','native-reset-retained/report.json','native-reset-decoder/report.json','native-gxt310-mode/report.json','native-gxt310-bus/report.json','native-gxt310-id/report.json','native-yhm-chip-id/report.json','native-device-checks/report.json','native-dfu-vector-set/report.json','native-dfu-svci-init/report.json','native-cmbacktrace-init/report.json','native-device-reset-startup/report.json','native-peripheral-module/report.json','native-application-entry/report.json','native-scatter-dispatch/report.json','native-scatter-data/report.json','native-scanf-core/report.json','native-sscanf-frontend/report.json','native-ctype/report.json','native-scanf-conversion/report.json','native-libc-sequences/report.json','native-libc-primitives/report.json','native-pow-core/report.json','native-pow-dispatch/report.json','native-sqrt-core-abi/report.json','native-powf-core/report.json','native-powf-dispatch/report.json','native-log/report.json','native-exp/report.json','native-expm1/report.json','native-tanh/report.json','native-atan/report.json','native-tanf/report.json','native-sinf/report.json','native-cosf/report.json','native-trig-reduce/report.json','native-atan2f/report.json','native-atanf/report.json','native-float-logs/report.json','native-expf-tanhf/report.json','native-math-special/report.json','native-math-round/report.json','native-double-directed/report.json','native-double-flags/report.json','native-math-selection/report.json','native-math-sqrt/report.json','native-float-sqrt/report.json','native-float-rounding/report.json','native-polynomial/report.json','native-float-bits/report.json','native-formatter-stream/report.json','native-rtt-write/report.json','native-formatter-wrappers/report.json','native-formatter-core/report.json','native-formatter-product/report.json','native-formatter-add/report.json','native-formatter-unsigned/report.json','native-formatter-decimal/report.json','native-formatter-output/report.json','native-protocol-device-info/report.json','native-protocol-device-status/report.json','native-protocol-event-handlers/report.json','native-protocol-modules/report.json','native-protocol-ingress/report.json','native-protocol-receive/report.json','native-protocol-port/report.json','native-protocol-fragment/report.json','native-protocol-fragment-state/report.json','native-protocol-send-registration/report.json','native-protocol-send-hook/report.json','native-protocol-connection-gates/report.json','native-protocol-encoder/report.json','native-protocol-response/report.json','native-phone-operation/report.json','native-protocol-response-header/report.json','native-battery-protocol/report.json','native-battery-frame/report.json','native-battery-voltage/report.json','native-kv-device-fields/report.json','native-battery-low/report.json','native-battery-diagnostic/report.json','native-battery-initial-curve/report.json','native-battery-recovery/report.json','native-battery-cadence/report.json','native-battery-configuration/report.json','native-battery-discharge/report.json','native-battery-filter/report.json','native-yhm-system-track/report.json','native-yhm-status/report.json','native-yhm-state/report.json','native-stacmd-state/report.json','native-stacmd-receive/report.json','native-stacmd-transmit/report.json','native-stacmd-frames/report.json','native-stacmd-write-retry/report.json','native-stacmd-delay/report.json','native-stacmd-recovery/report.json','native-stacmd-operations/report.json','native-yhm-initialize/report.json','native-yhm-transport/report.json','native-yhm-frontend/report.json','native-charger-state/report.json','native-battery-control/report.json','native-battery-statistics/report.json','native-battery-runtime/report.json','native-status-record/report.json','native-thread-init-logs/report.json','native-delayed-cancel/report.json','rtos-timer-new/report.json','rtos-timer-id/report.json','native-delayed-worker/report.json','native-delayed-initialize/report.json','native-delayed-state/report.json','native-delayed-reschedule/report.json','rtos-timer-controls/report.json','rtos-timer-active/report.json','native-delayed-push/report.json','native-delayed-schedule/report.json','rtos-notification-wrappers/report.json','rtos-notification-tasks/report.json','rtos-event-groups/report.json','rtos-timer-pend/report.json','rtos-unordered-event/report.json','rtos-synchronization/report.json','rtos-mutex-kernel/report.json','rtos-mutex-tasks/report.json','rtos-message-queue/report.json','rtos-queue-receive-isr/report.json','rtos-timer-runtime/report.json','rtos-timer-queue/report.json','rtos-timer-task-wait/report.json','rtos-timer-api/report.json','rtos-timer-isr-queue/report.json','rtos-task-count/report.json','native-stack-overflow/report.json','rtos-context-port/report.json','rtos-port-start/report.json','rtos-scheduler-start/report.json','rtos-sleep-kernel/report.json','rtos-tickless-port/report.json','rtos-idle/report.json','rtos-task-termination/report.json','rtos-thread-new/report.json','native-task-construction/report.json','rtos-task-wait/report.json','rtos-queue-operations/report.json','rtos-scheduler-tick/report.json','rtos-scheduler-resume/report.json','native-heap/report.json','rtos-queue-create/report.json','rtos-semaphore-new/report.json','native-output-gpio-registration/report.json','native-stacmd-registration/report.json','native-hw-twi-registration/report.json','native-initcalls/report.json','native-rtc-discovery/report.json','native-rtc-error/report.json','sdk-nrfx-rtc/report.json','native-rtc-lifecycle/report.json','native-rtc-device/report.json','runtime-memmove/report.json','native-clock-calendar/report.json','native-clock-port/report.json','native-clock-bootstrap/report.json','native-rtt-delay/report.json','native-log-calendar/report.json','sdk-log-modules/report.json','sdk-fprintf/report.json','sdk-log-formatter/report.json','sdk-log-serial/report.json','sdk-segger-rtt/report.json','sdk-rtt-backend/report.json','sdk-memobj/report.json','sdk-logger-frontend/report.json','sdk-dfu-state/report.json','sdk-power-management/report.json','sdk-nrfx-clock/report.json','sdk-clock/report.json','sdk-soc/report.json','sdk-sdh/report.json','sdk-atfifo/report.json','sdk-fstorage-sd/report.json','sdk-fstorage/report.json','native-internal-flash-operations/report.json','native-internal-flash/report.json','native-fal-device/report.json','sdk-fal-partition/report.json','sdk-fal-device/report.json','runtime-strncmp/report.json','sdk-fal-core/report.json','native-kv-scans/report.json','sdk-fal-readiness/report.json','native-kv-initialize/report.json','native-kv-store-put/report.json','native-kv-store-get/report.json','native-kv-port/report.json','native-kv-class/report.json','native-advertising-configuration/report.json','sdk-advertising-init/report.json','sdk-advertising/report.json','native-gatt/report.json','sdk-gatt/report.json','sdk-qwr/report.json','sdk-ble-dispatch/report.json','sdk-connection-events/report.json','sdk-connection-index/report.json','sdk-link-context/report.json','native-bae8-send/report.json','native-ble-send/report.json','native-output/report.json','watchdog-logging/report.json','sdk-critical/report.json','integer-runtime/report.json','report.json','bootloader/report.json','public-providers/report.json','rtos/report.json','crypto/report.json','application-sdk/report.json','goodix/report.json','sensors/report.json','i2c5/report.json','software-twi/gpio-report.json','gpio/report.json','adc/report.json','runtime/report.json','board-seams/report.json','structured-log/report.json','rtos-critical/report.json','structured-encode/report.json','structured-time/report.json','rtos-ticks/report.json','structured-float/report.json','structured-cache/report.json','structured-cache-copy/report.json','native-events/report.json','connection-handle/report.json','native-tx/report.json','native-task-lifecycle/report.json','native-tasks/report.json','native-sync/report.json','native-watchdog/report.json','native-event-dispatch/report.json','watchdog-startup/report.json']
+REPORTS=['native-record-providers/report.json','native-record-update/report.json','native-charge-notification/report.json','native-health-init/report.json','native-health-get-encoders/report.json','native-health-get-dispatch/report.json','native-health-latest-samples/report.json','native-sleep-report/report.json','native-sleep-sector-finalize/report.json','native-sleep-sector-write/report.json','native-sleep-sector-select/report.json','native-sleep-record/report.json','native-sleep-sync-status/report.json','native-health-service-wrappers/report.json','native-health-daily-logging/report.json','native-health-daily-fixture/report.json','native-subscriber-consume/report.json','native-subscriber-registration/report.json','native-subscriber-sync/report.json','native-event-multicast/report.json','native-time-update/report.json','native-activity-storage/report.json','native-calendar-frames/report.json','native-health-average/report.json','native-health-sample-storage/report.json','native-flashdb-control/report.json','native-internal-flash-read-frames/report.json','native-fal-read-frames/report.json','native-fal-device-lookup/report.json','native-fal-partition-read/report.json','native-flashdb-sector-read/report.json','native-flashdb-log-read/report.json','native-flashdb-iterator/report.json','native-flashdb-query-count/report.json','native-health-notification-stages/report.json','native-health-notification-throttle/report.json','native-health-event-consumers/report.json','native-event-callbacks/report.json','native-event-table-prefixes/report.json','native-gxt-call-frames/report.json','native-temperature/report.json','native-qma-configuration/report.json','native-qma-transport/report.json','native-bma-initialize/report.json','native-bma-setup/report.json','native-bma-fifo/report.json','native-bma-feature-io/report.json','native-bma-reads/report.json','native-bma-interface/report.json','native-lis-aux/report.json','native-lis-call-frames/report.json','native-lis-configure/report.json','native-lis-setup/report.json','native-lis-registers/report.json','native-lis-identity/report.json','native-lis-fifo/report.json','native-motion-fifo/report.json','native-motion-selection/report.json','native-motion-stream/report.json','native-stream-singletons/report.json','native-stream-objects/report.json','native-stream-poll/report.json','native-stream-bootstrap/report.json','native-crash-payload/report.json','native-crash-initialize-bridge/report.json','native-health-cache/report.json','native-hourly-snapshot/report.json','native-crash-snapshot/report.json','native-crash-initialize/report.json','native-retained-log/report.json','native-dfu-backend/report.json','native-dfu-ble-event/report.json','sdk-ble-service-common/report.json','native-hw-twi-lifecycle/report.json','sdk-legacy-twi/report.json','native-hw-twi-operations/report.json','native-hw-twi-register/report.json','sdk-twim/report.json','native-hw-twi-wait/report.json','native-hw-twi-completion/report.json','native-peripheral-bindings/report.json','native-output-gpio-lifecycle/report.json','native-output-gpio-command/report.json','native-output-gpio-operations/report.json','native-output-gpio-drivers/report.json','native-user-profile-command/report.json','native-health-settings/report.json','native-system-settings/report.json','native-touch-gesture/report.json','native-touch-task-message/report.json','native-touch-release/report.json','native-touch-services/report.json','native-touch-switch/report.json','native-device-id-reader/report.json','native-device-id-command/report.json','native-power-command/report.json','native-time-sync-providers/report.json','native-time-sync-command/report.json','native-nv-recovery-dispatch/report.json','native-nv-recovery-envelope/report.json','native-nv-class-writer/report.json','native-nv-update/report.json','native-system-event-commands/report.json','native-nordic-delay-runtime/report.json','native-phone-role/report.json','native-ble-message/report.json','native-protocol-control/report.json','native-protocol-serial/report.json','native-protocol-ack/report.json','native-health-commands/report.json','native-protocol-reset/report.json','native-daily-metadata/report.json','native-vbat-cache/report.json','native-reset-writer/report.json','native-reset-retained/report.json','native-reset-decoder/report.json','native-gxt310-mode/report.json','native-gxt310-bus/report.json','native-gxt310-id/report.json','native-yhm-chip-id/report.json','native-device-checks/report.json','native-dfu-vector-set/report.json','native-dfu-svci-init/report.json','native-cmbacktrace-init/report.json','native-device-reset-startup/report.json','native-peripheral-module/report.json','native-application-entry/report.json','native-scatter-dispatch/report.json','native-scatter-data/report.json','native-scanf-core/report.json','native-sscanf-frontend/report.json','native-ctype/report.json','native-scanf-conversion/report.json','native-libc-sequences/report.json','native-libc-primitives/report.json','native-pow-core/report.json','native-pow-dispatch/report.json','native-sqrt-core-abi/report.json','native-powf-core/report.json','native-powf-dispatch/report.json','native-log/report.json','native-exp/report.json','native-expm1/report.json','native-tanh/report.json','native-atan/report.json','native-tanf/report.json','native-sinf/report.json','native-cosf/report.json','native-trig-reduce/report.json','native-atan2f/report.json','native-atanf/report.json','native-float-logs/report.json','native-expf-tanhf/report.json','native-math-special/report.json','native-math-round/report.json','native-double-directed/report.json','native-double-flags/report.json','native-math-selection/report.json','native-math-sqrt/report.json','native-float-sqrt/report.json','native-float-rounding/report.json','native-polynomial/report.json','native-float-bits/report.json','native-formatter-stream/report.json','native-rtt-write/report.json','native-formatter-wrappers/report.json','native-formatter-core/report.json','native-formatter-product/report.json','native-formatter-add/report.json','native-formatter-unsigned/report.json','native-formatter-decimal/report.json','native-formatter-output/report.json','native-protocol-device-info/report.json','native-protocol-device-status/report.json','native-protocol-event-handlers/report.json','native-protocol-modules/report.json','native-protocol-ingress/report.json','native-protocol-receive/report.json','native-protocol-port/report.json','native-protocol-fragment/report.json','native-protocol-fragment-state/report.json','native-protocol-send-registration/report.json','native-protocol-send-hook/report.json','native-protocol-connection-gates/report.json','native-protocol-encoder/report.json','native-protocol-response/report.json','native-phone-operation/report.json','native-protocol-response-header/report.json','native-battery-protocol/report.json','native-battery-frame/report.json','native-battery-voltage/report.json','native-kv-device-fields/report.json','native-battery-low/report.json','native-battery-diagnostic/report.json','native-battery-initial-curve/report.json','native-battery-recovery/report.json','native-battery-cadence/report.json','native-battery-configuration/report.json','native-battery-discharge/report.json','native-battery-filter/report.json','native-yhm-system-track/report.json','native-yhm-status/report.json','native-yhm-state/report.json','native-stacmd-state/report.json','native-stacmd-receive/report.json','native-stacmd-transmit/report.json','native-stacmd-frames/report.json','native-stacmd-write-retry/report.json','native-stacmd-delay/report.json','native-stacmd-recovery/report.json','native-stacmd-operations/report.json','native-yhm-initialize/report.json','native-yhm-transport/report.json','native-yhm-frontend/report.json','native-charger-state/report.json','native-battery-control/report.json','native-battery-statistics/report.json','native-battery-runtime/report.json','native-status-record/report.json','native-thread-init-logs/report.json','native-delayed-cancel/report.json','rtos-timer-new/report.json','rtos-timer-id/report.json','native-delayed-worker/report.json','native-delayed-initialize/report.json','native-delayed-state/report.json','native-delayed-reschedule/report.json','rtos-timer-controls/report.json','rtos-timer-active/report.json','native-delayed-push/report.json','native-delayed-schedule/report.json','rtos-notification-wrappers/report.json','rtos-notification-tasks/report.json','rtos-event-groups/report.json','rtos-timer-pend/report.json','rtos-unordered-event/report.json','rtos-synchronization/report.json','rtos-mutex-kernel/report.json','rtos-mutex-tasks/report.json','rtos-message-queue/report.json','rtos-queue-receive-isr/report.json','rtos-timer-runtime/report.json','rtos-timer-queue/report.json','rtos-timer-task-wait/report.json','rtos-timer-api/report.json','rtos-timer-isr-queue/report.json','rtos-task-count/report.json','native-stack-overflow/report.json','rtos-context-port/report.json','rtos-port-start/report.json','rtos-scheduler-start/report.json','rtos-sleep-kernel/report.json','rtos-tickless-port/report.json','rtos-idle/report.json','rtos-task-termination/report.json','rtos-thread-new/report.json','native-task-construction/report.json','rtos-task-wait/report.json','rtos-queue-operations/report.json','rtos-scheduler-tick/report.json','rtos-scheduler-resume/report.json','native-heap/report.json','rtos-queue-create/report.json','rtos-semaphore-new/report.json','native-output-gpio-registration/report.json','native-stacmd-registration/report.json','native-hw-twi-registration/report.json','native-initcalls/report.json','native-rtc-discovery/report.json','native-rtc-error/report.json','sdk-nrfx-rtc/report.json','native-rtc-lifecycle/report.json','native-rtc-device/report.json','runtime-memmove/report.json','native-clock-calendar/report.json','native-clock-port/report.json','native-clock-bootstrap/report.json','native-rtt-delay/report.json','native-log-calendar/report.json','sdk-log-modules/report.json','sdk-fprintf/report.json','sdk-log-formatter/report.json','sdk-log-serial/report.json','sdk-segger-rtt/report.json','sdk-rtt-backend/report.json','sdk-memobj/report.json','sdk-logger-frontend/report.json','sdk-dfu-state/report.json','sdk-power-management/report.json','sdk-nrfx-clock/report.json','sdk-clock/report.json','sdk-soc/report.json','sdk-sdh/report.json','sdk-atfifo/report.json','sdk-fstorage-sd/report.json','sdk-fstorage/report.json','native-internal-flash-operations/report.json','native-internal-flash/report.json','native-fal-device/report.json','sdk-fal-partition/report.json','sdk-fal-device/report.json','runtime-strncmp/report.json','sdk-fal-core/report.json','native-kv-scans/report.json','sdk-fal-readiness/report.json','native-kv-initialize/report.json','native-kv-store-put/report.json','native-kv-store-get/report.json','native-kv-port/report.json','native-kv-class/report.json','native-advertising-configuration/report.json','sdk-advertising-init/report.json','sdk-advertising/report.json','native-gatt/report.json','sdk-gatt/report.json','sdk-qwr/report.json','sdk-ble-dispatch/report.json','sdk-connection-events/report.json','sdk-connection-index/report.json','sdk-link-context/report.json','native-bae8-send/report.json','native-ble-send/report.json','native-output/report.json','watchdog-logging/report.json','sdk-critical/report.json','integer-runtime/report.json','report.json','bootloader/report.json','public-providers/report.json','rtos/report.json','crypto/report.json','application-sdk/report.json','goodix/report.json','sensors/report.json','i2c5/report.json','software-twi/gpio-report.json','gpio/report.json','adc/report.json','runtime/report.json','board-seams/report.json','structured-log/report.json','rtos-critical/report.json','structured-encode/report.json','structured-time/report.json','rtos-ticks/report.json','structured-float/report.json','structured-cache/report.json','structured-cache-copy/report.json','native-events/report.json','connection-handle/report.json','native-tx/report.json','native-task-lifecycle/report.json','native-tasks/report.json','native-sync/report.json','native-watchdog/report.json','native-event-dispatch/report.json','watchdog-startup/report.json']
 VERIFIED={
- '0x000750b8':('lis2dw12_block_data_update_set','native-lis-registers/verification.json'),
- '0x000753c6':('lis2dw12_fifo_mode_set','native-lis-registers/verification.json'),
- '0x000753f4':('lis2dw12_fifo_watermark_set','native-lis-registers/verification.json'),
- '0x00075422':('lis2dw12_filter_bandwidth_set','native-lis-registers/verification.json'),
- '0x000754ac':('lis2dw12_full_scale_set','native-lis-registers/verification.json'),
- '0x000757ec':('lis2dw12_reset_set','native-lis-registers/verification.json'),
- '0x0007581a':('lis2dw12_tap_detection_on_x_set','native-lis-registers/verification.json'),
- '0x00075848':('lis2dw12_tap_detection_on_y_set','native-lis-registers/verification.json'),
- '0x00075876':('lis2dw12_tap_detection_on_z_set','native-lis-registers/verification.json'),
- '0x000758a4':('lis2dw12_tap_dur_set','native-lis-registers/verification.json'),
- '0x000758d2':('lis2dw12_tap_mode_set','native-lis-registers/verification.json'),
- '0x00075900':('lis2dw12_tap_quiet_set','native-lis-registers/verification.json'),
- '0x0007592e':('lis2dw12_tap_shock_set','native-lis-registers/verification.json'),
- '0x0007595c':('lis2dw12_tap_threshold_x_set','native-lis-registers/verification.json'),
- '0x0007598a':('lis2dw12_tap_threshold_y_set','native-lis-registers/verification.json'),
- '0x000759b8':('lis2dw12_tap_threshold_z_set','native-lis-registers/verification.json'),
- '0x000757d2':('lis2dw12_reset_get','native-lis-registers/verification.json'),
+ '0x0006c53c':('r1_record12_apply','native-record-providers/verification.json'),
+ '0x00073604':('r1_record12_persist','native-record-providers/verification.json'),
+ '0x0006c640':('r1_record12_validate','native-record-update/verification.json'),
+ '0x0006c66c':('r1_event_service_0006c66c','native-record-update/verification.json'),
+ '0x000838e0':('r1_event_service_000838e0','native-charge-notification/verification.json'),
+ '0x0008d380':('r1_event_service_0008d380','native-health-init/verification.json'),
+ '0x0008a866':('r1_health_init_publish','native-health-init/verification.json'),
+ '0x00083930':('r1_health_get_hr_encode','native-health-get-encoders/verification.json'),
+ '0x00083972':('r1_health_get_hrv_encode','native-health-get-encoders/verification.json'),
+ '0x00083c20':('r1_health_get_spo2_encode','native-health-get-encoders/verification.json'),
+ '0x00082ef4':('r1_protocol_health_sample_send','native-health-get-encoders/verification.json'),
+
+ '0x0008b8e8':('r1_event_service_0008b8e8','native-health-get-dispatch/verification.json'),
+ '0x0008d6ac':('r1_hr_latest_sample','native-health-latest-samples/verification.json'),
+ '0x0008d858':('r1_hrv_latest_sample','native-health-latest-samples/verification.json'),
+ '0x0008e524':('r1_spo2_latest_sample','native-health-latest-samples/verification.json'),
+ '0x0005ace8':('r1_hr_latest_packed','native-health-latest-samples/verification.json'),
+ '0x0005af20':('r1_hrv_latest_packed','native-health-latest-samples/verification.json'),
+ '0x0005baf4':('r1_spo2_latest_packed','native-health-latest-samples/verification.json'),
+
+ '0x0008dd90':('r1_event_service_0008dd90','native-sleep-report/verification.json'),
+ '0x000901e4':('r1_sleep_sector_finalize','native-sleep-sector-finalize/verification.json'),
+ '0x0008fe98':('r1_sleep_sector_write','native-sleep-sector-write/verification.json'),
+ '0x0008fe28':('r1_sleep_sector_select','native-sleep-sector-select/verification.json'),
+ '0x0008fc6c':('r1_sleep_sector_fallback','native-sleep-sector-select/verification.json'),
+ '0x0005b890':('r1_sleep_record_store','native-sleep-record/verification.json'),
+ '0x0008dc94':('r1_event_service_0008dc94','native-sleep-record/verification.json'),
+ '0x0005b2f8':('r1_sleep_erase_all','native-sleep-record/verification.json'),
+ '0x0008fe14':('r1_sleep_sector_count','native-sleep-record/verification.json'),
+ '0x0008dd88':('r1_event_service_0008dd88','native-sleep-record/verification.json'),
+
+ '0x0005b6f4':('r1_sleep_sync_status_backend','native-sleep-sync-status/verification.json'),
+ '0x0008e154':('r1_event_service_0008e154','native-health-service-wrappers/verification.json'),
+ '0x0008e1e0':('r1_event_service_0008e1e0','native-health-service-wrappers/verification.json'),
+ '0x0008e274':('r1_event_service_0008e274','native-health-service-wrappers/verification.json'),
+ '0x0008e552':('r1_event_service_0008e552','native-health-service-wrappers/verification.json'),
+ '0x0008e55c':('r1_event_service_0008e55c','native-health-service-wrappers/verification.json'),
+ '0x0008a87e':('r1_health_publish_spo2_state','native-health-service-wrappers/verification.json'),
+ '0x0008a896':('r1_health_publish_temperature_state','native-health-service-wrappers/verification.json'),
+
+ '0x0008d40c':('r1_health_fixture_notify_hr','native-health-daily-logging/verification.json'),
+ '0x0008e3f8':('r1_health_fixture_notify_spo2','native-health-daily-logging/verification.json'),
+ '0x0008e560':('r1_health_fixture_notify_temperature','native-health-daily-logging/verification.json'),
+ '0x0008b378':('r1_event_service_0008b378','native-health-daily-fixture/verification.json'),
+ '0x0005be5c':('r1_temperature_daily_cache_accessor','native-health-daily-fixture/verification.json'),
+ '0x0008b0fc':('r1_event_service_0008b0fc','native-subscriber-consume/verification.json'),
+ '0x0008af8c':('r1_subscriber_register','native-subscriber-registration/verification.json'),
+ '0x0005dcb0':('r1_subscriber_lock','native-subscriber-sync/verification.json'),
+ '0x0005dcd4':('r1_subscriber_unlock','native-subscriber-sync/verification.json'),
+ '0x0007d814':('r1_subscriber_current_thread','native-subscriber-sync/verification.json'),
+ '0x0008b028':('r1_event_service_0008b028','native-event-multicast/verification.json'),
+ '0x0008aea4':('r1_event_service_0008aea4','native-time-update/verification.json'),
+ '0x0008aeb0':('r1_event_service_0008aeb0','native-time-update/verification.json'),
+ '0x0005aa14':('r1_activity_event_storage','native-activity-storage/verification.json'),
+ '0x0005ac74':('r1_activity_ten_minute_bucket','native-activity-storage/verification.json'),
+
+ '0x0005aba0':('r1_health_storage_average','native-health-average/verification.json'),
+ '0x0005aca6':('r1_health_storage_hour_index','native-health-average/verification.json'),
+
+ '0x0005ad90':('r1_hr_event_storage','native-health-sample-storage/verification.json'),
+ '0x0005af60':('r1_hrv_event_storage','native-health-sample-storage/verification.json'),
+ '0x0005bb2c':('r1_spo2_event_storage','native-health-sample-storage/verification.json'),
+ '0x0005bcec':('r1_stress_event_storage','native-health-sample-storage/verification.json'),
+ '0x0005be7c':('r1_temperature_event_storage','native-health-sample-storage/verification.json'),
+
+ '0x00063694':('r1_health_sync_provider_00063694','native-flashdb-control/verification.json'),
+ '0x00064f74':('r1_fal_native_device_by_partition','native-fal-device-lookup/verification.json'),
+ '0x000631e8':('r1_fdb_native_partition_read','native-fal-partition-read/verification.json'),
+ '0x00087c24':('r1_fdb_native_read_sector','native-flashdb-sector-read/verification.json'),
+ '0x00087e14':('r1_fdb_native_read_tsl','native-flashdb-log-read/verification.json'),
+ '0x0003f03e':('r1_fdb_native_flash_read','native-flashdb-log-read/verification.json'),
+ '0x0003f076':('r1_fdb_native_get_status','native-flashdb-log-read/verification.json'),
+
+ '0x00063ad8':('r1_health_sync_provider_00063ad8','native-flashdb-iterator/verification.json'),
+ '0x0006a158':('r1_fdb_native_last_sector','native-flashdb-iterator/verification.json'),
+ '0x0006a176':('r1_fdb_native_last_tsl','native-flashdb-iterator/verification.json'),
+ '0x0006a194':('r1_fdb_native_next_sector','native-flashdb-iterator/verification.json'),
+ '0x0006a1b2':('r1_fdb_native_next_tsl','native-flashdb-iterator/verification.json'),
+
+ '0x00063cb4':('r1_health_sync_provider_00063cb4','native-flashdb-query-count/verification.json'),
+ '0x00087428':('r1_fdb_native_query_count_cb','native-flashdb-query-count/verification.json'),
+ '0x0003f014':('r1_fdb_native_db_path','native-flashdb-query-count/verification.json'),
+ '0x0008c150':('r1_health_notification_stage_0008c150','native-health-notification-stages/verification.json'),
+ '0x0008cd60':('r1_health_notification_stage_0008cd60','native-health-notification-stages/verification.json'),
+ '0x0008c750':('r1_health_notification_stage_0008c750','native-health-notification-stages/verification.json'),
+ '0x0008baec':('r1_health_notification_stage_0008baec','native-health-notification-stages/verification.json'),
+ '0x0008b818':('r1_health_notification_stage_0008b818','native-health-notification-stages/verification.json'),
+
+ '0x0008b138':('r1_health_event_notification_throttle','native-health-notification-throttle/verification.json'),
+ '0x0008a7f4':('r1_event_service_0008a7f4','native-health-event-consumers/verification.json'),
+ '0x0008a80a':('r1_event_service_0008a80a','native-health-event-consumers/verification.json'),
+ '0x0008a83e':('r1_event_service_0008a83e','native-health-event-consumers/verification.json'),
+ '0x0008a8ae':('r1_event_service_0008a8ae','native-health-event-consumers/verification.json'),
+ '0x0008a8d8':('r1_event_service_0008a8d8','native-health-event-consumers/verification.json'),
+ '0x0008a8fc':('r1_event_service_0008a8fc','native-health-event-consumers/verification.json'),
+
+ '0x00042108':('r1_event_callback_00042108','native-event-callbacks/verification.json'),
+ '0x0004210c':('r1_event_callback_0004210c','native-event-callbacks/verification.json'),
+ '0x00042118':('r1_event_callback_00042118','native-event-callbacks/verification.json'),
+ '0x00042122':('r1_event_callback_00042122','native-event-callbacks/verification.json'),
+ '0x00042128':('r1_event_callback_00042128','native-event-callbacks/verification.json'),
+ '0x000421c0':('r1_event_callback_000421c0','native-event-callbacks/verification.json'),
+ '0x000421c4':('r1_event_callback_000421c4','native-event-callbacks/verification.json'),
+ '0x00042244':('r1_event_callback_00042244','native-event-callbacks/verification.json'),
+ '0x000422c8':('r1_event_callback_000422c8','native-event-callbacks/verification.json'),
+ '0x00042350':('r1_event_callback_00042350','native-event-callbacks/verification.json'),
+ '0x000423d4':('r1_event_callback_000423d4','native-event-callbacks/verification.json'),
+ '0x000423d8':('r1_event_callback_000423d8','native-event-callbacks/verification.json'),
+ '0x00042474':('r1_event_callback_00042474','native-event-callbacks/verification.json'),
+ '0x00042514':('r1_event_callback_00042514','native-event-callbacks/verification.json'),
+ '0x000425b0':('r1_event_callback_000425b0','native-event-callbacks/verification.json'),
+ '0x00042788':('r1_event_callback_00042788','native-event-callbacks/verification.json'),
+ '0x00042840':('r1_event_callback_00042840','native-event-callbacks/verification.json'),
+ '0x00042856':('r1_event_callback_00042856','native-event-callbacks/verification.json'),
+ '0x00042860':('r1_event_callback_00042860','native-event-callbacks/verification.json'),
+ '0x0004286e':('r1_event_callback_0004286e','native-event-callbacks/verification.json'),
+ '0x0004287c':('r1_event_callback_0004287c','native-event-callbacks/verification.json'),
+ '0x00042896':('r1_event_callback_00042896','native-event-callbacks/verification.json'),
+ '0x000428a4':('r1_event_callback_000428a4','native-event-callbacks/verification.json'),
+ '0x000428b2':('r1_event_callback_000428b2','native-event-callbacks/verification.json'),
+ '0x000428b4':('r1_event_callback_000428b4','native-event-callbacks/verification.json'),
+ '0x00042960':('r1_event_callback_00042960','native-event-callbacks/verification.json'),
+ '0x00042964':('r1_event_callback_00042964','native-event-callbacks/verification.json'),
+ '0x0004296a':('r1_event_callback_0004296a','native-event-callbacks/verification.json'),
+ '0x00042978':('r1_event_callback_00042978','native-event-callbacks/verification.json'),
+ '0x00042a10':('r1_event_callback_00042a10','native-event-callbacks/verification.json'),
+ '0x00042a20':('r1_event_callback_00042a20','native-event-callbacks/verification.json'),
+ '0x00042b20':('r1_event_callback_00042b20','native-event-callbacks/verification.json'),
+ '0x00042bb0':('r1_event_callback_00042bb0','native-event-callbacks/verification.json'),
+ '0x00042bbe':('r1_event_callback_00042bbe','native-event-callbacks/verification.json'),
+ '0x00042bc2':('r1_event_callback_00042bc2','native-event-callbacks/verification.json'),
+ '0x00042bc6':('r1_event_callback_00042bc6','native-event-callbacks/verification.json'),
+ '0x00042bca':('r1_event_callback_00042bca','native-event-callbacks/verification.json'),
+
+ '0x00050e4c':('r1_temperature_pair_read_calibrated','native-temperature/verification.json'),
+ '0x0006f600':('r1_gxt310_temperature_read','native-temperature/verification.json'),
+ '0x0006f80c':('r1_gxt310_temperature_channel0','native-temperature/verification.json'),
+ '0x0006f826':('r1_gxt310_temperature_channel2','native-temperature/verification.json'),
+ '0x0006f738':('r1_gxt310_one_shot','native-temperature/verification.json'),
+ '0x0006f818':('r1_gxt310_one_shot_channel0','native-temperature/verification.json'),
+ '0x0006f832':('r1_gxt310_one_shot_channel2','native-temperature/verification.json'),
+ '0x0007badc':('r1_temperature_calibration_read','native-temperature/verification.json'),
+
+ '0x00086e68':('r1_qma6100_configure_boundary','native-qma-configuration/verification.json'),
+ '0x00086ee4':('r1_qma_setup','native-qma-configuration/verification.json'),
+ '0x00086d40':('r1_qma_any_motion','native-qma-configuration/verification.json'),
+ '0x00087188':('r1_qma_range','native-qma-configuration/verification.json'),
+ '0x000871c4':('r1_qma_reset','native-qma-configuration/verification.json'),
+ '0x00087250':('r1_qma_steps','native-qma-configuration/verification.json'),
+ '0x000872e4':('r1_qma_tap','native-qma-configuration/verification.json'),
+
+ '0x0008714c':('r1_qma_read_retry','native-qma-transport/verification.json'),
+ '0x000873f4':('r1_qma_write_retry','native-qma-transport/verification.json'),
+ '0x00086e48':('r1_qma_delay_units','native-qma-transport/verification.json'),
+ '0x00086e34':('r1_qma6100_chip_id','native-qma-transport/verification.json'),
+ '0x00086fa8':('r1_qma6100_irq_boundary','native-qma-transport/verification.json'),
+ '0x00086ff4':('r1_qma6100_bounded_fifo_read','native-qma-transport/verification.json'),
+
+ '0x00053c6c':('r1_bma456w_configure_boundary','native-bma-initialize/verification.json'),
+ '0x000543c4':('r1_bma456w_initialize','native-bma-initialize/verification.json'),
+ '0x0005447e':('r1_bma4_initialize','native-bma-initialize/verification.json'),
+ '0x000545ca':('r1_bma4_set_accel_config','native-bma-setup/setup-verification.json'),
+ '0x00054640':('r1_bma4_set_accel_enable','native-bma-setup/setup-verification.json'),
+ '0x000546d0':('r1_bma4_set_fifo_config','native-bma-setup/setup-verification.json'),
+ '0x00096820':('r1_bma_validate_accel_parameters','native-bma-setup/validator-verification.json'),
+ '0x000541a8':('r1_bma456w_fifo_read','native-bma-fifo/verification.json'),
+ '0x000544c8':('r1_bma_fifo_read_bytes','native-bma-fifo/verification.json'),
+ '0x00054440':('r1_bma4_get_fifo_length','native-bma-fifo/verification.json'),
+ '0x0009756a':('r1_bma4_write_regs_direct','native-bma-feature-io/verification.json'),
+ '0x0005475a':('r1_bma4_write_regs_boundary','native-bma-feature-io/verification.json'),
+ '0x0005468e':('r1_bma4_set_advance_power_save_boundary','native-bma-feature-io/verification.json'),
+ '0x0008edd8':('r1_bma4_feature_address_reset','native-bma-feature-io/verification.json'),
+ '0x00070fda':('r1_bma4_feature_address_increment','native-bma-feature-io/verification.json'),
+ '0x00087e58':('r1_bma4_feature_chunk_read_boundary','native-bma-feature-io/verification.json'),
+ '0x000976b8':('r1_bma4_feature_chunk_write','native-bma-feature-io/verification.json'),
+
+ '0x00053b2c':('r1_bma456w_identity_probe','native-bma-reads/verification.json'),
+ '0x00054534':('r1_bma4_read_regs_boundary','native-bma-feature-io/verification.json'),
+ '0x00087bbc':('r1_bma4_read_regs_direct','native-bma-reads/verification.json'),
+ '0x00054408':('r1_bma4_get_advance_power_save','native-bma-reads/verification.json'),
+ '0x00053aec':('r1_bma_interface_initialize','native-bma-interface/verification.json'),
+ '0x00053ab4':('r1_bma_default_read','native-bma-interface/verification.json'),
+ '0x00053ad0':('r1_bma_default_write','native-bma-interface/verification.json'),
+ '0x00053aa4':('r1_bma_delay_us','native-bma-interface/verification.json'),
+ '0x0007b61c':('r1_bma4_null_pointer_check','native-bma-interface/verification.json'),
+ '0x000751b8':('r1_lis2dw12_aux20_boundary','native-lis-aux/verification.json'),
+ '0x00075290':('r1_lis2dw12_aux16_boundary','native-lis-aux/verification.json'),
+ '0x000756cc':('lis2dw12_pin_int1_route_get','native-lis-aux/route-verification.json'),
+ '0x000756da':('lis2dw12_pin_int1_route_set','native-lis-aux/route-verification.json'),
+ '0x00075510':('r1_lis2dw12_configure_boundary','native-lis-call-frames/verification.json'),
+ '0x00075120':('lis2dw12_data_rate_set','native-lis-call-frames/direct-setup/verification.json'),
+ '0x00075450':('lis2dw12_filter_path_set','native-lis-call-frames/direct-setup/verification.json'),
+ '0x0007575a':('r1_lis_native_power_mode_set','native-lis-call-frames/direct-setup/verification.json'),
+ '0x0007518a':('r1_lis_reg17_bit6_enable','native-lis-call-frames/direct-setup/verification.json'),
+ '0x000750b8':('lis2dw12_block_data_update_set','native-lis-call-frames/direct-registers/verification.json'),
+ '0x000753c6':('lis2dw12_fifo_mode_set','native-lis-call-frames/direct-registers/verification.json'),
+ '0x000753f4':('lis2dw12_fifo_watermark_set','native-lis-call-frames/direct-registers/verification.json'),
+ '0x00075422':('lis2dw12_filter_bandwidth_set','native-lis-call-frames/direct-registers/verification.json'),
+ '0x000754ac':('lis2dw12_full_scale_set','native-lis-call-frames/direct-registers/verification.json'),
+ '0x000757ec':('lis2dw12_reset_set','native-lis-call-frames/direct-registers/verification.json'),
+ '0x0007581a':('lis2dw12_tap_detection_on_x_set','native-lis-call-frames/direct-registers/verification.json'),
+ '0x00075848':('lis2dw12_tap_detection_on_y_set','native-lis-call-frames/direct-registers/verification.json'),
+ '0x00075876':('lis2dw12_tap_detection_on_z_set','native-lis-call-frames/direct-registers/verification.json'),
+ '0x000758a4':('lis2dw12_tap_dur_set','native-lis-call-frames/direct-registers/verification.json'),
+ '0x000758d2':('lis2dw12_tap_mode_set','native-lis-call-frames/direct-registers/verification.json'),
+ '0x00075900':('lis2dw12_tap_quiet_set','native-lis-call-frames/direct-registers/verification.json'),
+ '0x0007592e':('lis2dw12_tap_shock_set','native-lis-call-frames/direct-registers/verification.json'),
+ '0x0007595c':('lis2dw12_tap_threshold_x_set','native-lis-call-frames/direct-registers/verification.json'),
+ '0x0007598a':('lis2dw12_tap_threshold_y_set','native-lis-call-frames/direct-registers/verification.json'),
+ '0x000759b8':('lis2dw12_tap_threshold_z_set','native-lis-call-frames/direct-registers/verification.json'),
+ '0x000757d2':('lis2dw12_reset_get','native-lis-call-frames/direct-registers/verification.json'),
  '0x000759e6':('lis2dw12_write_reg','native-lis-registers/verification.json'),
  '0x000754dc':('r1_lis2dw12_identity_probe','native-lis-identity/verification.json'),
  '0x0007517c':('r1_lis_device_id_get','native-lis-identity/verification.json'),
@@ -37,7 +231,7 @@ VERIFIED={
  '0x000501c8':('r1_motion_bus_write_request','native-lis-identity/verification.json'),
  '0x000750e8':('r1_lis2dw12_fifo_read','native-lis-fifo-runtime/verification.json'),
  '0x000750a0':('r1_lis2dw12_fifo_burst_read','native-lis-fifo-runtime/verification.json'),
- '0x000753ac':('lis2dw12_fifo_data_level_get','native-lis-fifo-runtime/verification.json'),
+ '0x000753ac':('lis2dw12_fifo_data_level_get','native-lis-call-frames/direct-fifo/verification.json'),
  '0x000757c4':('lis2dw12_read_reg','native-lis-fifo-runtime/verification.json'),
  '0x0006f1dc':('r1_bma456w_fifo_normalized','native-motion-fifo-runtime/verification.json'),
  '0x0006f3b4':('r1_lis2dw12_fifo_normalized','native-motion-fifo-runtime/verification.json'),
@@ -206,11 +400,11 @@ VERIFIED={
  '0x0007ee7c':('r1_reset_trace_return_address_read','native-reset-retained/verification.json'),
  '0x0007ef4c':('r1_reset_trace_program_counter_read','native-reset-retained/verification.json'),
  '0x0008198c':('r1_reset_reason_decode_and_report','native-reset-decoder/verification.json'),
- '0x00050f88':('r1_gxt310_disable_pair_native','native-gxt310-mode/verification.json'),
- '0x00050f9c':('r1_gxt310_enable_pair_native','native-gxt310-mode/verification.json'),
- '0x0006f648':('r1_gxt310_switch_mode_native','native-gxt310-mode/verification.json'),
- '0x0006f804':('r1_gxt310_mode_channel0','native-gxt310-mode/verification.json'),
- '0x0006f81e':('r1_gxt310_mode_channel2','native-gxt310-mode/verification.json'),
+ '0x00050f88':('r1_gxt310_disable_pair_native','native-gxt-call-frames/verification.json'),
+ '0x00050f9c':('r1_gxt310_enable_pair_native','native-gxt-call-frames/verification.json'),
+ '0x0006f648':('r1_gxt310_switch_mode_native','native-gxt-call-frames/verification.json'),
+ '0x0006f804':('r1_gxt310_mode_channel0','native-gxt-call-frames/verification.json'),
+ '0x0006f81e':('r1_gxt310_mode_channel2','native-gxt-call-frames/verification.json'),
  '0x00050efc':('r1_gxt310_bus_release','native-gxt310-bus/verification.json'),
  '0x00050f08':('r1_i2c2_handle_cache','native-gxt310-bus/verification.json'),
  '0x00050f28':('r1_gxt310_bus_acquire','native-gxt310-bus/verification.json'),
@@ -1669,6 +1863,120 @@ def main():
     audit_native_lis_identity()
     from audit_native_lis_registers import audit as audit_native_lis_registers
     audit_native_lis_registers()
+    from audit_native_lis_setup import audit as audit_native_lis_setup
+    audit_native_lis_setup()
+    from audit_native_lis_configure import audit as audit_native_lis_configure
+    audit_native_lis_configure()
+    from audit_native_lis_call_frames import audit as audit_native_lis_call_frames
+    audit_native_lis_call_frames()
+    from audit_native_lis_aux import audit as audit_native_lis_aux
+    audit_native_lis_aux()
+    from audit_native_bma_interface import audit as audit_native_bma_interface
+    audit_native_bma_interface()
+    from audit_native_bma_reads import audit as audit_native_bma_reads
+    audit_native_bma_reads()
+    from audit_native_bma_feature_io import audit as audit_native_bma_feature_io
+    audit_native_bma_feature_io()
+    from audit_native_bma_fifo import audit as audit_native_bma_fifo
+    audit_native_bma_fifo()
+    from audit_native_bma_setup import audit as audit_native_bma_setup
+    audit_native_bma_setup()
+    from audit_native_bma_initialize import audit as audit_native_bma_initialize
+    audit_native_bma_initialize()
+    from audit_native_record_chain import audit as audit_native_record_chain
+    audit_native_record_chain()
+    from audit_native_record_providers import audit as audit_native_record_providers
+    audit_native_record_providers()
+    from audit_native_record_update import audit as audit_native_record_update
+    audit_native_record_update()
+    from audit_native_charge_notification import audit as audit_native_charge_notification
+    audit_native_charge_notification()
+    from audit_native_health_init import audit as audit_native_health_init
+    audit_native_health_init()
+    from audit_native_health_get_chain import audit as audit_native_health_get_chain
+    audit_native_health_get_chain()
+    from audit_native_health_get_encoders import audit as audit_native_health_get_encoders
+    audit_native_health_get_encoders()
+    from audit_native_health_get_dispatch import audit as audit_native_health_get_dispatch
+    audit_native_health_get_dispatch()
+    from audit_native_health_latest_samples import audit as audit_native_health_latest_samples
+    audit_native_health_latest_samples()
+    from audit_native_sleep_report import audit as audit_native_sleep_report
+    audit_native_sleep_report()
+    from audit_native_sleep_report_chain import audit as audit_native_sleep_report_chain
+    audit_native_sleep_report_chain()
+    from audit_native_sleep_storage_chain import audit as audit_native_sleep_storage_chain
+    audit_native_sleep_storage_chain()
+    from audit_native_sleep_sector_finalize import audit as audit_native_sleep_sector_finalize
+    audit_native_sleep_sector_finalize()
+    from audit_native_sleep_sector_write import audit as audit_native_sleep_sector_write
+    audit_native_sleep_sector_write()
+    from audit_native_sleep_sector_select import audit as audit_native_sleep_sector_select
+    audit_native_sleep_sector_select()
+    from audit_native_sleep_record import audit as audit_native_sleep_record
+    audit_native_sleep_record()
+    from audit_native_sleep_sync_status import audit as audit_native_sleep_sync_status
+    audit_native_sleep_sync_status()
+    from audit_native_health_service_wrappers import audit as audit_native_health_service_wrappers
+    audit_native_health_service_wrappers()
+    from audit_native_health_daily_logging import audit as audit_native_health_daily_logging
+    audit_native_health_daily_logging()
+    from audit_native_health_daily_fixture import audit as audit_native_health_daily_fixture
+    audit_native_health_daily_fixture()
+    from audit_native_subscriber_consume import audit as audit_native_subscriber_consume
+    audit_native_subscriber_consume()
+    from audit_native_subscriber_registration import audit as audit_native_subscriber_registration
+    audit_native_subscriber_registration()
+    from audit_native_subscriber_sync import audit as audit_native_subscriber_sync
+    audit_native_subscriber_sync()
+    from audit_native_event_multicast import audit as audit_native_event_multicast
+    audit_native_event_multicast()
+    from audit_native_time_update import audit as audit_native_time_update
+    audit_native_time_update()
+    from audit_native_activity_storage import audit as audit_native_activity_storage
+    audit_native_activity_storage()
+    from audit_native_calendar_frames import audit as audit_native_calendar_frames
+    audit_native_calendar_frames()
+    from audit_native_health_average import audit as audit_native_health_average
+    audit_native_health_average()
+    from audit_native_health_sample_storage import audit as audit_native_health_sample_storage
+    audit_native_health_sample_storage()
+    from audit_native_flashdb_control import audit as audit_native_flashdb_control
+    audit_native_flashdb_control()
+    from audit_native_internal_flash_read_frames import audit as audit_native_internal_flash_read_frames
+    audit_native_internal_flash_read_frames()
+    from audit_native_fal_read_frames import audit as audit_native_fal_read_frames
+    audit_native_fal_read_frames()
+    from audit_native_fal_device_lookup import audit as audit_native_fal_device_lookup
+    audit_native_fal_device_lookup()
+    from audit_native_fal_partition_read import audit as audit_native_fal_partition_read
+    audit_native_fal_partition_read()
+    from audit_native_flashdb_sector_read import audit as audit_native_flashdb_sector_read
+    audit_native_flashdb_sector_read()
+    from audit_native_flashdb_log_read import audit as audit_native_flashdb_log_read
+    audit_native_flashdb_log_read()
+    from audit_native_flashdb_iterator import audit as audit_native_flashdb_iterator
+    audit_native_flashdb_iterator()
+    from audit_native_flashdb_query_count import audit as audit_native_flashdb_query_count
+    audit_native_flashdb_query_count()
+    from audit_native_health_notification_stages import audit as audit_native_health_notification_stages
+    audit_native_health_notification_stages()
+    from audit_native_health_notification_throttle import audit as audit_native_health_notification_throttle
+    audit_native_health_notification_throttle()
+    from audit_native_health_event_consumers import audit as audit_native_health_event_consumers
+    audit_native_health_event_consumers()
+    from audit_native_event_callbacks import audit as audit_native_event_callbacks
+    audit_native_event_callbacks()
+    from audit_native_event_table_prefixes import audit as audit_native_event_table_prefixes
+    audit_native_event_table_prefixes()
+    from audit_native_gxt_call_frames import audit as audit_native_gxt_call_frames
+    audit_native_gxt_call_frames()
+    from audit_native_temperature import audit as audit_native_temperature
+    audit_native_temperature()
+    from audit_native_qma_configuration import audit as audit_native_qma_configuration
+    audit_native_qma_configuration()
+    from audit_native_qma_transport import audit as audit_native_qma_transport
+    audit_native_qma_transport()
     from audit_native_health_settings import audit as audit_native_health_settings
     audit_native_health_settings()
     from audit_native_system_settings import audit as audit_native_system_settings

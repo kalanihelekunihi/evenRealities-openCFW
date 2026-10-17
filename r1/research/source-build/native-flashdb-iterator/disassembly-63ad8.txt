@@ -1,0 +1,179 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00063ad8 <r1_stock_i2c5_acquire+0x13600>:
+   63ad8:	e92d 4fff 	stmdb	sp!, {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+   63adc:	b09f      	sub	sp, #124	@ 0x7c
+   63ade:	f04f 0900 	mov.w	r9, #0
+   63ae2:	4606      	mov	r6, r0
+   63ae4:	f8cd 9068 	str.w	r9, [sp, #104]	@ 0x68
+   63ae8:	7e00      	ldrb	r0, [r0, #24]
+   63aea:	4690      	mov	r8, r2
+   63aec:	460c      	mov	r4, r1
+   63aee:	b970      	cbnz	r0, 63b0e <r1_stock_i2c5_acquire+0x13636>
+   63af0:	a05b      	add	r0, pc, #364	@ (adr r0, 63c60 <r1_stock_i2c5_acquire+0x13788>)
+   63af2:	f7d4 fab5 	bl	38060 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x11060>
+   63af6:	4630      	mov	r0, r6
+   63af8:	f7db fa8c 	bl	3f014 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x18014>
+   63afc:	4602      	mov	r2, r0
+   63afe:	a05c      	add	r0, pc, #368	@ (adr r0, 63c70 <r1_stock_i2c5_acquire+0x13798>)
+   63b00:	6831      	ldr	r1, [r6, #0]
+   63b02:	f7d4 faad 	bl	38060 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x11060>
+   63b06:	a05d      	add	r0, pc, #372	@ (adr r0, 63c7c <r1_stock_i2c5_acquire+0x137a4>)
+   63b08:	6831      	ldr	r1, [r6, #0]
+   63b0a:	f7d4 faa9 	bl	38060 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x11060>
+   63b0e:	4544      	cmp	r4, r8
+   63b10:	dc05      	bgt.n	63b1e <r1_stock_i2c5_acquire+0x13646>
+   63b12:	6970      	ldr	r0, [r6, #20]
+   63b14:	900d      	str	r0, [sp, #52]	@ 0x34
+   63b16:	f8df b18c 	ldr.w	fp, [pc, #396]	@ 63ca4 <r1_stock_i2c5_acquire+0x137cc>
+   63b1a:	4863      	ldr	r0, [pc, #396]	@ (63ca8 <r1_stock_i2c5_acquire+0x137d0>)
+   63b1c:	e004      	b.n	63b28 <r1_stock_i2c5_acquire+0x13650>
+   63b1e:	6af0      	ldr	r0, [r6, #44]	@ 0x2c
+   63b20:	900d      	str	r0, [sp, #52]	@ 0x34
+   63b22:	f8df b188 	ldr.w	fp, [pc, #392]	@ 63cac <r1_stock_i2c5_acquire+0x137d4>
+   63b26:	4862      	ldr	r0, [pc, #392]	@ (63cb0 <r1_stock_i2c5_acquire+0x137d8>)
+   63b28:	4682      	mov	sl, r0
+   63b2a:	9822      	ldr	r0, [sp, #136]	@ 0x88
+   63b2c:	2800      	cmp	r0, #0
+   63b2e:	d022      	beq.n	63b76 <r1_stock_i2c5_acquire+0x1369e>
+   63b30:	9d0d      	ldr	r5, [sp, #52]	@ 0x34
+   63b32:	69f1      	ldr	r1, [r6, #28]
+   63b34:	b109      	cbz	r1, 63b3a <r1_stock_i2c5_acquire+0x13662>
+   63b36:	4630      	mov	r0, r6
+   63b38:	4788      	blx	r1
+   63b3a:	68f1      	ldr	r1, [r6, #12]
+   63b3c:	2300      	movs	r3, #0
+   63b3e:	4489      	add	r9, r1
+   63b40:	aa02      	add	r2, sp, #8
+   63b42:	4629      	mov	r1, r5
+   63b44:	4630      	mov	r0, r6
+   63b46:	f024 f86d 	bl	87c24 <_stack+0x7c24>
+   63b4a:	b938      	cbnz	r0, 63b5c <r1_stock_i2c5_acquire+0x13684>
+   63b4c:	f89d 0009 	ldrb.w	r0, [sp, #9]
+   63b50:	2802      	cmp	r0, #2
+   63b52:	d013      	beq.n	63b7c <r1_stock_i2c5_acquire+0x136a4>
+   63b54:	2803      	cmp	r0, #3
+   63b56:	d017      	beq.n	63b88 <r1_stock_i2c5_acquire+0x136b0>
+   63b58:	2801      	cmp	r0, #1
+   63b5a:	d007      	beq.n	63b6c <r1_stock_i2c5_acquire+0x13694>
+   63b5c:	464a      	mov	r2, r9
+   63b5e:	a902      	add	r1, sp, #8
+   63b60:	4630      	mov	r0, r6
+   63b62:	465b      	mov	r3, fp
+   63b64:	4798      	blx	r3
+   63b66:	4605      	mov	r5, r0
+   63b68:	1c40      	adds	r0, r0, #1
+   63b6a:	d1e6      	bne.n	63b3a <r1_stock_i2c5_acquire+0x13662>
+   63b6c:	6a31      	ldr	r1, [r6, #32]
+   63b6e:	2900      	cmp	r1, #0
+   63b70:	d001      	beq.n	63b76 <r1_stock_i2c5_acquire+0x1369e>
+   63b72:	4630      	mov	r0, r6
+   63b74:	4788      	blx	r1
+   63b76:	b023      	add	sp, #140	@ 0x8c
+   63b78:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+   63b7c:	2228      	movs	r2, #40	@ 0x28
+   63b7e:	f106 0128 	add.w	r1, r6, #40	@ 0x28
+   63b82:	a802      	add	r0, sp, #8
+   63b84:	f7c3 fdea 	bl	2775c <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x75c>
+   63b88:	981a      	ldr	r0, [sp, #104]	@ 0x68
+   63b8a:	b9a8      	cbnz	r0, 63bb8 <r1_stock_i2c5_acquire+0x136e0>
+   63b8c:	4544      	cmp	r4, r8
+   63b8e:	dc08      	bgt.n	63ba2 <r1_stock_i2c5_acquire+0x136ca>
+   63b90:	980d      	ldr	r0, [sp, #52]	@ 0x34
+   63b92:	4285      	cmp	r5, r0
+   63b94:	d102      	bne.n	63b9c <r1_stock_i2c5_acquire+0x136c4>
+   63b96:	9805      	ldr	r0, [sp, #20]
+   63b98:	42a0      	cmp	r0, r4
+   63b9a:	da0d      	bge.n	63bb8 <r1_stock_i2c5_acquire+0x136e0>
+   63b9c:	9806      	ldr	r0, [sp, #24]
+   63b9e:	42a0      	cmp	r0, r4
+   63ba0:	da0a      	bge.n	63bb8 <r1_stock_i2c5_acquire+0x136e0>
+   63ba2:	4544      	cmp	r4, r8
+   63ba4:	ddda      	ble.n	63b5c <r1_stock_i2c5_acquire+0x13684>
+   63ba6:	980d      	ldr	r0, [sp, #52]	@ 0x34
+   63ba8:	4285      	cmp	r5, r0
+   63baa:	d102      	bne.n	63bb2 <r1_stock_i2c5_acquire+0x136da>
+   63bac:	9806      	ldr	r0, [sp, #24]
+   63bae:	42a0      	cmp	r0, r4
+   63bb0:	dd02      	ble.n	63bb8 <r1_stock_i2c5_acquire+0x136e0>
+   63bb2:	9805      	ldr	r0, [sp, #20]
+   63bb4:	42a0      	cmp	r0, r4
+   63bb6:	dcd1      	bgt.n	63b5c <r1_stock_i2c5_acquire+0x13684>
+   63bb8:	2001      	movs	r0, #1
+   63bba:	9d03      	ldr	r5, [sp, #12]
+   63bbc:	9f07      	ldr	r7, [sp, #28]
+   63bbe:	3550      	adds	r5, #80	@ 0x50
+   63bc0:	901a      	str	r0, [sp, #104]	@ 0x68
+   63bc2:	1b78      	subs	r0, r7, r5
+   63bc4:	eb00 70d0 	add.w	r0, r0, r0, lsr #31
+   63bc8:	211f      	movs	r1, #31
+   63bca:	eb01 0160 	add.w	r1, r1, r0, asr #1
+   63bce:	f001 011f 	and.w	r1, r1, #31
+   63bd2:	ebc1 0060 	rsb	r0, r1, r0, asr #1
+   63bd6:	4428      	add	r0, r5
+   63bd8:	301f      	adds	r0, #31
+   63bda:	9017      	str	r0, [sp, #92]	@ 0x5c
+   63bdc:	a914      	add	r1, sp, #80	@ 0x50
+   63bde:	4630      	mov	r0, r6
+   63be0:	f024 f918 	bl	87e14 <_stack+0x7e14>
+   63be4:	9915      	ldr	r1, [sp, #84]	@ 0x54
+   63be6:	42a1      	cmp	r1, r4
+   63be8:	da03      	bge.n	63bf2 <r1_stock_i2c5_acquire+0x1371a>
+   63bea:	9d17      	ldr	r5, [sp, #92]	@ 0x5c
+   63bec:	f105 0520 	add.w	r5, r5, #32
+   63bf0:	e003      	b.n	63bfa <r1_stock_i2c5_acquire+0x13722>
+   63bf2:	dd33      	ble.n	63c5c <r1_stock_i2c5_acquire+0x13784>
+   63bf4:	9f17      	ldr	r7, [sp, #92]	@ 0x5c
+   63bf6:	f1a7 0720 	sub.w	r7, r7, #32
+   63bfa:	42bd      	cmp	r5, r7
+   63bfc:	dde1      	ble.n	63bc2 <r1_stock_i2c5_acquire+0x136ea>
+   63bfe:	4544      	cmp	r4, r8
+   63c00:	dd08      	ble.n	63c14 <r1_stock_i2c5_acquire+0x1373c>
+   63c02:	a914      	add	r1, sp, #80	@ 0x50
+   63c04:	4630      	mov	r0, r6
+   63c06:	9517      	str	r5, [sp, #92]	@ 0x5c
+   63c08:	f024 f904 	bl	87e14 <_stack+0x7e14>
+   63c0c:	9915      	ldr	r1, [sp, #84]	@ 0x54
+   63c0e:	42a1      	cmp	r1, r4
+   63c10:	dd00      	ble.n	63c14 <r1_stock_i2c5_acquire+0x1373c>
+   63c12:	3d20      	subs	r5, #32
+   63c14:	9512      	str	r5, [sp, #72]	@ 0x48
+   63c16:	a90f      	add	r1, sp, #60	@ 0x3c
+   63c18:	4630      	mov	r0, r6
+   63c1a:	f024 f8fb 	bl	87e14 <_stack+0x7e14>
+   63c1e:	f89d 003c 	ldrb.w	r0, [sp, #60]	@ 0x3c
+   63c22:	b198      	cbz	r0, 63c4c <r1_stock_i2c5_acquire+0x13774>
+   63c24:	4544      	cmp	r4, r8
+   63c26:	dc04      	bgt.n	63c32 <r1_stock_i2c5_acquire+0x1375a>
+   63c28:	9810      	ldr	r0, [sp, #64]	@ 0x40
+   63c2a:	42a0      	cmp	r0, r4
+   63c2c:	db01      	blt.n	63c32 <r1_stock_i2c5_acquire+0x1375a>
+   63c2e:	4540      	cmp	r0, r8
+   63c30:	dd06      	ble.n	63c40 <r1_stock_i2c5_acquire+0x13768>
+   63c32:	4544      	cmp	r4, r8
+   63c34:	dd9a      	ble.n	63b6c <r1_stock_i2c5_acquire+0x13694>
+   63c36:	9810      	ldr	r0, [sp, #64]	@ 0x40
+   63c38:	42a0      	cmp	r0, r4
+   63c3a:	dc97      	bgt.n	63b6c <r1_stock_i2c5_acquire+0x13694>
+   63c3c:	4540      	cmp	r0, r8
+   63c3e:	db95      	blt.n	63b6c <r1_stock_i2c5_acquire+0x13694>
+   63c40:	9a22      	ldr	r2, [sp, #136]	@ 0x88
+   63c42:	a80f      	add	r0, sp, #60	@ 0x3c
+   63c44:	992c      	ldr	r1, [sp, #176]	@ 0xb0
+   63c46:	4790      	blx	r2
+   63c48:	2800      	cmp	r0, #0
+   63c4a:	d18f      	bne.n	63b6c <r1_stock_i2c5_acquire+0x13694>
+   63c4c:	a90f      	add	r1, sp, #60	@ 0x3c
+   63c4e:	a802      	add	r0, sp, #8
+   63c50:	4652      	mov	r2, sl
+   63c52:	4790      	blx	r2
+   63c54:	9012      	str	r0, [sp, #72]	@ 0x48
+   63c56:	1c40      	adds	r0, r0, #1
+   63c58:	d1dd      	bne.n	63c16 <r1_stock_i2c5_acquire+0x1373e>
+   63c5a:	e77f      	b.n	63b5c <r1_stock_i2c5_acquire+0x13684>
+   63c5c:	9d17      	ldr	r5, [sp, #92]	@ 0x5c
+   63c5e:	e7d9      	b.n	63c14 <r1_stock_i2c5_acquire+0x1373c>

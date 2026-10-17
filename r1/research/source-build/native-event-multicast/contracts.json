@@ -1,0 +1,416 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "analysis_elf_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "frozen_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "generator_sha256": "6d61eb36d665974af9ec807fd5d63f56d08957d7c5355886904e2d0401ae7621",
+  "source_sha256": "40f71ba2792abba6b15cb09d96ce2015fa6df6a3b12735082eb9373719c524f1",
+  "bodies": [
+    {
+      "address": "0x8b028",
+      "code_bytes": 202,
+      "source_span_bytes": 212,
+      "symbol": "r1_event_service_0008b028",
+      "instructions": [
+        {
+          "address": "0x8b028",
+          "size": 4,
+          "assembly": "stmdb\tsp!, {r0, r1, r2, r4, r5, r6, r7, r8, r9, sl, fp, lr}"
+        },
+        {
+          "address": "0x8b02c",
+          "size": 2,
+          "assembly": "ldr\tr5, [pc, #196]"
+        },
+        {
+          "address": "0x8b02e",
+          "size": 2,
+          "assembly": "mov\tr4, r0"
+        },
+        {
+          "address": "0x8b030",
+          "size": 2,
+          "assembly": "mov\tr7, r2"
+        },
+        {
+          "address": "0x8b032",
+          "size": 4,
+          "assembly": "ldr.w\tr0, [r5, r4, lsl #2]"
+        },
+        {
+          "address": "0x8b036",
+          "size": 2,
+          "assembly": "cmp\tr0, #0"
+        },
+        {
+          "address": "0x8b038",
+          "size": 2,
+          "assembly": "beq.n\t8b0e6 <_stack+0xb0e6>"
+        },
+        {
+          "address": "0x8b03a",
+          "size": 4,
+          "assembly": "bl\t5dcb0 <r1_stock_i2c5_acquire+0xd7d8>"
+        },
+        {
+          "address": "0x8b03e",
+          "size": 2,
+          "assembly": "cmp\tr7, #4"
+        },
+        {
+          "address": "0x8b040",
+          "size": 2,
+          "assembly": "bhi.n\t8b058 <_stack+0xb058>"
+        },
+        {
+          "address": "0x8b042",
+          "size": 4,
+          "assembly": "ldr.w\tr0, [r5, r4, lsl #2]"
+        },
+        {
+          "address": "0x8b046",
+          "size": 2,
+          "assembly": "movs\tr1, #0"
+        },
+        {
+          "address": "0x8b048",
+          "size": 2,
+          "assembly": "mov\tr2, r7"
+        },
+        {
+          "address": "0x8b04a",
+          "size": 2,
+          "assembly": "str\tr1, [r0, #8]"
+        },
+        {
+          "address": "0x8b04c",
+          "size": 4,
+          "assembly": "ldr.w\tr0, [r5, r4, lsl #2]"
+        },
+        {
+          "address": "0x8b050",
+          "size": 2,
+          "assembly": "ldr\tr1, [sp, #4]"
+        },
+        {
+          "address": "0x8b052",
+          "size": 2,
+          "assembly": "adds\tr0, #8"
+        },
+        {
+          "address": "0x8b054",
+          "size": 4,
+          "assembly": "bl\t2775c <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x75c>"
+        },
+        {
+          "address": "0x8b058",
+          "size": 4,
+          "assembly": "bl\t7d814 <r1_stock_gpio_pin_set+0x43e0>"
+        },
+        {
+          "address": "0x8b05c",
+          "size": 2,
+          "assembly": "mov\tr6, r0"
+        },
+        {
+          "address": "0x8b05e",
+          "size": 4,
+          "assembly": "ldr.w\tr0, [r5, r4, lsl #2]"
+        },
+        {
+          "address": "0x8b062",
+          "size": 4,
+          "assembly": "mov.w\tr8, #0"
+        },
+        {
+          "address": "0x8b066",
+          "size": 2,
+          "assembly": "ldr\tr5, [r0, #0]"
+        },
+        {
+          "address": "0x8b068",
+          "size": 4,
+          "assembly": "add.w\tr0, r7, #8"
+        },
+        {
+          "address": "0x8b06c",
+          "size": 2,
+          "assembly": "uxth\tr0, r0"
+        },
+        {
+          "address": "0x8b06e",
+          "size": 2,
+          "assembly": "mov\tsl, r0"
+        },
+        {
+          "address": "0x8b070",
+          "size": 2,
+          "assembly": "cbz\tr5, 8b0e0 <_stack+0xb0e0>"
+        },
+        {
+          "address": "0x8b072",
+          "size": 4,
+          "assembly": "bl\t855a0 <_stack+0x55a0>"
+        },
+        {
+          "address": "0x8b076",
+          "size": 2,
+          "assembly": "movs\tr4, r0"
+        },
+        {
+          "address": "0x8b078",
+          "size": 2,
+          "assembly": "beq.n\t8b088 <_stack+0xb088>"
+        },
+        {
+          "address": "0x8b07a",
+          "size": 2,
+          "assembly": "str\tr5, [r4, #0]"
+        },
+        {
+          "address": "0x8b07c",
+          "size": 2,
+          "assembly": "strh\tr7, [r4, #4]"
+        },
+        {
+          "address": "0x8b07e",
+          "size": 2,
+          "assembly": "mov\tr2, r7"
+        },
+        {
+          "address": "0x8b080",
+          "size": 2,
+          "assembly": "adds\tr0, r4, #6"
+        },
+        {
+          "address": "0x8b082",
+          "size": 2,
+          "assembly": "ldr\tr1, [sp, #4]"
+        },
+        {
+          "address": "0x8b084",
+          "size": 4,
+          "assembly": "bl\t2775c <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x75c>"
+        },
+        {
+          "address": "0x8b088",
+          "size": 2,
+          "assembly": "ldr\tr7, [pc, #108]"
+        },
+        {
+          "address": "0x8b08a",
+          "size": 4,
+          "assembly": "mov.w\tr9, #1"
+        },
+        {
+          "address": "0x8b08e",
+          "size": 2,
+          "assembly": "ldr\tr2, [r5, #0]"
+        },
+        {
+          "address": "0x8b090",
+          "size": 2,
+          "assembly": "cbz\tr2, 8b0d2 <_stack+0xb0d2>"
+        },
+        {
+          "address": "0x8b092",
+          "size": 2,
+          "assembly": "ldr\tr1, [r5, #4]"
+        },
+        {
+          "address": "0x8b094",
+          "size": 2,
+          "assembly": "ldr\tr0, [r1, #0]"
+        },
+        {
+          "address": "0x8b096",
+          "size": 2,
+          "assembly": "cmp\tr0, r6"
+        },
+        {
+          "address": "0x8b098",
+          "size": 2,
+          "assembly": "bne.n\t8b0a0 <_stack+0xb0a0>"
+        },
+        {
+          "address": "0x8b09a",
+          "size": 2,
+          "assembly": "ldr\tr0, [sp, #4]"
+        },
+        {
+          "address": "0x8b09c",
+          "size": 2,
+          "assembly": "blx\tr2"
+        },
+        {
+          "address": "0x8b09e",
+          "size": 2,
+          "assembly": "b.n\t8b0d2 <_stack+0xb0d2>"
+        },
+        {
+          "address": "0x8b0a0",
+          "size": 4,
+          "assembly": "movs.w\tr0, #0"
+        },
+        {
+          "address": "0x8b0a4",
+          "size": 4,
+          "assembly": "ldr.w\tr2, [r7, r0, lsl #3]"
+        },
+        {
+          "address": "0x8b0a8",
+          "size": 2,
+          "assembly": "cmp\tr2, r1"
+        },
+        {
+          "address": "0x8b0aa",
+          "size": 2,
+          "assembly": "bne.n\t8b0ea <_stack+0xb0ea>"
+        },
+        {
+          "address": "0x8b0ac",
+          "size": 2,
+          "assembly": "sxtb\tr0, r0"
+        },
+        {
+          "address": "0x8b0ae",
+          "size": 2,
+          "assembly": "adds\tr1, r0, #1"
+        },
+        {
+          "address": "0x8b0b0",
+          "size": 2,
+          "assembly": "beq.n\t8b0d2 <_stack+0xb0d2>"
+        },
+        {
+          "address": "0x8b0b2",
+          "size": 4,
+          "assembly": "lsl.w\tfp, r9, r0"
+        },
+        {
+          "address": "0x8b0b6",
+          "size": 4,
+          "assembly": "tst.w\tfp, r8"
+        },
+        {
+          "address": "0x8b0ba",
+          "size": 2,
+          "assembly": "bne.n\t8b0d2 <_stack+0xb0d2>"
+        },
+        {
+          "address": "0x8b0bc",
+          "size": 2,
+          "assembly": "cbz\tr4, 8b0ce <_stack+0xb0ce>"
+        },
+        {
+          "address": "0x8b0be",
+          "size": 4,
+          "assembly": "add.w\tr0, r7, r0, lsl #3"
+        },
+        {
+          "address": "0x8b0c2",
+          "size": 2,
+          "assembly": "mov\tr2, sl"
+        },
+        {
+          "address": "0x8b0c4",
+          "size": 2,
+          "assembly": "ldrh\tr0, [r0, #4]"
+        },
+        {
+          "address": "0x8b0c6",
+          "size": 2,
+          "assembly": "mov\tr1, r4"
+        },
+        {
+          "address": "0x8b0c8",
+          "size": 2,
+          "assembly": "uxth\tr0, r0"
+        },
+        {
+          "address": "0x8b0ca",
+          "size": 4,
+          "assembly": "bl\t8d8fc <_stack+0xd8fc>"
+        },
+        {
+          "address": "0x8b0ce",
+          "size": 4,
+          "assembly": "orr.w\tr8, fp, r8"
+        },
+        {
+          "address": "0x8b0d2",
+          "size": 2,
+          "assembly": "ldr\tr5, [r5, #8]"
+        },
+        {
+          "address": "0x8b0d4",
+          "size": 2,
+          "assembly": "cmp\tr5, #0"
+        },
+        {
+          "address": "0x8b0d6",
+          "size": 2,
+          "assembly": "bne.n\t8b08e <_stack+0xb08e>"
+        },
+        {
+          "address": "0x8b0d8",
+          "size": 2,
+          "assembly": "cbz\tr4, 8b0e0 <_stack+0xb0e0>"
+        },
+        {
+          "address": "0x8b0da",
+          "size": 2,
+          "assembly": "mov\tr0, r4"
+        },
+        {
+          "address": "0x8b0dc",
+          "size": 4,
+          "assembly": "bl\t95d48 <_stack+0x15d48>"
+        },
+        {
+          "address": "0x8b0e0",
+          "size": 4,
+          "assembly": "bl\t5dcd4 <r1_stock_i2c5_acquire+0xd7fc>"
+        },
+        {
+          "address": "0x8b0e4",
+          "size": 2,
+          "assembly": "movs\tr0, #1"
+        },
+        {
+          "address": "0x8b0e6",
+          "size": 4,
+          "assembly": "ldmia.w\tsp!, {r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, pc}"
+        },
+        {
+          "address": "0x8b0ea",
+          "size": 2,
+          "assembly": "adds\tr0, r0, #1"
+        },
+        {
+          "address": "0x8b0ec",
+          "size": 2,
+          "assembly": "cmp\tr0, #2"
+        },
+        {
+          "address": "0x8b0ee",
+          "size": 2,
+          "assembly": "bcc.n\t8b0a4 <_stack+0xb0a4>"
+        },
+        {
+          "address": "0x8b0f0",
+          "size": 2,
+          "assembly": "b.n\t8b0d2 <_stack+0xb0d2>"
+        }
+      ],
+      "disassembly_sha256": "cba4e35869f96c73aee302fff471bc79b67c22f31be64bdd3e56476bdf378574"
+    }
+  ],
+  "native_code_bytes": 202,
+  "native_span_bytes": 212,
+  "unresolved_config": {
+    "r1_subscriber_roots": "0x20015708; extent and initialized owner unresolved",
+    "r1_subscriber_routes": "0x99ba8; two stride-8 records observed; symbolic task context ownership unresolved"
+  },
+  "new_ram_state_bytes": 0,
+  "whole_image_complete": false
+}

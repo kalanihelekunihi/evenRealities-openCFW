@@ -1,0 +1,28 @@
+Traceback (most recent call last):
+  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_health_event_consumers.py", line 49, in main
+    try:u.emu_start((syms[name] if side else case['entry'])|1,0x20000100,count=10000)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/r1-source-venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py", line 769, in emu_start
+    raise self._hook_exception
+  File "/private/tmp/r1-source-venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py", line 363, in wrapper
+    return func(uc, *args, **kwargs)
+  File "/private/tmp/r1-source-venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py", line 1063, in __hook_code_cb
+    callback(uc, address, size, user_data)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_health_event_consumers.py", line 21, in hook
+    kind='storage';extra=[bytes(u.mem_read(args[0],8)).hex()];st['storage'].append([STORAGE[a],extra[0]])
+                                ~~~~~~~~~~^^^^^^^^^^^
+  File "/private/tmp/r1-source-venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py", line 980, in mem_read
+    raise UcError(status, address, size)
+unicorn.unicorn_py3.unicorn.UcError: Invalid memory read (UC_ERR_READ_UNMAPPED)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_health_event_consumers.py", line 65, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_health_event_consumers.py", line 50, in main
+    except UcError:assert st['fault'],(case,side,hex(u.reg_read(UC_ARM_REG_PC)))
+                          ~~^^^^^^^^^
+AssertionError: ({'entry': 567284, 'value': 0, 'oldtime': 0, 'now': 2147483647, 'payload': 537133055, 'length': 8, 'result': 0, 'mutation': 0, 'mutate_record': 0, 'modes': [0]}, 0, '0x5aa14')

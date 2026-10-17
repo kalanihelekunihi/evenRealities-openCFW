@@ -1,0 +1,35 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00082ef4 <r1_stock_gpio_pin_set+0x9ac0>:
+   82ef4:	e92d 41fc 	stmdb	sp!, {r2, r3, r4, r5, r6, r7, r8, lr}
+   82ef8:	f5a0 467f 	sub.w	r6, r0, #65280	@ 0xff00
+   82efc:	e9dd 4508 	ldrd	r4, r5, [sp, #32]
+   82f00:	3eff      	subs	r6, #255	@ 0xff
+   82f02:	d01b      	beq.n	82f3c <_stack+0x2f3c>
+   82f04:	2700      	movs	r7, #0
+   82f06:	2602      	movs	r6, #2
+   82f08:	9700      	str	r7, [sp, #0]
+   82f0a:	f88d 6001 	strb.w	r6, [sp, #1]
+   82f0e:	0a0e      	lsrs	r6, r1, #8
+   82f10:	f88d 6002 	strb.w	r6, [sp, #2]
+   82f14:	f88d 1003 	strb.w	r1, [sp, #3]
+   82f18:	f89d 1000 	ldrb.w	r1, [sp]
+   82f1c:	f082 0201 	eor.w	r2, r2, #1
+   82f20:	4311      	orrs	r1, r2
+   82f22:	9701      	str	r7, [sp, #4]
+   82f24:	f041 0102 	orr.w	r1, r1, #2
+   82f28:	f8ad 3004 	strh.w	r3, [sp, #4]
+   82f2c:	f88d 1000 	strb.w	r1, [sp]
+   82f30:	462b      	mov	r3, r5
+   82f32:	4622      	mov	r2, r4
+   82f34:	4669      	mov	r1, sp
+   82f36:	f7ff fcbd 	bl	828b4 <_stack+0x28b4>
+   82f3a:	b110      	cbz	r0, 82f42 <_stack+0x2f42>
+   82f3c:	2000      	movs	r0, #0
+   82f3e:	e8bd 81fc 	ldmia.w	sp!, {r2, r3, r4, r5, r6, r7, r8, pc}
+   82f42:	2001      	movs	r0, #1
+   82f44:	e7fb      	b.n	82f3e <_stack+0x2f3e>

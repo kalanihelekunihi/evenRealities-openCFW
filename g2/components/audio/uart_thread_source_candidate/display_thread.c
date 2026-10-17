@@ -32,7 +32,7 @@ extern void audio_uart_display_service_sync(void); /* 0x4228a */
 extern void audio_uart_display_current_set(uint32_t,uint32_t); /* 0x42456 */
 extern void audio_uart_display_channel_set(uint32_t); /* 0x65d7c */
 extern uint32_t audio_uart_display_process(void); /* 0x64344 */
-extern void audio_uart_display_sync_info(void); /* 0x71fa4 */
+extern uint32_t audio_uart_display_sync_info(void); /* native 0x471fa4 */
 extern int32_t audio_uart_display_housekeep(void); /* 0x7243a */
 extern void audio_uart_display_notify(uint32_t,uint32_t,const void *,uint32_t); /* 0x4228a */
 extern void audio_uart_display_quiesce(void); /* 0x65b10 */

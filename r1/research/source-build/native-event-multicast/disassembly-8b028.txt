@@ -1,0 +1,85 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0008b028 <r1_stock_gpio_pin_set+0x11bf4>:
+   8b028:	e92d 4ff7 	stmdb	sp!, {r0, r1, r2, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+   8b02c:	4d31      	ldr	r5, [pc, #196]	@ (8b0f4 <_stack+0xb0f4>)
+   8b02e:	4604      	mov	r4, r0
+   8b030:	4617      	mov	r7, r2
+   8b032:	f855 0024 	ldr.w	r0, [r5, r4, lsl #2]
+   8b036:	2800      	cmp	r0, #0
+   8b038:	d055      	beq.n	8b0e6 <_stack+0xb0e6>
+   8b03a:	f7d2 fe39 	bl	5dcb0 <r1_stock_i2c5_acquire+0xd7d8>
+   8b03e:	2f04      	cmp	r7, #4
+   8b040:	d80a      	bhi.n	8b058 <_stack+0xb058>
+   8b042:	f855 0024 	ldr.w	r0, [r5, r4, lsl #2]
+   8b046:	2100      	movs	r1, #0
+   8b048:	463a      	mov	r2, r7
+   8b04a:	6081      	str	r1, [r0, #8]
+   8b04c:	f855 0024 	ldr.w	r0, [r5, r4, lsl #2]
+   8b050:	9901      	ldr	r1, [sp, #4]
+   8b052:	3008      	adds	r0, #8
+   8b054:	f79c fb82 	bl	2775c <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x75c>
+   8b058:	f7f2 fbdc 	bl	7d814 <r1_stock_gpio_pin_set+0x43e0>
+   8b05c:	4606      	mov	r6, r0
+   8b05e:	f855 0024 	ldr.w	r0, [r5, r4, lsl #2]
+   8b062:	f04f 0800 	mov.w	r8, #0
+   8b066:	6805      	ldr	r5, [r0, #0]
+   8b068:	f107 0008 	add.w	r0, r7, #8
+   8b06c:	b280      	uxth	r0, r0
+   8b06e:	4682      	mov	sl, r0
+   8b070:	b3b5      	cbz	r5, 8b0e0 <_stack+0xb0e0>
+   8b072:	f7fa fa95 	bl	855a0 <_stack+0x55a0>
+   8b076:	0004      	movs	r4, r0
+   8b078:	d006      	beq.n	8b088 <_stack+0xb088>
+   8b07a:	6025      	str	r5, [r4, #0]
+   8b07c:	80a7      	strh	r7, [r4, #4]
+   8b07e:	463a      	mov	r2, r7
+   8b080:	1da0      	adds	r0, r4, #6
+   8b082:	9901      	ldr	r1, [sp, #4]
+   8b084:	f79c fb6a 	bl	2775c <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x75c>
+   8b088:	4f1b      	ldr	r7, [pc, #108]	@ (8b0f8 <_stack+0xb0f8>)
+   8b08a:	f04f 0901 	mov.w	r9, #1
+   8b08e:	682a      	ldr	r2, [r5, #0]
+   8b090:	b1fa      	cbz	r2, 8b0d2 <_stack+0xb0d2>
+   8b092:	6869      	ldr	r1, [r5, #4]
+   8b094:	6808      	ldr	r0, [r1, #0]
+   8b096:	42b0      	cmp	r0, r6
+   8b098:	d102      	bne.n	8b0a0 <_stack+0xb0a0>
+   8b09a:	9801      	ldr	r0, [sp, #4]
+   8b09c:	4790      	blx	r2
+   8b09e:	e018      	b.n	8b0d2 <_stack+0xb0d2>
+   8b0a0:	f05f 0000 	movs.w	r0, #0
+   8b0a4:	f857 2030 	ldr.w	r2, [r7, r0, lsl #3]
+   8b0a8:	428a      	cmp	r2, r1
+   8b0aa:	d11e      	bne.n	8b0ea <_stack+0xb0ea>
+   8b0ac:	b240      	sxtb	r0, r0
+   8b0ae:	1c41      	adds	r1, r0, #1
+   8b0b0:	d00f      	beq.n	8b0d2 <_stack+0xb0d2>
+   8b0b2:	fa09 fb00 	lsl.w	fp, r9, r0
+   8b0b6:	ea1b 0f08 	tst.w	fp, r8
+   8b0ba:	d10a      	bne.n	8b0d2 <_stack+0xb0d2>
+   8b0bc:	b13c      	cbz	r4, 8b0ce <_stack+0xb0ce>
+   8b0be:	eb07 00c0 	add.w	r0, r7, r0, lsl #3
+   8b0c2:	4652      	mov	r2, sl
+   8b0c4:	8880      	ldrh	r0, [r0, #4]
+   8b0c6:	4621      	mov	r1, r4
+   8b0c8:	b280      	uxth	r0, r0
+   8b0ca:	f002 fc17 	bl	8d8fc <_stack+0xd8fc>
+   8b0ce:	ea4b 0808 	orr.w	r8, fp, r8
+   8b0d2:	68ad      	ldr	r5, [r5, #8]
+   8b0d4:	2d00      	cmp	r5, #0
+   8b0d6:	d1da      	bne.n	8b08e <_stack+0xb08e>
+   8b0d8:	b114      	cbz	r4, 8b0e0 <_stack+0xb0e0>
+   8b0da:	4620      	mov	r0, r4
+   8b0dc:	f00a fe34 	bl	95d48 <_stack+0x15d48>
+   8b0e0:	f7d2 fdf8 	bl	5dcd4 <r1_stock_i2c5_acquire+0xd7fc>
+   8b0e4:	2001      	movs	r0, #1
+   8b0e6:	e8bd 8ffe 	ldmia.w	sp!, {r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, pc}
+   8b0ea:	1c40      	adds	r0, r0, #1
+   8b0ec:	2802      	cmp	r0, #2
+   8b0ee:	d3d9      	bcc.n	8b0a4 <_stack+0xb0a4>
+   8b0f0:	e7ef      	b.n	8b0d2 <_stack+0xb0d2>

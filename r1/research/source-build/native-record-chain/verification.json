@@ -1,0 +1,66 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "workflows": 19776,
+  "counts": {
+    "workflows": 19776,
+    "memcmp": 15552,
+    "read": 15072,
+    "write": 15072,
+    "reinitialize": 4128
+  },
+  "trace_sha256": "1afd69399383bac09f32b200654e87427fab4aebd26591b8b2ea51a3d896d619",
+  "source_spans": [
+    {
+      "address": "0x6c640",
+      "size": 44,
+      "native_sha256": "e8fb5c129824ccdda08fbd2993706f9668e421707ece60631c20e0e420948df6",
+      "source_sha256": "e8fb5c129824ccdda08fbd2993706f9668e421707ece60631c20e0e420948df6"
+    },
+    {
+      "address": "0x6c66c",
+      "size": 60,
+      "native_sha256": "f89c5035f563f844de9b77a77f673696678ef70b6626d9ded4821dfdda0a2be7",
+      "source_sha256": "2d94f20887127484a80d43e80e5169d4b543be14225b5fdb8ce80943dd584773"
+    },
+    {
+      "address": "0x6c53c",
+      "size": 260,
+      "native_sha256": "2f700c380f4238beaf6568c1834ac4e409524e7bacee3c64c89f8dd501663aa5",
+      "source_sha256": "2f700c380f4238beaf6568c1834ac4e409524e7bacee3c64c89f8dd501663aa5"
+    },
+    {
+      "address": "0x73604",
+      "size": 48,
+      "native_sha256": "9da7b90a13a536dd35f07b98b10a55e734d9a8c7d7aee36c86613d041f395fc0",
+      "source_sha256": "9da7b90a13a536dd35f07b98b10a55e734d9a8c7d7aee36c86613d041f395fc0"
+    }
+  ],
+  "native_span_bytes": 412,
+  "source_c_memcmp_text_bytes": 28,
+  "memcmp_text_sha256": "eb9419476a14e056dd6ae342809d77b2af7bb40c23c8655ca3e769942ea886e2",
+  "relocated_call_address": "0x6c68a",
+  "differing_byte_addresses": [
+    "0x6c68a",
+    "0x6c68b",
+    "0x6c68c",
+    "0x6c68d"
+  ],
+  "inputs": {
+    "r1/research/source-build/native-record-update/contracts.json": "48d99f02968e6b51f4cb889d164624e88b8aaa9cb26c9e99a72486dd0c116cea",
+    "r1/research/source-build/native-record-update/report.json": "7378ce258044574f33b727c3717b968f27e1d3a23ea2a176cd6cf85eac257bdf",
+    "r1/research/source-build/native-record-update/native_record_update.o": "d21ca334496bafe7ceed7c726f3285ec53c885022f3554b7bd46c51794edf9b4",
+    "r1/research/source-build/native-record-providers/contracts.json": "c30354bf218b5c3fb87047bed764a34acb326ef2e93706daf985f11ca9207d88",
+    "r1/research/source-build/native-record-providers/report.json": "be5d6bfcbeb2f9f83758b1da2c98f790e05672523e663736de6552774d592e54",
+    "r1/research/source-build/native-record-providers/native_record_providers.o": "5f02139db0ec7134cc0d33acaf4f1869d7fdfc060d089cc370c8894253c69b55",
+    "r1/research/source-build/native-record-update/memcmp-source.o": "401395cf804d2151ef3b1226501baf9dbf7cdff4328af249371512de0c8aa42e"
+  },
+  "proof_elf_sha256": "d83179eedced5cdde6f4e073ce8af04ceea38bda56a8b0bb6fed69d01098d5fa",
+  "proof_layout_sha256": "a6d2211ba278d3197059bbdd14206854219ea979fbd5fe58fb10fe6f75ad7c90",
+  "driver_sha256": "213dc8675f1773fd3b0d23880cf387b6f7288a7189072537fe0448052ee2965a",
+  "actual_validator_wrapper_persist_apply_and_c_memcmp_execute": true,
+  "independent_validation_packet_and_threshold_oracle": true,
+  "kv_mode_log_and_reinitialize_providers_are_fixtures": true,
+  "full_raw_abi_or_private_histories_verified": false,
+  "whole_image_complete": false,
+  "hardware_write_executed": false
+}

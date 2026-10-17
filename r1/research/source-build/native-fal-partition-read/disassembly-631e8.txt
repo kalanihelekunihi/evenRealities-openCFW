@@ -1,0 +1,73 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+000631e8 <r1_stock_i2c5_acquire+0x12d10>:
+   631e8:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
+   631ec:	4698      	mov	r8, r3
+   631ee:	4691      	mov	r9, r2
+   631f0:	460e      	mov	r6, r1
+   631f2:	0004      	movs	r4, r0
+   631f4:	d013      	beq.n	6321e <r1_stock_i2c5_acquire+0x12d46>
+   631f6:	f1b9 0f00 	cmp.w	r9, #0
+   631fa:	d016      	beq.n	6322a <r1_stock_i2c5_acquire+0x12d52>
+   631fc:	6ba1      	ldr	r1, [r4, #56]	@ 0x38
+   631fe:	eb06 0008 	add.w	r0, r6, r8
+   63202:	f04f 37ff 	mov.w	r7, #4294967295	@ 0xffffffff
+   63206:	4288      	cmp	r0, r1
+   63208:	d915      	bls.n	63236 <r1_stock_i2c5_acquire+0x12d5e>
+   6320a:	f44f 72cf 	mov.w	r2, #414	@ 0x19e
+   6320e:	4921      	ldr	r1, [pc, #132]	@ (63294 <r1_stock_i2c5_acquire+0x12dbc>)
+   63210:	a021      	add	r0, pc, #132	@ (adr r0, 63298 <r1_stock_i2c5_acquire+0x12dc0>)
+   63212:	f7d4 ff25 	bl	38060 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x11060>
+   63216:	a027      	add	r0, pc, #156	@ (adr r0, 632b4 <r1_stock_i2c5_acquire+0x12ddc>)
+   63218:	f7d4 ff22 	bl	38060 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x11060>
+   6321c:	e035      	b.n	6328a <r1_stock_i2c5_acquire+0x12db2>
+   6321e:	4a1d      	ldr	r2, [pc, #116]	@ (63294 <r1_stock_i2c5_acquire+0x12dbc>)
+   63220:	a132      	add	r1, pc, #200	@ (adr r1, 632ec <r1_stock_i2c5_acquire+0x12e14>)
+   63222:	a034      	add	r0, pc, #208	@ (adr r0, 632f4 <r1_stock_i2c5_acquire+0x12e1c>)
+   63224:	f7d4 ff1c 	bl	38060 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x11060>
+   63228:	e7fe      	b.n	63228 <r1_stock_i2c5_acquire+0x12d50>
+   6322a:	4a1a      	ldr	r2, [pc, #104]	@ (63294 <r1_stock_i2c5_acquire+0x12dbc>)
+   6322c:	a139      	add	r1, pc, #228	@ (adr r1, 63314 <r1_stock_i2c5_acquire+0x12e3c>)
+   6322e:	a031      	add	r0, pc, #196	@ (adr r0, 632f4 <r1_stock_i2c5_acquire+0x12e1c>)
+   63230:	f7d4 ff16 	bl	38060 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x11060>
+   63234:	e7fe      	b.n	63234 <r1_stock_i2c5_acquire+0x12d5c>
+   63236:	4620      	mov	r0, r4
+   63238:	f001 fe9c 	bl	64f74 <r1_stock_i2c5_acquire+0x14a9c>
+   6323c:	f104 051c 	add.w	r5, r4, #28
+   63240:	b1c0      	cbz	r0, 63274 <r1_stock_i2c5_acquire+0x12d9c>
+   63242:	6b61      	ldr	r1, [r4, #52]	@ 0x34
+   63244:	6a84      	ldr	r4, [r0, #40]	@ 0x28
+   63246:	198b      	adds	r3, r1, r6
+   63248:	4642      	mov	r2, r8
+   6324a:	4649      	mov	r1, r9
+   6324c:	4618      	mov	r0, r3
+   6324e:	47a0      	blx	r4
+   63250:	0004      	movs	r4, r0
+   63252:	d50c      	bpl.n	6326e <r1_stock_i2c5_acquire+0x12d96>
+   63254:	f44f 72d6 	mov.w	r2, #428	@ 0x1ac
+   63258:	490e      	ldr	r1, [pc, #56]	@ (63294 <r1_stock_i2c5_acquire+0x12dbc>)
+   6325a:	a00f      	add	r0, pc, #60	@ (adr r0, 63298 <r1_stock_i2c5_acquire+0x12dc0>)
+   6325c:	f7d4 ff00 	bl	38060 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x11060>
+   63260:	4629      	mov	r1, r5
+   63262:	a02d      	add	r0, pc, #180	@ (adr r0, 63318 <r1_stock_i2c5_acquire+0x12e40>)
+   63264:	f7d4 fefc 	bl	38060 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x11060>
+   63268:	a038      	add	r0, pc, #224	@ (adr r0, 6334c <r1_stock_i2c5_acquire+0x12e74>)
+   6326a:	f7d4 fef9 	bl	38060 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x11060>
+   6326e:	4620      	mov	r0, r4
+   63270:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
+   63274:	f240 12a5 	movw	r2, #421	@ 0x1a5
+   63278:	4906      	ldr	r1, [pc, #24]	@ (63294 <r1_stock_i2c5_acquire+0x12dbc>)
+   6327a:	a007      	add	r0, pc, #28	@ (adr r0, 63298 <r1_stock_i2c5_acquire+0x12dc0>)
+   6327c:	f7d4 fef0 	bl	38060 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x11060>
+   63280:	1d22      	adds	r2, r4, #4
+   63282:	4629      	mov	r1, r5
+   63284:	4833      	ldr	r0, [pc, #204]	@ (63354 <r1_stock_i2c5_acquire+0x12e7c>)
+   63286:	f7d4 feeb 	bl	38060 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x11060>
+   6328a:	a030      	add	r0, pc, #192	@ (adr r0, 6334c <r1_stock_i2c5_acquire+0x12e74>)
+   6328c:	f7d4 fee8 	bl	38060 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x11060>
+   63290:	4638      	mov	r0, r7
+   63292:	e7ed      	b.n	63270 <r1_stock_i2c5_acquire+0x12d98>

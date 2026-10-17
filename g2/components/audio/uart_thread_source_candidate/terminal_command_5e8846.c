@@ -20,7 +20,7 @@ extern uint32_t g2_flashdb_candidate_tick(void);
 extern uint64_t audio_uart_ring_u64_div_47cc60(uint32_t,uint32_t,uint32_t,uint32_t);
 extern void audio_ble_param_reset_delayed_event(uint32_t);
 extern uint8_t audio_terminal_ui_mode;
-uint8_t audio_terminal_mode_sync_pending; /* native RAM 0x2006e344 */
+extern uint8_t audio_terminal_mode_sync_pending; /* native RAM 0x2006e344, state-base +0x274 */
 uint32_t audio_terminal_mode_start_tick; /* native RAM 0x20074a8c */
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,
