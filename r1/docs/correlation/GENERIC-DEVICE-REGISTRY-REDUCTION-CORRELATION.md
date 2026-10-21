@@ -6,7 +6,7 @@ Under the "Owner-authorized full reduction (2026-08-14)" section of
 [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md), the forty-function family
 `unknown_generic_device_registry_candidate` is reduced from the recovered
 decompilation evidence to compilable C at
-[`../../reconstructed/generic_device_registry/`](../../reconstructed/generic_device_registry/).
+[`../../reconstructed/generic_device_registry/`](../../src/vendor/generic_device_registry).
 The reconstruction is not vendor source and is never presented as such;
 every file carries the provenance banner.  The boundary doc
 [`../boundaries/GENERIC-DEVICE-REGISTRY-BOUNDARY.md`](../boundaries/GENERIC-DEVICE-REGISTRY-BOUNDARY.md)

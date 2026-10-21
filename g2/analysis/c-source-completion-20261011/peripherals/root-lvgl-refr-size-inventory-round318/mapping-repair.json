@@ -1,7 +1,0 @@
-{
-  "reason": "GNU assembler incbin emits a data mapping symbol at body start, overriding explicit Thumb marker; REA sees no function",
-  "repair": "Only ELF symbol table body-start $d name replaced with existing $t entry; all loadable sections unchanged",
-  "repaired_elf_sha256": "307fd798425cd2e53e54e4a44aa052973a7fb93dd8d3039215030f384966873f",
-  "patch_count": 1,
-  "production_selected": false
-}

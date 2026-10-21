@@ -164,7 +164,7 @@ Under the owner-authorized full reduction (2026-08-14, see
 [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)), the forty ledger entries of
 `unknown_generic_device_registry_candidate` (the ops-table dispatchers, offset-list walkers, subscriber machinery, and static request-block client wrappers) are reconstructed
 from the recovered decompilation evidence as independently compiled C in
-[`../../reconstructed/generic_device_registry/`](../../reconstructed/generic_device_registry/).  The
+[`../../reconstructed/generic_device_registry/`](../../src/vendor/generic_device_registry).  The
 reconstruction is not vendor source; it carries per-function provenance
 banners, and its contract, reconstruction decisions, divergences, and
 host-test mapping are documented in

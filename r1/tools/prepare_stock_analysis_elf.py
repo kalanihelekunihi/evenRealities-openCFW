@@ -14,7 +14,7 @@ def main():
     source=Path('r1/blobs/official/r1-2.2.6.0009/application.bin')
     payload=(ROOT/source).read_bytes();digest=hashlib.sha256(payload).hexdigest()
     assert digest=='0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a'
-    output=ROOT/'r1/research/source-build/i2c5';output.mkdir(parents=True,exist_ok=True)
+    output=ROOT/'pre-consolidation:r1/research/source-build/i2c5';output.mkdir(parents=True,exist_ok=True)
     target=output/'stock-r1-native-analysis.elf';commands=[]
     with tempfile.TemporaryDirectory(prefix='r1-stock-analysis-') as temporary:
         temp=Path(temporary);unbased=temp/'unbased.elf';relocatable=temp/'stock-analysis.elf';roundtrip=temp/'roundtrip.bin'

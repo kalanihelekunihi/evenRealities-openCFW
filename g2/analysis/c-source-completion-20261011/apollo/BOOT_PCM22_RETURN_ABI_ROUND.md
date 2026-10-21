@@ -1,9 +1,0 @@
-# Boot PCM22 selector13 return ABI correction
-
-Locked stock SHA-256: `f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5`.
-
-The 606-byte native body at 0x4291ec returns 64 bits in R1:R0. Its low word is the float-derived temporary VDDf rise. The high word contains four pre-transition bytes from the selector table word at base+0x64: `(word & 0x7f)`, `((word >> 7) & 0x7f)`, `((word >> 14) & 0x7f)`, and `((word >> 21) & 0x7f)`. The native decompiler's final `CONCAT17(... ) & 0x7f7f7fffffffffff` confirms the layout. Previously selected C calculated `packed` but returned only the low 32-bit `delta`.
-
-`pcm22_sequence13.c` now returns `uint64_t`, retains the selected ordered MMIO/control body, and packs the high word. Declarations in the source-owned callback table and interface were corrected. The linker sees the same callback address; the C ABI now supplies R1 as stock does. A 100,000-case independent arithmetic check matched the native concatenation expression to the C packed expression. Target object disassembly ends with R0 holding the rise and R1 the field word. This is arithmetic/ABI evidence, not a hardware or complete-body runtime oracle.
-
-`boot-coplacement-pcm22-return-round/receipt.json` is terminal PASS_BOUNDED_LINK: 371 selected units, 1,008 providers, three genuine ROM imports, 34 callback relocations. The image file is 158,580 bytes versus 148,599 stock bytes; this is not a size or image-equality admission. The source body source-binding moved this reachable native entry out of header-only lead status. Conservative direct-root proof backlog: 187 header-only entries of 654 reachable catalogue entries; whole catalogue: 285 header-only of 903. Three ROM imports, indirect root closure, final scatter/link layout, complete runtime/original byte equality, and hardware behavior remain open.

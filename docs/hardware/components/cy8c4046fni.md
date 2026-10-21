@@ -7,7 +7,7 @@ controller. Tags: [vocabulary](../README.md#confidence-vocabulary).
 
 | Evidence | Tag |
 |---|---|
-| Apollo driver `drv_cy8c4046fni`; touch payload is Cortex-M0+ code using CapSense MSCLP (5th-gen) and PSoC 4 peripheral bases | FW High (`g2/components/apollo_main/core_overlay/drv_cy8c4046fni.c:173-200`; `g2/docs/research/g2-touch-identity-recovery.md:15,43`) |
+| Apollo driver `drv_cy8c4046fni`; touch payload is Cortex-M0+ code using CapSense MSCLP (5th-gen) and PSoC 4 peripheral bases | FW High (`pre-consolidation:g2/components/apollo_main/core_overlay/drv_cy8c4046fni.c:173-200`; `g2/docs/research/g2-touch-identity-recovery.md:15,43`) |
 
 ## Documents
 

@@ -37,10 +37,17 @@ g2/
 ├── config-recovered/  recovered upstream configuration headers and patches
 ├── research/          retained Ghidra corpus: all 7,449 Apollo functions, case
 │                      frontier, EM9305 rounds, IAR and QP/C evidence
-├── components/em9305/source_image/record_package.py   EM9305 record-package codec
-├── tools/             EVENOTA packer, container analyzers, Ghidra pipeline
-└── tests/             tests for those tools
+├── src/               all reconstructed C/assembly, per payload, with sources.json
+├── evidence/          analysis data that tools and manifests still read
+├── tools/             EVENOTA packer, container analyzers, Ghidra pipeline,
+│                      em9305_source_image/ record-package codec
+└── tests/             tests for those tools; simulators/ holds the Unicorn
+                       behavioural harnesses for the apollo-common modules
 ```
+
+[`src/README.md`](src/README.md) describes the source tree and how it is
+built. Findings distilled from the removed experiment directories are in
+`docs/reference/findings-*.md`.
 
 Upstream libraries are pinned as submodules in
 [`../third-party/`](../third-party/README.md). Hardware facts are in
@@ -49,7 +56,7 @@ Upstream libraries are pinned as submodules in
 ## Commands
 
 The user-authorized bounded foundation implementation adds
-[`components/foundation/touch_scb/`](components/foundation/touch_scb/README.md)
+[`src/touch/scb/`](src/touch/scb/README.md)
 and [optional resource preservation](tools/RESOURCE_PRESERVATION.md).
 `make foundation-test` compiles/tests the callback-based C component and the
 lossless local resource path; `make foundation-object` builds a freestanding
@@ -66,6 +73,11 @@ make -C g2 ghidra-harvest OPENCFW_APOLLO_GHIDRA_PROJECT=/abs/project
 
 ## History
 
+On 2026-10-21 the per-candidate source directories (`components/`,
+`firmware_c/`), the dated `analysis/` experiments and the top-level `reviews/`
+were merged into `src/`, `evidence/` and `docs/reference/findings-*.md`; the
+previous layout is at Git tag `pre-consolidation`.
+
 The hybrid-overlay campaign was removed on 2026-09-29. It compiled per-function
 overlays and patched them into stock bytes. It also produced behavioural
 rewrites of the touch and case images, and GX8002 equivalence proofs. None
@@ -75,7 +87,7 @@ references above, and the files are in Git history (commit `832137ec`).
 The history contains official-derived firmware under `g2/.tmp-*` paths. Do not
 publish or mirror it as-is.
 
-The source-backed [Ambiq MSPI interrupt subset](components/foundation/ambiq_mspi/README.md)
+The source-backed [Ambiq MSPI interrupt subset](src/apollo-common/ambiq-mspi/README.md)
 has a standalone Cortex-M55 callable simulator target:
 `make ambiq-mspi-simulator` / `make ambiq-mspi-simulator-test`. It is not a
 bootable production provider; clocks, IRQ/DMA and board initialization remain

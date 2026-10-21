@@ -37,6 +37,7 @@ openCFW/
 │   ├── methodology.md    evidence and attribution rules
 │   └── build.md, repository-layout.md
 ├── tools/bootstrap/      pinned, fail-closed installer for the analysis tools
+├── tools/build/          source build (sources.py), hybrid build, qualification
 ├── g2/
 │   ├── workflow/         active G2 procedure, target lock, gates, prompts
 │   ├── docs/reference/   formats, memory map, toolchains, libraries,
@@ -46,14 +47,19 @@ openCFW/
 │   ├── blobs/official/   versioned MIT firmware mirrors and provenance
 │   ├── manifests/        EVENOTA reference manifest (+ legacy profiles)
 │   ├── research/         Ghidra decompilation corpus and evidence
+│   ├── src/              all reconstructed C, per payload, listed in sources.json
+│   ├── evidence/         analysis data still read by tools and manifests
 │   └── tools/            EVENOTA/container tools, Ghidra pipeline, analyzers
 ├── r1/
 │   ├── docs/             memory map, protocol, storage formats, pinout,
 │   │                     toolchain/dependencies, security, correlation records
 │   ├── config-recovered/ SDK/RTOS/linker configuration seeds for a stock build
+│   ├── src/              all reconstructed C, vendor pseudocode and build config,
+│   │                     listed in sources.json
+│   ├── symbols/          function-frontier.csv (source symbol -> stock entry)
 │   ├── research/         application/bootloader decompilation, rebuild oracle,
 │   │                     source correlation, BSim runs
-│   └── tools/            Ghidra export and verification scripts
+│   └── tools/            Ghidra export, corpus verification, data generators
 └── third-party/          dependency registry: submodules, fetched archives,
                           proposed pins, G2 emulator
 ```
@@ -65,6 +71,7 @@ openCFW/
 | understand the hardware | [`docs/hardware/README.md`](docs/hardware/README.md) |
 | set up analysis tools | [`docs/tooling.md`](docs/tooling.md), [`tools/bootstrap/README.md`](tools/bootstrap/README.md) |
 | work on G2 | [`g2/workflow/README.md`](g2/workflow/README.md), then [`g2/docs/reference/`](g2/docs/reference) |
+| work on reconstructed C | [`g2/src/README.md`](g2/src/README.md), [`r1/src/README.md`](r1/src/README.md), [`docs/build.md`](docs/build.md#reconstructed-source-build) |
 | work on R1 | [`r1/docs/memory-map.md`](r1/docs/memory-map.md), [`r1/docs/toolchain-and-dependencies.md`](r1/docs/toolchain-and-dependencies.md), [`r1/research/README.md`](r1/research/README.md) |
 | know which upstream is pinned where | [`third-party/README.md`](third-party/README.md) |
 | know what "verified" means here | [`docs/methodology.md`](docs/methodology.md) |
@@ -91,6 +98,19 @@ repacks the six official G2 payloads as a reference. See
 > publish or mirror this history as-is.
 
 ## Repository status
+
+On 2026-10-21 the scattered reconstruction experiments were merged into one
+source tree per device. `g2/components`, `g2/firmware_c` and the C from
+`g2/analysis/c-source-completion-*` now live in `g2/src/`; `r1/components`,
+`r1/source`, `r1/reconstructed`, `r1/source-config` and the kernels in
+`r1/research/source-build` now live in `r1/src/`. One manifest per tree drives
+`make sources`, replacing the per-image builders and about 1,000 per-candidate
+R1 scripts. Where several experiments implemented the same function, one copy
+was kept. The 496 dated `g2/analysis` experiments, the top-level `reviews/`
+and the R1 receipt store were distilled into `g2/docs/reference/findings-*.md`
+and `r1/docs/source-reconstruction-findings.md` and removed. The previous
+layout is at Git tag `pre-consolidation`; the hybrid build output is
+byte-identical before and after.
 
 On 2026-09-29 the earlier G2 hybrid-overlay campaign, the R1 clean-room
 reimplementation, the retired agent launcher and queue, and the duplicate

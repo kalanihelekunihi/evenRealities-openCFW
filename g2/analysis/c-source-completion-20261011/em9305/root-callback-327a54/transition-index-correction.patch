@@ -1,5 +1,0 @@
---- controller_init.c
-+++ controller_init.c
-@@
-- uint32_t next=*(const uint8_t *)((uintptr_t)opencfw_em9305_associated_channel_transitions+action+state*2u);
-+ uint32_t next=*(const uint8_t *)((uintptr_t)opencfw_em9305_associated_channel_transitions+action*2u+state);

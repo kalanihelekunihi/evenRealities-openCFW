@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_health_cache.py", line 51, in <module>
-    if __name__=='__main__':main()
-                            ~~~~^^
-  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_health_cache.py", line 47, in main
-    assert results[0]==results[1],(name,timestamp,offset,seed,workflow,results[0][:2],results[1][:2])
-           ^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: ('activity', 0, 0, 0, 0, [[536963332, 536962756], [[536962756, 576]]], [[536962756, 536962756], [[536962756, 576]]])

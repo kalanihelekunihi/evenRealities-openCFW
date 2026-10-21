@@ -1,1 +1,0 @@
-Partial/unaccepted:12bytesE668..E674,threealignedliteralwords. EverywordmappedPCloadconsumerfrom21380retainedandcomponenthasheschecked. Diagnosticliteralsretainedverbatim; pointedownership/otherconsumersunproven. No C/freeze/completenessclaim.

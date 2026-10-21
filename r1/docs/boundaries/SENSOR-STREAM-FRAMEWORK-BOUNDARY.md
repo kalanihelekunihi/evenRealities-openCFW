@@ -166,7 +166,7 @@ Under the owner-authorized full reduction (2026-08-14, see
 [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)), the thirty-two ledger entries of
 `unknown_sensor_stream_framework_candidate` (listener registration/unregistration, timer dispatch, buffer resize, and rate retiming) are reconstructed
 from the recovered decompilation evidence as independently compiled C in
-[`../../reconstructed/sensor_stream/`](../../reconstructed/sensor_stream/).  The
+[`../../reconstructed/sensor_stream/`](../../src/vendor/sensor_stream).  The
 reconstruction is not vendor source; it carries per-function provenance
 banners, and its contract, reconstruction decisions, divergences, and
 host-test mapping are documented in

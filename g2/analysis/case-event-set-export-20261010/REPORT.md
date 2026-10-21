@@ -1,7 +1,0 @@
-# CASE event-set source export
-
-The existing independent `case_event_set_waiters` C body is compiled into the CASE archive with a typed `xEventGroupSetBits(void *, uint32_t)` adapter in `event_set_task.c`. The original source file still hashes to `d6a4ba76d822f94bcc0777e578061b5ed466897be429151cbfd54ecf1b10891a`, matching its earlier validation receipt. The adapter keeps the public cross-unit C signature compatible with the event-flags caller.
-
-Prior validation compared the source body with the authenticated original at `0x0800c4de` for 384 bounded waiter cases and 3,456 multiwaiter cases. Those comparisons include list/TCB state and the scheduler child behavior documented in the original reports. The current Clang `-Os` adapter and included body passed a fresh **384/384** original/source one-waiter comparison using the same actual original scheduler/list peers. The verifier asserts that its object hash equals the object inside the current archive. `results.json` records the compiler, command, candidate source and ELF hashes. Multiwaiter coverage remains prior-source evidence, not a fresh adapter comparison.
-
-This source export is **COMPLETE** as a bounded archive composition step. The current archive has 23 objects, 43 provided globals, and 12 unresolved provider names after the subsequent timer export. Event-group lifetime, physical task/interrupt scheduling, and a complete CASE image remain open.

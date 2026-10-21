@@ -1,1 +1,0 @@
-Partial/unaccepted:32bytes E614..E634,eightalignedlittle-endianliteralwords. EverywordhasmappedPCloadconsumerfrom21362,componenthashesverified. Includes12bytetemplatepointer anddiagnosticliterals. Valuesretainedverbatim; pointedownership/otherconsumersunproven. No C/freeze/completenessclaim.

@@ -151,3 +151,12 @@ compile_commands.json
 
 # Build tooling is source, unlike generated build/ directories.
 !/tools/build/
+
+# Retired experiment trees (removed 2026-10-21; see tag pre-consolidation).
+# Only local, never-tracked leftovers (toolchain caches, private installs,
+# build products) can remain here. vendor-cache/g2/ links to the toolchains.
+/g2/analysis/
+/g2/components/
+/g2/firmware_c/
+/r1/research/source-build/
+/reviews/

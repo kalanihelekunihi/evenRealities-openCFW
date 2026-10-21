@@ -181,7 +181,7 @@ settings are v40-minimal TrueType hinting, GX variation services, and an
 - WSF buffer pools are 8×16, 4×32, 10×64 and 20×480;
 - the WSF timer uses the field order `ticks +4`, `msg +8`, with `sec*100` /
   `ms/10` conversions. This is the Ambiq variant, not public r20.05c
-  (`g2/components/README.md:54-67`);
+  (`pre-consolidation:g2/components/README.md:54-67`);
 - advertising messages use Ambiq's inline flexible-array ABI at `+8`;
 - `smp_main.c` carries the Ambiq stale-AES queue cleanup
   (`cordio-ble-stack-identity-audit.md:378-410`).
@@ -286,7 +286,7 @@ All entries are ⚑: no submodule exists for any GX8002 library.
   DSP libraries are not source.
 - Evidence:
   - `g2/docs/research/gx8002-upstream-object-candidates.md:5-38`;
-  - `g2/components/shared/gx8002/NATIONALCHIP-*-NOTICE.txt`, which covers
+  - `pre-consolidation:g2/components/shared/gx8002/NATIONALCHIP-*-NOTICE.txt`, which covers
     main, KWS, mode, parameters, stream, TWS, idle, libc, SPL/startup, and
     UART boot stage 1/2.
 
@@ -307,7 +307,7 @@ All entries are ⚑: no submodule exists for any GX8002 library.
 
 - Identity: lineage at newlib mirror commit `4aa696c8` (`FLT_SMALLEST_EXP -22`).
 - Licence: newlib (BSD-style).
-- Evidence: `g2/components/shared/gx8002/scalbnf-underflow-correction.md:23-28`.
+- Evidence: `pre-consolidation:g2/components/shared/gx8002/scalbnf-underflow-correction.md:23-28`.
 
 **GCC libgcc `fp-bit.c` soft-double** (Strong).
 

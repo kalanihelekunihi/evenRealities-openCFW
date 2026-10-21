@@ -2,7 +2,7 @@
 import hashlib,json,shutil,subprocess,tempfile,unittest
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-COMPONENT=ROOT/'components/foundation/wsf_timer'
+COMPONENT=ROOT/'src/apollo-common/wsf-timer'
 class TimerStopTests(unittest.TestCase):
  def test_pinned_bodies_and_unchanged_port(self):
   source=(COMPONENT/'wsf_timer_stop.c').read_text();prov=json.loads((COMPONENT/'SOURCE_PROVENANCE.json').read_text())

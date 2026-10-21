@@ -1,1 +1,0 @@
-SECTIONS { . = 0x42a030; .text : SUBALIGN(2) { *(.text.event_a_transition_sequence_24) *(.text.event_a_transition_sequence_25) *(.text.event_a_transition_sequence_26) } /DISCARD/ : { *(.ARM.exidx*) *(.ARM.extab*) *(.comment*) } }

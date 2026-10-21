@@ -1,5 +1,0 @@
-# Logger append primitive
-
-`append.c` implements the non-null branch of fixed-image `0x44b668..0x44b70a`. It reads a NUL-terminated source and copies bytes while the caller's current offset is less than 1024; it returns the count copied and does not write a terminator. Its null destination/source branches call an assert or enter a fatal loop and are outside this bounded API.
-
-The image is the official G2 2.2.6.10 OTA stripped by 32 bytes at base `0x438000`, SHA-256 `19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701`. The body appears in `g2/analysis/coverage-audit-parallel-2026-10-09/TDK-TRANSPORT-MAIN-DISASSEMBLY.txt`. `verify.py` compiles Cortex-M55 and M4 with warnings as errors, then compares original bytes with M4 source under Unicorn. **108 comparisons pass**, including zero length, 1,025 source bytes, and offsets 1022, 1023, 1024, 1025 and `UINT32_MAX`. Return value, destination bytes and stack restoration agree. This is a lower formatter primitive; extended log `0x43d574` remains open.

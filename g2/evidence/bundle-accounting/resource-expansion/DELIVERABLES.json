@@ -1,0 +1,90 @@
+{
+  "schema": "opencfw-resource-delivery-v1",
+  "baselineFilesUnchanged": 13,
+  "coverage": {
+    "baselineDeclaredFilesRead": 13,
+    "baselineResourcesValidated": 1125,
+    "L8DescriptorsRevalidated": 428,
+    "newFontHypothesisAlignedOffsetsTested": 880844,
+    "fontHypothesis": "32-bit/short-enum fmt_txt ABI corroborated: 20-byte descriptor, 20-byte cmap, 16-byte LARGE glyph; other font layouts outside scope",
+    "fontCandidatesAcceptedAsConfirmed": 0,
+    "imageSamplesRendered": 24,
+    "semanticInspectionPending": true,
+    "fullFontChainsValidated": 11,
+    "imageSamplesVisuallyInspected": 24,
+    "fontSamplesVisuallyInspected": 20,
+    "fontRootRecordsValidated": 11,
+    "fontChainsWithConsumerJoin": 11,
+    "decodedDomainsScanned": 12,
+    "decodedBytesScanned": 795378,
+    "decodedAsciiCandidates": 16,
+    "fontResourceChainsCorroborated": 11
+  },
+  "resourceExtractionVerification": {
+    "pass": true,
+    "recordsVerified": 1191,
+    "sourceSegmentCount": 411,
+    "uniqueBlobFiles": 375,
+    "storedUniqueBlobBytes": 785113,
+    "sourceDomainUnionBytes": {
+      "bundleBoundPayloadBytes": 785326,
+      "decodedRAMBytes": 180
+    },
+    "manifestSha256": "36f79fceee92905a07cc7452985f3e9ffbf2664b53a332bacef7bdb428129b4d",
+    "bundleSha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "noSourceMutation": true,
+    "allExtentsVerbatim": true,
+    "overlapDuplication": false
+  },
+  "negativeControls": "PASS: idempotence, conflicting output not overwritten, wrong bundle, path escape",
+  "unresolved": [
+    "404 images not visually inspected; all 24 generated samples inspected",
+    "font glyphs outside 20 generated samples uninspected",
+    "dynamic owning UI activation/live rendering and font source identity",
+    "other font ABIs/decoded formats outside bounded search",
+    "authenticated external NOR filesystem contents absent"
+  ],
+  "publication": "local only; Library approval pending; no commit/push",
+  "artifactHashes": {
+    "g2/evidence/bundle-accounting/resource-expansion/dashboard-resources.json": {
+      "bytes": 141596,
+      "sha256": "ce73ede9fbfaa59f331c6b633dd14a03cfee5d6af550a2b1fbe4bfc8ff81f462"
+    },
+    "g2/evidence/bundle-accounting/resource-expansion/resources-full.json": {
+      "bytes": 1471999,
+      "sha256": "e05b786a0c550fe9633e818b947e889b4a7bfba667bf581bd79dedbf8d5a47fb"
+    },
+    "g2/evidence/bundle-accounting/resource-expansion/REPORT.md": {
+      "bytes": 14692,
+      "sha256": "26a7d1c9234c55c420d9d8ea942229833e861abbabc7f164f71feaa2daa49fa4"
+    },
+    "g2/evidence/bundle-accounting/resource-expansion/validation.json": {
+      "bytes": 15295,
+      "sha256": "8ebf54a9a4ce9977444204abc3fe78f8bef36c2848f102ff6e12621f1358c6c9"
+    },
+    "resources/g2/s200-v2.2.6.10/manifest.json": {
+      "bytes": 2470032,
+      "sha256": "36f79fceee92905a07cc7452985f3e9ffbf2664b53a332bacef7bdb428129b4d"
+    },
+    "resources/g2/s200-v2.2.6.10/verification.json": {
+      "bytes": 500,
+      "sha256": "af66ae8d49a4d3556467640141b06a95a11c7c866a6c314625ae9b1d24e0ff52"
+    },
+    "resources/extract.py": {
+      "bytes": 2532,
+      "sha256": "4b842a06b2cf871ea3f62127fbe3633159e9eaf35a5fcbda4b1681780dbda275"
+    },
+    "resources/build_g2_catalog.py": {
+      "bytes": 8527,
+      "sha256": "1331c7f351b3a0af77bdd0728590b2a3db9539c10e18defca5a39b414bc0e8ee"
+    },
+    "resources/test_extract.py": {
+      "bytes": 1749,
+      "sha256": "f1ea5765f2e0c4d225623f439ec7f6dacd75543d82a35ba1866a0c4d36a69895"
+    },
+    "resources/README.md": {
+      "bytes": 5540,
+      "sha256": "571f150912a6c3d35131f1c0987696c88ea57c5e768ea3ccf3b3fa24110a5d24"
+    }
+  }
+}

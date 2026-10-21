@@ -8,8 +8,8 @@ stock trace comparisons, and synchronization passes 66,024. A second task run
 executes the actual synchronization bodies. RTOS scheduling, watchdog, hardware,
 database and dispatch providers remain explicit boundaries; these checks do not
 prove physical execution or original instruction identity. See
-`r1/research/source-build/native-tasks/verification.json` and
-`r1/research/source-build/native-sync/verification.json` for bounded scope.
+`pre-consolidation:r1/research/source-build/native-tasks/verification.json` and
+`pre-consolidation:r1/research/source-build/native-sync/verification.json` for bounded scope.
 
 ## Outcome
 

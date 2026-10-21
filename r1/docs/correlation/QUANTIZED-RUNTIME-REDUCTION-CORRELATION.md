@@ -6,7 +6,7 @@ Under the "Owner-authorized full reduction (2026-08-14)" section of
 [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md), the 28-function family
 `unknown_shared_quantized_neural_runtime_candidate` is reduced from the
 recovered decompilation evidence to compilable C at
-[`../../reconstructed/quantized_runtime/`](../../reconstructed/quantized_runtime/).
+[`../../reconstructed/quantized_runtime/`](../../src/vendor/quantized_runtime).
 The reconstruction is not vendor source and is never presented as such;
 every file carries the provenance banner.  The ledger disposition for the 26
 entries becomes `clean_room_reimplementation_owner_authorized` when the

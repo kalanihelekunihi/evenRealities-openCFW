@@ -159,7 +159,7 @@ Under the owner-authorized full reduction (2026-08-14, see
 [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)), the sixteen ledger entries of
 `unknown_time_calendar_provider_candidate` (the Unix/Gregorian converters, clock-backend wrappers, and local-hour/bucket helpers) are reconstructed
 from the recovered decompilation evidence as independently compiled C in
-[`../../reconstructed/time_calendar/`](../../reconstructed/time_calendar/).  The
+[`../../reconstructed/time_calendar/`](../../src/vendor/time_calendar).  The
 reconstruction is not vendor source; it carries per-function provenance
 banners, and its contract, reconstruction decisions, divergences, and
 host-test mapping are documented in

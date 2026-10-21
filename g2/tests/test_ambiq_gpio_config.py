@@ -2,7 +2,8 @@
 import hashlib,json,shutil,subprocess,tempfile,unittest
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-COMPONENT=ROOT/'components/foundation/ambiq_gpio_config'
+COMPONENT=ROOT/'src/apollo-common/ambiq-gpio-config'
+SIMULATOR=ROOT/'tests/simulators/ambiq-gpio-config'
 class GpioConfigTests(unittest.TestCase):
  def test_pinned_function_and_type_text(self):
   source=(COMPONENT/'ambiq_gpio_config.c').read_text();header=(COMPONENT/'gpio_config.h').read_text();prov=json.loads((COMPONENT/'SOURCE_PROVENANCE.json').read_text())
@@ -25,7 +26,7 @@ class GpioConfigTests(unittest.TestCase):
    subprocess.run(['clang','-std=c11','-Wall','-Wextra','-Werror','-I',str(COMPONENT),str(p),'-o',folder+'/bits'],check=True,capture_output=True)
    subprocess.run([folder+'/bits'],check=True,capture_output=True)
  def test_optimized_python_rejected(self):
-  p=subprocess.run(['python3','-O',str(COMPONENT/'simulator/verify.py')],capture_output=True,text=True)
+  p=subprocess.run(['python3','-O',str(SIMULATOR/'verify.py')],capture_output=True,text=True)
   self.assertNotEqual(p.returncode,0);self.assertIn('optimized Python rejected',p.stderr)
 
  def test_pinned_state_body_and_macros(self):

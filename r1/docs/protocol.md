@@ -28,7 +28,7 @@ that is R1-specific is product code.
 | No other readable characteristics | no flash/UICR/memory read characteristic exists | Proven (physical) | `AUGUST-18-...VALIDATION.md:126-128` |
 | BAE8 service implementation | R1 expansion of Nordic `ble_nus.c::on_write` skeleton at `0x0007CF4C`: 4 characteristics, 2 CCCDs | Proven | `NORDIC-SDK-CORRELATION.md:739-744` |
 | Queued writes | `nrf_ble_qwr` linked with `NRF_BLE_QWR_MAX_ATTR == 0` | Proven | `NORDIC-SDK-CORRELATION.md:384-387` |
-| Sole BAE8 HVX path | `0x000526CC` (2.2.6). In 2.2.7.0005 the HVX Thumb entry is `0x00052969` and the service struct is `0x20006514` | Proven | `r1/docs/PROVENANCE.md:53`; `r1/tools/probes/r1_227_uicr_dump.S:15-16` |
+| Sole BAE8 HVX path | `0x000526CC` (2.2.6). In 2.2.7.0005 the HVX Thumb entry is `0x00052969` and the service struct is `0x20006514` | Proven | `r1/docs/PROVENANCE.md:53`; `pre-consolidation:r1/tools/probes/r1_227_uicr_dump.S:15-16` |
 
 BAE8 service event routing is done by callback `0x0005D5E0`, registered via pointer `0x0005D5E1`
 at `0x0004E6E4` into service config `0x000529BC` at offset `0x2C`
@@ -166,7 +166,7 @@ Keys are `command<<8 | subcommand` with command = 0 (`EUS-MODULE-DISPATCH-CORREL
 | `0005` | systemTime | `0x000846DC..0x000847BC`. Signed timezone minutes + Unix time in the first 6 payload bytes | Proven | `PROVENANCE.md:43`; `r1/docs/correlation/CLOCK-PRODUCTION-CORRELATION.md:24-25` |
 | `0007` | touchSwitch | `0x00084874`. 2 bytes (selector, value): 1 phone (diagnostic), 2 glasses opens/closes touch source 0 | Proven | `PROVENANCE.md:16`; `r1/include/openr1/r1_dispatch.h:37-40` |
 | `0008` | pairAuth | `0x000842EC`. Byte `01` selects the phone role and triggers link security. Required before the phone route answers | Proven (physical) | `PROVENANCE.md:40`; `AUGUST-18-...VALIDATION.md:196-220` |
-| `0009` | otaStart | enters buttonless DFU (GPREGRET `0xB1`) | Strong | `r1/src/r1_dispatch.c:911`; `r1/tools/probes/r1_227_dfu_proof.S:1-20` |
+| `0009` | otaStart | enters buttonless DFU (GPREGRET `0xB1`) | Strong | `r1/src/r1_dispatch.c:911`; `pre-consolidation:r1/tools/probes/r1_227_dfu_proof.S:1-20` |
 | `000A` | advStart | `0x00083D04`. Exact 12-byte SET with two 6-byte peer targets | Proven | `PROVENANCE.md:16` |
 | `000B` | getAlgoKeyStatus | `0x00083E50`. 25 bytes: status + 24-byte identifier. Clears one-shot latch `0x20006DA5` | Proven | `r1-capability-matrix.csv:196` (R1-195) |
 | `000C` | setAlgoKey | 64-byte GoMore key, persisted asynchronously (ACK before write) | Strong | `r1/src/r1_dispatch.c:954`; `r1-capability-matrix.csv` R1-017 |

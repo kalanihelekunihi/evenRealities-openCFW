@@ -49,7 +49,7 @@ Notes:
 
 | Range | Size | Pages | Owner | Tag | Source |
 |---|---:|---:|---|---|---|
-| `0x00000000..0x00000FFF` | 4 KiB | 1 | MBR (part of the S140 hex). MBR config words at `0xFF8` (bootloader addr) and `0xFFC` (param page addr) are programmed by the retail bootloader | Strong | `r1/tools/probes/r1_228_mbr_config_dump.S:1-10` |
+| `0x00000000..0x00000FFF` | 4 KiB | 1 | MBR (part of the S140 hex). MBR config words at `0xFF8` (bootloader addr) and `0xFFC` (param page addr) are programmed by the retail bootloader | Strong | `pre-consolidation:r1/tools/probes/r1_228_mbr_config_dump.S:1-10` |
 | `0x00001000..0x00026FFF` | 152 KiB | 38 | S140 7.2.0 | Proven (FWID) | `research/decompilation/README.md:28` |
 | `0x00027000..0x000C4D07` | 646,408 B | – | Application 2.2.6.0009 image (logical end) | Proven | `artifact-inventory.csv:2` |
 | `0x000C4D08..0x000D0FFF` | – | – | Application-aligned tail / DFU bank space. Contents not captured | Inferred | `research/decompilation/README.md:30` |
@@ -69,7 +69,7 @@ Derivations:
   `CODEPAGESIZE*CODESIZE` (`INTERNAL-FLASH-CORRELATION.md:5-8,37-40`). Tag: Proven.
 - The bootloader reserves the same 36 pages as app data (`NRF_DFU_APP_DATA_AREA_SIZE = 36*4096`).
   This is the retail two-byte delta at `0xFB54E` from the SDK example
-  (`r1/research/bootloader-reconstruction/sdk-overlay/r1_sdk_overrides.h:17-19`). Tag: Proven.
+  (`r1/src/bootloader/r1_sdk_overrides.h:17-19`). Tag: Proven.
 - The maximum application link region is `0x27000..<0xD1000` (170 pages). This limit comes from the
   layout, not from a stock linker file. The stock scatter file is unknown (`INTERNAL-FLASH-CORRELATION.md:25`). Tag: Inferred.
 
@@ -102,7 +102,7 @@ Stock anchors:
 | `NRFFW[1]` (`0x10001018`), MBR param page | `0x000FE000` | Proven | same; `sdk-overlay/README.md:14` |
 | PSELRESET | pin reset on P0.18. The app is built with `CONFIG_GPIO_AS_PINRESET`, and `SystemInit` programs it | Strong | `r1/docs/correlation/NORDIC-SYSTEM-INIT-CORRELATION.md:49-53` |
 | NFCPINS | converted to GPIO (`CONFIG_NFCT_PINS_AS_GPIOS`) | Strong | same |
-| APPROTECT / DEBUGCTRL | the tested legacy ring had physical debug protection disabled. Exact word values are only in the uncommitted snapshot | Strong | `research/bootloader-reconstruction/SECURITY-MODEL.md:33-37`; `r1/tools/probes/r1_227_uicr_dump.S:1-7` |
+| APPROTECT / DEBUGCTRL | the tested legacy ring had physical debug protection disabled. Exact word values are only in the uncommitted snapshot | Strong | `research/bootloader-reconstruction/SECURITY-MODEL.md:33-37`; `pre-consolidation:r1/tools/probes/r1_227_uicr_dump.S:1-7` |
 
 ## 5. RAM
 
@@ -144,7 +144,7 @@ Other fixed bootloader constants:
 - Handoff ACL write-protects `0xF8000..0xFEFFF` and flash `0..` the page-aligned application end
   (`SECURITY-MODEL.md:18-19`; `MEMORY-MAP.md:28`). Tag: Proven.
 - Public key bytes (`9d 11 56 44 ... 42 34 55`) are in `config-recovered/r1_dfu_public_key.c`,
-  a copy of `r1/research/bootloader-reconstruction/sdk-overlay/r1_dfu_public_key.c:13-22`. Tag: Proven.
+  a copy of `r1/src/bootloader/r1_dfu_public_key.c:13-22`. Tag: Proven.
 
 ## 7. Values that are openR1 choices, not stock
 

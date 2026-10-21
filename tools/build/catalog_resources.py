@@ -9,7 +9,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'tools/cutting'))
 import firmware_cut as cut
-EVIDENCE = 'g2/analysis/coverage-audit-parallel-2026-10-09/bundle-accounting-2026-10-13/resource-expansion/resources-full.json'
+EVIDENCE = 'g2/evidence/bundle-accounting/resource-expansion/resources-full.json'
 
 
 def main():
@@ -44,7 +44,7 @@ def main():
     add('g2-apollo-main',*palette['payloadRange'],'font','font opacity palette',EVIDENCE,palette['sha256'])
     # R1 has no font claim: its recovered startup map identifies exact strings,
     # literal data and a callback function. Exclude the executable noop body.
-    path='r1/source-config/startup/device-reset-data-regions.json'
+    path='r1/src/config/startup/device-reset-data-regions.json'
     for label,address,size in json.loads((ROOT/path).read_text()):
         if label=='rtc_noop': continue
         add('r1-application',address-0x27000,address-0x27000+size,

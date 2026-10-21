@@ -14,7 +14,7 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
-COMPONENT = ROOT / "components/em9305/source_image"
+COMPONENT = ROOT / "tools/em9305_source_image"
 MODULE_PATH = COMPONENT / "record_package.py"
 BUILDER_PATH = COMPONENT / "build_image.py"
 README_PATH = COMPONENT / "README.md"

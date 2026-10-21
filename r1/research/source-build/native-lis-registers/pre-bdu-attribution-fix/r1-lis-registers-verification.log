@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_lis_registers.py", line 54, in <module>
-    if __name__=='__main__':main()
-                            ~~~~^^
-  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_lis_registers.py", line 50, in main
-    assert results[0]==results[1],(case,results)
-           ^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: ({'val': 0, 'old': 85, 'read_status': 0, 'write_status': 0, 'written': 1, 'mutation': 0, 'seed': 2882400001, 'name': 'lis2dw12_auto_increment_set'}, [[0, 2882400085, [['read', 17825792, [305419896, 33, 537120752, 1], None], ['write', 17826048, [305419896, 33, 537120752, 1], '55']], '01011001010010010000000078563412', '96969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696'], [0, 2882400081, [['read', 17825792, [305419896, 33, 537120752, 1], None], ['write', 17826048, [305419896, 33, 537120752, 1], '51']], '01011001010010010000000078563412', '96969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696']])

@@ -59,7 +59,7 @@ make -C r1 vendor-audit SDK_ROOT=$CACHE/nRF5_SDK_17.1.0_ddde560 \
   Its hash is pinned.
 - `qst-qma6100` has no licensed public source. It remains an attribution
   reference, and its behaviour is recorded as pseudocode in
-  [`../../r1/reconstructed/`](../../r1/reconstructed/README.md).
+  [`../../r1/reconstructed/`](../../r1/src/vendor/README.md).
 - The GoMore algorithms and the Goodix algorithm libraries are binary-only.
   The stock image links them as vendor objects, so a byte-identical build needs
   the vendor's original objects or byte-matched decompiled C for those

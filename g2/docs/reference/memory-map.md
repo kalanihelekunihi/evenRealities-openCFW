@@ -102,12 +102,12 @@ authenticated image.
 | `0x20070BE8` | EasyLogger logger object (`0xF8` B) | `g2/docs/upstream-inventory.md:844-845` |
 | `0x2006BD30` | EasyLogger 1,024-byte output buffer | `g2/docs/upstream-inventory.md:840-841` |
 | `0x20072AD8` / `0x20074578` / `0x20074570` | elog mutex control block (80 B), mutex handle, async event-flags handle | `g2/docs/upstream-inventory.md:858-860` |
-| `0x200749C4` | TinyFrame instance, in a bookended allocation: `0xA5A5A5A5`, then a `0x7158`-byte core at `+4`, then `0x5A5A5A5A` at `+0x715C` | `g2/components/README.md:38-43` |
+| `0x200749C4` | TinyFrame instance, in a bookended allocation: `0xA5A5A5A5`, then a `0x7158`-byte core at `+4`, then `0x5A5A5A5A` at `+0x715C` | `pre-consolidation:g2/components/README.md:38-43` |
 | `0x2005DFFC` | two FlashDB `fdb_kvdb` objects, stride `0x8AC` | `g2/docs/upstream-inventory.md:795-797` |
 | `0x2006F600` | LVGL tick state | `g2/docs/memory-map.md:1367-1371` |
 | `0x20066230` / `0x200744D4` | UI-module registry runtime copy (43 rows; flash table `0x006A44B0`) / count | `g2/docs/memory-map.md:1256-1258` |
 | `0x20068228` / `0x20068928` | GPIO handler table (14×32 pointers) / callback arguments | `g2/docs/memory-map.md:1258-1260` |
-| `0x20075024` | lens-side byte: 1 = left/other, 2 = right. Sampled 5× from GPIO `0x9C` | `g2/components/apollo_main/core_overlay/EVIDENCE.md:37,53-66` |
+| `0x20075024` | lens-side byte: 1 = left/other, 2 = right. Sampled 5× from GPIO `0x9C` | `pre-consolidation:g2/components/apollo_main/core_overlay/EVIDENCE.md:37,53-66` |
 | `0x2004FA98` / `0x2004FAC8–0x200523C8` | Cordio WSF buffer pool descriptors / pools (8×16, 4×32, 10×64, 20×480) | `g2/docs/memory-map.md:365-372` |
 | `0x20075045`, `0x20074EF0`, `0x20073230` | WSF critical-section nesting byte, event group, WSF task | `g2/docs/memory-map.md:355-361` |
 | `0x200708EC` (0x100 B) | Cordio SMP DB: 10×24-byte records plus a timer | `g2/docs/memory-map.md:402-409` |

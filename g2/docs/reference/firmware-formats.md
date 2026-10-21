@@ -336,9 +336,9 @@ Image B loads to IRAM `[0x10003000, 0x1001708C)`, entry `0x10003100`, stack
 
 Sources:
 
-- `g2/components/em9305/source_image/record_package.py:12-141` (the parser and
+- `g2/tools/em9305_source_image/record_package.py:12-141` (the parser and
   builder, which rebuild the stock container byte-for-byte);
-- `g2/components/em9305/source_image/README.md:5-14`;
+- `g2/tools/em9305_source_image/README.md:5-14`;
 - `g2/tools/open_cfw.py:670-694`;
 - `g2/manifests/g2-2.2.6.10.json:55-116`.
 

@@ -34,7 +34,7 @@ def main():
     names={};entries={};bases={'g2-apollo-main':0x437fe0,'g2-apollo-bootloader':0x410000,'g2-case':0x8000000-32,'g2-touch':0x3300-32,'r1-application':0x27000}
     for payload,base in bases.items():
         if payload=='r1-application':
-            rows=list(csv.DictReader(io.StringIO((ROOT/'r1/research/source-build/function-frontier.csv').read_text())))
+            rows=list(csv.DictReader(io.StringIO((ROOT/'r1/symbols/function-frontier.csv').read_text())))
             names[payload]=defaultdict(set)
             for r in rows:
                 if r['image']=='application' and r['candidate_symbol']:names[payload][r['candidate_symbol']].add(int(r['entry'],16)-base)

@@ -856,8 +856,8 @@ Re-audit notes:
   first-pass mislabel pattern as 0x6EC28, corrected by the residual pass).
 - Ledger/pin updates: generator tables `APP_GOODIX_PUBLIC_DEMOCODE` (+0x6D3C0/0x6CC2C/0x6A150/
   0x2EDE0/0x2EB80) and `APP_GOODIX_PUBLIC_DEMOCODE_MODERATE` (+0x2D66C) in
-  `r1/tools/build_r1_source_ownership.py`; regenerated `r1/docs/FUNCTION-OWNERSHIP.csv` /
-  `FUNCTION-OWNERSHIP-SUMMARY.json` (+ reference copies); `r1/tools/verify_openr1.py`
+  `pre-consolidation:r1/tools/build_r1_source_ownership.py`; regenerated `r1/docs/FUNCTION-OWNERSHIP.csv` /
+  `FUNCTION-OWNERSHIP-SUMMARY.json` (+ reference copies); `pre-consolidation:r1/tools/verify_openr1.py`
   `goodix_democode_symbols`/`goodix_democode_entries` (+6), provider-count pins
   (democode 168→174, candidate 325→319), both family entry-set digests re-pinned to the new
   legitimate state, and the stale cluster comment corrected (64→110 attributed members; the

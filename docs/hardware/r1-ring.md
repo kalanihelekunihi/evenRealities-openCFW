@@ -121,7 +121,7 @@ Health algorithms (sleep, energy, stress) run from the GoMore SDK
 | Command acceptance | Command accepted only when bit 6 is set; header `(command & 0xF0) + register` | same:64 | FW High |
 | Header | Seven header bits then a read (1) / write (0) selector pulse | same:65 | FW High |
 | Data | Eight data bits MSB first; XOR parity over each byte; read responses carry parity after every byte except the last | same:66-67 | FW High |
-| Timing | 52-count and 13-count pulse encoding; 209-iteration delay loop; recovery/idle waveforms; bounded edge sampling | same:24; `r1/reconstructed/yhm2710/yhm2710.h` | FW High |
+| Timing | 52-count and 13-count pulse encoding; 209-iteration delay loop; recovery/idle waveforms; bounded edge sampling | same:24; `r1/src/vendor/yhm2710/yhm2710.h` | FW High |
 | Identity | Chip ID **0xA0**; exact five-register init sequence | same:25 | FW High |
 | Registers used | Reg 1 (bit 1, upper field from an eight-code float ladder), reg 2 (`0x28` / `0xA8` shared-power values, `0xF8`), reg 3 (charging-event mask), reg 6 (high nibble = charge state), reg 9 (one-byte read) | same:26-34 | FW High |
 | Vendor description | YHM2710/2: programmable charging, current monitoring and shipping mode for wearables ("Smart Power Management") | `r1/docs/boundaries/NAMED-PERIPHERAL-BOUNDARIES.md`; product listing http://www.yhmicros.com/en/productw.asp?id=44 (title seen in search; the page returned HTTP 503 when opened) | DS (weak) |

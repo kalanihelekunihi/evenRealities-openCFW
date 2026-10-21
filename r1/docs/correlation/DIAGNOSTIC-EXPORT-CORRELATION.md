@@ -68,7 +68,7 @@ then proves each is uniquely retained in the nRF52840 loadable image.
 
 ```sh
 make -C r1 test sanitize arm-objects
-python3 r1/tools/verify_zephyr_source_boundary.py
-python3 r1/tools/verify_zephyr_bundle.py \
+python3 pre-consolidation:r1/tools/verify_zephyr_source_boundary.py
+python3 pre-consolidation:r1/tools/verify_zephyr_bundle.py \
   r1/build/openr1-zephyr/openr1-source-built.zip
 ```

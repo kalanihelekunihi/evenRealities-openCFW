@@ -13,6 +13,8 @@ process instructions separate from old evidence and generated work.
 | `docs/hardware/`, `docs/tooling.md`, `tools/bootstrap/` | cross-device hardware reference, tooling guide and pinned tool installer |
 | `g2/research/` | retained Ghidra corpus (Apollo main, case, EM9305, IAR, QP/C), reusable only after identity and scope validation |
 | `g2/manifests/`, `g2/tools/`, `g2/tests/` | reference manifest, container analyzers and Ghidra pipeline with their tests; the hybrid overlay tree was removed 2026-09-29 |
+| `g2/src/`, `g2/evidence/` | all reconstructed G2 C (merged 2026-10-21 from `g2/components`, `g2/firmware_c` and `g2/analysis`, see Git tag `pre-consolidation`) and the analysis data tools still read; reconstruction C is not admitted pseudocode-corpus evidence |
+| `g2/analysis/`, top-level `reviews/` | removed 2026-10-21 after distillation into `g2/docs/reference/findings-*.md`; recoverable at Git tag `pre-consolidation` |
 | `g2/blobs/official/g2-2.2.6.10/` | existing extracted oracle payloads and provenance |
 | `g2/build/pseudocode-first/<campaign>/` | future local analysis attempts, projects and frozen campaign artifacts |
 | `r1/`, `third-party/` | R1 decompilation corpus and references; submodule and archive dependency pins (the old `g2/third_party/` snapshots were replaced by submodules on 2026-09-29) |

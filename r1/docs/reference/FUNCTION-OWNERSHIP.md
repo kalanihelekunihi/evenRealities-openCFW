@@ -377,7 +377,7 @@ Under the owner-authorized full reduction (2026-08-14,
 `unknown_*_candidate` families — 169 entries: generic device registry (43), GPIO-driven
 software-TWI engines (40), sensor-stream framework (32), shared quantized-neural runtime (28),
 time/calendar provider (16), and RTC-device layer (10) — are reconstructed from the recovered
-decompilation evidence as independently compiled C under `r1/reconstructed/` with per-function
+decompilation evidence as independently compiled C under `r1/src/vendor/` with per-function
 provenance banners and host tests. Their disposition is now
 `clean_room_reimplementation_owner_authorized`; the family names are unchanged, no entry remains
 `investigate_before_implementing`, and the reconstructions are not vendor source. The boundary

@@ -1,7 +1,0 @@
-# Logger length and fill contracts
-
-`memory.c` source-defines the value result of optimized module length at `0x44a43c..0x44a472` and the memory side effect of stack fill at `0x43c0e4..0x43c14a`. The fixed main image is official G2 2.2.6.10 OTA stripped 32 bytes and mapped at `0x438000`, SHA-256 `19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701`. Original disassembly is in `g2/analysis/coverage-audit-parallel-2026-10-09/TDK-TRANSPORT-MAIN-DISASSEMBLY.txt`.
-
-`verify.py` compiles M55 and M4 source with warnings as errors and executes original/source M4 pairs in Unicorn. **560 comparisons pass**: 224 module strings and 336 fills, crossing four pointer alignments, 14 lengths through 127 bytes, and varied fill values. For length it compares return and memory; for fill it compares memory and restored stack. The stock fill's r0 register is intentionally excluded because the logger ignores it and source exposes a `void` API.
-
-The 18-unit main source archive includes `memory.c`. The generated `g2/build/source-candidates/20261010-main/receipt.json` records source/tool/output hashes and four unchanged direct undefined FlashDB symbols. The source-owned logger lower-contract estimate is now **three**: timestamp formatting, variadic formatting, and shared-buffer/lock output state. Full logger `0x43d574..0x43d976` remains direct SMP body **10/11** and has not been claimed complete.

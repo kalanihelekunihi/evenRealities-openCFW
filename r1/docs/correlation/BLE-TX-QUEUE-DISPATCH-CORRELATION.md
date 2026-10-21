@@ -2,7 +2,7 @@
 
 ## Native source reconstruction update
 
-`r1/components/board/native_tx.c` now compiles all three veneers and their
+`r1/src/application/board/native_tx.c` now compiles all three veneers and their
 common producer, with 26,931 comparisons against original Thumb execution.
 The guarded paths use actual source connection getters. Native task creators
 and stoppers in `native_task_lifecycle.c` separately preserve their five

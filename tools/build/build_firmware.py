@@ -13,6 +13,7 @@ import tempfile
 
 from source_providers import build_selected
 from firmware_coverage import coverage
+import sources
 from compiler_mode import validate_license_free
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -160,6 +161,9 @@ def main(argv=None):
                       'source_qualification_sha256': cut.sha256(CATALOG.with_name('source-qualification.json').read_bytes()),
                       'payloads': []}
             devices = {'g2','r1'} if args.device == 'all' else {args.device}
+            # Patched vendor headers that the source plan includes from {root}/build/generated/<device>.
+            report['generated_inputs'] = {d: sources.generate(sources.load(d), ROOT / 'build/generated' / d)
+                                          for d in sorted(devices) if sources.load(d).get('generated')}
             providers, receipts = build_selected(source_plan, stage, devices)
             report['source_builds'] = receipts
             report['source_plan_sha256'] = cut.sha256(args.source_plan.read_bytes())

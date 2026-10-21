@@ -1,7 +1,7 @@
 import unittest
 import json
 from pathlib import Path
-from g2.tools.trace_inventory import add_trace, summarize
+from tools.trace_inventory import add_trace, summarize
 
 
 class TraceInventoryTests(unittest.TestCase):
@@ -26,7 +26,7 @@ class TraceInventoryTests(unittest.TestCase):
 
     def test_saved_cumulative_inventory_has_final_payload_totals(self):
         root = Path(__file__).resolve().parents[2]
-        paths = [root / 'g2/analysis' / name / 'cumulative-inventory.json' for name in
+        paths = [root / 'g2/tests/fixtures' / f'{name}-cumulative-inventory.json' for name in
                  ('power-domain-descriptor-2026-10-06', 'cache-maintenance-2026-10-06',
                   'audio-cache-handoff-2026-10-06', 'audio-dma-rearm-2026-10-06')]
         paths = [path for path in paths if path.exists()]

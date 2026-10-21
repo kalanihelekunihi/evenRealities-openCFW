@@ -4,7 +4,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 class GpioTests(unittest.TestCase):
  def test_pinned_unchanged_function_excerpts(self):
-  component=ROOT/'components/foundation/ambiq_gpio';source=(component/'ambiq_gpio_irq.c').read_text();provenance=json.loads((component/'SOURCE_PROVENANCE.json').read_text())
+  component=ROOT/'src/apollo-common/ambiq-gpio';source=(component/'ambiq_gpio_irq.c').read_text();provenance=json.loads((component/'SOURCE_PROVENANCE.json').read_text())
   for name,digest in provenance['unchanged_function_text_sha256'].items():
    i=source.index('uint32_t\n'+name+'(');j=source.index('\n}',i)+2
    self.assertEqual(hashlib.sha256(source[i:j].encode()).hexdigest(),digest)
@@ -20,7 +20,7 @@ class GpioTests(unittest.TestCase):
   if not shutil.which('clang'):self.skipTest('clang missing')
   with tempfile.TemporaryDirectory() as folder:
    src=Path(folder)/'abi.c';src.write_text('#include "ambiq_gpio_compat.h"\n_Static_assert(sizeof(am_hal_gpio_handler_t)==4,"callback word");\n_Static_assert(sizeof(am_hal_gpio_handler_t[32])==0x80,"bank stride");\n_Static_assert(sizeof(am_hal_gpio_int_channel_e)==4,"channel ABI");\n_Static_assert(offsetof(opencfw_gpio_registers_t,MCUN0INT0CLR)==0x538,"clear offset");\n')
-   subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-ffreestanding','-std=c11','-Wall','-Wextra','-Werror','-I',str(ROOT/'components/foundation/ambiq_gpio'),'-c',str(src),'-o',folder+'/abi.o'],check=True,capture_output=True)
+   subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-ffreestanding','-std=c11','-Wall','-Wextra','-Werror','-I',str(ROOT/'src/apollo-common/ambiq-gpio'),'-c',str(src),'-o',folder+'/abi.o'],check=True,capture_output=True)
  def test_optimized_verifier_rejected(self):
-  p=subprocess.run(['python3','-O',str(ROOT/'components/foundation/ambiq_gpio/simulator/verify.py')],capture_output=True,text=True)
+  p=subprocess.run(['python3','-O',str(ROOT/'tests/simulators/ambiq-gpio/verify.py')],capture_output=True,text=True)
   self.assertNotEqual(p.returncode,0);self.assertIn('optimized Python rejected',p.stderr)

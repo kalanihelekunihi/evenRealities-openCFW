@@ -1,7 +1,8 @@
 """Exact pinned text and integrated callable event-group contract checks."""
 import csv,hashlib,json,pathlib,subprocess,unittest
 ROOT=pathlib.Path(__file__).resolve().parents[2]
-COMP=ROOT/'g2/components/foundation/freertos_event_group'
+COMP=ROOT/'g2/src/apollo-common/freertos-event-group'
+SIM=ROOT/'g2/tests/simulators/freertos-event-group'
 def function(text,name):
  prefix='EventBits_t ' if name=='xEventGroupSetBits' else 'void ' if name=='vEventGroupSetBitsCallback' else 'BaseType_t '
  start=text.index(prefix+name+'(');brace=text.index('{',start);depth=1;i=brace+1
@@ -32,4 +33,4 @@ class EventGroupEvidence(unittest.TestCase):
   for n in ['xEventGroupSetBits','xEventGroupSetBitsFromISR','vEventGroupSetBitsCallback','xTimerPendFunctionCallFromISR','opencfw_wsf_notify_task','opencfw_wsf_notify_isr','opencfw_wsf_dispatch','GPIO0_607F_IRQHandler']:self.assertIn(' T '+n,nm)
   self.assertIn('event-group-wsf-simulator-test: event-group-wsf-simulator',(ROOT/'g2/Makefile').read_text())
  def test_optimized_verifier_is_rejected(self):
-  p=subprocess.run(['python3','-O',str(COMP/'simulator/verify.py')],capture_output=True,text=True);self.assertNotEqual(p.returncode,0);self.assertIn('optimized Python rejected',p.stderr)
+  p=subprocess.run(['python3','-O',str(SIM/'verify.py')],capture_output=True,text=True);self.assertNotEqual(p.returncode,0);self.assertIn('optimized Python rejected',p.stderr)

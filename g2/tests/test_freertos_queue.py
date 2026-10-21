@@ -1,7 +1,8 @@
 """Pinned queue producer lineage and integrated ARM32 executable evidence."""
 import hashlib,json,pathlib,re,subprocess,unittest
 ROOT=pathlib.Path(__file__).resolve().parents[2]
-COMP=ROOT/'g2/components/foundation/freertos_queue'
+COMP=ROOT/'g2/src/apollo-common/freertos-queue'
+SIM=ROOT/'g2/tests/simulators/freertos-queue'
 class QueueEvidence(unittest.TestCase):
  def test_exact_pinned_source_text(self):
   p=json.loads((COMP/'SOURCE_PROVENANCE.json').read_text());raw=(COMP/'queue_subset.c').read_bytes();s=raw.decode()
@@ -23,4 +24,4 @@ class QueueEvidence(unittest.TestCase):
   if elf.exists():
    nm=subprocess.check_output(['arm-none-eabi-nm',str(elf)],text=True)
    for n in ['xQueueGenericSendFromISR','opencfw_queue_memcpy','opencfw_queue_mask_set','opencfw_queue_mask_restore','xEventGroupSetBitsFromISR','opencfw_wsf_set_event','GPIO0_607F_IRQHandler']:self.assertIn(' T '+n,nm)
-  p=subprocess.run(['python3','-O',str(COMP/'simulator/verify.py')],capture_output=True,text=True);self.assertNotEqual(p.returncode,0);self.assertIn('optimized Python rejected',p.stderr)
+  p=subprocess.run(['python3','-O',str(SIM/'verify.py')],capture_output=True,text=True);self.assertNotEqual(p.returncode,0);self.assertIn('optimized Python rejected',p.stderr)

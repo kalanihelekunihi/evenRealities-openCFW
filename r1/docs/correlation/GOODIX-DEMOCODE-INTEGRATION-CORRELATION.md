@@ -3,7 +3,7 @@
 > Reconstruction update (2026-10-15): the public SpO2 version tag matches, but its
 > full configuration object differs from stock in three calibration words. The
 > R1-owned patch and complete 136-byte HR/HRV/SpO2 verification are documented in
-> `r1/source-config/goodix/README.md`. The expanded reconstruction also compiles
+> `r1/src/config/goodix/README.md`. The expanded reconstruction also compiles
 > the source-correlated public algorithm-configuration unit; historical exclusions
 > below describe the retired clean-room build, not a blanket source-build gate.
 

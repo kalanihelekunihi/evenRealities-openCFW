@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_qma_transport.py", line 73, in <module>
-    if __name__=='__main__':main()
-                            ~~~~^^
-  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_qma_transport.py", line 67, in main
-    if not st['fault']:assert u.reg_read(UC_ARM_REG_PC)==0x20000100 and u.reg_read(UC_ARM_REG_SP)==SP and [u.reg_read(x) for x in SAVED]==[0x12340000+i for i in range(8)],(case,side,hex(u.reg_read(UC_ARM_REG_PC)),hex(u.reg_read(UC_ARM_REG_SP)),[hex(u.reg_read(x)) for x in SAVED],st['trace'][-8:])
-                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: ({'kind': 'read', 'reg': 0, 'length': 0, 'value': 135, 'units': 5, 'destination': 536936448, 'bus': 0, 'failures': 0, 'error': 8, 'written': 0, 'byte': 144, 'seed': 2882400001, 'mutation': 0, 'irq_bits': 0, 'event_mask': 3, 'irq_mutation': 0, 'depth': 31, 'requested': 30, 'phase_fail': 'none', 'modes': [0]}, 0, '0x9a6a0', '0x2003cfc8', ['0x1', '0x9a6a1', '0x9a6a0', '0xfa00', '0x20010000', '0x0', '0x12340006', '0x12340007'], [])

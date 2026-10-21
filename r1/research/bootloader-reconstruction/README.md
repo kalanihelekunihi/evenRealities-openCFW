@@ -50,7 +50,7 @@ whole-firmware byte oracle for the application, bootloader, UICR, and runtime sn
 | [`generated/symbols.csv`](generated/symbols.csv) | all in-image symbols after naming |
 | `firmware-project` (removed; Git commit `832137ec`) | complete hash-pinned nRF52840/S140 C/assembly build producing ELF/HEX/BIN |
 | `functional-model` (removed; Git commit `832137ec`) | compile-tested clean C model of security/update behavior |
-| [`sdk-overlay`](sdk-overlay) | build-tested R1 public key, configuration deltas, and non-destructive GNU Make overlay |
+| [`sdk-overlay`](../../src/bootloader) | build-tested R1 public key, configuration deltas, and non-destructive GNU Make overlay |
 | [`SOURCE-CORRELATION.md`](SOURCE-CORRELATION.md) | reference build and naming method/results |
 | [`SECURITY-MODEL.md`](SECURITY-MODEL.md) | security-audit behavior incorporated into the reconstruction |
 | [`MEMORY-MAP.md`](MEMORY-MAP.md) | linked flash/SRAM map |

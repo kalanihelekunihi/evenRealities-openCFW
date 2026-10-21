@@ -6,7 +6,7 @@ Under the "Owner-authorized full reduction (2026-08-14)" section of
 [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md), the forty-function family
 `unknown_software_twi_provider_candidate` is reduced from the recovered
 disassembly evidence to compilable C at
-[`../../reconstructed/software_twi/`](../../reconstructed/software_twi/).  The
+[`../../reconstructed/software_twi/`](../../src/vendor/software_twi).  The
 reconstruction is not vendor source and is never presented as such; every
 file carries the provenance banner.  The ledger disposition for the forty
 entries becomes `clean_room_reimplementation_owner_authorized` when the
@@ -217,7 +217,7 @@ does not touch them):
 
 ## Authenticated primitive comparison (2026-10-15)
 
-`r1/tools/verify_software_twi_primitives.py` links the actual compiled C bodies
+`pre-consolidation:r1/tools/verify_software_twi_primitives.py` links the actual compiled C bodies
 and executes all twenty original primitive bodies from the hash-locked
 application. All 4,144 comparisons pass, including all 256 write/read values,
 both read ACK choices, two pin/delay/pull configurations and ordered callback
@@ -246,7 +246,7 @@ behavior. Those are explicit remaining contracts.
 ## Native binding integration (2026-10-15)
 
 The four board-binding wrappers are now compiled in
-`r1/components/software-twi/stock_records.c` alongside the native registry.
+`r1/src/application/software-twi/stock_records.c` alongside the native registry.
 Their 112-byte layout is asserted at compile time and fixed-address execution
 passes 48 stock comparisons, including duplicate registration and preserved
 record fields. The earlier statement that these wrappers are not reconstructed

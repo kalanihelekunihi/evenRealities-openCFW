@@ -15,7 +15,7 @@ import tempfile
 from pathlib import Path
 
 MAP = Path(__file__).with_name('manifests') / 'g2-l8-resource-map.json'
-MAP_SHA = '33115d16c9917b0908943c4f2c91b0f8955b3b255bf5a06fe10adf736841595d'
+MAP_SHA = 'c44dcf0d5ce61496fd7e94c9ccb8082d4caa7e16c4991628d00a1efd933b1742'
 def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 def require(ok: bool, message: str) -> None:

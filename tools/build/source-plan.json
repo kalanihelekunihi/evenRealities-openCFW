@@ -29,10 +29,10 @@
         "-DFREERTOS",
         "-DCONFIG_NFCT_PINS_AS_GPIOS",
         "-DCONFIG_GPIO_AS_PINRESET",
-        "-I{root}/r1/source-config/sdk",
-        "-I{root}/r1/research/source-build/application-sdk",
+        "-I{root}/r1/src/config/sdk",
+        "-I{root}/build/generated/r1",
         "-include",
-        "{root}/r1/research/source-build/application-sdk/nrf_svci_clang.h",
+        "{root}/build/generated/r1/nrf_svci_clang.h",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
@@ -86,7 +86,7 @@
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
         "-I{root}/third-party/upstream/freertos-kernel/include",
-        "-I{root}/r1/source-config/rtos"
+        "-I{root}/r1/src/config/rtos"
       ],
       "regions": [
         {
@@ -95,7 +95,7 @@
           "start": 173840,
           "end": 173846,
           "sha256": "fa3e2d00b9b20169cfe840228d491dd26092eb80dec02ab831785d0b4b4af13d",
-          "evidence": "r1/research/source-build/application-sdk/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/application-sdk/report.json"
         }
       ]
     },
@@ -126,10 +126,10 @@
         "-DFREERTOS",
         "-DCONFIG_NFCT_PINS_AS_GPIOS",
         "-DCONFIG_GPIO_AS_PINRESET",
-        "-I{root}/r1/source-config/sdk",
-        "-I{root}/r1/research/source-build/application-sdk",
+        "-I{root}/r1/src/config/sdk",
+        "-I{root}/build/generated/r1",
         "-include",
-        "{root}/r1/research/source-build/application-sdk/nrf_svci_clang.h",
+        "{root}/build/generated/r1/nrf_svci_clang.h",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
@@ -183,7 +183,7 @@
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
         "-I{root}/third-party/upstream/freertos-kernel/include",
-        "-I{root}/r1/source-config/rtos"
+        "-I{root}/r1/src/config/rtos"
       ],
       "regions": [
         {
@@ -192,7 +192,7 @@
           "start": 182704,
           "end": 182712,
           "sha256": "326d2a25b66421aabb57b5eb4e5e649b67ff0fdd7908dd14cff0647169a86385",
-          "evidence": "r1/research/source-build/application-sdk/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/application-sdk/report.json"
         },
         {
           "payload": "r1-application",
@@ -200,7 +200,7 @@
           "start": 182696,
           "end": 182704,
           "sha256": "09da9fcb9fad03606c272eaf2b3d68f76e1cb6b1f63503abcb470f056168dc36",
-          "evidence": "r1/research/source-build/application-sdk/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/application-sdk/report.json"
         }
       ]
     },
@@ -231,10 +231,10 @@
         "-DFREERTOS",
         "-DCONFIG_NFCT_PINS_AS_GPIOS",
         "-DCONFIG_GPIO_AS_PINRESET",
-        "-I{root}/r1/source-config/sdk",
-        "-I{root}/r1/research/source-build/application-sdk",
+        "-I{root}/r1/src/config/sdk",
+        "-I{root}/build/generated/r1",
         "-include",
-        "{root}/r1/research/source-build/application-sdk/nrf_svci_clang.h",
+        "{root}/build/generated/r1/nrf_svci_clang.h",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
@@ -288,7 +288,7 @@
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
         "-I{root}/third-party/upstream/freertos-kernel/include",
-        "-I{root}/r1/source-config/rtos"
+        "-I{root}/r1/src/config/rtos"
       ],
       "regions": [
         {
@@ -297,7 +297,7 @@
           "start": 344516,
           "end": 344524,
           "sha256": "ccc997001f272832a537e5b47d7048c256daf96a713da81eb676c20d95831172",
-          "evidence": "r1/research/source-build/application-sdk/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/application-sdk/report.json"
         }
       ]
     },
@@ -393,7 +393,7 @@
           "start": 1180,
           "end": 1182,
           "sha256": "575fc8fa9e92ffe7d57a6aef6f1168f39da04f07d6bcd5b5e17883bff7b33165",
-          "evidence": "r1/research/source-build/bootloader/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/bootloader/report.json"
         },
         {
           "payload": "r1-application",
@@ -401,7 +401,7 @@
           "start": 1186,
           "end": 1188,
           "sha256": "575fc8fa9e92ffe7d57a6aef6f1168f39da04f07d6bcd5b5e17883bff7b33165",
-          "evidence": "r1/research/source-build/bootloader/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/bootloader/report.json"
         }
       ]
     },
@@ -497,7 +497,7 @@
           "start": 334968,
           "end": 334976,
           "sha256": "1f9fe126994d1feb4b667541272ecb677ab06871204bc087f4bfae89d2d297c9",
-          "evidence": "r1/research/source-build/bootloader/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/bootloader/report.json"
         }
       ]
     },
@@ -522,7 +522,7 @@
         "-D__TIME__=\"00:00:00\"",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
-        "-I{root}/r1/source-config/goodix",
+        "-I{root}/r1/src/config/goodix",
         "-I{root}/third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/driver/inc",
         "-I{root}/third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/module/gh_agc",
         "-I{root}/third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/module/gh_ecg",
@@ -544,12 +544,12 @@
           "start": 31616,
           "end": 31618,
           "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
-          "evidence": "r1/research/source-build/goodix/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/goodix/report.json"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_float_bits.c",
+      "source": "r1/src/application/runtime/native_float_bits.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -569,7 +569,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -580,12 +580,12 @@
           "start": 5018,
           "end": 5022,
           "sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
-          "evidence": "r1/research/source-build/native-float-bits/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-float-bits/report.json"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_formatter_stream.c",
+      "source": "r1/src/application/runtime/native_formatter_stream.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -605,7 +605,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -616,12 +616,12 @@
           "start": 121452,
           "end": 121462,
           "sha256": "b912c7eaa8c5681214454c4ed558609e9c943358cf5a15f44f97bb061232fcd7",
-          "evidence": "r1/research/source-build/native-formatter-stream/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-formatter-stream/report.json"
         }
       ]
     },
     {
-      "source": "r1/components/board/native_rtt_delay.c",
+      "source": "r1/src/application/board/native_rtt_delay.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -647,7 +647,7 @@
           "start": 467776,
           "end": 467782,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -655,7 +655,7 @@
           "start": 470192,
           "end": 470198,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -663,7 +663,7 @@
           "start": 470208,
           "end": 470214,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -671,7 +671,7 @@
           "start": 470224,
           "end": 470230,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -679,7 +679,7 @@
           "start": 470240,
           "end": 470246,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -687,7 +687,7 @@
           "start": 470256,
           "end": 470262,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -695,7 +695,7 @@
           "start": 470272,
           "end": 470278,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -703,7 +703,7 @@
           "start": 470288,
           "end": 470294,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -711,7 +711,7 @@
           "start": 472560,
           "end": 472566,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -719,7 +719,7 @@
           "start": 472592,
           "end": 472598,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -727,7 +727,7 @@
           "start": 472640,
           "end": 472646,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -735,7 +735,7 @@
           "start": 472656,
           "end": 472662,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -743,7 +743,7 @@
           "start": 472672,
           "end": 472678,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -751,7 +751,7 @@
           "start": 472688,
           "end": 472694,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -759,7 +759,7 @@
           "start": 472736,
           "end": 472742,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -767,7 +767,7 @@
           "start": 472848,
           "end": 472854,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -775,7 +775,7 @@
           "start": 477968,
           "end": 477974,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -783,7 +783,7 @@
           "start": 481168,
           "end": 481174,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -791,7 +791,7 @@
           "start": 481184,
           "end": 481190,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -799,7 +799,7 @@
           "start": 481760,
           "end": 481766,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         },
         {
           "payload": "r1-application",
@@ -807,7 +807,7 @@
           "start": 484304,
           "end": 484310,
           "sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
-          "evidence": "r1/research/source-build/native-rtt-delay/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-rtt-delay/report.json"
         }
       ]
     },
@@ -834,7 +834,7 @@
         "-DFLOAT_ABI_HARD",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
-        "-I{root}/r1/source-config/rtos",
+        "-I{root}/r1/src/config/rtos",
         "-I{root}/r1/config-recovered",
         "-I{root}/third-party/upstream/freertos-kernel/include",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
@@ -863,7 +863,7 @@
           "start": 453798,
           "end": 453804,
           "sha256": "bc7f0bc51acf61c75c206ca28e5e0d2c7fb4e8dfdcb6076dffe45857be5d2369",
-          "evidence": "r1/research/source-build/rtos/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/rtos/report.json"
         }
       ]
     },
@@ -890,7 +890,7 @@
         "-DFLOAT_ABI_HARD",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
-        "-I{root}/r1/source-config/rtos",
+        "-I{root}/r1/src/config/rtos",
         "-I{root}/r1/config-recovered",
         "-I{root}/third-party/upstream/freertos-kernel/include",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
@@ -919,7 +919,7 @@
           "start": 352932,
           "end": 352938,
           "sha256": "80c6a2e0d49b5086f537d721419222d4c376948d1ec29a581cf2426025364aee",
-          "evidence": "r1/research/source-build/rtos/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/rtos/report.json"
         },
         {
           "payload": "r1-application",
@@ -927,12 +927,12 @@
           "start": 354324,
           "end": 354328,
           "sha256": "43a18f1e0d8f09e7bcd512a1f7a8ad3783b3af08e2f82a4ac2d92ef43c6097ea",
-          "evidence": "r1/research/source-build/rtos/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/rtos/report.json",
           "address": 514068,
           "bindings": {
             "xTaskGetCurrentTaskHandle": 624541
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         }
       ]
     },
@@ -959,7 +959,7 @@
         "-DFLOAT_ABI_HARD",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
-        "-I{root}/r1/source-config/rtos",
+        "-I{root}/r1/src/config/rtos",
         "-I{root}/r1/config-recovered",
         "-I{root}/third-party/upstream/freertos-kernel/include",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
@@ -984,9 +984,9 @@
         "-fno-delete-null-pointer-checks",
         "-fno-inline",
         "-include",
-        "{root}/r1/source-config/rtos/event_group_contract.h",
+        "{root}/r1/src/config/rtos/event_group_contract.h",
         "-include",
-        "{root}/r1/source-config/rtos/native_port_assert.h"
+        "{root}/r1/src/config/rtos/native_port_assert.h"
       ],
       "regions": [
         {
@@ -995,7 +995,7 @@
           "start": 446124,
           "end": 446136,
           "sha256": "3b7672e8d1fa8e0f87597cd70ca2eaefe805eb0aae2b7ee473b4233d3e273442",
-          "evidence": "r1/research/source-build/rtos-event-groups/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/rtos-event-groups/report.json"
         },
         {
           "payload": "r1-application",
@@ -1003,12 +1003,12 @@
           "start": 446136,
           "end": 446148,
           "sha256": "3b7672e8d1fa8e0f87597cd70ca2eaefe805eb0aae2b7ee473b4233d3e273442",
-          "evidence": "r1/research/source-build/rtos-event-groups/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/rtos-event-groups/report.json"
         }
       ]
     },
     {
-      "source": "g2/components/audio/uart_thread_source_candidate/display_ble_att_empty_handler.c",
+      "source": "g2/src/apollo-main/ble/ble-att/display_ble_att_empty_handler.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -1035,7 +1035,7 @@
       ]
     },
     {
-      "source": "g2/components/audio/uart_thread_source_candidate/display_ble_dm_adv_msg_4ba6ac.c",
+      "source": "g2/src/apollo-main/ble/ble-dm/display_ble_dm_adv_msg_4ba6ac.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -1078,7 +1078,7 @@
       ]
     },
     {
-      "source": "g2/components/audio/uart_thread_source_candidate/display_ble_dm_conn_main_action_leaves_4b63ca.c",
+      "source": "g2/src/apollo-main/ble/ble-dm/display_ble_dm_conn_main_action_leaves_4b63ca.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -1105,7 +1105,7 @@
       ]
     },
     {
-      "source": "g2/components/audio/uart_thread_source_candidate/display_ble_dm_empty_handlers_4d29be.c",
+      "source": "g2/src/apollo-main/ble/ble-dm/display_ble_dm_empty_handlers_4d29be.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -1140,7 +1140,7 @@
       ]
     },
     {
-      "source": "g2/components/audio/uart_thread_source_candidate/display_ble_hci_boot_public.c",
+      "source": "g2/src/apollo-main/ble/ble-hci/display_ble_hci_boot_public.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -1167,7 +1167,7 @@
       ]
     },
     {
-      "source": "g2/components/audio/uart_thread_source_candidate/display_ble_master_link_notify.c",
+      "source": "g2/src/apollo-main/ble/ble-master/display_ble_master_link_notify.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -1194,7 +1194,7 @@
       ]
     },
     {
-      "source": "g2/components/audio/uart_thread_source_candidate/display_lv_event_state_small_helpers.c",
+      "source": "g2/src/apollo-main/ui/lvgl/lv-event/display_lv_event_state_small_helpers.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -1221,7 +1221,7 @@
       ]
     },
     {
-      "source": "g2/components/audio/uart_thread_source_candidate/display_lv_init_children.c",
+      "source": "g2/src/apollo-main/ui/lvgl/display-lv/display_lv_init_children.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -1277,7 +1277,7 @@
       ]
     },
     {
-      "source": "g2/components/audio/uart_thread_source_candidate/display_lv_layout_rect_primitives.c",
+      "source": "g2/src/apollo-main/ui/lvgl/lv-layout/display_lv_layout_rect_primitives.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -1312,7 +1312,7 @@
       ]
     },
     {
-      "source": "g2/components/audio/uart_thread_source_candidate/display_lv_render_area_helpers.c",
+      "source": "g2/src/apollo-main/ui/lvgl/lv-render/display_lv_render_area_helpers.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -1339,7 +1339,7 @@
       ]
     },
     {
-      "source": "g2/components/audio/uart_thread_source_candidate/display_ring_task_entry.c",
+      "source": "g2/src/apollo-main/drivers/peripherals/ring-task/display_ring_task_entry.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -1374,7 +1374,7 @@
       ]
     },
     {
-      "source": "g2/components/audio/uart_thread_source_candidate/l2c_default_control.c",
+      "source": "g2/src/apollo-main/ble/l2c-default/l2c_default_control.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -1426,10 +1426,10 @@
         "-DFREERTOS",
         "-DCONFIG_NFCT_PINS_AS_GPIOS",
         "-DCONFIG_GPIO_AS_PINRESET",
-        "-I{root}/r1/source-config/sdk",
-        "-I{root}/r1/research/source-build/application-sdk",
+        "-I{root}/r1/src/config/sdk",
+        "-I{root}/build/generated/r1",
         "-include",
-        "{root}/r1/research/source-build/application-sdk/nrf_svci_clang.h",
+        "{root}/build/generated/r1/nrf_svci_clang.h",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
@@ -1483,7 +1483,7 @@
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
         "-I{root}/third-party/upstream/freertos-kernel/include",
-        "-I{root}/r1/source-config/rtos",
+        "-I{root}/r1/src/config/rtos",
         "-Oz"
       ],
       "regions": [
@@ -1493,12 +1493,12 @@
           "start": 175736,
           "end": 175740,
           "sha256": "0a4f73cfe42e4d5f58f49dc5c98a721832911ab4b5c7d3f2c5c4cd1c2b0a0f79",
-          "evidence": "r1/research/source-build/application-sdk/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/application-sdk/report.json",
           "address": 335480,
           "bindings": {
             "bcs_internal_state_reset": 332865
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         }
       ]
     },
@@ -1529,10 +1529,10 @@
         "-DFREERTOS",
         "-DCONFIG_NFCT_PINS_AS_GPIOS",
         "-DCONFIG_GPIO_AS_PINRESET",
-        "-I{root}/r1/source-config/sdk",
-        "-I{root}/r1/research/source-build/application-sdk",
+        "-I{root}/r1/src/config/sdk",
+        "-I{root}/build/generated/r1",
         "-include",
-        "{root}/r1/research/source-build/application-sdk/nrf_svci_clang.h",
+        "{root}/build/generated/r1/nrf_svci_clang.h",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
@@ -1586,7 +1586,7 @@
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
         "-I{root}/third-party/upstream/freertos-kernel/include",
-        "-I{root}/r1/source-config/rtos"
+        "-I{root}/r1/src/config/rtos"
       ],
       "regions": [
         {
@@ -1595,12 +1595,12 @@
           "start": 359124,
           "end": 359132,
           "sha256": "ff94d77f4f8c3c1b7a9b759f841c242e5441a0ea1f5465d8c39a3cf31a626b3e",
-          "evidence": "r1/research/source-build/application-sdk/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/application-sdk/report.json",
           "address": 518868,
           "bindings": {
             "peer_id_allocate": 519285
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         },
         {
           "payload": "r1-application",
@@ -1608,12 +1608,12 @@
           "start": 359154,
           "end": 359158,
           "sha256": "49d98f57367bc2cf4842ff1e2f88ee9b0fc1fc5ea5e7fd3d98b179eab63d3b98",
-          "evidence": "r1/research/source-build/application-sdk/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/application-sdk/report.json",
           "address": 518898,
           "bindings": {
             "peer_id_is_allocated": 519433
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         },
         {
           "payload": "r1-application",
@@ -1621,12 +1621,12 @@
           "start": 358672,
           "end": 358676,
           "sha256": "a4fe38186971ae2af6244971652dc1630a8d6285186bbee3da26c8114eb73b47",
-          "evidence": "r1/research/source-build/application-sdk/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/application-sdk/report.json",
           "address": 518416,
           "bindings": {
             "peer_id_get_next_used": 519373
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         },
         {
           "payload": "r1-application",
@@ -1634,12 +1634,12 @@
           "start": 358668,
           "end": 358672,
           "sha256": "915002f461f9ba7cd1200a1b1829ee8d18b1f0ef9e9a704932c892df0334a65e",
-          "evidence": "r1/research/source-build/application-sdk/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/application-sdk/report.json",
           "address": 518412,
           "bindings": {
             "peer_id_get_next_deleted": 519361
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         }
       ]
     },
@@ -1670,10 +1670,10 @@
         "-DFREERTOS",
         "-DCONFIG_NFCT_PINS_AS_GPIOS",
         "-DCONFIG_GPIO_AS_PINRESET",
-        "-I{root}/r1/source-config/sdk",
-        "-I{root}/r1/research/source-build/application-sdk",
+        "-I{root}/r1/src/config/sdk",
+        "-I{root}/build/generated/r1",
         "-include",
-        "{root}/r1/research/source-build/application-sdk/nrf_svci_clang.h",
+        "{root}/build/generated/r1/nrf_svci_clang.h",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
@@ -1727,7 +1727,7 @@
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
         "-I{root}/third-party/upstream/freertos-kernel/include",
-        "-I{root}/r1/source-config/rtos"
+        "-I{root}/r1/src/config/rtos"
       ],
       "regions": [
         {
@@ -1736,12 +1736,12 @@
           "start": 357748,
           "end": 357754,
           "sha256": "603fb354c17fa8b32a0b977a79be0fc7b17d3125f7acd3217613e5aa0af4c266",
-          "evidence": "r1/research/source-build/application-sdk/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/application-sdk/report.json",
           "address": 517492,
           "bindings": {
             "pds_peer_data_read": 518525
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         }
       ]
     },
@@ -1772,10 +1772,10 @@
         "-DFREERTOS",
         "-DCONFIG_NFCT_PINS_AS_GPIOS",
         "-DCONFIG_GPIO_AS_PINRESET",
-        "-I{root}/r1/source-config/sdk",
-        "-I{root}/r1/research/source-build/application-sdk",
+        "-I{root}/r1/src/config/sdk",
+        "-I{root}/build/generated/r1",
         "-include",
-        "{root}/r1/research/source-build/application-sdk/nrf_svci_clang.h",
+        "{root}/build/generated/r1/nrf_svci_clang.h",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
@@ -1829,7 +1829,7 @@
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
         "-I{root}/third-party/upstream/freertos-kernel/include",
-        "-I{root}/r1/source-config/rtos"
+        "-I{root}/r1/src/config/rtos"
       ],
       "regions": [
         {
@@ -1838,12 +1838,12 @@
           "start": 339096,
           "end": 339100,
           "sha256": "e12df538daf5523bed59102214c8de0313814075d1302edabdfb67ce3a4a28f2",
-          "evidence": "r1/research/source-build/application-sdk/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/application-sdk/report.json",
           "address": 498840,
           "bindings": {
             "nrf_balloc_init": 491847
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         }
       ]
     },
@@ -1868,7 +1868,7 @@
         "-D__TIME__=\"00:00:00\"",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
-        "-I{root}/r1/source-config/goodix",
+        "-I{root}/r1/src/config/goodix",
         "-I{root}/third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/driver/inc",
         "-I{root}/third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/module/gh_agc",
         "-I{root}/third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/module/gh_ecg",
@@ -1890,17 +1890,17 @@
           "start": 15424,
           "end": 15434,
           "sha256": "bec6984c305317266f7002be3ed2c28e00a20f6d9e5b7f2764772d0c75664102",
-          "evidence": "r1/research/source-build/goodix/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/goodix/report.json",
           "address": 175168,
           "bindings": {
             "GH3X2X_WriteReg": 176313
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         }
       ]
     },
     {
-      "source": "r1/components/board/native_charger_state.c",
+      "source": "r1/src/application/board/native_charger_state.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -1919,7 +1919,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
         "-Oz"
@@ -1931,17 +1931,17 @@
           "start": 169496,
           "end": 169500,
           "sha256": "9011d0939e811241075a55f8ebf69d4ebe99a0f5f8db71bbcedbd001ead7ae2b",
-          "evidence": "r1/research/source-build/native-charger-state/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-charger-state/report.json",
           "address": 329240,
           "bindings": {
             "r1_yhm_charge_state_native": 217715
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_gxt310_bus.c",
+      "source": "r1/src/application/runtime/native_gxt310_bus.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -1961,7 +1961,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -1972,12 +1972,12 @@
           "start": 296512,
           "end": 296516,
           "sha256": "f5c0c38d85ddf29a1b5db89d823b2a96137a77652922f8cb161f77f9925a2ede",
-          "evidence": "r1/research/source-build/native-gxt310-bus/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-gxt310-bus/report.json",
           "address": 456256,
           "bindings": {
             "r1_gxt310_transfer_read_native": 331573
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         },
         {
           "payload": "r1-application",
@@ -1985,17 +1985,17 @@
           "start": 296516,
           "end": 296520,
           "sha256": "e9bc7ab6405fe4cb4bd068c679cc8ee6720e9900bb43edad0abb2a009fa3c60e",
-          "evidence": "r1/research/source-build/native-gxt310-bus/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-gxt310-bus/report.json",
           "address": 456260,
           "bindings": {
             "r1_gxt310_transfer_write_native": 331613
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_gxt310_id.c",
+      "source": "r1/src/application/runtime/native_gxt310_id.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -2015,7 +2015,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -2026,12 +2026,12 @@
           "start": 296978,
           "end": 296984,
           "sha256": "3f01b0974df2ddc0ecc7d672849bd70350f96ee66d05a4b7397a3d6712c00097",
-          "evidence": "r1/research/source-build/native-gxt310-id/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-gxt310-id/report.json",
           "address": 456722,
           "bindings": {
             "r1_gxt310_chip_id_native": 455997
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         },
         {
           "payload": "r1-application",
@@ -2039,17 +2039,17 @@
           "start": 297004,
           "end": 297010,
           "sha256": "e1294c4430d5e48496a9c853ee712b3c5ff863527123fd263704f92747c4f2d5",
-          "evidence": "r1/research/source-build/native-gxt310-id/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-gxt310-id/report.json",
           "address": 456748,
           "bindings": {
             "r1_gxt310_chip_id_native": 455997
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_gxt310_mode.c",
+      "source": "r1/src/application/runtime/native_gxt310_mode.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -2069,7 +2069,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -2080,12 +2080,12 @@
           "start": 296964,
           "end": 296972,
           "sha256": "0a099318ad9c76b025b0aa229e8de6332ef6956114081adf0972d7ab88684700",
-          "evidence": "r1/research/source-build/native-gxt310-mode/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-gxt310-mode/report.json",
           "address": 456708,
           "bindings": {
             "r1_gxt310_switch_mode_native": 456265
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         },
         {
           "payload": "r1-application",
@@ -2093,17 +2093,17 @@
           "start": 296990,
           "end": 296998,
           "sha256": "4811461d8532e3b7b0f3a00ac062c333edd814247df6d0f610af4887153ded1f",
-          "evidence": "r1/research/source-build/native-gxt310-mode/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-gxt310-mode/report.json",
           "address": 456734,
           "bindings": {
             "r1_gxt310_switch_mode_native": 456265
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         }
       ]
     },
     {
-      "source": "r1/components/board/native_yhm_frontend.c",
+      "source": "r1/src/application/board/native_yhm_frontend.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -2123,7 +2123,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -2134,17 +2134,17 @@
           "start": 58380,
           "end": 58386,
           "sha256": "6ba60cc0148015a8c204c06e20d138f413cce8e7d75e3a2abb08d8a57bfc2c35",
-          "evidence": "r1/research/source-build/native-yhm-frontend/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-yhm-frontend/report.json",
           "address": 218124,
           "bindings": {
             "r1_yhm_register_read_record": 329677
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         }
       ]
     },
     {
-      "source": "r1/components/board/native_yhm_system_track.c",
+      "source": "r1/src/application/board/native_yhm_system_track.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -2164,7 +2164,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -2175,17 +2175,17 @@
           "start": 169884,
           "end": 169888,
           "sha256": "b1322d2a50626c62b1d53606d9839bbd54b123ab62b7fe729766d35540450a2c",
-          "evidence": "r1/research/source-build/native-yhm-system-track/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-yhm-system-track/report.json",
           "address": 329628,
           "bindings": {
             "r1_yhm_system_track_native": 218557
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         }
       ]
     },
     {
-      "source": "r1/components/st25/stock_bus_bindings.c",
+      "source": "r1/src/application/st25/stock_bus_bindings.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -2215,12 +2215,12 @@
           "start": 121988,
           "end": 121994,
           "sha256": "030026b653096676e0a1e42ef849033b09a3312468389e5824d859449eb37404",
-          "evidence": "r1/research/source-build/sensors/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/sensors/report.json",
           "address": 281732,
           "bindings": {
             "r1_i2c5_read_transfer": 328977
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         },
         {
           "payload": "r1-application",
@@ -2228,17 +2228,17 @@
           "start": 121994,
           "end": 122000,
           "sha256": "3bbff11ae7fbd405ae5aaf1d4b32ea5cc2eaa8c23b34e3434c0c935076b3c1f0",
-          "evidence": "r1/research/source-build/sensors/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/sensors/report.json",
           "address": 281738,
           "bindings": {
             "r1_i2c5_write_transfer": 329013
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         }
       ]
     },
     {
-      "source": "r1/components/board/native_watchdog_device.c",
+      "source": "r1/src/application/board/native_watchdog_device.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -2263,10 +2263,10 @@
         "-DFREERTOS",
         "-DCONFIG_NFCT_PINS_AS_GPIOS",
         "-DCONFIG_GPIO_AS_PINRESET",
-        "-I{root}/r1/source-config/sdk",
-        "-I{root}/r1/research/source-build/application-sdk",
+        "-I{root}/r1/src/config/sdk",
+        "-I{root}/build/generated/r1",
         "-include",
-        "{root}/r1/research/source-build/application-sdk/nrf_svci_clang.h",
+        "{root}/build/generated/r1/nrf_svci_clang.h",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
@@ -2320,10 +2320,10 @@
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
         "-I{root}/third-party/upstream/freertos-kernel/include",
-        "-I{root}/r1/source-config/rtos",
+        "-I{root}/r1/src/config/rtos",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
-        "-I{root}/r1/components/registry",
+        "-I{root}/r1/src/vendor",
+        "-I{root}/r1/src/application/registry",
         "-I{root}/third-party/upstream/cmsis-5-590/CMSIS/RTOS2/Include",
         "-Wall",
         "-Wextra",
@@ -2337,17 +2337,17 @@
           "start": 453608,
           "end": 453612,
           "sha256": "07983508cd241588ec24ee42f080e1abe7f59dfb06a3522f4fb2f0cf9f28213e",
-          "evidence": "r1/research/source-build/watchdog-logging/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/watchdog-logging/report.json",
           "address": 613352,
           "bindings": {
             "r1_native_watchdog_hw_feed": 327933
           },
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         }
       ]
     },
     {
-      "source": "g2/components/audio/uart_thread_source_candidate/display_lv_init_children.c",
+      "source": "g2/src/apollo-main/ui/lvgl/display-lv/display_lv_init_children.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -2392,16 +2392,16 @@
       ]
     },
     {
-      "source": "g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/drivers/source/cy_flash.c",
+      "source": "vendor-cache/g2/touch-gcc-matrix/pdl-input/drivers/source/cy_flash.c",
       "argv": [
         "python3",
         "{root}/tools/build/linux_gcc.py",
         "--compiler",
-        "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+        "{root}/vendor-cache/g2/touch-gcc-matrix/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
         "--read-root",
-        "{root}/g2/analysis/dependency-followup-2026-10-08/touch-source",
+        "{root}/third-party/upstream/psoc4-touch-slice",
         "--read-root",
-        "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input",
+        "{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input",
         "--",
         "-mcpu=cortex-m0plus",
         "-mthumb",
@@ -2411,13 +2411,13 @@
         "-DCY8C4046FNI_T412",
         "-ffunction-sections",
         "-fdata-sections",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source/cmsis",
-        "-I{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/drivers/include",
-        "-I{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/devices/include",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include"
+        "-I{root}/third-party/upstream/psoc4-touch-slice",
+        "-I{root}/third-party/upstream/psoc4-touch-slice/cmsis",
+        "-I{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input/drivers/include",
+        "-I{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input/devices/include",
+        "-I{root}/third-party/upstream/psoc4-touch-slice/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include"
       ],
-      "compiler_path": "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "compiler_path": "{root}/vendor-cache/g2/touch-gcc-matrix/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
       "compiler_sha256": "a3c5b9d3b1d05160462b6c86e46f3a3471db314f6406f0e6a98973524ab00da3",
       "regions": [
         {
@@ -2426,7 +2426,7 @@
           "start": 22932,
           "end": 22984,
           "sha256": "86e77c10215d3e1ef95a671ddcf4eb790ca4e41e2017b0c0e48eae6067189a2a",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         },
         {
           "payload": "g2-touch",
@@ -2434,21 +2434,21 @@
           "start": 22984,
           "end": 23012,
           "sha256": "8242330bb12931a2ef7a9f05a4abd3b996839206a2cf00648a94b12c3f065cff",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         }
       ]
     },
     {
-      "source": "g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/drivers/source/cy_gpio.c",
+      "source": "vendor-cache/g2/touch-gcc-matrix/pdl-input/drivers/source/cy_gpio.c",
       "argv": [
         "python3",
         "{root}/tools/build/linux_gcc.py",
         "--compiler",
-        "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+        "{root}/vendor-cache/g2/touch-gcc-matrix/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
         "--read-root",
-        "{root}/g2/analysis/dependency-followup-2026-10-08/touch-source",
+        "{root}/third-party/upstream/psoc4-touch-slice",
         "--read-root",
-        "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input",
+        "{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input",
         "--",
         "-mcpu=cortex-m0plus",
         "-mthumb",
@@ -2458,13 +2458,13 @@
         "-DCY8C4046FNI_T412",
         "-ffunction-sections",
         "-fdata-sections",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source/cmsis",
-        "-I{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/drivers/include",
-        "-I{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/devices/include",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include"
+        "-I{root}/third-party/upstream/psoc4-touch-slice",
+        "-I{root}/third-party/upstream/psoc4-touch-slice/cmsis",
+        "-I{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input/drivers/include",
+        "-I{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input/devices/include",
+        "-I{root}/third-party/upstream/psoc4-touch-slice/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include"
       ],
-      "compiler_path": "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "compiler_path": "{root}/vendor-cache/g2/touch-gcc-matrix/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
       "compiler_sha256": "a3c5b9d3b1d05160462b6c86e46f3a3471db314f6406f0e6a98973524ab00da3",
       "regions": [
         {
@@ -2473,7 +2473,7 @@
           "start": 23368,
           "end": 23428,
           "sha256": "ebba39f272a9d0bd546bd146aca3d390d1f71bf2207ce04ff74854a63bdadc93",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         },
         {
           "payload": "g2-touch",
@@ -2481,7 +2481,7 @@
           "start": 23428,
           "end": 23460,
           "sha256": "d4986aa95d320e707b911f081eb3237dd64e1c03f05f00ecf9dac6c8232b2660",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         },
         {
           "payload": "g2-touch",
@@ -2489,7 +2489,7 @@
           "start": 23460,
           "end": 23518,
           "sha256": "430593a5b307bca1d4e239879bc208cf7f09e3feddfaac01da19e9fefe6fb2b5",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         },
         {
           "payload": "g2-touch",
@@ -2497,21 +2497,21 @@
           "start": 23518,
           "end": 23554,
           "sha256": "6cf558f6ba5da5d9bb2f348bfc3e91838df206b5862cbdd9ece652a2aa42f454",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         }
       ]
     },
     {
-      "source": "g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/drivers/source/cy_msclp.c",
+      "source": "vendor-cache/g2/touch-gcc-matrix/pdl-input/drivers/source/cy_msclp.c",
       "argv": [
         "python3",
         "{root}/tools/build/linux_gcc.py",
         "--compiler",
-        "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+        "{root}/vendor-cache/g2/touch-gcc-matrix/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
         "--read-root",
-        "{root}/g2/analysis/dependency-followup-2026-10-08/touch-source",
+        "{root}/third-party/upstream/psoc4-touch-slice",
         "--read-root",
-        "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input",
+        "{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input",
         "--",
         "-mcpu=cortex-m0plus",
         "-mthumb",
@@ -2521,13 +2521,13 @@
         "-DCY8C4046FNI_T412",
         "-ffunction-sections",
         "-fdata-sections",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source/cmsis",
-        "-I{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/drivers/include",
-        "-I{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/devices/include",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include"
+        "-I{root}/third-party/upstream/psoc4-touch-slice",
+        "-I{root}/third-party/upstream/psoc4-touch-slice/cmsis",
+        "-I{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input/drivers/include",
+        "-I{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input/devices/include",
+        "-I{root}/third-party/upstream/psoc4-touch-slice/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include"
       ],
-      "compiler_path": "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "compiler_path": "{root}/vendor-cache/g2/touch-gcc-matrix/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
       "compiler_sha256": "a3c5b9d3b1d05160462b6c86e46f3a3471db314f6406f0e6a98973524ab00da3",
       "regions": [
         {
@@ -2536,7 +2536,7 @@
           "start": 23744,
           "end": 23792,
           "sha256": "72b50f8c37b730c97a001d6df65bd0a35c49ae3979bfa1da20bc81c7d5f99441",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         },
         {
           "payload": "g2-touch",
@@ -2544,21 +2544,21 @@
           "start": 24216,
           "end": 24376,
           "sha256": "aca4046f59c198244af1fd481ce56c598688f0604b35c51169c238f40dda2ce5",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         }
       ]
     },
     {
-      "source": "g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/drivers/source/cy_scb_common.c",
+      "source": "vendor-cache/g2/touch-gcc-matrix/pdl-input/drivers/source/cy_scb_common.c",
       "argv": [
         "python3",
         "{root}/tools/build/linux_gcc.py",
         "--compiler",
-        "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+        "{root}/vendor-cache/g2/touch-gcc-matrix/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
         "--read-root",
-        "{root}/g2/analysis/dependency-followup-2026-10-08/touch-source",
+        "{root}/third-party/upstream/psoc4-touch-slice",
         "--read-root",
-        "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input",
+        "{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input",
         "--",
         "-mcpu=cortex-m0plus",
         "-mthumb",
@@ -2568,13 +2568,13 @@
         "-DCY8C4046FNI_T412",
         "-ffunction-sections",
         "-fdata-sections",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source/cmsis",
-        "-I{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/drivers/include",
-        "-I{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/devices/include",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include"
+        "-I{root}/third-party/upstream/psoc4-touch-slice",
+        "-I{root}/third-party/upstream/psoc4-touch-slice/cmsis",
+        "-I{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input/drivers/include",
+        "-I{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input/devices/include",
+        "-I{root}/third-party/upstream/psoc4-touch-slice/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include"
       ],
-      "compiler_path": "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "compiler_path": "{root}/vendor-cache/g2/touch-gcc-matrix/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
       "compiler_sha256": "a3c5b9d3b1d05160462b6c86e46f3a3471db314f6406f0e6a98973524ab00da3",
       "regions": [
         {
@@ -2583,7 +2583,7 @@
           "start": 24376,
           "end": 24432,
           "sha256": "07627776d2bc275029e974a40d0944d6b87502cfea118880b8d60d6c3fa97cc7",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         },
         {
           "payload": "g2-touch",
@@ -2591,12 +2591,12 @@
           "start": 24432,
           "end": 24462,
           "sha256": "c7729e5dfb38b7391112b5eeeb9e0a8b0fc0d2ad0bc2e1e9b53b353b401e5e49",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json",
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json",
           "bindings": {
             "Cy_SCB_ReadArrayNoCheck": 37401
           },
           "address": 37456,
-          "binding_evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "binding_evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         },
         {
           "payload": "g2-touch",
@@ -2604,7 +2604,7 @@
           "start": 24462,
           "end": 24518,
           "sha256": "ba8eabab79e5f3cf46e4b9b7bd76456a262ed1ff7d3780885a747f9eb6e1b434",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         },
         {
           "payload": "g2-touch",
@@ -2612,12 +2612,12 @@
           "start": 24518,
           "end": 24566,
           "sha256": "e3bd934582667c74ed28fa5a43ce49d2a70802d22b01b6f01ff19994fa474ce9",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json",
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json",
           "bindings": {
             "Cy_SCB_WriteArrayNoCheck": 37487
           },
           "address": 37542,
-          "binding_evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "binding_evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         },
         {
           "payload": "g2-touch",
@@ -2625,7 +2625,7 @@
           "start": 24566,
           "end": 24582,
           "sha256": "ec65352149705e5d99247c6304f60772bc6feacccd2c020952f45b32e2c531b1",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         },
         {
           "payload": "g2-touch",
@@ -2633,26 +2633,26 @@
           "start": 24582,
           "end": 24630,
           "sha256": "a138965686502bfecef80f1c8972059b8ea8379e3ea2f23ffd3ad471f749284b",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json",
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json",
           "bindings": {
             "Cy_SCB_WriteDefaultArrayNoCheck": 37591
           },
           "address": 37606,
-          "binding_evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "binding_evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         }
       ]
     },
     {
-      "source": "g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/drivers/source/cy_scb_ezi2c.c",
+      "source": "vendor-cache/g2/touch-gcc-matrix/pdl-input/drivers/source/cy_scb_ezi2c.c",
       "argv": [
         "python3",
         "{root}/tools/build/linux_gcc.py",
         "--compiler",
-        "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+        "{root}/vendor-cache/g2/touch-gcc-matrix/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
         "--read-root",
-        "{root}/g2/analysis/dependency-followup-2026-10-08/touch-source",
+        "{root}/third-party/upstream/psoc4-touch-slice",
         "--read-root",
-        "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input",
+        "{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input",
         "--",
         "-mcpu=cortex-m0plus",
         "-mthumb",
@@ -2662,13 +2662,13 @@
         "-DCY8C4046FNI_T412",
         "-ffunction-sections",
         "-fdata-sections",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source/cmsis",
-        "-I{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/drivers/include",
-        "-I{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/devices/include",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include"
+        "-I{root}/third-party/upstream/psoc4-touch-slice",
+        "-I{root}/third-party/upstream/psoc4-touch-slice/cmsis",
+        "-I{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input/drivers/include",
+        "-I{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input/devices/include",
+        "-I{root}/third-party/upstream/psoc4-touch-slice/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include"
       ],
-      "compiler_path": "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "compiler_path": "{root}/vendor-cache/g2/touch-gcc-matrix/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
       "compiler_sha256": "a3c5b9d3b1d05160462b6c86e46f3a3471db314f6406f0e6a98973524ab00da3",
       "regions": [
         {
@@ -2677,21 +2677,21 @@
           "start": 24630,
           "end": 24674,
           "sha256": "1fdc6e20657ebf1efbbf7423c354904526f55af9f31d09ad5cd700d69ecdb993",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         }
       ]
     },
     {
-      "source": "g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/drivers/source/cy_scb_i2c.c",
+      "source": "vendor-cache/g2/touch-gcc-matrix/pdl-input/drivers/source/cy_scb_i2c.c",
       "argv": [
         "python3",
         "{root}/tools/build/linux_gcc.py",
         "--compiler",
-        "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+        "{root}/vendor-cache/g2/touch-gcc-matrix/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
         "--read-root",
-        "{root}/g2/analysis/dependency-followup-2026-10-08/touch-source",
+        "{root}/third-party/upstream/psoc4-touch-slice",
         "--read-root",
-        "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input",
+        "{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input",
         "--",
         "-mcpu=cortex-m0plus",
         "-mthumb",
@@ -2701,13 +2701,13 @@
         "-DCY8C4046FNI_T412",
         "-ffunction-sections",
         "-fdata-sections",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source/cmsis",
-        "-I{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/drivers/include",
-        "-I{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/devices/include",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include"
+        "-I{root}/third-party/upstream/psoc4-touch-slice",
+        "-I{root}/third-party/upstream/psoc4-touch-slice/cmsis",
+        "-I{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input/drivers/include",
+        "-I{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input/devices/include",
+        "-I{root}/third-party/upstream/psoc4-touch-slice/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include"
       ],
-      "compiler_path": "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "compiler_path": "{root}/vendor-cache/g2/touch-gcc-matrix/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
       "compiler_sha256": "a3c5b9d3b1d05160462b6c86e46f3a3471db314f6406f0e6a98973524ab00da3",
       "regions": [
         {
@@ -2716,7 +2716,7 @@
           "start": 25884,
           "end": 26132,
           "sha256": "e913457dc3dbd58e46abfa5403da34d1069e0658ef07347964a7abe05736a72c",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json",
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json",
           "bindings": {
             "Cy_SCB_WriteDefaultArray": 37607,
             "Cy_SCB_WriteArray": 37543,
@@ -2724,21 +2724,21 @@
             "Cy_SysLib_ExitCriticalSection": 17563
           },
           "address": 38908,
-          "binding_evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "binding_evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         }
       ]
     },
     {
-      "source": "g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/drivers/source/cy_sysclk.c",
+      "source": "vendor-cache/g2/touch-gcc-matrix/pdl-input/drivers/source/cy_sysclk.c",
       "argv": [
         "python3",
         "{root}/tools/build/linux_gcc.py",
         "--compiler",
-        "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+        "{root}/vendor-cache/g2/touch-gcc-matrix/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
         "--read-root",
-        "{root}/g2/analysis/dependency-followup-2026-10-08/touch-source",
+        "{root}/third-party/upstream/psoc4-touch-slice",
         "--read-root",
-        "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input",
+        "{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input",
         "--",
         "-mcpu=cortex-m0plus",
         "-mthumb",
@@ -2748,13 +2748,13 @@
         "-DCY8C4046FNI_T412",
         "-ffunction-sections",
         "-fdata-sections",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source/cmsis",
-        "-I{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/drivers/include",
-        "-I{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/pdl-input/devices/include",
-        "-I{root}/g2/analysis/dependency-followup-2026-10-08/touch-source/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include"
+        "-I{root}/third-party/upstream/psoc4-touch-slice",
+        "-I{root}/third-party/upstream/psoc4-touch-slice/cmsis",
+        "-I{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input/drivers/include",
+        "-I{root}/vendor-cache/g2/touch-gcc-matrix/pdl-input/devices/include",
+        "-I{root}/third-party/upstream/psoc4-touch-slice/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include"
       ],
-      "compiler_path": "{root}/g2/analysis/touch-compiler-matrix-2026-10-09/tools/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "compiler_path": "{root}/vendor-cache/g2/touch-gcc-matrix/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
       "compiler_sha256": "a3c5b9d3b1d05160462b6c86e46f3a3471db314f6406f0e6a98973524ab00da3",
       "regions": [
         {
@@ -2763,7 +2763,7 @@
           "start": 26980,
           "end": 27040,
           "sha256": "af43c7b3a6a23cafe49d4ba582f10f4a3ec98b150898327fca2cefc553edc0f9",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         },
         {
           "payload": "g2-touch",
@@ -2771,7 +2771,7 @@
           "start": 27040,
           "end": 27312,
           "sha256": "23bb5385728976dbfd779cb6d4e0db8bd69afc911f35d15b7445427b708b5e83",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json",
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json",
           "bindings": {
             "Cy_SysClk_ImoGetFrequency": 40005,
             "__aeabi_uidiv": 42689,
@@ -2780,7 +2780,7 @@
             "Cy_SysLib_ExitCriticalSection": 17563
           },
           "address": 40064,
-          "binding_evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "binding_evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         },
         {
           "payload": "g2-touch",
@@ -2788,7 +2788,7 @@
           "start": 27892,
           "end": 27964,
           "sha256": "5121d232b6e464866ada1ba0923fbe41961c70f28452ef23f9f5268f4079714b",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         },
         {
           "payload": "g2-touch",
@@ -2796,7 +2796,7 @@
           "start": 27964,
           "end": 28124,
           "sha256": "9ef76547e70f59d15c9ae6dc0c160c7b07abd2412108c1bd49dc24ca75ed7842",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         },
         {
           "payload": "g2-touch",
@@ -2804,7 +2804,7 @@
           "start": 28124,
           "end": 28196,
           "sha256": "0cc392097ad782eac63695406e3523ad66f6e1f17a65a1f0edfd8506f3f89ebe",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         },
         {
           "payload": "g2-touch",
@@ -2812,7 +2812,7 @@
           "start": 28196,
           "end": 28264,
           "sha256": "a4c52a9e6433e74c0ae8984087323c94c71accd6599a7bbe2f977f64ad841bb1",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         },
         {
           "payload": "g2-touch",
@@ -2820,12 +2820,12 @@
           "start": 28264,
           "end": 28328,
           "sha256": "86b51f9e6334d8685fcc046d946be2ad17a4475fa5b32d07e8f5e8ea1bd9335a",
-          "evidence": "g2/symbols/touch.tsv; g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json"
+          "evidence": "g2/symbols/touch.tsv; g2/evidence/touch-msclp-unique-exact-sections.json"
         }
       ]
     },
     {
-      "source": "g2/components/case/source_candidate_20261010/critical_providers.c",
+      "source": "g2/src/case/glue/critical_providers.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -2870,6 +2870,8 @@
         "{root}/third-party/upstream",
         "--read-root",
         "{root}/vendor-cache/r1",
+        "--read-root",
+        "{root}/build/generated/r1",
         "--",
         "-mcpu=cortex-m4",
         "-mthumb",
@@ -2893,10 +2895,10 @@
         "-DFREERTOS",
         "-DCONFIG_NFCT_PINS_AS_GPIOS",
         "-DCONFIG_GPIO_AS_PINRESET",
-        "-I{root}/r1/source-config/sdk",
-        "-I{root}/r1/research/source-build/application-sdk",
+        "-I{root}/r1/src/config/sdk",
+        "-I{root}/build/generated/r1",
         "-include",
-        "{root}/r1/research/source-build/application-sdk/nrf_svci_clang.h",
+        "{root}/build/generated/r1/nrf_svci_clang.h",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
@@ -2950,7 +2952,7 @@
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
         "-I{root}/third-party/upstream/freertos-kernel/include",
-        "-I{root}/r1/source-config/rtos"
+        "-I{root}/r1/src/config/rtos"
       ],
       "compiler_path": "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
       "compiler_sha256": "833c289c7927d83b0508da62bf1a1b8abe68684ed0f798fa4e8fd1f1e117bb1a",
@@ -2961,12 +2963,12 @@
           "start": 331892,
           "end": 331898,
           "sha256": "74c1b1066af160bed1c3d83450c8e623d8b0a804e13d01dff6abd1ec2be8ba97",
-          "evidence": "r1/research/source-build/application-sdk/report.json",
+          "evidence": "pre-consolidation:r1/research/source-build/application-sdk/report.json",
           "bindings": {
             "nrf_atomic_u32_fetch_or": 491687
           },
           "address": 491636,
-          "binding_evidence": "r1/research/source-build/function-frontier.csv"
+          "binding_evidence": "r1/symbols/function-frontier.csv"
         }
       ]
     },
@@ -3006,12 +3008,12 @@
           "start": 247404,
           "end": 247410,
           "sha256": "d4979c5c55c14ca3dad053b2e44519e0a11e935dbd0dacd95868856253c58571",
-          "evidence": "r1/research/source-build/public-providers/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/public-providers/report.json"
         }
       ]
     },
     {
-      "source": "r1/components/board/native_battery_discharge.c",
+      "source": "r1/src/application/board/native_battery_discharge.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3031,7 +3033,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3043,12 +3045,12 @@
           "start": 470294,
           "end": 470774,
           "sha256": "fdd47849f270e0fcba16ef4464ffcba8d8307de7154d0ce48794bf8f2a0f87ac",
-          "evidence": "r1/research/source-build/native-battery-discharge/verification.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-battery-discharge/verification.json"
         }
       ]
     },
     {
-      "source": "r1/components/board/native_battery_initial_curve.c",
+      "source": "r1/src/application/board/native_battery_initial_curve.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3068,7 +3070,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3080,13 +3082,13 @@
           "start": 470774,
           "end": 471254,
           "sha256": "fa7c8e78ea948cada194d4c8b4a770390ba98de001beaac5f63a67ad9371fa19",
-          "evidence": "r1/research/source-build/native-battery-initial-curve/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-battery-initial-curve/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_ctype.c",
+      "source": "r1/src/application/runtime/native_ctype.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3106,7 +3108,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3118,13 +3120,13 @@
           "start": 617104,
           "end": 617361,
           "sha256": "2aa4b840e7e7df4d869049581ac1907dade67cb4d4d87057b5b8110861f5c8bd",
-          "evidence": "r1/research/source-build/native-ctype/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-ctype/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_powf_core.c",
+      "source": "r1/src/application/runtime/native_powf_core.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3144,7 +3146,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3156,7 +3158,7 @@
           "start": 616784,
           "end": 616912,
           "sha256": "f09c6d6c83a6f1d2bb607527e42b69bd7e3bb94416e979ad7856e3ddbae966cb",
-          "evidence": "r1/research/source-build/native-powf-core/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-powf-core/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3166,7 +3168,7 @@
           "start": 616976,
           "end": 617040,
           "sha256": "d40eeb9d3e47ac1b5907842859de142687de58d0a3d0e2a54c4da62f7b05c099",
-          "evidence": "r1/research/source-build/native-powf-core/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-powf-core/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3176,7 +3178,7 @@
           "start": 617040,
           "end": 617104,
           "sha256": "897133476516e88d5d9dc2d47dc5e236b66cab035bbabbf8212cdeff4c54e620",
-          "evidence": "r1/research/source-build/native-powf-core/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-powf-core/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3186,7 +3188,7 @@
           "start": 616912,
           "end": 616976,
           "sha256": "0b9acac1c771ff6b79f9a659dffee2771ff6431dda6ef2022280248eb65c9813",
-          "evidence": "r1/research/source-build/native-powf-core/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-powf-core/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3196,7 +3198,7 @@
           "start": 80440,
           "end": 80472,
           "sha256": "f05d46c0bec2967447f4c9e58e8bdad3b7e2d37f13a464de3354ecf9a96b004b",
-          "evidence": "r1/research/source-build/native-powf-core/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-powf-core/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3206,7 +3208,7 @@
           "start": 80476,
           "end": 80488,
           "sha256": "960ba8c7ae94b38af6205c540f5745155e37b93b271a4fc1e9caa042d3dc841d",
-          "evidence": "r1/research/source-build/native-powf-core/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-powf-core/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3216,7 +3218,7 @@
           "start": 80500,
           "end": 80520,
           "sha256": "e8762efe9f4f674b856cd6b61965386eb6bc8a1b3f19786efcca7f28e41f8383",
-          "evidence": "r1/research/source-build/native-powf-core/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-powf-core/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3226,13 +3228,13 @@
           "start": 81016,
           "end": 81028,
           "sha256": "65db0a39878e63d21ac014cc28d8909ef7cc36d7e103c53ddc1f976f83919320",
-          "evidence": "r1/research/source-build/native-powf-core/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-powf-core/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_tanh.c",
+      "source": "r1/src/application/runtime/native_tanh.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3252,7 +3254,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3264,13 +3266,13 @@
           "start": 82688,
           "end": 82728,
           "sha256": "8aea594015519b5efd3249ad03c2dc648b3ea13f1085c6933cf1a9b13a688d51",
-          "evidence": "r1/research/source-build/native-tanh/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-tanh/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_pow_core.c",
+      "source": "r1/src/application/runtime/native_pow_core.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3290,7 +3292,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3302,7 +3304,7 @@
           "start": 616648,
           "end": 616664,
           "sha256": "794976fd0327050748e98d0926137f2f0b50991ccc25ca591b701361bef8fb66",
-          "evidence": "r1/research/source-build/native-pow-core/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-pow-core/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3312,7 +3314,7 @@
           "start": 616696,
           "end": 616744,
           "sha256": "983bf38cdb3fc1faa79daecf0127cb43ae9ad69a479a0927d7977474118724b8",
-          "evidence": "r1/research/source-build/native-pow-core/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-pow-core/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3322,7 +3324,7 @@
           "start": 616680,
           "end": 616696,
           "sha256": "18bfa20785f2d34b265b5c7e1ff460c572d0d85f761ec60af655cd488bfbf874",
-          "evidence": "r1/research/source-build/native-pow-core/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-pow-core/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3332,7 +3334,7 @@
           "start": 616664,
           "end": 616680,
           "sha256": "b2af0851c2d051746511a5bba4b3bcf491304536a89e890d9bd235a1d77b1c5a",
-          "evidence": "r1/research/source-build/native-pow-core/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-pow-core/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3342,7 +3344,7 @@
           "start": 77376,
           "end": 77416,
           "sha256": "ec2175e32daa2a5f5fdc1be627fbed334bf2bbbf37f0a30789863a7d55a3ac0d",
-          "evidence": "r1/research/source-build/native-pow-core/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-pow-core/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3352,7 +3354,7 @@
           "start": 78472,
           "end": 78512,
           "sha256": "8dcff25d597dd2ea5cf302f808ee9d341af79109b22444067c3de69030fb2355",
-          "evidence": "r1/research/source-build/native-pow-core/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-pow-core/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3362,7 +3364,7 @@
           "start": 78524,
           "end": 78560,
           "sha256": "78cf5a420323dd1b1b0ab726a4292001d240b18402cc6d8c0e6e2d704f29f1d6",
-          "evidence": "r1/research/source-build/native-pow-core/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-pow-core/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3372,7 +3374,7 @@
           "start": 79312,
           "end": 79344,
           "sha256": "a0556011e99043f95aaee02a8494169af48635f060e45f854c3420346688e1bb",
-          "evidence": "r1/research/source-build/native-pow-core/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-pow-core/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3382,13 +3384,13 @@
           "start": 79348,
           "end": 79376,
           "sha256": "19ce253f63456980da2575f2b32d4db362a0e338a3d7f88a4560ae23013cb303",
-          "evidence": "r1/research/source-build/native-pow-core/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-pow-core/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_double_directed.c",
+      "source": "r1/src/application/runtime/native_double_directed.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3408,7 +3410,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3420,7 +3422,7 @@
           "start": 72152,
           "end": 72176,
           "sha256": "ac6c6f8148d354597b39b0bd25971af9b6975bfb85d733a2bfb48639044701e7",
-          "evidence": "r1/research/source-build/native-double-directed/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-double-directed/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3430,13 +3432,13 @@
           "start": 74248,
           "end": 74272,
           "sha256": "bb7967aa1470848be08c929944e88c31fcbac0ec9f5dea4966455dfd291925dc",
-          "evidence": "r1/research/source-build/native-double-directed/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-double-directed/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_atan2f.c",
+      "source": "r1/src/application/runtime/native_atan2f.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3456,7 +3458,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3468,13 +3470,13 @@
           "start": 71452,
           "end": 71540,
           "sha256": "b811b68b0a2301c22ce6fdd291e7eb7cec765b7b9f86921c3bc7f02911a0e6c9",
-          "evidence": "r1/research/source-build/native-atan2f/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-atan2f/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_cosf.c",
+      "source": "r1/src/application/runtime/native_cosf.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3494,7 +3496,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3506,13 +3508,13 @@
           "start": 72564,
           "end": 72620,
           "sha256": "1441dfa482f489c00360c2dce8f0fcf2fade52d17e87543683ca25f5827c7ccd",
-          "evidence": "r1/research/source-build/native-cosf/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-cosf/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_atan.c",
+      "source": "r1/src/application/runtime/native_atan.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3532,7 +3534,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3544,7 +3546,7 @@
           "start": 70752,
           "end": 70840,
           "sha256": "77a2a5e09118f4d58051fc8efc991be4b1d6b45f6c09c02750bdca7a02260473",
-          "evidence": "r1/research/source-build/native-atan/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-atan/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3554,7 +3556,7 @@
           "start": 616280,
           "end": 616328,
           "sha256": "d30b3fe9ad1c9713eff36b754d01c3a83c6fec9e5ca499ae94c427e5c15ae064",
-          "evidence": "r1/research/source-build/native-atan/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-atan/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3564,7 +3566,7 @@
           "start": 616240,
           "end": 616280,
           "sha256": "fc49f89c43673dcf6535f78dfa78409bb692a4ee93ae1f43a203813d7f186fdf",
-          "evidence": "r1/research/source-build/native-atan/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-atan/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3574,7 +3576,7 @@
           "start": 616208,
           "end": 616240,
           "sha256": "29543b11e11e985c536893911f364e42dda82df41e3c0b62b583bed0955092a6",
-          "evidence": "r1/research/source-build/native-atan/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-atan/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3584,13 +3586,13 @@
           "start": 616176,
           "end": 616208,
           "sha256": "dbda0719fe79db3b7da6fda5039f1fc7c5869fb1357374a7a58171f966db1cb4",
-          "evidence": "r1/research/source-build/native-atan/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-atan/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_tanf.c",
+      "source": "r1/src/application/runtime/native_tanf.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3610,7 +3612,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3622,13 +3624,13 @@
           "start": 82316,
           "end": 82372,
           "sha256": "8feeb69673df537f28d74705fe15cfeebea596bcb64ed01ac1848f891e8f464a",
-          "evidence": "r1/research/source-build/native-tanf/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-tanf/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_trig_reduce.c",
+      "source": "r1/src/application/runtime/native_trig_reduce.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3648,7 +3650,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3660,13 +3662,13 @@
           "start": 85060,
           "end": 85080,
           "sha256": "035f9ef86c43ffbbb0f2a889bad60051fe0ddd1cccacf69eea49386a473fdb61",
-          "evidence": "r1/research/source-build/native-trig-reduce/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-trig-reduce/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_math_round.c",
+      "source": "r1/src/application/runtime/native_math_round.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3686,7 +3688,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3698,13 +3700,13 @@
           "start": 81232,
           "end": 81256,
           "sha256": "dd18823c8c55f4fec61487c5296210b616e4736743be7b280f2bce5146878c8d",
-          "evidence": "r1/research/source-build/native-math-round/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-math-round/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_math_selection.c",
+      "source": "r1/src/application/runtime/native_math_selection.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3724,7 +3726,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3736,13 +3738,13 @@
           "start": 74372,
           "end": 74384,
           "sha256": "71a91968325c9108db34fa7d4f2fb36057d016cc99501d2852aef276cfce7732",
-          "evidence": "r1/research/source-build/native-math-selection/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-math-selection/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_expm1.c",
+      "source": "r1/src/application/runtime/native_expm1.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3762,7 +3764,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3774,7 +3776,7 @@
           "start": 84456,
           "end": 84568,
           "sha256": "6f2c6aa678e0dc04ae70677d5c2583b3050fd1ca2f1bd1b2e26a2f2f8343d51a",
-          "evidence": "r1/research/source-build/native-expm1/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-expm1/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3784,13 +3786,13 @@
           "start": 84572,
           "end": 84632,
           "sha256": "2fd950974a194173a40aff0568f41bc564c539dcc8f1574d8598c667d4109ff1",
-          "evidence": "r1/research/source-build/native-expm1/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-expm1/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_atanf.c",
+      "source": "r1/src/application/runtime/native_atanf.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3810,7 +3812,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3822,13 +3824,13 @@
           "start": 71836,
           "end": 71892,
           "sha256": "5132dd5a71788d0795634837cae17abd207fd523bdb4fd97e49ad5919df690b3",
-          "evidence": "r1/research/source-build/native-atanf/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-atanf/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_expf_tanhf.c",
+      "source": "r1/src/application/runtime/native_expf_tanhf.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3848,7 +3850,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3860,7 +3862,7 @@
           "start": 616416,
           "end": 616464,
           "sha256": "ec898ed76bd035497aff42e1a9441a6cff9b595da04e0e2c307b04c3ad52f8d0",
-          "evidence": "r1/research/source-build/native-expf-tanhf/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-expf-tanhf/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3870,7 +3872,7 @@
           "start": 73908,
           "end": 73940,
           "sha256": "8c391d19f884ed31f4f5f91ddafc4f47191afc76827c24732488f22a4cd7dc24",
-          "evidence": "r1/research/source-build/native-expf-tanhf/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-expf-tanhf/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3880,7 +3882,7 @@
           "start": 73952,
           "end": 73968,
           "sha256": "b75f7fa3134ea38b711d7bbd0cfa1aef2b3e6bcae5e960d2b6e145f7fd340ce0",
-          "evidence": "r1/research/source-build/native-expf-tanhf/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-expf-tanhf/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         },
         {
@@ -3890,13 +3892,13 @@
           "start": 82936,
           "end": 82956,
           "sha256": "e5fa53834837dabd368932497e50ad864bd79c0721997cdc432dfe700f093e0e",
-          "evidence": "r1/research/source-build/native-expf-tanhf/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-expf-tanhf/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_sinf.c",
+      "source": "r1/src/application/runtime/native_sinf.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3916,7 +3918,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3928,13 +3930,13 @@
           "start": 81756,
           "end": 81812,
           "sha256": "f2aa6266b1554993dd28934f63f7ead9984dd0a41979837af1e0c5d1961b9bdd",
-          "evidence": "r1/research/source-build/native-sinf/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-sinf/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_powf_dispatch.c",
+      "source": "r1/src/application/runtime/native_powf_dispatch.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3954,7 +3956,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -3966,13 +3968,13 @@
           "start": 81000,
           "end": 81016,
           "sha256": "daec3eca1bcb3806c9857f94cf497565c6bb177525fde145d3ee624f4afd1d8a",
-          "evidence": "r1/research/source-build/native-powf-dispatch/verification.json",
+          "evidence": "pre-consolidation:r1/research/source-build/native-powf-dispatch/verification.json",
           "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
         }
       ]
     },
     {
-      "source": "r1/components/runtime/native_exp.c",
+      "source": "r1/src/application/runtime/native_exp.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -3987,7 +3989,7 @@
         "-fshort-enums",
         "-ffunction-sections",
         "-fdata-sections",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -4045,7 +4047,7 @@
       ]
     },
     {
-      "source": "r1/components/runtime/native_pow_dispatch.c",
+      "source": "r1/src/application/runtime/native_pow_dispatch.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -4060,7 +4062,7 @@
         "-fshort-enums",
         "-ffunction-sections",
         "-fdata-sections",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -4088,7 +4090,7 @@
       ]
     },
     {
-      "source": "r1/components/runtime/native_log.c",
+      "source": "r1/src/application/runtime/native_log.c",
       "argv": [
         "clang",
         "--target=arm-none-eabi",
@@ -4103,7 +4105,7 @@
         "-fshort-enums",
         "-ffunction-sections",
         "-fdata-sections",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -4163,6 +4165,8 @@
         "{root}/third-party/upstream",
         "--read-root",
         "{root}/vendor-cache/r1",
+        "--read-root",
+        "{root}/build/generated/r1",
         "--",
         "-mcpu=cortex-m4",
         "-mthumb",
@@ -4186,10 +4190,10 @@
         "-DFREERTOS",
         "-DCONFIG_NFCT_PINS_AS_GPIOS",
         "-DCONFIG_GPIO_AS_PINRESET",
-        "-I{root}/r1/source-config/sdk",
-        "-I{root}/r1/research/source-build/application-sdk",
+        "-I{root}/r1/src/config/sdk",
+        "-I{root}/build/generated/r1",
         "-include",
-        "{root}/r1/research/source-build/application-sdk/nrf_svci_clang.h",
+        "{root}/build/generated/r1/nrf_svci_clang.h",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
@@ -4243,7 +4247,7 @@
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
         "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
         "-I{root}/third-party/upstream/freertos-kernel/include",
-        "-I{root}/r1/source-config/rtos"
+        "-I{root}/r1/src/config/rtos"
       ],
       "compiler_path": "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
       "compiler_sha256": "833c289c7927d83b0508da62bf1a1b8abe68684ed0f798fa4e8fd1f1e117bb1a",
@@ -4280,12 +4284,12 @@
           "payload": "r1-application",
           "symbol": "flag_toggle",
           "sha256": "53205aba947298459f3a2b3774c188b4550522f06e0a1013d49eb111c5c842e6",
-          "evidence": "r1/research/source-build/application-sdk/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/application-sdk/report.json"
         }
       ]
     },
     {
-      "source": "r1/components/board/native_yhm_frontend.c",
+      "source": "r1/src/application/board/native_yhm_frontend.c",
       "argv": [
         "python3",
         "{root}/tools/build/linux_gcc.py",
@@ -4314,7 +4318,7 @@
         "-Wextra",
         "-Werror",
         "-fno-delete-null-pointer-checks",
-        "-I{root}/r1/reconstructed",
+        "-I{root}/r1/src/vendor",
         "-isystem",
         "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
       ],
@@ -4345,7 +4349,7 @@
           "payload": "r1-application",
           "symbol": "r1_yhm_register_read_byte_native",
           "sha256": "4fe3ea9d2bf7ec94e85c69b533c47836894e8da18051ea75f4a082a004485e26",
-          "evidence": "r1/research/source-build/native-yhm-frontend/report.json"
+          "evidence": "pre-consolidation:r1/research/source-build/native-yhm-frontend/report.json"
         }
       ]
     }

@@ -19,7 +19,7 @@ def main():
     stocks={m['payload']:cut.official_bytes(m) for m in cut.load_manifests()}
     mapping={'apollo_bootloader':'g2-apollo-bootloader','apollo_main':'g2-apollo-main','case':'g2-case'}
     arrays={name:bytearray(len(data)) for name,data in stocks.items() if name.startswith('g2-')}
-    folder=ROOT/'g2/analysis/rescan-2026-10-06T140235Z/instructions-current'
+    folder=ROOT/'g2/evidence/instructions-current'
     ledger=folder/'instruction-ledger.jsonl';cache={};counts=Counter()
     with ledger.open() as stream:
         for line in stream:

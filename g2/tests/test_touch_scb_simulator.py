@@ -2,7 +2,7 @@
 import importlib.util,shutil,subprocess,tempfile,unittest,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-VERIFY=ROOT/'components/foundation/touch_scb/simulator/verify.py'
+VERIFY=ROOT/'tests/simulators/touch-scb/verify.py'
 spec=importlib.util.spec_from_file_location('touch_scb_simulator',VERIFY)
 module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
 

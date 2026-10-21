@@ -19,7 +19,7 @@ _require_official('firmware_ble_em9305.bin')
 
 
 ROOT = Path(__file__).resolve().parents[1]
-COMPONENT = ROOT / "components/em9305/source_image"
+COMPONENT = ROOT / "tools/em9305_source_image"
 MODULE_PATH = COMPONENT / "record_package.py"
 BUILDER = COMPONENT / "build_image.py"
 OFFICIAL = ROOT / "blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin"

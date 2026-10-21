@@ -10,13 +10,13 @@ and actual handler bodies remain gates. Lookups span beyond known prefixes; no
 unsupported array extent or bounds guard is introduced.
 
 The native campaign now compiles the original publisher and queue adapter in
-`r1/components/board/native_events.c`. Its 25,349 publisher comparisons and 48
+`r1/src/application/board/native_events.c`. Its 25,349 publisher comparisons and 48
 adapter comparisons use actual source memory operations and intercept heap,
 CMSIS queue/flags and logging providers. The leading record word remains
 uninitialized and excluded from byte comparison. The portable module and SDK
 application below retain their separate 12-byte representation and local bounds;
 those are not native record-layout or whole-image source evidence. See
-`r1/research/source-build/native-events/verification.json` for current limits.
+`pre-consolidation:r1/research/source-build/native-events/verification.json` for current limits.
 
 ## Decision
 

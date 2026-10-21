@@ -22,10 +22,11 @@ def main():
     container=os.environ.get('OPENCFW_GCC_CONTAINER')
     if container:
         return subprocess.run(['docker','exec',container,str(compiler),*args]).returncode
-    readonly={compiler.parents[1],*(r.resolve() for r in a.read_root)}
+    # Mount each root at the path the arguments use; vendor-cache entries may be symlinks.
+    readonly={compiler.parents[1]:compiler.parents[1],**{r.absolute():r.resolve() for r in a.read_root}}
     command=['docker','run','--rm','--network=none','--platform','linux/amd64']
-    for root in sorted(readonly):
-        command+=['--mount',f'type=bind,src={root},dst={root},readonly']
+    for dst,src in sorted(readonly.items()):
+        command+=['--mount',f'type=bind,src={src},dst={dst},readonly']
     command+=['--mount',f'type=bind,src={output},dst={output}',
               '--entrypoint',str(compiler),'ubuntu:24.04',*args]
     return subprocess.run(command).returncode

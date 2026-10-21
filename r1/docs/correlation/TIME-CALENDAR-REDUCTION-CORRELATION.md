@@ -6,7 +6,7 @@ Under the "Owner-authorized full reduction (2026-08-14)" section of
 [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md), the sixteen-function
 family `unknown_time_calendar_provider_candidate` is reduced from the
 recovered decompilation evidence to compilable C at
-[`../../reconstructed/time_calendar/`](../../reconstructed/time_calendar/).
+[`../../reconstructed/time_calendar/`](../../src/vendor/time_calendar).
 The reconstruction is not vendor source and is never presented as such;
 every file carries the provenance banner.  The ledger disposition for the
 sixteen entries becomes `clean_room_reimplementation_owner_authorized` when

@@ -1,7 +1,8 @@
 """Pinned tick text, stock body and actual provider/configuration evidence."""
 import hashlib,json,pathlib,subprocess,unittest
 ROOT=pathlib.Path(__file__).resolve().parents[2]
-COMP=ROOT/'g2/components/foundation/freertos_tick'
+COMP=ROOT/'g2/src/apollo-common/freertos-tick'
+SIM=ROOT/'g2/tests/simulators/freertos-tick'
 class TickEvidence(unittest.TestCase):
  def test_unchanged_function_text_and_license(self):
   provenance=json.loads((COMP/'SOURCE_PROVENANCE.json').read_text());s=(COMP/'tasks_tick.c').read_bytes().decode()
@@ -20,7 +21,7 @@ class TickEvidence(unittest.TestCase):
   elf=ROOT/'g2/build/foundation/rtos-tick-wsf-simulator/rtos_tick_wsf.elf';self.assertTrue(elf.exists(),'build tick simulator first')
   nm=subprocess.check_output(['arm-none-eabi-nm',str(elf)],text=True)
   for n in ['xTaskIncrementTick','xTaskResumeAll','opencfw_ready_remove_event_list','opencfw_timer_callbacks_drain']:self.assertIn(' T '+n,nm)
-  self.assertNotIn('BaseType_t xTaskIncrementTick(void){',(COMP/'simulator/providers.c').read_text())
+  self.assertNotIn('BaseType_t xTaskIncrementTick(void){',(SIM/'providers.c').read_text())
   self.assertIn('TICK_SIM_CFLAGS ?= $(GPIO_SIM_CFLAGS) -O0',(ROOT/'g2/Makefile').read_text())
-  p=subprocess.run(['python3','-O',str(COMP/'simulator/verify.py')],capture_output=True,text=True)
+  p=subprocess.run(['python3','-O',str(SIM/'verify.py')],capture_output=True,text=True)
   self.assertNotEqual(p.returncode,0);self.assertIn('optimized Python rejected',p.stderr)

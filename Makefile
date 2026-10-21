@@ -19,7 +19,7 @@ R1_DIR := r1
 THIRD_PARTY_DIR := third-party
 
 .PHONY: all help \
-        build open-build test verify clean \
+        build open-build test verify clean sources sources-check sources-qualify \
         g2 g2-build g2-test g2-verify g2-clean \
         r1 r1-test r1-verify r1-clean \
         third-party third-party-submodules third-party-fetched tools \
@@ -37,6 +37,11 @@ help:
 	@echo '  verify           reference/oracle verification of both targets'
 	@echo '  third-party      check initialised submodules are at their pinned commits'
 	@echo '  clean            remove all build output from both targets'
+	@echo
+	@echo 'Reconstructed source (g2/src, r1/src):'
+	@echo '  sources          compile every unit in g2/src/sources.json and r1/src/sources.json'
+	@echo '  sources-check    every source file is listed once and every unit exists (no compiler)'
+	@echo '  sources-qualify  compare compiled anchored functions with the stock payloads'
 	@echo
 	@echo 'G2 (Apollo510 glasses firmware):'
 	@echo '  g2-build         compile selected G2 source and build hybrid EVENOTA'
@@ -67,12 +72,26 @@ build: open-build
 
 open-build: hybrid-build
 
-test: g2-test r1-test hybrid-test
+test: sources-check g2-test r1-test hybrid-test
 	$(PYTHON) -m unittest tools/cutting/test_firmware_cut.py
 
 verify: g2-verify r1-verify
 
 clean: g2-clean r1-clean
+
+# --- reconstructed source --------------------------------------------------
+
+SOURCES_OUT ?= build/sources
+QUALIFY_OUT ?= build/qualify
+
+sources:
+	$(PYTHON) tools/build/sources.py build --out "$(SOURCES_OUT)"
+
+sources-check:
+	$(PYTHON) tools/build/sources.py check
+
+sources-qualify:
+	$(PYTHON) tools/build/qualify_sources.py --out "$(QUALIFY_OUT)"
 
 # --- G2 --------------------------------------------------------------------
 

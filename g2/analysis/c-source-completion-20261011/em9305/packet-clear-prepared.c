@@ -1,9 +1,0 @@
-/* Native31ac54..31ac82: capture notification flag before clearing active byte. */
-void opencfw_em9305_command_record_clear_31ac54(uintptr_t record)
-{uint32_t notify=*(volatile uint8_t *)(record+2809u);*(volatile uint8_t *)record=0u;if(notify!=0u){uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805c74u;if(callback!=0u)((void (*)(uintptr_t))callback)(record);}(void)opencfw_em9305_wsf_timer_stop(record+808u);(void)opencfw_em9305_command_count_down_30e48c();}
-/* Native30ca00 tail308368..3083a0: gate, saved record, two busy flags and callback. */
-uint32_t opencfw_em9305_command_clear_30ca00(uint32_t id)
-{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;if(*(volatile uint8_t *)(record+2u)!=0u||*(volatile uint8_t *)(record+369u)!=0u)return 12u;uintptr_t callback=*(volatile uint32_t *)(record+2804u);if(callback!=0u)((void (*)(uintptr_t))callback)(record);opencfw_em9305_command_record_clear_31ac54(record);return 0u;}
-/* Native30b118 tail306b14..306b6e: preflight fixed count, then reload after active clears. */
-uint32_t opencfw_em9305_command_clear_all_30b118(void)
-{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t count=*(volatile uint8_t *)(config+12u);if(count!=0u){uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x805c38u;for(uint32_t i=0;i<count;i++){if(*(volatile uint8_t *)(record+2u)!=0u||*(volatile uint8_t *)(record+369u)!=0u)return 12u;record+=2824u;}}uint32_t index=0u,offset=0u;while(index<count){uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x805c38u+offset;if(*(volatile uint8_t *)record!=0u){opencfw_em9305_command_record_clear_31ac54(record);config=*(volatile uint32_t *)(uintptr_t)0x805cacu;count=*(volatile uint8_t *)(config+12u);}offset+=2824u;index++;}return 0u;}

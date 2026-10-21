@@ -1,5 +1,24 @@
 # Repository work instructions
 
+## Source tree consolidation — 2026-10-21
+
+All reconstructed C lives in `g2/src/` and `r1/src/`, one manifest per tree
+(`sources.json`). The earlier experiment trees (`g2/components`,
+`g2/firmware_c`, `g2/analysis`, `reviews/`, `r1/components`,
+`r1/research/source-build`, per-candidate `r1/tools` scripts) were merged or
+distilled and removed; they remain at Git tag `pre-consolidation`.
+
+- New or changed reconstruction C goes under `<device>/src/<payload>/` with a
+  unit in that tree's `sources.json`. `make sources-check` must pass and
+  `make sources` must not add failures or duplicate strong symbols.
+- Keep one implementation per stock function. Replace a superseded copy rather
+  than adding a dated variant next to it.
+- Run experiments, probes and one-off harnesses under `build/` (ignored). Put
+  their durable result in `<device>/src`, `<device>/docs/reference/` or
+  `g2/evidence/`; do not commit new dated experiment directories.
+- Compilation is not byte identity. Only `tools/build/qualify_sources.py`
+  selections enter `tools/build/source-plan.json`.
+
 ## G2 workflow reset — 2026-09-26
 
 The current G2 process is [g2/workflow/README.md](g2/workflow/README.md).
@@ -29,6 +48,8 @@ Preserve existing staged and unstaged work. Do not reset, clean, re-pin, move
 authenticated evidence, or change firmware sources as part of preparation.
 The old launcher and queue were removed on 2026-09-29 (recoverable from Git
 history). Look up facts in the consolidated references first:
-`docs/hardware/`, `docs/tooling.md`, `g2/docs/reference/`, `g2/symbols/`,
-`g2/config-recovered/`, `r1/docs/*.md`, and `r1/config-recovered/`. See the
+`docs/hardware/`, `docs/tooling.md`, `g2/docs/reference/` (including the
+`findings-*.md` distilled from the removed experiments), `g2/symbols/`,
+`g2/evidence/`, `g2/config-recovered/`, `r1/docs/*.md`, and
+`r1/config-recovered/`. See the
 procedure for output ownership, evidence, and gates.

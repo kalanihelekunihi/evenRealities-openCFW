@@ -112,6 +112,20 @@ Deliberately not pinned:
   exist only for the clean-room openR1 runtime. They are not stock
   dependencies.
 
+## Tracked file slices (added 2026-10-21)
+
+These partial copies were vendored by experiments under `g2/analysis/` and
+moved here when that tree was removed. Each carries its own provenance file
+with the upstream commit and per-file SHA-256. A slice used by the build is
+under `upstream/`; reference-only slices are under `reference/`.
+
+| Path | Upstream | Used by |
+| --- | --- | --- |
+| `upstream/psoc4-touch-slice/` | Infineon mtb-pdl-cat2 `35f17146`, core-lib `ca57d1e5`, CMSIS core_cm0plus | touch PDL providers in `tools/build/source-plan.json`, `g2/src` touch units |
+| `upstream/ambiqhal-apollo510-slice/` | AmbiqSuite 5.1.0 Apollo510 HAL and CMSIS headers (`PROVENANCE.md`, `SHA256SUMS`) | Apollo bootloader units in `g2/src/sources.json` |
+| `reference/capsense-v6-slice/`, `reference/capsense-v11-slice/` | Infineon CAPSENSE at the commits in each `provenance.json` | comparison only; the pinned `upstream/infineon-capsense` submodule is the build input |
+| `reference/cw221x-rockchip-77168c8d/` | Rockchip Linux `drivers/power/supply/cw221x_battery.c` (GPL-2.0) | corroborates the CASE fuel-gauge profile; never compiled |
+
 ## G2 firmware emulator
 
 The historical upstream reference is

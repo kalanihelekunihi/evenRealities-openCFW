@@ -1,1 +1,0 @@
-Partial/unaccepted continuity47AB6C..47ACEA,382instruction bytes,four maps. Component hashes,pinned tiling andlocalbranchboundaries checked. Indexed pointer computation before bounds check,two guards,separate diagnostic reads,path-only index narrowing and56-byte booleanreturn retained. No source/freeze/wholefirmwareclaim.

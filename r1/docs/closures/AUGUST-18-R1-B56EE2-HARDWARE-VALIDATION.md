@@ -338,7 +338,7 @@ forbidden because the exact recovery basis preserves product data and UICR.
 ```sh
 make -C r1 build/r1_ble_probe_frames
 xcrun swiftc -warnings-as-errors -framework CoreBluetooth -framework Foundation \
-  r1/tools/probe_r1_ble.swift -o /tmp/openr1_ble_probe
+  pre-consolidation:r1/tools/probe_r1_ble.swift -o /tmp/openr1_ble_probe
 /tmp/openr1_ble_probe --timeout 180 --pair-role-phone --device-info B56EE2
 /tmp/openr1_ble_probe --timeout 180 --pair-role-phone \
   --status-count 20 --status-burst B56EE2
@@ -351,7 +351,7 @@ xcrun swiftc -warnings-as-errors -framework CoreBluetooth -framework Foundation 
   --expect-status-silence-ms 3000 B56EE2
 /tmp/openr1_ble_probe --timeout 180 --pair-role-phone --status-count 20 \
   --status-burst --channel1-probe-count 20 B56EE2
-python3 r1/tools/analyze_r1_hci_capture.py trace.pklg \
+python3 pre-consolidation:r1/tools/analyze_r1_hci_capture.py trace.pklg \
   --expect-sha256 EXACT_CAPTURE_SHA256 \
   --channel2-write-handle 0x15 --channel2-notify-handle 0x17 \
   --require hci --require mtu --require data-length --require phy \

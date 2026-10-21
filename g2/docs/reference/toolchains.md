@@ -310,13 +310,13 @@ differs from the pinned GCC 13 in loop code generation
 `exponent < -22`. That is newlib's `FLT_SMALLEST_EXP -22` from
 `fdlibm.h`/`sf_scalbn.c` (newlib mirror commit `4aa696c8`), which gives a
 newlib libm lineage
-(`g2/components/shared/gx8002/scalbnf-underflow-correction.md:1-28`).
+(`pre-consolidation:g2/components/shared/gx8002/scalbnf-underflow-correction.md:1-28`).
 
 **libgcc** (Strong). The binary64 soft-float helpers come from GCC
 `libgcc/fp-bit.c` (for example `__fixunsdfsi`, `_fpadd_parts`). They match
 the pinned GCC commit's source (`g2/docs/source-only-goal.md:13481,13553`).
 
-**fp-bit correction patch.** `g2/components/shared/gx8002/gcc-fp-bit-sticky-rounding.md`
+**fp-bit correction patch.** `pre-consolidation:g2/components/shared/gx8002/gcc-fp-bit-sticky-rounding.md`
 documents a local correction that intentionally differs from stock. It must
 **not** be used for a byte-equal build.
 

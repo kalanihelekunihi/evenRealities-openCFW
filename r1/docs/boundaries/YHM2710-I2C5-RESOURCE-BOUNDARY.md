@@ -5,7 +5,7 @@
 > `nrf_gpio_pin_set`, writing GPIO `+0x508` (OUTSET). Resource acquire writes
 > OUTSET, delays, writes OUTCLR, delays, then opens the registry device;
 > release closes the device and writes OUTSET. Integrated stock comparisons
-> and REA/Ghidra evidence are saved under `r1/research/source-build/i2c5/`.
+> and REA/Ghidra evidence are saved under `r1/symbols/i2c5/`.
 > These register actions do not establish the pin's downstream electrical role.
 
 ## Decision

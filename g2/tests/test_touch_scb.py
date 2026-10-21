@@ -8,10 +8,10 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-COMPONENT = ROOT / "components/foundation/touch_scb"
+COMPONENT = ROOT / "src/touch/scb"
 SOURCE = COMPONENT / "touch_scb.c"
 HEADER_DIR = COMPONENT
-ORIGINAL_RESULTS = ROOT / "analysis/shortcut-batch-2026-10-05/touch-upstream/results.json"
+ORIGINAL_RESULTS = ROOT / "tests/fixtures/touch-upstream-results.json"
 EXPANDED_RESULTS = COMPONENT / "validation/results.json"
 
 

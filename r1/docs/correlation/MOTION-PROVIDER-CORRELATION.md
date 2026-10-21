@@ -200,7 +200,7 @@ installed QMA part is confirmed, but source availability is no longer the gate.
 
 ## Build consequence
 
-`r1/tools/fetch_vendor.sh` fetches and verifies the Bosch v2.29.0 and selected ST v2.1.0
+`pre-consolidation:r1/tools/fetch_vendor.sh` fetches and verifies the Bosch v2.29.0 and selected ST v2.1.0
 archives beside Nordic SDK and FlashDB. The Nordic image now compiles and retains both official
 provider paths plus the R1 selector, configuration, bus, and FIFO adapters. Host tests prove probe
 priority, forced selection, error behavior, FIFO bounds, over-report rejection, and negative-axis

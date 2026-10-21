@@ -9,7 +9,7 @@ Five distinct outputs now exist, with deliberately separate fidelity claims.
 | mechanical Ghidra C corpus | analysis only | complete address-indexed pseudocode for 304 recovered functions; zero decompiler failures |
 | `firmware-project` (removed; Git commit `832137ec`) | yes, Cortex-M4 ELF/HEX/BIN | complete source-constructed target using a hash-pinned minimal SDK/library closure plus recovered R1 configuration and trust anchor |
 | `functional-model` (removed; Git commit `832137ec`) | yes, host C11 with tests | clean behavioral model of boot selection, settings, signature policy, DATA bounds, postvalidation, ACL, and malformed-input handling |
-| [`sdk-overlay`](sdk-overlay) + Nordic SDK 17.1.0 reference | yes, Cortex-M4 | closest on-device source reconstruction; correct layout/public key/configuration family, but not byte-identical |
+| [`sdk-overlay`](../../src/bootloader) + Nordic SDK 17.1.0 reference | yes, Cortex-M4 | closest on-device source reconstruction; correct layout/public key/configuration family, but not byte-identical |
 | [`../r1-firmware-decompilation/rebuild`](../r1-firmware-decompilation/rebuild) | yes, host emitter | exact supplied raw bytes, without pretending the byte arrays are recovered source |
 
 The firmware project is the buildable on-device answer to “functionally equivalent based on

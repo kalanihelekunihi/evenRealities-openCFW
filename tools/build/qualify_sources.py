@@ -21,53 +21,51 @@ import firmware_cut as cut
 
 
 def candidates():
+    """Every ARM unit in the device source manifests, anchored to its payload's stock map."""
+    import sources
     units = []
-    rows = list(csv.DictReader((ROOT/'r1/research/source-build/function-frontier.csv').open()))
-    for report in sorted((ROOT/'r1/research/source-build').glob('*/report.json')):
-        value = json.loads(report.read_text())
-        for unit in value.get('units', []):
-            source = unit.get('source', '')
-            command = unit.get('command')
-            if not source or not command or '-c' not in command: continue
-            if Path(source).is_absolute():
-                try: source = str(Path(source).relative_to(ROOT))
-                except ValueError: continue
-            matches = [r for r in rows if r['image']=='application' and r['candidate_symbol'] and r['size'] and
-                       source in r['candidate_sources'].split(';')]
-            if not matches: continue
-            argv = []; skip = False
-            for a in command:
-                if skip: skip = False; continue
-                if a in ('-c','-o','-MF','-MT','-MQ'): skip = True; continue
-                if a in ('-MD','-MMD'): continue
-                argv.append(a.replace(str(ROOT), '{root}'))
-            units.append(dict(source=source, argv=argv, payload='r1-application',
-                              evidence=str(report.relative_to(ROOT)),
-                              anchors=[dict(symbol=r['candidate_symbol'], start=int(r['entry'],16)-0x27000,
-                                            size=int(r['size'])) for r in matches]))
-    configurations = [
-        ('g2-apollo-main', 'apollo_main', 0x437fe0, 'cortex-m55',
-         list((ROOT/'g2/components/audio/uart_thread_source_candidate').glob('*.c')) +
-         [ROOT/p for p in json.loads((ROOT/'g2/firmware_c/experimental-sources.json').read_text())['apollo_main']]),
-        ('g2-apollo-bootloader', 'bootloader', 0x410000, 'cortex-m55',
-         list((ROOT/'g2/components/bootloader').glob('*/*.c'))),
-        ('g2-case', 'case', 0x8000000-32, 'cortex-m0plus',
-         list((ROOT/'g2/components/case/source_candidate_20261010').glob('*.c'))),
-        ('g2-touch', 'touch', 0x3300-32, 'cortex-m0plus',
-         list((ROOT/'g2/components/touch').glob('*_offline/*.c'))),
-    ]
-    for payload, symbolfile, base, cpu, sources in configurations:
-        inventory = list(csv.DictReader((ROOT/f'g2/symbols/{symbolfile}.tsv').open(), delimiter='\t'))
-        anchors = [dict(symbol=r['name'], address=int(r['address'],16), start=int(r['address'],16)-base,
-                        size=int(r['size'])) for r in inventory if r['size']]
-        for source in sorted(set(sources)):
+    frontier = list(csv.DictReader((ROOT/'r1/symbols/function-frontier.csv').open()))
+    bases = {'g2-apollo-main': ('apollo_main', 0x437fe0), 'g2-apollo-bootloader': ('bootloader', 0x410000),
+             'g2-case': ('case', 0x8000000-32), 'g2-touch': ('touch', 0x3300-32)}
+    inventories = {}
+    for device in ('r1', 'g2'):
+        manifest = sources.load(device)
+        generated = ROOT/'build/generated'/device
+        if manifest.get('generated'):
+            sources.generate(manifest, generated)
+        for unit in sources.units_of(manifest):
+            source = unit['source']
             # Analysis harness bodies are not firmware providers.
-            if source.name.startswith(('test_', 'probe', 'entry', 'seams')) or 'decoder.c' == source.name: continue
-            flags = ['clang','--target=arm-none-eabi', '-mcpu='+cpu, '-mthumb', '-std=c11',
-                     '-O2', '-ffreestanding','-fno-builtin','-ffunction-sections','-fdata-sections']
-            if cpu == 'cortex-m55': flags += ['-mfpu=fpv5-sp-d16','-mfloat-abi=softfp']
-            units.append(dict(source=str(source.relative_to(ROOT)), argv=flags,
-                              payload=payload, evidence=f'g2/symbols/{symbolfile}.tsv', anchors=anchors))
+            if Path(source).name.startswith(('test_', 'probe', 'entry', 'seams')) or Path(source).name == 'decoder.c':
+                continue
+            flags = [f.replace('{gen}', str(generated)) for f in
+                     manifest['profiles'][unit['profile']] + unit.get('flags', [])]
+            if unit['toolchain'] == 'clang':
+                argv = ['clang', *flags]
+            elif unit['toolchain'] == 'gcc9':
+                argv = ['python3', *flags]
+            else:
+                continue  # C-SKY and ARC payloads have no stock cut for byte comparison yet
+            if unit['payload'] == 'r1-application':
+                matches = [r for r in frontier if r['image'] == 'application' and r['candidate_symbol'] and r['size']
+                           and source in r['candidate_sources'].split(';')]
+                if not matches:
+                    continue
+                anchors = [dict(symbol=r['candidate_symbol'], start=int(r['entry'], 16)-0x27000, size=int(r['size']))
+                           for r in matches]
+                evidence = 'r1/symbols/function-frontier.csv'
+            elif unit['payload'] in bases:
+                symbolfile, base = bases[unit['payload']]
+                if symbolfile not in inventories:
+                    rows = csv.DictReader((ROOT/f'g2/symbols/{symbolfile}.tsv').open(), delimiter='\t')
+                    inventories[symbolfile] = [dict(symbol=r['name'], address=int(r['address'], 16),
+                                                    start=int(r['address'], 16)-base, size=int(r['size']))
+                                               for r in rows if r['size']]
+                anchors = inventories[symbolfile]
+                evidence = f'g2/symbols/{symbolfile}.tsv'
+            else:
+                continue
+            units.append(dict(source=source, argv=argv, payload=unit['payload'], evidence=evidence, anchors=anchors))
     seen = set(); result = []
     for u in units:
         key = (u['source'], tuple(u['argv']))
@@ -97,7 +95,7 @@ def main():
         gcc=ROOT/'vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc'
         derived=[]
         for unit in candidates():
-            if unit['payload']!='r1-application':continue
+            if unit['payload']!='r1-application' or unit['argv'][0]!='clang':continue
             converted=dict(unit)
             converted['argv']=['python3','{root}/tools/build/linux_gcc.py','--compiler',str(gcc).replace(str(ROOT),'{root}'),*[v for p in ('r1','third-party/upstream','vendor-cache/r1') for v in ('--read-root','{root}/'+p)],'--',*[a for a in unit['argv'][1:] if not a.startswith('--target=')]]
             converted.update(compiler_path=str(gcc).replace(str(ROOT),'{root}'),compiler_sha256=sha(gcc))
@@ -105,9 +103,9 @@ def main():
         original+=derived
     if args.profile in ('g2-gcc','all'):
         from source_providers import sha
-        gcc=ROOT/'g2/analysis/touch-compiler-matrix-2026-10-09/tools/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc'
+        gcc=ROOT/'vendor-cache/g2/touch-gcc-matrix/12.2.Rel1/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc'
         for unit in candidates():
-            if not unit['payload'].startswith('g2-'):continue
+            if not unit['payload'].startswith('g2-') or unit['argv'][0]!='clang':continue
             converted=dict(unit)
             converted['argv']=['python3','{root}/tools/build/linux_gcc.py','--compiler',str(gcc).replace(str(ROOT),'{root}'),'--read-root','{root}/g2','--read-root','{root}/third-party','--',*[a for a in unit['argv'][1:] if not a.startswith('--target=')]]
             converted.update(compiler_path=str(gcc).replace(str(ROOT),'{root}'),compiler_sha256=sha(gcc))
@@ -177,7 +175,7 @@ def main():
                             address=lo+bases[unit['payload']]
                             data, _ = link_function(folder/'unit.o',f,address,bindings,folder/('link-'+f['symbol']))
                             extra=dict(bindings=bindings,address=address,
-                                       binding_evidence='r1/research/source-build/function-frontier.csv' if unit['payload']=='r1-application' else unit['evidence'])
+                                       binding_evidence='r1/symbols/function-frontier.csv' if unit['payload']=='r1-application' else unit['evidence'])
                         except ValueError:
                             reasons['native_bindings_or_isolated_link_unresolved']+=1
                             continue

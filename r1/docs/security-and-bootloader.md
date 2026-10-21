@@ -25,7 +25,7 @@ with line numbers.
 | Dual bank | `NRF_DFU_SINGLE_BANK_APP_UPDATES 0` | Strong | same `:34` |
 | HW version | `NRF_DFU_HW_VERSION 52` | Strong | same `:10` |
 | Bonds | `NRF_DFU_BLE_REQUIRES_BONDS 0` (bootloader); buttonless app side `SUPPORTS_BONDS=0` | Strong / Proven | same `:11`; `r1/docs/correlation/NORDIC-SDK-CORRELATION.md:955` |
-| DFU entry | GPREGRET (`0xB1` = `BOOTLOADER_DFU_START`) and buttonless only. Button and pin-reset entry are off | Strong | `r1_recovered_config.h:24-27`; `r1/tools/probes/r1_227_dfu_proof.S:1-20` |
+| DFU entry | GPREGRET (`0xB1` = `BOOTLOADER_DFU_START`) and buttonless only. Button and pin-reset entry are off | Strong | `r1_recovered_config.h:24-27`; `pre-consolidation:r1/tools/probes/r1_227_dfu_proof.S:1-20` |
 | App data preserved | 36 pages below `0xF8000`, `NRF_DFU_APP_DATA_AREA_SIZE = 36*4096`; retail 2-byte delta at `0xFB54E` vs the SDK example | Proven | `sdk-overlay/r1_sdk_overrides.h:17-19` |
 | LF clock | `nrf_clock_lf_cfg_t` bytes `00 10 02 01` at `0x000FDC68` (LFRC, 16, 2, 500 ppm). Using the PCA10056 LFXO default leaves the SoftDevice unable to start on R1 hardware | Proven (physical failure mode) | `r1_recovered_config.h:13-22`; `r1/docs/closures/AUGUST-18-R1-B56EE2-HARDWARE-VALIDATION.md:30-38` |
 | Debug port | `NRF_BL_DEBUG_PORT_DISABLE 0`. On the tested legacy nRF52840, physical debug protection (APPROTECT) is disabled | Strong | `r1_recovered_config.h:37-38`; `SECURITY-MODEL.md:33-38` |

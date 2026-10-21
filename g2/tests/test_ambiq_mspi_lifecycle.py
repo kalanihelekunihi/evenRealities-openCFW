@@ -7,7 +7,8 @@ import unittest
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
-COMPONENT=ROOT/'components/foundation/ambiq_mspi'
+COMPONENT=ROOT/'src/apollo-common/ambiq-mspi'
+SIMULATOR=ROOT/'tests/simulators/ambiq-mspi'
 HARNESS=r'''
 #include "ambiq_mspi_compat.h"
 #include <assert.h>
@@ -70,7 +71,7 @@ class AmbiqLifecycleTests(unittest.TestCase):
             self.assertEqual(run.returncode,0,run.stderr)
 
     def test_optimized_lifecycle_verifier_rejected(self):
-        run=subprocess.run([sys.executable,'-O',str(COMPONENT/'simulator/verify_lifecycle.py'),'--help'],capture_output=True,text=True)
+        run=subprocess.run([sys.executable,'-O',str(SIMULATOR/'verify_lifecycle.py'),'--help'],capture_output=True,text=True)
         self.assertNotEqual(run.returncode,0)
         self.assertIn('optimized Python is rejected',run.stderr)
 

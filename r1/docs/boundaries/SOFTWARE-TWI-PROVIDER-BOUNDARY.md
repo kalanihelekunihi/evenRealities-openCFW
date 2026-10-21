@@ -138,7 +138,7 @@ Under the owner-authorized full reduction (2026-08-14, see
 [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)), the forty ledger entries of
 `unknown_software_twi_provider_candidate` (all four compiler-instantiated GPIO bit-bang buses and their shared helpers) are reconstructed
 from the recovered decompilation evidence as independently compiled C in
-[`../../reconstructed/software_twi/`](../../reconstructed/software_twi/).  The
+[`../../reconstructed/software_twi/`](../../src/vendor/software_twi).  The
 reconstruction is not vendor source; it carries per-function provenance
 banners, and its contract, reconstruction decisions, divergences, and
 host-test mapping are documented in

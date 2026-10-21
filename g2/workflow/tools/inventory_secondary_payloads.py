@@ -29,7 +29,7 @@ def main():
     receipt={'schema_version':1,'campaign_id':CAMP,'source':'coordinator P1 read-only inventory','target_sha256':TARGET['bundle']['sha256'],'components':{}}
     # EM9305: nested record package parser performs an in-memory exact roundtrip only.
     cid='ble_em9305'; c=comp(cid); p=ROOT/c['local_payload_path']; b=p.read_bytes(); open_cfw.validate_em9305(b)
-    em=load_module('g2_campaign_em9305_record_package','g2/components/em9305/source_image/record_package.py')
+    em=load_module('g2_campaign_em9305_record_package','g2/tools/em9305_source_image/record_package.py')
     parsed=em.parse_package(b); assert em.build_package(parsed.records,parsed.erase_sectors)==b
     assert (len(b),sha(b))==(c['size'],c['sha256']) and parsed.metadata_size==124 and len(parsed.records)==4
     records=[]; intervals=[{'start':0,'end':124,'kind':'container','evidence':'record-package header, four descriptors, 29 erase-sector entries and zero alignment padding validated'}]
@@ -56,7 +56,7 @@ def main():
     cid='apollo_bootloader'; c=comp(cid); p=ROOT/c['local_payload_path']; b=p.read_bytes(); open_cfw.validate_apollo_bootloader(b)
     sp,rv=struct.unpack_from('<II',b,0)
     receipt['components'][cid]={'size':len(b),'sha256':sha(b),'validator':'open_cfw.validate_apollo_bootloader','validation':'passed','image':{'image_id':'apollo_bootloader:payload-root','architecture':'Arm Cortex-M family indicated by valid M-profile vector/Thumb reset; exact core revision requires source/tool config confirmation','endianness':'little-endian','isa_mode':'Thumb state; exact profile pending','address_space':'Apollo510B internal MRAM','entry_vector':{'initial_sp':sp,'reset_vector_raw':rv,'reset_address':rv&~1},'mapping':add_map(cid,0,len(b),0x00410000),'external_dependencies':['secure resident bootloader','hardware/MMIO','external interfaces not fully inventoried']},'coverage':{'intervals':[{'start':0,'end':len(b),'kind':'unknown','evidence':'validated executable image range and first vector words; internal code/data boundary not classified in this inventory pass'}],'accounted_bytes':len(b),'total_bytes':len(b)}}
-    source_paths=['g2/workflow/target.json','g2/manifests/g2-2.2.6.10.json','g2/tools/open_cfw.py','g2/components/em9305/source_image/record_package.py','g2/tools/analyze_g2_touch_identity.py']
+    source_paths=['g2/workflow/target.json','g2/manifests/g2-2.2.6.10.json','g2/tools/open_cfw.py','g2/tools/em9305_source_image/record_package.py','g2/tools/analyze_g2_touch_identity.py']
     receipt['source_hashes']={x:file_sha(x) for x in source_paths}
     out=BASE/'inventory'/'secondary-payloads.json';out.write_text(json.dumps(receipt,indent=2)+'\n');print(out.relative_to(ROOT))
 if __name__=='__main__': main()

@@ -42,18 +42,18 @@ application payload and bootloader span can be reproduced independently.
 
 | Path | Purpose |
 | --- | --- |
-| [`artifact-inventory.csv`](./artifact-inventory.csv) | Source path, load address, byte count, digest, and signing-material disposition |
-| [`application/functions.csv`](./application/functions.csv) | All 2,687 application function bodies and addresses found by fixed-point Ghidra analysis |
-| [`application/decompiler-output.c`](./application/decompiler-output.c) | Address-delimited C-like output for each application function |
-| [`application/manual-recovery/0x000979dc.c`](./application/manual-recovery/0x000979dc.c) | Compile-checked semantic recovery for the sole automatic decompiler failure |
-| [`application/disassembly.s`](./application/disassembly.s) | Every decoded application instruction with exact address and bytes |
-| [`application/call-graph.csv`](./application/call-graph.csv) | Direct call edges with caller, call site, target, and callee |
-| [`application/symbols.csv`](./application/symbols.csv) | Complete Ghidra symbol/reference-label export |
-| [`bootloader/functions.csv`](./bootloader/functions.csv) | All 285 bootloader function bodies and addresses found by fixed-point analysis plus evidence-backed optimized tail-target seeds |
-| [`bootloader/decompiler-output.c`](./bootloader/decompiler-output.c) | Address-delimited C-like output for every bootloader function |
-| [`bootloader/disassembly.s`](./bootloader/disassembly.s) | Every decoded bootloader instruction with exact address and bytes |
-| [`rebuild/emit_image.c`](./rebuild/emit_image.c) | Compilable C program that emits any supplied raw image region |
-| [`rebuild/manifest.json`](./rebuild/manifest.json) | Exact unsigned/raw rebuild sizes and digests |
+| [`artifact-inventory.csv`](artifact-inventory.csv) | Source path, load address, byte count, digest, and signing-material disposition |
+| [`application/functions.csv`](application/functions.csv) | All 2,687 application function bodies and addresses found by fixed-point Ghidra analysis |
+| [`application/decompiler-output.c`](application/decompiler-output.c) | Address-delimited C-like output for each application function |
+| [`application/manual-recovery/0x000979dc.c`](application/manual-recovery/0x000979dc.c) | Compile-checked semantic recovery for the sole automatic decompiler failure |
+| [`application/disassembly.s`](application/disassembly.s) | Every decoded application instruction with exact address and bytes |
+| [`application/call-graph.csv`](application/call-graph.csv) | Direct call edges with caller, call site, target, and callee |
+| [`application/symbols.csv`](application/symbols.csv) | Complete Ghidra symbol/reference-label export |
+| [`bootloader/functions.csv`](bootloader/functions.csv) | All 285 bootloader function bodies and addresses found by fixed-point analysis plus evidence-backed optimized tail-target seeds |
+| [`bootloader/decompiler-output.c`](bootloader/decompiler-output.c) | Address-delimited C-like output for every bootloader function |
+| [`bootloader/disassembly.s`](bootloader/disassembly.s) | Every decoded bootloader instruction with exact address and bytes |
+| [`rebuild/emit_image.c`](rebuild/emit_image.c) | Compilable C program that emits any supplied raw image region |
+| [`rebuild/manifest.json`](rebuild/manifest.json) | Exact unsigned/raw rebuild sizes and digests |
 
 The `functions.csv` files are the canonical function-address indexes. The disassemblies and byte
 includes retain evidence that a decompiler necessarily classifies as literal pools, tables,

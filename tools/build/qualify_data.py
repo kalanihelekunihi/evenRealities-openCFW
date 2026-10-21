@@ -27,9 +27,9 @@ def main():
     stock=(ROOT/'r1/blobs/official/r1-2.2.6.0009/application.bin').read_bytes()
     if hashlib.sha256(stock).hexdigest()!='0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a':raise ValueError('R1 identity mismatch')
     audits=[]
-    flags=['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-mfpu=fpv4-sp-d16','-mfloat-abi=hard','-std=c11','-Os','-ffreestanding','-fno-builtin','-fshort-enums','-ffunction-sections','-fdata-sections','-I{root}/r1/reconstructed','-isystem','{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include']
+    flags=['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-mfpu=fpv4-sp-d16','-mfloat-abi=hard','-std=c11','-Os','-ffreestanding','-fno-builtin','-fshort-enums','-ffunction-sections','-fdata-sections','-I{root}/r1/src/vendor','-isystem','{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include']
     for index,source in enumerate(SOURCES):
-        unit=dict(source='r1/components/'+source,argv=flags,regions=[]);folder=args.out/f'{index:04d}'
+        unit=dict(source='r1/src/application/'+source,argv=flags,regions=[]);folder=args.out/f'{index:04d}'
         _,receipt=compile_unit(unit,folder)
         (folder/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
         for symbol in functions(folder/'unit.o',include_objects=True):

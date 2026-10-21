@@ -149,7 +149,7 @@ Under the owner-authorized full reduction (2026-08-14, see
 `unknown_rtc_device_provider_candidate` (the seven generic bodies above plus
 the three ops-table veneers at `0x00050DAA..<0x00050DEB`) are reconstructed
 from the recovered decompilation evidence as independently compiled C in
-[`../../reconstructed/rtc_device/`](../../reconstructed/rtc_device/).  The
+[`../../reconstructed/rtc_device/`](../../src/vendor/rtc_device).  The
 reconstruction is not vendor source; it carries per-function provenance
 banners, and its contract, reconstruction decisions, divergences (including
 the recovered slot-0-only loop-condition quirk), and host-test mapping are

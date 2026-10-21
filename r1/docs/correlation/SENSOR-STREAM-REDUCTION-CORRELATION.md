@@ -6,7 +6,7 @@ Under the "Owner-authorized full reduction (2026-08-14)" section of
 [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md), the 32-function family
 `unknown_sensor_stream_framework_candidate` is reduced from the recovered
 decompilation evidence to compilable C at
-[`../../reconstructed/sensor_stream/`](../../reconstructed/sensor_stream/).
+[`../../reconstructed/sensor_stream/`](../../src/vendor/sensor_stream).
 The reconstruction is not vendor source and is never presented as such;
 every file carries the provenance banner.  The boundary doc
 [`../boundaries/SENSOR-STREAM-FRAMEWORK-BOUNDARY.md`](../boundaries/SENSOR-STREAM-FRAMEWORK-BOUNDARY.md)

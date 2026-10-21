@@ -57,7 +57,7 @@ secure user handoff; no key goes into files, build layers, arguments or logs.
 The supplied original is `~/Downloads/T9305_EMB_SDK_installer.sh.zip`. Exact
 embedded agreement path is `License/em_sdk_sla.txt` in its Makeself tar payload.
 The already inspected local agreement is
-`g2/analysis/bootloader-completion-2026-10-06/upstream-worker/downloaded-sdks/em9305-v4.6-docs/em_sdk_sla.txt`.
+`third-party/downloaded/evidence/sdks/em9305-v4.6-docs/em_sdk_sla.txt`.
 The SDK documentation links its agreement as `doc/app_notes/EM_SDK_SLA.pdf`
 (relative link `../app_notes/EM_SDK_SLA.pdf` from its license page); that PDF
 was not separately extracted. No verified public URL for this exact agreement

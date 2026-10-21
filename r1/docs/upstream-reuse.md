@@ -49,10 +49,10 @@ compilation to test hypotheses rather than counting decompiler text as C.
 
 ## Build and maintenance rules
 
-`python3 r1/tools/build_public_providers.py` checks initialized submodule pins
+`python3 pre-consolidation:r1/tools/build_public_providers.py` checks initialized submodule pins
 and clean trees, compiles the original source files to Cortex-M4F objects and
 records source hashes, commands, symbols and configuration limits in
-`r1/research/source-build/public-providers/report.json`. The run compiled eight
+`pre-consolidation:r1/research/source-build/public-providers/report.json`. The run compiled eight
 units. It does not establish the application's source closure or byte identity.
 
 Keep upstream trees unmodified. Put recovered configuration and any necessary
@@ -61,19 +61,19 @@ upstream improvement is adopted, record old/new pins and the intended fix,
 rebuild its consumers, compare behavior and bytes, and preserve the locked
 baseline's results. Do not silently advance dependency pins to make a build pass.
 
-The RTOS candidate build now compiles the pinned 10.5.1 core and CMSIS wrapper directly. Exact configuration remains gated by the 92-byte candidate TCB versus the stock 112-byte reservation; see `r1/source-config/rtos/README.md`.
+The RTOS candidate build now compiles the pinned 10.5.1 core and CMSIS wrapper directly. Exact configuration remains gated by the 92-byte candidate TCB versus the stock 112-byte reservation; see `r1/src/config/rtos/README.md`.
 
 The application-side SDK target now compiles 64 nonempty units directly from
 the authenticated Nordic tree, with the later correlated BLE/DFU, logging,
 power and nrfx sources included. The R1-owned candidate configuration corrects
 the RTT down-buffer size and preserves the proven TIMER2/TIMER4 selections.
 Remaining example defaults and Clang-only operand adaptations stay explicit in
-`r1/source-config/sdk/README.md`; they do not advance stock byte-identity gates.
+`r1/src/config/sdk/README.md`; they do not advance stock byte-identity gates.
 
-Five Bosch/ST sensor API units now compile at their authenticated declared pins. R1 ST25 bus veneers compile and pass bounded stock comparisons, while actual board/resource integration remains open. A differing LIS2DW12 checkout is preserved by materializing the declared pin from Git objects rather than moving the checkout. See `r1/components/st25/README.md`.
+Five Bosch/ST sensor API units now compile at their authenticated declared pins. R1 ST25 bus veneers compile and pass bounded stock comparisons, while actual board/resource integration remains open. A differing LIS2DW12 checkout is preserved by materializing the declared pin from Git objects rather than moving the checkout. See `r1/src/application/st25/README.md`.
 
 The software-TWI GPIO callbacks now consume Nordic `nrf_gpio.h` directly through
-six thin R1 wrappers (`r1/components/software-twi/sdk_gpio.c`). The builder
+six thin R1 wrappers (`r1/src/application/software-twi/sdk_gpio.c`). The builder
 checks every consumed vendor header against the authenticated SDK archive and
 records all transitive input hashes. All 24 original callback copies pass
 4,608 bounded MMIO comparisons. Preserve this direct upstream relationship:
@@ -104,14 +104,14 @@ remain open.
 
 R1 reuses unchanged `udivmoddi4.c` and its headers from LLVM compiler-rt
 20.1.8, commit `87f0227cb60147a26a1eeb4fb06e3b505e9c7261`. The existing shared
-cache stays unchanged; `r1/source-config/runtime/llvm_integer_provenance.json`
+cache stays unchanged; `r1/src/config/runtime/llvm_integer_provenance.json`
 authenticates these files against the immutable upstream commit and retains the
 compiler-rt-specific license separately. Keeping nonzero arithmetic upstream
 allows later compiler-rt updates to be evaluated without rewriting the R1 ABI
 or stock edge behavior. An update requires fresh hash authentication and the
 stock differential oracle; no automatic improvement or equivalence is assumed.
 
-`r1/components/runtime/integer_eabi.c` supplies the EABI quotient/remainder
+`r1/src/application/runtime/integer_eabi.c` supplies the EABI quotient/remainder
 register glue and recovered zero-divisor and extended shift-count contracts.
 Four entries pass 50,822 comparisons; 211 WDT SDK cases also execute the real
 C division provider. These are attributable replacements, with original Arm
@@ -143,7 +143,7 @@ The unchanged Nordic `nrf_strerror.c` provider also matches every one of the
 37 stock error-code/name entries and passes 139,272 lookup/fallback comparisons.
 Reusing its search/table source avoids a manually maintained substitute table.
 Both variant units and their SDK headers are archive-authenticated by
-`r1/tools/build_watchdog_logging.py`; source licenses remain with the SDK files.
+`pre-consolidation:r1/tools/build_watchdog_logging.py`; source licenses remain with the SDK files.
 
 
 ## BAE8 dual-notification send
@@ -151,7 +151,7 @@ Both variant units and their SDK headers are archive-authenticated by
 The R1 BAE8 send adaptation retains the Nordic NUS source license and uses the
 pinned SDK's real HVX parameter type and SVC identifier. Its SDK headers and
 `ble_nus.c` reference are archive-authenticated by
-`r1/tools/build_native_bae8_send.py`. R1-specific dual enables/handles, log
+`pre-consolidation:r1/tools/build_native_bae8_send.py`. R1-specific dual enables/handles, log
 routing, return policy and 244-byte cap stay local; the whole proprietary
 service is not replaced by a generic `ble_nus_t`. This keeps upstream type/ABI
 changes reviewable while preserving the locked R1 contract. The actual

@@ -38,14 +38,14 @@ The stock scatter initializer was executed on 2026-10-15 and resolves the
 software-bus field order: `i2c_2` SCL P0.28/SDA P1.13; `i2c_3` SCL P0.12/SDA
 P0.11; `i2c_4` SCL P0.31/SDA P1.09; `i2c_5` SCL P1.11/SDA P1.14. This is
 firmware configuration evidence, not physical routing proof. Receipt:
-`r1/research/source-build/software-twi/stock-initialization.json`.
+`pre-consolidation:r1/research/source-build/software-twi/stock-initialization.json`.
 
 Historical `i2c_5` pin-order conflict (resolved by the stock field observation above):
 - `r1-capability-matrix.csv:87` (R1-086) says "clock GPIO43/P1.11 and data GPIO46/P1.14".
   `YHM2710-I2C5-RESOURCE-BOUNDARY.md:65`, `ST25DVXXKC-CORRELATION.md:168` and
   `NORDIC-SDK-CORRELATION.md:844` agree with it.
 - The software-TWI boundary table (`SOFTWARE-TWI-PROVIDER-BOUNDARY.md:49`, "SDA/SCL" column
-  `P1.11 / P1.14`) and `r1/reconstructed/software_twi/software_twi.c:125` give SCL P1.14 /
+  `P1.11 / P1.14`) and `r1/src/vendor/software_twi/software_twi.c:125` give SCL P1.14 /
   SDA P1.11.
 - Resolve this by decoding the record at `0x20007550` (+0x04 = SCL, +0x08 = SDA per
   `SOFTWARE-TWI-REDUCTION-CORRELATION.md:58`) in the decompressed RW image.

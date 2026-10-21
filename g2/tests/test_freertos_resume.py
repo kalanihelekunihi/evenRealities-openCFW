@@ -1,7 +1,8 @@
 """Pinned resume text, actual stock bodies and external-tick boundary."""
 import hashlib,json,pathlib,subprocess,unittest
 ROOT=pathlib.Path(__file__).resolve().parents[2]
-COMP=ROOT/'g2/components/foundation/freertos_resume'
+COMP=ROOT/'g2/src/apollo-common/freertos-resume'
+SIM=ROOT/'g2/tests/simulators/freertos-resume'
 class ResumeEvidence(unittest.TestCase):
  def test_unchanged_function_text_and_license(self):
   provenance=json.loads((COMP/'SOURCE_PROVENANCE.json').read_text())
@@ -23,6 +24,6 @@ class ResumeEvidence(unittest.TestCase):
   self.assertTrue(elf.exists(),'build resume simulator first')
   nm=subprocess.check_output(['arm-none-eabi-nm',str(elf)],text=True)
   for n in ['vTaskSuspendAll','xTaskResumeAll','opencfw_resume_yield_request','opencfw_ready_remove_event_list']:self.assertIn(' T '+n,nm)
-  s=(COMP/'simulator/verify.py').read_text();self.assertIn("0x45504c:'tick_boundary'",s)
-  p=subprocess.run(['python3','-O',str(COMP/'simulator/verify.py')],capture_output=True,text=True)
+  s=(SIM/'verify.py').read_text();self.assertIn("0x45504c:'tick_boundary'",s)
+  p=subprocess.run(['python3','-O',str(SIM/'verify.py')],capture_output=True,text=True)
   self.assertNotEqual(p.returncode,0);self.assertIn('optimized Python rejected',p.stderr)

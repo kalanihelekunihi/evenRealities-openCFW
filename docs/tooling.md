@@ -41,7 +41,7 @@ binary hash.
 
 | Tool | What it provides here | Known gaps | Pin |
 | --- | --- | --- | --- |
-| Ghidra 12.1.x + JDK 21 | Headless analysis for Cortex-M55/M4F/M0+, FunctionID, BSim, Version Tracking, PyGhidra. The existing scripts are in [`g2/tools/ghidra_scripts/`](../g2/tools/ghidra_scripts) and [`r1/tools/ghidra_scripts/`](../r1/tools/ghidra_scripts). | 12.1.4 has no MVE/Helium or low-overhead-loop decode, and no ARC or C-SKY processor | release `Ghidra_12.1.4_build` = `8b6bbb857accdfa20dc5b2f5dea471178c2e9fbc` [V] |
+| Ghidra 12.1.x + JDK 21 | Headless analysis for Cortex-M55/M4F/M0+, FunctionID, BSim, Version Tracking, PyGhidra. The existing scripts are in [`g2/tools/ghidra_scripts/`](../g2/tools/ghidra_scripts) and [`pre-consolidation:r1/tools/ghidra_scripts/`](../r1/tools/ghidra_scripts). | 12.1.4 has no MVE/Helium or low-overhead-loop decode, and no ARC or C-SKY processor | release `Ghidra_12.1.4_build` = `8b6bbb857accdfa20dc5b2f5dea471178c2e9fbc` [V] |
 | Ghidra ARC module | EM9305 | NSA pull request 3006 (`d3fbf109ada6d051750e973779170c1758622530` [V]) is still open and covers **ARCompact only**, not the ARCv2 EM core in the EM9305. No maintained public ARCv2 Ghidra module was found. Use IDA Pro's ARC module or `arc-elf32-objdump` for disassembly, or extend the SLEIGH to ARCv2 in a project-owned fork. | fork and extend |
 | `ghidra_csky_WinnerMicro` | C-SKY processor module for the GX8002 | Written for WinnerMicro W80x (CK804); DSP instructions are partial | `0daaa056e8c570ba514fc0d0226384ecf9f9df05` [V] |
 | GhidraSVD | Loads SVD register maps as typed peripheral blocks | — | tag `v0.6.6` = `893dfbe02d889dfb7c4cf69b7a395051a8307828` [V] |

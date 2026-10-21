@@ -6,7 +6,7 @@ Under the "Owner-authorized full reduction (2026-08-14)" section of
 [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md), the ten-function family
 `unknown_rtc_device_provider_candidate` is reduced from the recovered
 decompilation evidence to compilable C at
-[`../../reconstructed/rtc_device/`](../../reconstructed/rtc_device/).  The
+[`../../reconstructed/rtc_device/`](../../src/vendor/rtc_device).  The
 reconstruction is not vendor source and is never presented as such; every
 file carries the provenance banner.  The ledger disposition for the ten
 entries is now `clean_room_reimplementation_owner_authorized`.  The boundary

@@ -10,8 +10,9 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-COMPONENT = ROOT / 'components/foundation/ambiq_mspi'
-VERIFY = COMPONENT / 'simulator/verify.py'
+COMPONENT = ROOT / 'src/apollo-common/ambiq-mspi'
+SIMULATOR=ROOT / 'tests/simulators/ambiq-mspi'
+VERIFY = SIMULATOR/'verify.py'
 HARNESS = r'''
 #include "ambiq_mspi_compat.h"
 #include <assert.h>

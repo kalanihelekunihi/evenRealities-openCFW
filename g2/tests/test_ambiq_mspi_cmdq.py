@@ -12,11 +12,11 @@ class CmdqBuild(unittest.TestCase):
    for name in ['am_hal_cmdq_disable','am_hal_cmdq_term','mspi_cq_disable','mspi_cq_term','opencfw_cmdq_critical_enter']:
     self.assertRegex(symbols,r'\bT '+name+r'\n')
  def test_optimized_verifier_rejected(self):
-  p=subprocess.run(['python3','-O',str(ROOT/'components/foundation/ambiq_mspi/simulator/verify_cmdq.py')],capture_output=True,text=True)
+  p=subprocess.run(['python3','-O',str(ROOT/'tests/simulators/ambiq-mspi/verify_cmdq.py')],capture_output=True,text=True)
   self.assertNotEqual(p.returncode,0);self.assertIn('optimized Python rejected',p.stderr)
 
  def test_pinned_cmdq_excerpts(self):
-  component=ROOT/'components/foundation/ambiq_mspi'
+  component=ROOT/'src/apollo-common/ambiq-mspi'
   provenance=json.loads((component/'CMDQ_PROVENANCE.json').read_text())
   source=(component/'ambiq_cmdq.c').read_text()
   for name,digest in provenance['unchanged_function_text_sha256'].items():
@@ -31,7 +31,7 @@ class CmdqBuild(unittest.TestCase):
    if not nm:self.skipTest('arm-none-eabi-nm missing')
    symbols=subprocess.run([nm,folder+'/ambiq_mspi.elf'],check=True,capture_output=True,text=True).stdout
    self.assertRegex(symbols,r'\bT am_hal_interrupt_master_disable\n')
-  component=ROOT/'components/foundation/ambiq_mspi'
+  component=ROOT/'src/apollo-common/ambiq-mspi'
   source=(component/'ambiq_interrupt_mask.c').read_text()
   provenance=json.loads((component/'INTERRUPT_MASK_PROVENANCE.json').read_text())
   i=source.index('uint32_t __attribute__((naked))\nam_hal_interrupt_master_disable(void)');j=source.index('\n}',i)+2

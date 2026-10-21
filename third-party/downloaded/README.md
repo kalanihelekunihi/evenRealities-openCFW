@@ -109,8 +109,8 @@ Detailed local inspection evidence:
 
 - `third-party/downloaded/AGREEMENTS.md`: exact agreement paths, acceptance evidence and material restrictions.
 
-- `g2/analysis/bootloader-completion-2026-10-06/upstream-worker/downloaded-sdks/SDK-INSPECTION.md`
-- `g2/analysis/bootloader-completion-2026-10-06/review-worker/downloaded-tools/installer-review.md`
+- `third-party/downloaded/evidence/sdks/SDK-INSPECTION.md`
+- `third-party/downloaded/evidence/tools/installer-review.md`
 
 The Windows installers contain certificate-table data, but that inspection did
 not establish Authenticode validity. Recorded hashes identify the supplied
@@ -191,7 +191,7 @@ do not access a key, set a token, activate a license or flash anything.
 
 Verified status: IAR compiler version execution succeeded (`V10.10.2.628/LNX for ARM`). An offline owned Cortex-M55 probe returned `LMSC2143`, requiring a bearer token or iarlogin, and produced no object. This is an activation/authentication boundary, not a source/compiler-install failure. The Base installer also authenticates and installs the supplied LMSC Tools1.14 package so iarlogin is available for a secure user login. No credential was accessed or activation attempted. Ubuntu package dependencies come from normal current repositories; the pinned base/archive and final image identity are recorded, but apt repositories are not a historical snapshot.
 
-Final installed image: `sha256:af35f7f439b4af1827cdbfffe1f0895540b2aaf8c6a19ff5059e4250047e37d0` (linux/amd64). Compiler, linker and assembler version commands pass; iarbuild9.5.4.2231 starts with no missing loader dependencies, C-SPY9.5.4.2231 help passes and C-STAT2.11.0.945 version passes. The owned probe remains blocked by authentication. Evidence: `g2/analysis/bootloader-completion-2026-10-06/iar-container-verification.json`.
+Final installed image: `sha256:af35f7f439b4af1827cdbfffe1f0895540b2aaf8c6a19ff5059e4250047e37d0` (linux/amd64). Compiler, linker and assembler version commands pass; iarbuild9.5.4.2231 starts with no missing loader dependencies, C-SPY9.5.4.2231 help passes and C-STAT2.11.0.945 version passes. The owned probe remains blocked by authentication. Evidence: `third-party/downloaded/evidence/iar-container-verification.json`.
 
 The legacy Docker builder failed exporting a content digest. Buildx0.37.2 resolved that error. On this Mac the installer uses a dedicated ignored `docker-build-config/config.json` containing only the plugin directory and explicitly connects to the existing Colima Unix socket. It does not read or modify your normal credential-bearing Docker configuration, prune images or restart the engine. Fresh setup requires Docker/Colima and Buildx (`brew install docker-buildx` on this Mac).
 

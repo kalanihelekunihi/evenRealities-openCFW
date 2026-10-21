@@ -1,7 +1,8 @@
 """Pinned helper and actual omitted timer-daemon call-path identities."""
 import hashlib,json,pathlib,re,subprocess,unittest
 ROOT=pathlib.Path(__file__).resolve().parents[2]
-COMP=ROOT/'g2/components/foundation/freertos_daemon'
+COMP=ROOT/'g2/src/apollo-common/freertos-daemon'
+SIM=ROOT/'g2/tests/simulators/freertos-daemon'
 class DaemonEvidence(unittest.TestCase):
  def test_pinned_copy_helper_and_license(self):
   p=json.loads((COMP/'SOURCE_PROVENANCE.json').read_text());raw=(COMP/'receive_copy.c').read_bytes();s=raw.decode()
@@ -19,4 +20,4 @@ class DaemonEvidence(unittest.TestCase):
   if elf.exists():
    nm=subprocess.check_output(['arm-none-eabi-nm',str(elf)],text=True)
    for n in ['opencfw_queue_receive_nowait','prvCopyDataFromQueue','opencfw_timer_callbacks_drain','opencfw_daemon_critical_enter','opencfw_daemon_critical_exit','xQueueGenericSendFromISR','vEventGroupSetBitsCallback','opencfw_wsf_dispatch']:self.assertIn(' T '+n,nm)
-  p=subprocess.run(['python3','-O',str(COMP/'simulator/verify.py')],capture_output=True,text=True);self.assertNotEqual(p.returncode,0);self.assertIn('optimized Python rejected',p.stderr)
+  p=subprocess.run(['python3','-O',str(SIM/'verify.py')],capture_output=True,text=True);self.assertNotEqual(p.returncode,0);self.assertIn('optimized Python rejected',p.stderr)

@@ -228,7 +228,7 @@ Each file is described in detail below.
 
 ### FreeRTOS TCB patch: `freertos-kernel/g2-patches/g2-tcb-v10.5.1.patch`
 
-- **Original path:** `g2/components/shared/freertos/g2-tcb-v10.5.1.patch`
+- **Original path:** `pre-consolidation:g2/components/shared/freertos/g2-tcb-v10.5.1.patch`
 - **Note:** this file is outside the requested set. It is included because it
   is the only recovered FreeRTOS vendor delta.
 - **Applies to:** FreeRTOS-Kernel V10.5.1 `def7d2df`, `tasks.c` and
@@ -240,7 +240,7 @@ Each file is described in detail below.
 - **Unobservable:** the vendor's field name.
 - **Evidence:**
   - `g2/docs/research/freertos-g2-tcb-vendor-patch-audit.md:7-30`;
-  - `g2/components/README.md:1622-1632`.
+  - `pre-consolidation:g2/components/README.md:1622-1632`.
 
 ### GX8002 tinyprintf: `gx8002-tinyprintf/upstream-patches/tinyprintf-padding-loop.patch`
 
@@ -279,8 +279,8 @@ These files are not copied here.
   They are tied to that vendored tree, which is being kept.
 - **Deliberate deviations from stock:** `gcc-fp-bit-sticky-rounding.patch`,
   `newlib-kernel-{sin,cos}-loop.patch` and `newlib-fmod-signed-zero.patch`
-  under `g2/components/shared/gx8002/`. They are corrections or experiments
+  under `pre-consolidation:g2/components/shared/gx8002/`. They are corrections or experiments
   that differ from stock, so they are not usable for byte equality.
 - **Application feature patches:** `canvas480`, `evenai_thumb` and
-  `ring_gesture` under `g2/components/apollo_main/`. They are not recovered
+  `ring_gesture` under `pre-consolidation:g2/components/apollo_main/`. They are not recovered
   configuration.

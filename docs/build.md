@@ -35,11 +35,15 @@ licensing terms and boundaries.
 | Additional R1 captured reconstruction images (bootloader, UICR, APPROTECT) | `r1/blobs/official/2.2.6.0009/` | [`PROVENANCE.md`](../r1/blobs/official/2.2.6.0009/PROVENANCE.md) |
 | nRF5 SDK 17.1.0 and R1 archive sources | any absolute cache directory | [`../third-party/fetched/`](../third-party/fetched/README.md) |
 | Upstream libraries | `third-party/upstream/*` | `git submodule update --init --depth 1 <path>` |
+| Toolchains and SDK caches | `vendor-cache/` | see [Local inputs](#local-inputs) |
 
 ## Targets
 
 | Target | What it does | Needs |
 | --- | --- | --- |
+| `./make.sh sources-check` | every file in `g2/src` and `r1/src` is listed in its `sources.json` once, and every unit exists | nothing |
+| `./make.sh sources` | compiles every reconstructed source unit, checks each link group for duplicate strong symbols, composes ARM relocatables | Clang, `arm-none-eabi-ld`, Docker + `vendor-cache/` for codec, EM9305 and GCC units |
+| `./make.sh sources-qualify` | compiles the ARM units and selects functions whose bytes equal the stock payloads at their anchors | as `sources`, plus the official payloads |
 | `./make.sh g2-test` | tests for the kept G2 tools; tests that read payloads skip when they are absent | nothing |
 | `./make.sh g2-reference` | repacks the six official payloads into the byte-identical reference EVENOTA | G2 payloads |
 | `./make.sh g2-verify` | reference build, manifest verification and research-corpus authentication | G2 payloads |
@@ -56,6 +60,47 @@ reconstruct source. `build`, `g2-build`, and `r1-build` compile selected source
 providers through the hybrid path described below. The byte-identical C builds are defined phase by phase in
 [`roadmap.md`](roadmap.md) and gated by
 [`../g2/workflow/PROCEDURE.md`](../g2/workflow/PROCEDURE.md).
+
+## Reconstructed source build
+
+`g2/src/` and `r1/src/` hold every reconstructed source; each tree's
+`sources.json` lists the units, the toolchain and the exact flags each one
+compiled with when the experiments were merged on 2026-10-21. The fields are
+described in [`../g2/src/README.md`](../g2/src/README.md).
+
+```sh
+./make.sh sources-check
+./make.sh sources SOURCES_OUT=build/sources-$(date +%Y%m%d)
+```
+
+`tools/build/sources.py build` writes one object per unit, a per-payload
+relocatable for the ARM link groups, and `report.json` with every command,
+input hash, defined/undefined symbol set and failure. It exits non-zero when a
+unit fails that the manifest does not record as `"expect": "fails"`, or when
+two linked units define the same strong symbol. Docker units run in one
+container per toolchain. A full build takes about eight minutes.
+
+Compiling is not byte identity. `sources-qualify` (`qualify_sources.py`) reads
+the same manifests, compiles each ARM unit and selects only whole functions
+whose bytes equal the stock payload at an anchored address; the hybrid
+`source-plan.json` is built from those selections.
+
+## Local inputs
+
+`vendor-cache/` is ignored by Git and holds toolchains and archives that are
+authenticated by hash where they are used:
+
+| Path | Contents | Provision |
+| --- | --- | --- |
+| `vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update`, `nRF5_SDK_17.1.0_ddde560`, `newlib-source-6d79e0a`, `st-lis2dw12-*` | R1 GCC, SDK and library sources | [`../third-party/fetched/README.md`](../third-party/fetched/README.md) |
+| `vendor-cache/g2/touch-gcc-matrix/` | Arm GNU 10.3/11.3/12.2 Linux toolchains and `pdl-input/` used by the touch PDL providers | release URLs and hashes in `tools/build/touch-gcc-acquisition.json` |
+| `vendor-cache/g2/touch-gcc-14.2/` | Arm GNU 14.2.Rel1 and its `pdl-input/` | Arm GNU release archive |
+| `vendor-cache/g2/csky-abiv2-gcc-6.3/` | C-SKY ABIv2 V3.10.15 GCC 6.3 (GX8002) | `third-party/downloaded/install-csky.py` |
+| `vendor-cache/g2/arc-gnu-2026.03/` | ARC GNU 2026.03 (EM9305) | `tools/build/fetch_arc_toolchain.py` (`tools/build/arc-toolchain.json`) |
+
+The Docker image `opencfw/iar-base:10.10.2-local` runs the C-SKY and ARC
+compilers; `ubuntu:24.04` runs the Linux Arm GNU builds through
+`tools/build/linux_gcc.py`. The entries may be symlinks to an existing cache.
 
 ## When a target fails
 

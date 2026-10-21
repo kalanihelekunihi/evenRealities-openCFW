@@ -7,13 +7,14 @@ from source_providers import ROOT, sha
 
 
 def candidates():
-    matrix=ROOT/'g2/analysis/touch-compiler-matrix-2026-10-09'
-    acquired=json.loads((matrix/'acquisition.json').read_text())
+    # Local cache of the official Arm GNU releases listed in touch-gcc-acquisition.json.
+    matrix=ROOT/'vendor-cache/g2/touch-gcc-matrix'
+    acquired=json.loads((ROOT/'tools/build/touch-gcc-acquisition.json').read_text())
     tool=next(e for e in acquired if e['version']=='12.2.Rel1')
     compiler=matrix/tool['gcc']
     if sha(compiler)!=tool['gcc_sha256']:raise ValueError('touch GCC identity mismatch')
-    base=ROOT/'g2/analysis/dependency-followup-2026-10-08/touch-source'
-    pdl=matrix/'tools/pdl-input'
+    base=ROOT/'third-party/upstream/psoc4-touch-slice'
+    pdl=matrix/'pdl-input'
     includes=[base,base/'cmsis',pdl/'drivers/include',pdl/'devices/include',
               base/'core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include']
     rows=list(csv.DictReader((ROOT/'g2/symbols/touch.tsv').open(),delimiter='\t'))
@@ -21,7 +22,7 @@ def candidates():
                   start=int(r['address'],16)-0x3300+32,size=int(r['size'])) for r in rows if r['size']]
     # Earlier section equality receipts establish additional upstream aliases;
     # fresh compilation and equality are still mandatory in the selector.
-    evidence=ROOT/'g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json'
+    evidence=ROOT/'g2/evidence/touch-msclp-unique-exact-sections.json'
     for r in json.loads(evidence.read_text())['matches']:
         if len(r['matches'])!=1:continue
         address=int(r['matches'][0],16)

@@ -1,5 +1,0 @@
-# Diagnostic flags getter C candidates
-
-COMPLETE for two bounded original getters: `0x0043d0ce..0x0043d0d4` loads RAM byte `0x20004543`, and `0x004c9c50..0x004c9c56` loads RAM byte `0x2007502f`. Their authenticated body extents total twelve bytes. Source also exposes an SMP callback adapter for the first getter. Original literals and bodies are hash-checked independently. All 768 original-versus-compiled comparisons pass: 256 values for each getter and the callback adapter, with unchanged RAM and stack pointer.
-
-Run `/tmp/iar-c-runtime-venv/bin/python g2/analysis/diagnostic-flags-candidate-20261010/verify.py` using Unicorn 2.1.4 and pyelftools 0.33. `results.json` binds source/ELF identities and compile commands. No original executable bytes are linked into the C candidate. Storage flags and SMP diagnostic callbacks now have source-defined getters. Actual RAM initialization, writer lifecycle, production callback binding and image placement remain integration work. Hardware and whole-image equality are unproved.

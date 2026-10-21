@@ -1,9 +1,0 @@
-# Image-B binary64 exponential source
-
-Native `0x1000f84c..0x1000faa9` in image SHA256 `d23fb40126b434e3c47a605997d25210a3cb80302bad7d6c302aaf790627a941` matches Sun fdlibm `e_exp.c`. Primary source is Android bionic commit `a27d2baa0c1a2ec70f47ea9199b1dd6762c8a349`, path `libm/src/e_exp.c`, downloaded as `upstream-android-a27d2baa-e_exp.c`, SHA256 `82b29367a38d1e08382cb362b927b105074144d7556853d1cf532b56bd760e4f`. Sun's copy/modification notice is retained in adapted source.
-
-Native pool `0x1000fab4..0x1000fad8` matches all five binary64 P coefficients, and `0x100154d8..0x10015500` matches signed ln2 high/low and half. Threshold words at `0x1000faac`, `0x1000faf0..0x1000fb04` identify branch/range reduction. The C body preserves bitwise exponent scaling and the underflow 2^-1000 factor. 100,000 seeded finite host inputs in [-700,700] versus host libc `exp`: 90,103 exact and 9,897 one ULP; boundary samples include -1000,-745,-709,709,710,1000. This establishes bounded numerical behavior and source attribution, not exact C-SKY runtime FP flags.
-
-Coherent CK804EF archive `build-exp-double-round/receipt.json`: 138 units, linked SHA256 `ac45b89ee8b314b161eecbc4b1cc97c9d34d4c099a7e9575c841f5e9f24c86aa`, undefined names __fe_getround, __fe_raise_inexact, gx8002_image_b_imcra_cfg_words_20016fb8, gx8002_image_b_imcra_setting_2002d7b4, gx8002_image_b_native_word_at_zero_1000ada6, gx8002_image_b_uart_dma_ambient_direction_100040e8. Catalogue crosswalk 200/288; 88 remain outside. Runtime FP environment, initialized IMCRA data, zero-address native word, ambient UART direction, and final image layout remain open.
-
-The exact primary source is also pinned at `third-party/upstream/android-bionic-fdlibm-a27d2baa/libm/src/` as a Git submodule at commit `a27d2baa0c1a2ec70f47ea9199b1dd6762c8a349`; both downloaded source copies match the submodule byte-for-byte. See `android-fdlibm-submodule-receipt.json`.

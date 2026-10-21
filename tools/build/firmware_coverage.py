@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[2]
-BASELINE='g2/analysis/coverage-audit-parallel-2026-10-09/bundle-accounting-2026-10-13/full-accounting.json'
+BASELINE='g2/evidence/bundle-accounting/full-accounting.json'
 COMPONENTS={'codec':'g2-codec','ble_em9305':'g2-em9305','touch':'g2-touch',
             'case':'g2-case','apollo_bootloader':'g2-apollo-bootloader','apollo_main':'g2-apollo-main'}
 CATEGORIES=['c_compiled_executable','assembly_source_executable','compiled_non_executable_data',

@@ -1,5 +1,0 @@
-#include <stdint.h>
-void case_control_write(uint32_t a,uint32_t b,uint32_t c){(void)a;(void)b;(void)c;}
-void case_bus_gpio_config(uint32_t a,volatile uint32_t *b){(void)a;(void)b;}
-void case_clock_priority_config(uint32_t a,uint32_t b,uint32_t c){(void)a;(void)b;(void)c;}
-void case_boot_sensor_irq_enable(uint32_t a){(void)a;}

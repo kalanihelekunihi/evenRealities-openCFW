@@ -28,8 +28,8 @@ its original.
 | `fal_cfg.h` | `r1/port/fal_cfg.h` | `fcba906d82c82cd92d66859ca4df5f7bde1e0471e15763a3a34e2e3c8b24973f` |
 | `fdb_cfg.h` | `r1/port/fdb_cfg.h` | `6cb06d95d79cd4f84b3fc236698489be349e70d0711889e23ca7d9e2adbd91c7` |
 | `r1_recovered_config.h` | `r1/research/bootloader-reconstruction/firmware-project/config/r1_recovered_config.h` | `29d041a58ad66d87d93b78b7122e6d6b4b19c9dd38a8cc0ead5bcb67db0e25a9` |
-| `r1_sdk_overrides.h` | `r1/research/bootloader-reconstruction/sdk-overlay/r1_sdk_overrides.h` | `bf87a0230829e1b82bd767055b047d3dff6b3a9d14e6f2c10971920961e0a72d` |
-| `r1_dfu_public_key.c` | `r1/research/bootloader-reconstruction/sdk-overlay/r1_dfu_public_key.c` | `f26f2aa65ed8e3828c51f9f48e091c19713793193758f8c62e55145cf1daaae9` |
+| `r1_sdk_overrides.h` | `r1/src/bootloader/r1_sdk_overrides.h` | `bf87a0230829e1b82bd767055b047d3dff6b3a9d14e6f2c10971920961e0a72d` |
+| `r1_dfu_public_key.c` | `r1/src/bootloader/r1_dfu_public_key.c` | `f26f2aa65ed8e3828c51f9f48e091c19713793193758f8c62e55145cf1daaae9` |
 | `openr1_nrf52840.dts` | `r1/platform/nrf52840/zephyr/boards/openr1/openr1_nrf52840/openr1_nrf52840.dts` | `fb3e513be6927269d08dec3e5deab4a8dd5853677faa64ddf4520f7040076e9e` |
 | `openr1_nrf52840-pinctrl.dtsi` | `r1/platform/nrf52840/zephyr/boards/openr1/openr1_nrf52840/openr1_nrf52840-pinctrl.dtsi` | `3a9d26b41b9ab6d880526ec9c95324174f9bc091de34183e12bd3d1e80c31a73` |
 
@@ -202,7 +202,7 @@ Purpose: force-included before Nordic's `pca10056_s140_ble` secure-bootloader `s
 
 | Lines | Value | Tag | Evidence |
 |---|---|---|---|
-| 10-11 | `NRF_DFU_HW_VERSION 52`, `NRF_DFU_BLE_REQUIRES_BONDS 0` | Strong | `r1/research/bootloader-reconstruction/sdk-overlay/r1_sdk_overrides.h:9-10` |
+| 10-11 | `NRF_DFU_HW_VERSION 52`, `NRF_DFU_BLE_REQUIRES_BONDS 0` | Strong | `r1/src/bootloader/r1_sdk_overrides.h:9-10` |
 | 19-22 | `NRF_SDH_CLOCK_LF_SRC 0`, `RC_CTIV 16`, `RC_TEMP_CTIV 2`, `ACCURACY 1` | Proven | bytes `00 10 02 01` at `0x000FDC68` |
 | 24-27 | enter via GPREGRET and buttonless only | Strong | recovered bootloader config |
 | 30 | `NRF_DFU_APP_DATA_AREA_SIZE (36*4096)` | Proven | retail two-byte delta at `0xFB54E` |
