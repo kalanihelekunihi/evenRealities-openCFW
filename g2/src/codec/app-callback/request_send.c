@@ -24,6 +24,7 @@ extern void g2_codec_header_sync(void *header, uint32_t bytes); /* ROM 0x1002566
 extern uint32_t g2_codec_queue_enqueue(void *queue, const void *request); /* ROM 0x100261b8 */
 extern uint32_t g2_codec_uart_message_start(uint32_t channel); /* 0x10207adc */
 
+/* Stock 0x102083BC (UartMessageAsyncSend) */
 uint32_t g2_codec_request_consume(g2_codec_request *request)
 {
     volatile g2_codec_request *const header = request;

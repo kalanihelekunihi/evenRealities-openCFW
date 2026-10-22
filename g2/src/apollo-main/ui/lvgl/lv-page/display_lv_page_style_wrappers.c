@@ -10,9 +10,6 @@ SETTER(audio_uart_page_44120e,0x10u)
 SETTER(audio_uart_page_44121c,0x11u)
 SETTER(audio_uart_page_44122a,0x12u)
 SETTER(audio_uart_page_441238,0x13u)
-void audio_uart_page_44129e(void *object,uint32_t value,uint32_t selector) {
-    audio_uart_page_style_apply_44be4c(object,0x1du,(uint8_t)value,selector);
-}
 SETTER(audio_uart_page_44131c,0x30u)
 SETTER(audio_uart_page_44133a,0x38u)
 SETTER(audio_uart_page_441378,0x3bu)

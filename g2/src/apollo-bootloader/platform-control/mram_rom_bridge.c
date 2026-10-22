@@ -4,6 +4,7 @@
  */
 #include <stdint.h>
 #include "resident_rom_contracts.h"
+/* Stock 0x42e8a4 (guarded_call_cleanup_42e8a4) */
 uint32_t opencfw_boot_control_mram(uint32_t key,uint32_t operation,const void *source,uint32_t word_offset,uint32_t words) {
     uint32_t result=opencfw_boot_rom_mram_program(key,operation,source,word_offset,words);
     *(volatile uint32_t *)(uintptr_t)0x40014008u=0xc3u;

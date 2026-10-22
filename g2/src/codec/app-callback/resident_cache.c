@@ -5,6 +5,7 @@
  */
 #include <stdint.h>
 
+/* Stock 0x10025664 (gx_dcache_clean_range) */
 void g2_codec_header_sync(void *header, uint32_t bytes)
 {
     volatile uint32_t *const command =

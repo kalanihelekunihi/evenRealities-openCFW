@@ -16,6 +16,7 @@ static uint64_t resident_clock_time_us(void)
     return (ticks * UINT64_C(1000)) >> 10;
 }
 
+/* Stock 0x1002585C (gx8002_clock_time_us) */
 uint64_t gx8002_resident_clock_time_us_2585c(void)
 {
     return resident_clock_time_us();
@@ -37,6 +38,7 @@ static uint32_t resident_divide_1000_low32(uint64_t numerator)
     return quotient_low;
 }
 
+/* Stock 0x10025930 (gx8002_clock_time_ms) */
 uint32_t g2_codec_timestamp(void)
 {
     return resident_divide_1000_low32(resident_clock_time_us());

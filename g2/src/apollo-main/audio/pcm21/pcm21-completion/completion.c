@@ -5,20 +5,24 @@ extern void stock_delay(uint32_t);
 extern void stock_timer_stop(void);
 extern uint32_t stock_save_irq(void);
 static void field(uint32_t a,uint32_t v,uint32_t mask,uint32_t shift) {W(a)=(W(a)&~mask)|((v<<shift)&mask);}
+/* Stock 0x005A0AE8 (PCM2.1 boost timer publish) */
 void pcm21_timer_publish(uint32_t boost_memory) {
     if((uint8_t)boost_memory) {W(0x400201b0)|=0x18000;field(0x40020088,W(0x200566c4)>>14,63,0);}
     uint32_t trim=W(0x40020080)&1023;
     W(0x200742c8)=trim+7>=1024?1023-trim:7;
     field(0x40020080,W(0x40020080)+W(0x200742c8),1023,0);
 }
+/* Stock 0x005A0B54 (PCM2.1 boost removal) */
 void pcm21_boost_remove(uint32_t remove_core) {
     field(0x40020088,W(0x200566c4)>>2,63,0);
     field(0x400201b0,W(0x200566c4),0x18000,15);
     if((uint8_t)remove_core) field(0x40020080,W(0x40020080)-W(0x200742c8),1023,0);
 }
+/* Stock 0x005A0B9C (PCM2.1 buck completion) */
 void pcm21_buck_complete(void) {
     if(!B(0x20074f69)) {field(0x40020044,W(0x200742cc),127,0);field(0x4002004c,W(0x200742d0),127,0);}
 }
+/* Stock 0x005A0BCC (am_hal_spotmgr_pcm2_1 boost timer interrupt service) */
 void pcm21_timer_isr(void) {
     uint32_t irq=stock_save_irq();pcm21_buck_complete();
     if(B(0x20074f6d)) {
@@ -28,6 +32,7 @@ void pcm21_timer_isr(void) {
     stock_timer_stop();pcm21_boost_remove(1);
     __asm volatile("msr primask, %0" :: "r"(irq) : "memory");
 }
+/* Stock 0x005A0D9C (PCM2.1 TON update) */
 void pcm21_ton(uint32_t selector,uint32_t profile) {
     uint32_t core=W(0x40020080)&1023,mem=W(0x40020088)&63;
     uint32_t cb=core+14>=1024?1023-core:14,mb=mem+6>=64?63-mem:6;

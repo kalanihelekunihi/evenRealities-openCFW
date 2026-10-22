@@ -18,6 +18,7 @@ static void wr16(uint32_t address, uint16_t value)
     *(volatile uint16_t *)(uintptr_t)address = value;
 }
 
+/* Stock 0x0800856C (case_boot_sensor_commit) */
 void case_boot_sensor_commit(uint32_t descriptor)
 {
     uint32_t settings = descriptor + 64u;

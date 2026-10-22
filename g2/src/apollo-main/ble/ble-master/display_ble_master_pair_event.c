@@ -7,28 +7,9 @@ extern void *WsfMsgAlloc(uint16_t);
 extern void WsfMsgSend(uint8_t,void *);
 extern void *audio_queue_copy_bytes(void *,const void *,uint32_t);
 
-void audio_ble_master_pair_payload_4b6e14(uint8_t connection,
-                                           const void *payload)
-{
-    uint8_t *message=(uint8_t *)WsfMsgAlloc(16u);
-    if (message==0) return;
-    message[2]=0x22u;
-    message[0]=connection;
-    message[1]=0u;
-    (void)audio_queue_copy_bytes(message+4u,payload,12u);
-    WsfMsgSend(audio_ble_dm_handler_state[0x0cu],message);
-}
+extern void audio_ble_master_pair_payload_4b6e14(uint8_t connection, const void *payload); /* opencfw U5: now provided by the Cordio unit */
 
-void audio_ble_master_pair_status_4b6e46(uint8_t connection,uint8_t status)
-{
-    uint8_t *message=(uint8_t *)WsfMsgAlloc(6u);
-    if (message==0) return;
-    message[2]=0x23u;
-    message[0]=connection;
-    message[1]=0u;
-    message[4]=status;
-    WsfMsgSend(audio_ble_dm_handler_state[0x0cu],message);
-}
+extern void audio_ble_master_pair_status_4b6e46(uint8_t connection,uint8_t status); /* opencfw U5: now provided by the Cordio unit */
 
 void audio_ble_master_event_503b24(void *event,void *record)
 {

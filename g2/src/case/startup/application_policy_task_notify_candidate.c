@@ -3,6 +3,7 @@
  */
 #include <stdint.h>
 extern void case_policy_task_notify_core(uint32_t task); /* 0xc2f8 */
+/* Stock 0x0800AA24 (osThreadTerminate) */
 int32_t case_policy_task_notify(uint32_t task)
 {
     uint32_t ipsr;

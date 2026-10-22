@@ -8,6 +8,7 @@ extern void case_boot_sensor_open_apply(uint32_t descriptor); /* 0x85b0 */
 extern uint32_t case_boot_sensor_open_finish(uint32_t descriptor); /* 0x867c */
 static uint32_t rd32(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr32(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
+/* Stock 0x08006240 (case_prepare_controller_context) */
 uint32_t case_boot_sensor_open(uint32_t descriptor)
 {
     if(descriptor==0u)return 1u;

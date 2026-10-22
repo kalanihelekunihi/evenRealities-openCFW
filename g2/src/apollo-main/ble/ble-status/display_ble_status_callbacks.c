@@ -18,10 +18,12 @@ static void log_null(const char *function,uint32_t line) {
     if((audio_log_flags()&1u)!=0u||(audio_log_flags()&4u)!=0u)
         (void)compressed_log_output(0x04000000u,short_message,short_message);
 }
+/* Stock 0x4ABCC6 (CB_BLE_STATUS_RegisterCallback) */
 void audio_ble_status_register_callback(void (*callback)(uint32_t,const void *)) {
     if(callback==0) {log_null(register_name,41u);return;}
     (void)audio_callback_mgr_register(audio_ble_status_callback_manager,(void *)callback);
 }
+/* Stock 0x4ABD14 (CB_BLE_STATUS_UnregisterCallback) */
 void audio_ble_status_unregister_callback(void (*callback)(uint32_t,const void *)) {
     if(callback==0) {log_null(unregister_name,52u);return;}
     audio_callback_mgr_unregister(audio_ble_status_callback_manager,(void *)callback);

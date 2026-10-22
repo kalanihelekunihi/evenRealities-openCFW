@@ -48,31 +48,13 @@ The free head and pending tail are product RAM cells. A four-case original/
 source oracle covers uncontended empty/allocation/free/enqueue transitions;
 concurrent CAS retries and consumer dequeue still need composition.
 
-`event_set.c` binds both event-set imports to the pinned MIT-licensed
-FreeRTOS V10.5.1 `event_groups_subset.c` and `timer_pend_subset.c`. Their
-task waiter scan and ISR deferred 16-byte daemon command are source-defined.
-The qualified Cortex-M55 link reduces this chunk's integrated undefined
-count from 85 to 83, without duplicate definitions. Remaining direct
-contracts in this subgraph are the product failure handler/message and
-`vTaskSuspendAll`, `xTaskResumeAll`, and
-`vTaskRemoveFromUnorderedEventList`. The event queue-send source provider is
-already in the current Apollo candidate. Product event-handle creation,
-queue sentinel initialization and actual scheduler/list integration remain
-unproved.
-
-`event_scheduler_adapters.c` then binds `vTaskSuspendAll` and `xTaskResumeAll`
-to the selected Apollo `audio_suspend` and `stock_scheduler_resume` source
-providers, which have the corresponding stock entry maps `0x454d7c` and
-`0x454dcc`. The integrated link remains duplicate-free and reaches 81
-undefined names. The event waiter removal child is still an explicit import.
-
-`event_unblock.c` now supplies that final event-list lower (`0x45547c`)
-using the pinned FreeRTOS algorithm and selected `uxListRemove`,
-`vListInsertEnd`, and `audio_resume_next_unblock` providers. Four bounded
-original/source waiter transitions pass with initialized list/TCB state;
-the next-unblock child is a named cut. The integrated link has 80 undefined
-names, including only two direct logger transport contracts: the product
-queue failure handler and its message string.
+The former `event_set.c`, `event_scheduler_adapters.c` and `event_unblock.c`
+shims (event-set, scheduler suspend/resume and event-list unblock lowers) were
+retired when the pinned FreeRTOS kernel units were integrated:
+`xEventGroupSetBits`/`xEventGroupSetBitsFromISR` (event_groups.c),
+`xTimerPendFunctionCallFromISR` (timers.c) and `vTaskSuspendAll`,
+`xTaskResumeAll`, `vTaskRemoveFromUnorderedEventList` (tasks.c) now come from
+those units.
 
 `transport_failure.c` now provides the exact authenticated string at stock
 `0x71e990` and the `0x4733ee` variadic error wrapper. It uses the stock

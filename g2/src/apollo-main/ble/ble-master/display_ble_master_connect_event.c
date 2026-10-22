@@ -30,6 +30,7 @@ static const char function[]="APP_MasterConnectEvent";
  if((audio_log_level()&1u)||(audio_log_level()&4u)) \
   (void)compressed_log_output(mask,compact,compact,##__VA_ARGS__); \
 } while(0)
+/* Stock 0x004A1B60 (APP_MasterConnectEvent) */
 void audio_ble_master_connect_event(uint32_t event,uint32_t unused1,uint32_t unused2,uint32_t caller_context) {
     (void)unused1;(void)unused2;
     (void)audio_event_loop_remove_delayed((void (*)(void))audio_ble_master_connect_event);

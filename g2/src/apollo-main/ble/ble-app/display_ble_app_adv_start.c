@@ -12,6 +12,7 @@ extern void appSetAdvScanData(uint8_t handle,uint8_t mode);
 extern void DmAdvStart(uint8_t count,const uint8_t *handles,const uint16_t *duration,
                        const uint8_t *maximum_events);
 
+/* Stock 0x4B42F0 (appAdvStart product variant with OTA gate) */
 void appAdvStart(uint8_t count,const uint8_t *handles,const uint16_t *interval,
                  const uint16_t *duration,const uint8_t *maximum_events,
                  uint8_t configure)

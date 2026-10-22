@@ -18,6 +18,7 @@ static const char message[]=
 static const char short_message[]=
  "[dashboard.ext]dashboard_ext: slave report pb file state to peer, exists=%d";
 
+/* Stock 0x501066 (dashboard_ext_report_pb_state_to_peer) */
 void audio_uart_service_prepare9(uint32_t delay_first) {
     if(audio_uart_service_version()!=2u) return;
     uint32_t exists=audio_uart_pb_file_exists();

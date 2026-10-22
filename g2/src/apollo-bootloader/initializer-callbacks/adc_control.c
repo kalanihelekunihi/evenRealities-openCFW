@@ -14,6 +14,7 @@ static float single_multiply(float left,float right) {
 static uint32_t single_equal(float left,float right) {
     uint32_t flags;__asm__ volatile("vcmp.f32 %1, %2\n\tvmrs APSR_nzcv, FPSCR\n\tmrs %0, APSR" : "=r"(flags) : "t"(left),"t"(right) : "cc");return (flags>>30)&1u;
 }
+/* Stock 0x42EC0C (hw_config_dispatch_42ec0c; am_hal_adc_control) */
 __attribute__((noinline))
 uint32_t opencfw_bl_adc_configure(uint32_t context,uint32_t request,void *arguments) {
     (void)R(context+4u); /* Original loads module before checking handle NULL. */

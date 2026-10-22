@@ -2,6 +2,7 @@
  * Caller supplies acquired counts and coherent ARM32 widget/history pointers. */
 #include <stdint.h>
 #include "../slider-producer/slider.h"
+/* Stock 0x000050A0 (touch_pipeline_1da0_filter_chain) */
 void touch_raw_filters(const uint8_t *widget,uint8_t *sensor,uint16_t *history,uint8_t *fraction){
  uint16_t flags=*(const uint16_t *)(widget+116),x=*(uint16_t *)sensor;
  if(flags&0x10){uint16_t a=x,b=history[0],c=history[1],t;if(a<=b){t=a;a=b;b=t;}if(a<=c)c=a;history[1]=history[0];history[0]=x;x=b>=c?b:c;history+=2;}
@@ -9,6 +10,7 @@ void touch_raw_filters(const uint8_t *widget,uint8_t *sensor,uint16_t *history,u
  if(flags&0x400){uint32_t total=x+history[0];if((flags&0x1800)==0x1000){total+=history[1]+history[2];history[2]=history[1];history[1]=history[0];history[0]=x;x=(uint16_t)(total>>2);}else{history[0]=x;x=(uint16_t)(total>>1);}}
  *(uint16_t *)sensor=x;
 }
+/* Stock 0x00005A0A (touch_state_270a_update_lanes) */
 void touch_proximity_process(uint8_t *widget){
  uint8_t *ctx=*(uint8_t **)widget,*sensors=*(uint8_t **)(widget+4),*deb=*(uint8_t **)(widget+40);ctx[35]&=(uint8_t)~1u;
  for(uint32_t q=0;q<2u**(uint16_t *)(widget+56);q++){
@@ -20,6 +22,7 @@ void touch_proximity_process(uint8_t *widget){
   if(s[6]&mask)ctx[35]|=1;
  }
 }
+/* Stock 0x00005938 (touch_application_2638_dispatch) */
 uint32_t touch_proximity_raw(uint32_t id,const uint8_t *context){
  uint8_t *w=(uint8_t *)(*(const uint32_t *)(context+12)+id*144u),*c=*(uint8_t **)w,*s=*(uint8_t **)(w+4);uint16_t *history=*(uint16_t **)(w+28);uint8_t *fraction=*(uint8_t **)(w+32);uint32_t result=0;uint16_t flags=*(uint16_t *)(w+116);
  /* Selected one-frequency firmware. Integrity leaf4db4 returnszero. */

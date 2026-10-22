@@ -19,30 +19,7 @@ void g2_wsf_candidate_cs_exit(void)
     if (WSF_NEST == 0u) __asm__ volatile("cpsie i" ::: "memory");
 }
 
-uint32_t g2_wsf_candidate_queue_deq(uint32_t queue_word)
-{
-    g2_wsf_queue *queue = (g2_wsf_queue *)(uintptr_t)queue_word;
-    g2_wsf_candidate_cs_enter();
-    uint32_t head = queue->head;
-    if (head != 0u) {
-        queue->head = *(volatile uint32_t *)(uintptr_t)head;
-        if (queue->head == 0u) queue->tail = 0u;
-    }
-    g2_wsf_candidate_cs_exit();
-    return head;
-}
 
-uint32_t g2_smp_candidate_message_dequeue(void *context, uint32_t queue_word,
-                                           uint8_t *handler_id)
-{
-    (void)context;
-    uint32_t header = g2_wsf_candidate_queue_deq(queue_word);
-    if (header != 0u) {
-        *handler_id = ((volatile g2_wsf_msg_header *)(uintptr_t)header)->handler_id;
-        return header + 8u;
-    }
-    return 0u;
-}
 
 void g2_smp_candidate_message_free(void *context, uint32_t message_word)
 {

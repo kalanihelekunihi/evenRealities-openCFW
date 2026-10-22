@@ -21,6 +21,7 @@ struct gx8002_timer_record {
 _Static_assert(sizeof(struct gx8002_timer_record) == 36,
                "native timer record ABI");
 
+/* Stock 0x100258C4 (gx8002_timer_dispatch) */
 uint32_t gx8002_resident_timer_dispatch_258c4(void)
 {
     volatile struct gx8002_timer_record *const records =
@@ -54,6 +55,7 @@ uint32_t gx8002_resident_timer_dispatch_258c4(void)
     return 0u;
 }
 
+/* Stock 0x10025944 (gx8002_delay_us) */
 void gx8002_resident_delay_us_25944(uint32_t duration)
 {
     uint64_t target = gx8002_resident_clock_time_us_2585c() +
@@ -64,6 +66,7 @@ void gx8002_resident_delay_us_25944(uint32_t duration)
     }
 }
 
+/* Stock 0x1002598C (gx8002_delay_ms) */
 void gx8002_resident_delay_ms_2598c(uint32_t duration)
 {
     gx8002_resident_delay_us_25944(duration * 1000u);

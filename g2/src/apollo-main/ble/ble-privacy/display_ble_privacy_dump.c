@@ -14,6 +14,7 @@ static const char function[]="PrintSmpDbRecord";
 #define C(flags,msg,...) do { if((audio_log_level()&1u)||(audio_log_level()&4u)) (void)compressed_log_output(flags,msg,msg,__VA_ARGS__); } while(0)
 static uint16_t half(const uint8_t *p) { return *(const uint16_t *)(const void *)p; }
 static uint32_t word(const uint8_t *p) { return *(const uint32_t *)(const void *)p; }
+/* Stock 0x4789B0 (PrintSmpDbRecord; TSV FUN_004789b0) */
 void audio_ble_privacy_dump_row(uint8_t *ignored,uint8_t index) {
     (void)ignored;
     const uint8_t *row=audio_ble_privacy_nvm_records+(uint32_t)index*256u;

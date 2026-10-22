@@ -38,5 +38,7 @@ static void control(uint32_t side,uint32_t enabled)
     if(case_policy_parse_probe(side)==62u)device[side==1u?2u:3u]=(uint8_t)enabled;
     *busy=0u;
 }
+/* Stock 0x080023F4 (aging_status_set_left) */
 void case_boot_transport_left_aging(uint32_t enabled){control(1u,enabled);}
+/* Stock 0x080024C0 (aging_status_set_right) */
 void case_boot_transport_right_aging(uint32_t enabled){control(0u,enabled);}

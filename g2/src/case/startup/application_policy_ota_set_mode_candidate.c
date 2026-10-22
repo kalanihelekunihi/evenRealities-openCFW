@@ -9,12 +9,14 @@ extern void case_policy_sensor_delay(uint32_t amount); /* 0xa7b0 */
 extern uint32_t case_legacy_logger(const char *format,...); /* 0x9170 */
 extern uint32_t case_policy_ota_transmit(uint32_t channel,const uint8_t *packet,uint32_t count,uint32_t option); /* 0x2744 */
 extern uint32_t case_policy_parse_probe(uint32_t channel); /* 0x1e94 */
+/* Stock 0x08009B70 (case_finalize_length_checksum) */
 void case_policy_ota_checksum(uint8_t *packet,uint32_t count) /* 0x9b70 */
 {
     packet[count-1u]=(uint8_t)(count+125u);
     for(uint32_t i=0u;(int32_t)i<(int32_t)(count-1u);++i)
         packet[count-1u]=(uint8_t)(packet[count-1u]+packet[i]);
 }
+/* Stock 0x08001D68 (ota_result_inform_glasses) */
 void case_policy_ota_set_mode(uint32_t mode)
 {
     volatile uint8_t *busy=(volatile uint8_t *)(uintptr_t)0x200000bcu;

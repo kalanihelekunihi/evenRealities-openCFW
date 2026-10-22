@@ -4,6 +4,7 @@ extern uint8_t audio_ble_subsystem_link_state_200719c8[];
 extern uint8_t audio_ble_discovery_connection_records_200717b0[];
 extern uint8_t DmConnRole(uint8_t connection);
 
+/* Stock 0x4B32E2 (appSlaveConnectableAdv; upstream third-party/upstream/cordio/ble-profiles/sources/af/app_slave.c) */
 uint8_t appSlaveConnectableAdv(uint8_t count,const uint8_t *handles)
 {
     for (uint8_t i=0u;i<count;i++) {
@@ -15,12 +16,3 @@ uint8_t appSlaveConnectableAdv(uint8_t count,const uint8_t *handles)
     return 0u;
 }
 
-uint8_t appNumConns(uint8_t role)
-{
-    uint8_t count=0u;
-    for (uint8_t i=0u;i<3u;i++) {
-        uint8_t connection=audio_ble_discovery_connection_records_200717b0[(uint32_t)i*0x30u+4u];
-        if (connection && DmConnRole(connection)==role) count++;
-    }
-    return count;
-}

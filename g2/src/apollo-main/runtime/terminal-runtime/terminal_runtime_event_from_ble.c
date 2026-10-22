@@ -7,6 +7,7 @@ extern uint32_t audio_terminal_candidate_session_for_runtime(void);
 extern uint8_t audio_td_record_status_read(void);
 extern uint32_t audio_terminal_runtime_saved_session;
 
+/* Stock 0x5E50EA (terminal_runtime_event_from_ble) */
 uint8_t audio_terminal_runtime_event_from_ble(uint8_t ble_status) {
     uint8_t *state=audio_td_state_ptr_alias1();
     uint8_t *session=audio_td_session_struct_ptr();

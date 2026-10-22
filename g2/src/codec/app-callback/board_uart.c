@@ -38,6 +38,7 @@ _Static_assert(offsetof(struct g2_codec_uart_prefix, burst_nonzero_direction) ==
 _Static_assert(offsetof(struct g2_codec_uart_prefix, burst_zero_direction) == 0x38,
                "UART alternate burst offset");
 
+/* Stock 0x10203050 (dw_uart_get_dma_burst_size) */
 uint32_t g2_codec_dw_uart_dma_burst(const struct g2_codec_uart_prefix *uart,
                                  int32_t direction)
 {
@@ -59,6 +60,7 @@ uint32_t g2_codec_dw_uart_dma_burst(const struct g2_codec_uart_prefix *uart,
     }
 }
 
+/* Stock 0x1020324C (dw_uart_putc) */
 void g2_codec_dw_uart_putc(const struct g2_codec_uart_prefix *uart, uint32_t value)
 {
     volatile uint32_t *const registers = uart->registers;
@@ -67,6 +69,7 @@ void g2_codec_dw_uart_putc(const struct g2_codec_uart_prefix *uart, uint32_t val
     registers[0] = value;
 }
 
+/* Stock 0x10203260 (dw_uart_getc) */
 uint32_t g2_codec_dw_uart_getc(const struct g2_codec_uart_prefix *uart)
 {
     volatile uint32_t *const registers = uart->registers;

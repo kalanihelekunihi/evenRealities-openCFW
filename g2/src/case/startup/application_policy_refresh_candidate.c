@@ -8,6 +8,7 @@ extern uint32_t case_policy_task_event_send(uint32_t task,uint32_t op,uint32_t v
 extern int32_t case_policy_event_signal(uint32_t task,uint32_t value); /* 0xaaf0 */
 static __attribute__((noreturn)) void native_fault(void)
 {__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+/* Stock 0x0800CDE4 (case_critical_read_flag40) */
 uint32_t case_policy_task_active(uint32_t task) /* 0xcde4 */
 {
     if(task==0u)native_fault();
@@ -16,6 +17,7 @@ uint32_t case_policy_task_active(uint32_t task) /* 0xcde4 */
     (void)case_policy_scheduler_unlock();
     return result;
 }
+/* Stock 0x0800AB26 (osTimerStop) */
 int32_t case_policy_task_reset(uint32_t task) /* 0xab26 */
 {
     uint32_t ipsr;
@@ -25,6 +27,7 @@ int32_t case_policy_task_reset(uint32_t task) /* 0xab26 */
     if(case_policy_task_active(task)==0u)return -3;
     return case_policy_task_event_send(task,3u,0u,0u,0u)==1u?0:-1;
 }
+/* Stock 0x0800BB74 (periodic_timer_restart) */
 void case_policy_refresh(void) /* 0xbb74 */
 {
     uint32_t task=*(volatile uint32_t *)(uintptr_t)0x200000ccu;

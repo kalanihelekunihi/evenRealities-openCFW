@@ -1,19 +1,10 @@
-/* Native 0x45fb7c clear and 0x45fbae wrapper for display audio state. */
+/* Native 0x45fbae wrapper for display audio state. Its conditional clear
+ * 0x45fb7c is audio_uart_page_45fb7c (app/page-manager). */
 #include <stdint.h>
-#include <stddef.h>
-extern void *memset(void *,int,size_t);
+extern void audio_uart_page_45fb7c(void *page); /* 0x45fb7c */
 
-void audio_uart_display_page_clear_45fb7c(void *object)
-{
-    if (object==0) return;
-    uint8_t *p=(uint8_t *)object;
-    p[0xc0u]=0u;
-    p[0xc1u]=0u;
-    p[0xc2u]=0u;
-    (void)memset(p,0,0xc0u);
-}
-
+/* Stock 0x0045FBAE (page clear wrapper) */
 void audio_uart_display_page_deinit(void *object)
 {
-    if (object!=0) audio_uart_display_page_clear_45fb7c(object);
+    if (object!=0) audio_uart_page_45fb7c(object);
 }

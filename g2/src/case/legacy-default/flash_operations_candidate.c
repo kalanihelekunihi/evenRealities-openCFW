@@ -12,6 +12,7 @@ extern void case_flash_program_doubleword(uint32_t address,uint32_t retained_r1,
                                           uint32_t low,uint32_t high); /* 0x08003f1c */
 extern void case_flash_copy_operation(uint32_t address,uint32_t source); /* 0x08003f38 */
 
+/* Stock 0x08003F6C (case_wait_serial_idle) */
 uint32_t case_flash_status_wait(uint32_t timeout) /* 0x08003f6c */
 {
     volatile uint32_t *status=(volatile uint32_t *)(uintptr_t)0x40022010u;
@@ -33,6 +34,7 @@ uint32_t case_flash_status_wait(uint32_t timeout) /* 0x08003f6c */
     return 0u;
 }
 
+/* Stock 0x0800497C (case_run_controller_range) */
 uint32_t case_binary_5e_flash_read(void *configuration,uint32_t *error_page) /* 0x0800497c */
 {
     const uint32_t *cfg=(const uint32_t *)configuration;
@@ -62,6 +64,7 @@ uint32_t case_binary_5e_flash_read(void *configuration,uint32_t *error_page) /* 
     return result;
 }
 
+/* Stock 0x08004B94 (case_copy_controller_words) */
 uint32_t case_binary_5e_flash_program(uint32_t operation,uint32_t address,
                                       uint32_t arg2,uint32_t arg3) /* 0x08004b94 */
 {

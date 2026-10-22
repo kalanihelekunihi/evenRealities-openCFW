@@ -3,6 +3,7 @@
 extern void audio_ble_privacy_reset_local(void); /* 0x47acf8 */
 extern void DmPrivClearResList(void);
 extern uint8_t audio_ble_subsystem_link_state_200719c8[]; /* live RAM */
+/* Stock 0x4B46CE (AppSlaveClearAllBondingInfo product variant) */
 void audio_ble_pair_failure_reset(void) {
     audio_ble_privacy_reset_local();
     DmPrivClearResList();
@@ -10,6 +11,7 @@ void audio_ble_pair_failure_reset(void) {
     for(uint32_t i=0u;i<4u;i++)audio_ble_subsystem_link_state_200719c8[0x70u+i]=0u;
     audio_ble_subsystem_link_state_200719c8[0x6cu]=0u;
 }
+/* Stock 0x4B8390 (BLE pairing failure reason string) */
 const char *audio_ble_pair_failure_reason(uint8_t code) {
     switch(code) {
     case 1u:return "Passkey entry failed";

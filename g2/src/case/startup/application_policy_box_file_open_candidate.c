@@ -20,6 +20,7 @@ static volatile uint8_t *const box=(volatile uint8_t *)(uintptr_t)0x2000087cu;
 static uint32_t rd32(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr32(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static void logline(uint32_t a){(void)case_policy_log(a);(void)case_policy_log(CASE_STRING_ADDR(08001794));}
+/* Stock 0x08001574 (case_ota_execute) */
 uint32_t case_policy_box_file_open(void)
 {
     while(*box_lock!=0u)case_policy_wait(100u);

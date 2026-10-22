@@ -1,7 +1,5 @@
 #include "../../drivers/codec-host/i2s-power/power.c"
 
-/* Diagnostic callback imports the selected Apollo entries directly. */
-__asm__(".global audio_i2s_power\n"
-        ".set audio_i2s_power, audio_i2s_power_selected\n"
-        ".global audio_i2s_uninit\n"
-        ".set audio_i2s_uninit, audio_i2s_uninitialize_selected\n");
+/* The diagnostic-callback names audio_i2s_power / audio_i2s_uninit (and the
+ * selected names) bind to upstream am_hal_i2s_power_control /
+ * am_hal_i2s_deinitialize through the payload defsym map. */

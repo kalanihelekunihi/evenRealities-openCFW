@@ -11,6 +11,7 @@ uint32_t touch_saturated_max(uint32_t fifo,uint32_t scan_ctl,uint32_t clock_sour
 }
 /* Recovered wrapper5cac: the injected scan adapter is an explicit external
  * dependency; neither analog measurement nor scan failure values invented. */
+/* Stock 0x00005CAC (touch_sub_29ac) */
 uint32_t touch_max_raw_init(uint32_t id,uint8_t *context,touch_saturated_scan scan){
  uint8_t *w=(uint8_t *)(*(uint32_t *)(context+12)+id*144u),*c=*(uint8_t **)w;
  if(!(c[35]&8))return 0;

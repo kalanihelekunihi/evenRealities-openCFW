@@ -6,11 +6,13 @@
 extern uint32_t case_init_selfcheck_read(uint32_t reg,uint8_t *out,uint32_t count); /* 0x35b8 */
 extern uint32_t case_init_pmic_write(uint32_t reg,uint32_t value); /* 0x39c8 */
 extern void case_policy_timer_delay(uint32_t count); /* 0xa148 */
+/* Stock 0x0800A13A (case_invoke_byte) */
 __attribute__((noinline)) int32_t case_init_pmic_write_register(uint32_t reg,const uint8_t *value)
 {
     (void)case_init_pmic_write(reg,*value);
     return 0;
 }
+/* Stock 0x0800A0EA (case_retry_selector8) */
 static int32_t case_init_pmic_arm(void)
 {
     uint8_t value=0x30u;
@@ -21,11 +23,13 @@ static int32_t case_init_pmic_arm(void)
     case_policy_timer_delay(11u);
     return 0;
 }
+/* Stock 0x0800A124 (case_invoke_mode_one) */
 __attribute__((noinline)) int32_t case_init_pmic_read_register(uint32_t reg,uint8_t *out)
 {
     (void)case_init_selfcheck_read(reg,out,1u);
     return 0;
 }
+/* Stock 0x08009EF8 (case_query_low_byte) */
 __attribute__((noinline)) int32_t case_init_pmic_identify(uint32_t *out)
 {
     uint8_t value=0u;
@@ -33,6 +37,7 @@ __attribute__((noinline)) int32_t case_init_pmic_identify(uint32_t *out)
     *out=value;
     return 0;
 }
+/* Stock 0x08009F80 (case_verify_selector_bank) */
 __attribute__((noinline)) int32_t case_init_pmic_status(void)
 {
     uint8_t value=0u;
@@ -47,6 +52,7 @@ __attribute__((noinline)) int32_t case_init_pmic_status(void)
     }
     return 0;
 }
+/* Stock 0x08009E0C (case_program_selector_bank) */
 __attribute__((noinline)) int32_t case_init_pmic_repair(void)
 {
     if(case_init_pmic_arm()<0)return -1;
@@ -71,6 +77,7 @@ __attribute__((noinline)) int32_t case_init_pmic_repair(void)
     (void)case_init_pmic_arm();
     return -1;
 }
+/* Stock 0x0800A046 (case_start_validated) */
 int32_t case_init_pmic_probe_once(void)
 {
     uint32_t identity=0u;

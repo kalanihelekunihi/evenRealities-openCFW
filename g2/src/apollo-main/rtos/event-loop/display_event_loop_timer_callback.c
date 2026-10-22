@@ -30,6 +30,7 @@ static void log_mutex(uint32_t line,const char *message,const char *short_messag
     if((audio_log_flags()&1u)!=0u||(audio_log_flags()&4u)!=0u)
         (void)compressed_log_output(0x04000000u,short_message,short_message);
 }
+/* Stock 0x004767A8 (fw_event_loop_timer_callback) */
 void audio_event_loop_timer_callback(uint32_t marker) {
     stock_enter_critical();
     uint32_t elapsed=audio_event_loop_elapsed;

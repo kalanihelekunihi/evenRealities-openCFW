@@ -7,6 +7,7 @@ extern uint32_t case_boot_bus_prepare(uint32_t descriptor); /* 0x6d72 */
 extern uint32_t case_boot_bus_apply(uint32_t descriptor); /* 0x6db8 */
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
+/* Stock 0x08005A74 (case_activate_controller) */
 uint32_t case_boot_bus_open(uint32_t descriptor)
 {
     if(descriptor==0u)return 1u;

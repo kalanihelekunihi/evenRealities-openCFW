@@ -3,6 +3,7 @@
  * No validation/barriers/IRQ cleanup are present in the stock leaf. */
 .syntax unified
 .thumb
+/* Stock 0x42dc90 (vector_handoff_42dc90) */
 .section .text.opencfw_boot_vector_handoff,"ax",%progbits
 .global opencfw_boot_vector_handoff
 .type opencfw_boot_vector_handoff,%function

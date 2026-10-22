@@ -8,6 +8,7 @@ extern uint32_t case_boot_transport_worker_static(uint32_t entry,uint32_t trampo
     uint32_t stack_words,uint32_t mode,uint32_t priority,
     uint32_t task_storage,uint32_t stack_storage); /* 0xca06 */
 
+/* Stock 0x0800A93C (os_timer_or_thread_create_wrapper) */
 uint32_t case_boot_transport_worker(uint32_t entry,uint32_t mode,uint32_t storage)
 {
     uint32_t ipsr;

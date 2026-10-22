@@ -7,6 +7,7 @@ extern void case_boot_pool_initialize(uint32_t count,uint32_t stride,
                                       uint32_t region); /* 0xae74 */
 static __attribute__((noreturn)) void native_fault(void)
 {__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+/* Stock 0x0800C5D0 (case_boot_scheduler_pool) */
 uint32_t case_boot_scheduler_pool(uint32_t count,uint32_t stride,uint32_t storage,
                                   uint32_t region,uint32_t flags)
 {

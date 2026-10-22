@@ -11,26 +11,8 @@ extern void audio_wsf_queue_enqueue(void *,void *); /* selected 0x538c24 */
 
 static uint32_t word(const void *p) {uint32_t v;__builtin_memcpy(&v,p,4u);return v;}
 static void put(void *p,uint32_t v) {__builtin_memcpy(p,&v,4u);}
-void audio_wsf_queue_push(void *queue,void *element) {
-    uint8_t *q=(uint8_t *)queue;
-    audio_wsf_cs_enter();
-    put(element,word(q));
-    if(word(q)==0u)put(q+4u,(uint32_t)(uintptr_t)element);
-    put(q,(uint32_t)(uintptr_t)element);
-    audio_wsf_cs_exit();
-}
-void audio_wsf_queue_insert(void *queue,void *element,void *previous) {
-    uint8_t *q=(uint8_t *)queue;
-    audio_wsf_cs_enter();
-    if(word(q)==0u || previous==(void *)(uintptr_t)word(q+4u))
-        audio_wsf_queue_enqueue(queue,element);
-    else if(previous==0)audio_wsf_queue_push(queue,element);
-    else {
-        put(element,word(previous));
-        put(previous,(uint32_t)(uintptr_t)element);
-    }
-    audio_wsf_cs_exit();
-}
+extern void audio_wsf_queue_insert(void *queue,void *element,void *previous); /* opencfw U5: now provided by the Cordio unit */
+/* Stock 0x0052A424 (wsfTimerInsert) */
 void audio_ble_wsf_timer_insert(void *timer,uint32_t ticks) {
     uint8_t *t=(uint8_t *)timer;
     WsfTaskLock();

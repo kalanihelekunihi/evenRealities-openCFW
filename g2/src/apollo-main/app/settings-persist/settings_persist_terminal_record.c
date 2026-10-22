@@ -15,6 +15,7 @@ static const char function[]="SVC_KvdbWriteTerminalMode";
 static const char message[]="write terminal mode failed, ret = %d";
 static const char short_message[]="[kv.terminal_mode]write terminal mode failed, ret = %d";
 
+/* Stock 0x4B04C4 (SVC_KvdbWriteTerminalMode) */
 uint32_t audio_settings_persist_record(const void *source) {
     const uint8_t *bytes=(const uint8_t *)source;
     for(uint32_t i=0u;i<4u;i++) audio_settings_terminal_record[i]=bytes[i];

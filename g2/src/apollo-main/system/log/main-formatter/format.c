@@ -67,6 +67,7 @@ typedef void (*am_util_stdio_print_char_t)(char *);
 #define g_pfnCharPrint (*(am_util_stdio_print_char_t volatile *)0x200742f0)
 #define g_prfbuf ((char *)0x2006b930)
 #define g_bTxtXlate (*(volatile bool *)0x20074f7f)
+/* Stock 0x472C84 (divu64_10); AmbiqSuite R3.2.0 utils/am_util_stdio.c */
 static uint64_t
 divu64_10(uint64_t ui64Val)
 {
@@ -107,6 +108,7 @@ divu64_10(uint64_t ui64Val)
 // example: 10000 return 5, 123 returns 3.
 //
 //*****************************************************************************
+/* Stock 0x472D40 (ndigits_in_u64); AmbiqSuite R3.2.0 utils/am_util_stdio.c */
 static int
 ndigits_in_u64(uint64_t ui64Val)
 {
@@ -133,6 +135,7 @@ ndigits_in_u64(uint64_t ui64Val)
 // example: -3 returns 1, 3 returns 1, 15 returns 2, -15 returns 2, ...
 //
 //*****************************************************************************
+/* Stock 0x472D64 (ndigits_in_i64); AmbiqSuite R3.2.0 utils/am_util_stdio.c */
 static int
 ndigits_in_i64(int64_t i64Val)
 {
@@ -152,6 +155,7 @@ ndigits_in_i64(int64_t i64Val)
 // Return the number of hex digits in an uint64_t.
 //
 //*****************************************************************************
+/* Stock 0x472D76 (ndigits_in_hex); AmbiqSuite R3.2.0 utils/am_util_stdio.c */
 static int
 ndigits_in_hex(uint64_t ui64Val)
 {
@@ -176,6 +180,7 @@ ndigits_in_hex(uint64_t ui64Val)
 // pui32CharCnt.
 //
 //*****************************************************************************
+/* Stock 0x472D9C (decstr_to_int); AmbiqSuite R3.2.0 utils/am_util_stdio.c */
 static uint32_t
 decstr_to_int(const char *pcStr, uint32_t *pui32CharCnt)
 {
@@ -224,6 +229,7 @@ decstr_to_int(const char *pcStr, uint32_t *pui32CharCnt)
 // written).
 //
 //*****************************************************************************
+/* Stock 0x472DE0 (uint64_to_str); AmbiqSuite R3.2.0 utils/am_util_stdio.c */
 static int
 uint64_to_str(uint64_t ui64Val, char *pcBuf)
 {
@@ -286,6 +292,7 @@ uint64_to_str(uint64_t ui64Val, char *pcBuf)
 // written).
 //
 //*****************************************************************************
+/* Stock 0x472E48 (uint64_to_hexstr); AmbiqSuite R3.2.0 utils/am_util_stdio.c */
 static int
 uint64_to_hexstr(uint64_t ui64Val, char *pcBuf, bool bLower)
 {
@@ -342,6 +349,7 @@ uint64_to_hexstr(uint64_t ui64Val, char *pcBuf, bool bLower)
 // Return length of the given string.
 //
 //*****************************************************************************
+/* Stock 0x472EBC (simple_strlen); AmbiqSuite R3.2.0 utils/am_util_stdio.c */
 static uint32_t
 simple_strlen(char *pcBuf)
 {
@@ -363,6 +371,7 @@ simple_strlen(char *pcBuf)
 // Pad a string buffer with pad characters.
 //
 //*****************************************************************************
+/* Stock 0x472ED4 (padbuffer); AmbiqSuite R3.2.0 utils/am_util_stdio.c */
 static int32_t
 padbuffer(char *pcBuf, uint8_t cPadChar, int32_t i32NumChars)
 {
@@ -422,6 +431,7 @@ typedef union
     float F;
 } i32fl_t;
 
+/* Stock 0x472EF6 (ftoa); AmbiqSuite R3.2.0 utils/am_util_stdio.c */
 static int ftoa(float fValue, char *pcBuf, int iPrecision)
 {
     i32fl_t unFloatValue;

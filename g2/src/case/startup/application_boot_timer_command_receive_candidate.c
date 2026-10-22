@@ -38,6 +38,7 @@ static uint32_t is_empty(uint32_t queue)
     (void)case_policy_scheduler_unlock();
     return result;
 }
+/* Stock 0x0800C83A (case_boot_timer_command_receive) */
 uint32_t case_boot_timer_command_receive(uint32_t queue,uint32_t *message,uint32_t timeout)
 {
     if(queue==0u)native_fault();

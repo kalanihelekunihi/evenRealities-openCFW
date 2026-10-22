@@ -16,6 +16,7 @@ extern void AppAdvStart(uint8_t mode);
 extern void AppSetBondable(uint8_t bondable);
 static void set16(uint8_t *p,uint16_t v) { p[0]=(uint8_t)v;p[1]=(uint8_t)(v>>8u); }
 
+/* Stock 0x46DB04 (_bleAdvInit) */
 void audio_ble_adv_init(void *event)
 {
     (void)event;

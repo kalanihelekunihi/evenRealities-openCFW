@@ -13,6 +13,7 @@ static const char function[]="AppDbReloadResolvingList";
  if((audio_log_flags()&1u)||(audio_log_flags()&4u)) \
   (void)compressed_log_output(0x10000000u,compact,compact); \
 } while(0)
+/* Stock 0x47B4D4 (FUN_0047b4d4, AppDbReloadResolvingList) */
 void audio_ble_pair_storage_refresh(void) {
     LOG(0x706u,
         "AppDbReloadResolvingList: Forcing reload of resolving list",

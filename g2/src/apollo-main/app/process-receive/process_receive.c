@@ -7,6 +7,7 @@ extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
 extern const char g2_uart_sync_module_name[],g2_uart_sync_source_file[],g2_uart_sync_receive_function[];
 extern const char g2_uart_sync_uninit_message[],g2_uart_sync_uninit_short[];
 extern void audio_uart_module_receive(void *,const void *,uint32_t); /* 0x491b9a */
+/* Stock 0x45D4DC (SyncModuleReceivedDataHandler) */
 void audio_uart_process_receive(const void *bytes,uint32_t length)
 {
     void *module=g2_uart_sync_module;

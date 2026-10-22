@@ -13,6 +13,7 @@ static void wb(uint32_t a,uint8_t v){*(volatile uint8_t *)(uintptr_t)a=v;}
 static __attribute__((noreturn)) void native_fault(void)
 {__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
 static void invoke(uint32_t f,uint32_t timer){((void (*)(uint32_t))(uintptr_t)f)(timer);}
+/* Stock 0x0800B024 (case_boot_timer_insert) */
 uint32_t case_boot_timer_insert(uint32_t timer,uint32_t next,uint32_t now,uint32_t previous)
 {
     wr(timer+4u,next);wr(timer+16u,timer);
@@ -26,6 +27,7 @@ uint32_t case_boot_timer_insert(uint32_t timer,uint32_t next,uint32_t now,uint32
     case_policy_task_list_insert_sorted(rd(scheduler+12u),timer+4u);
     return 0u;
 }
+/* Stock 0x0800B0A0 (case_boot_timer_process_due) */
 void case_boot_timer_process_due(uint32_t deadline,uint32_t now)
 {
     uint32_t scheduler=0x20000164u;

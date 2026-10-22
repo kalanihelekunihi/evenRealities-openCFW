@@ -9,6 +9,7 @@ static const char reset[]="SESSION_STATUS_RESET";
 static const char sync_end[]="SESSION_STATUS_SYNC_END";
 static const char unknown[]="SESSION_STATUS_UNKNOWN";
 
+/* Stock 0x5E82A4 (semantic_terminal_session_status_name) */
 const char *audio_terminal_session_status_name(uint32_t status) {
     switch((uint8_t)status) {
     case 0:return none;

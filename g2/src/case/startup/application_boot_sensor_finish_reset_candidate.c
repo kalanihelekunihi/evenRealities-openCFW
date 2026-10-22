@@ -2,6 +2,7 @@
  * CASE 0x0800a358 frame parser resynchronization.
  */
 #include <stdint.h>
+/* Stock 0x0800A358 (case_validate_magic_state) */
 void case_boot_sensor_finish_reset(void)
 {
     volatile uint8_t *const state=(volatile uint8_t *)(uintptr_t)0x20000108u;

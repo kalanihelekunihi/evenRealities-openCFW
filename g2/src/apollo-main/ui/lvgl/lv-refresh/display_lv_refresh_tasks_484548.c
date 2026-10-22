@@ -4,12 +4,8 @@
 extern uint32_t audio_uart_lv_render_task_evaluate_48458e(void *display, void *layer);
 extern void audio_uart_lv_draw_dispatch_request_48462e(void);
 
-void *audio_uart_lv_display_next_44fa22(void *previous) {
-    volatile uint32_t *list = (volatile uint32_t *)(uintptr_t)0x2006f54cu;
-    if (previous == (void *)0) return (void *)(uintptr_t)list[1];
-    uint32_t offset = list[0];
-    return (void *)(uintptr_t)*(uint32_t *)(uintptr_t)(offset + (uintptr_t)previous + 4u);
-}
+/* Retired: stock 0x44fa22 is upstream lv_display_get_next (lvgl/src/display/lv_display.c); this name is a link alias. */
+void *audio_uart_lv_display_next_44fa22(void *previous);
 
 void audio_uart_lv_render_idle_callbacks_484528(void) {
     uint32_t node = *(volatile uint32_t *)(uintptr_t)0x2006f684u;

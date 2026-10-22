@@ -64,5 +64,7 @@ static void stream(uint32_t d,uint32_t width)
         return;
     }
 }
+/* Stock 0x08008808 (case_drain_receive_u16) */
 void case_boot_sensor_callback_8808(uint32_t descriptor){stream(descriptor,2u);}
+/* Stock 0x08008A48 (case_drain_receive_u8) */
 void case_boot_sensor_callback_8a48(uint32_t descriptor){stream(descriptor,1u);}

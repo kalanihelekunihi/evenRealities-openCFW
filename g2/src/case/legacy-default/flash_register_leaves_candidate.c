@@ -4,10 +4,12 @@
  */
 #include <stdint.h>
 #define CASE_FLASH_CR (*(volatile uint32_t *)(uintptr_t)0x40022014u)
+/* Stock 0x08003E94 (case_control_word5_set) */
 void case_flash_erase_mode4(uint32_t mode)
 {
     CASE_FLASH_CR=CASE_FLASH_CR | mode | 0x10000u;
 }
+/* Stock 0x08003EEC (case_gpio_policy_update) */
 void case_flash_erase_page(uint32_t mode,uint32_t page)
 {
     uint32_t control=CASE_FLASH_CR & 0xffffe007u;
@@ -15,6 +17,7 @@ void case_flash_erase_page(uint32_t mode,uint32_t page)
     else control|=0x2000u;
     CASE_FLASH_CR=(page<<3)|control|0x10002u;
 }
+/* Stock 0x08003F1C (case_register_pair_commit) */
 void case_flash_program_doubleword(uint32_t address,uint32_t retained_r1,
                                    uint32_t low,uint32_t high)
 {

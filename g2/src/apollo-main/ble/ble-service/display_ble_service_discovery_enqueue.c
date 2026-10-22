@@ -47,6 +47,7 @@ __attribute__((used,noinline)) static void service_discovery_body(uint8_t connec
 
 /* The stock entry forwards its incoming callee-saved R4 in the first log.
  * Capture it before the C compiler's prologue changes the register. */
+/* Stock 0x5354C2 (APP_StartServiceDiscovery) */
 __attribute__((naked)) void audio_ble_comm_disconnect_delayed(uint8_t connection __attribute__((unused)))
 {
     __asm volatile("push {r4, lr}\nmov r1, r4\nbl service_discovery_body\npop {r4, pc}");

@@ -12,6 +12,7 @@ static void fail(uint32_t line,const char *function)
         "Asserted at expression: %s (%s)","lru != NULL","NULL pointer");
     for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
 }
+/* Stock 0x5C3222 (get_victim_cb; upstream third-party/upstream/lvgl/src/misc/cache/lv_cache_lru_rb.c) */
 void *audio_uart_font_lru_get_victim(void *cache,uint32_t context)
 {
     (void)context;
@@ -27,6 +28,7 @@ void *audio_uart_font_lru_get_victim(void *cache,uint32_t context)
     }
     return 0;
 }
+/* Stock 0x5C328A (reserve_cond_cb; upstream third-party/upstream/lvgl/src/misc/cache/lv_cache_lru_rb.c) */
 uint32_t audio_uart_font_lru_reserve(void *cache,const void *data,uint32_t extra,uint32_t context)
 {
     (void)context; /* native R3 unused */

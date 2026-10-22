@@ -6,6 +6,7 @@
 
 extern uint32_t gx8002_resident_flash_initialize_245f0(void);
 
+/* Stock 0x10024940 (gx_pmu_get_wakeup_source) */
 uint32_t gx8002_resident_pmu_wakeup_source_24940(void)
 {
     volatile uint32_t *const clock =
@@ -30,6 +31,7 @@ void gx8002_resident_analog_config_update_10203c74(void)
     analog[0x4cu / 4u] = 0x59u;
 }
 
+/* Stock 0x10025CBC (gx8002_board_initialize) */
 void gx8002_resident_board_initialize_25cbc(void)
 {
     if (gx8002_resident_pmu_wakeup_source_24940() >= 2u)

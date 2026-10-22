@@ -13,6 +13,7 @@ extern uint32_t case_boot_sensor_set_clock(uint32_t descriptor,uint32_t clock); 
 extern uint32_t case_boot_sensor_start(uint32_t descriptor); /* 0x5e2e */
 extern uint32_t case_boot_sensor_bind(uint32_t descriptor,uint32_t channel,uint32_t enabled); /* 0x64ec */
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
+/* Stock 0x08006BB0 (case_initialize_channel_profile) */
 void case_boot_bus_initialize(void)
 {
     const uint32_t d=0x20000948u;
@@ -22,6 +23,7 @@ void case_boot_bus_initialize(void)
     if(case_boot_bus_set_frequency(d,0xf0u,4u)!=0u)case_boot_init_failure();
     (void)case_boot_bus_start(d);
 }
+/* Stock 0x08006C00 (case_initialize_controller_profile) */
 void case_boot_sensor_initialize(void)
 {
     const uint32_t d=0x20000e24u;

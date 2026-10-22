@@ -5,6 +5,7 @@
  */
 #include <stdint.h>
 
+/* Stock 0x10023528 (gx8002_clear_bss) */
 void gx8002_resident_clear_bss_23528(void)
 {
     for (uintptr_t address = UINT32_C(0x20026d80);

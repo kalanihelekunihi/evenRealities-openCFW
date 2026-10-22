@@ -12,6 +12,7 @@ static void field(uint32_t module,uint32_t offset,uint32_t shift,uint32_t bits,u
  *p=(*p&~mask)|((value<<shift)&mask);
 }
 /* 42488e has no argument validation; >25 leaves the low nibble untouched. */
+/* Stock 0x42488E (mspi_piomixed_configure) */
 void opencfw_hal_mspi_pio_mixed(uint32_t address) {
  const uint8_t *h=(const uint8_t *)(uintptr_t)address;uint32_t module=*(const uint32_t *)(const void *)(h+4);uint8_t mode=h[11];
  if(mode>25u)return;

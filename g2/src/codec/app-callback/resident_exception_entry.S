@@ -7,6 +7,7 @@
     .align 2
     .global gx8002_resident_trap_c_235f0
     .type gx8002_resident_trap_c_235f0, %function
+/* Stock 0x100235F0 (trap_c) */
 gx8002_resident_trap_c_235f0:
     mfcr r3, cr<0, 0>
     lsri r3, r3, 16
@@ -17,6 +18,7 @@ gx8002_resident_trap_c_235f0:
     .align 2
     .global gx8002_resident_trap_235fc
     .type gx8002_resident_trap_235fc, %function
+/* Stock 0x100235FC (trap) */
 gx8002_resident_trap_235fc:
     psrset ee
     subi r14, r14, 4

@@ -6,19 +6,23 @@
 #define CFG ((uint8_t *)0x200004ecu)
 #define RECORD ((touch_saved_record *)0x200009d0u)
 extern uint32_t touch_bootstrap_log(uint32_t,uint32_t,uint32_t,uint32_t);
+/* Stock 0x00003A1C (saved_proximity_baseline_read) */
 uint32_t touch_saved_baseline(void){return RECORD->magic==0x45564e55u?RECORD->baseline:0;}
+/* Stock 0x00007D36 (capsense_sensor_raw_count_read) */
 uint32_t touch_sensor_active(uint32_t w,uint32_t sensor,const uint8_t *c){
  if(w>2)return 0;
  uint8_t *widget=(uint8_t *)(*(const uint32_t *)(c+12)+w*144u);
  if(widget[123]!=6 || *(uint16_t *)(widget+56)<=sensor)return 0;
  return ((uint8_t *)(*(uint32_t *)(widget+4)+sensor*10u))[6];
 }
+/* Stock 0x00007D04 (capsense_widget_active_query) */
 uint32_t touch_widget_active(uint32_t w,const uint8_t *c){
  if(w>2)return 0;
  uint8_t *widget=(uint8_t *)(*(const uint32_t *)(c+12)+w*144u);
  if(widget[123]==7)return 0;
  return ((uint8_t *)(*(const uint32_t *)(c+16)+w*60u))[35]&1u;
 }
+/* Stock 0x0000441C (proximity_baseline_update_adapter) */
 uint32_t touch_proximity_change(void){
  uint8_t *sensor=(uint8_t *)(*(uint32_t *)(*(uint32_t *)(CFG+12)+2*144u+4));
  uint32_t desired=touch_sensor_active(2,0,CFG)?2:1,b=touch_saved_baseline();
@@ -27,17 +31,20 @@ uint32_t touch_proximity_change(void){
  uint8_t *prior=(uint8_t *)0x200009d8u;
  if(*prior==desired)return 0;*prior=(uint8_t)desired;return desired;
 }
+/* Stock 0x00003A38 (touch_config_load_from_eeprom) */
 uint32_t touch_config_save(void){
  RECORD->magic=0x45564e55u;
  uint32_t s=touch_application_write(0,(const uint8_t *)RECORD,8);
  if(s)touch_bootstrap_log(0xabe4,s,0xaa5c,0);else touch_bootstrap_log(0xac0c,RECORD->baseline,RECORD->parameter,0xaa5c);
  return s;
 }
+/* Stock 0x0000404C (touch_startup_0d4c_initialize) */
 void touch_gesture_initialize(uint8_t *state,const uint16_t *parameter){
  if(!state || !parameter)return;
  for(unsigned i=0;i<80;i++)state[i]=0;
  *(uint16_t *)state=*parameter;if(!*(uint16_t *)state)*(uint16_t *)state=1000;
 }
+/* Stock 0x00003B24 (report_builder) */
 void touch_calibration_report(void){
  uint32_t active=touch_widget_active(1,CFG);
  uint8_t *widget=(uint8_t *)(*(uint32_t *)(CFG+12)+144u);

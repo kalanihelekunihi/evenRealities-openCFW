@@ -13,6 +13,7 @@ static const char no_thread[]="[fw_evt_loop_push]fw_evt_loop_thread_id is NULL";
 static const char no_thread_short[]="[evtloop][fw_evt_loop_push]fw_evt_loop_thread_id is NULL";
 static const char put_error[]="[fw_evt_loop_push]fw_event_push error:0x%x";
 static const char put_error_short[]="[evtloop][fw_evt_loop_push]fw_event_push error:0x%x";
+/* Stock 0x004766EC (fw_event_loop_push) */
 void audio_event_loop_push(void (*callback)(void),uint32_t argument,uint32_t timeout) {
     if(audio_event_loop_thread_handle==0) {
         if((audio_log_flags()&2u)!=0u)

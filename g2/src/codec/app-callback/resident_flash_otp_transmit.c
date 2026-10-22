@@ -9,6 +9,7 @@ extern void gx8002_resident_flash_wait_bus_2364c(void);
 extern uint32_t gx8002_resident_flash_wait_tx_empty_23670(void);
 extern uint32_t gx8002_resident_flash_wait_ready_2375c(void);
 
+/* Stock 0x10023E14 (gx8002_flash_otp_transmit) */
 uint32_t gx8002_resident_flash_otp_transmit_23e14(
     uint32_t command_bytes, const uint8_t *data, uint32_t data_bytes)
 {

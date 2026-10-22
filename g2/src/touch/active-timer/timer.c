@@ -2,6 +2,7 @@
  * Multiply/wrap/clamp behavior is delegated to tested stock5d70 reconstruction. */
 #include "timer.h"
 #include "../clock-selection/clock.h"
+/* Stock 0x00005D90 (touch_sub_2a90) */
 uint32_t touch_set_active_interval(uint32_t us,uint8_t *c){
  if(!c)return 1;uint8_t *i=*(uint8_t **)(c+8);*(uint32_t *)(i+28)=us;
  *(uint32_t *)(i+32)=touch_timer_cycles(us,c);

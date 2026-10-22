@@ -13,6 +13,7 @@ static uint32_t bit_at(uint32_t value, int8_t bit)
     return (value >> ((uint8_t)bit & 31u)) & 1u;
 }
 
+/* Stock 0x10024BE0 (gx8002_clock_module_source_fixed) */
 uint32_t gx8002_resident_clock_module_source_24be0(
     uint32_t module, uint32_t source)
 {

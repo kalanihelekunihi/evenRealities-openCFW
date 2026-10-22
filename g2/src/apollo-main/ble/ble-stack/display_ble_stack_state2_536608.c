@@ -14,11 +14,3 @@ void audio_ble_stack_state2_536608_body(uint8_t *message)
     WsfMsgSend(context[0x28u],message);
 }
 
-__attribute__((naked)) uint32_t audio_ble_stack_state2_536608(
-    uint8_t *message __attribute__((unused)))
-{
-    __asm__ volatile(
-        "push {r7, lr}\n"
-        "bl audio_ble_stack_state2_536608_body\n"
-        "pop {r0, pc}\n");
-}

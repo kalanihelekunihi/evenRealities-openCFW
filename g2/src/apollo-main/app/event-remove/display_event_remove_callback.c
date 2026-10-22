@@ -12,20 +12,3 @@ static const char expression[]="obj != NULL";
 static const char message[]="NULL pointer";
 static const char format[]="Asserted at expression: %s (%s)";
 
-uint32_t audio_uart_display_event_remove_callback(void *object,void (*callback)(void))
-{
-    if (object==0) {
-        audio_uart_lvgl_log(3u,source,0x8bu,function,format,expression,message);
-        for (;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
-    }
-    uint32_t count=audio_uart_display_event_count_451790(object);
-    uint32_t removed=0u;
-    for (uint32_t index=0u;index<count;++index) {
-        void *entry=audio_uart_display_event_at_4517d6(object,index);
-        if (entry!=0 && *(void (**)(void))entry==callback) {
-            audio_uart_display_event_remove_45181c(object,index);
-            ++removed;
-        }
-    }
-    return removed;
-}

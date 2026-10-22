@@ -8,6 +8,7 @@ extern void stock_change_state(uint32_t next,uint32_t old);
 extern uint32_t stock_plan(struct pcm21_power_request *,uint32_t *,uint32_t *);
 extern void stock_apply(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton);
 static void restore_irq(uint32_t irq) { __asm volatile("msr primask, %0" :: "r"(irq) : "memory"); }
+/* Stock 0x005A1738 (PCM2.1 SPOT power-state control) */
 uint32_t pcm21_control(uint32_t action,uint32_t enable,uint8_t *metadata) {
     if(((W(0x40021108)>>4)&3)!=3) return 0;
     if(W(0x2005665c)!=0x1f01600d) return 1;

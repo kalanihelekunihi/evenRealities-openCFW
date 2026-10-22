@@ -7,6 +7,7 @@
 extern uint32_t case_policy_adc_tick(void); /* 0x4eac */
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
+/* Stock 0x08005128 (case_boot_bus_clock_setup) */
 uint32_t case_boot_bus_clock_setup(uint32_t *config)
 {
     uint32_t flags=config[0],result=0u,temporary_power=0u;

@@ -25,6 +25,7 @@ static const char registered[] = "PCM app registered: ID=%d, Source=%d";
 static const char simple_registered[] =
     "[svc.audio]PCM app registered: ID=%d, Source=%d";
 
+/* Stock 0x0057AB78 (SVC_PcmAppRegister) */
 int32_t audio_register(uint32_t app_id, uint32_t mode, uint32_t callback) {
     const uint32_t index = (uint8_t)mode;
     if (index >= 2u || callback == 0u) {

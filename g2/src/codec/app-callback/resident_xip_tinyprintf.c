@@ -31,6 +31,7 @@ struct gx8002_tfp_param {
     char *bf;
 };
 
+/* Stock 0x10206920 (ui2a) */
 static void gx8002_tfp_ui2a(uint32_t num, struct gx8002_tfp_param *p)
 {
     uint32_t divisor = 1;
@@ -74,6 +75,7 @@ static char gx8002_tfp_parse_width(char character, const char **source,
     return character;
 }
 
+/* Stock 0x10206998 (putf) */
 static uint32_t gx8002_tfp_putf(void *stream, char character)
 {
     (void)stream;
@@ -82,6 +84,7 @@ static uint32_t gx8002_tfp_putf(void *stream, char character)
     return 1;
 }
 
+/* Stock 0x102069B0 (putchw) */
 static uint32_t gx8002_tfp_putchw(void *stream, struct gx8002_tfp_param *p)
 {
     uint32_t written = 0;

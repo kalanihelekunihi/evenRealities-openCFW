@@ -12,6 +12,7 @@ extern void gx8002_uart_stage2_spi_read_34a4(
 extern uint32_t gx8002_uart_stage2_spi_write_35a8(
     const uint8_t *buffer, uint32_t bytes, uint32_t mode);
 
+/* Stock 0x10002ECE (dw_uart_getc) */
 uint32_t gx8002_uart_stage2_dw_uart_getc_2ece(
     volatile const uint32_t *descriptor)
 {

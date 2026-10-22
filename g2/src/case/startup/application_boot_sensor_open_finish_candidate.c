@@ -7,6 +7,7 @@ extern uint32_t case_boot_sensor_open_ready(uint32_t descriptor,uint32_t mask,
     uint32_t expected,uint32_t start,uint32_t control); /* 0x08008ec4 */
 static uint32_t rd32(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr32(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
+/* Stock 0x0800867C (case_wait_controller_channels) */
 uint32_t case_boot_sensor_open_finish(uint32_t descriptor)
 {
     wr32(descriptor+144u,0u);

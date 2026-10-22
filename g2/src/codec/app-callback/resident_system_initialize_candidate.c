@@ -37,6 +37,7 @@ static inline uint32_t gx8002_read_cr18(void)
     return value;
 }
 
+/* Stock 0x1002354C (gx8002_system_initialize) */
 void gx8002_resident_system_initialize_2354c(void)
 {
     uint32_t cr19 = gx8002_read_cr19();

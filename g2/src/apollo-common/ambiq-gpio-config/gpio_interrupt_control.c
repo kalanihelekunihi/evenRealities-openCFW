@@ -35,6 +35,7 @@
 
 #include "gpio_control_compat.h"
 
+/* Stock 0x480ED8 (gpionum_intreg_index_get) */
 static uint32_t
 gpionum_intreg_index_get(uint32_t ui32Gpionum,
                          uint32_t *pui32RegIdx,

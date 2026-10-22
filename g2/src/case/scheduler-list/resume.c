@@ -11,6 +11,7 @@ extern int32_t case_increment_tick(void);
 #define CASE_READY_BASE ((uintptr_t)0x20000ff4u)
 
 /* Original 0x0800b260. The active delayed list pointer lives at state+0x34. */
+/* Stock 0x0800B260 (case_reset_next_unblock) */
 void case_reset_next_unblock(void)
 {
     case_list *delayed=(case_list *)(uintptr_t)CASE_STATE[13];

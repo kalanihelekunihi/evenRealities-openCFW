@@ -93,6 +93,7 @@ uint32_t audio_ble_hci_reset_sequence_body(const void *message,uint32_t unused1,
 
 /* The native one-argument caller leaves R3 as call residue. Branching rather
  * than calling keeps that architectural input intact for the 0x2018 callback. */
+/* Stock 0x569B56 (hciCoreResetSequence) */
 __attribute__((naked)) uint32_t audio_ble_hci_reset_sequence(const void *message) {
     __asm volatile("b audio_ble_hci_reset_sequence_body");
 }

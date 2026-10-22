@@ -9,6 +9,7 @@ static uint64_t divide(uint64_t n,unsigned base,unsigned *remainder){
  if(base==8||base==16){unsigned shift=base==8?3:4;*remainder=(unsigned)n&(base-1);return n>>shift;}
  uint64_t q=0;unsigned r=0;for(int bit=63;bit>=0;bit--){r=(r<<1)|(unsigned)((n>>bit)&1);if(r>=10){r-=10;q|=(uint64_t)1<<bit;}}*remainder=r;return q;
 }
+/* Stock 0x482518 (IAR printf integer conversion) */
 uint64_t g2_main_format_integer_render(integer_format *s,unsigned conversion,uint32_t return_low,uint32_t return_high){
  unsigned base=conversion=='o'?8:((conversion|0x20)=='x'?16:10),pos=60;uint64_t n=((uint64_t)s->high<<32)|s->low;
  if((conversion=='d'||conversion=='i')&&(s->high&0x80000000u))n=0-n;

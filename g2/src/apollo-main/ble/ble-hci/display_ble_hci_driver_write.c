@@ -7,6 +7,7 @@ extern uint32_t audio_ble_hci_ring_commit_530084(void *,const void *,uint32_t);
 extern void audio_ble_wsf_set_event(uint32_t,uint32_t); /* native 0x52b91e */
 static uint32_t word(const uint8_t *p) {uint32_t v;__builtin_memcpy(&v,p,4u);return v;}
 static void put(uint8_t *p,uint32_t v) {__builtin_memcpy(p,&v,4u);}
+/* Stock 0x4B4A02 (hciDrvWrite) */
 uint32_t audio_ble_hci_driver_write(uint32_t packet_type,uint16_t length,const void *bytes) {
     uint8_t *ring=audio_ble_hci_radio_scheduler_state;
     if(word(ring+8u)==word(ring+12u)) {

@@ -15,6 +15,7 @@ static const char failed_short[]=
 static const char sent[]="ring battery request sent to peer";
 static const char sent_short[]="[svc.ring_bat]ring battery request sent to peer";
 
+/* Stock 0x4FF99A (SVC_RingBattery_RequestFromPeer) */
 void audio_uart_service_prepare7(void) {
     uint8_t request[12]={0};
     request[0]=6u;

@@ -5,6 +5,7 @@
 extern void opencfw_em9305_assert(uint32_t module,uint32_t line);
 static uint32_t irq_save(void) { uint32_t state; __asm__ volatile("clri %0\n\tsync" : "=r"(state) :: "memory"); return state; }
 static void irq_restore(uint32_t state) { __asm__ volatile("seti %0" :: "r"(state) : "memory"); }
+/* Stock 0x00310D38 (QActive_get_) */
 void *opencfw_em9305_active_get(void *active)
 {
     volatile uint8_t *const bytes = active;

@@ -1,5 +1,7 @@
-/* Apollo LV render-task cleanup and image descriptor selection. */
+/* Apollo LV render-task cleanup (lv_draw.c, 0x4848e8). The label-descriptor
+ * accessor 0x489fc8 is upstream lv_draw_task_get_label_dsc (lv_draw_label.c). */
 #include <stdint.h>
+extern void *lv_draw_task_get_label_dsc(void *task);
 
 extern uint32_t audio_uart_lv_area_height_4515a4(const void *area);
 extern void audio_uart_font_bitmap_release(void *buffer);
@@ -7,10 +9,6 @@ extern void audio_uart_lv_heap_free(void *pointer);
 extern void audio_uart_lvgl_log(uint32_t level, const char *source, uint32_t line,
                                 const char *format, ...);
 
-void *audio_uart_lv_draw_task_image_desc_489fc8(void *task) {
-    uint8_t *t = (uint8_t *)task;
-    return t[4] == 5u ? (void *)(uintptr_t)*(uint32_t *)(void *)(t + 0x54u) : (void *)0;
-}
 
 void audio_uart_lv_render_task_free_4848e8(void *task, void *display) {
     uint8_t *t = (uint8_t *)task;
@@ -51,7 +49,7 @@ void audio_uart_lv_render_task_free_4848e8(void *task, void *display) {
             audio_uart_lv_heap_free(cell);
         }
     }
-    uint8_t *image = (uint8_t *)audio_uart_lv_draw_task_image_desc_489fc8(task);
+    uint8_t *image = (uint8_t *)lv_draw_task_get_label_dsc(task); /* 0x489fc8, upstream lv_draw_label.c */
     if (image != (void *)0 && (image[0x54u] & 1u) != 0u) {
         audio_uart_lv_heap_free((void *)(uintptr_t)*(uint32_t *)(void *)(image + 0x1cu));
         *(uint32_t *)(void *)(image + 0x1cu) = 0u;

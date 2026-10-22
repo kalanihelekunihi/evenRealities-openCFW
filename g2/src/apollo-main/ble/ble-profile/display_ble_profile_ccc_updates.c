@@ -28,27 +28,32 @@ static void update(uint8_t *state,const uint8_t *message,uint8_t index,
     else {state[0]=0u;state[2]=0u;}
 }
 #define PATH(profile) "D:\\01_workspace\\s200_ap510b_iar_git\\platform\\ble\\profiles\\" profile "\\profile_" profile ".c"
+/* Stock 0x004BDB90 (_evenOtaProcCccState) */
 void audio_ble_ota_update(void *raw) {
     update(audio_ble_ota_handler_state,(const uint8_t *)raw,1u,
            "profile.ota",PATH("ota"),"_evenOtaProcCccState",0x5eu,
            "ccc state ind value:%d handle:%d idx:%d",
            "[profile.ota]ccc state ind value:%d handle:%d idx:%d");
 }
+/* Stock 0x4BDE4C (eusProcCccState) */
 void audio_ble_eus_update(void *raw) {
     update(audio_ble_eus_handler_state,(const uint8_t *)raw,2u,
            "profile.eus",PATH("eus"),"eusProcCccState",0x42u,
            "eusProcCccState ccc state ind value=%d,handle=%d,idx=%d",
            "[profile.eus]eusProcCccState ccc state ind value=%d,handle=%d,idx=%d");
 }
+/* Stock 0x4BE228 (essProcCccState) */
 void audio_ble_ess_update(void *raw) {
     update(audio_ble_ess_handler_state,(const uint8_t *)raw,3u,0,0,0,0u,0,0);
 }
+/* Stock 0x4BE3A4 (efsProcCccState) */
 void audio_ble_efs_update(void *raw) {
     update(audio_ble_efs_handler_state,(const uint8_t *)raw,4u,
            "profile.efs",PATH("efs"),"efsProcCccState",0x41u,
            "efsProcCccState ccc state ind value=%d,handle=%d,idx=%d",
            "[profile.efs]efsProcCccState ccc state ind value=%d,handle=%d,idx=%d");
 }
+/* Stock 0x4BE6F0 (nusProcCccState) */
 void audio_ble_nus_update(void *raw) {
     update(audio_ble_nus_handler_state,(const uint8_t *)raw,5u,
            "profile.nus",PATH("nus"),"nusProcCccState",0x43u,

@@ -7,6 +7,7 @@ extern uint32_t case_binary_read_byte_lower(uint32_t selector, uint8_t *value);
 extern uint32_t case_binary_read_word_lower(uint32_t selector, uint32_t *value);
 extern uint32_t case_binary_14_scale(uint32_t value, uint32_t radix);
 
+/* Stock 0x08009F18 (calibrated_sensor_value_convert) */
 uint32_t case_binary_14_read_b(uint32_t *out)
 {
     uint32_t raw = 0u;

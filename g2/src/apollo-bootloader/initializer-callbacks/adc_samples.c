@@ -11,6 +11,7 @@ static float subtract(float x,float y) {float f;__asm__ volatile("vsub.f32 %0, %
 static float divide(float x,float y) {float f;__asm__ volatile("vdiv.f32 %0, %1, %2":"=t"(f):"t"(x),"t"(y));return f;}
 static float multiply(float x,float y) {float f;__asm__ volatile("vmul.f32 %0, %1, %2":"=t"(f):"t"(x),"t"(y));return f;}
 static float accumulate(float x,float y,float z) {__asm__ volatile("vmla.f32 %0, %1, %2":"+t"(x):"t"(y),"t"(z));return x;}
+/* Stock 0x42EE00 (hw_channel_normalize_42ee00; am_hal_adc.c sample_correction_apply) */
 __attribute__((noinline))
 uint32_t opencfw_boot_adc_correct_sample(uint32_t word,uint32_t enabled) {
     if(!B(0x20027199u)||!(uint8_t)enabled)return word;
@@ -22,6 +23,7 @@ uint32_t opencfw_boot_adc_correct_sample(uint32_t word,uint32_t enabled) {
     sample=divide(sample,as_float(0x4494c000u));
     return (word&0xfff00000u)|((float_to_unsigned(sample)<<6)&0x3ffffu);
 }
+/* Stock 0x42EE70 (hw_channel_enumerate_42ee70; am_hal_adc_samples_read) */
 __attribute__((noinline))
 uint32_t opencfw_bl_adc_enumerate(uint32_t context,uint32_t full_sample,const uint32_t *buffer,uint32_t *count,opencfw_boot_adc_sample *output) {
     uintptr_t n=(uintptr_t)count,p=(uintptr_t)buffer,out=(uintptr_t)output;
@@ -54,6 +56,7 @@ uint32_t opencfw_bl_adc_enumerate(uint32_t context,uint32_t full_sample,const ui
     }
     return 0;
 }
+/* Stock 0x42ED60 (hw_handle_activate_42ed60; am_hal_adc_enable) */
 __attribute__((noinline))
 uint32_t opencfw_bl_adc_activate(uint32_t context) {
     if(!valid(context))return 2;
@@ -61,22 +64,26 @@ uint32_t opencfw_bl_adc_activate(uint32_t context) {
     R(0x40038000u)=R(0x40038000u)|1u;
     R(context)=R(context)|0x2000000u;return 0;
 }
+/* Stock 0x42ebaa (hw_handle_enable_42ebaa) */
 __attribute__((noinline))
 uint32_t opencfw_bl_adc_enable(uint32_t context) {
     if(!valid(context))return 2;
     if(!(R(0x40038000u)&1u))return 7;
     R(0x40038040u)=R(0x40038040u)|0x80000000u;return 0;
 }
+/* Stock 0x42ebe2 (hw_handle_disable_42ebe2) */
 __attribute__((noinline))
 uint32_t opencfw_bl_adc_disable(uint32_t context) {
     if(!valid(context))return 2;
     R(0x40038040u)=R(0x40038040u)&~0x80000000u;return 0;
 }
+/* Stock 0x42EFF4 (hw_handle_command_42eff4; am_hal_adc_sw_trigger) */
 __attribute__((noinline))
 uint32_t opencfw_bl_adc_command(uint32_t context) {
     if(!valid(context))return 2;
     R(0x40038008u)=0x37u;return 0;
 }
+/* Stock 0x42EDA0 (hardware_channel_normalize_42eda0; am_hal_adc_disable) */
 __attribute__((noinline))
 uint32_t opencfw_bl_adc_normalize(uint32_t context) {
     if(!valid(context))return 2;

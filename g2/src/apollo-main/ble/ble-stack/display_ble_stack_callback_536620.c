@@ -23,12 +23,3 @@ void audio_ble_stack_callback_536620_body(uint8_t *message,const uint8_t *payloa
     }
 }
 
-__attribute__((naked)) uint32_t audio_ble_stack_callback_536620(
-    uint8_t *message __attribute__((unused)),const uint8_t *payload __attribute__((unused)),
-    uint32_t unused __attribute__((unused)),uint32_t inherited __attribute__((unused)))
-{
-    __asm__ volatile(
-        "push {r3, r4, r5, lr}\n"
-        "bl audio_ble_stack_callback_536620_body\n"
-        "pop {r0, r4, r5, pc}\n");
-}

@@ -18,6 +18,7 @@ static uint32_t copy(const uint8_t *c,uint32_t address,uint32_t size,uint8_t *da
  const uint32_t *p=(const uint32_t *)w(c,28);
  uint32_t (*fn)(uint32_t,uint32_t,uint32_t,uint8_t *)=(void *)p[5];return fn(p[0],address,size,data);
 }
+/* Stock 0x00007FA4 (DefineLastWrittenRow) */
 uint32_t touch_define_last(uint8_t *c) {
  uint32_t row=w(c,16);*(uint32_t *)(c+24)=row;if(c[13])return 0;
  uint32_t count=h(c,0)*c[12],best=0,chosen=row,status=0;
@@ -25,6 +26,7 @@ uint32_t touch_define_last(uint8_t *c) {
  if(c[14])for(uint32_t i=0;i<count;i++,row+=stride(c)){uint32_t s=seq(row);if(s>best&&!crc_check(row,h(c,2))){best=s;chosen=row;status=0x093e0004u;}}
  *(uint32_t *)(c+24)=chosen;return status;
 }
+/* Stock 0x00008058 (CheckLastWrittenRowIntegrity) */
 uint32_t touch_integrity(uint32_t *out,uint8_t *c) {
  uint32_t s=0,status=0;
  if(!c[13]) {uint32_t row=w(c,24);if(!crc_check(row,h(c,2)))s=seq(row);
@@ -33,6 +35,7 @@ uint32_t touch_integrity(uint32_t *out,uint8_t *c) {
  }
  *out=s;return status;
 }
+/* Stock 0x0000814C (CopyHistoricData) */
 uint32_t touch_history(uint8_t *out,uint32_t address,uint8_t *c) {
  uint32_t row=previous_block(address,c),size=h(c,2),offset=(size>>3)*4u,status;
  if(!crc_check(row,size))return copy(c,row+offset,h(c,20),out+offset)?0x093e0002u:0;
@@ -43,6 +46,7 @@ uint32_t touch_history(uint8_t *out,uint32_t address,uint8_t *c) {
 }
 static uint32_t div32(uint32_t n,uint32_t d) {uint32_t q=0;for(unsigned k=32;k;k--){unsigned i=k-1;if(d<=(n>>i)){n-=d<<i;q+=1u<<i;}}return q;}
 static uint32_t mod32(uint32_t n,uint32_t d) {return n-div32(n,d)*d;}
+/* Stock 0x00008680 (em_eeprom_extended_read_row_helper) */
 uint32_t touch_merge(uint8_t *out,uint32_t address,uint8_t *c) {
  uint32_t rows=h(c,0),size=h(c,2),cursor=previous_block(address,c),limit=seq((uint32_t)out);
  if(limit<rows)cursor=w(c,16);else {cursor=next(cursor,c);limit=rows;}

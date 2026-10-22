@@ -7,6 +7,7 @@ extern void audio_ble_ota_export_mode_set(uint32_t); /* native 0x478860 */
 extern uint32_t audio_log_level(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,uint32_t,const char *,...);
 extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
+/* Stock 0x4BF6C4 (_anccResetStateMachine) */
 void audio_ble_ancc_reset_state_machine(void) {
     if(audio_log_level()&2u)
       audio_log_extended(4u,"ble.ancc",
@@ -26,6 +27,7 @@ void audio_ble_ancc_reset_state_machine(void) {
     audio_uart_buffer_zero(audio_ble_ancc_state+0x31cu,0x40u,0u);
     audio_uart_buffer_zero(audio_ble_ancc_state+0x35cu,0x200u,0u);
 }
+/* Stock 0x004486BC (semantic_OtaResetExportState) */
 void audio_ble_ota_reset_export_state(void) {
     audio_uart_buffer_zero(audio_ble_ota_export_state,0x60u,0u);
     audio_ble_ota_export_state[0]=0u;

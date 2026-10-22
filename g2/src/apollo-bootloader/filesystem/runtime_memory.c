@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include <stdint.h>
 void *memcpy(void *out,const void *in,size_t size) {uint8_t *d=out;const uint8_t *s=in;for(size_t i=0;i<size;i++)d[i]=s[i];return out;}
+/* Stock 0x426C10 (memset_wrapper_426c10; stock calls IAR fill 0x41560C as (dst,n,c) and returns dst) */
 void *memset(void *out,int value,size_t size) {uint8_t *d=out;for(size_t i=0;i<size;i++)d[i]=(uint8_t)value;return out;}
 int memcmp(const void *left,const void *right,size_t size) {const uint8_t *a=left,*b=right;for(size_t i=0;i<size;i++)if(a[i]!=b[i])return (int)a[i]-(int)b[i];return 0;}
 size_t strlen(const char *text) {size_t i=0;while(text[i])i++;return i;}

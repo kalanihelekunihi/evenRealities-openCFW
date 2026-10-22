@@ -10,6 +10,7 @@ extern uint32_t g2_codec_critical_save(void);
 extern void g2_codec_critical_restore(uint32_t state);
 
 /* 0x100251ec: preserve the exact interrupt state around the SNPU gate. */
+/* Stock 0x100251EC (gx_clock_set_module_snpu_enable) */
 void gx8002_resident_clock_snpu_enable_251ec(uint32_t enabled)
 {
     uint32_t state = g2_codec_critical_save();
@@ -22,6 +23,7 @@ void gx8002_resident_clock_snpu_enable_251ec(uint32_t enabled)
     g2_codec_critical_restore(state);
 }
 
+/* Stock 0x10024D70 (gx8002_clock_module_query) */
 uint32_t gx8002_resident_clock_module_query_24d70(uint32_t module)
 {
     struct gx8002_module_info info;
@@ -44,6 +46,7 @@ uint32_t gx8002_resident_clock_module_query_24d70(uint32_t module)
     return selected;
 }
 
+/* Stock 0x10025180 (gx8002_clock_gate_query_fixed) */
 uint32_t gx8002_resident_clock_gate_query_25180(uint32_t module)
 {
     struct gx8002_module_info info;

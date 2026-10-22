@@ -7,14 +7,7 @@ extern void audio_log_extended(uint8_t,const char *,const char *,const char *,ui
 extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
 extern uint8_t audio_uart_device_role_get(void); /* selected 0x45a568 */
 extern int32_t audio_ble_send_status_message(uint32_t,const uint8_t *,uint32_t,uint32_t); /* selected 0x464d1c */
-uint8_t *audio_ble_pair_record(uint8_t conn) {
-    /* Native table uses connId-1 and 0x30-byte records, including connId zero. */
-    const uint8_t *slot=(const uint8_t *)((uintptr_t)audio_ble_atts_connection_rows+
-      (uint32_t)conn*0x30u-0x30u);
-    uint32_t value=(uint32_t)slot[0]|((uint32_t)slot[1]<<8)|
-      ((uint32_t)slot[2]<<16)|((uint32_t)slot[3]<<24);
-    return (uint8_t *)(uintptr_t)value;
-}
+/* Stock 0x4B82E8 (RPC_SystemBleStatusSync) */
 void audio_ble_slave_security_state(uint8_t state) {
     static const char module[]="ble.comm";
     static const char path[]="D:\\01_workspace\\s200_ap510b_iar_git\\platform\\ble\\app_ble.c";

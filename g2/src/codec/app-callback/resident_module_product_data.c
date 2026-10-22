@@ -8,6 +8,8 @@
 _Static_assert(sizeof(struct gx8002_module_config_data) == 72,
                "native module config ABI");
 
+/* Stock 0x10026884 (gx_clock_div_table) */
+/* Stock 0x10026880 (gx_clock_dto_table) */
 const struct gx8002_module_config_data gx8002_module_config_26880
     __attribute__((section(".gx8002.module_config.26880"), used,
                    aligned(4))) = {
@@ -24,6 +26,7 @@ _Static_assert(sizeof(struct gx8002_module_entry) == 16,
 
 #define C(i) (&gx8002_module_config_26880.words[i])
 #define M(i) (&gx8002_module_config_26880.modes[i])
+/* Stock 0x100266E0 (gx_clock_param_table) */
 const struct gx8002_module_entry gx8002_module_table_266e0[26]
     __attribute__((section(".gx8002.module_table.266e0"), used,
                    aligned(4))) = {

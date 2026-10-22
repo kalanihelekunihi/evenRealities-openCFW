@@ -2,9 +2,14 @@
 #define G2_POWER_VENDOR_CANDIDATE_H
 #include <stdbool.h>
 #include <stdint.h>
+/* Same layout as struct am_pwr_s in pinned am_hal_pwrctrl.c (enable register,
+ * enable mask, status register, status mask); filled by upstream am_get_pwrctrl
+ * (stock 0x47EF18) through the g2_power_get_descriptor defsym. */
 typedef struct {
-    uintptr_t enable_register, status_register;
-    uint32_t enable_mask, status_mask;
+    uintptr_t enable_register;
+    uint32_t enable_mask;
+    uintptr_t status_register;
+    uint32_t status_mask;
 } g2_power_descriptor;
 typedef struct {
     uint32_t crypto, otp, debug, gfx, pdm0;
@@ -24,14 +29,21 @@ typedef struct {
 /* Product-specific configuration and state must be supplied by an attributed
  * binding. No fallback constants or success-only hooks are defined here. */
 extern const g2_power_product_config g2_power_product;
-/* Native ROM pointers at 0x47fac0/c4 target adjacent live byte cells. */
-#define g2_power_current_gpu_mode (*(volatile uint8_t *)(uintptr_t)0x20074f60u)
-#define g2_power_previous_gpu_mode (*(volatile uint8_t *)(uintptr_t)0x20074f61u)
+/* Native ROM pointers at 0x47fac0/c4 target adjacent live byte cells
+ * (RAM 0x20074f60/61): upstream g_eCurGpuPwrMode / g_ePreGpuPwrMode, defined by
+ * the am_hal_pwrctrl.c unit (one-byte enums). */
+extern volatile uint8_t g_eCurGpuPwrMode, g_ePreGpuPwrMode;
+#define g2_power_current_gpu_mode g_eCurGpuPwrMode
+#define g2_power_previous_gpu_mode g_ePreGpuPwrMode
+/* Upstream am_get_pwrctrl / am_hal_spotmgr_tempco_postpone /
+ * am_hal_spotmgr_tempco_pending_handle (defsym aliases). */
 extern uint32_t g2_power_get_descriptor(g2_power_descriptor *, uint32_t);
 extern uint32_t g2_power_tempco_postpone(void);
 extern uint32_t g2_power_tempco_pending(void);
-/* These selected bodies map by native entry 0x480312/0x4c44bc/0x4c4530/
- * 0x4c45a4, respectively. Their returns are ignored by this caller. */
+/* These selected bodies map by native entry 0x480312/0x47f11c/0x4c44bc/0x4c4530/
+ * 0x4c45a4, respectively (0x480312 = am_hal_spotmgr_power_state_update and
+ * 0x47f11c = am_hal_pwrctrl_gpu_mode_select, both upstream units now). Their
+ * returns are ignored by this caller. */
 extern uint32_t audio_ble_flash_control(uint32_t, uint32_t, const uint32_t *);
 extern uint32_t g2_power_gpu_mode_select(uint32_t);
 extern uint32_t audio_uart_pin_mux_enable(uint32_t, uint32_t);

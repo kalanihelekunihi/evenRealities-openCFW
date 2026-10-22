@@ -9,6 +9,7 @@ extern uint32_t case_policy_task_reschedule(void);
 extern void case_boot_first_task_prepare(void); /* 0xaf70 */
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
+/* Stock 0x0800AC08 (case_boot_task_register) */
 void case_boot_task_register(uint32_t task)
 {
     uint32_t scheduler=0x20000128u;

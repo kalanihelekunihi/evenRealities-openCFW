@@ -5,6 +5,7 @@
 extern void case_bus_gpio_config(uint32_t,volatile uint32_t *); /* 0x4d30 */
 extern void case_clock_priority_config(uint32_t,uint32_t,uint32_t); /* 0x5024 */
 extern void case_boot_sensor_irq_enable(uint32_t); /* 0x500c */
+/* Stock 0x080046A4 (case_configure_irq_resource) */
 void case_boot_console_reset_descriptor(uint32_t descriptor)
 {
     volatile uint32_t config[6];

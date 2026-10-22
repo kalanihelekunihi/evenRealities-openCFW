@@ -3,8 +3,8 @@
 extern uint32_t audio_uart_command_pending(void); /* selected productModeGet 0x4abe60 */
 extern uint8_t audio_uart_device_role_get(void); /* selected 0x45a568 */
 extern volatile uint8_t audio_uart_auto_brightness_enabled_cell; /* RAM 0x20072daa */
-extern uint32_t audio_hub_channel_open(uint32_t); /* source 0x4a6d58 */
-extern uint32_t audio_hub_channel_close(uint32_t); /* source 0x4a6dca */
+extern int32_t HUB_Open(uint8_t func_type); /* 0x4a6d58 */
+extern int32_t HUB_Close(uint8_t func_type); /* 0x4a6dca */
 extern uint32_t audio_log_flags(void); /* selected 0x43d0ce */
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,
                                uint32_t,const char *,...); /* selected 0x43d574 */
@@ -33,7 +33,7 @@ uint32_t SVC_Settings_AutoBrightnessOpen(void) {
         return 0;
     }
     if(audio_uart_device_role_get()==1u) {
-        (void)audio_hub_channel_open(4u);
+        (void)HUB_Open(4u);
     } else {
         log_message(open_function,395u,open_wrong_role,open_wrong_role_short);
     }
@@ -42,7 +42,7 @@ uint32_t SVC_Settings_AutoBrightnessOpen(void) {
 uint32_t SVC_Settings_AutoBrightnessClose(void) {
     if(audio_uart_command_pending()==1u) return 0;
     if(audio_uart_device_role_get()==1u) {
-        (void)audio_hub_channel_close(4u);
+        (void)HUB_Close(4u);
     } else {
         log_message(close_function,410u,close_wrong_role,close_wrong_role_short);
     }

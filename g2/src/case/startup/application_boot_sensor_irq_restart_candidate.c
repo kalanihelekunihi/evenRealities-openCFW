@@ -19,6 +19,7 @@ static void lines(uint32_t p)
         wr(rd(p+88u)+4u,rd(p+92u));
     }
 }
+/* Stock 0x0800487A (case_boot_sensor_irq_restart) */
 uint32_t case_boot_sensor_irq_restart(uint32_t p)
 {
     if(p==0u)return 1u;
@@ -31,6 +32,7 @@ uint32_t case_boot_sensor_irq_restart(uint32_t p)
     wb(p+37u,1u);wb(p+36u,0u);
     return 0u;
 }
+/* Stock 0x080048E6 (case_boot_sensor_irq_restart_ready) */
 uint32_t case_boot_sensor_irq_restart_ready(uint32_t p)
 {
     uint32_t state=p+32u;

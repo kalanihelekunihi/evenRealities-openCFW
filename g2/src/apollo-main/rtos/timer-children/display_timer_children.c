@@ -61,32 +61,11 @@ uint32_t audio_uart_lv_unlock_core(void *cell) {
 }
 
 
-void *audio_uart_lv_list_first(void *list) {
-    if(list==0) return 0;
-    return (void *)(uintptr_t)*(uint32_t *)(void *)((uint8_t *)list+4u);
-}
-void *audio_uart_lv_list_next(void *list,void *node) {
-    uintptr_t base=*(uint32_t *)(void *)list;
-    uintptr_t offset=(uintptr_t)node;
-    return (void *)(uintptr_t)*(uint32_t *)(void *)(base+offset+4u);
-}
-/* Native 0x473482: volatile callback reload and tick flag retry. */
-uint32_t audio_uart_lv_tick(void) {
-    volatile uint8_t *state=audio_uart_lv_tick_state;
-    if(*(volatile uint32_t *)(state+8u)!=0u) {
-        uint32_t callback=*(volatile uint32_t *)(state+8u);
-        return ((uint32_t (*)(void))(uintptr_t)callback)();
-    }
-    uint32_t tick;
-    do {
-        state[4u]=1u;
-        tick=*(volatile uint32_t *)state;
-    } while(state[4u]==0u);
-    return tick;
-}
-uint32_t audio_uart_lv_elapsed(uint32_t start) {
-    return audio_uart_lv_tick()-start;
-}
+/* Retired: stock 0x473482 is upstream lv_tick_get (lvgl/src/tick/lv_tick.c); this name is a link alias. */
+uint32_t audio_uart_lv_tick(void);
+/* Retired: stock 0x4734a0 is upstream lv_tick_elaps (lvgl/src/tick/lv_tick.c); this name is a link alias. */
+uint32_t audio_uart_lv_elapsed(uint32_t start);
+/* Stock 0x46467C (lv_timer_time_remaining; upstream third-party/upstream/lvgl/src/misc/lv_timer.c) */
 uint32_t audio_uart_lv_timer_remaining(void *timer) {
     uint32_t period=*(const uint32_t *)(const void *)timer;
     uint32_t baseline=*(const uint32_t *)(const void *)((const uint8_t *)timer+4u);
@@ -99,37 +78,8 @@ void audio_uart_lv_lock(void) {
 void audio_uart_lv_unlock(void) {
     (void)audio_uart_lv_unlock_core(audio_uart_lv_lock_cell);
 }
-static uint32_t lv_node_prev(uint32_t *list,uint32_t node) {
-    return *(uint32_t *)(uintptr_t)(list[0]+node);
-}
-static uint32_t lv_node_next(uint32_t *list,uint32_t node) {
-    return *(uint32_t *)(uintptr_t)(list[0]+node+4u);
-}
-static void lv_set_prev(uint32_t *list,uint32_t node,uint32_t previous) {
-    if(node!=0u) *(uint32_t *)(uintptr_t)(list[0]+node)=previous;
-}
-static void lv_set_next(uint32_t *list,uint32_t node,uint32_t next) {
-    if(node!=0u) *(uint32_t *)(uintptr_t)(list[0]+node+4u)=next;
-}
-void audio_uart_lv_list_remove(void *list,void *node) {
-    if(list==0) return;
-    uint32_t *l=(uint32_t *)list;
-    uint32_t n=(uint32_t)(uintptr_t)node;
-    if(l[1]==n) {
-        l[1]=lv_node_next(l,n);
-        if(l[1]==0u) l[2]=0u;
-        else lv_set_prev(l,l[1],0u);
-    } else if(l[2]==n) {
-        l[2]=lv_node_prev(l,n);
-        if(l[2]==0u) l[1]=0u;
-        else lv_set_next(l,l[2],0u);
-    } else {
-        uint32_t previous=lv_node_prev(l,n);
-        uint32_t next=lv_node_next(l,n);
-        lv_set_next(l,previous,next);
-        lv_set_prev(l,next,previous);
-    }
-}
+/* Retired: stock 0x482c0e is upstream lv_ll_remove (lvgl/src/misc/lv_ll.c); this name is a link alias. */
+void audio_uart_lv_list_remove(void *list,void *node);
 uint32_t audio_uart_lv_timer_execute(void *timer) {
     uint8_t *t=(uint8_t *)timer;
     if((t[0x14u]&1u)!=0u) return 0u;
@@ -155,10 +105,8 @@ void audio_uart_lv_timer_delete(void *timer) {
     audio_uart_display_lv_state[0x82u]=1u;
     audio_uart_lv_free(timer);
 }
-void audio_uart_lv_timer_pause(void *timer) {
-    if(timer==0) audio_uart_lv_assert_null();
-    else *(uint32_t *)(void *)((uint8_t *)timer+0x14u)|=1u;
-}
+/* Retired: stock 0x46450c is upstream lv_timer_pause (lvgl/src/misc/lv_timer.c); this name is a link alias. */
+void audio_uart_lv_timer_pause(void *timer);
 void audio_uart_lv_free(void *pointer) {
     if(pointer!=0&&pointer!=audio_uart_lv_static_slot)
         audio_uart_lv_heap_free(pointer);

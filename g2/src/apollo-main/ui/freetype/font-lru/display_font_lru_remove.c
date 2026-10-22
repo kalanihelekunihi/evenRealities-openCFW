@@ -23,6 +23,7 @@ static uint32_t list_link(uint8_t *cache,uint8_t *rb) {
     void *link=audio_uart_lv_cache_lru_link_5c2be4(cache,rb);
     return *(volatile uint32_t *)link;
 }
+/* Stock 0x5C2FD4 (remove_cb; upstream third-party/upstream/lvgl/src/misc/cache/lv_cache_lru_rb.c) */
 void audio_uart_font_lru_remove(void *cache,void *entry,uint32_t context) {
     (void)context;
     if(cache==0) fail(0x149u,"remove_cb","lru != NULL");
@@ -39,6 +40,7 @@ void audio_uart_font_lru_remove(void *cache,void *entry,uint32_t context) {
     volatile uint32_t *current=(void *)(base+0x0cu);
     *current=*current-delta;
 }
+/* Stock 0x5C3098 (drop_cb; upstream third-party/upstream/lvgl/src/misc/cache/lv_cache_lru_rb.c) */
 void audio_uart_font_lru_evict(void *cache,const void *key,uint32_t context) {
     if(cache==0) fail(0x162u,"drop_cb","lru != NULL");
     if(key==0) fail(0x163u,"drop_cb","key != NULL");

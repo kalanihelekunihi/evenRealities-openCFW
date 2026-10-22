@@ -11,4 +11,5 @@ uint32_t codec_ring_read(uart3_ring_t *q,uint8_t *dst,uint32_t capacity){
     while(n<capacity && codec_ring_get(q,dst)){n++;dst++;}
     return n;
 }
+/* Stock 0x58FB2A (codec UART3 RX ring read) */
 uint32_t codec_uart_read(uint8_t *dst,uint32_t capacity){return codec_ring_read((uart3_ring_t *)0x20073ed4,dst,capacity);}

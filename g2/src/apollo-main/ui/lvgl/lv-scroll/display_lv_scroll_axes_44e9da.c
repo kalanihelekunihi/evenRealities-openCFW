@@ -18,20 +18,4 @@ void audio_uart_lv_scroll_anim_y_44f3d4(void *object, int32_t value) {
     (void)audio_uart_lv_scroll_by_44ea98(object, 0, current + value);
 }
 
-void audio_uart_lv_scroll_to_x_44e9da(void *object, int32_t target,
-                                       uint32_t animated) {
-    (void)audio_uart_lv_style_unlink_450500(
-        object, (void *)audio_uart_lv_scroll_anim_x_44f3b8);
-    const int32_t current = audio_uart_lv_obj_x_44e486(object);
-    audio_uart_lv_scroll_move_44e79e(object, current - target, 0,
-                                     (uint8_t)animated);
-}
 
-void audio_uart_lv_scroll_to_y_44ea04(void *object, int32_t target,
-                                       uint32_t animated) {
-    (void)audio_uart_lv_style_unlink_450500(
-        object, (void *)audio_uart_lv_scroll_anim_y_44f3d4);
-    const int32_t current = audio_uart_lv_obj_y_44e498(object);
-    audio_uart_lv_scroll_move_44e79e(object, 0, current - target,
-                                     (uint8_t)animated);
-}

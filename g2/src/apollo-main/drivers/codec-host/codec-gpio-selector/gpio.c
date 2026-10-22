@@ -3,7 +3,7 @@
 /* Stock 0x00509024..0x00509130. The shared mask's original pointer
  * literal is 0x2007436c; its initializer is a product-data contract. */
 extern volatile uint32_t g2_codec_shared_enable_mask;
-uint32_t g2_gpio_critical_save(void);
+uint32_t g2_gpio_critical_save(void); /* 0x473940 am_hal_interrupt_master_disable (defsym) */
 
 extern int32_t g2_gpio_hal_write(uint32_t pin, uint32_t mode);
 
@@ -12,13 +12,7 @@ __attribute__((noinline)) uint32_t g2_codec_pin_write(uint32_t pin, uint32_t val
     return g2_gpio_hal_write(pin, (uint8_t)value == 1u) == 0 ? 0u : 0xffffffffu;
 }
 
-/* Exact stock 0x00473940: MRS R0,PRIMASK; CPSID I; BX LR. */
-uint32_t g2_gpio_critical_save(void) {
-    uint32_t prior;
-    __asm volatile("mrs %0, primask\n\tcpsid i" : "=r"(prior) : : "memory");
-    return prior;
-}
-
+/* Stock 0x00509024 (codec GPIO selector) */
 uint32_t g2_codec_gpio_write(uint32_t channel, uint32_t value,
                              uint32_t unused_r2, uint32_t passthrough_r3) {
     (void)unused_r2;

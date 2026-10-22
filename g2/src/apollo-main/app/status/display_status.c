@@ -14,6 +14,7 @@ static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\platform\\pro
 static const char fn[]="RING_SendGlassesStatusEvt";
 static const char extended[]="glasses status send to ring: in case: %d, wear status: %d, imu status: %d, lcd status: %d, status: 0x%02X 0x%02X";
 static const char compact[]="[ring.proto]glasses status send to ring: in case: %d, wear status: %d, imu status: %d, lcd status: %d, status: 0x%02X 0x%02X";
+/* Stock 0x47243A (RING_SendGlassesStatusEvt) */
 int32_t audio_uart_display_housekeep(void) {
     uint8_t in_case=(uint8_t)audio_uart_case_status();
     uint8_t wear=(uint8_t)audio_log_wake_allowed();

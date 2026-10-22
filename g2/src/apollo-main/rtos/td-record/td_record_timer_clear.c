@@ -2,6 +2,7 @@
 #include <stdint.h>
 extern uint8_t *audio_td_current_record(uint32_t);
 
+/* Stock 0x597652 (td_record_timer_clear) */
 void audio_td_record_timer_clear(uint32_t session) {
     uint8_t *record=audio_td_current_record(session);
     if(record==0) return;

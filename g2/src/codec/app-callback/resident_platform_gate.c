@@ -7,6 +7,7 @@
 #include "resident_platform_gate.h"
 _Static_assert(sizeof(struct gx8002_module_entry) == 16, "native module entry ABI");
 
+/* Stock 0x10024A44 (__module_get_info) */
 int32_t gx8002_resident_module_get_info_24a44(
     uint32_t module, struct gx8002_module_info *info)
 {
@@ -34,6 +35,7 @@ int32_t gx8002_resident_module_get_info_24a44(
     return 0;
 }
 
+/* Stock 0x10025080 (gx8002_platform_gate) */
 void gx8002_resident_platform_gate_25080(uint32_t module, uint32_t enabled)
 {
     uint32_t lookup = module;

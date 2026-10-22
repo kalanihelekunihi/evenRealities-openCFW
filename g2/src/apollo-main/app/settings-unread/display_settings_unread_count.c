@@ -14,6 +14,7 @@ static const char no_mutex[]="ANCC message mutex not initialized";
 static const char no_mutex_short[]="[svc.ancc]ANCC message mutex not initialized";
 static const char acquire_fail[]="Failed to acquire ANCC message mutex during get count";
 static const char acquire_fail_short[]="[svc.ancc]Failed to acquire ANCC message mutex during get count";
+/* Stock 0x4974D4 (service_ancc_message_count_get) */
 uint32_t audio_settings_unread_message_count(void) {
     void *mutex=audio_settings_ancc_mutex;
     if(mutex==0) {

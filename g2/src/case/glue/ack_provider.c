@@ -3,6 +3,7 @@
 extern void case_send(const uint8_t *payload, uint32_t length);
 
 /* Stock 0x080068d0: copy the eight-byte literal and send its first five. */
+/* Stock 0x080068D0 (case_command_build_fixed) */
 void case_ack(uint32_t command)
 {
     uint8_t reply[8] = {0u, 1u, 3u, 1u, 0u, 0u, 0u, 0u};

@@ -6,6 +6,7 @@ static uint32_t valid(uint32_t context) {
     (void)R(context+4u); /* Original read precedes NULL/magic check. */
     return context && (R(context)&0x01ffffffu)==0x01afafafu;
 }
+/* Stock 0x42eb74 (hw_handle_configure_42eb74) */
 __attribute__((noinline))
 uint32_t opencfw_bl_adc_context_configure(uint32_t context,const void *configuration) {
     if(!valid(context))return 2;
@@ -14,6 +15,7 @@ uint32_t opencfw_bl_adc_context_configure(uint32_t context,const void *configura
     word|=R(p+4)&0x3ffu;
     R(0x40038040u)=word;return 0;
 }
+/* Stock 0x42eaf6 (hw_channel_config_42eaf6) */
 __attribute__((noinline))
 uint32_t opencfw_bl_adc_configure_channel(uint32_t context,uint32_t channel,const void *configuration) {
     if(!valid(context))return 2;

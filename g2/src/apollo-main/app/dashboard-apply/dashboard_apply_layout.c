@@ -43,6 +43,7 @@ static int32_t fail1(uint32_t line,const char *e,const char *c,uint32_t compact,
     return -1;
 }
 
+/* Stock 0x00502174 (dashboard_ext_apply_layout_pb_to_runtime_502174) */
 int32_t audio_dashboard_apply_layout_pb(void) {
     const uint8_t *p=audio_uart_dashboard_decoded;
     if(!audio_uart_dashboard_ready)

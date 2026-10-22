@@ -30,6 +30,7 @@ static void discovery_log(uint8_t level) {
     if((audio_log_flags()&2u)!=0u)
         audio_log_extended(level,module,source,name,0x7cu,message,0u);
 }
+/* Stock 0x531D60 (appDiscStart) */
 void audio_ble_service_discovery_start(uint8_t connection) {
     static const char warn[]="WARN",error[]="ERR",info[]="INFO",hci[]="HCI",app[]="APP";
     static const char message[]="Invalid connId in appDiscStart: %d";

@@ -28,19 +28,26 @@ that is absent is unknown; it must not be read as the upstream default.
 | File (in this directory) | SHA-256 | Confidence |
 |---|---|---|
 | `cmbacktrace/g2-config/cmb_user_cfg.h` | `9599205cc01589927c5384a316c8fd0919d2fb238f094c9f1b1933c55f85c411` | Proven (first block), Compat (CPU/language) |
+| `easylogger/g2-config/elog_cfg.h` | `956196034e1fc0ea74a40aa8e3f9acd1e1382f69bb63e7f30d29ad0453b6f6e3` | Proven (values), upstream default (`ELOG_OUTPUT_LVL`) |
+| `easylogger/g2-config/stdio.h` | `c55f43035e544a0426fa6983f713c0b4b9e1c6f48e8fb1947ad99bed67cb1799` | Compat |
+| `liblc3/g2-config/math.h` | `d6f469d44334659aea6c91e0f744110b2f1656826fa0792fb67a60bc3a67ec7b` | Proven (call/inline split), Compat (header) |
 | `cordio/g2-config/cordio_recovered_config.h` | `a908d4d003392c4fa2cfceef0e5d000bb448a67dbb4cf94fcb431c14366e68a2` | Proven (bounded) |
 | `cordio/g2-patches/smp_main-ambiq-aes-queue-cleanup.patch` | `0b86bf4ff50cdae14662a9c06824404737993d966523421fd3a347d1c3fbdf52` | Strong |
 | `flashdb/g2-config/fdb_cfg.h` | `9445f7c81d7a7ee55fd45868bc64733d0bb6e3f295b48ef7cda7c1346cc11cd6` | Proven |
+| `flashdb/g2-config/fal_cfg.h` | `46867ef1f1bcb49b564c3e2a428eaebe12781f96d653a2349eec1a9d9592ee94` | Proven (tables) |
 | `freertos-plus-cli/g2-patches/0001-suppress-unknown-command-for-blank-input.patch` | `ada47a9141d44e465be3be4b878e61b1056c65986dd728003c169d9383491d70` | Proven (behaviour) |
 | `freetype/g2-config/freetype/config/ftmodule.h` | `522c1d358dce8a141b2f8afec7020f66bf800d3d829a1ad22f3418ebf3f05d74` | Proven |
+| `invensense-icm45608/g2-config/math.h` | `cb7154600aca28179893eec9aee1e652bec0c6ec56c75af8904222e39f5c6fe7` | Compat (empty header for the freestanding build; no code effect) |
 | `lvgl/g2-config/lv_conf_recovered.h` | `2876e2abb3821103d0f8dd7dda71e2b1cea70ab194ffe5c4955a194798d86b5b` | Proven (subset) |
 | `lvgl/g2-config/lvgl_g2_abi.json` | `6e45a77ae37a9715bbf8dcc31440a845116a30ed5ff6b0de275cc04cafccef91` | Proven |
 | `lvgl/tools-patches/lvgl-g2-ambiq-draw-buffer-abi.patch` | `17dedb9b304817621a0312d8231aa7426732e089c88403ea6ace98e746d31e4b` | Proven (layout) |
 | `nanopb/g2-config/pb_g2_options.h` | `ae758999d239e49e2d5c5bf6de3f4aef3aab5cd3c29d8de65c4db301c62899db` | Strong |
-| `tinyframe/g2-config/TF_Config.h` | `af73f59617f4f6b63f2cd924a3f38abe0091e35dc7bc374d1814cca974c1430c` | Proven (values), Compat (error hook) |
+| `tinyframe/g2-config/TF_Config.h` | `d692a94545b6fa31de33b15906d5886853ca850e3d5cd7cbc3e10e6b81b4f232` | Proven (values and error hook) |
 | `freertos-kernel/g2-patches/g2-tcb-v10.5.1.patch` | `cf8c457153b75ad6a3163b9b6e6873e476e03537bb4534c9c8e4557de0eb4eb3` | Proven (layout) |
+| `freertos-kernel/g2-config/FreeRTOSConfig.h` | `44600158ad81de05d1f4be9ef31d0ae22057277e1bc25a98be0f3d887f07b9b6` | Proven (most values), Strong (TCB/API set), Compat (marked) |
 | `gx8002-tinyprintf/upstream-patches/tinyprintf-padding-loop.patch` | `3f5e79c0f4671f6d96c3a3a2761ead4c682769e6238164585682818f49f544c6` | Inferred (codegen shaping) |
 | `toolchain-gx8002/toolchain-patches/gcc-safe-ctype.patch` | `61bdf58e166c79c394513a8df0779e5a4eb53fd9b194498af512be8e5dab76af` | Not stock |
+| `ambiqhal-apollo510/g2-config/math.h` | `5973427987b29dc07e23c3fc912a9cbb912b493a854c0d8639f20ece46c40a61` | Not stock (build shim) |
 | `toolchain-gx8002/toolchain-patches/README.md` | `095e9adb4f47fc24588f57a2c846c52f3beda55e875df21f65049bfcf5d7a39a` | documentation |
 
 Each file is described in detail below.
@@ -64,6 +71,22 @@ Each file is described in detail below.
 - **Unresolved:** `cmb_println` must be supplied by the build.
 - **Evidence:** `g2/third_party/cmbacktrace/README.openCFW.md:33-40`,
   `g2/docs/research/cmbacktrace-identity-audit.md:40-50`.
+
+### EasyLogger: `easylogger/g2-config/elog_cfg.h` and `stdio.h`
+
+- **Applies to:** EasyLogger `a596b264` (`easylogger/src/elog.c`, `elog_utils.c`) in Apollo main.
+- **Configures (Proven):** `ELOG_LINE_BUF_SIZE 1024`, `ELOG_LINE_NUM_MAX_LEN 5`,
+  `ELOG_FILTER_TAG_MAX_LEN 30`, `ELOG_FILTER_KW_MAX_LEN 16`,
+  `ELOG_FILTER_TAG_LVL_MAX_NUM 5`, newline `"\n"`, colour on with the default
+  colours, function/file/line formats on, asserts on; asynchronous and buffered
+  output off. Per-value evidence is in the header comment.
+- **Upstream default:** `ELOG_OUTPUT_LVL ELOG_LVL_VERBOSE` (not discriminated).
+- **`stdio.h` (Compat):** declares `snprintf`/`vsnprintf` for freestanding builds.
+- **Stock source differences:** the manifest builds `elog.c`, `elog_utils.c` and
+  `elog.h` as `generated` patches of the pin (stock `__FILE__`/`__LINE__`, the
+  interrupt-context drop and leveled port output in `elog_output`, the product
+  info-log form in `elog_start`/`elog_stop`, and an assert loop that calls the
+  system-reset wrapper `0x44B0AE`).
 
 ### Cordio configuration: `cordio/g2-config/cordio_recovered_config.h`
 
@@ -110,6 +133,16 @@ Each file is described in detail below.
 - **Evidence:**
   - `g2/third_party/flashdb/README.openCFW.md:14-21`;
   - `g2/docs/research/flashdb-configuration-recovery-audit.md:13-45`.
+
+### FAL: `flashdb/g2-config/fal_cfg.h`
+
+- **Applies to:** FlashDB 2.1.1 `714d6159` `port/fal/inc/fal.h`, which the
+  upstream FlashDB units include.
+- **Recovered values (Proven):** one flash device `norflash` (device table
+  ROM `0x78F0A4`, count `0x78F0A8`); partition rows at ROM `0x6D5358`:
+  `kvdb` at `0x01FC0000` + `0x38000` and `NVdb` at `0x01FF8000` + `0x8000`.
+  The 64-byte rows imply the default `FAL_DEV_NAME_MAX` of 24.
+- **Evidence:** `g2/src/apollo-main/drivers/flash/fal/fal-product-config/product_tables.c`.
 
 ### FreeRTOS+CLI: `freertos-plus-cli/g2-patches/0001-suppress-unknown-command-for-blank-input.patch`
 
@@ -219,9 +252,16 @@ Each file is described in detail below.
   - **Buffers:** RX payload `0x6000`; send buffer `0x400`.
   - **Listener tables:** 128/32/10.
   - **Timeout and locking:** timeout 100; no mutex.
-- **Compatibility choice (Compat):** the `TF_Error` hook is a port seam.
-- **Also required:** `-fshort-enums`, and the G2 bookend magic words, which
-  belong in the port rather than upstream.
+- **Error hook (Proven):** `TF_Error` is the G2 two-sink log: EasyLogger
+  `elog_output` level 1, tag `TinyFrame`, the IAR source path and
+  `"[TF] :error " fmt "\n"`, then `compressed_log_output(0x04000000 |
+  argc << 22, "[TinyFrame][TF] :error " fmt "\n", ...)` (stock
+  `TF_InitStatic` `0x491752..0x4917A0`).
+- **Also required:** `-fshort-enums`, and the G2 bookend magic words
+  (`0xA5A5A5A5` at `+0`, `0x5A5A5A5A` at `+0x715C`, `sizeof` `0x7160`). The
+  Apollo main manifest applies them, and the stock line offsets (+3 before
+  `TF_ClaimTx`, +2 in `TF_InitStatic`), as a `generated` patch of the pinned
+  `TinyFrame.c`/`TinyFrame.h`.
 - **Evidence:**
   - `g2/third_party/tinyframe/README.openCFW.md:11-17`;
   - `g2/docs/upstream-inventory.md:1224`.
@@ -241,6 +281,43 @@ Each file is described in detail below.
 - **Evidence:**
   - `g2/docs/research/freertos-g2-tcb-vendor-patch-audit.md:7-30`;
   - `pre-consolidation:g2/components/README.md:1622-1632`.
+
+### FreeRTOS configuration: `freertos-kernel/g2-config/FreeRTOSConfig.h`
+
+- **Original path:** new in this tree (2026-10-21); no recovered header
+  existed outside `build/`.
+- **Applies to:** FreeRTOS-Kernel V10.5.1 `def7d2df` (with the TCB patch
+  above), the `ARM_CM55_NTZ/non_secure` port, CMSIS-FreeRTOS `d213f261`
+  `cmsis_os2.c` and FreeRTOS-Plus-CLI `43defa56`.
+- **Configures:** the complete Apollo-main kernel configuration. Every value
+  carries an inline Proven/Strong/Compat note with its stock address.
+- **Recovered values (Proven):** NTZ port with MPU 0, FPU 1; BASEPRI `0x30`;
+  56 priorities; 32-byte names; 32-bit ticks at 1024 Hz; preemption, time
+  slicing, idle yield, generic task selection; tickless idle with expected
+  idle time 2; idle and malloc-failed hooks, no tick hook, stack check 2;
+  static and dynamic allocation; heap_4 with `0x2F000` bytes; timers with
+  priority 54 and a 50-entry queue; mutexes, recursive mutexes, counting
+  semaphores, trace facility, one notification slot; no queue sets or
+  registry; `configMINIMAL_STACK_SIZE 1024` (CMSIS `osThreadNew` default,
+  `0x4490FE`); `configSTACK_DEPTH_TYPE uint16_t` (`UXTH` before
+  `xTaskCreate`, `0x449194`); `configUSE_SB_COMPLETED_CALLBACK 0`
+  (`sizeof(StreamBuffer_t)=0x24`, `0x57DFE0`); the assertion shape (mask,
+  store 0 to `0xFFFFFFFF`, spin); the task-switch history trace hooks
+  (64 `{out,in}` TCB numbers at `0x2006F348`, index `0x20074A5C`).
+- **Strong:** the TCB-shaping options (no tags, TLS, run-time stats, newlib,
+  POSIX errno, high-address record) and the `INCLUDE_*` set required by the
+  stock CMSIS wrapper.
+- **Compat:** `configENABLE_MVE 0`, `configCPU_CLOCK_HZ` (only read by the
+  weak SysTick code that stock replaces), `configTIMER_TASK_STACK_DEPTH 4096`
+  (matches the stock timer-memory callback), no stats formatting,
+  `configCOMMAND_INT_MAX_OUTPUT_SIZE 128`, and the order of the outgoing
+  trace record (stock stores it after the stack check).
+- **Build note:** compile CMSIS `cmsis_os2.c` with `-D__ARM_ARCH_8M_MAIN__=1`;
+  stock `IRQ_Context` (`0x44900E`) tests PRIMASK and BASEPRI, which the
+  upstream file only does for that macro.
+- **Evidence:** `g2/docs/reference/libraries.md` section 1.2 and the retired
+  `freertos-g2-config-port-audit.md` (`4ae5a2d24^`), plus the addresses cited
+  in the header.
 
 ### GX8002 tinyprintf: `gx8002-tinyprintf/upstream-patches/tinyprintf-padding-loop.patch`
 
@@ -270,6 +347,19 @@ Each file is described in detail below.
 - **Content:** provenance of the patch above, and the SHA-256 values of
   `system.h` before and after the patch.
 
+### liblc3: `liblc3/g2-config/math.h`
+
+- **Original path:** none (added 2026-10-21; not a copy of an older file).
+- **Applies to:** google/liblc3 v1.1.3 `96a3af0b` (`LC3_PLUS=1`,
+  `LC3_PLUS_HR=1`; `lc3_hr_*` entry points are present in stock).
+- **SHA-256:** `d6f469d44334659aea6c91e0f744110b2f1656826fa0792fb67a60bc3a67ec7b`.
+- **Recovered values (Proven):** which libm functions the stock encoder calls
+  out of line (`sqrtf` 0x4397a8, `fmaxf` 0x439f88, `fminf` 0x439efc,
+  `floorf` 0x43a5a0, `roundf` 0x577d08, `truncf` 0x59f510, all hard-float)
+  and which are inlined (`fabsf` as `vabs.f32`; `log10f(2)` folded). The
+  header itself is **Compat**: it lets the freestanding profile
+  `g2-apollo-main-85` reproduce that split.
+
 ## Related material not copied
 
 These files are not copied here.
@@ -284,3 +374,9 @@ These files are not copied here.
 - **Application feature patches:** `canvas480`, `evenai_thumb` and
   `ring_gesture` under `pre-consolidation:g2/components/apollo_main/`. They are not recovered
   configuration.
+
+### AmbiqSuite HAL: `ambiqhal-apollo510/g2-config/math.h`
+
+- **Applies to:** AmbiqSuite 5.1.0 Apollo510 HAL (`third-party/upstream/ambiqhal-apollo510`), units on profiles `g2-apollo-main-75`/`-76`.
+- **Purpose:** declarations-only `<math.h>` for the freestanding build of `am_hal_syspll.c` and `am_hal_i2s.c`. The bodies come from the reconstructed stock float runtime, bound by the payload defsym map.
+- **Confidence:** Not stock. It is not a vendor file and carries no recovered values.

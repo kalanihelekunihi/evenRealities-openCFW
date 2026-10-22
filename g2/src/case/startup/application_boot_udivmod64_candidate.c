@@ -27,6 +27,7 @@ __attribute__((used,noinline)) static void case_boot_udivmod64_words(
     result[0]=qlo;result[1]=qhi;result[2]=rlo;result[3]=rhi;
 }
 
+/* Stock 0x08000210 (case_boot_udivmod64) */
 __attribute__((naked)) void case_boot_udivmod64(void)
 {
     __asm__ volatile(

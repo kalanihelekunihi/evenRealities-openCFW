@@ -25,6 +25,7 @@ static const char null_short[] = "[pb.evenai]PORINT NULL";
 static const char status_message[] = "pVADInfo->status = %d";
 static const char status_short[] = "[pb.evenai]pVADInfo->status = %d";
 
+/* Stock 0x4E391A (PB_RxEvenAIVADInfo) */
 uint32_t audio_even_ai_rx_vad(uint8_t sequence, const void *payload) {
     (void)sequence;
     if (payload == 0) {

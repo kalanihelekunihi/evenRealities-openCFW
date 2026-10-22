@@ -9,20 +9,7 @@ extern void WsfMsgEnq(void *,uint8_t,void *);
 extern void *audio_ble_hci_cmd_alloc_52ae38(uint16_t,uint16_t); /* selected hciCmdAlloc */
 extern void audio_ble_hci_cmd_send(void *); /* selected hciCmdSend */
 
-void HciLeReadLocalP256PubKey(void) {
-    void *command=audio_ble_hci_cmd_alloc_52ae38(0x2025u,0u);
-    if(command)audio_ble_hci_cmd_send(command);
-}
-uint32_t audio_ble_dm_ecc_request(uint8_t handler,uint16_t conn,uint8_t event) {
-    uint8_t *message=(uint8_t *)WsfMsgAlloc(0x9cu);
-    if(!message)return 0u;
-    message[0]=(uint8_t)conn;message[1]=(uint8_t)(conn>>8u);
-    message[2]=event;
-    message[0x34u]=2u;
-    WsfMsgEnq(audio_ble_stack_state_20072cb8+0x28u,handler,message);
-    HciLeReadLocalP256PubKey();
-    return 1u;
-}
+extern uint32_t audio_ble_dm_ecc_request(uint8_t handler,uint16_t conn,uint8_t event); /* opencfw U5: now provided by the Cordio unit */
 void DmSecGenerateEccKeyReq(void) {
     (void)audio_ble_dm_ecc_request(audio_ble_dm_handler_state[0x0cu],0u,0x41u);
 }

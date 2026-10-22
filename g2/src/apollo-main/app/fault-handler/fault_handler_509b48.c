@@ -19,7 +19,7 @@ extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,
                                uint32_t,const char *,...);
 extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
-extern const char *audio_fault_unmapped_code_message_509b48(uint16_t);
+extern const char *audio_fault_unmapped_code_message(uint16_t);
 
 static const char module[]="assert";
 static const char path[]="D:\\01_workspace\\s200_ap510b_iar_git\\utils\\assert\\util_error_check.c";
@@ -38,7 +38,7 @@ void audio_ring_pb_assert_509b48(const struct audio_fault_record *record) {
                 reason=audio_fault_code_table[i].message;
                 break;
             }
-        if(reason==0) reason=audio_fault_unmapped_code_message_509b48(code);
+        if(reason==0) reason=audio_fault_unmapped_code_message(code);
         (void)audio_ble_format_to_buffer(formatted,"Error code 0x%04X: %s",
                                          (uint32_t)code,reason);
     } else if((uint8_t)record->type==1u) {

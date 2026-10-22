@@ -5,6 +5,7 @@
 #include <stdint.h>
 extern uint32_t case_watchdog_frame_pack(uint32_t code,uint32_t count,
                                          const uint8_t *byte); /* 0x08009004 */
+/* Stock 0x08002C8E (glasses_channel_command_pack) */
 uint32_t case_legacy_watchdog_set(uint32_t enabled)
 {
     uint8_t byte=0u;

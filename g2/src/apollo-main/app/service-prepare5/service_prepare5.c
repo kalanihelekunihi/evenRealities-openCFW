@@ -15,6 +15,7 @@ static const char function_name[]="RPC_OnboardingFlagSendToPeer";
 static const char message[]="send flag=%d to peer";
 static const char short_message[]="[onboarding.data_mgr]send flag=%d to peer";
 
+/* Stock 0x47E4A6 (RPC_OnboardingFlagSendToPeer) */
 void audio_uart_service_prepare5(void) {
     uint8_t flag=g2_onboarding_flag;
     uint8_t packet[2]={0x0du,flag};

@@ -7,6 +7,7 @@
 extern uint32_t gx8002_image_b_bss_start[];
 extern uint32_t gx8002_image_b_bss_end[];
 
+/* Stock 0x10003144 (gx8002_backup_bss_bounds) */
 void gx8002_image_b_clear_bss_10003128(void)
 {
     volatile uint32_t *cursor = gx8002_image_b_bss_start;

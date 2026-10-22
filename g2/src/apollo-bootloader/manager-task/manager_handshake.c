@@ -7,16 +7,21 @@ extern uint32_t opencfw_provider_41652e(uint32_t *,uint32_t);
 extern void opencfw_provider_4176ce(uint32_t,const char *,const char *,const char *,uint32_t,const char *,...);
 static const char file[]="D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_manager.c";
 static uint32_t task_bit(uint32_t task) {uint32_t shift=task&255;return shift<32?1u<<shift:0;}
+/* Stock 0x42e3e0 (control_one_wait_42e3e0) */
 void opencfw_boot_manager_start_wait(uint32_t task) {
     while (!((uint32_t)opencfw_provider_4162c4(0x800000,1,UINT32_MAX,0)&0x800000)){}
     opencfw_provider_4176ce(3,"task.manager",file,"thread_manager_sysstart_sync",0x12b,"thread %d sync start:",(uint8_t)task);
 }
+/* Stock 0x42e412 (control_two_publish_42e412) */
 void opencfw_boot_manager_start_done(uint32_t task) {
     opencfw_provider_4176ce(3,"task.manager",file,"thread_manager_sysstart_sync_end",0x139,"thread %d sync end",(uint8_t)task);
     (void)opencfw_provider_41652e(*(uint32_t *volatile *)(uintptr_t)0x20000510,task_bit(task));
 }
+/* Stock 0x42e444 (event_bit_set_42e444) */
 void opencfw_boot_manager_start_signal(uint32_t task) {
     (void)opencfw_provider_41652e(*(uint32_t *volatile *)(uintptr_t)0x20000510,task_bit(task));
 }
+/* Stock 0x42dd9a (control_one_wrapper_42dd9a) */
 void opencfw_boot_dfu_control_one(void) {opencfw_boot_manager_start_wait(1);}
+/* Stock 0x42dda4 (control_two_wrapper_42dda4) */
 void opencfw_boot_dfu_control_two(void) {opencfw_boot_manager_start_done(1);}

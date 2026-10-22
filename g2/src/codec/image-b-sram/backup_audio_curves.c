@@ -14,6 +14,7 @@ static void set_two_halves(volatile uint32_t *word, uint32_t a, uint32_t b)
     *word = (*word & UINT32_C(0x0000ffff)) | ((b & 0xffffu) << 16);
 }
 
+/* Stock 0x10005B34 (gx_audio_in_set_fftvad_curve_1) */
 int32_t gx8002_image_b_set_fftvad_curve_1_10005b34(uint32_t a, uint32_t b)
 {
     if (a > 0x0c00u || b > 0x4600u) return -1;
@@ -21,6 +22,7 @@ int32_t gx8002_image_b_set_fftvad_curve_1_10005b34(uint32_t a, uint32_t b)
     return 0;
 }
 
+/* Stock 0x10005B68 (gx_audio_in_set_fftvad_curve_2) */
 int32_t gx8002_image_b_set_fftvad_curve_2_10005b68(uint32_t a, uint32_t b)
 {
     if (a > 0x0c00u || b > 0x1e00u) return -1;
@@ -36,6 +38,7 @@ int32_t gx8002_image_b_set_fftvad_curve_3_10005b9c(
     return 0;
 }
 
+/* Stock 0x10005BDC (gx_audio_in_set_fftvad_curve_4) */
 int32_t gx8002_image_b_set_fftvad_curve_4_10005bdc(uint32_t a, uint32_t b)
 {
     if (a > 0x1400u || b > 0x1400u) return -1;
@@ -43,6 +46,7 @@ int32_t gx8002_image_b_set_fftvad_curve_4_10005bdc(uint32_t a, uint32_t b)
     return 0;
 }
 
+/* Stock 0x10005C10 (gx_audio_in_set_fftvad_curve_5) */
 int32_t gx8002_image_b_set_fftvad_curve_5_10005c10(uint32_t value)
 {
     if (value > 0x2000u) return -1;

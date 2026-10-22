@@ -13,6 +13,7 @@ __attribute__((noinline)) int32_t case_policy_timer_bus_read(uint32_t reg,uint8_
     }
     return 0;
 }
+/* Stock 0x0800A148 (case_nested_delay) */
 __attribute__((noinline)) void case_policy_timer_delay(uint32_t count)
 {
     for(uint32_t outer=0u;outer<count;++outer)

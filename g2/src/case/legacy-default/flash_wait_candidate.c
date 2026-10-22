@@ -6,6 +6,7 @@
 #include <stdint.h>
 extern uint32_t case_tick_word2(void);
 
+/* Stock 0x08004958 (case_wait_elapsed) */
 uint32_t case_binary_5e_wait(uint32_t timeout)
 {
     uint32_t start=case_tick_word2();

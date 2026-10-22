@@ -5,6 +5,7 @@
 extern uint32_t g2_fal_partition_table_base;
 extern uint32_t g2_fal_device_cache[];
 
+/* Stock 0x597D10 (fal flash_device_find_by_part) */
 uint32_t g2_fal_device_for_partition(uint32_t partition)
 {
     const uint32_t base = g2_fal_partition_table_base;

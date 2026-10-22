@@ -16,9 +16,3 @@ void audio_ble_hci_cmd_status_failure(uint32_t status,uint32_t opcode) {
     ((void (*)(void *))(uintptr_t)callback)(event);
     g2_wsf_candidate_buffer_free_word((uint32_t)(uintptr_t)event);
 }
-void audio_ble_hci_cmd_receive_complete(uint32_t ignored) {
-    (void)ignored;
-    WsfTimerStop(audio_ble_hci_cmd_state_20073a90);
-    audio_ble_hci_cmd_state_20073a90[0x1au]=1u;
-    audio_ble_hci_cmd_send(0u);
-}

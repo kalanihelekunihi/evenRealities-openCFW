@@ -2,6 +2,7 @@
  * Source-owned stock 0x0800502c reset request. Physical reset is not tested.
  */
 #include <stdint.h>
+/* Stock 0x0800502C (NVIC_SystemReset) */
 __attribute__((noreturn)) uint32_t case_legacy_reset_first(uint32_t prior)
 {
     (void)prior;

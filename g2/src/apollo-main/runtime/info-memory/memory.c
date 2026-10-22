@@ -5,6 +5,7 @@ extern uint32_t stock_wait5(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
 extern uint32_t stock_dispatch(uint32_t,uint32_t,const void*);
 _Static_assert(sizeof(audio_mcu_memory_cfg)==5,"MCU config layout");
 _Static_assert(sizeof(audio_sram_cfg)==5,"SRAM config layout");
+/* Stock 0x47F204 (am_hal_pwrctrl_mcu_memory_config; older-revision variant of am_hal_pwrctrl.c) */
 uint32_t audio_mcu_memory_config(const audio_mcu_memory_cfg *cfg){
  uint32_t enable=0,target=0,forced=0;
  B(0x20074f62)=cfg->rom_mode;
@@ -35,6 +36,7 @@ uint32_t audio_mcu_memory_config(const audio_mcu_memory_cfg *cfg){
  else return 5;
  return 0;
 }
+/* Stock 0x47F46A (am_hal_pwrctrl_sram_config; older-revision variant of am_hal_pwrctrl.c) */
 uint32_t audio_sram_config(const audio_sram_cfg *cfg){
  if(cfg->active!=(W(0x40021028)&7)){
   uint32_t update_later=(W(0x40021028)&7)>=cfg->active;

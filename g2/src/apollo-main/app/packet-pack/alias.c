@@ -31,6 +31,7 @@ static uint32_t packed_crc(const uint8_t *wire) {
            ((uint32_t)wire[12] << 16) | ((uint32_t)wire[13] << 24);
 }
 
+/* Stock 0x57BB0A (gx8002_pack_message) */
 int32_t audio_packet_pack(uint32_t code, uint32_t family,
                           uint32_t payload, uint32_t length,
                           uint32_t flags, uint8_t *wire,

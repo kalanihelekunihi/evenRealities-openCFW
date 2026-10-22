@@ -61,6 +61,7 @@ static void retry_adv(uint32_t ms) {
  audio_event_loop_remove_delayed(audio_ble_phone_advertising_restart);
  audio_event_loop_push_delayed(audio_ble_phone_advertising_restart,0u,ms);
 }
+/* Stock 0x0046E098 (_bleSlaveProcMsg) */
 void audio_ble_adv_message_preprocess(void *raw) {
  uint8_t *m=(uint8_t *)raw;
  uint8_t event=m[2u],emit=0u,dm,app,id;

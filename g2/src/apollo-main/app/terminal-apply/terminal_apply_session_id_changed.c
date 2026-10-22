@@ -31,6 +31,7 @@ static const char show_short[]="[terminal.pb]recv terminal session id changed to
 static const char changed[]="recv terminal session id changed: session=%lu status=%d(%s)";
 static const char changed_short[]="[terminal.pb]recv terminal session id changed: session=%lu status=%d(%s)";
 
+/* Stock 0x5E8346 (terminal_apply_session_id_changed) */
 void audio_terminal_apply_session_id_changed(uint32_t session,uint8_t reset_ring) {
     audio_td_session_bind_store(session);
     uint8_t status=audio_terminal_cached_session_status(session);

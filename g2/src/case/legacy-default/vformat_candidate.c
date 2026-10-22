@@ -109,6 +109,7 @@ static void put_number(case_emit_t emit,void *context,uint32_t *count,
     if(flags&LEFT) repeat(emit,context,count,' ',pad);
 }
 
+/* Stock 0x08009210 (case_vformat) */
 int32_t case_vformat(const char *format,const uint32_t *arguments,
                      void *context,case_emit_t emit)
 {

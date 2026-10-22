@@ -5,6 +5,7 @@
 extern void touch_bootstrap_delay(uint32_t);
 #define U32(s,n) (*(uint32_t *)((s)+(n)))
 static uint32_t magnitude(int32_t x){return x<0?(uint32_t)-x:(uint32_t)x;}
+/* Stock 0x00003AFC (attention_release_timeout_rearm) */
 void touch_gesture_attention_rearm(void){
  *(volatile uint32_t *)0x40040444u=2;
  touch_bootstrap_delay(200);
@@ -15,6 +16,7 @@ static void motion(uint8_t *s,int32_t delta,uint32_t counter,uint8_t position,ui
  s[77]=release?(uint8_t)(s[77]|(delta<0?0x20:0x40)):(delta<0?0x20:0x40);
  s[78]=(uint8_t)magnitude(delta);s[79]=s[74];
 }
+/* Stock 0x00004070 (touch_gesture_state_machine) */
 uint8_t *touch_gesture_step(uint8_t *s,uint32_t active,uint8_t position,uint32_t counter){
  if(!s)return 0;
  if(!*(uint16_t *)s)*(uint16_t *)s=1000;

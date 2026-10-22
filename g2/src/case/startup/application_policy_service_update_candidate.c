@@ -24,6 +24,7 @@ static void count_low(volatile uint8_t *counter,volatile uint8_t *state,
     if(*quiet==0u){case_policy_log(first_log);case_policy_log(CASE_STRING_ADDR(0800d128));}
     state[0]=1u;state[2]=1u;
 }
+/* Stock 0x0800CE34 (glasses_charge_control_policy) */
 void case_policy_service_update(void)
 {
     volatile uint8_t *s=(volatile uint8_t *)(uintptr_t)0x2000087cu;

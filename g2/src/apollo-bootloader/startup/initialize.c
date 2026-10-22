@@ -21,6 +21,7 @@ uint32_t *opencfw_boot_expand_record(uint32_t *record,uint32_t static_base) {
     }
     return record+3;
 }
+/* Stock 0x431E38 (zero_table_431e38; IAR __iar_zero_init3) */
 uint32_t *opencfw_boot_zero_table(uint32_t *table,uint32_t static_base) {
     for(;;) {
         uint32_t size=*table++;

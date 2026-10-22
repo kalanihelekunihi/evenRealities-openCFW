@@ -20,6 +20,7 @@ _Static_assert(sizeof(GX_CLOCK_DIV) == 4, "clock div layout");
 _Static_assert(sizeof(GX_CLOCK_DTO) == 1, "clock dto layout");
 _Static_assert(sizeof(image_b_clock_module_param) == 16, "clock row layout");
 
+/* Stock 0x10016B40 (gx_clock_div_table) */
 GX_CLOCK_DIV gx8002_image_b_clock_div_table_10016b40[] = {
 	{.addr = 0x80, .offs =  8, .mask =  0x3f}, // CLOCK_MODULE_RTC
 	{.addr = 0x80, .offs = 16, .mask =  0x3f}, // CLOCK_MODULE_PMU
@@ -41,12 +42,14 @@ GX_CLOCK_DIV gx8002_image_b_clock_div_table_10016b40[] = {
 	{.addr = 0x80, .offs =  0, .mask =  0x3f}, // CLOCK_MODULE_TIMER_WDT
 };
 
+/* Stock 0x10016B3C (gx_clock_dto_table) */
 GX_CLOCK_DTO gx8002_image_b_clock_dto_table_10016b3c[] = {
 	{.addr = 0x24}, // CLOCK_MODULE_AUDIO_IN_SYS
 	{.addr = 0x24}, // CLOCK_MODULE_UART0_UART1
 	{.addr = 0x28}, // CLOCK_MODULE_AUDIO_PLAY
 };
 
+/* Stock 0x1001699C (gx_clock_param_table) */
 image_b_clock_module_param gx8002_image_b_clock_param_table_1001699c[] = {
 	/*  Mod                    HGate AGate Clk             Div                     Dto         */
 	{CLOCK_MODULE_RTC         ,  0 ,  1 ,  1 , gx8002_image_b_clock_div_table_10016b40 +  0 , NULL                  },

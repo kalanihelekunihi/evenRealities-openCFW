@@ -6,6 +6,7 @@
 
 extern void HAL_UART_ErrorCallback(void *state);
 
+/* Stock 0x080086E0 (case_reset_timer_fields) */
 uint32_t case_boot_sensor_cancel_callback(uint32_t descriptor)
 {
     uint32_t state=*(volatile uint32_t *)(uintptr_t)(descriptor+40u);

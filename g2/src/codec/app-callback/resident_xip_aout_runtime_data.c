@@ -40,6 +40,7 @@ _Static_assert(offsetof(struct gx8002_aout_context, allocated) == 4u &&
                offsetof(struct gx8002_aout_context, hardware_configuration) == 48u,
                "stock AOUT context field offsets");
 
+/* Stock 0x10026B94 (gx8002_aout_route) */
 __attribute__((section(".gx8002.sram.aout_context"), aligned(4)))
 struct gx8002_aout_context gx8002_aout_product_context = {
     .route_name = gx8002_aout_route_name
@@ -75,6 +76,7 @@ struct gx8002_aout_configuration {
 _Static_assert(sizeof(struct gx8002_aout_configuration) == 88u,
                "stock AOUT configuration extent");
 
+/* Stock 0x10026C1C (gx8002_aout_hw_settings) */
 __attribute__((section(".gx8002.sram.aout_configuration"), aligned(4)))
 struct gx8002_aout_configuration gx8002_aout_product_configuration = {
     .playback_bit0_source = 1u,

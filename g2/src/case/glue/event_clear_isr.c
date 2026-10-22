@@ -7,6 +7,7 @@ extern int32_t xTimerPendFunctionCallFromISR(
     int32_t *higher_priority_task_woken);
 
 /* Stock 0x0800c478..0x0800c48c, including callback literal. */
+/* Stock 0x0800C478 (case_dispatch_resource) */
 uint32_t xEventGroupClearBitsFromISR(void *event_group, uint32_t bits)
 {
     return xTimerPendFunctionCallFromISR(

@@ -12,6 +12,7 @@ extern uint32_t gx8002_xip_tws_dispatch_10208cc0(const uint32_t *event);
 extern int32_t gx8002_xip_tws_ready_102077f8(void);
 extern int32_t gx8002_xip_tws_command_10207808(uint32_t command);
 
+/* Stock 0x10026358 (gx8002_tws_tick) */
 void gx8002_resident_tws_tick_26358(void)
 {
     volatile uint8_t *const queue =

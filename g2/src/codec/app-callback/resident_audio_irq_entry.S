@@ -3,6 +3,7 @@
     .align 2
     .global gx8002_resident_audio_irq_25e48
     .type gx8002_resident_audio_irq_25e48, @function
+/* Stock 0x10025E48 (gx8002_audio_irq) */
 gx8002_resident_audio_irq_25e48:
     push r15
     mov r1, r4

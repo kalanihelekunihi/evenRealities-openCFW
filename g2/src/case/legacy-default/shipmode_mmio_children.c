@@ -1,6 +1,7 @@
 /* Authenticated CASE standby children 0x08005094/0x080050a8/0x080050c4. */
 #include <stdint.h>
 
+/* Stock 0x08005094 (HAL_PWR_DisableWakeUpPin) */
 uint32_t case_legacy_ee_wake_prepare(uint32_t mode) {
     volatile uint32_t *const gpio=(volatile uint32_t *)(uintptr_t)0x40007000u;
     uint32_t mask=mode&63u;
@@ -16,6 +17,7 @@ uint32_t case_legacy_ee_wake_enable(uint32_t mode) {
     return gpio[2];
 }
 
+/* Stock 0x080050C4 (HAL_PWR_EnterSTANDBYMode) */
 uint32_t case_legacy_ee_enter_standby(void) {
     volatile uint32_t *const gpio=(volatile uint32_t *)(uintptr_t)0x40007000u;
     volatile uint32_t *const scr=(volatile uint32_t *)(uintptr_t)0xe000ed10u;

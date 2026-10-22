@@ -4,6 +4,7 @@
 #include <stdint.h>
 extern void case_boot_irq_hall_prepare(uint32_t mode); /* 0x3848 */
 extern int32_t case_policy_event_signal(uint32_t task,uint32_t value); /* 0xaaf0 */
+/* Stock 0x0800AB70 (g2_timer_callback_6) */
 void case_boot_transport_cb_ab70(uint32_t argument)
 {
     /* Native trampoline supplies pair[1] in R0; this callback ignores it. */

@@ -17,9 +17,11 @@ extern void WsfTaskLock(void); /* native 0x52b8c8 */
 extern void WsfTaskUnlock(void); /* native 0x52b8d0 */
 extern void audio_ble_dm_adv_lower(void); /* native dmAdvInit */
 extern void HciSetLeSupFeat(uint32_t,uint32_t,uint32_t);
-uint32_t audio_ble_dm_adv_ready_cell; /* RAM 0x200744f4 */
+extern uint32_t audio_ble_dm_adv_ready_cell; /* opencfw U5: now provided by the Cordio unit */
+/* RAM 0x200744f4 */
 uint8_t audio_ble_dm_master_state_a[12u]; /* RAM 0x20073fe4 */
-uint8_t audio_ble_dm_master_state_b[12u]; /* RAM 0x20073fd8 */
+extern uint8_t audio_ble_dm_master_state_b[12u]; /* opencfw U5: now provided by the Cordio unit */
+/* RAM 0x20073fd8 */
 const void *audio_ble_dm_security_state[2]; /* RAM 0x20074114 */
 static void put(uint32_t offset,const void *table) {
     *(const void **)(void *)(audio_ble_dm_config+offset)=table;
@@ -29,12 +31,6 @@ void DmAdvInit(void) { /* 0x4bac2c */
     put(0u,audio_ble_dm_adv_table);
     audio_ble_dm_adv_lower();
     audio_ble_dm_adv_ready_cell=0u;
-    WsfTaskUnlock();
-}
-void DmPhyInit(void) { /* 0x4c584a */
-    WsfTaskLock();
-    put(0x24u,audio_ble_dm_phy_table);
-    HciSetLeSupFeat(0x900u,0u,1u);
     WsfTaskUnlock();
 }
 void DmConnMasterInit(void) { /* 0x536a98 */
@@ -56,10 +52,4 @@ void DmSecInit(void) { /* 0x4d250c */
 }
 void DmSecLescInit(void) { /* 0x53496a */
     put(0x20u,audio_ble_dm_lesc_table);
-}
-void DmPrivInit(void) { /* 0x4d27e0 */
-    WsfTaskLock();
-    put(0x18u,audio_ble_dm_priv_table_a);
-    put(0x3cu,audio_ble_dm_priv_table_b);
-    WsfTaskUnlock();
 }

@@ -3,6 +3,7 @@
 #include <stdint.h>
 #define W(a) (*(volatile uint32_t *)(uintptr_t)(a))
 #define B(a) (*(volatile uint8_t *)(uintptr_t)(a))
+/* Stock 0x429DA4 (spotmgr_load_factory_trims_429da4; PCM2.2 transition_sequence_21b) */
 uint32_t opencfw_pcm22_sequence21b(void){
  uint32_t t=W(0x20026ba4+4*W(0x20000150));
  W(0x40020080)=(W(0x40020080)&~0x3c00u)|(((t>>17)&15)<<10);
@@ -12,6 +13,7 @@ uint32_t opencfw_pcm22_sequence21b(void){
  W(0x40020044)=(W(0x40020044)&~127u)|((t>>21)&127u);
  B(0x200271bc)=0;return 0;
 }
+/* Stock 0x42A036 (spotmgr_ensure_factory_trims_42a036; am_hal_spotmgr_pcm2_2_post_lptohp_handle) */
 uint32_t opencfw_pcm22_post_lptohp(void){
  if(B(0x200271bc)) (void)opencfw_pcm22_sequence21b();
  return 0;

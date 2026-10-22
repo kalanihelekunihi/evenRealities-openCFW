@@ -62,6 +62,7 @@ static void critical_restore(uint32_t previous)
     __asm volatile("msr primask, %0" :: "r"(previous) : "memory");
 }
 
+/* Stock 0x426C58 (clkgen_hfadj_enable_426c58; am_hal_clkgen_private_hfrc_force_on) */
 static uint32_t hfadj_enable(uint32_t enabled)
 {
     volatile uint32_t *const reg =
@@ -70,6 +71,7 @@ static uint32_t hfadj_enable(uint32_t enabled)
     return 0u;
 }
 
+/* Stock 0x426C72 (clkgen_hfadj_config_426c72; am_hal_clkgen_private_hfadj_apply) */
 static uint32_t hfadj_configure(uint32_t value)
 {
     *(volatile uint32_t *)(uintptr_t)HFADJ_CONFIG_REGISTER = value | 1u;

@@ -42,6 +42,7 @@ static void log1(uint8_t level,uint32_t line,uint32_t compact,
         (void)compressed_log_output(compact,short_text,short_text,word);
 }
 
+/* Stock 0x00491184 (submit_work) */
 uint32_t audio_uart_timeout_submit(uart_timeout_dispatch dispatch,
                                     uint32_t target,
                                     void *payload,

@@ -133,6 +133,7 @@ static void insertion_sort(unsigned char *base, uint32_t count,
     }
 }
 
+/* Stock 0x423A48 (qsort_introsort_core; IAR DLIB qsort core) */
 static void intro_sort(unsigned char *base, uint32_t count, uint32_t width,
                        uint32_t budget, sort_compare_fn compare)
 {
@@ -303,6 +304,7 @@ static void intro_sort(unsigned char *base, uint32_t count, uint32_t width,
     }
 }
 
+/* Stock 0x423D08 (qsort_public_wrapper; IAR DLIB qsort) */
 void opencfw_boot_init_sort(
     void *array, uint32_t count, uint32_t width,
     int32_t (*compare)(const void *, const void *))

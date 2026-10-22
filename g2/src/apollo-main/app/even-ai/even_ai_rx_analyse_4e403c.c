@@ -25,6 +25,7 @@ static const char null_short[] = "[pb.evenai]PORINT NULL";
 static const char info_message[] = "pAnalyseInfo";
 static const char info_short[] = "[pb.evenai]pAnalyseInfo";
 
+/* Stock 0x4E403C (PB_RxEvenAIAnalyseInfo) */
 uint32_t audio_even_ai_rx_analyse(uint8_t sequence, const void *payload) {
     (void)sequence;
     if (payload == 0) {

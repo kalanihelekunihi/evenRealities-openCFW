@@ -42,6 +42,7 @@ static void log1(uint8_t level,uint32_t line,uint32_t compact,
         (void)compressed_log_output(compact,short_text,short_text,word);
 }
 
+/* Stock 0x442524 (find_ui_DataHandler_by_id) */
 void audio_uart_user_broadcast(uint32_t id,const void *payload,
                                 uint32_t length,uint32_t flags) {
     (void)payload;(void)length;
@@ -61,6 +62,7 @@ void audio_uart_user_broadcast(uint32_t id,const void *payload,
          audio_uart_user_c_missing,id);
 }
 
+/* Stock 0x45A6D0 (user-response worker, audio_uart_user_dispatch) */
 void audio_uart_user_dispatch(uint32_t id,void *payload,uint32_t length,
                                uint32_t flags) {
     if(payload==0) {
@@ -74,6 +76,7 @@ void audio_uart_user_dispatch(uint32_t id,void *payload,uint32_t length,
     audio_file_heap_free(payload);
 }
 
+/* Stock 0x45A72C (user-response enqueue, audio_uart_user_response) */
 uint32_t audio_uart_user_response(uint32_t id,const void *bytes,
                                    uint32_t length,uint32_t flags) {
     void *owned=codec_allocate(length);

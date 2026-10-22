@@ -15,6 +15,7 @@ static const char path[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\co
  if((audio_log_flags()&1u)||(audio_log_flags()&4u)) \
   (void)compressed_log_output(mask,compact,compact,##__VA_ARGS__); \
 } while(0)
+/* Stock 0x47C2BC (FUN_0047c2bc, AppDbShowNvmStatus) */
 void audio_ble_pair_failure_prepare(void) {
     static const char fn[]="AppDbShowNvmStatus";
     LOG(fn,4u,0x84bu,0x10000000u,"=== AppDbShowNvmStatus ===","[ble.smpdb]=== AppDbShowNvmStatus ===");
@@ -35,6 +36,7 @@ void audio_ble_pair_failure_prepare(void) {
     LOG(fn,4u,0x862u,0x10800000u,"Record Size: %d bytes (%d words)","[ble.smpdb]Record Size: %d bytes (%d words)",256u,64u);
     LOG(fn,4u,0x863u,0x10000000u,"=== End AppDbShowNvmStatus ===","[ble.smpdb]=== End AppDbShowNvmStatus ===");
 }
+/* Stock 0x47C8CC (FUN_0047c8cc, AppDbClearRecordByConnId) */
 void audio_ble_pair_failure_clear(uint8_t conn) {
     static const char fn[]="AppDbClearRecordByConnId";
     uint8_t *record=audio_ble_pair_record(conn);

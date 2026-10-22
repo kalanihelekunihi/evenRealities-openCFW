@@ -34,6 +34,7 @@ static void store32(uint8_t *p, uint32_t v) {
     for (unsigned i = 0; i < 4u; ++i) p[i] = (uint8_t)(v >> (i*8u));
 }
 
+/* Stock 0x597A96 (terminal_data_append_agent_content) */
 uint8_t audio_terminal_data_append_agent_content(const void *payload,
                                                   uint16_t *out_index) {
     uint8_t *ring = audio_td_state + 0x1054u; /* RAM 0x20110d74 */

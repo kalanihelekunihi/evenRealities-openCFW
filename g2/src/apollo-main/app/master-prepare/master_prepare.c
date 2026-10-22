@@ -29,6 +29,7 @@ static void log0(uint8_t level,uint32_t line,uint32_t compact,
         (void)compressed_log_output(compact,short_text,short_text);
 }
 
+/* Stock 0x45D1EC (SyncScheduleManagerInit) */
 uint32_t audio_uart_master_prepare(void) {
     audio_uart_master_schedule_queue=audio_queue_new(0x96u,4u,
                                                      audio_uart_master_queue_attrs);

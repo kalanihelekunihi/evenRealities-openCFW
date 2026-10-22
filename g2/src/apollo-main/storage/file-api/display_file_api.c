@@ -42,6 +42,7 @@ void *audio_file_open(const char *path,const char *mode) {
     }
     return file;
 }
+/* Stock 0x474634 (file_read) */
 uint32_t audio_file_read(void *buffer,uint32_t size,uint32_t count,void *file) {
     uint32_t bytes=count*size;
     if(audio_file_mutex_acquire(audio_file_api_mutex,1000u)!=0) return 0u;
@@ -52,6 +53,7 @@ uint32_t audio_file_read(void *buffer,uint32_t size,uint32_t count,void *file) {
     __asm volatile("udiv %0, %1, %2" : "=r"(result) : "r"((uint32_t)n),"r"(size));
     return result;
 }
+/* Stock 0x474814 (file_seek) */
 int32_t audio_file_seek(void *file,int32_t offset,uint32_t whence) {
     if(whence>2u) return -1;
     if(audio_file_mutex_acquire(audio_file_api_mutex,1000u)!=0) return -1;
@@ -59,6 +61,7 @@ int32_t audio_file_seek(void *file,int32_t offset,uint32_t whence) {
     (void)audio_file_mutex_release(audio_file_api_mutex);
     return status<0 ? -1 : 0;
 }
+/* Stock 0x474870 (file_tell) */
 int32_t audio_file_tell(void *file) {
     if(file==0) return -1;
     if(audio_file_mutex_acquire(audio_file_api_mutex,1000u)!=0) return -1;

@@ -77,12 +77,14 @@ uint32_t opencfw_boot_ton_trim_apply(uint32_t gpu_on, uint32_t gpu_mode) {
     return 0;
 }
 
+/* Stock 0x42F1C8 (register_power_toggle_42f1c8; am_hal_spotmgr_pcm0_7.c simobuck_enable) */
 /* Stock42f1c8: its R0 return is caller R7, ignored by these callers.
  * This ordinary C interface deliberately exposes only ordered effects. */
 void opencfw_boot_ton_clock_gate(uint32_t enabled){
  if((uint8_t)enabled){W(0x40021100)|=1;(void)opencfw_boot_delay_us_math(5);(void)opencfw_boot_ton_gate_write(1);}
  else {(void)opencfw_boot_ton_gate_write(0);(void)opencfw_boot_delay_us_math(5);W(0x40021100)&=~1u;}
 }
+/* Stock 0x42F204 (event_value_profile_42f204; am_hal_spotmgr_pcm0_7_gpu_on_sequence) */
 /* Stock42f204: GPU state enters a temporary trim state. Integer offsets,
  * saturation and register ordering are instruction-derived; units unknown. */
 uint32_t opencfw_boot_ton_lowpower_begin(uint32_t mode){
@@ -107,6 +109,7 @@ uint32_t opencfw_boot_ton_lowpower_begin(uint32_t mode){
  }
  return 0;
 }
+/* Stock 0x42F2FA (hw_register_profile_restore_42f2fa; am_hal_spotmgr_pcm0_7_gpu_off_sequence) */
 /* Stock42f2fa restores cached fields before hook24(0,0). */
 uint32_t opencfw_boot_ton_lowpower_end(void){
  if(((W(0x40021108)>>4)&3)!=3){
@@ -123,6 +126,7 @@ uint32_t opencfw_boot_ton_lowpower_end(void){
  }
  (void)opencfw_boot_startup_hook24(0,0);return 0;
 }
+/* Stock 0x42F38E (event_dispatch_42f38e; am_hal_spotmgr_pcm0_7_power_state_update) */
 /* Stock42f38e; R1 is unused, R2 points to selector-specific data. */
 uint32_t opencfw_boot_ton_state_event(uint32_t selector,uint32_t enabled,void *payload){
  (void)enabled;

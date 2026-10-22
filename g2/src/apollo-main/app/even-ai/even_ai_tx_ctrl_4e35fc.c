@@ -134,38 +134,48 @@ static uint32_t encode_simple(const struct even_ai_tx_simple_config *config,
     return 0u;
 }
 
+/* Stock 0x4E35FC (APP_PbTxEncodeEvenAICtrl) */
 uint32_t audio_even_ai_tx_ctrl(uint8_t sequence, const void *payload) {
     return encode_simple(&control_config, sequence, payload);
 }
 
+/* Stock 0x4E39EA (APP_PbTxEncodeEvenAIVADInfo) */
 uint32_t audio_even_ai_tx_vad(uint8_t sequence, const void *payload) {
     return encode_simple(&vad_config, sequence, payload);
 }
 
+/* Stock 0x4E4888 (APP_PbTxEncodeEvenAIPromptInfo) */
 uint32_t audio_even_ai_tx_prompt(uint8_t sequence, const void *payload) {
     return encode_simple(&prompt_config, sequence, payload);
 }
 
+/* Stock 0x4E4B20 (APP_PbTxEncodeEvenAIEvent) */
 uint32_t audio_even_ai_tx_event(uint8_t sequence, const void *payload) {
     return encode_simple(&event_config, sequence, payload);
 }
 
+/* Stock 0x4E4F30 (APP_PbTxEncodeEvenAIHeartbeat) */
 uint32_t audio_even_ai_tx_heartbeat(uint8_t sequence, const void *payload) {
     return encode_simple(&heartbeat_config, sequence, payload);
 }
 
+/* Stock 0x4E3EA4 (APP_PbTxEncodeEvenAIAskInfo) */
 uint32_t audio_even_ai_tx_ask(uint8_t sequence, const void *payload) {
     return encode_simple(&ask_config, sequence, payload);
 }
+/* Stock 0x4E412C (APP_PbTxEncodeEvenAIAnalyseInfo) */
 uint32_t audio_even_ai_tx_analyse(uint8_t sequence, const void *payload) {
     return encode_simple(&analyse_config, sequence, payload);
 }
+/* Stock 0x4E43A0 (APP_PbTxEncodeEvenAIReplyInfo) */
 uint32_t audio_even_ai_tx_reply(uint8_t sequence, const void *payload) {
     return encode_simple(&reply_config, sequence, payload);
 }
+/* Stock 0x4E4608 (APP_PbTxEncodeEvenAISkillInfo) */
 uint32_t audio_even_ai_tx_skill(uint8_t sequence, const void *payload) {
     return encode_simple(&skill_config, sequence, payload);
 }
+/* Stock 0x4E51C0 (APP_PbTxEncodeEvenAIConfig) */
 uint32_t audio_even_ai_tx_config(uint8_t sequence, const void *payload) {
     return encode_simple(&config_config, sequence, payload);
 }

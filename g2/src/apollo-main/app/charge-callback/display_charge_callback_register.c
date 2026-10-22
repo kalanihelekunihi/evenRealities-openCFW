@@ -13,9 +13,11 @@ static const char function[]="CB_CHG_RegisterBatInfoCallback";
 static const char message[]="Invalid callback function";
 static const char short_message[]="[cb.charge]Invalid callback function";
 static const char battery_type[]="BAT_INFO"; /* ROM 0x78a574 */
+/* Stock 0x4AEA40 (CB_CHG_InitBatInfoCallbacks) */
 void audio_settings_init_battery_callbacks(void) {
     (void)audio_callback_mgr_init(audio_charge_callback_manager,battery_type);
 }
+/* Stock 0x4AEA56 (CB_CHG_RegisterBatInfoCallback) */
 uint32_t audio_settings_register_battery_callback(void (*callback)(uint32_t,void *)) {
     if(callback==0) {
         if((audio_log_flags()&2u)!=0u)

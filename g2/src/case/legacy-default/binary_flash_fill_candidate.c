@@ -3,12 +3,14 @@
  * The data at these addresses is external to the pinned CASE image.
  */
 #include <stdint.h>
+/* Stock 0x08002F60 (case_binary_fill51) */
 uint8_t *case_binary_fill51(uint8_t *out)
 {
     volatile const uint8_t *source=(volatile const uint8_t *)(uintptr_t)0x0803f800u;
     for(uint32_t i=0;i<8u;i++) out[i]=source[7u-i];
     return out;
 }
+/* Stock 0x08002F88 (case_binary_fill5f) */
 uint8_t *case_binary_fill5f(uint8_t *out)
 {
     volatile const uint8_t *source=(volatile const uint8_t *)(uintptr_t)0x0803f000u;

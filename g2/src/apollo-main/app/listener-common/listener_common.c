@@ -73,11 +73,13 @@ static uint32_t listener(void *tf,const void *message,uint8_t command,
     return 1u;
 }
 
+/* Stock 0x45B588 (UserDataReplyListener) */
 uint32_t audio_uart_listener_common1(void *tf,const void *message,
                                       uint32_t unused3,uint32_t unused4) {
     (void)unused3;(void)unused4;
     return listener(tf,message,9u,10u,user,0x20bu);
 }
+/* Stock 0x45B6E4 (PeerDataReplyListener) */
 uint32_t audio_uart_listener_common4(void *tf,const void *message,
                                       uint32_t unused3,uint32_t unused4) {
     (void)unused3;(void)unused4;

@@ -4,18 +4,7 @@
 extern uint8_t audio_ble_dm_stack_rows_200738dc[];
 extern uint8_t audio_ble_dm_handler_state[];
 
-uint8_t *audio_ble_dm_find_ad_type_4d2a06(uint8_t type, uint16_t remaining,
-                                            uint8_t *fields)
-{
-    while (remaining != 0u) {
-        const uint8_t length = fields[0u];
-        if (length == 0u || length >= remaining) return 0;
-        if (fields[1u] == type) return fields;
-        remaining = (uint16_t)(remaining - length - 1u);
-        fields += (uint32_t)length + 1u;
-    }
-    return 0;
-}
+extern uint8_t *audio_ble_dm_find_ad_type_4d2a06(uint8_t type, uint16_t remaining, uint8_t *fields); /* opencfw U5: now provided by the Cordio unit */
 
 void audio_ble_dm_stack_hci_scan_complete_5368b6(void *event_ptr)
 {

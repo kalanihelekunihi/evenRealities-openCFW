@@ -11,6 +11,7 @@ static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static uint8_t rb(uint32_t a){return *(volatile uint8_t *)(uintptr_t)a;}
 static __attribute__((noreturn)) void native_fault(void)
 {__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+/* Stock 0x0800B2B0 (case_boot_timer_handle_wrap) */
 void case_boot_timer_handle_wrap(void)
 {
     uint32_t scheduler=0x20000164u;

@@ -9,6 +9,7 @@ extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
 static const char module[]="device_mgr";
 static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\platform\\device_mgr\\device_mgr.c";
 static const char function[]="DEV_SendMessage";
+/* Stock 0x004C659A (device_mgr_fn_004c659a) */
 void audio_ble_device_manager_send(const uint8_t *message) {
     if(message==0) return;
     void *queue=*(void **)(void *)(audio_ble_device_manager_state+12u);

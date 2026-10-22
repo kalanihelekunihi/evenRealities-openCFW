@@ -3,6 +3,7 @@
 #define CASE_CRITICAL_NEST (*(volatile uint32_t *)(uintptr_t)0x2000019cu)
 
 /* Original 0x0800bffc..0x0800c010. */
+/* Stock 0x0800BFFC (case_enter_critical) */
 void case_enter_critical(void)
 {
     __asm__ volatile("cpsid i" : : : "memory");

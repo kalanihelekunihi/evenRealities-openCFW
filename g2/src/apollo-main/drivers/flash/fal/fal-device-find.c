@@ -15,6 +15,7 @@ static int name_equal_24(uint32_t a, uint32_t b)
     return 1;
 }
 
+/* Stock 0x597E54 (fal_flash_device_find) */
 uint32_t g2_fal_flash_device_find(uint32_t name)
 {
     for (uint32_t i = 0; i < g2_fal_flash_device_count; ++i) {

@@ -84,6 +84,7 @@ static uint32_t delay_until(uint32_t timeout, volatile uint32_t *address,
     }
 }
 
+/* Stock 0x426C8C (dual_switch_426c8c; am_hal_clkgen_private_hfrc2_force_on) */
 static uint32_t dual_switch(uint32_t enabled)
 {
     volatile uint32_t *const reg =
@@ -101,6 +102,7 @@ static uint32_t dual_switch(uint32_t enabled)
     return 0u;
 }
 
+/* Stock 0x426CCC (clkgen_config_426ccc; am_hal_clkgen_private_hf2adj_apply) */
 static uint32_t clkgen_config(const uint8_t *config)
 {
     if (config == 0)
@@ -120,6 +122,7 @@ static uint32_t clkgen_config(const uint8_t *config)
     return 0u;
 }
 
+/* Stock 0x426D1E (clkgen_disable_426d1e; am_hal_clkgen_private_hf2adj_disable; stock returns 0) */
 static void clkgen_disable(void)
 {
     *(volatile uint32_t *)(uintptr_t)CLKGEN_CONFIG_DIVIDER &= ~1u;

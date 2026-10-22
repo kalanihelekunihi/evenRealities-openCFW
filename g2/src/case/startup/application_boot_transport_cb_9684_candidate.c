@@ -13,6 +13,7 @@ extern int32_t case_boot_sensor_finish_signal(uint32_t,uint32_t); /* 0xa888 */
 extern void case_boot_transport_stop_clock(uint32_t); /* 0x6b80 */
 extern void case_boot_transport_stop_link(uint32_t); /* 0x6b98 */
 
+/* Stock 0x08009684 (g2_timer_callback_3) */
 void case_boot_transport_cb_9684(uint32_t argument)
 {
     /* Native trampoline supplies pair[1] in R0; this callback ignores it. */

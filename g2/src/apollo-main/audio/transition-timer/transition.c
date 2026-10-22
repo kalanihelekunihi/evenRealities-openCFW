@@ -11,23 +11,20 @@ static void field(uint32_t a,uint32_t value,unsigned shift,unsigned bits) {
     uint32_t mask=((1u<<bits)-1u)<<shift;
     W(a)=(W(a)&~mask)|((value<<shift)&mask);
 }
-void pcm22_timer_stop(void) {
-    W(0x400083e0)&=~1u;W(0x40008010)&=~0x8000u;
-    (void)stock_clock_release(4,49);
-    W(0xe000e188)=0x40000u;W(0x40008068)=0xc0000000u;
-    (void)W(0x47ff0000);W(0xe000e288)=0x40000u;
-}
+/* pcm22_timer_stop is upstream am_hal_spotmgr_timer_stop (0x4802CE; payload defsym). */
 static void load_pending_trims(void) {
     field(0x40020044,W(0x200742d4),0,7);
     field(0x40020080,W(0x200742e0),10,4);
     field(0x40020080,W(0x200742dc),0,10);
     stock_delay_us(5);
 }
+/* Stock 0x005A23F8 (PCM2.2 transition sequence 2b completion) */
 void pcm22_sequence_2_complete(void) {
     load_pending_trims();
     W(0x4002037c)&=~0x10000u;W(0x4002037c)&=~0x2000000u;
     field(0x4002004c,W(0x200742d8),0,7);B(0x20004540)=26;
 }
+/* Stock 0x005A2B14 (PCM2.2 transition sequence 7b completion) */
 void pcm22_sequence_7_complete(void) {
     load_pending_trims();field(0x4002004c,W(0x200742d8),0,7);
     unsigned restore=(W(0x40021000)&3u)==2;
@@ -50,6 +47,7 @@ void pcm22_sequence_7_complete(void) {
     }
     B(0x20004540)=26;
 }
+/* Stock 0x005A40CA (PCM2.2 boost-timer completion dispatcher) */
 void pcm22_boost_completion(void) {
     uint32_t irq=stock_save_irq();
     if(B(0x20004540)==2) pcm22_sequence_2_complete();
@@ -57,6 +55,7 @@ void pcm22_boost_completion(void) {
     pcm22_timer_stop();
     __asm volatile("msr primask, %0" :: "r"(irq) : "memory");
 }
+/* Stock 0x005A22C0 (PCM2.2 transition sequence 2) */
 void pcm22_sequence_2(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old_ton;
     /* Original loads trim fields before optionally completing prior work. */
@@ -79,6 +78,7 @@ void pcm22_sequence_2(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) 
     W(0x200002a4)=next;stock_timer_start(50);B(0x20004540)=2;
 }
 
+/* Stock 0x005A3E24 (PCM2.2 transition sequence 21b completion) */
 void pcm22_sequence_21_complete(void) {
     field(0x40020080,W(0x20056660+W(0x200002a0)*4u)>>17,10,4);
     field(0x40020080,W(0x20056660+W(0x200002a0)*4u)>>7,0,10);

@@ -2,6 +2,7 @@
 extern int32_t audio_file_mutex_acquire(void*,uint32_t),audio_file_mutex_release(void*);
 extern int32_t audio_file_backend_close(void*,void*);
 extern void audio_file_heap_free(void*);
+/* Stock 0x4745F4 (file_close) */
 int32_t audio_file_close_selected(uint32_t *stream){
  void **mutex=(void**)0x200748f4u;
  if(audio_file_mutex_acquire(*mutex,1000)!=0)return -1;

@@ -10,6 +10,7 @@ static uint32_t get32(const uint8_t *p) {
         ((uint32_t)p[2] << 16u) | ((uint32_t)p[3] << 24u);
 }
 
+/* Stock 0x0045ED4E (page anim finish callback) */
 void audio_uart_display_anim_finish_b_45ed4f(void *descriptor) {
     uint8_t *page = (uint8_t *)(uintptr_t)get32((const uint8_t *)descriptor);
     uint8_t *entry = (uint8_t *)(uintptr_t)get32(page + 16u);

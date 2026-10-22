@@ -24,6 +24,7 @@ static void log_skip(uint8_t severity,uint32_t line,uint32_t compressed,
     if((audio_log_flags()&1u)!=0u||(audio_log_flags()&4u)!=0u)
         (void)compressed_log_output(compressed,short_message,short_message);
 }
+/* Stock 0x47761C (_connectParamReq) */
 void audio_ble_connect_param_request(uint8_t mode) {
     uint8_t *controller=audio_ble_controller;
     if(controller==0||controller[0x56u]==0u) {

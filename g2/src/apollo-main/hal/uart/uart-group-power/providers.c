@@ -11,21 +11,10 @@ uint32_t uart_group_can_poll(uint32_t domain) {
     if((W(d.enable_register)&0x1e00) && !(W(d.enable_register)&d.enable_mask)) return 0;
     return 1;
 }
-uint32_t uart_power_pre(void) {
-    volatile uint32_t *slot=(volatile uint32_t *)0x2007327c;
-    if(!*slot)return 0;
-    return ((uint32_t (*)(void))(uintptr_t)*slot)();
-}
-uint32_t uart_power_post(void) {
-    volatile uint32_t *slot=(volatile uint32_t *)0x20073280;
-    if(!*slot)return 0;
-    return ((uint32_t (*)(void))(uintptr_t)*slot)();
-}
-uint32_t uart_group_control(uint32_t action,uint32_t enable,void *metadata) {
-    volatile uint32_t *slot=(volatile uint32_t *)0x20073274;
-    if(!*slot)return 0;
-    return ((uint32_t (*)(uint32_t,uint32_t,void *))(uintptr_t)*slot)((uint8_t)action,(uint8_t)enable,metadata);
-}
+/* uart_power_pre / uart_power_post / uart_group_control (stock 0x48032C /
+ * 0x480342 / 0x480312) are upstream am_hal_spotmgr_tempco_postpone /
+ * am_hal_spotmgr_tempco_pending_handle / am_hal_spotmgr_power_state_update
+ * (payload defsym). */
 extern void uart_delay_boundary(uint32_t);
 uint32_t uart_status_wait(uint32_t budget,uint32_t address,uint32_t mask,uint32_t expected,uint32_t equal) {
     for(;;){

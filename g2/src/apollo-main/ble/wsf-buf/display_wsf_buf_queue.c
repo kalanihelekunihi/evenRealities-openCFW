@@ -38,23 +38,3 @@ void *audio_wsf_buffer_alloc(uint16_t size) {
         (void)compressed_log_output(0x04400000u,fail_short,fail_short,size);
     return 0;
 }
-void audio_wsf_queue_enqueue(void *queue,void *message) {
-    struct wsf_queue *q=(struct wsf_queue *)queue;
-    *(void **)message=0;
-    audio_wsf_cs_enter();
-    if(q->head==0) q->head=message;
-    else *(void **)q->tail=message;
-    q->tail=message;
-    audio_wsf_cs_exit();
-}
-void *audio_wsf_queue_dequeue(void *queue) {
-    struct wsf_queue *q=(struct wsf_queue *)queue;
-    audio_wsf_cs_enter();
-    void *message=q->head;
-    if(message!=0) {
-        q->head=*(void **)message;
-        if(q->head==0) q->tail=0;
-    }
-    audio_wsf_cs_exit();
-    return message;
-}

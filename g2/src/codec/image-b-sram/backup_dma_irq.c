@@ -8,6 +8,7 @@ extern void gx8002_image_b_dma_pair_10004bc0(uint32_t channel);
 
 typedef void (*dma_callback_t)(uint32_t context);
 
+/* Stock 0x10004C78 (gx8002_backup_dma_callback_pointer) */
 int32_t gx8002_image_b_dma_irq_10004c04(int32_t line, void *context)
 {
     (void)line;

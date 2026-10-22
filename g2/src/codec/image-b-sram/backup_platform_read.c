@@ -34,6 +34,7 @@ static void store_half(uint8_t *out, uint32_t offset, uint32_t value)
     *(uint16_t *)(void *)(out + offset) = (uint16_t)value;
 }
 
+/* Stock 0x10012A64 (gx8002_platform_read_switch) */
 int32_t gx8002_image_b_platform_read_10003edc(uint32_t selector, void *result)
 {
     uint8_t *out = (uint8_t *)result;

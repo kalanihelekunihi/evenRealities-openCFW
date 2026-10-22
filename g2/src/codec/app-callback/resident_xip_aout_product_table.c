@@ -64,6 +64,7 @@ struct gx8002_aout_product_ops {
 _Static_assert(sizeof(struct gx8002_aout_product_ops) == 84u,
                "stock AOUT operation table has 21 four-byte slots");
 
+/* Stock 0x10026BC8 (gx8002_aout_dispatch) */
 __attribute__((section(".gx8002.sram.aout_operations"), aligned(4)))
 struct gx8002_aout_product_ops gx8002_aout_product_operations = {
     .alloc = gx8002_xip_aout_alloc_playback_10205254,

@@ -7,6 +7,7 @@ extern uint32_t case_init_pmic_read(uint32_t reg,uint8_t *out,uint32_t count); /
 extern uint32_t case_legacy_logger(const char *format,...); /* 0x9170 */
 extern void case_boot_irq_button_refresh(void); /* 0x3a84 */
 extern void case_boot_irq_clear(uint32_t mask); /* 0x4d04 */
+/* Stock 0x08003BC8 (case_vector_irq_3bc8) */
 void case_vector_irq_3bc8(void)
 {
     volatile uint32_t *const bus=(volatile uint32_t *)(uintptr_t)0x40021800u;

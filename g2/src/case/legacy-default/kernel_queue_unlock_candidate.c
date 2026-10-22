@@ -8,6 +8,7 @@ extern void case_kernel_exit(void);
 extern uint32_t case_queue_wake(uint32_t *list);
 extern void case_kernel_request_yield(void); /* stock 0x0800c16c */
 
+/* Stock 0x0800B374 (case_queue_unlock) */
 void case_queue_unlock(uint32_t queue)
 {
     volatile int8_t *deferred_recv=(volatile int8_t *)(uintptr_t)(queue+0x45u);
@@ -34,6 +35,7 @@ void case_queue_unlock(uint32_t queue)
     case_kernel_exit();
 }
 
+/* Stock 0x0800C16C (case_kernel_request_yield) */
 void case_kernel_request_yield(void)
 {
     *(volatile uint32_t *)(uintptr_t)0x20000144u=1u;

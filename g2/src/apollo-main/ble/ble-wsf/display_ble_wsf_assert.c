@@ -17,6 +17,7 @@ static const char null_format[]="(%s) has assert failed at %s:%ld.";
 static const char file_word[]="pFile";
 
 void audio_ble_wsf_assert(const char *file,uint32_t line) __attribute__((noreturn));
+/* Stock 0x569A44 (WsfAssert) */
 void audio_ble_wsf_assert(const char *file,uint32_t line) {
     if((audio_log_flags()&2u)!=0u)
         audio_log_extended(1u,module,path,name,0x2bu,message,file,line);

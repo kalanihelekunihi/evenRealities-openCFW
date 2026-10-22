@@ -7,10 +7,12 @@ static uint8_t *ptr(const uint8_t *c,unsigned n){return *(uint8_t *const *)(c+n)
 static uint16_t u16(const uint8_t *c,unsigned n){return *(const uint16_t *)(c+n);}
 static volatile uint32_t *hardware(const uint8_t *c){return *(volatile uint32_t **)ptr(ptr(c,0),8);}
 static uint32_t enabled(uint32_t id,const uint8_t *c){return id<3 && ((ptr(c,16)[id*60+35]&6u)==6u);}
+/* Stock 0x0000614C (touch_sub_2e4c) */
 void touch_clear_busy(uint8_t *c){
  uint8_t *common=ptr(c,4);*(uint32_t *)(common+8)&=~1u;*(uint32_t *)(common+8)&=~128u;
  void (*callback)(void *)=*(void (**)(void *))(ptr(c,8)+4);if(callback)callback(0);
 }
+/* Stock 0x00006462 (touch_sub_3162) */
 void touch_transfer_active(uint32_t start,uint32_t count,uint8_t *c){
  volatile uint32_t *hw=hardware(c);uint32_t *frame=(uint32_t *)(ptr(c,40)+start*28u);volatile uint32_t *buffer=hw+0x2000/4;
  uint32_t end=start+count-1u;
@@ -23,6 +25,7 @@ void touch_transfer_active(uint32_t start,uint32_t count,uint8_t *c){
   else frame[6]=coefficient|((uint32_t)*(uint16_t *)sensor<<8);
  }
 }
+/* Stock 0x00006530 (touch_sub_3230) */
 void touch_transfer_low_power(uint32_t start,uint32_t count,uint8_t *c){
  uint8_t *common=ptr(c,4);volatile uint32_t *hw=hardware(c);uint16_t *out=(uint16_t *)ptr(c,56);
  uint32_t available=hw[0x3410/4]&0x7ffu;uint32_t sign=hw[0x3414/4];common[28]=(sign&0x80000000u)?1u:3u;
@@ -35,6 +38,7 @@ void touch_transfer_low_power(uint32_t start,uint32_t count,uint8_t *c){
   out++; /* Disabled slots reserve history positions without writing. */
  }
 }
+/* Stock 0x0000664C (touch_sub_334c) */
 void touch_scan_slots(uint32_t start,uint32_t count,uint8_t *c){
  uint8_t *i=ptr(c,8);volatile uint32_t *hw=hardware(c);uint32_t slots=count>21u?21u:count;*(uint16_t *)(i+70)=(uint16_t)slots;if(!count)return;
  const uint32_t *frame=(const uint32_t *)(ptr(c,40)+start*28u);volatile uint32_t *out=hw+0x2000/4;
@@ -47,6 +51,7 @@ void touch_scan_slots(uint32_t start,uint32_t count,uint8_t *c){
  if(i[97]==1 && (hw[0x180/4]&0x1000000u))hw[0x144/4]=0x100u;
  hw[0]|=0x80000000u;hw[0x140/4]=1;
 }
+/* Stock 0x00006780 (touch_sub_3480) */
 void touch_scan_isr(uint8_t *c){
  volatile uint32_t *hw=hardware(c);uint8_t *i=ptr(c,8),*common=ptr(c,4);
  uint32_t intr=hw[0x120/4],mask=hw[0x128/4];
@@ -64,8 +69,11 @@ void touch_scan_isr(uint8_t *c){
 uint32_t touch_prepare_scan_isr_bound(uint8_t *c){uint32_t status=touch_prepare_scan(c);*(void (**)(uint8_t *))(ptr(c,8)+16)=touch_scan_isr;return status;}
 /* Stock5fba/5c98 dispatch arguments are ignored except for context.
  * Callback must already be initialized; stock has no null guard. */
+/* Stock 0x00005FBA (touch_sub_2cba) */
 void touch_interrupt_dispatch(uint32_t channel,uint8_t *c){
  (void)channel;void (*callback)(uint8_t *)=*(void (**)(uint8_t *))(ptr(c,8)+16);callback(c);
 }
+/* Stock 0x00005C98 (touch_sub_2998) */
 void touch_msclp_interrupt(volatile uint32_t *block,uint8_t *c){(void)block;touch_interrupt_dispatch(0,c);}
+/* Stock 0x00003948 (touch_platform_0648_configure) */
 void touch_project_msclp_irq(void){touch_msclp_interrupt((volatile uint32_t *)0x40290000u,(uint8_t *)0x200004ecu);}

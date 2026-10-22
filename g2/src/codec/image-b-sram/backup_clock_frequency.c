@@ -12,6 +12,7 @@
 #include <clk_priv.h>
 #pragma GCC diagnostic pop
 
+/* Stock 0x100129F0 (gx8002_clock_frequency_switch) */
 uint32_t gx8002_image_b_clock_frequency_10003cf0(uint32_t module)
 {
     return _clk_get_module_frequence((GX_CLOCK_MODULE)module);

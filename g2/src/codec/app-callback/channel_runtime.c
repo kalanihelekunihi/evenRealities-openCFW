@@ -35,6 +35,7 @@ uint32_t g2_codec_channel_stop(uint32_t index)
     g2_codec_critical_restore(state);
     return 0;
 }
+/* Stock 0x102077A8 (gx8002_power_lock) */
 uint32_t g2_codec_channel_timer_start(uint32_t timer)
 {
     const uint32_t count = timer - 1u;

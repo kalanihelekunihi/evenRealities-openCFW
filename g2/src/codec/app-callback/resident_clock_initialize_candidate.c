@@ -38,6 +38,7 @@ static volatile uint32_t *const pll_config =
 static volatile uint32_t *const clock_gate_snapshot =
     (volatile uint32_t *)(uintptr_t)UINT32_C(0x20027318);
 
+/* Stock 0x10025A88 (gx8002_clock_init_pointer) */
 void gx8002_resident_clock_init_pointer_25a88(
     uint32_t unused0, uint32_t unused1, uint32_t unused2, uint32_t unused3)
 {

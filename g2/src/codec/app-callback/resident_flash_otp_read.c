@@ -12,6 +12,7 @@ extern uint32_t gx8002_resident_flash_wait_ready_2375c(void);
 extern void gx8002_resident_flash_addr_to_command_23b8c(
     const volatile uint32_t *, uint32_t, uint8_t *);
 
+/* Stock 0x10023FA4 (gx8002_flash_otp_read) */
 int32_t gx8002_resident_flash_otp_read_23fa4(
     uint32_t offset, uint8_t *destination, uint32_t bytes)
 {

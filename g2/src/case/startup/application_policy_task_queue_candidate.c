@@ -7,18 +7,21 @@ static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static __attribute__((noreturn)) void native_fault(void)
 {__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+/* Stock 0x0800BF94 (case_policy_task_list_initialize) */
 void case_policy_task_list_initialize(uint32_t list)
 {
     uint32_t sentinel=list+8u;
     wr(list+4u,sentinel);wr(sentinel,0xffffffffu);
     wr(list+12u,sentinel);wr(list+16u,sentinel);wr(list,0u);
 }
+/* Stock 0x0800B330 (case_policy_task_valid) */
 uint32_t case_policy_task_valid(uint32_t task)
 {
     if(task==0u)native_fault();
     return rd(task+20u)==0x200014a4u && rd(task+40u)==0u;
 }
 
+/* Stock 0x0800BF2C (uxListRemove) */
 __attribute__((noinline)) void case_policy_task_unlink(uint32_t link)
 {
     uint32_t list=rd(link+16u),prev=rd(link+4u),next=rd(link+8u);
@@ -26,6 +29,7 @@ __attribute__((noinline)) void case_policy_task_unlink(uint32_t link)
     if(rd(list+4u)==link)wr(list+4u,next);
     wr(link+16u,0u);wr(list,rd(list)-1u);
 }
+/* Stock 0x0800BFE2 (case_policy_task_list_insert) */
 __attribute__((noinline)) void case_policy_task_list_insert(uint32_t list,uint32_t link)
 {
     uint32_t first=rd(list+4u),second=rd(first+8u);
@@ -33,6 +37,7 @@ __attribute__((noinline)) void case_policy_task_list_insert(uint32_t list,uint32
     wr(second+4u,link);wr(first+8u,link);
     wr(link+16u,list);wr(list,rd(list)+1u);
 }
+/* Stock 0x0800BFB0 (case_policy_task_list_insert_sorted) */
 __attribute__((noinline)) void case_policy_task_list_insert_sorted(uint32_t list,uint32_t link)
 {
     uint32_t key=rd(link);

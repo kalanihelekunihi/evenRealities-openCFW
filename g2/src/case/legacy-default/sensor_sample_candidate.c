@@ -3,6 +3,7 @@
  * register read. Sensor electrical levels at 0x50000410 remain runtime data.
  */
 #include <stdint.h>
+/* Stock 0x0800A528 (case_select_mask) */
 uint32_t case_binary_sensor_sample(void)
 {
     uint32_t mask=*(volatile uint8_t *)(uintptr_t)0x20000114u ? 8u : 16u;

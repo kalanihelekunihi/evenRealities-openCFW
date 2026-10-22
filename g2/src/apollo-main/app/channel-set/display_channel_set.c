@@ -25,6 +25,7 @@ static const char function[]="SendStartUpCommandtoScheduleManager";
         (void)compressed_log_output(mask,compact,compact,##__VA_ARGS__); \
 } while(0)
 
+/* Stock 0x465D7C (SendStartUpCommandtoScheduleManager) */
 int32_t audio_uart_display_channel_set(uint32_t channel)
 {
     if(audio_uart_device_role_get()!=1u) return -1;

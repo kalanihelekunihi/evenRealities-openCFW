@@ -9,12 +9,7 @@ extern uint32_t audio_ble_hci_transport_send_cmd(const void *); /* native 0x5301
 
 static uint16_t rd16(const uint8_t *p) {return (uint16_t)((uint16_t)p[0]|((uint16_t)p[1]<<8));}
 static void wr16(uint8_t *p,uint16_t v) {__builtin_memcpy(p,&v,2u);}
-void *audio_ble_wsf_message_peek(void *queue,uint8_t *handler) {
-    uint8_t *head=*(uint8_t **)queue;
-    if(head==0)return 0;
-    *handler=head[4u];
-    return head+8u;
-}
+extern void *audio_ble_wsf_message_peek(void *queue,uint8_t *handler); /* opencfw U5: now provided by the Cordio unit */
 uint64_t audio_ble_hci_cmd_send_body(void *message,uint32_t unused,
                                      uint32_t scratch,uint32_t high) {
     (void)unused;(void)high;
@@ -38,7 +33,4 @@ uint64_t audio_ble_hci_cmd_send_body(void *message,uint32_t unused,
         }
     }
     return (uint64_t)scratch<<32;
-}
-__attribute__((naked)) uint64_t audio_ble_hci_cmd_send(void *message) {
-    __asm volatile("b audio_ble_hci_cmd_send_body");
 }

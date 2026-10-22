@@ -12,6 +12,7 @@ static volatile uint8_t *const shared=(volatile uint8_t *)(uintptr_t)0x200000b8u
 static volatile uint8_t *const device=(volatile uint8_t *)(uintptr_t)0x200000f4u;
 static volatile uint8_t *const state=(volatile uint8_t *)(uintptr_t)0x2000087cu;
 
+/* Stock 0x08009BC0 (case_boot_transport_sample_refresh) */
 void case_boot_transport_sample_refresh(void)
 {
     if(case_boot_transport_aging_status()!=0u){
@@ -32,6 +33,7 @@ void case_boot_transport_sample_refresh(void)
     }
 }
 
+/* Stock 0x08009CC8 (case_boot_transport_sample_refresh_mode4) */
 void case_boot_transport_sample_refresh_mode4(void)
 {
     if(state[16u]!=0u && state[17u]!=0u){shared[0u]=0u;return;}

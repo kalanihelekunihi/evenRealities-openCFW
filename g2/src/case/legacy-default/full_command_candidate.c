@@ -15,6 +15,7 @@ extern uint32_t case_binary_06_41_candidate(const uint8_t *, uint32_t);
 /* Stock 0x080068d0. Its transmission and return ABI need lower proof. */
 extern void case_binary_ack0641(uint32_t opcode);
 
+/* Stock 0x08000928 (case_legacy_command_candidate) */
 uint32_t case_legacy_command_candidate(const uint8_t *command, uint32_t length)
 {
     uint32_t result;
@@ -34,6 +35,7 @@ uint32_t case_binary_legacy0641(const uint8_t *command, uint32_t length)
     return case_legacy_command_candidate(command, length);
 }
 
+/* Stock 0x08000E1C (case_binary_command_candidate) */
 uint32_t case_binary_command_candidate(const uint8_t *command,
                                         uint32_t length, uint32_t mode)
 {

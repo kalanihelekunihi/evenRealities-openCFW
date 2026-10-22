@@ -6,6 +6,7 @@ extern uint32_t case_wait_condition(void *uart,uint32_t flag,uint32_t expected,
 
 /* Original 0x080063ec. Caller supplies live UART/peripheral state and a
  * writable buffer; the tick/wait helpers are distinct source contracts. */
+/* Stock 0x080063EC (case_read_controller_blocking) */
 uint32_t case_bulk_receive(void *handle,uint8_t *buffer,uint32_t length,
                             uint32_t timeout)
 {

@@ -22,6 +22,7 @@ static void setcore(uint32_t value,uint32_t boosted) {
     if(boosted) {W(0x200742c8)=value+7>=1024?1023-value:7;value=(value+W(0x200742c8))&1023;}
     field(0x40020080,value,1023,0);
 }
+/* Stock 0x005A0FC4 (PCM2.1 profile apply) */
 void pcm21_apply(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     uint32_t nc=cal(next),oc=cal(old),cached=W(0x20000298),cachedc=cal(cached);
     if(next==old) {if(ton!=old_ton) stock_ton(ton,next);return;}

@@ -30,14 +30,3 @@ void *audio_uart_lv_pool_realloc_484234(void *pool_cell,void *ptr,uint32_t size)
 __attribute__((noinline)) void *audio_uart_lv_pool_realloc_48432a(void *ptr,uint32_t size) {
     return audio_uart_lv_pool_realloc_484234(audio_uart_lv_heap_pool,ptr,size);
 }
-void *audio_uart_lv_realloc_44f76a(void *ptr,uint32_t size) {
-    if(size==0u) {
-        audio_uart_lv_heap_free(ptr);
-        return audio_uart_lv_static_slot;
-    }
-    if(ptr==audio_uart_lv_static_slot)return audio_uart_lv_malloc(size);
-    void *result=audio_uart_lv_pool_realloc_48432a(ptr,size);
-    if(result==0)
-        audio_uart_lvgl_log(3u,path,0xa2u,"lv_realloc","couldn't reallocate memory");
-    return result;
-}

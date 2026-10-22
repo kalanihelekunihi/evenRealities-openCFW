@@ -39,18 +39,3 @@ void appSlaveLegAdvStop(void *message)
         appSlaveNextLegAdvState(message);
 }
 
-void appSlaveLegAdvRestart(void *message)
-{
-    uint8_t *const event=(uint8_t *)message;
-    uint8_t *const state=audio_ble_subsystem_link_state_200719c8;
-    if (event[2u]==0x28u) {
-        if (state[0x75u]) { state[0x75u]=0u;return; }
-    } else if (event[2u]==0x27u) {
-        if (state[0x75u]) { state[0x75u]=0u;return; }
-        state[0x57u]=3u;
-    }
-    if (state[0x57u]==3u) {
-        state[0x57u]=0u;
-        appSlaveLegAdvStart();
-    }
-}

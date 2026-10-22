@@ -59,6 +59,7 @@ g_ui32DSpintbl[7] =
     0x00000189
 };
 
+/* Stock 0x480EEE (am_hal_gpio_pinconfig_get) */
 uint32_t
 am_hal_gpio_pinconfig_get(uint32_t ui32GpioNum, am_hal_gpio_pincfg_t* psGpioCfg)
 {

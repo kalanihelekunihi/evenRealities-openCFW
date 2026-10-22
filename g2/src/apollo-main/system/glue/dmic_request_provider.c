@@ -18,6 +18,7 @@ static const char module[] = "codec.host";
 static const char file[] = "D:\\01_workspace\\s200_ap510b_iar_git\\platform\\audio\\service_codec_host.c";
 static const char function[] = "GX8002_DMICCtrl";
 
+/* Stock 0x57CE78 (GX8002_DMICCtrl) */
 int32_t audio_dmic_request(uint32_t enabled, uint16_t *response,
                            uint32_t timeout) {
     if (!response) return -1;

@@ -8,6 +8,7 @@ static uint32_t cursor_of_va(va_list ap){uint32_t cursor;__builtin_memcpy(&curso
 typedef struct { uint32_t next,remaining,total; } opencfw_format_sink;
 typedef opencfw_format_sink *(*opencfw_format_put)(opencfw_format_sink *,uint32_t);
 extern int32_t opencfw_boot_format_engine(opencfw_format_put,opencfw_format_sink *,const char *,uint32_t *,uint32_t);
+/* Stock 0x415672 (bl_bounded_sink; IAR DLIB bounded snprintf putc sink) */
 opencfw_format_sink *opencfw_boot_bounded_writer(opencfw_format_sink *s,uint32_t c){
  s->total++;
  if(s->remaining){uint32_t next=s->next;s->next=next+1;*(volatile uint8_t *)(uintptr_t)next=(uint8_t)c;s->remaining--;}

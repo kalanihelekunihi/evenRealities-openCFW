@@ -5,17 +5,8 @@ extern uint8_t audio_uart_display_lv_root[];
 extern void *audio_uart_lv_list_first(void *); /* selected native0x482cd8 */
 extern void *audio_uart_lv_list_next(void *,void *); /* selected native0x482cf0 */
 
-void *audio_uart_lv_fs_driver_find_4c70b4(uint32_t letter)
-{
-    uint8_t *registry=audio_uart_display_lv_root+0x180u;
-    for (uint8_t *slot=audio_uart_lv_list_first(registry);
-         slot!=0;
-         slot=audio_uart_lv_list_next(registry,slot)) {
-        uint8_t *driver=*(uint8_t **)(void *)slot;
-        if (driver[0]==(uint8_t)letter) return driver;
-    }
-    return 0;
-}
+/* Retired: stock 0x4c70b4 is upstream lv_fs_get_drv (lvgl/src/misc/lv_fs.c); this name is a link alias. */
+void *audio_uart_lv_fs_driver_find_4c70b4(uint32_t letter);
 
 void audio_uart_lv_init_global_bind_4c8efc(void *filesystem)
 {

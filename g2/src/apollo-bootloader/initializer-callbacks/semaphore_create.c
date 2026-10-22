@@ -31,6 +31,7 @@ uintptr_t opencfw_boot_counting_semaphore_dynamic(uint32_t maximum,
     if (queue) *(volatile uint32_t *)(queue+0x38u)=initial;
     return queue;
 }
+/* Stock 0x416762 (bl_runtime_semaphore_create; CMSIS-RTOS2 osSemaphoreNew) */
 uintptr_t opencfw_boot_semaphore_create(uint32_t maximum,uint32_t initial,
     const uint32_t *attribute) {
     if (opencfw_bl_context_guard() || !maximum || maximum<initial) return 0;

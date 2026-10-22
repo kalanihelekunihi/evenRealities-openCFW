@@ -4,6 +4,7 @@
  */
 #include <stdint.h>
 extern void case_policy_task_wake_dispatch(void); /* 0xc390 */
+/* Stock 0x08000102 (xPortPendSVHandler) */
 __attribute__((naked)) void case_vector_pendsv_0102(void)
 {
     __asm__ volatile(

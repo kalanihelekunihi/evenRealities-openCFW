@@ -58,9 +58,11 @@ static uint32_t classify(const uint8_t *params,uint32_t threshold,uint32_t slow)
     log_plain(function,slow?0xdfu:0xd1u,is_slow,is_slow_short);
     return 0xa4u;
 }
+/* Stock 0x476DB8 (_isConnParamsFast) */
 uint32_t audio_ble_is_conn_params_fast(const void *params) {
     return classify((const uint8_t *)params,25u,0u);
 }
+/* Stock 0x476FE2 (_isConnParamsSlow) */
 uint32_t audio_ble_is_conn_params_slow(const void *params) {
     return classify((const uint8_t *)params,72u,1u);
 }

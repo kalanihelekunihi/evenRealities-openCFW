@@ -10,6 +10,7 @@ extern void callback_change_state(uint32_t next, uint32_t old);
 extern uint32_t callback_plan(struct power_request *,uint32_t *,uint32_t *);
 extern void callback_apply(uint32_t next_a,uint32_t old_a,uint32_t next_b,uint32_t old_b);
 static void restore(uint32_t mask) { __asm__ volatile("msr primask, %0"::"r"(mask):"memory"); }
+/* Stock 0x005A490C (PCM2.2 power_state_update) */
 uint32_t audio_platform_newer_control(uint32_t action,uint32_t enable,uint8_t *m) {
     action=(uint8_t)action; enable=(uint8_t)enable;
     if(((W(0x40021108)>>4)&3u)!=3) return 0;

@@ -47,11 +47,19 @@ extern uint32_t audio_uart_page_45fffe(const void *, uint32_t);
 extern uint32_t audio_uart_ring_primary_head_cell;
 extern uint32_t audio_uart_registry_context_20003064[];
 
-static void zero_four_styles(uint32_t object) {
-    audio_uart_page_44122a(object, 0, 0);
-    audio_uart_page_441238(object, 0, 0);
-    audio_uart_page_44120e(object, 0, 0);
-    audio_uart_page_44121c(object, 0, 0);
+/* Stock calls the out-of-line pad_all copy at 0x5cf2b4 with (object, 0, 0);
+ * it is defined once, in ui/p-16-pdt-screens/pdt_screen_helpers.c. */
+extern void semantic_zero_four_object_styles(uint32_t object, uint32_t value, uint32_t selector);
+
+/* Stock 0x5cf32c..0x5cf32f (movs r0,#1; bx lr): input handler stored at
+ * +0x18 of the page's UI-registry context (RAM 0x20003064, word 0x5cf32d). */
+uint32_t semantic_distortion_predicate_true_5cf32c(uint32_t arg0, uint32_t arg1,
+                                                   uint32_t code, const uint8_t *event) {
+    (void)arg0;
+    (void)arg1;
+    (void)code;
+    (void)event;
+    return 1u;
 }
 
 uint32_t audio_uart_registry_callback_5cf330(uint32_t event, uint32_t arg2,
@@ -67,7 +75,7 @@ uint32_t audio_uart_registry_callback_5cf330(uint32_t event, uint32_t arg2,
     audio_uart_page_44127e(root, audio_uart_page_44104c(0), 0);
     audio_uart_page_44129e(root, 0xff, 0);
     audio_uart_page_44131c(root, 0, 0);
-    zero_four_styles(root);
+    semantic_zero_four_object_styles(root, 0, 0);
 
     uint32_t top = audio_uart_page_43de82(root);
     audio_uart_page_43dfa4(top, 0x10);
@@ -85,7 +93,7 @@ uint32_t audio_uart_registry_callback_5cf330(uint32_t event, uint32_t arg2,
     audio_uart_page_4413b0(top, 0, 0);
     audio_uart_page_441394(top, 0, 0);
     audio_uart_page_4413a2(top, 0, 0);
-    zero_four_styles(top);
+    semantic_zero_four_object_styles(top, 0, 0);
     audio_uart_page_44120e(top, 0, 0);
     audio_uart_page_44121c(top, 0, 0);
     audio_uart_page_44122a(top, 0, 0);
@@ -98,7 +106,7 @@ uint32_t audio_uart_registry_callback_5cf330(uint32_t event, uint32_t arg2,
     audio_uart_page_43f4c0(center, 0x3fffffff, 0x3fffffff);
     audio_uart_page_44129e(center, 0, 0);
     audio_uart_page_44131c(center, 0, 0);
-    zero_four_styles(center);
+    semantic_zero_four_object_styles(center, 0, 0);
     audio_uart_page_48ba78(center, 1);
     audio_uart_page_48ba92(center, 2, 2, 2);
     audio_uart_page_441246(center, 8, 0);
@@ -108,7 +116,7 @@ uint32_t audio_uart_registry_callback_5cf330(uint32_t event, uint32_t arg2,
     audio_uart_page_43f4c0(child, 0x3fffffff, 0x3fffffff);
     audio_uart_page_44129e(child, 0, 0);
     audio_uart_page_44131c(child, 0, 0);
-    zero_four_styles(child);
+    semantic_zero_four_object_styles(child, 0, 0);
     audio_uart_page_48ba78(child, 0);
     audio_uart_page_48ba92(child, 2, 2, 2);
     audio_uart_page_441254(child, 8, 0);

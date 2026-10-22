@@ -3,6 +3,7 @@
  */
 #include <stdint.h>
 
+/* Stock 0x080001B4 (case_binary_3d_dispatch) */
 uint32_t case_binary_3d_dispatch(uint32_t destination, const uint8_t *frame,
                                   uint32_t length)
 {

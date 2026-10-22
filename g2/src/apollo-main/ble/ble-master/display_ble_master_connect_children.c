@@ -44,10 +44,12 @@ void audio_ble_master_set_target(const uint8_t *address,const char *name,uint8_t
                 "[ble.master]_g_targetName : %s",audio_ble_master_target_name);
     }
 }
+/* Stock 0x004A2168 (auth_mode_set) */
 uint32_t audio_ble_master_auth_mode_set(uint8_t mode) {
     if(mode<0x5au) audio_ble_master_auth_mode=mode;
     return audio_ble_master_auth_mode!=0u;
 }
+/* Stock 0x004A2618 (central_schedule_master_connect_004a2618) */
 void audio_ble_master_schedule_connect(uint32_t delay,uint8_t use_alternate_event) {
     audio_ble_master_cancel_retry();
     audio_ble_master_connect_state=2u;

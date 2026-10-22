@@ -1,0 +1,299 @@
+address	payload	library	note
+0x517E18	g2-apollo-main	NemaVG nema_vg.o	stroke_cubic_decasteljau (u-04)
+0x519290	g2-apollo-main	NemaVG nema_vg.o	stroke_quadratic_decasteljau (u-04)
+0x51A660	g2-apollo-main	NemaVG nema_vg.o	transform_arc (u-04)
+0x51A694	g2-apollo-main	NemaVG nema_vg.o	render_arc (u-04)
+0x51A8EC	g2-apollo-main	NemaVG nema_vg.o	fill_arc (u-04)
+0x51B140	g2-apollo-main	NemaVG nema_vg.o	fill_rounded_cap-like (u-04)
+0x00302508	g2-em9305	EM9305 SDK	 em_vendor_rom_stub blocked-probable startup/vector default-handler stubs (pre-QPC port)
+0x0030251C	g2-em9305	EM9305 SDK	IRQHandler_SWI0 libs/third_party/QPC/lib_QPC.a:qk_port.s.obj blocked(EM port) 
+0x003025D0	g2-em9305	EM9305 SDK	QK_noPreemption libs/third_party/QPC/lib_QPC.a:qk_port.s.obj blocked(EM port) 
+0x003025DC	g2-em9305	EM9305 SDK	QK_restoreContext libs/third_party/QPC/lib_QPC.a:qk_port.s.obj blocked(EM port) 
+0x003025F8	g2-em9305	EM9305 SDK	IRQHandler_SWI1 libs/third_party/QPC/lib_QPC.a:qk_port.s.obj blocked(EM port) 
+0x00304BB4	g2-em9305	EM9305 SDK	EMSG_CallWeakFunction libs/em_system/lib_em_system_emcore.a:EMSG_CallWeakFunction.c.obj blocked 
+0x00304BF8	g2-em9305	EM9305 SDK	EMSG_CallWeakFunction_Callback libs/em_system/lib_em_system_emcore.a:EMSG_CallWeakFunction.c.obj blocked 
+0x00304C0C	g2-em9305	EM9305 SDK	 em_vendor_system blocked-probable lib_em_system EMSG_* vendor HCI cmd handlers (opcodes 0xFC42/0xFC4F table)
+0x00304CAC	g2-em9305	EM9305 SDK	EMSG_GetEmCoreInformation libs/em_system/lib_em_system_di04.a:EMSG_GetEmCoreInformation.c.obj blocked 
+0x00304CDC	g2-em9305	EM9305 SDK	 em_vendor_rom_wrapper blocked-probable lib_em_system EMSG_* handler (opcode 0xFC41)
+0x00304CF0	g2-em9305	EM9305 SDK	EMSG_SetBootModeFlags libs/em_system/lib_em_system_emcore.a:EMSG_SetBootModeFlags.c.obj blocked 
+0x00304D20	g2-em9305	EM9305 SDK	EMSG_SetBootModeFlags_Callback libs/em_system/lib_em_system_emcore.a:EMSG_SetBootModeFlags.c.obj blocked 
+0x00304D88	g2-em9305	EM9305 SDK	EMSG_SetPublicAddress libs/third_party/emb/lib_emb_peripheral_legacy.a:EMSG_SetPublicAddress.c.obj blocked 
+0x00304DB0	g2-em9305	EM9305 SDK	EMSG_SetRssiOffset libs/em_system/lib_em_system_emcore.a:EMSG_SetRssiOffset.c.obj blocked 
+0x00304DDC	g2-em9305	EM9305 SDK	EMSG_SetSleepOptions libs/em_system/lib_em_system_emcore.a:EMSG_SetSleepOptions.c.obj blocked 
+0x00304E10	g2-em9305	EM9305 SDK	EMSG_SetUartBaudRate libs/em_system/lib_em_system_emcore.a:EMSG_SetUartBaudRate.c.obj blocked 
+0x00304E4C	g2-em9305	EM9305 SDK	EMSG_SetUartBaudRate_Callback libs/em_system/lib_em_system_emcore.a:EMSG_SetUartBaudRate.c.obj blocked 
+0x00304E74	g2-em9305	EM9305 SDK	EMSG_SvldMeasurement libs/em_system/lib_em_system_emcore.a:EMSG_SvldMeasurement.c.obj blocked 
+0x00304EB4	g2-em9305	EM9305 SDK	 unknown blocked-probable lib_em_system EMSG/EMSMM empty weak body
+0x00304EBC	g2-em9305	EM9305 SDK	EMSMM_NVMEraseFull libs/em_system/lib_em_system_di03.a:EMSMM_NVMEraseFull.c.obj blocked 
+0x00304EFC	g2-em9305	EM9305 SDK	EMSMM_NVMEraseMain libs/em_system/lib_em_system_di03.a:EMSMM_NVMEraseMain.c.obj blocked 
+0x00304F44	g2-em9305	EM9305 SDK	EMSMM_NVMErasePage libs/em_system/lib_em_system_di03.a:EMSMM_NVMErasePage.c.obj blocked 
+0x00304FA4	g2-em9305	EM9305 SDK	EMSMM_ReadAtAddress libs/em_system/lib_em_system_emcore.a:EMSMM_ReadAtAddress.c.obj blocked 
+0x00305020	g2-em9305	EM9305 SDK	EMSMM_WriteAtAddress libs/em_system/lib_em_system_emcore.a:EMSMM_WriteAtAddress.c.obj blocked 
+0x0030509C	g2-em9305	EM9305 SDK	EMSMM_WriteContinue libs/em_system/lib_em_system_di03.a:EMSMM_WriteContinue.c.obj blocked 
+0x00305104	g2-em9305	EM9305 SDK	 em_vendor_system blocked-probable lib_em_system EMSMM/EMSRC handlers (NVM magic 0x53535353/0xa9a9a9a9)
+0x003051D4	g2-em9305	EM9305 SDK	EMSRC_EmCoreReceiver154TestEnd libs/em_system/lib_em_system_emcore.a:EMSRC_ReceiverTestEnd.c.obj blocked 
+0x0030523C	g2-em9305	EM9305 SDK	EMSRC_EmCoreReceiverTest libs/em_system/lib_em_system_emcore.a:EMSRC_ReceiverTest.c.obj blocked 
+0x00305284	g2-em9305	EM9305 SDK	EMSRC_EmCoreReceiverTestEnd libs/em_system/lib_em_system_emcore.a:EMSRC_ReceiverTestEnd.c.obj blocked 
+0x003052DC	g2-em9305	EM9305 SDK	EMSRC_EmCoreScan15_4 libs/em_system/lib_em_system_emcore.a:EMSRC_Scan15_4.c.obj blocked 
+0x00305328	g2-em9305	EM9305 SDK	EMSRC_EmCoreStartAdvPattern libs/em_system/lib_em_system_emcore.a:EMSRC_StartAdvPattern.c.obj blocked 
+0x00305358	g2-em9305	EM9305 SDK	EMSRC_EmCoreTransmitterTest libs/em_system/lib_em_system_emcore.a:EMSRC_TransmitterTest.c.obj blocked 
+0x003053B4	g2-em9305	EM9305 SDK	EMSRC_EmCoreTransmitterTestEnd libs/em_system/lib_em_system_emcore.a:EMSRC_TransmitterTestEnd.c.obj blocked 
+0x00305448	g2-em9305	EM9305 SDK	EMSRC_ReceiverTest libs/third_party/emb/lib_emb_peripheral_legacy.a:EMSRC_ReceiverTest.c.obj blocked 
+0x003054F0	g2-em9305	EM9305 SDK	 em_vendor_system blocked-probable lib_em_system EMSRC_* handler (opcode 0xFCC6)
+0x0030555C	g2-em9305	EM9305 SDK	EMSRC_SetRfPower libs/third_party/emb/lib_emb_peripheral_legacy.a:EMSRC_SetRfPower.c.obj blocked 
+0x003055AC	g2-em9305	EM9305 SDK	EMSRC_TransmitterTest libs/third_party/emb/lib_emb_peripheral_legacy.a:EMSRC_TransmitterTest.c.obj blocked 
+0x003055F8	g2-em9305	EM9305 SDK	EMSRC_TransmitterTestEnd EMSRC_TransmitterTestEnd.c.obj blocked 
+0x00305658	g2-em9305	EM9305 SDK	EMSRC_setAOADCteConfig libs/third_party/emb/lib_emb_peripheral_legacy.a:EMSRC_AOADSettings.c.obj blocked 
+0x003056AC	g2-em9305	EM9305 SDK	EMSS_LeDecrypt libs/em_system/lib_em_system_emcore.a:EMSS_LeDecrypt.c.obj blocked 
+0x0030573C	g2-em9305	EM9305 SDK	EMSS_LeDecryptKC libs/em_system/lib_em_system_emcore.a:EMSS_LeDecryptKC.c.obj blocked 
+0x003057B8	g2-em9305	EM9305 SDK	EMSS_LeEncrypt libs/em_system/lib_em_system_emcore.a:EMSS_LeEncrypt.c.obj blocked 
+0x00305844	g2-em9305	EM9305 SDK	EMSS_LeEncryptKC libs/em_system/lib_em_system_emcore.a:EMSS_LeEncryptKC.c.obj blocked 
+0x003058C0	g2-em9305	EM9305 SDK	EMSS_LeRand libs/em_system/lib_em_system_emcore.a:EMSS_LeRand.c.obj blocked 
+0x0030592C	g2-em9305	EM9305 SDK	em_system_command_gap em9305-ghidra-residual-round4 blocked-probable lib_em_system EMSS/EMSystem memory commands (ghidra
+0x00305944	g2-em9305	EM9305 SDK	 em_vendor_system blocked-probable lib_em_system EMSS/EMSystem memory command core
+0x00305AB4	g2-em9305	EM9305 SDK	EMSystem_TransmitCM libs/em_system/lib_em_system_emcore.a:EMSRC_RfUtils.c.obj blocked 
+0x00305B1C	g2-em9305	EM9305 SDK	IRQHandler_ArcTimer0 irq_system_isr.c.obj blocked 
+0x00305BE0	g2-em9305	EM9305 SDK	IRQHandler_ArcTimer1 irq_system_isr.c.obj blocked 
+0x00305CA4	g2-em9305	EM9305 SDK	IRQHandler_GPIO libs/em_hw_api/lib_em_hw_api_di03.a:irq_system_isr.c.obj blocked 
+0x00305D84	g2-em9305	EM9305 SDK	IRQHandler_PmlClock libs/em_hw_api/lib_em_hw_api_di03.a:irq_system_isr.c.obj blocked 
+0x00305E68	g2-em9305	EM9305 SDK	IRQHandler_PmlSvld libs/pml/lib_pml_di03.a:pml_volt_monitor.c.obj blocked 
+0x00305F74	g2-em9305	EM9305 SDK	IRQHandler_ProtocolTimerOutCmp7 libs/em_hw_api/lib_em_hw_api_di03.a:irq_system_isr.c.obj blocked 
+0x00306050	g2-em9305	EM9305 SDK	IRQHandler_ProtocolTimerOutCmp0 libs/third_party/emb/lib_emb_peripheral_legacy.a:pal_frc.c.obj blocked 
+0x003061E4	g2-em9305	EM9305 SDK	IRQHandler_ProtocolTimerOutCmp3 libs/third_party/emb/lib_emb_peripheral_legacy.a:pal_frc.c.obj blocked 
+0x003062AC	g2-em9305	EM9305 SDK	IRQHandler_ProtocolTimerSync libs/em_hw_api/lib_em_hw_api_di03.a:irq_system_isr.c.obj blocked 
+0x00306384	g2-em9305	EM9305 SDK	IRQHandler_RadioRx radio_irq.c.obj blocked 
+0x00306440	g2-em9305	EM9305 SDK	IRQHandler_RadioTx radio_irq.c.obj blocked 
+0x003064FC	g2-em9305	EM9305 SDK	IRQHandler_RcCalib libs/rc_calib/lib_rc_calib.a:rc_calib.c.obj blocked 
+0x0030660C	g2-em9305	EM9305 SDK	IRQHandler_SWI7 libs/em_hw_api/lib_em_hw_api_di03.a:irq_system_isr.c.obj blocked 
+0x003066E8	g2-em9305	EM9305 SDK	IRQHandler_SleepTimerFullVal libs/em_hw_api/lib_em_hw_api_di03.a:irq_system_isr.c.obj blocked 
+0x003067B8	g2-em9305	EM9305 SDK	IRQHandler_SleepTimerOutCmp3 libs/em_hw_api/lib_em_hw_api_di03.a:irq_system_isr.c.obj blocked 
+0x00306968	g2-em9305	EM9305 SDK	IRQ_Restore libs/em_hw_api/lib_em_hw_api_di03.a:irq.c.obj blocked 
+0x003069B8	g2-em9305	EM9305 SDK	 unknown blocked-probable lib_em_hw_api irq.c IRQ_Set* callback store
+0x003069C4	g2-em9305	EM9305 SDK	IRQ_Store libs/em_hw_api/lib_em_hw_api_di03.a:irq.c.obj blocked 
+0x00306B14	g2-em9305	EM9305 SDK	LctrClearAdvSets libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_adv_slave_ae.c.obj blocked 
+0x00306B70	g2-em9305	EM9305 SDK	LctrConfigureDataPath libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_iso.c.obj blocked 
+0x00306E2C	g2-em9305	EM9305 SDK	LctrGenerateP256KeyPair libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_main_sc.c.obj blocked 
+0x00306ED4	g2-em9305	EM9305 SDK	LctrGetConnectionAcceptTimeout libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_iso.c.obj blocked 
+0x00306EE8	g2-em9305	EM9305 SDK	LctrGetExtAdvTxPowerLevel libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_adv_slave_ae.c.obj blocked 
+0x00306F70	g2-em9305	EM9305 SDK	LctrGetPerAdvChanMap libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_adv_slave_ae.c.obj blocked 
+0x00306F8C	g2-em9305	EM9305 SDK	LctrGetPerScanChanMap libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_adv_master_ae.c.obj blocked 
+0x003074C0	g2-em9305	EM9305 SDK	LctrIsoRxTest libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_iso.c.obj blocked 
+0x00307504	g2-em9305	EM9305 SDK	LctrIsoTestEnd libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_iso.c.obj blocked 
+0x00307564	g2-em9305	EM9305 SDK	LctrIsoTxTest libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_iso.c.obj blocked 
+0x003081A4	g2-em9305	EM9305 SDK	LctrReadIsoLinkQual libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_iso.c.obj blocked 
+0x003081DC	g2-em9305	EM9305 SDK	LctrReadIsoTxSync libs/third_party/emb/lib_emb_controller_iso.a:lctr_main_iso.c.obj blocked 
+0x00308308	g2-em9305	EM9305 SDK	LctrRejectCisReq lctr_main_cis_slave.c.obj blocked 
+0x00308368	g2-em9305	EM9305 SDK	LctrRemoveAdvSet libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_adv_slave_ae.c.obj blocked 
+0x003083A4	g2-em9305	EM9305 SDK	LctrRemoveCig libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_cis_master.c.obj blocked 
+0x0030843C	g2-em9305	EM9305 SDK	LctrRemoveIsoDataPath libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_iso.c.obj blocked 
+0x00308780	g2-em9305	EM9305 SDK	LctrSetAuxOffsetDelay libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_adv_slave_ae.c.obj blocked 
+0x00308B4C	g2-em9305	EM9305 SDK	LctrSetDefaultSubrate libs/third_party/emb/lib_emb_pawr_synchronizer.a:lctr_main_ecu.c.obj blocked 
+0x00308BA8	g2-em9305	EM9305 SDK	LctrSetExtAdvData libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_adv_slave_ae.c.obj blocked 
+0x00308C44	g2-em9305	EM9305 SDK	LctrSetExtAdvDataFragLen libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_adv_slave_ae.c.obj blocked 
+0x00308ECC	g2-em9305	EM9305 SDK	LctrSetExtAdvSetRandAddr libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_adv_slave_ae.c.obj blocked 
+0x00308F28	g2-em9305	EM9305 SDK	LctrSetExtAdvTxPhyOptions libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_adv_slave_ae.c.obj blocked 
+0x00308F54	g2-em9305	EM9305 SDK	LctrSetExtScanRespData libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_adv_slave_ae.c.obj blocked 
+0x0030A100	g2-em9305	EM9305 SDK	LctrSlvBisTerminateBig libs/third_party/emb/lib_emb_controller_iso.a:lctr_main_bis_slave.c.obj blocked 
+0x0030A564	g2-em9305	EM9305 SDK	LctrTxIso libs/third_party/emb/lib_emb_controller_iso.a:lctr_main_iso.c.obj blocked 
+0x0030AE90	g2-em9305	EM9305 SDK	LhciSendEvent libs/third_party/emb/lib_emb_peripheral_legacy.a:lhci_evt.c.obj blocked 
+0x0030C930	g2-em9305	EM9305 SDK	LlRecvAclData ll_main_conn.c.obj blocked 
+0x0030C934	g2-em9305	EM9305 SDK	LlRecvAclDataComplete ll_main_conn.c.obj blocked 
+0x0030C938	g2-em9305	EM9305 SDK	LlRecvIsoData ll_main_iso.c.obj blocked 
+0x0030C93C	g2-em9305	EM9305 SDK	LlRecvIsoDataComplete ll_main_iso.c.obj blocked 
+0x0030CB7C	g2-em9305	EM9305 SDK	LlReset libs/third_party/emb/lib_emb_peripheral_legacy.a:ll_init.c.obj blocked 
+0x0030CF2C	g2-em9305	EM9305 SDK	LlSetBdAddr libs/third_party/emb/lib_emb_peripheral_legacy.a:ll_main.c.obj blocked 
+0x0030EB0C	g2-em9305	EM9305 SDK	NVMEntry_CopyJLITable libs/nvm_entry/lib_nvm_entry.a:nvm_entry.c.obj blocked 
+0x0030EB48	g2-em9305	EM9305 SDK	NVM_AfterOperation libs/nvm/lib_nvm_fix.a:nvm_fix.c.obj blocked 
+0x0030EC9C	g2-em9305	EM9305 SDK	NVM_BeforeOperation libs/nvm/lib_nvm_fix.a:nvm_fix.c.obj blocked 
+0x0030ECF8	g2-em9305	EM9305 SDK	nvm_operation_gap em9305-ghidra-residual-round3 blocked-probable lib_nvm_fix / nvm_entry NVM_* (SPIM+QF init, C-runtime 
+0x0030EF14	g2-em9305	EM9305 SDK	NVM_ErasePage libs/nvm/lib_nvm_fix.a:nvm_fix.c.obj blocked 
+0x0030EF44	g2-em9305	EM9305 SDK	NVM_InitCopy libs/em_core/lib_em_core.a:initcopy.c.obj blocked 
+0x0030F014	g2-em9305	EM9305 SDK	application_sleep_gap em9305-ghidra-residual-round4 blocked-probable lib_nvm_fix NVM_* write path
+0x0030F1CC	g2-em9305	EM9305 SDK	PML_AutomaticSleepModeDisable libs/pml/lib_pml_di03.a:pml.c.obj blocked 
+0x0030F1F8	g2-em9305	EM9305 SDK	PML_ClearConfigurationModeFlag libs/em_system/lib_em_system_emcore.a:EMSG_ClearBootModeFlags.c.obj blocked 
+0x0030F208	g2-em9305	EM9305 SDK	PML_ClearModeFlag libs/em_system/lib_em_system_emcore.a:EMSG_ClearBootModeFlags.c.obj blocked 
+0x0030F218	g2-em9305	EM9305 SDK	PML_ConfigWakeByStInHfClk libs/pml/lib_pml_di03.a:pml.c.obj blocked 
+0x0030F250	g2-em9305	EM9305 SDK	PML_ConfigWakeByStInSysClkWithBootTimeComp libs/pml/lib_pml_di03.a:pml.c.obj blocked 
+0x0030F374	g2-em9305	EM9305 SDK	PML_GoToSleep libs/pml/lib_pml_di03.a:pml.c.obj blocked 
+0x0030F568	g2-em9305	EM9305 SDK	PML_IsCPUSleepAllowed libs/pml/lib_pml_di03.a:pml.c.obj blocked 
+0x0030F57C	g2-em9305	EM9305 SDK	PML_IsItOkToGoToSleep libs/pml/lib_pml_di03.a:pml.c.obj blocked 
+0x0030F60C	g2-em9305	EM9305 SDK	PML_IsVendorSleepAutomatic libs/pml/lib_pml_di03.a:pml.c.obj blocked 
+0x0030F970	g2-em9305	EM9305 SDK	PML_UpdateDcdcParameters libs/pml/lib_pml_di03.a:pml_power.c.obj blocked 
+0x0030FA08	g2-em9305	EM9305 SDK	PML_UseLfXtalClk libs/pml/lib_pml_di03.a:pml.c.obj blocked 
+0x00310A4C	g2-em9305	EM9305 SDK	ProtTimer_RestoreAdjust libs/prot_timer/lib_prot_timer.a:prot_timer.c.obj blocked 
+0x00310AA8	g2-em9305	EM9305 SDK	ProtTimer_RestoreConfig libs/prot_timer/lib_prot_timer.a:prot_timer.c.obj blocked 
+0x00310B08	g2-em9305	EM9305 SDK	ProtTimer_RestoreStart libs/prot_timer/lib_prot_timer.a:prot_timer.c.obj blocked 
+0x00310B54	g2-em9305	EM9305 SDK	 em_vendor_system blocked-probable lib_prot_timer ProtTimer_* IRQ-enable mask
+0x00310B84	g2-em9305	EM9305 SDK	ProtTimer_SetConfiguration libs/prot_timer/lib_prot_timer.a:prot_timer.c.obj blocked 
+0x00310B94	g2-em9305	EM9305 SDK	ProtTimer_SetDivider libs/prot_timer/lib_prot_timer.a:prot_timer.c.obj blocked 
+0x003111A0	g2-em9305	EM9305 SDK	QF_onStartupExt libs/third_party/QPC/lib_QPC.a:bsp.c.obj blocked(EM port) 
+0x00311218	g2-em9305	EM9305 SDK	QF_resume libs/third_party/emb/lib_emb_peripheral_legacy.a:wsf_os.c.obj blocked 
+0x003117E8	g2-em9305	EM9305 SDK	Q_onAssertExt libs/third_party/QPC/lib_QPC.a:bsp.c.obj blocked(EM port) 
+0x00311AB4	g2-em9305	EM9305 SDK	RF_HandleInterrupt_Rx libs/radio/lib_radio.a:radio_irq.c.obj blocked 
+0x00311CE8	g2-em9305	EM9305 SDK	RF_Init libs/radio/lib_radio.a:radio_common.c.obj blocked 
+0x00311D2C	g2-em9305	EM9305 SDK	RF_InitHw libs/radio/lib_radio.a:radio_common.c.obj blocked 
+0x00311DB8	g2-em9305	EM9305 SDK	RF_IrqConfigure libs/radio/lib_radio.a:radio_irq.c.obj blocked 
+0x00311F70	g2-em9305	EM9305 SDK	RF_SetCteDeltaRxTime libs/radio/lib_radio.a:radio_ble_cte.c.obj blocked 
+0x00311F84	g2-em9305	EM9305 SDK	 unknown blocked-probable lib_radio RF_Set* setter (0x805fdc)
+0x00312260	g2-em9305	EM9305 SDK	TI_RegisterModule libs/temperature_indicator/lib_temperature_indicator.a:temperature_indicator.c.obj blocked 
+0x003124BC	g2-em9305	EM9305 SDK	RF_TestModeStop libs/radio/lib_radio.a:radio_common.c.obj blocked 
+0x003125A4	g2-em9305	EM9305 SDK	sleep_pre_manager_entry em9305-ghidra-residual-round3 blocked-probable lib_sleep_manager SLEEP_MANAGER_* pre-sleep
+0x003126E0	g2-em9305	EM9305 SDK	sleep_manager_go_to_sleep em9305-ghidra-residual-round3 blocked-probable lib_sleep_manager SLEEP_MANAGER_* go-to-sleep
+0x003128E4	g2-em9305	EM9305 SDK	SLEEP_MANAGER_RCCAL_Callback libs/sleep_manager/lib_sleep_manager.a:sleep_manager.c.obj blocked 
+0x0031376C	g2-em9305	EM9305 SDK	SleepTimer_Init libs/sleep_timer/lib_sleep_timer.a:sleep_timer.c.obj blocked 
+0x00313778	g2-em9305	EM9305 SDK	 unknown blocked-probable lib_sleep_timer SleepTimer_* empty body
+0x003137B4	g2-em9305	EM9305 SDK	SleepTimer_SetWakeupTime libs/sleep_timer/lib_sleep_timer.a:sleep_timer.c.obj blocked 
+0x003137FC	g2-em9305	EM9305 SDK	System_Restore libs/em_hw_api/lib_em_hw_api_di03.a:system.c.obj blocked 
+0x00313880	g2-em9305	EM9305 SDK	System_Save libs/em_hw_api/lib_em_hw_api_di03.a:system.c.obj blocked 
+0x0031398C	g2-em9305	EM9305 SDK	 em_vendor_system blocked-probable lib_pml pml_volt_monitor VoltMon_* (ROM calls)
+0x00313B60	g2-em9305	EM9305 SDK	VoltMon_GetFlagLimitRf10dBm libs/pml/lib_pml_di03.a:pml_volt_monitor.c.obj blocked 
+0x00313B70	g2-em9305	EM9305 SDK	VoltMon_GetFlagLimitRf3dBm libs/pml/lib_pml_di03.a:pml_volt_monitor.c.obj blocked 
+0x00313B84	g2-em9305	EM9305 SDK	VoltMon_GetFlagLimitRf4dBm libs/pml/lib_pml_di03.a:pml_volt_monitor.c.obj blocked 
+0x00313B98	g2-em9305	EM9305 SDK	VoltMon_GetFlagLimitRf5dBm libs/pml/lib_pml_di03.a:pml_volt_monitor.c.obj blocked 
+0x00313BAC	g2-em9305	EM9305 SDK	VoltMon_GetFlagLimitRf6dBm libs/pml/lib_pml_di03.a:pml_volt_monitor.c.obj blocked 
+0x00313F98	g2-em9305	EM9305 SDK	 em_vendor_rom_wrapper blocked-probable lib_emb wsf_heap WsfHeap* ROM wrapper
+0x00313FB8	g2-em9305	EM9305 SDK	 em_vendor_rom_wrapper blocked-probable lib_emb wsf_heap WsfHeap* ROM wrapper
+0x00314068	g2-em9305	EM9305 SDK	WsfOsInitOnly libs/third_party/emb/lib_emb_peripheral_legacy.a:wsf_os.c.obj blocked 
+0x003140A8	g2-em9305	EM9305 SDK	WsfOsRegisterTaskInitCback wsf_os.c.obj blocked 
+0x00314250	g2-em9305	EM9305 SDK	WsfTaskMsgQueue wsf_os.c.obj blocked 
+0x00315658	g2-em9305	EM9305 SDK	bsp_LinkLayerTimeEventCallback libs/third_party/emb/lib_emb_peripheral_legacy.a:emb_bsp.c.obj blocked 
+0x003172EC	g2-em9305	EM9305 SDK	lctrBigTxCtrlQueuePeek libs/third_party/emb/lib_emb_controller_iso.a:lctr_main_bis.c.obj blocked 
+0x00317534	g2-em9305	EM9305 SDK	lctrBisFlushStaleSdus libs/third_party/emb/lib_emb_controller_iso.a:lctr_main_bis.c.obj blocked 
+0x00317890	g2-em9305	EM9305 SDK	lctrBisTxQueuePeek libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_main_bis.c.obj blocked 
+0x003191AC	g2-em9305	EM9305 SDK	lctrDecodeCtrlCasePduRejectInd libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x003191C4	g2-em9305	EM9305 SDK	lctrDecodeCtrlCasePduVersionInd libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x00319204	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCaseDefault lctr_pdu_conn.c.obj blocked 
+0x00319208	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduChReportingInd libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x00319234	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduChStatusInd libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x00319268	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduChannelMapInd libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x00319298	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduCisInd libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x003192C0	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduCisReq libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x003192E8	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduCisRsp libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x00319310	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduCisTermInd libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x00319338	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduConnParamReq libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x0031935C	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduConnParamRsp lctr_pdu_conn.c.obj blocked 
+0x0031936C	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduConnUpdateInd libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x003193D8	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduCteReq libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x00319400	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduCteRsp libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x00319450	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduMinUsedChainInd libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x003194CC	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduPerFeatureReq libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x003194F4	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduPeriodicSyncInd libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x00319518	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduPeriodicSyncWrInd libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x0031953C	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduPhyReq libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x00319564	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduPhyRsp lctr_pdu_conn.c.obj blocked 
+0x00319574	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduPhyUpdateInd libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x003195A0	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduPwrChangeInd libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x003195CC	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduPwrCtrlReq libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x003195F4	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduPwrCtrlRsp libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x00319620	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduRejectExtInd libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x00319644	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduSubrateInd libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x00319698	g2-em9305	EM9305 SDK	lctrDecodeCtrlPduCasePduSubrateReq libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_pdu_conn.c.obj blocked 
+0x0031AFD4	g2-em9305	EM9305 SDK	lctrGetBigRefTime libs/third_party/emb/lib_emb_controller_iso.a:lctr_main_bis_slave.c.obj blocked 
+0x00320588	g2-em9305	EM9305 SDK	lctrMstInitExecuteSm libs/third_party/emb/lib_emb_peripheral_legacy.a:lctr_sm_init_master.c.obj blocked 
+0x003217F0	g2-em9305	EM9305 SDK	lctrMstPerScanExecuteSm lctr_sm_adv_master_ae.c.obj blocked 
+0x00327FE4	g2-em9305	EM9305 SDK	lctrSlvAdvExecuteSm lctr_sm_adv_slave.c.obj blocked 
+0x003288B0	g2-em9305	EM9305 SDK	lctrSlvBigBeginOp libs/third_party/emb/lib_emb_controller_iso.a:lctr_isr_bis_slave.c.obj blocked 
+0x00329230	g2-em9305	EM9305 SDK	lctrSlvBisSetupTxData libs/third_party/emb/lib_emb_controller_iso.a:lctr_isr_bis_slave.c.obj blocked 
+0x003292F4	g2-em9305	EM9305 SDK	lctrSlvBisTxCompletionInterleaved libs/third_party/emb/lib_emb_controller_iso.a:lctr_isr_bis_slave.c.obj blocked 
+0x00329368	g2-em9305	EM9305 SDK	lctrSlvBisTxCompletionSequential libs/third_party/emb/lib_emb_controller_iso.a:lctr_isr_bis_slave.c.obj blocked 
+0x003293E0	g2-em9305	EM9305 SDK	lctrSlvBisTxControl libs/third_party/emb/lib_emb_controller_iso.a:lctr_isr_bis_slave.c.obj blocked 
+0x00329464	g2-em9305	EM9305 SDK	lctrSlvBisTxData libs/third_party/emb/lib_emb_controller_iso.a:lctr_isr_bis_slave.c.obj blocked 
+0x0032CFF2	g2-em9305	EM9305 SDK	lctrCisLlcpActIntPeerDisc libs/third_party/emb/lib_emb_peripheral_advext.a:lctr_act_cis.c.obj blocked 
+0x0032E5A8	g2-em9305	EM9305 SDK	lhciCmdVsExtInterfaceEM libs/third_party/emb/lib_emb_peripheral_legacy.a:lhci_cmd_vs_ext.c.obj blocked 
+0x0032E5D4	g2-em9305	EM9305 SDK	lhciCommonDecodeCmdPkt libs/third_party/emb/lib_emb_controller_iso.a:lhci_cmd.c.obj blocked 
+0x00331AC0	g2-em9305	EM9305 SDK	lhciReset libs/third_party/emb/lib_emb_peripheral_legacy.a:lhci_main.c.obj blocked 
+0x00332B70	g2-em9305	EM9305 SDK	lhciVsExtDecodeCmdPkt libs/third_party/emb/lib_emb_peripheral_legacy.a:lhci_cmd_vs_ext.c.obj blocked 
+0x00333404	g2-em9305	EM9305 SDK	palFrcExpiryHandler pal_frc.c.obj blocked 
+0x003335F4	g2-em9305	EM9305 SDK	receiverTestCheckParameters libs/third_party/emb/lib_emb_peripheral_legacy.a:emcore_compat.c.obj blocked 
+0x00333674	g2-em9305	EM9305 SDK	scan15_4CheckParameters libs/em_system/lib_em_system_emcore.a:parameter_checks.c.obj blocked 
+0x00333C24	g2-em9305	EM9305 SDK	validate libs/em_core/lib_em_core.a:initcopy.c.obj blocked 
+0x00333C44	g2-em9305	EM9305 SDK	wsfDispatcherThread libs/third_party/emb/lib_emb_peripheral_legacy.a:wsf_os.c.obj blocked 
+0x00333DB8	g2-em9305	EM9305 SDK	wsfTask_initial wsf_os.c.obj blocked 
+0x51B8F0	g2-apollo-main	NemaVG nema_vg.o	draw_start_cap (u-05; mnemonic sim 0.63, prologue 23/32 bytes vs SDK5.2 IAR nema_vg.o)
+0x51BF7C	g2-apollo-main	NemaVG nema_vg.o	draw_end_cap (u-05; mnemonic sim 0.71, prologue 25/32)
+0x51C5EC	g2-apollo-main	NemaVG nema_vg.o	draw_caps (u-05; draw_start_cap+draw_end_cap inlined, tail clears ctx+0x114/+0x118 and calls nema_vg_set_error 0x51565C)
+0x5202EC	g2-apollo-main	NemaVG nema_vg.o	nema_vg_draw_path (u-05; mnemonic sim 0.91, prologue 29/32)
+0x522400	g2-apollo-main	NemaVG nema_vg.o	nema_vg_init_stencil_prealloc (stock version differs from archive; 182 vs 138 bytes) (u-06)
+0x5225FC	g2-apollo-main	NemaGFX nema_programHW.o	nema_get_context (6-byte getter, byte-identical; returns 0x200709ec) (u-06)
+0x522622	g2-apollo-main	NemaGFX nema_programHW.o	enable_scaling (exact archive match) (u-06)
+0x522848	g2-apollo-main	NemaGFX nema_programHW.o	nema_set_matrix_all (exact archive match) (u-06)
+0x522974	g2-apollo-main	NemaGFX nema_programHW.o	nema_set_gradient_fx (same size, version differs) (u-06)
+0x522A24	g2-apollo-main	NemaGFX nema_programHW.o	nema_raster_triangle_f (u-06)
+0x522B30	g2-apollo-main	NemaGFX nema_programHW.o	nema_raster_rounded_rect (u-06)
+0x522E9C	g2-apollo-main	NemaGFX nema_programHW.o	nema_raster_quad_fx (u-06)
+0x522F1C	g2-apollo-main	NemaGFX nema_programHW.o	calculate_steps_from_radius (exact archive match) (u-06)
+0x522F50	g2-apollo-main	NemaGFX nema_programHW.o	line_intersection_point (exact archive match) (u-06)
+0x522FB4	g2-apollo-main	NemaGFX nema_programHW.o	nema_raster_circle (u-06)
+0x523284	g2-apollo-main	NemaGFX nema_programHW.o	nema_raster_circle_aa (u-06)
+0x52330C	g2-apollo-main	NemaGFX nema_programHW.o	nema_raster_stroked_arc_aa (u-06)
+0x523674	g2-apollo-main	NemaGFX nema_programHW.o	nema_raster_stroked_arc_aa_mask (u-06)
+0x523A34	g2-apollo-main	NemaGFX nema_programHW.o	nema_raster_triangle_fan_f entry (count<3 early return; 6+436 = archive 442 bytes) (u-06)
+0x523A3A	g2-apollo-main	NemaGFX nema_programHW.o	nema_raster_triangle_fan_f body (u-06)
+0x524218	g2-apollo-main	NemaVG (static helper)	fast inverse sqrt (0x5f3759df), called only from NemaVG stroker; no archive symbol (u-06)
+0x524260	g2-apollo-main	NemaGFX nema_math.o	nema_atan (followed by exact nema_f2fx 0x5242cc) (u-06)
+0x4B10C0	g2-apollo-main	NemaGFX nema_graphics.o	nema_init (a-19; 240 B, same size as archive, opcode match 0.55 before relocations)
+0x4B14CA	g2-apollo-main	NemaGFX nema_graphics.o	nema_set_clip2 (a-19; 52 B, halfword match 0.85)
+0x4B14FE	g2-apollo-main	NemaGFX nema_graphics.o	nema_supports_clip2 (a-19; 24 B, halfword match 0.83)
+0x4B1794	g2-apollo-main	NemaGFX nema_graphics.o	nema_bind_lut_tex (a-19; 520 B vs archive 522, halfword match 0.63)
+0x4B199C	g2-apollo-main	NemaGFX nema_graphics.o	nema_set_gradient (a-19; 220 B, halfword match 0.76)
+0x51D2E0	g2-apollo-main	NemaVG nema_vg.o	stroke_path (a-44; stock 9390 B vs SDK5.2 IAR archive 7100 B, mnemonic sim 0.60 best; same prologue push/vpush d8-d15 + 0x48-byte memset; callers: nema_vg_draw_path 0x5202EC x2; callees stroke_cubic/quadratic_decasteljau, fill_arc, draw_start/end_cap, nema_vg_set_error 0x51565C)
+0x51F798	g2-apollo-main	NemaVG nema_vg.o	stroke_dashed_path (a-45/a-44; 0x51F798..0x5202CF, only caller nema_vg_draw_path 0x5202EC; calls stroke_cubic/quadratic_decasteljau 0x517E18/0x519290, fill_arc 0x51A8EC, nema_vg_set_error 0x51565C; FP heavy)
+0x516E0C	g2-apollo-main	NemaVG nema_vg.o	fill-path helper (a-43; 990 B; callers nema_vg_draw_path 0x5202EC at 0x521B9C/0x521BD4; emits GPU cmd-list register writes 0x10c/0x128/0x320..0x354 via 0x514AEC, calls 0x5156B8); blocked (license)
+0x5171F8	g2-apollo-main	NemaVG nema_vg.o	fill-path helper (a-43; 1424 B; callers nema_vg_draw_path 0x5202EC at 0x520CE0/0x521C2C); blocked (license)
+0x00302A1C	g2-em9305	Packetcraft/EM Bleu BLE 5.4 controller (proprietary, LL_VER_NUM=28992, no public source)	residual-r1; b AOAD_Init veneer + controller stack init 0x302a20 (PalSysInit/PalBbLoadCfg/PalCfgLoadData/LlInitControllerInit/LlSetBdAddr/WsfTimerInit); registered as WSF task-init by 0x304610
+0x0030611C	g2-em9305	Packetcraft/EM Bleu BLE 5.4 controller (proprietary, LL_VER_NUM=28992, no public source)	residual-r1; interrupt-save wrapper (rtie) around palFrcExpiryHandler 0x333404 (PAL FRC timer IRQ)
+0x00306A20	g2-em9305	Packetcraft/EM Bleu BLE 5.4 controller (proprietary, LL_VER_NUM=28992, no public source)	residual-r1; lctr CIS/link command provider: lctrFindCisByHandle-style lookup, WsfMsgAlloc msg 0x2501, WsfMsgSend
+0x0030B0F0	g2-em9305	Packetcraft/EM Bleu BLE 5.4 controller (proprietary, LL_VER_NUM=28992, no public source)	residual-r1; LCTR/LMGR ISO/BIS init veneers (LctrMstBisInit/LctrSlvBisInit/LmgrIsoInit)
+0x0030FAB0	g2-em9305	Packetcraft/EM Bleu BLE 5.4 controller (proprietary, LL_VER_NUM=28992, no public source)	residual-r1; empty return + tail branches to PalRadioStop 0x310580
+0x00311C14	g2-em9305	Packetcraft/EM Bleu BLE 5.4 controller (proprietary, LL_VER_NUM=28992, no public source)	residual-r1; radio/RF event IRQ body (0xF00860 status, RF_Stop/RF_UpdateLdoAntConfig callees)
+0x00319414	g2-em9305	Packetcraft/EM Bleu BLE 5.4 controller (proprietary, LL_VER_NUM=28992, no public source)	residual-r1; lctrDecodeCtrlPdu case helpers (lctrUnpackDataLengthPdu/lctrUnpackFeaturePdu, 0x19 unknown-PDU), lctr_pdu_conn.c.obj family
+0x0031948C	g2-em9305	Packetcraft/EM Bleu BLE 5.4 controller (proprietary, LL_VER_NUM=28992, no public source)	residual-r1; lctrDecodeCtrlPdu case helpers (feature bit 0x805a97, 0x19 unknown-PDU), lctr_pdu_conn.c.obj family
+0x003196EC	g2-em9305	Packetcraft/EM Bleu BLE 5.4 controller (proprietary, LL_VER_NUM=28992, no public source)	residual-r1; lctrDecodeCtrlPdu case helpers (len check ==2, 0x19), lctr_pdu_conn.c.obj family
+0x00007E68	g2-touch	Cypress/Infineon Em_EEPROM (Cypress EULA)	CalcChecksum residual-r1; CRC-8 seed 0xFF poly 0x31 MSB-first; Em_EEPROM 2.60 checksum helper
+0x5F9F14	g2-apollo-main	NemaGFX nema_interpolators.o	nema_interpolate_rect_colors (a-68; same algorithm as build/u05/nema_interpolators.o, different register schedule; tail-calls nema_set_gradient 0x4B199C)
+0x514D2C	g2-apollo-main	NemaGFX nema_cmdlist.o	nema_cl_enough_space (final-r2; mnemonic sim 1.00, 42 insns; follows exact nema_cl_wait 0x514D00)
+0x515148	g2-apollo-main	NemaVG nema_vg_paint.o	bind_tex1_according_paint (final-r2; sim 0.86; follows exact nema_vg_paint_set_paint_color 0x515136)
+0x51520C	g2-apollo-main	NemaVG nema_vg_paint.o	set_matrix_according_paint (final-r2; sim 0.97)
+0x515304	g2-apollo-main	NemaVG nema_vg_context.o	context_reset (final-r2; sim 0.95)
+0x5155D6	g2-apollo-main	NemaVG nema_vg_context.o	nema_vg_get_context (final-r2; 6-byte getter, follows context_reset as in archive)
+0x5156B8	g2-apollo-main	NemaVG nema_vg.o	process_path_vertex (final-r2; archive order precedes exact nema_raster_quad_f_ 0x516B34; stock 5244 B vs archive 1756 B, sim 0.37; callers fill helpers 0x516E0C/0x5171F8, stroke_path, stroke_dashed_path)
+0x516B34	g2-apollo-main	NemaVG nema_vg.o	nema_raster_quad_f_ (final-r2; exact relocation-masked byte match, 170 B)
+0x516BDE	g2-apollo-main	NemaVG nema_vg.o	raster_triangle_fan_ (final-r2; by archive order after nema_raster_quad_f_; stock 164 B vs 102 B, sim 0.49)
+0x516C82	g2-apollo-main	NemaVG nema_vg.o	set_vertex_matrix (final-r2; sim 0.93)
+0x516CF8	g2-apollo-main	NemaVG nema_vg.o	fill_cubic (final-r2; sim 0.77, archive order)
+0x51778C	g2-apollo-main	NemaVG nema_vg.o	stock-only setter of NemaVG ctx+0x114 (final-r2; no archive symbol; callers set_matrix_according_paint and stroker 0x5639E8..0x567230; draw_caps clears same field)
+0x517796	g2-apollo-main	NemaVG nema_vg.o	stock-only setter of NemaVG ctx+0x118 (final-r2; companion of 0x51778C)
+0x5177A4	g2-apollo-main	NemaVG nema_vg.o	check_points_coincident (final-r2; sim 1.00)
+0x51785C	g2-apollo-main	NemaVG nema_vg.o	is_point_inside_stroked_line (final-r2; sim 0.98)
+0x5179D0	g2-apollo-main	NemaVG nema_vg.o	draw_join (final-r2; sim 0.88)
+0x55F74C	g2-apollo-main	Nordic nrf_fuel_gauge	nrf_fuel_gauge_ext_state_update (final-r2; inside brief range 0x55F74C..0x55FA20; -EINVAL=-22 checks; extern nrf_fuel_gauge_ext_state_update_55f74c)
+0x55F848	g2-apollo-main	Nordic nrf_fuel_gauge	nrf_fuel_gauge_process (final-r2; extern nrf_fuel_gauge_process_55f848)
+0x55F994	g2-apollo-main	Nordic nrf_fuel_gauge	nrf_fuel_gauge_tte_get (final-r2; real 6-byte tail-call to 0x58EABC + pool; inventory end 0x58EAC2 is an oversized-envelope artifact)
+0x55F9A0	g2-apollo-main	Nordic nrf_fuel_gauge	nrf_fuel_gauge_ttf_get (final-r2; calls 0x58EAC4)
+0x5619F2	g2-apollo-main	NemaVG nema_vg.o	nema_mat3x3_mul (final-r3; float 3x3 multiply; callers stroke_cubic/quadratic_decasteljau 0x517E18/0x519290, 0x567230)
+0x56395C	g2-apollo-main	NemaVG nema_vg.o	NemaVG internal (final-r3; float vector helper adjacent to 0x5639E8; not decompiled)
+0x5639E8	g2-apollo-main	NemaVG nema_vg.o	NemaVG internal (final-r3; float args; calls draw_end_cap 0x51BF7C, 0x516B34, 0x52266E, 0x5226B2)
+0x5640E4	g2-apollo-main	NemaVG nema_vg.o	stroker module (final-r3; brief range 0x5640E4..0x56722A)
+0x564974	g2-apollo-main	NemaVG nema_vg.o	stroker module (final-r3)
+0x5653A0	g2-apollo-main	NemaVG nema_vg.o	stroker module (final-r3)
+0x5657D8	g2-apollo-main	NemaVG nema_vg.o	tessellator (final-r3; 6738 B)
+0x567230	g2-apollo-main	NemaVG nema_vg.o	stroke draw (final-r3; calls 0x5657D8, nema_mat3x3_mul 0x5619F2, nema_vg_draw_path 0x5202EC)
+0x5675A8	g2-apollo-main	NemaVG nema_vg.o	raster size setter ctx+0x5c/+0x60 (final-r3; only caller nema_vg_init_stencil_prealloc 0x522400)
+0x5675B4	g2-apollo-main	NemaVG nema_vg.o	raster context init, default 800x600 (final-r3; only caller nema_vg_init_stencil_prealloc 0x522400)
+0x58EAB0	g2-apollo-main	nrf_fuel_gauge libnrf_fuel_gauge.a	state copy helper (final-r3; see findings-hardware-drivers.md fuel-gauge row)
+0x58EAC4	g2-apollo-main	nrf_fuel_gauge libnrf_fuel_gauge.a	fuel-gauge library function (final-r3; listed in brief and findings-hardware-drivers.md; not decompiled)
+0x439CE0	g2-apollo-main	nrf_fuel_gauge libnrf_fuel_gauge.a	library internal; callers 0x43a79c, 0x58eb2a, all in nrf_fuel_gauge (final-r1; placed by address range and call graph; no reconstruction)
+0x439E9C	g2-apollo-main	nrf_fuel_gauge libnrf_fuel_gauge.a	library internal; callers 0x439d66, 0x43a2ce, 0x43a6dc, all in nrf_fuel_gauge (final-r1; placed by address range and call graph; no reconstruction)
+0x439F24	g2-apollo-main	nrf_fuel_gauge libnrf_fuel_gauge.a	library internal; callers 0x439d7c, 0x43a2e4, 0x43a6f2, all in nrf_fuel_gauge (final-r1; placed by address range and call graph; no reconstruction)
+0x439FB4	g2-apollo-main	nrf_fuel_gauge libnrf_fuel_gauge.a	library internal; callers 0x439dd6, 0x43a33e, 0x43a74c, 0x43a8aa, 0x43a93c, all in nrf_fuel_gauge (final-r1; placed by address range and call graph; no reconstruction)
+0x439FE4	g2-apollo-main	nrf_fuel_gauge libnrf_fuel_gauge.a	library internal; callers 0x439e52, 0x43b7ca, all in nrf_fuel_gauge (final-r1; placed by address range and call graph; no reconstruction)
+0x43A0F4	g2-apollo-main	nrf_fuel_gauge libnrf_fuel_gauge.a	library internal; callers 0x439ea4, 0x439f2c, 0x43a01c, 0x43a074 (+4), all in nrf_fuel_gauge (final-r1; placed by address range and call graph; no reconstruction)
+0x43A1B0	g2-apollo-main	nrf_fuel_gauge libnrf_fuel_gauge.a	library internal; callers 0x43c1fc, 0x55f968, all in nrf_fuel_gauge (final-r1; placed by address range and call graph; no reconstruction)
+0x43A5DC	g2-apollo-main	nrf_fuel_gauge libnrf_fuel_gauge.a	library internal; callers 0x43a518, 0x43b7ea, 0x43b80c, all in nrf_fuel_gauge (final-r1; placed by address range and call graph; no reconstruction)
+0x43A698	g2-apollo-main	nrf_fuel_gauge libnrf_fuel_gauge.a	library internal; callers 0x55f8ca, all in nrf_fuel_gauge (final-r1; placed by address range and call graph; no reconstruction)
+0x43BA6C	g2-apollo-main	nrf_fuel_gauge libnrf_fuel_gauge.a	library internal; callers 0x43a7a8, all in nrf_fuel_gauge (final-r1; placed by address range and call graph; no reconstruction)
+0x43BB14	g2-apollo-main	nrf_fuel_gauge libnrf_fuel_gauge.a	library internal; callers 0x43ab16, 0x43abbe, 0x43ac7e, all in nrf_fuel_gauge (final-r1; placed by address range and call graph; no reconstruction)
+0x43BC58	g2-apollo-main	nrf_fuel_gauge libnrf_fuel_gauge.a	library internal; callers 0x43abca, 0x43ac8e, all in nrf_fuel_gauge (final-r1; placed by address range and call graph; no reconstruction)
+0x43BC84	g2-apollo-main	nrf_fuel_gauge libnrf_fuel_gauge.a	library internal; callers 0x43afe4, all in nrf_fuel_gauge (final-r1; placed by address range and call graph; no reconstruction)
+0x43BE18	g2-apollo-main	nrf_fuel_gauge libnrf_fuel_gauge.a	library internal; callers 0x43b072, all in nrf_fuel_gauge (final-r1; placed by address range and call graph; no reconstruction)
+0x43BFAC	g2-apollo-main	nrf_fuel_gauge libnrf_fuel_gauge.a	library internal; callers 0x43b242, all in nrf_fuel_gauge (final-r1; placed by address range and call graph; no reconstruction)

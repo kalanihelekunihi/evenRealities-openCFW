@@ -14,6 +14,7 @@ static const char function[]="AppDbHandlePairingFailure";
  if((audio_log_flags()&1u)||(audio_log_flags()&4u)) \
   (void)compressed_log_output(mask,compact,compact,##__VA_ARGS__); \
 } while(0)
+/* Stock 0x47C568 (FUN_0047c568, AppDbHandlePairingFailure) */
 void audio_ble_pair_failure(uint8_t conn,uint8_t status) {
     LOG(4u,0x872u,0x10800000u,
         "AppDbHandlePairingFailure: Processing pairing failure for connId=%d, status=0x%02x",

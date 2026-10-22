@@ -7,6 +7,7 @@ volatile uint8_t audio_uart_case_sensor_a
 volatile uint8_t audio_uart_case_sensor_b
     __attribute__((section(".g2_ram_2007418e"), used));
 
+/* Stock 0x4ACAD0 (BoxDetect case status: peer in case or peer lid open) */
 uint32_t audio_uart_case_status(void)
 {
     if (audio_uart_case_status_disabled != 0u)

@@ -16,6 +16,7 @@ uint32_t audio_td_active_record_count(void) {
     return count>10u?10u:count;
 }
 
+/* Stock 0x5ECAAC (current_session_index_signed) */
 int32_t audio_td_current_session_index_signed(void) {
     const uint8_t *active=audio_td_active_session();
     if(active==0) return -1;

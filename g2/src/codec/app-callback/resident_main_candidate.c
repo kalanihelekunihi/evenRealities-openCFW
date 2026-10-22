@@ -11,6 +11,7 @@ extern uint32_t gx8002_xip_mode_tick_102085f8(void);
 extern void gx8002_xip_app_event_tick_10208d48(void);
 extern void gx8002_xip_main_exit_10207a7c(void);
 
+/* Stock 0x10026314 (gx8002_main) */
 uint32_t gx8002_resident_main_26314(void)
 {
     gx8002_xip_lvp_system_initialize_102078a4();

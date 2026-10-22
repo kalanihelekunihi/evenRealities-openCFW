@@ -4,6 +4,9 @@
  */
 #include <stdint.h>
 
+/* Stock 0x4c072c: AmbiqSuite 5.1.0 am_hal_mspi.c mspi_dummy_callback (generated with external linkage). */
+extern void mspi_dummy_callback(void *context, uint32_t status);
+
 extern uint64_t g2_main_cq_reserve_538ece(uint32_t, uint32_t,
                                             uint32_t, uint32_t);
 extern uint32_t g2_main_cq_commit_538fb4(uint32_t, uint32_t);
@@ -70,7 +73,7 @@ uint32_t g2_main_mspi_transfer_descriptor_candidate(
     if (callback == 0u && state[0x20eu] == 0u &&
         *(const volatile uint8_t *)(uintptr_t)(controller + 0x82cu) == 0u &&
         (state[0x216u] >> 1u) <= state[0x217u])
-        callback = UINT32_C(0x004c072d);
+        callback = (uint32_t)(uintptr_t)&mspi_dummy_callback;
     state[(index & 0xffu) + 10u] = callback;
     state[(index & 0xffu) + 0x10au] = cfg[5];
 

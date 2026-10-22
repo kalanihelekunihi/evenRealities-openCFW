@@ -8,23 +8,9 @@ extern uint32_t audio_uart_font_rb_erase(void *,void *);
 extern void *audio_uart_font_cache_entry_at(void *,uint32_t);
 extern void audio_uart_font_cache_entry_init(void *,void *,uint32_t);
 extern void *audio_uart_lv_cache_lru_link_5c2be4(void *,void *);
-static void previous(volatile uint32_t *list,uint32_t node,uint32_t value)
-{ if(node!=0u) *(volatile uint32_t *)(uintptr_t)(list[0]+node)=value; }
-static void next(volatile uint32_t *list,uint32_t node,uint32_t value)
-{ if(node!=0u) *(volatile uint32_t *)(uintptr_t)(list[0]+node+4u)=value; }
-void *audio_uart_lv_list_prepend_482b12(uint32_t *list)
-{
-    volatile uint32_t *l=list;
-    void *node=audio_uart_lv_malloc(l[0]+8u);
-    uint32_t n=(uint32_t)(uintptr_t)node;
-    if(node==0) return 0;
-    previous(l,n,0u);
-    next(l,n,l[1]);
-    if(l[1]!=0u) previous(l,l[1],n);
-    l[1]=n;
-    if(l[2]==0u) l[2]=n;
-    return node;
-}
+/* Retired: stock 0x482b12 is upstream lv_ll_ins_head (lvgl/src/misc/lv_ll.c); this name is a link alias. */
+void *audio_uart_lv_list_prepend_482b12(uint32_t *list);
+/* Stock 0x5C2B00 (alloc_new_node; upstream third-party/upstream/lvgl/src/misc/cache/lv_cache_lru_rb.c) */
 void *audio_uart_font_lru_insert(void *cache,const void *key)
 {
     static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\cache\\lv_cache_lru_rb.c";

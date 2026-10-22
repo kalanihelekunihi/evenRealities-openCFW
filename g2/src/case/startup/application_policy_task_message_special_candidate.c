@@ -8,6 +8,7 @@ static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static __attribute__((noreturn)) void native_fault(void)
 {__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+/* Stock 0x0800C7A8 (case_policy_task_message_special) */
 uint32_t case_policy_task_message_special(uint32_t scheduler,const uint32_t *args,uint32_t notify,uint32_t mode,uint32_t meta)
 {
     if(scheduler==0u)native_fault();

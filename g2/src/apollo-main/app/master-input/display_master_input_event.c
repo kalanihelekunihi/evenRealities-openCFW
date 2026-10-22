@@ -27,6 +27,7 @@ static const char function[]="SendInputEventToPeers";
         (void)compressed_log_output(mask,compact,compact,##__VA_ARGS__); \
 } while(0)
 
+/* Stock 0x465748 (SendInputEventToPeers) */
 int32_t audio_uart_master_input_event(uint32_t device,uint32_t event,
                                        uint32_t value,uint32_t context)
 {

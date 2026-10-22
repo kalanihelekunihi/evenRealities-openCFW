@@ -9,6 +9,7 @@ extern void case_policy_ota_checksum(uint8_t *packet,uint32_t count); /* 0x9b70 
 extern uint32_t case_policy_send_probe(uint32_t side,const uint8_t *packet,uint32_t count,uint32_t reply); /* 0x258c */
 extern uint32_t case_policy_parse_probe(uint32_t side); /* 0x1e94 */
 
+/* Stock 0x08001408 (case_boot_transport_aging_status) */
 uint32_t case_boot_transport_aging_status(void)
 {
     volatile uint8_t *state=(volatile uint8_t *)(uintptr_t)0x2000087cu;

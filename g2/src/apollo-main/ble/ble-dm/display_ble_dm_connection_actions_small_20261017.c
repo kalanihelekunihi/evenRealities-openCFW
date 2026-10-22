@@ -17,19 +17,7 @@ void audio_ble_dm_action_536a86(const uint8_t *ccb, const uint8_t *msg)
     audio_ble_dm_conn_open_536a28(msg[4], msg[17], msg + 11);
 }
 
-void audio_ble_dm_action_55bc5c(const uint8_t *ccb, const uint8_t *msg)
-{
-    (void)ccb;
-    (void)msg;
-    audio_ble_hci_create_conn_cancel_52b0a4();
-    audio_ble_dm_dev_pass_priv_4b2ea6(14u, 1u, 0u, 0u);
-}
 
-void audio_ble_dm_action_55bc70(const uint8_t *ccb, const uint8_t *msg)
-{
-    const uint16_t handle = (uint16_t)ccb[12] | ((uint16_t)ccb[13] << 8);
-    audio_ble_hci_conn_update_52af40(handle, msg + 4);
-}
 
 void audio_ble_dm_action_536ac8(const uint8_t *ccb, const uint8_t *msg)
 {

@@ -29,11 +29,3 @@ uint32_t audio_uart_lv_grid_col_48c990(void *o){return audio_uart_lv_grid_col_48
 uint32_t audio_uart_lv_grid_row_48c99a(void *o){return audio_uart_lv_grid_row_48c900(o,0u);}
 uint32_t audio_uart_lv_grid_col_span_48c9a4(void *o){return audio_uart_lv_grid_col_span_48c8f6(o,0u);}
 uint32_t audio_uart_lv_grid_row_span_48c9ae(void *o){return audio_uart_lv_grid_row_span_48c916(o,0u);}
-uint8_t audio_uart_lv_grid_x_align_48c9b8(void *o){return audio_uart_lv_grid_x_align_48c8ea(o,0u);}
-uint8_t audio_uart_lv_grid_y_align_48c9c2(void *o){return audio_uart_lv_grid_y_align_48c90a(o,0u);}
-uint8_t audio_uart_lv_basic_h_mode_48c9cc(void *o){return audio_uart_lv_grid_h_mode_48c8be(o,0u);}
-uint8_t audio_uart_lv_basic_v_mode_48c9d6(void *o){return audio_uart_lv_grid_v_mode_48c8d4(o,0u);}
-int32_t audio_uart_lv_grid_x_auto_size_48c9e0(void *o)
-{return (int32_t)(audio_uart_lv_grid_x_start_48c87e(o,0u)+audio_uart_lv_grid_x_end_48c888(o,0u));}
-int32_t audio_uart_lv_grid_y_auto_size_48c9fc(void *o)
-{return (int32_t)(audio_uart_lv_grid_y_start_48c86a(o,0u)+audio_uart_lv_grid_y_end_48c874(o,0u));}

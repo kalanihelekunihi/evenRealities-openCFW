@@ -11,6 +11,7 @@ static inline void gx8002_cache_sync_pair(void)
     __asm__ volatile("sync\n\tsync" ::: "memory");
 }
 
+/* Stock 0x100255C4 (gx_dcache_enable) */
 void gx8002_resident_dcache_enable_255c4(void)
 {
     volatile uint32_t *const control =
@@ -21,6 +22,7 @@ void gx8002_resident_dcache_enable_255c4(void)
     gx8002_cache_sync_pair();
 }
 
+/* Stock 0x100255E4 (gx_dcache_disable) */
 void gx8002_resident_dcache_disable_255e4(void)
 {
     volatile uint32_t *const control =
@@ -55,17 +57,20 @@ static void gx8002_cache_lines(uintptr_t address, int32_t bytes, uint32_t op)
     }
 }
 
+/* Stock 0x10025608 (gx_dcache_invalid_range) */
 void gx8002_resident_cache_invalidate_25608(void *address, int32_t bytes)
 {
     gx8002_cache_lines((uintptr_t)address, bytes, 2u);
 }
 
+/* Stock 0x100256C0 (gx_dcache_clean_invalid_range) */
 void gx8002_resident_cache_clean_invalidate_256c0(
     void *address, int32_t bytes)
 {
     gx8002_cache_lines((uintptr_t)address, bytes, 10u);
 }
 
+/* Stock 0x1002571C (gx_icache_enable) */
 void gx8002_resident_icache_enable_2571c(void)
 {
     volatile uint32_t *const control =

@@ -8,19 +8,24 @@ void codec_ring_initialize(uart3_ring_t *q,uint8_t *storage,uint32_t size){
  /* Invalid non-power-of-two assertion path is deliberately outside contract. */
  q->storage=storage;q->mask=size-1;q->read=0;q->write=0;
 }
+/* Stock 0x58FB1C (codec UART3 RX ring write) */
 void codec_rx_callback(const uint8_t *src,uint32_t count){uart3_ring_write((uart3_ring_t *)(uintptr_t)0x20073ed4,src,count);}
+/* Stock 0x0055E8F0 (UART channel RX callback set) */
 void codec_channel_callback(uint32_t channel,uint32_t callback){channel=(uint8_t)channel;if(channel<4&&callback)W(0x20000d2c+channel*28+20)=callback;}
+/* Stock 0x0055E5BC (UART channel enable) */
 uint32_t codec_channel_enable(uint32_t channel){
  channel=(uint8_t)channel;if(channel>=4)return 1;uint32_t d=0x20000d2c+channel*28;
  uint32_t status=codec_hal_power(W(d+4),0,1),pins=W(d+8);
  (void)codec_gpio_config(W(pins+4),W(pins+12));(void)codec_gpio_config(W(pins),W(pins+8));
  B(d+24)=1;return status;
 }
+/* Stock 0x0055E630 (UART channel disable) */
 uint32_t codec_channel_disable(uint32_t channel){
  channel=(uint8_t)channel;if(channel>=4)return 1;uint32_t d=0x20000d2c+channel*28,pins=W(d+8);
  B(d+24)=0;(void)codec_gpio_config(W(pins+4),3);(void)codec_gpio_config(W(pins),0xe083);
  return codec_hal_power(W(d+4),2,1);
 }
+/* Stock 0x0055E898 (UART channel baud set) */
 uint32_t codec_channel_baud(uint32_t channel,uint32_t baud){
  channel=(uint8_t)channel;if(channel>=4)return 1;uint32_t d=0x20000d2c+channel*28;
  if(!B(d+24))return 1;
@@ -41,5 +46,6 @@ int32_t codec_uart_close(void){
  if(codec_channel_disable(3)!=0)return -1;
  B(0x20075015)=0;return 0;
 }
+/* Stock 0x58FAB6 (codec UART3 baud set) */
 int32_t codec_uart_baud(uint32_t baud){return codec_channel_baud(3,baud);}
 int32_t codec_host_initialize(void){int32_t r=codec_uart_initialize();if(r)return r;(void)codec_uart_baud(115200);return 0;}

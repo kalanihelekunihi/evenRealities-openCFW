@@ -20,6 +20,7 @@ static const char function[]="_bleAdvNameSet";
 static uint8_t *word_ptr(uint32_t offset) {
     return *(uint8_t **)(void *)(audio_ble_adv_config_state+offset);
 }
+/* Stock 0x46DD44 (_bleAdvNameSet) */
 void audio_ble_adv_name_set(void) {
     audio_ble_adv_name_buffer[11u]=audio_uart_service_mode()==1u?'R':'L';
     uint8_t *number=word_ptr(12u)+1u;

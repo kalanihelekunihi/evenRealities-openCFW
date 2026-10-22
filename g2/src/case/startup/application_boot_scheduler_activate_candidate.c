@@ -11,6 +11,7 @@ extern uint32_t case_boot_scheduler_ready(void); /* 0xcd20 */
 extern void case_boot_scheduler_run(void); /* 0xc57c */
 static __attribute__((noreturn)) void native_fault(void)
 {__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+/* Stock 0x0800C284 (case_boot_scheduler_activate) */
 void case_boot_scheduler_activate(void)
 {
     uint32_t task=case_boot_task_create(case_boot_idle_task_entry,

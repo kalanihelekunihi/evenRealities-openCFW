@@ -14,6 +14,7 @@ uint32_t case_binary_5e_flash_init(void)
     return (int32_t)regs[5]<0 ? 1u : 0u;
 }
 
+/* Stock 0x08004B20 (case_flag31_set) */
 uint32_t case_binary_5e_flash_finish(void)
 {
     volatile uint32_t *regs=(volatile uint32_t *)(uintptr_t)0x40022000u;

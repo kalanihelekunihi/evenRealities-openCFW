@@ -5,6 +5,7 @@
 #include <stdint.h>
 extern void case_flash_mode_registers(uint32_t snapshot[7]);
 
+/* Stock 0x08002F46 (case_classify_status) */
 uint32_t case_binary_5e_flash_mode(void)
 {
     uint32_t snapshot[7];

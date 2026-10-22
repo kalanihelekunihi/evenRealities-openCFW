@@ -6,6 +6,7 @@
  */
 #include "../pm-callbacks/callbacks.h"
 #include <stddef.h>
+/* Stock 0x00003620 (not in touch.tsv: application PM callback) */
 __attribute__((noinline)) uint32_t touch_app_pm_callback(touch_pm_params *params,uint32_t mode)
 {
     (void)params;(void)mode;return 0;

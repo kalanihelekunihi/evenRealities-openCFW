@@ -18,6 +18,7 @@ extern const struct gx8002_clock_record gx8002_clock_1m_sources_25cd0[2];
 extern void gx8002_resident_clock_source_select_24bcc(
     const struct gx8002_clock_record *record);
 
+/* Stock 0x1002599C (gx8002_clock_lowpower_init_shared) */
 void gx8002_resident_clock_lowpower_init_2599c(void)
 {
     volatile uint32_t *const status =
@@ -42,12 +43,14 @@ void gx8002_resident_clock_lowpower_init_2599c(void)
     }
 }
 
+/* Stock 0x10025A00 (gx8002_audio_lowpower_divider) */
 void gx8002_resident_clock_pair_dividers_zero_25a00(void)
 {
     gx8002_resident_clock_module_divider_24df8(7u, 0u);
     gx8002_resident_clock_module_divider_24df8(8u, 0u);
 }
 
+/* Stock 0x10025A14 (gx8002_clock_switch_1m) */
 void gx8002_resident_clock_switch_1m_25a14(void)
 {
     struct gx8002_clock_record records[2];

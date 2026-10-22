@@ -14,6 +14,7 @@ static uint16_t rd16(uint32_t a){return *(volatile uint16_t *)(uintptr_t)a;}
 static void wr16(uint32_t a,uint16_t v){*(volatile uint16_t *)(uintptr_t)a=v;}
 static uint32_t rd32(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void signal(uint32_t bits){(void)case_boot_sensor_finish_signal(rd32(0x200000f0u),bits);}
+/* Stock 0x08006544 (case_process_frame_byte) */
 void case_boot_sensor_callback_finish(uint32_t descriptor)
 {
     if(rd32(descriptor)!=0x40013800u)return;

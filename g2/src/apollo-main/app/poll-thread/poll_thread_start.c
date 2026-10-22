@@ -65,6 +65,7 @@ static void log1(uint8_t level,uint32_t line,const char *e,const char *c,
         (void)compressed_log_output(((uint32_t)level<<26)|0x400000u,c,c,n);
 }
 
+/* Stock 0x0049137A (init_thread_pool) */
 uint32_t audio_uart_poll_thread_start(void) {
     if(audio_uart_pool_initialized!=0u) {
         log0(2u,0x79u,e_already,c_already);

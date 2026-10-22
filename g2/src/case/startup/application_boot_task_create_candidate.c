@@ -8,6 +8,7 @@ extern void case_boot_task_initialize(void (*entry)(void *),const char *name,
 extern void case_boot_task_register(uint32_t storage); /* 0xac08 */
 static __attribute__((noreturn)) void native_fault(void)
 {__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+/* Stock 0x0800CA06 (case_boot_task_create) */
 uint32_t case_boot_task_create(void (*entry)(void *),const char *name,
                                uint32_t stack_words,void *arg,uint32_t priority,
                                uint32_t stack_end,uint32_t stack_start)

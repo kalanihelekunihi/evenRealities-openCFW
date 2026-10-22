@@ -2,7 +2,7 @@
 
 /* Stock 0x0059823c integer-only double-to-unsigned-64 runtime helper.
  * The caller supplies a finite nonnegative fraction scaled by 2^32. */
-uint64_t __aeabi_d2ulz(double value) {
+__attribute__((pcs("aapcs"))) uint64_t __aeabi_d2ulz(double value) {
     uint64_t bits;
     __builtin_memcpy(&bits, &value, sizeof bits);
     uint32_t const sign = (uint32_t)(bits >> 63);

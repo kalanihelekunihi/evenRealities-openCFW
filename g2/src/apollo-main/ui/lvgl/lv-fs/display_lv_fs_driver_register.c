@@ -11,18 +11,4 @@ static const char format[]="Asserted at expression: %s (%s)";
 static const char expression[]="new_drv != NULL";
 static const char message[]="Out of memory";
 
-void audio_uart_lv_fs_driver_construct_4c7064(void *driver)
-{
-    (void)memset(driver,0,0x34u);
-}
 
-void audio_uart_lv_fs_driver_register_4c706e(void *driver)
-{
-    uint8_t *slot=audio_uart_lv_list_prepend_482b12(
-        (uint32_t *)(void *)(audio_uart_display_lv_root+0x180u));
-    if (slot==0) {
-        audio_uart_lvgl_log(3u,source,0x190u,function,format,expression,message);
-        for (;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
-    }
-    *(void **)(void *)slot=driver;
-}

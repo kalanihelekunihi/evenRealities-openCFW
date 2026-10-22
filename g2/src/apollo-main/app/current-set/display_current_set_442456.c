@@ -25,6 +25,7 @@ static uint32_t word(const uint8_t *row, uint32_t offset)
     return *(const uint32_t *)(const void *)(row + offset);
 }
 
+/* Stock 0x442456 (register_all_foreground_ui_pages) */
 int32_t audio_uart_display_current_set(uint32_t type, uint32_t app_id)
 {
     if (type != 2u) return -1;

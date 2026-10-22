@@ -11,6 +11,7 @@ extern uint32_t case_binary_5e_flash_program(uint32_t operation,uint32_t address
 extern uint32_t case_binary_5e_flash_finish(void);
 extern uint32_t case_legacy_logger(const char *format,...);
 static uint32_t pack(const uint8_t *p){return ((uint32_t)p[0]<<24)|((uint32_t)p[1]<<16)|((uint32_t)p[2]<<8)|p[3];}
+/* Stock 0x08003664 (case_legacy_set_sn) */
 uint32_t case_legacy_set_sn(const uint8_t *bytes)
 {
     volatile uint32_t *cfg=(volatile uint32_t *)(uintptr_t)0x200001a4u;

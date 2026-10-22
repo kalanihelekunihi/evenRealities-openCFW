@@ -10,6 +10,7 @@ extern void gx8002_resident_reset_entry_23500(void);
 extern void gx8002_resident_exception_bridge_23640(void);
 extern void gx8002_resident_irq_compact_entry_25574(void);
 
+/* Stock 0x10023400 (gx8002_application_vectors_vectors) */
 const uintptr_t gx8002_resident_vectors_23400[64]
     __attribute__((section(".gx8002.vectors.23400"), used,
                    aligned(4))) = {

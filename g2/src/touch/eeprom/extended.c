@@ -4,6 +4,7 @@
 #include "provider.h"
 #include "history.h"
 static uint32_t div32(uint32_t n,uint32_t d) { uint32_t q=0;for(unsigned k=32;k;k--) {unsigned i=k-1;if(d<=(n>>i)){n-=d<<i;q+=1u<<i;}}return q; }
+/* Stock 0x00007F6C (CalculateRowChecksum) */
 uint8_t touch_row_checksum(const uint8_t *row,uint32_t size) {
  uint8_t crc=0xff; /* stock +1 byte, not conventional +4 */
  for(uint16_t i=0;i!=size-4u;i++) { crc^=row[1u+i];for(unsigned j=0;j<8;j++)crc=(uint8_t)((crc<<1)^((crc&0x80)?0x31u:0)); }
@@ -14,6 +15,7 @@ static uint32_t next_row(uint32_t address,const uint8_t *context) {
  uint32_t end=base+row*(*(const uint16_t *)context)*context[12];
  address+=(row>>2)*4u;return address>=end?base:address;
 }
+/* Stock 0x00008808 (ReadExtendedMode) */
 uint32_t touch_extended_write(uint32_t address,const uint8_t *data,uint32_t size,uint8_t *context) {
  uint32_t capacity=*(uint16_t *)(context+22),rows=div32(size-1u,capacity)+1u,sequence[2];
  touch_integrity(sequence,context);

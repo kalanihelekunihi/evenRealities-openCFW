@@ -56,6 +56,7 @@ static void release_node(void *node) {
     audio_file_heap_free((void *)(uintptr_t)word(node,8u));
     audio_file_heap_free(node);
 }
+/* Stock 0x45E024 (_MasterDisplayCmd_Listener) */
 uint32_t audio_uart_send_begin_type2(uint32_t unused,void *message,
                                       uint32_t unused3,uint32_t unused4) {
     (void)unused;(void)unused3;(void)unused4;

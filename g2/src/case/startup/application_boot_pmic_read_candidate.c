@@ -46,7 +46,9 @@ static uint32_t guarded_read(uint32_t selector,uint8_t *out,uint32_t count,uint3
     }
     return selector;
 }
+/* Stock 0x080035B8 (case_run_guarded) */
 uint32_t case_init_selfcheck_read(uint32_t selector,uint8_t *out,uint32_t count)
 {return guarded_read(selector,out,count,case_policy_timer_device_read);}
+/* Stock 0x080035D4 (peripheral_transaction_guard) */
 uint32_t case_init_pmic_read(uint32_t selector,uint8_t *out,uint32_t count)
 {return guarded_read(selector,out,count,case_init_pmic_device_read);}

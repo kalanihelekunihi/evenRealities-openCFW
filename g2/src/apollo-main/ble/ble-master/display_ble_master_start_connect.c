@@ -16,6 +16,7 @@ static const char module[]="ble.master";
 static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\platform\\ble\\app_ble_central.c";
 static const char function[]="APP_MasterSysStartTryConnectRing";
 static const char name_seed[14]={'E','V','E','N',' ','R','1','\0','r','i','n','g','M','a'};
+/* Stock 0x004A23AC (APP_MasterSysStartTryConnectRing) */
 void audio_ble_master_start_try_connect_ring(void) {
     if(audio_uart_ring_active()==0u) {
         if(audio_log_level()&2u)

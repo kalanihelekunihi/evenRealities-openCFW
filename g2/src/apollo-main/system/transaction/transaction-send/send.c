@@ -28,6 +28,7 @@ static const char response_format[] =
 static const char simple_response[] =
     "[codec.host]Response received: cmd=0x%04X(NR=0x%02X, TYPE=0x%02X), seq=0x%02X, flags=0x%02X";
 
+/* Stock 0x57C512 (gx8002_send_and_wait_response) */
 int32_t audio_send_transaction(uint32_t code, uint32_t family,
                                uint32_t payload, uint32_t length,
                                uint32_t flags, void *transaction,

@@ -7,8 +7,10 @@ extern uint32_t case_boot_option_status_b(void); /* 0x3ec0 */
 extern uint32_t case_boot_option_wait(uint32_t ticks); /* 0x3f6c */
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
+/* Stock 0x08003ED4 (case_flash_control_update) */
 static void program(uint32_t clear,uint32_t first,uint32_t second) /* 0x3ed4 */
 {wr(0x40022020u,(rd(0x40022020u)&~(clear|0xffu))|first|second);}
+/* Stock 0x08004A6C (case_boot_option_write) */
 uint32_t case_boot_option_write(const uint32_t *words)
 {
     volatile uint8_t *busy=(volatile uint8_t *)(uintptr_t)0x20000f98u;

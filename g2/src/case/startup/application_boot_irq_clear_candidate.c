@@ -3,6 +3,7 @@
  * and 0x4d00 are BX LR and have no side effect.
  */
 #include <stdint.h>
+/* Stock 0x08004D04 (case_dispatch_pending) */
 void case_boot_irq_clear(uint32_t mask)
 {
     volatile uint32_t *const status=(volatile uint32_t *)(uintptr_t)0x40021800u;

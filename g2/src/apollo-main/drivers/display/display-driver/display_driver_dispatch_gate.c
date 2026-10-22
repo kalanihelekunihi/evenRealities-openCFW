@@ -22,6 +22,7 @@ static void denied(uint32_t line,const char *message,const char *short_message) 
     if((audio_log_flags()&1u)!=0u || (audio_log_flags()&4u)!=0u)
         (void)compressed_log_output(0x08000000u,short_message,short_message);
 }
+/* Stock 0x46B238 (SVC_Settings_UledCtrlCheck) */
 uint32_t display_driver_dispatch_gate(void) {
     if(audio_uart_command_pending()==1u) return 1u;
     if(audio_ota_transfer_active()!=0u) {

@@ -26,12 +26,35 @@ typedef uint8_t TF_COUNT;
 #define TF_USE_MUTEX 0
 
 /*
- * This is a port seam, not upstream TinyFrame. Production admission must bind
- * it to the reviewed G2 logger adapter without importing application policy
- * into the authenticated upstream snapshot.
+ * TF_Error is the G2 two-sink error log (stock TinyFrame.c, e.g.
+ * TF_InitStatic 0x491752..0x4917A0). When audio_log_flags() 0x43D0CE has
+ * bit 1, EasyLogger elog_output() 0x43D574 receives level 1, tag "TinyFrame"
+ * (ROM 0x78C6C8), the IAR source path (ROM 0x6FE474), __func__, __LINE__
+ * and "[TF] :error " format "\n"; when it has bit 0 or bit 2,
+ * compressed_log_output() 0x43CE9E receives 0x04000000 | (argument count
+ * << 22) and "[TinyFrame][TF] :error " format "\n" twice (ROM 0x71A188).
+ * The ten stock line numbers are the generated TinyFrame.c's (pinned + 3
+ * before TF_ClaimTx, + 5 after TF_InitStatic).
  */
-void open_cfw_tinyframe_error(const char *format, ...);
-#define TF_Error(format, ...) \
-    open_cfw_tinyframe_error((format), ##__VA_ARGS__)
+#include <stdint.h>
+uint32_t audio_log_flags(void);
+void elog_output(uint8_t level, const char *tag, const char *file,
+                 const char *func, const long line, const char *format, ...);
+uint32_t compressed_log_output(uint32_t flags, const char *format,
+                               const char *text, ...);
+#define G2_TF_SOURCE_PATH \
+    "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\TinyFrame\\TinyFrame.c"
+/* Every TF_Error in TinyFrame.c passes at most one argument. */
+#define TF_Error(format, ...)                                                 \
+    do {                                                                      \
+        if (audio_log_flags() & 2u)                                           \
+            elog_output(1u, "TinyFrame", G2_TF_SOURCE_PATH, __func__,         \
+                        __LINE__, "[TF] :error " format "\n", ##__VA_ARGS__);  \
+        if ((audio_log_flags() & 1u) || (audio_log_flags() & 4u))             \
+            (void)compressed_log_output(                                      \
+                0x04000000u __VA_OPT__(| (1u << 22)),                         \
+                "[TinyFrame][TF] :error " format "\n",                        \
+                "[TinyFrame][TF] :error " format "\n", ##__VA_ARGS__);        \
+    } while (0)
 
 #endif

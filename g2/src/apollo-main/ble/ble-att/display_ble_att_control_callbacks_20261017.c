@@ -19,19 +19,4 @@ void audio_ble_attc_ctrl_531330(const void *message)
     }
 }
 
-void audio_ble_atts_ind_ctrl_533c4c(const void *message)
-{
-    const uint8_t connection = (uint8_t)*(const uint16_t *)message;
-    void *const ccb = audio_ble_att_registration_lookup(connection, 0u);
-    if (ccb != 0)
-        audio_ble_atts_ind_ntf_callback_53394c(connection, ccb, 0u);
-}
 
-void audio_ble_atts_ctrl_534c8a(void *message)
-{
-    const uintptr_t *const interface = (const uintptr_t *)(uintptr_t)
-        *(const uint32_t *)(const void *)(audio_ble_atts_state + 0x260u);
-    void (*const callback)(void *) =
-        (void (*)(void *))(uintptr_t)interface[1];
-    callback(message);
-}

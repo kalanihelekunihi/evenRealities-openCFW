@@ -15,19 +15,23 @@ static void configure(void)
     if(state[1]!=1u){state[1]=1u;case_bus_gpio_config(0x50000400u,state);}
 }
 static void delay(uint32_t n){for(volatile int32_t i=0;i<(int32_t)n;++i){}}
+/* Stock 0x0800A188 (case_route_boolean) */
 void case_bus_output_start(uint32_t bit)
 {
     high();configure();high();low();delay(bit?0x5au:0x17u);high();
 }
+/* Stock 0x0800A224 (case_pulse4_extended) */
 void case_bus_output_finish(void)
 {
     high();configure();high();delay(0x17u);low();delay(0x15eu);high();
 }
+/* Stock 0x0800A2A2 (case_emit_bits) */
 void case_bus_output_send(uint32_t value,uint32_t first)
 {
     uint32_t bit=first==1u?6u:7u;
     do{case_bus_output_start((value>>bit)&1u);--bit;}while((int32_t)bit>=0);
 }
+/* Stock 0x0800C42C (case_transform_word) */
 uint32_t case_bus_output_poll(uint32_t *word)
 {
     uint32_t bit=0u;

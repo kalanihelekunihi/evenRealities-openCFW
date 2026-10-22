@@ -4,10 +4,14 @@
  */
 #include <stdint.h>
 static volatile uint32_t *const flash=(volatile uint32_t *)(uintptr_t)0x40022000u;
+/* Stock 0x08004BF4 (HAL_FLASH_OB_Unlock) */
 void case_boot_option_prepare(void)
 {if((flash[5]&0x80000000u)!=0u){flash[2]=0x45670123u;flash[2]=0xcdef89abu;}}
+/* Stock 0x08004B6C (HAL_FLASH_Unlock) */
 void case_boot_option_unlock(void)
 {if((flash[5]&0x40000000u)!=0u){flash[3]=0x08192a3bu;flash[3]=0x4c5d6e7fu;}}
+/* Stock 0x08004B3C (case_flag27_set) */
 void case_boot_option_commit_a(void){flash[5]|=0x08000000u;}
+/* Stock 0x08004B50 (case_flag30_set) */
 void case_boot_option_commit_b(void){flash[5]|=0x40000000u;}
 void case_boot_option_commit_c(void){flash[5]|=0x80000000u;}

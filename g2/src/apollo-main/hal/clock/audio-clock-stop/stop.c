@@ -5,6 +5,7 @@
 extern const uint32_t g2_audio_clock_pin_config;
 extern uint32_t g2_codec_pin_function(uint32_t pin, uint32_t config);
 
+/* Stock 0x4C3138 (am_bsp_i2s_pins_disable) */
 void audio_clock_stop(uint32_t group, uint32_t mode) {
     if (group == 0u) {
         (void)g2_codec_pin_function(32u, g2_audio_clock_pin_config);

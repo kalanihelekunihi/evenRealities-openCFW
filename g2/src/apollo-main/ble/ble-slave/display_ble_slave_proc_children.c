@@ -4,11 +4,6 @@ extern uint8_t audio_ble_subsystem_link_state_200719c8[]; /* 0x200719c8 */
 extern uint8_t audio_ble_dm_adv_control[]; /* 0x20073394 */
 extern uint8_t audio_ble_privacy_rows[10u*200u]; /* 0x20067a30 */
 
-uint8_t audio_ble_app_adv_state(void) {
-    for(uint8_t i=0u;i<2u;i++)
-        if(audio_ble_subsystem_link_state_200719c8[0x57u+i]<3u)return 1u;
-    return 0u;
-}
 uint8_t audio_ble_dm_adv_state(uint8_t index) {
     return index<2u?audio_ble_dm_adv_control[0x1du+index]:0u;
 }

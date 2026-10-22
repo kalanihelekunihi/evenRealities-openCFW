@@ -15,17 +15,20 @@ static const char path[]="D:\\01_workspace\\s200_ap510b_iar_git\\platform\\ble\\
  if((audio_log_flags()&1u)||(audio_log_flags()&4u)) \
   (void)compressed_log_output(mask,short_text,short_text,##__VA_ARGS__); \
 } while(0)
+/* Stock 0x0046F098 (slave_disconnect_restart_adv_work_0046f098) */
 void audio_ble_slave_open_followup(void) {
     LOG(2u,"APP_BleSlaveWaitSecurityRequestEvt",0x2f9u,0x08000000u,
         "WaitSecurityRequestCmd failed disconnect",
         "[ble.Slave]WaitSecurityRequestCmd failed disconnect");
 }
+/* Stock 0x0046F350 (_bleSlaveSyncConnectEvt) */
 void audio_ble_slave_open_watchdog(uint32_t event) {
     LOG(4u,"_bleSlaveSyncConnectEvt",0x332u,0x10400000u,
         "_bleSlaveSyncConnectEvt event = %d",
         "[ble.Slave]_bleSlaveSyncConnectEvt event = %d",event&0xffu);
     audio_ble_slave_security_state((uint8_t)event);
 }
+/* Stock 0x0046EFFC (slave_post_unpair_event_0046effc) */
 void audio_ble_slave_disconnect_followup(uint32_t trusted) {
     audio_ble_slave_mode_context[0x20u]=(trusted!=0u);
     LOG(4u,"APP_SlaveStartSecurityRequestEvent",0x2e4u,0x10400000u,

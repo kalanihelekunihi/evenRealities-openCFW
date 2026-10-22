@@ -6,6 +6,7 @@ extern uint32_t case_wait_condition(void *uart,uint32_t flag,uint32_t expected,
 
 /* Original 0x080066ac. The UART handle and peripheral register window must
  * be live. Tick and wait helpers are separate lower contracts. */
+/* Stock 0x080066AC (case_write_controller_blocking) */
 uint32_t case_write_controller_blocking(void *handle,const uint8_t *data,
                                          uint32_t length,uint32_t timeout)
 {

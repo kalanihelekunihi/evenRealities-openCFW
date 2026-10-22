@@ -1,8 +1,8 @@
 #include <stdint.h>
 
 /* gx8002_read_uart_data, native 0x57c442..0x57c511.
- * Selected codec_response_read owns the blocking framing loop. */
-extern int32_t codec_response_read(uint8_t *buffer, uint16_t capacity,
+ * gx8002_uart_read_blocking (0x57c1fc) owns the blocking framing loop. */
+extern int32_t gx8002_uart_read_blocking(uint8_t *buffer, uint16_t capacity,
                                    uint32_t timeout);
 extern void audio_dump_hex(const char *label, uint32_t width,
                            const void *data, uint32_t length);
@@ -25,11 +25,12 @@ static const char simple_received[] =
     "[codec.host]UART read: %d bytes";
 static const char dump_label[] = "8002_rx";
 
+/* Stock 0x57C442 (gx8002_read_uart_data) */
 int32_t audio_transaction_exchange(void *buffer, uint32_t capacity,
                                     uint16_t *length, uint32_t timeout) {
     if (buffer == 0 || length == 0 || (uint16_t)capacity == 0u)
         return -1;
-    const int32_t result = codec_response_read(buffer, (uint16_t)capacity,
+    const int32_t result = gx8002_uart_read_blocking(buffer, (uint16_t)capacity,
                                                 timeout);
     if (result < 0) {
         if (audio_log_flags() & 2u)

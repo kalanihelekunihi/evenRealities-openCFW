@@ -9,6 +9,7 @@ uint32_t pcm21_after_enable(void) {
     if(W(0x2005665c)==0x1f01600d) {field(0x40020088,W(0x200566c4)>>2,63,0);field(0x400201b0,W(0x200566c4),0x18000,15);}
     return 0;
 }
+/* Stock 0x005A1C18 (PCM2.1 SPOT calibration init) */
 uint32_t pcm21_initialize(void) {
     if((W(0x400201bc)&8) && !(W(0x40021008)&0x8000000)) return 7;
     uint32_t result=stock_info_read(1,0x25c,16,(uint32_t *)(uintptr_t)0x20056660);if(result) return result;

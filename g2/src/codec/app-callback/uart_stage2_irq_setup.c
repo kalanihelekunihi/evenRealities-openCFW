@@ -5,6 +5,7 @@
  */
 #include <stdint.h>
 
+/* Stock 0x100030CC (csi_vic_enable_irq) */
 void gx8002_uart_stage2_vic_enable_30cc(uint32_t irq)
 {
     volatile uint32_t *const enable =

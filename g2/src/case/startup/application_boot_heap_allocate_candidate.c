@@ -10,6 +10,7 @@ static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static __attribute__((noreturn)) void native_fault(void)
 {__asm__ volatile("cpsid i\n1: b 1b" ::: "memory");__builtin_unreachable();}
 
+/* Stock 0x0800AE0C (case_boot_heap_initialize) */
 void case_boot_heap_initialize(void)
 {
     uint32_t start=0x20001c88u;
@@ -32,6 +33,7 @@ void case_boot_heap_initialize(void)
     wr(0x20000190u,0x80000000u);
 }
 
+/* Stock 0x0800B3E8 (pvPortMalloc) */
 uint32_t case_boot_transport_heap_allocate(uint32_t bytes)
 {
     uint32_t result=0u;

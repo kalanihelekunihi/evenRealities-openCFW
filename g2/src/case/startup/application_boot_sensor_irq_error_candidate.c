@@ -9,6 +9,7 @@ static uint32_t mask(void){uint32_t x;__asm volatile("mrs %0, primask":"=r"(x));
 static void setmask(uint32_t x){__asm volatile("msr primask, %0"::"r"(x):"memory");}
 static void clear_locked(uint32_t a,uint32_t bits)
 {uint32_t m=mask();setmask(1u);wr(a,rd(a)&~bits);setmask(m);}
+/* Stock 0x080086F4 (case_reset_context_transfer) */
 void case_boot_sensor_irq_error(uint32_t descriptor)
 {
     uint32_t hw=rd(descriptor);

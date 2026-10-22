@@ -3,8 +3,10 @@
  * and 0xb31c task-return fault policy.
  */
 #include <stdint.h>
+/* Stock 0x080001D8 (case_boot_task_fill) */
 void case_boot_task_fill(uint32_t address,uint32_t count,uint8_t value)
 {volatile uint8_t *p=(volatile uint8_t *)(uintptr_t)address;for(uint32_t i=0u;i<count;++i)p[i]=value;}
+/* Stock 0x0800BFAA (case_boot_task_link_reset) */
 void case_boot_task_link_reset(uint32_t link)
 {*(volatile uint32_t *)(uintptr_t)(link+16u)=0u;}
 __attribute__((noreturn)) void case_boot_task_return(void)
@@ -19,6 +21,7 @@ __attribute__((noreturn)) void case_boot_task_return(void)
     __asm__ volatile("cpsid i\n2: b 2b" ::: "memory");
     __builtin_unreachable();
 }
+/* Stock 0x0800B4C0 (pxPortInitialiseStack) */
 uint32_t case_boot_task_frame(uint32_t top,void (*entry)(void *),void *arg)
 {
     uint32_t *stack=(uint32_t *)(uintptr_t)top;

@@ -30,6 +30,7 @@ static void missing_owner_warning(void) {
         (void)compressed_log_output(0x08000000u, compact, compact);
 }
 
+/* Stock 0x0045ECCA (page anim ready callback) */
 void audio_uart_display_anim_finish_c_45eccb(void *descriptor) {
     uint8_t *page = (uint8_t *)(uintptr_t)get32((const uint8_t *)descriptor);
     uint8_t *entry = (uint8_t *)(uintptr_t)get32(page + 16u);

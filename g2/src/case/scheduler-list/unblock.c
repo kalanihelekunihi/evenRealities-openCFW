@@ -5,6 +5,7 @@
 
 /* Original 0x0800c1cc. Caller holds a suspended scheduler and passes a
  * linked event item whose owner is a live TCB with a linked state item. */
+/* Stock 0x0800C1CC (case_unblock_waiter) */
 void case_unblock_waiter(case_item *event_item,uint32_t event_bits)
 {
     if(CASE_STATE[12]==0u){

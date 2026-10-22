@@ -28,6 +28,7 @@ static uint32_t source_kind(uint32_t base)
     if(base==0x40004c00u||base==0x40005000u||base==0x40013c00u)return 0u;
     return 16u;
 }
+/* Stock 0x08008BD8 (case_boot_sensor_open_validate) */
 uint32_t case_boot_sensor_open_validate(uint32_t d)
 {
     uint32_t hw=rd32(d);

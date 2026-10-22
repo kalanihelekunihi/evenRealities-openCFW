@@ -4,7 +4,10 @@
 static volatile uint32_t *row(uint32_t c){return (volatile uint32_t *)(0x20073324u+8u*(uint8_t)c);}
 uint32_t audio_clock_any(uint32_t c){for(unsigned i=0;i<2;i++)if(row(c)[i])return 1;return 0;}
 uint32_t audio_clock_user(uint32_t c,uint32_t u){return (row(c)[(uint8_t)u>>5]>>(u&31))&1;}
-uint32_t audio_clock_count(uint32_t c){unsigned n=0;for(unsigned i=0;i<2;i++){uint32_t v=row(c)[i];while(v){n+=v&1;v>>=1;}}return (uint8_t)n;}
+/* Stock 0x4c3750 (am_hal_clkmgr calculate_bit_set): SWAR population count. */
+uint32_t audio_clock_bit_count(uint32_t v){v-=(v>>1)&0x55555555u;v=(v&0x33333333u)+((v>>2)&0x33333333u);return (uint8_t)((((v+(v>>4))&0x0f0f0f0fu)*0x01010101u)>>24);}
+/* Stock 0x4c37ca (am_hal_clkmgr_user_count_get): sum of both bitmap words. */
+uint32_t audio_clock_count(uint32_t c){uint32_t n=0;for(unsigned i=0;i<2;i++)n+=audio_clock_bit_count(row(c)[i]);return (uint8_t)n;}
 uint32_t audio_clock_set(uint32_t c,uint32_t u,uint32_t yes){
  if((uint8_t)c>=7||(uint8_t)u>=57)return 6;
  volatile uint32_t *p=row(c)+((uint8_t)u>>5);uint32_t bit=1u<<(u&31);

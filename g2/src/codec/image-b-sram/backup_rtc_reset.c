@@ -22,6 +22,7 @@ uint32_t gx8002_image_b_rtc_irq_100087dc(uint32_t irq)
     return result;
 }
 
+/* Stock 0x10008800 (gx_rtc_start_tick) */
 void gx8002_image_b_rtc_start_tick_10008800(void)
 {
     volatile uint32_t *const rtc =

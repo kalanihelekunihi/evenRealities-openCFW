@@ -17,6 +17,7 @@ static void clock_pulses(uint32_t count,uint32_t pause)
 {
     for(uint32_t i=0u;i<count;++i){pin(0u);spin(pause);pin(1u);spin(pause);}
 }
+/* Stock 0x0800B678 (case_emit_probe_train) */
 void case_policy_reset_pulse(void)
 {
     case_control_write(0x50000000u,8u,1u);

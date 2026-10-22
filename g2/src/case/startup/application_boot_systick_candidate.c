@@ -3,6 +3,7 @@
  */
 #include <stdint.h>
 extern uint32_t case_policy_sensor_divide(uint32_t,uint32_t);
+/* Stock 0x0800C078 (case_boot_systick_start) */
 void case_boot_systick_start(void)
 {
     volatile uint32_t *systick=(volatile uint32_t *)(uintptr_t)0xe000e000u;

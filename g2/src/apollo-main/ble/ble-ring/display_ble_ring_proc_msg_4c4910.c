@@ -57,12 +57,14 @@ static const char dropped_short[] =
 static const char handle_text[] = "ringCb.pRingHdlList[%d] = 0x%04X";
 static const char handle_short[] = "[ble.ring]ringCb.pRingHdlList[%d] = 0x%04X";
 
+/* Stock 0x4C46C0 (ringPackCccdEpochValue) */
 uint32_t audio_ble_ring_cccd_epoch_token(uint8_t connection, uint8_t final,
                                           uint16_t epoch)
 {
     return ((uint32_t)epoch << 16) | ((uint32_t)final << 8) | connection;
 }
 
+/* Stock 0x4C46D0 (_ringEnableCccd) */
 void audio_ble_ring_cccd_enable(uint32_t token)
 {
     struct audio_ble_ring_handler_state *state = &audio_ble_ring_handler_state;
@@ -117,6 +119,7 @@ void audio_ble_ring_receive_data_4c48ac(const uint8_t *message)
     audio_uart_registry_child_4c548c(data, length);
 }
 
+/* Stock 0x4C4910 (APP_BleRingProcMsg) */
 void audio_ble_master_message(uint8_t handler, void *raw)
 {
     (void)handler;

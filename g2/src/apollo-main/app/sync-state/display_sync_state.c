@@ -23,6 +23,7 @@ static const char lock_short[] =
 static const char unlock_short[] =
     "[sync.module.framework]释放全局变量互斥锁失败，错误码: %d";
 
+/* Stock 0x49EB8E (WearDetect state getter, audio_uart_lcd_status) */
 uint32_t audio_uart_lcd_status(void)
 {
     return audio_uart_lcd_status_cell;
@@ -54,6 +55,7 @@ void audio_uart_display_audio_release_45bb58(void)
                                     unlock_short, result);
 }
 
+/* Stock 0x45BBD2 (clear global input-closed flag under lockGlobalVariable) */
 void audio_uart_display_audio_finalize(void)
 {
     audio_uart_display_audio_acquire_45baf0();

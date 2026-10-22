@@ -3,6 +3,7 @@
  * words 0x08004a68 and 0x08003ed0; live registers remain target state.
  */
 #include <stdint.h>
+/* Stock 0x08004A00 (case_build_register_descriptor) */
 void case_flash_mode_registers(uint32_t snapshot[7])
 {
     volatile uint32_t *const regs=(volatile uint32_t *)(uintptr_t)0x40022000u;

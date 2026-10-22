@@ -6,6 +6,7 @@ extern void audio_wsf_msg_send(uint8_t,void *);
 extern uint32_t audio_log_level(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,uint32_t,const char *,...);
 extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
+/* Stock 0x0046EE70 (APP_BleSlaveAdvStartEvent) */
 void audio_ble_phone_advertising_restart(void) {
     uint8_t *message=(uint8_t *)audio_wsf_msg_alloc(12u);
     if(message==0) return;

@@ -14,6 +14,7 @@ static const char not_master[]="not master role, not send";
 static const char not_master_short[]="[pb_service_setting]not master role, not send";
 static const char build_failed[]="Failed to build status package";
 static const char build_failed_short[]="[pb_service_setting]Failed to build status package";
+/* Stock 0x49BE04 (setting_notify_device_status_to_app) */
 uint32_t audio_settings_notify_device_status(void) {
     if(audio_uart_device_role_get()!=1u) {
         if((audio_log_flags()&2u)!=0u)

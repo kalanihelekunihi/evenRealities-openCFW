@@ -6,6 +6,7 @@
 #define B(a) (*(volatile uint8_t *)(uintptr_t)(a))
 static uint32_t valid(uint32_t context) {(void)R(context+4u);return context&&(R(context)&0x01ffffffu)==0x01afafafu;}
 static const uint32_t profile_registers[12]={0x4003800c,0x40038010,0x40038014,0x40038018,0x4003801c,0x40038020,0x40038024,0x40038028,0x40038040,0x4003802c,0x40038030,0x40038200};
+/* Stock 0x42F020 (register_profile_transfer_42f020; am_hal_adc_power_control) */
 __attribute__((noinline))
 uint32_t opencfw_bl_adc_profile_transfer(uint32_t context,uint32_t operation,uint32_t save_restore) {
     if(!valid(context))return 2;
@@ -34,6 +35,7 @@ uint32_t opencfw_bl_adc_profile_transfer(uint32_t context,uint32_t operation,uin
     }
     return 6;
 }
+/* Stock 0x42ea68 (hw_profile_apply_42ea68) */
 __attribute__((noinline))
 uint32_t opencfw_bl_adc_apply_profile(uint32_t context,const void *profile) {
     /* Native 0x42ea6e reads context+4 before its NULL comparison. Preserve

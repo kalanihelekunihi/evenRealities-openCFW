@@ -16,6 +16,7 @@ extern struct wsf_pool_desc_init *audio_wsf_pool_list; /* RAM pointer cell 0x200
 extern volatile uint8_t audio_wsf_pool_count; /* RAM 0x20075044 */
 extern volatile uint16_t audio_wsf_pool_used_bytes; /* RAM 0x20074f4a */
 
+/* Stock 0x530364 (WsfBufInit; upstream third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/port/freertos/wsf_buf.c) */
 uint16_t audio_wsf_buffer_init(uint16_t bytes, void *memory, uint8_t count,
                                const struct wsf_pool_config *config) {
     uint8_t *base=(uint8_t *)memory;

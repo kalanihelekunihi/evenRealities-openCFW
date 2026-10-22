@@ -10,6 +10,7 @@ extern uint32_t case_boot_transport_register_static(uint32_t callback,uint32_t p
     uint32_t mode,uint32_t context,uint32_t trampoline,uint32_t storage); /* 0xccf2 */
 extern void case_boot_transport_entry_8558(uint32_t task); /* stock Thumb 0x8559 */
 
+/* Stock 0x0800AA48 (os_timer_or_thread_create_wrapper) */
 uint32_t case_boot_transport_register(uint32_t callback,uint32_t mode,
                                       uint32_t flags,uint32_t storage)
 {

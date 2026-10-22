@@ -9,6 +9,7 @@ static uint32_t get32(const uint8_t *p) {
            ((uint32_t)p[2]<<16u)|((uint32_t)p[3]<<24u);
 }
 static void set16(uint8_t *p,uint16_t v) { p[0]=(uint8_t)v;p[1]=(uint8_t)(v>>8u); }
+/* Stock 0x4B3416 (appSetAdvScanDataFrag; upstream third-party/upstream/cordio/ble-profiles/sources/af/app_slave.c) */
 void appSetAdvScanDataFrag(uint8_t handle,uint8_t location)
 {
     uint8_t *const state=audio_ble_subsystem_link_state_200719c8;

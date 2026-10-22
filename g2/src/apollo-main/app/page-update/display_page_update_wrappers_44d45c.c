@@ -18,35 +18,5 @@ static const char null_pointer[] = "NULL pointer";
 
 typedef void (*page_update_callback)(void *, uint32_t);
 
-static page_update_callback callback_at(void *page) {
-    uintptr_t raw = *(const uint32_t *)(const void *)((const uint8_t *)page + 0x14u);
-    return (page_update_callback)raw;
-}
 
-void audio_uart_page_update_unbound_44d45c(void *page) {
-    if (page == 0) {
-        audio_uart_lvgl_log(3u, page_source, 0x102u, "lv_group_focus_next",
-                            assertion, group_nonnull, null_pointer);
-        for (;;) { }
-    }
-    const uint32_t changed = audio_uart_page_update_core_44d63a(
-        page, audio_uart_lv_list_first,
-        audio_uart_lv_list_next);
-    page_update_callback const callback = callback_at(page);
-    if (callback != 0 && (uint8_t)changed == 0u)
-        callback(page, 1u);
-}
 
-void audio_uart_page_update_bound_44d4b6(void *page) {
-    if (page == 0) {
-        audio_uart_lvgl_log(3u, page_source, 0x10du, "lv_group_focus_prev",
-                            assertion, group_nonnull, null_pointer);
-        for (;;) { }
-    }
-    const uint32_t changed = audio_uart_page_update_core_44d63a(
-        page, audio_uart_lv_list_first_482ce4,
-        audio_uart_lv_list_next_482cfa);
-    page_update_callback const callback = callback_at(page);
-    if (callback != 0 && (uint8_t)changed == 0u)
-        callback(page, 0u);
-}

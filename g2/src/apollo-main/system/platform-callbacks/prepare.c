@@ -7,6 +7,7 @@ uint32_t audio_platform_auxiliary_active(void) {
     uint32_t value=W(0x40008800);
     return (value&15u)!=0 && !(value&0xc0000000u);
 }
+/* Stock 0x005A410C (PCM2.2 prepare state) */
 void audio_platform_prepare_state(struct power_request *request) {
     unsigned active=request->range==3 || (request->masks[0]&0x3fffffffu)!=0 || (request->masks[1]&0x4c4u)!=0;
     if(!active) active=(W(0x400204d8)&(1u<<29))!=0;

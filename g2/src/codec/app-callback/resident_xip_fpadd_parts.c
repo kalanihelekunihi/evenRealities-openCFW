@@ -8,6 +8,7 @@
  */
 #include <stdint.h>
 
+/* Stock 0x1020BD08 (gx8002_fpadd_parts_nan, data) */
 static const uint32_t opposite_infinity_nan_parts[5] = {0u, 0u, 0u, 0u, 0u};
 
 static uint64_t join_parts(const uint32_t *parts)

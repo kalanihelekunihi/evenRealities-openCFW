@@ -11,6 +11,7 @@ extern uint32_t case_bus_poll(uint32_t *word);
 extern uint32_t case_bus_read(uint32_t byte);
 extern uint32_t case_bus_byte_sample(uint8_t *output); /* 0x0800b5d6 */
 extern void case_bus_response_bit(uint32_t bit);       /* 0x0800a176 */
+/* Stock 0x080004C0 (case_wire_read_register) */
 uint32_t case_bus_input_transaction(uint32_t command,uint32_t index,
                                     uint32_t count,void *output)
 {

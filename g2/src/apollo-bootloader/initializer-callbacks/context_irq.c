@@ -4,6 +4,7 @@
 #include "context_events.h"
 #define W(p,o) (*(volatile uint32_t *)((uintptr_t)(p)+(o)))
 #define NI __attribute__((noinline))
+/* Stock 0x42c672 (hw_interrupt_status_get_42c672) */
 NI uint32_t opencfw_boot_iom_interrupt_status(void *handle,uint32_t enabled,
                                            uint32_t *output) {
     if(!handle || (W(handle,0)&0x01ffffffu)!=0x01123456u) return 2;
@@ -13,6 +14,7 @@ NI uint32_t opencfw_boot_iom_interrupt_status(void *handle,uint32_t enabled,
     if((uint8_t)enabled) status&=W(iom,0x200);
     *output=status;return 0;
 }
+/* Stock 0x42c6b6 (hw_interrupt_clear_42c6b6) */
 NI uint32_t opencfw_boot_iom_interrupt_clear(void *handle,uint32_t status) {
     if(!handle || (W(handle,0)&0x01ffffffu)!=0x01123456u) return 2;
     uint32_t module=W(handle,4);uintptr_t iom=0x40050000u+(module<<12);

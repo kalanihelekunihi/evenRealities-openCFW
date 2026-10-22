@@ -9,6 +9,7 @@ _Static_assert(sizeof(struct gx8002_flash_protect_entry) == 8,
 
 #define ENTRY(a,b,c,d,n) {a,b,c,d,n}
 
+/* Stock 0x1002657C (gx8002_flash_protection_256k) */
 const struct gx8002_flash_protect_entry gx8002_otp_protect_2657c[5]
     __attribute__((section(".gx8002.otp_protect.2657c"), used, aligned(4))) = {
     ENTRY(0x00,0x9c,0x00,0x41,0x00000),
@@ -18,6 +19,7 @@ const struct gx8002_flash_protect_entry gx8002_otp_protect_2657c[5]
     ENTRY(0x1c,0xfc,0x00,0x41,0x40000),
 };
 
+/* Stock 0x100265A4 (gx8002_flash_protection_512k) */
 const struct gx8002_flash_protect_entry gx8002_otp_protect_265a4[7]
     __attribute__((section(".gx8002.otp_protect.265a4"), used, aligned(4))) = {
     ENTRY(0x00,0x9c,0x00,0x41,0x00000),
@@ -29,6 +31,7 @@ const struct gx8002_flash_protect_entry gx8002_otp_protect_265a4[7]
     ENTRY(0x1c,0xfc,0x00,0x41,0x80000),
 };
 
+/* Stock 0x100265DC (gx8002_flash_protection_1024k) */
 const struct gx8002_flash_protect_entry gx8002_otp_protect_265dc[9]
     __attribute__((section(".gx8002.otp_protect.265dc"), used, aligned(4))) = {
     ENTRY(0x00,0x9c,0x00,0x41,0x000000),

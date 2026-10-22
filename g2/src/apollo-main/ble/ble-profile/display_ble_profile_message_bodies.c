@@ -41,6 +41,7 @@ static void profile_event(uint8_t *state,const uint8_t *message,uint8_t write_ev
         }
     }
 }
+/* Stock 0x004BDC0C (evenOtaProcMsg) */
 void audio_ble_ota_message_body(void *raw) {
     const uint8_t *m=(const uint8_t *)raw;
     uint8_t event=m[2];
@@ -55,15 +56,19 @@ void audio_ble_ota_message_body(void *raw) {
         }
     } else profile_event(audio_ble_ota_handler_state,m,0xa7u,0x824u,audio_ble_ota_update);
 }
+/* Stock 0x4BDED6 (eusProcMsg) */
 void audio_ble_eus_message_body(void *raw) {
     profile_event(audio_ble_eus_handler_state,(const uint8_t *)raw,0xa8u,0x844u,audio_ble_eus_update);
 }
+/* Stock 0x4BE24E (essProcMsg) */
 void audio_ble_ess_message_body(void *raw) {
     profile_event(audio_ble_ess_handler_state,(const uint8_t *)raw,0xa9u,0x864u,audio_ble_ess_update);
 }
+/* Stock 0x4BE420 (efsProcMsg) */
 void audio_ble_efs_message_body(void *raw) {
     profile_event(audio_ble_efs_handler_state,(const uint8_t *)raw,0xaau,0x884u,audio_ble_efs_update);
 }
+/* Stock 0x4BE76C (nusProcMsg) */
 void audio_ble_nus_message_body(void *raw) {
     profile_event(audio_ble_nus_handler_state,(const uint8_t *)raw,0xabu,0x8a4u,audio_ble_nus_update);
 }

@@ -5,22 +5,9 @@ extern uint8_t audio_ble_dm_conn_state_table_20067a30[];
 extern uint32_t audio_ble_pair_timestamp_counter_20074344;
 extern int32_t g2_lfs_memcmp(const void *, const void *, uint32_t);
 
-/* Native 0x4d2aa8. Privacy state byte 0x16 is RAM 0x20073b8e. */
-uint32_t audio_ble_pair_address_type_4d2aa8(uint32_t type)
-{
-    type = (uint8_t)type;
-    if (audio_ble_dm_privacy_state[0x16u] != 0u) {
-        if (type == 2u) return 0u;
-        if (type == 3u) return 1u;
-    }
-    return type;
-}
+extern uint32_t audio_ble_pair_address_type_4d2aa8(uint32_t type); /* opencfw U5: now provided by the Cordio unit */
 
-/* Native 0x4d294a. */
-uint32_t audio_ble_pair_address_equal_4d294a(const void *row, const void *address)
-{
-    return g2_lfs_memcmp(row, address, 6u) == 0 ? 1u : 0u;
-}
+extern uint32_t audio_ble_pair_address_equal_4d294a(const void *row, const void *address); /* opencfw U5: now provided by the Cordio unit */
 
 /* Native 0x47ad74: ten 200-byte AppDb rows, first matching row wins. */
 uint32_t audio_ble_pair_record_find_47ad74(uint32_t type, const void *address)

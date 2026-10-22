@@ -16,6 +16,7 @@ extern void audio_ble_slave_disconnect_event(uint8_t);
 extern uint32_t audio_ble_hci_driver_radio_boot(uint8_t);
 extern void audio_ble_dm_device_reset(void);
 
+/* Stock 0x00503C32 (AppMasterSecProcDmMsg; investigation-required-mixed row) */
 void audio_ble_comm_master_dispatch_b(void *message)
 {
     const uint8_t *bytes = (const uint8_t *)message;

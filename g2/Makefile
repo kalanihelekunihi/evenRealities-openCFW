@@ -42,7 +42,7 @@ CORE_TESTS := test_open_cfw test_analyze_g2_codec_fwpk_segments \
 	test_run_ghidra_shard_batch test_assetgen_lvgl_font test_assetgen_lvgl_image \
 	test_assetgen_nanopb_descriptor test_assetgen_string_pool \
 	test_gxdnn_command_emitter test_gxdnn_quantize test_csky_macos_build \
-	test_preserve_l8_resources test_touch_scb test_touch_scb_mmio test_touch_scb_simulator test_touch_scb_tx test_touch_scb_fifo test_ambiq_mspi test_ambiq_mspi_lifecycle test_ambiq_mspi_cmdq test_ambiq_gpio test_radio_gpio test_wsf_radio test_freertos_event_group test_freertos_queue test_freertos_daemon test_freertos_ready test_freertos_resume test_freertos_tick test_ambiq_gpio_config test_wsf_timer_stop test_trace_inventory
+	test_preserve_l8_resources test_touch_scb test_touch_scb_mmio test_touch_scb_simulator test_touch_scb_tx test_touch_scb_fifo test_ambiq_mspi test_ambiq_mspi_lifecycle test_ambiq_mspi_cmdq test_ambiq_gpio test_radio_gpio test_wsf_radio test_ambiq_gpio_config test_wsf_timer_stop test_trace_inventory
 
 .PHONY: all help reference verify reference-verify test core-test research-corpus \
         em9305-record-package ghidra-harvest bootloader-ghidra-harvest \
@@ -86,12 +86,6 @@ foundation-test:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest discover -s tests -t . -p 'test_preserve_l8_resources.py'
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest discover -s tests -t . -p 'test_radio_gpio.py'
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest discover -s tests -t . -p 'test_wsf_radio.py'
-	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest discover -s tests -t . -p 'test_freertos_event_group.py'
-	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest discover -s tests -t . -p 'test_freertos_queue.py'
-	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest discover -s tests -t . -p 'test_freertos_daemon.py'
-	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest discover -s tests -t . -p 'test_freertos_ready.py'
-	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest discover -s tests -t . -p 'test_freertos_resume.py'
-	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest discover -s tests -t . -p 'test_freertos_tick.py'
 
 foundation-object: $(FOUNDATION_OBJECT)
 
@@ -271,102 +265,6 @@ WSF_SIM_REPORT ?= $(WSF_SIM_DIR)/comparison.json
 .PHONY: wsf-radio-simulator-test
 wsf-radio-simulator-test: wsf-radio-simulator
 	$(SCB_SIM_PYTHON) $(WSF_SIMULATOR)/verify.py --elf "$(WSF_SIM_DIR)/wsf_radio.elf" --output "$(WSF_SIM_REPORT)"
-
-EVENT_GROUP_COMPONENT := src/apollo-common/freertos-event-group
-EVENT_GROUP_SIMULATOR := tests/simulators/freertos-event-group
-EVENT_GROUP_SIM_DIR ?= build/foundation/event-group-wsf-simulator
-.PHONY: event-group-wsf-simulator
-event-group-wsf-simulator: wsf-radio-simulator
-	mkdir -p "$(EVENT_GROUP_SIM_DIR)"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(EVENT_GROUP_COMPONENT)/event_groups_subset.c -o "$(EVENT_GROUP_SIM_DIR)/event.o"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(EVENT_GROUP_COMPONENT)/timer_pend_subset.c -o "$(EVENT_GROUP_SIM_DIR)/pend.o"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(EVENT_GROUP_COMPONENT)/wsf_event_adapter.c -o "$(EVENT_GROUP_SIM_DIR)/adapter.o"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(EVENT_GROUP_SIMULATOR)/providers.c -o "$(EVENT_GROUP_SIM_DIR)/providers.o"
-	$(SCB_SIM_LD) -T $(EVENT_GROUP_SIMULATOR)/module.ld -o "$(EVENT_GROUP_SIM_DIR)/event_group_wsf.elf" "$(EVENT_GROUP_SIM_DIR)/event.o" "$(EVENT_GROUP_SIM_DIR)/pend.o" "$(EVENT_GROUP_SIM_DIR)/adapter.o" "$(EVENT_GROUP_SIM_DIR)/providers.o" "$(WSF_SIM_DIR)/wsf.o" "$(RADIO_GPIO_SIM_DIR)/radio.o" "$(GPIO_SIM_DIR)/gpio.o" "$(GPIO_SIM_DIR)/critical.o"
-
-EVENT_GROUP_SIM_REPORT ?= $(EVENT_GROUP_SIM_DIR)/comparison.json
-.PHONY: event-group-wsf-simulator-test
-event-group-wsf-simulator-test: event-group-wsf-simulator
-	$(SCB_SIM_PYTHON) $(EVENT_GROUP_SIMULATOR)/verify.py --elf "$(EVENT_GROUP_SIM_DIR)/event_group_wsf.elf" --output "$(EVENT_GROUP_SIM_REPORT)"
-
-QUEUE_COMPONENT := src/apollo-common/freertos-queue
-QUEUE_SIMULATOR := tests/simulators/freertos-queue
-QUEUE_SIM_DIR ?= build/foundation/timer-queue-wsf-simulator
-.PHONY: timer-queue-wsf-simulator
-timer-queue-wsf-simulator: event-group-wsf-simulator
-	mkdir -p "$(QUEUE_SIM_DIR)"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(QUEUE_COMPONENT)/queue_subset.c -o "$(QUEUE_SIM_DIR)/queue.o"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(QUEUE_COMPONENT)/queue_adapter.c -o "$(QUEUE_SIM_DIR)/adapter.o"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(QUEUE_SIMULATOR)/providers.c -o "$(QUEUE_SIM_DIR)/providers.o"
-	$(SCB_SIM_LD) -T $(EVENT_GROUP_SIMULATOR)/module.ld -o "$(QUEUE_SIM_DIR)/timer_queue_wsf.elf" "$(QUEUE_SIM_DIR)/queue.o" "$(QUEUE_SIM_DIR)/adapter.o" "$(QUEUE_SIM_DIR)/providers.o" "$(EVENT_GROUP_SIM_DIR)/event.o" "$(EVENT_GROUP_SIM_DIR)/pend.o" "$(EVENT_GROUP_SIM_DIR)/adapter.o" "$(WSF_SIM_DIR)/wsf.o" "$(RADIO_GPIO_SIM_DIR)/radio.o" "$(GPIO_SIM_DIR)/gpio.o" "$(GPIO_SIM_DIR)/critical.o"
-QUEUE_SIM_REPORT ?= $(QUEUE_SIM_DIR)/comparison.json
-.PHONY: timer-queue-wsf-simulator-test
-timer-queue-wsf-simulator-test: timer-queue-wsf-simulator
-	$(SCB_SIM_PYTHON) $(QUEUE_SIMULATOR)/verify.py --elf "$(QUEUE_SIM_DIR)/timer_queue_wsf.elf" --output "$(QUEUE_SIM_REPORT)"
-
-DAEMON_COMPONENT := src/apollo-common/freertos-daemon
-DAEMON_SIMULATOR := tests/simulators/freertos-daemon
-DAEMON_SIM_DIR ?= build/foundation/timer-daemon-wsf-simulator
-.PHONY: timer-daemon-wsf-simulator
-timer-daemon-wsf-simulator: timer-queue-wsf-simulator
-	mkdir -p "$(DAEMON_SIM_DIR)"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(DAEMON_COMPONENT)/daemon.c -o "$(DAEMON_SIM_DIR)/daemon.o"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(DAEMON_COMPONENT)/receive_copy.c -o "$(DAEMON_SIM_DIR)/copy.o"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(DAEMON_COMPONENT)/task_critical.c -o "$(DAEMON_SIM_DIR)/taskcritical.o"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(DAEMON_SIMULATOR)/providers.c -o "$(DAEMON_SIM_DIR)/providers.o"
-	$(SCB_SIM_LD) -T $(EVENT_GROUP_SIMULATOR)/module.ld -o "$(DAEMON_SIM_DIR)/timer_daemon_wsf.elf" "$(DAEMON_SIM_DIR)/daemon.o" "$(DAEMON_SIM_DIR)/copy.o" "$(DAEMON_SIM_DIR)/taskcritical.o" "$(DAEMON_SIM_DIR)/providers.o" "$(QUEUE_SIM_DIR)/queue.o" "$(QUEUE_SIM_DIR)/adapter.o" "$(EVENT_GROUP_SIM_DIR)/event.o" "$(EVENT_GROUP_SIM_DIR)/pend.o" "$(EVENT_GROUP_SIM_DIR)/adapter.o" "$(WSF_SIM_DIR)/wsf.o" "$(RADIO_GPIO_SIM_DIR)/radio.o" "$(GPIO_SIM_DIR)/gpio.o" "$(GPIO_SIM_DIR)/critical.o"
-DAEMON_SIM_REPORT ?= $(DAEMON_SIM_DIR)/comparison.json
-.PHONY: timer-daemon-wsf-simulator-test
-timer-daemon-wsf-simulator-test: timer-daemon-wsf-simulator
-	$(SCB_SIM_PYTHON) $(DAEMON_SIMULATOR)/verify.py --elf "$(DAEMON_SIM_DIR)/timer_daemon_wsf.elf" --output "$(DAEMON_SIM_REPORT)"
-
-READY_COMPONENT := src/apollo-common/freertos-ready
-READY_SIMULATOR := tests/simulators/freertos-ready
-READY_SIM_DIR ?= build/foundation/rtos-ready-wsf-simulator
-.PHONY: rtos-ready-wsf-simulator
-rtos-ready-wsf-simulator: timer-daemon-wsf-simulator
-	mkdir -p "$(READY_SIM_DIR)"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(READY_COMPONENT)/tasks_subset.c -o "$(READY_SIM_DIR)/tasks.o"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(READY_COMPONENT)/list_subset.c -o "$(READY_SIM_DIR)/list.o"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(READY_COMPONENT)/ready_adapter.c -o "$(READY_SIM_DIR)/adapter.o"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(READY_SIMULATOR)/providers.c -o "$(READY_SIM_DIR)/providers.o"
-	$(SCB_SIM_LD) -T $(EVENT_GROUP_SIMULATOR)/module.ld -o "$(READY_SIM_DIR)/rtos_ready_wsf.elf" "$(READY_SIM_DIR)/tasks.o" "$(READY_SIM_DIR)/list.o" "$(READY_SIM_DIR)/adapter.o" "$(READY_SIM_DIR)/providers.o" "$(DAEMON_SIM_DIR)/daemon.o" "$(DAEMON_SIM_DIR)/copy.o" "$(DAEMON_SIM_DIR)/taskcritical.o" "$(QUEUE_SIM_DIR)/queue.o" "$(QUEUE_SIM_DIR)/adapter.o" "$(EVENT_GROUP_SIM_DIR)/event.o" "$(EVENT_GROUP_SIM_DIR)/pend.o" "$(EVENT_GROUP_SIM_DIR)/adapter.o" "$(WSF_SIM_DIR)/wsf.o" "$(RADIO_GPIO_SIM_DIR)/radio.o" "$(GPIO_SIM_DIR)/gpio.o" "$(GPIO_SIM_DIR)/critical.o"
-READY_SIM_REPORT ?= $(READY_SIM_DIR)/comparison.json
-.PHONY: rtos-ready-wsf-simulator-test
-rtos-ready-wsf-simulator-test: rtos-ready-wsf-simulator
-	$(SCB_SIM_PYTHON) $(READY_SIMULATOR)/verify.py --elf "$(READY_SIM_DIR)/rtos_ready_wsf.elf" --output "$(READY_SIM_REPORT)"
-
-RESUME_COMPONENT := src/apollo-common/freertos-resume
-RESUME_SIMULATOR := tests/simulators/freertos-resume
-RESUME_SIM_DIR ?= build/foundation/rtos-resume-wsf-simulator
-.PHONY: rtos-resume-wsf-simulator
-rtos-resume-wsf-simulator: rtos-ready-wsf-simulator
-	mkdir -p "$(RESUME_SIM_DIR)"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(RESUME_COMPONENT)/tasks_resume.c -o "$(RESUME_SIM_DIR)/resume.o"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(RESUME_COMPONENT)/yield_request.c -o "$(RESUME_SIM_DIR)/yield.o"
-	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(RESUME_SIMULATOR)/providers.c -o "$(RESUME_SIM_DIR)/providers.o"
-	$(SCB_SIM_LD) -T $(EVENT_GROUP_SIMULATOR)/module.ld -o "$(RESUME_SIM_DIR)/rtos_resume_wsf.elf" "$(RESUME_SIM_DIR)/resume.o" "$(RESUME_SIM_DIR)/yield.o" "$(READY_SIM_DIR)/tasks.o" "$(READY_SIM_DIR)/list.o" "$(READY_SIM_DIR)/adapter.o" "$(RESUME_SIM_DIR)/providers.o" "$(DAEMON_SIM_DIR)/daemon.o" "$(DAEMON_SIM_DIR)/copy.o" "$(DAEMON_SIM_DIR)/taskcritical.o" "$(QUEUE_SIM_DIR)/queue.o" "$(QUEUE_SIM_DIR)/adapter.o" "$(EVENT_GROUP_SIM_DIR)/event.o" "$(EVENT_GROUP_SIM_DIR)/pend.o" "$(EVENT_GROUP_SIM_DIR)/adapter.o" "$(WSF_SIM_DIR)/wsf.o" "$(RADIO_GPIO_SIM_DIR)/radio.o" "$(GPIO_SIM_DIR)/gpio.o" "$(GPIO_SIM_DIR)/critical.o"
-RESUME_SIM_REPORT ?= $(RESUME_SIM_DIR)/comparison.json
-.PHONY: rtos-resume-wsf-simulator-test
-rtos-resume-wsf-simulator-test: rtos-resume-wsf-simulator
-	$(SCB_SIM_PYTHON) $(RESUME_SIMULATOR)/verify.py --elf "$(RESUME_SIM_DIR)/rtos_resume_wsf.elf" --output "$(RESUME_SIM_REPORT)"
-
-TICK_COMPONENT := src/apollo-common/freertos-tick
-TICK_SIMULATOR := tests/simulators/freertos-tick
-TICK_SIM_CFLAGS ?= $(GPIO_SIM_CFLAGS) -O0
-TICK_SIM_DIR ?= build/foundation/rtos-tick-wsf-simulator
-.PHONY: rtos-tick-wsf-simulator
-rtos-tick-wsf-simulator: rtos-resume-wsf-simulator
-	mkdir -p "$(TICK_SIM_DIR)"
-	$(FOUNDATION_CC) $(TICK_SIM_CFLAGS) -c $(TICK_COMPONENT)/tasks_tick.c -o "$(TICK_SIM_DIR)/tick.o"
-	$(FOUNDATION_CC) $(TICK_SIM_CFLAGS) -c $(RESUME_COMPONENT)/tasks_resume.c -o "$(TICK_SIM_DIR)/resume.o"
-	$(FOUNDATION_CC) $(TICK_SIM_CFLAGS) -c $(READY_COMPONENT)/list_subset.c -o "$(TICK_SIM_DIR)/list.o"
-	$(FOUNDATION_CC) $(TICK_SIM_CFLAGS) -c $(TICK_SIMULATOR)/providers.c -o "$(TICK_SIM_DIR)/providers.o"
-	$(SCB_SIM_LD) -T $(EVENT_GROUP_SIMULATOR)/module.ld -o "$(TICK_SIM_DIR)/rtos_tick_wsf.elf" "$(TICK_SIM_DIR)/tick.o" "$(TICK_SIM_DIR)/resume.o" "$(RESUME_SIM_DIR)/yield.o" "$(READY_SIM_DIR)/tasks.o" "$(TICK_SIM_DIR)/list.o" "$(READY_SIM_DIR)/adapter.o" "$(TICK_SIM_DIR)/providers.o" "$(DAEMON_SIM_DIR)/daemon.o" "$(DAEMON_SIM_DIR)/copy.o" "$(DAEMON_SIM_DIR)/taskcritical.o" "$(QUEUE_SIM_DIR)/queue.o" "$(QUEUE_SIM_DIR)/adapter.o" "$(EVENT_GROUP_SIM_DIR)/event.o" "$(EVENT_GROUP_SIM_DIR)/pend.o" "$(EVENT_GROUP_SIM_DIR)/adapter.o" "$(WSF_SIM_DIR)/wsf.o" "$(RADIO_GPIO_SIM_DIR)/radio.o" "$(GPIO_SIM_DIR)/gpio.o" "$(GPIO_SIM_DIR)/critical.o"
-TICK_SIM_REPORT ?= $(TICK_SIM_DIR)/comparison.json
-.PHONY: rtos-tick-wsf-simulator-test
-rtos-tick-wsf-simulator-test: rtos-tick-wsf-simulator
-	$(SCB_SIM_PYTHON) $(TICK_SIMULATOR)/verify.py --elf "$(TICK_SIM_DIR)/rtos_tick_wsf.elf" --output "$(TICK_SIM_REPORT)"
 
 # Pinned board GPIO pad configuration; independent of scheduler simulation.
 GPIO_CONFIG_COMPONENT := src/apollo-common/ambiq-gpio-config

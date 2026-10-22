@@ -6,6 +6,7 @@
 #define TX ((uint8_t *)0x200009b0u)
 static void arm_tx(void) { Cy_SCB_I2C_SlaveConfigReadBuf(SCB1,TX,16,CTX); }
 static void ack(uint8_t op,uint8_t status) { TX[0]=op;TX[1]=status;TX[2]=0x17;arm_tx(); }
+/* Stock 0x000035F4 (sensor_read_mux) */
 static void sensor_read(unsigned widget,uint8_t *out) {
  uintptr_t base=*(uint32_t *)(0x200004ecu+12u);
  uintptr_t w=base+widget*0x90u;
@@ -14,6 +15,7 @@ static void sensor_read(unsigned widget,uint8_t *out) {
  for(unsigned i=0;i<count;i++) { uint16_t v=*(uint16_t *)(sensors+i*10u+4u);out[i*2u]=(uint8_t)v;out[i*2u+1u]=(uint8_t)(v>>8); }
 }
 __attribute__((noreturn)) void touch_reset_boundary(void);
+/* Stock 0x00003700 (i2c_irq_handler) */
 void app_event(uint32_t events) {
  if(events & 0x20u) {
   uint8_t n=(uint8_t)CTX->slaveRxBufferIdx;

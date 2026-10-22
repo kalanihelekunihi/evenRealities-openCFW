@@ -6,6 +6,7 @@ extern void *audio_uart_display_audio_find_45f840(void *,uint32_t);
 extern void audio_uart_display_audio_stop_one_45f6c0(void *,uint32_t);
 extern void audio_uart_display_audio_stop_top_45f6ec(void *,uint32_t);
 
+/* Stock 0x0045FAA8 (page stop selector) */
 uint32_t audio_uart_display_audio_stop(void *state,uint32_t mode,uint32_t id,uint32_t ambient)
 {
     (void)ambient;

@@ -2,7 +2,7 @@
 #include <stdint.h>
 extern uint8_t audio_ble_connection_state_table[]; /* native attsCsfCb 0x20073e04 */
 extern volatile uint8_t audio_ble_trace_level_cell;
-extern uint32_t g2_smp_candidate_compare(void *,uint32_t,uint32_t,uint32_t);
+extern int32_t audio_ble_hci_vendor_compare_44b610(const void *,const void *,uint32_t); /* 0x44b610 bounded strncmp */
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,uint32_t,const char *,...);
 extern void audio_ble_wsf_trace(const char *,const char *,...);
@@ -15,7 +15,7 @@ static const char complete[]="Database hash calculation complete";
 static const char calculating[]="Calculating database hash";
 static uint32_t compare(const char *a,const char *b,uint32_t n)
 {
-    return g2_smp_candidate_compare(0,(uint32_t)(uintptr_t)a,(uint32_t)(uintptr_t)b,n);
+    return (uint32_t)audio_ble_hci_vendor_compare_44b610(a,b,n);
 }
 static void diagnostic(const char *message,uint32_t line)
 {

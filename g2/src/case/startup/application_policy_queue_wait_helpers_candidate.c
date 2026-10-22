@@ -26,12 +26,14 @@ uint32_t case_policy_queue_wait_eligible(uint32_t queue)
     (void)case_policy_scheduler_unlock();
     return result;
 }
+/* Stock 0x0800C178 (case_policy_queue_wait_register) */
 void case_policy_queue_wait_register(uint32_t list,uint32_t timeout)
 {
     if(list==0u)native_fault();
     case_policy_task_list_insert_sorted(list,rd(0x20000128u)+24u);
     case_policy_task_sleep_enqueue(timeout,1u);
 }
+/* Stock 0x0800C948 (case_policy_queue_wait_elapsed) */
 uint32_t case_policy_queue_wait_elapsed(uint32_t *snapshot,uint32_t *timeout)
 {
     if(snapshot==0 || timeout==0)native_fault();

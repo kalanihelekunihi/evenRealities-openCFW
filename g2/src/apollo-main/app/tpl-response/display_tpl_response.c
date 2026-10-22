@@ -52,6 +52,7 @@ void audio_tpl_response_body(uint32_t pipe, uint32_t *saved)
 }
 
 /* IAR returns the original saved R1/R2 stack words as R0/R1. */
+/* Stock 0x4B9012 (_tplReponse) */
 __attribute__((naked)) uint64_t audio_tpl_response(uint8_t pipe __attribute__((unused)), ...)
 {
     __asm__ volatile(

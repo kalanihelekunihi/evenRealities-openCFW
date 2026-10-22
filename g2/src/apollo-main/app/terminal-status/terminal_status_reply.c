@@ -19,6 +19,7 @@ static const char null_short[] = "[pb.terminal]terminal status reply is null";
 static const char status_message[] = "terminal status reply: magic=%d current_mode=%d err_code=%d";
 static const char status_short[] = "[pb.terminal]terminal status reply: magic=%d current_mode=%d err_code=%d";
 
+/* Stock 0x5CEBA2 (APP_PbTerminalTxEncodeStatusReply) */
 uint32_t audio_terminal_send_status_reply(const void *reply) {
     if (reply == 0) {
         if (audio_log_flags() & 2u)

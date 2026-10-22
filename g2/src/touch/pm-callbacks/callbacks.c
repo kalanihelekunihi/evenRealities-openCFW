@@ -7,6 +7,7 @@ _Static_assert(offsetof(touch_pm_callback,order)==24,"order");
 #define FAILED ((touch_pm_callback * volatile *)0x20000f28u)
 #define LAST (*(touch_pm_callback * volatile *)0x20000f24u)
 #define FAIL 0x4200ffu
+/* Stock 0x0000A3B0 (Cy_SysPm_RegisterCallback) */
 bool touch_pm_register(touch_pm_callback *h)
 {
  if (!h || !h->params || !h->callback) return false;
@@ -21,6 +22,7 @@ bool touch_pm_register(touch_pm_callback *h)
  }
  return true;
 }
+/* Stock 0x0000A444 (Cy_SysPm_ExecuteCallback) */
 uint32_t touch_pm_execute(uint32_t type,uint32_t mode)
 {
  touch_pm_callback *cur=ROOT[type];uint32_t result=0;touch_pm_params params;
@@ -43,12 +45,14 @@ uint32_t touch_pm_execute(uint32_t type,uint32_t mode)
 
 extern uint32_t Cy_SysLib_EnterCriticalSection(void);
 extern void Cy_SysLib_ExitCriticalSection(uint32_t);
+/* Stock 0x0000A388 (sflash_trim_load) */
 static void deep_sleep_no_callbacks(void)
 {
  *(volatile uint32_t *)0x40030004u=*(volatile const uint16_t *)0x0ffff152u;
  *(volatile uint32_t *)0xe000ed10u|=4u;
  __asm volatile("wfi");
 }
+/* Stock 0x0000A58C (Cy_SysPm_CpuEnterDeepSleep) */
 uint32_t touch_pm_deep_sleep(void)
 {
  uint32_t result=0,saved;

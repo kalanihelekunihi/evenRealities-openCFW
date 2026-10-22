@@ -42,6 +42,7 @@ static void log_byte(const char *function, uint32_t line, const char *message,
 }
 
 static const char ask_function[] = "PB_RxEvenAIAskInfo";
+/* Stock 0x4E3D34 (PB_RxEvenAIAskInfo) */
 uint32_t audio_even_ai_rx_ask(uint8_t sequence, const void *payload) {
     (void)sequence;
     if (payload == 0)
@@ -57,6 +58,7 @@ uint32_t audio_even_ai_rx_ask(uint8_t sequence, const void *payload) {
 }
 
 static const char reply_function[] = "PB_RxEvenAIReplyInfo";
+/* Stock 0x4E42B4 (PB_RxEvenAIReplyInfo) */
 uint32_t audio_even_ai_rx_reply(uint8_t sequence, const void *payload) {
     (void)sequence;
     if (payload == 0)
@@ -67,6 +69,7 @@ uint32_t audio_even_ai_rx_reply(uint8_t sequence, const void *payload) {
 }
 
 static const char skill_function[] = "PB_RxEvenAISkillInfo";
+/* Stock 0x4E4538 (PB_RxEvenAISkillInfo) */
 uint32_t audio_even_ai_rx_skill(uint8_t sequence, const void *payload) {
     (void)sequence;
     if (payload == 0)
@@ -82,6 +85,7 @@ static const char config_message[] =
     "EvenAI config voice_switch=%d, stream_speed=%d, duplex_mode=%d";
 static const char config_short[] =
     "[pb.evenai]EvenAI config voice_switch=%d, stream_speed=%d, duplex_mode=%d";
+/* Stock 0x4E50D8 (PB_RxEvenAIConfig) */
 uint32_t audio_even_ai_rx_config(uint8_t sequence, const void *payload) {
     (void)sequence;
     if (payload == 0)

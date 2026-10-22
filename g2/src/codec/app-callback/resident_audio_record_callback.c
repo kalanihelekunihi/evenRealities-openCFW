@@ -20,6 +20,7 @@ static int32_t native_signed_divide(uint32_t numerator, uint32_t denominator)
     return quotient;
 }
 
+/* Stock 0x10026214 (gx8002_audio_record_callback) */
 uint32_t gx8002_resident_audio_record_callback_26214(
     uint32_t flags, void *packet)
 {

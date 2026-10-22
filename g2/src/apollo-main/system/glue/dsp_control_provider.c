@@ -34,6 +34,7 @@ static int32_t dmic_control(uint32_t enable, uint32_t failure_line,
     return 0;
 }
 
+/* Stock 0x57D6B4 (SVC_CodecDMICOpen) */
 int32_t audio_dsp_enable(void) {
     return dmic_control(1, 811, 814, "SVC_CodecDMICOpen",
                         "DMICOpen failed: %d, rsp=0x%04X", "DMICOpen success",
@@ -41,6 +42,7 @@ int32_t audio_dsp_enable(void) {
                         "[codec.host]DMICOpen success");
 }
 
+/* Stock 0x57D794 (SVC_CodecDMICClose) */
 int32_t audio_dsp_disable(void) {
     return dmic_control(0, 823, 826, "SVC_CodecDMICClose",
                         "DMICClose failed: %d, rsp=0x%04X", "DMICClose success",
@@ -48,6 +50,7 @@ int32_t audio_dsp_disable(void) {
                         "[codec.host]DMICClose success");
 }
 
+/* Stock 0x57D93C (SVC_I2SOutputCtrl) */
 int32_t audio_dsp_gate(uint32_t enable) {
     uint8_t response = 0;
     uint8_t selected = (uint8_t)enable;

@@ -3,6 +3,7 @@
  */
 #include <stdint.h>
 
+/* Stock 0x080001FC (case_boot_read_le32) */
 uint32_t case_boot_read_le32(const uint8_t *input)
 {
     uint32_t value=0u;

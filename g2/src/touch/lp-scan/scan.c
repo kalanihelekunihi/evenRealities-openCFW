@@ -6,6 +6,7 @@
 static uint8_t *ptr(const uint8_t *c,unsigned n){return *(uint8_t *const *)(c+n);}
 static uint16_t get16(const uint8_t *c,unsigned n){return *(const uint16_t *)(c+n);}
 static void set16(uint8_t *c,unsigned n,uint16_t x){*(uint16_t *)(c+n)=x;}
+/* Stock 0x00006D74 (touch_sub_3a74) */
 uint32_t touch_start_lp_slots(uint32_t first,uint32_t count,uint8_t *c){
  uint32_t last=first+count-1u;if(!c || !count || count>8u || last>3u)return 1;
  uint8_t *common=ptr(c,4);*(uint32_t *)(common+8)&=~0x400u;

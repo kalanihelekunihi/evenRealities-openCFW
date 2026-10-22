@@ -8,36 +8,15 @@ extern void *audio_uart_lv_list_first_482ce4(void *); /* native tail */
 extern void *audio_uart_lv_list_next_482cfa(void *,void *); /* native previous */
 extern void audio_uart_lv_list_remove(void *,void *);
 extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
-static void set_previous(volatile uint32_t *list,uint32_t node,uint32_t value)
-{
-    if(node!=0u) *(volatile uint32_t *)(uintptr_t)(list[0]+node)=value;
-}
-static void set_next(volatile uint32_t *list,uint32_t node,uint32_t value)
-{
-    if(node!=0u) *(volatile uint32_t *)(uintptr_t)(list[0]+node+4u)=value;
-}
-void audio_uart_lv_list_move_before_482d22(void *list,void *node,void *before)
-{
-    volatile uint32_t *l=list;
-    uint32_t n=(uint32_t)(uintptr_t)node,b=(uint32_t)(uintptr_t)before;
-    if(n==b) return;
-    uint32_t previous=(uint32_t)(uintptr_t)(b!=0u ?
-        audio_uart_lv_list_next_482cfa(list,before) : audio_uart_lv_list_first_482ce4(list));
-    if(n==previous) return;
-    audio_uart_lv_list_remove(list,node);
-    set_next(l,previous,n);
-    set_previous(l,n,previous);
-    set_previous(l,b,n);
-    set_next(l,n,b);
-    if(b==0u) l[2]=n;
-    if(previous==0u) l[1]=n;
-}
+/* Retired: stock 0x482d22 is upstream lv_ll_move_before (lvgl/src/misc/lv_ll.c); this name is a link alias. */
+void audio_uart_lv_list_move_before_482d22(void *list,void *node,void *before);
 void *audio_uart_lv_cache_lru_link_5c2be4(void *cache,void *rb_node)
 {
     const volatile uint32_t *c=cache,*n=rb_node;
     uint32_t data=n[4];
     return (void *)(uintptr_t)(c[12]+data-4u);
 }
+/* Stock 0x5C2E4C (get_cb; upstream third-party/upstream/lvgl/src/misc/cache/lv_cache_lru_rb.c) */
 void *audio_uart_font_lru_lookup(void *cache,const void *key,uint32_t context)
 {
     (void)context; /* native R2 unused */

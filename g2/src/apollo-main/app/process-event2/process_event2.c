@@ -57,6 +57,7 @@ static void log_send(uint8_t level,uint32_t line,const char *long_message,
         else (void)compressed_log_output(category,short_message,short_message);
     }
 }
+/* Stock 0x45E664 (SyncModuleSendDataHandler) */
 void audio_uart_process_event2(void) {
     send_node *node=0;
     for(;;) {

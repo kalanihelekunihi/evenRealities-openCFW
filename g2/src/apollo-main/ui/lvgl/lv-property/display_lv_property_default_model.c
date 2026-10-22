@@ -5,8 +5,9 @@
  * prologue can overwrite the high byte; all property logic remains C. */
 #include <stdint.h>
 
-uint32_t audio_uart_lv_property_default_model_48297c(uint32_t property,
-                                                        uint32_t entry_r1) {
+__attribute__((used))
+static uint32_t audio_uart_lv_property_default_model(uint32_t property,
+                                                    uint32_t entry_r1) {
     switch((uint8_t)property) {
     case 5:case 7:return 0x1fffffffu;
     case 0x1c:return (entry_r1&0xff000000u)|0x00ffffffu;
@@ -27,5 +28,5 @@ uint32_t audio_uart_lv_property_default_model_48297c(uint32_t property,
  * A naked tail branch captures that authentic machine ABI without guessing
  * a C-level second argument at the call site. */
 __attribute__((naked)) uint32_t audio_uart_lv_property_default_48297c(uint32_t property) {
-    __asm volatile("b audio_uart_lv_property_default_model_48297c");
+    __asm volatile("b audio_uart_lv_property_default_model");
 }

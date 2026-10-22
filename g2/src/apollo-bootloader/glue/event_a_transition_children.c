@@ -58,6 +58,7 @@ static int event_a_le0(uint32_t state)
 }
 
 /* Inputs are documented SPOT state indices 0..19, as in the firmware caller. */
+/* Stock 0x42A2B4 (spotmgr_state_transition_sequence_42a2b4; spotmgr_state_transition_sequence_determine) */
 __attribute__((noinline, used))
 uint32_t event_a_state_transition_sequence(uint32_t target_state,
                                           uint32_t current_state,
@@ -126,6 +127,7 @@ typedef uint32_t (*event_a_sequence_callback)(uint32_t, uint32_t,
 /* Installed callback table is supplied by SPOT runtime at this fixed ABI. */
 #define EVENT_A_CALLBACK_TABLE ((volatile event_a_sequence_callback *)(uintptr_t)0x20000158U)
 
+/* Stock 0x42A43A (spotmgr_temperature_transition_separate_42a43a) */
 __attribute__((noinline, used))
 uint64_t event_a_temperature_transition_separate(uint32_t target_state,
                                              uint32_t current_state,

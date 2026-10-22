@@ -24,6 +24,7 @@ static uint8_t compact(void)
     return (audio_log_level() & 1u) != 0u || (audio_log_level() & 4u) != 0u;
 }
 
+/* Stock 0x4B8C6C (_rxNextPacketTimeout) */
 void audio_tpl_rx_next_packet_timeout(const uint8_t *ids)
 {
     if (audio_ble_controller[0x56u] == 0u) {

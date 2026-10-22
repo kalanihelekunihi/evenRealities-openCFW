@@ -10,6 +10,7 @@ uint32_t case_forward_event(void *event, uint32_t flags) {
  return case_event_flags_set(event, flags);
 }
 /* Original CASE target 0x08005f42 is exactly `bx lr` (weak error callback). */
+/* Stock 0x08005F42 (HAL_UART_ErrorCallback) */
 void HAL_UART_ErrorCallback(void *uart) { (void)uart; }
 /* Original wrapper 0x0800a7d2, retained instruction sequence in the frame
  * dispatch closure. Kernel primitives remain explicit unresolved providers. */

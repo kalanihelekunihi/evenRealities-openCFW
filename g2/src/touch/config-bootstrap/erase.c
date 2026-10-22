@@ -6,6 +6,7 @@
 extern uint8_t touch_row_checksum(const uint8_t *,uint32_t);
 static uint32_t div32(uint32_t n,uint32_t d){uint32_t q=0;for(unsigned k=32;k;k--){unsigned i=k-1;if(d<=(n>>i)){n-=d<<i;q+=1u<<i;}}return q;}
 static uint32_t next(uint32_t a,const uint8_t *c){uint32_t row=*(const uint16_t *)(c+2),base=*(const uint32_t *)(c+16);a+=(row>>2)*4;return a>=base+row*(*(const uint16_t *)c)*c[12]?base:a;}
+/* Stock 0x00008AE0 (touch_eeprom_57e0_erase_adapter) */
 uint32_t touch_eeprom_erase(uint8_t *c) {
  uint32_t rows=(*(uint16_t *)c)*c[12],physical=*(uint16_t *)(c+2),status=0;
  uint8_t *scratch=(uint8_t *)0x20000cd4u;

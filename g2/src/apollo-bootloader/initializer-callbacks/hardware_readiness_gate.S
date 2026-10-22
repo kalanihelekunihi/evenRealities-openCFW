@@ -7,6 +7,7 @@
 .syntax unified
 .thumb
 .fpu fpv5-sp-d16
+/* Stock 0x42bf54 (hardware_readiness_gate_42bf54) */
 .section .text.opencfw_boot_hardware_readiness_gate,"ax",%progbits
 .global opencfw_boot_hardware_readiness_gate
 .type opencfw_boot_hardware_readiness_gate,%function

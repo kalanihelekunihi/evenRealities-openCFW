@@ -13,9 +13,11 @@ static uint32_t read32(uint32_t address)
 {return *(volatile uint32_t *)(uintptr_t)address;}
 static void write32(uint32_t address,uint32_t value)
 {*(volatile uint32_t *)(uintptr_t)address=value;}
+/* Stock 0x08004328 (case_handle_word16) */
 uint32_t case_policy_adc_read(uint32_t handle)
 {return read32(read32(handle)+0x40u);}
 
+/* Stock 0x08004710 (case_wait_peripheral) */
 uint32_t case_policy_adc_settle(uint32_t handle,uint32_t timeout)
 {
     uint32_t base=read32(handle);
@@ -53,6 +55,7 @@ uint32_t case_policy_adc_settle(uint32_t handle,uint32_t timeout)
     return 0u;
 }
 
+/* Stock 0x080047D4 (case_policy_adc_open) */
 uint32_t case_policy_adc_open(uint32_t handle)
 {
     uint32_t base=read32(handle);
@@ -69,6 +72,7 @@ uint32_t case_policy_adc_open(uint32_t handle)
     write32(base+8u,(read32(base+8u)&0x7fffffe8u)+4u);
     return 0u;
 }
+/* Stock 0x0800483C (case_guarded_two_stage) */
 uint32_t case_policy_adc_close(uint32_t handle)
 {
     volatile uint8_t *busy=(volatile uint8_t *)(uintptr_t)(handle+0x54u);

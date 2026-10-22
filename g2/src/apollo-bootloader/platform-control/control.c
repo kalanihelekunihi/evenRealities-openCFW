@@ -17,6 +17,7 @@ static void restore(uint32_t saved) {
      * decompiler's privilege-check narrative is incorrect. */
     __asm__ volatile("msr primask,%0"::"r"(saved):"memory");
 }
+/* Stock 0x42e4a0 (aligned_guarded_dispatch_42e4a0) */
 uint32_t opencfw_boot_mram_aligned(uint32_t key,const void *source,uint32_t destination,uint32_t words) {
     if(destination&3u)return 0x08000140u;
     uint32_t offset=(destination-0x00400000u)>>2;
@@ -27,10 +28,12 @@ uint32_t opencfw_boot_mram_aligned(uint32_t key,const void *source,uint32_t dest
     restore(saved);
     return result ? result|0x08000100u : 0;
 }
+/* Stock 0x42e4f4 (alignment_dispatch_42e4f4) */
 uint32_t opencfw_boot_mram_dispatch(uint32_t key,const void *source,uint32_t destination,uint32_t words) {
     if((destination&15u)||(words&3u))return 0x08000140u;
     return opencfw_boot_mram_aligned(key,source,destination,words);
 }
+/* Stock 0x42e514 (terminal_mode_42e514) */
 uint32_t opencfw_boot_terminal_mode(uint32_t mode) {
     mode&=255u;
     if(mode==0) {
@@ -43,6 +46,7 @@ uint32_t opencfw_boot_terminal_mode(uint32_t mode) {
     }
     return 6;
 }
+/* Stock 0x42de0e (critical_dispatch_transaction_42de0e) */
 void opencfw_boot_dfu_error_transaction(void) {
     opencfw_boot_control_log(1,0x1f9u);
     uint32_t saved=opencfw_boot_control_critical_save();
@@ -51,6 +55,7 @@ void opencfw_boot_dfu_error_transaction(void) {
     restore(saved);
     (void)opencfw_boot_terminal_mode(0);
 }
+/* Stock 0x42ddf2 (runtime_enable_sequence_42ddf2) */
 void opencfw_boot_dfu_runtime_enable(void) {
     (void)opencfw_boot_control_critical_save();
     opencfw_boot_control_mode_one(1);

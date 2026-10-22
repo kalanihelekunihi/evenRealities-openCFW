@@ -34,6 +34,7 @@ static void log_simple(uint8_t level,uint32_t line,uint32_t code,const char *fun
     if((audio_log_flags()&1u)!=0u||(audio_log_flags()&4u)!=0u)
         (void)compressed_log_output(code,short_text,short_text);
 }
+/* Stock 0x5100A0 (CALLBACK_MGR_CreateNode) */
 static struct callback_node *create_node(void *callback) {
     struct callback_node *node=(struct callback_node *)codec_allocate(8u);
     if(node==0) {
@@ -44,12 +45,14 @@ static struct callback_node *create_node(void *callback) {
     node->next=0;
     return node;
 }
+/* Stock 0x510218 (callback_mgr_is_registered) */
 static uint32_t is_registered(const struct callback_manager *manager,void *callback) {
     if(manager!=0&&callback!=0)
         for(const struct callback_node *node=manager->head;node!=0;node=node->next)
             if(node->callback==callback) return 1u;
     return 0u;
 }
+/* Stock 0x510108 (CALLBACK_MGR_Init) */
 uint32_t audio_callback_mgr_init(void *manager_storage,const char *name) {
     struct callback_manager *manager=(struct callback_manager *)manager_storage;
     if(manager==0) {
@@ -65,6 +68,7 @@ uint32_t audio_callback_mgr_init(void *manager_storage,const char *name) {
         (void)compressed_log_output(0x10400000u,init_message_short,init_message_short,manager->name);
     return 1u;
 }
+/* Stock 0x510240 (CALLBACK_MGR_Register) */
 uint32_t audio_callback_mgr_register(void *manager_storage,void *callback) {
     struct callback_manager *manager=(struct callback_manager *)manager_storage;
     if(manager==0) {

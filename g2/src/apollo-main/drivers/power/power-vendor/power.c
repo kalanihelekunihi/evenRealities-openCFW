@@ -3,6 +3,7 @@
 #include "power.h"
 #define REG(a) (*(volatile uint32_t *)(uintptr_t)(a))
 
+/* Stock 0x47F6F2 (pwrctrl_periph_disable_msk_check; upstream am_hal_pwrctrl.c) */
 static bool last_in_domain(uint32_t peripheral) {
     g2_power_descriptor p;
     if (g2_power_get_descriptor(&p, peripheral) != g2_power_product.status_success) return true;

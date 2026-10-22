@@ -15,15 +15,6 @@ static uint16_t le16(const uint8_t *p)
     return (uint16_t)p[0] | ((uint16_t)p[1] << 8);
 }
 
-void audio_ble_dm_action_55bc7c(const uint8_t *ccb, const uint8_t *msg)
-{
-    uint16_t handle = le16(ccb + 12);
-    audio_ble_l2c_dm_conn_update_rsp_537230(msg[8], handle, 0u);
-    audio_ble_hci_conn_update_52af40(handle,
-                                      (const uint8_t *)(uintptr_t)
-                                      ((uint32_t)msg[4] | ((uint32_t)msg[5] << 8) |
-                                       ((uint32_t)msg[6] << 16) | ((uint32_t)msg[7] << 24)));
-}
 
 void audio_ble_dm_action_536adc(const uint8_t *ccb, const uint8_t *msg)
 {

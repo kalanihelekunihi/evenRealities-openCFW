@@ -12,10 +12,12 @@ struct gx8002_clock_boot_source {
 _Static_assert(sizeof(struct gx8002_clock_boot_source) == 8,
                "clock source ABI");
 
+/* Stock 0x10025CD0 (gx8002_clock_switch_1m_rodata) */
 const struct gx8002_clock_boot_source gx8002_clock_1m_sources_25cd0[2]
     __attribute__((section(".gx8002.clock_boot.25cd0"), used,
                    aligned(4))) = {{28u, 0u}, {18u, 1u}};
 
+/* Stock 0x10025CE0 (gx8002_clock_init_pointer_rodata) */
 const int32_t gx8002_clock_startmode_adjustments_25ce0[5]
     __attribute__((section(".gx8002.clock_boot.25ce0"), used,
                    aligned(4))) = {0, 10, 15, -10, -15};

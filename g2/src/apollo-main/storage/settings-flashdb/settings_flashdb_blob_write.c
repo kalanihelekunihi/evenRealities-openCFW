@@ -9,6 +9,7 @@ struct audio_flashdb_blob_request {
     uint32_t length;
 };
 
+/* Stock 0x5411F2 (SVC_FlashDBBlobWrite) */
 int32_t audio_flashdb_blob_write(uint32_t index,const char *key,const void *data,uint16_t length) {
     (void)g2_flashdb_candidate_tick();
     struct audio_flashdb_blob_request request={data,(uint32_t)length};

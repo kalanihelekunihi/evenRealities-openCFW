@@ -7,6 +7,7 @@ extern void case_boot_init_failure(void) __attribute__((noreturn)); /* 0x3e90 */
 extern void case_bus_gpio_config(uint32_t base,volatile uint32_t *state); /* 0x4d30 */
 extern void case_clock_priority_config(uint32_t irq,uint32_t plan,uint32_t unused); /* 0x5024 */
 /* Native 0x500c writes the selected NVIC ISER bit for nonnegative IRQs. */
+/* Stock 0x0800500C (case_interrupt_enable) */
 void case_boot_sensor_irq_enable(uint32_t irq)
 {
     if((int32_t)irq>=0)
@@ -14,6 +15,7 @@ void case_boot_sensor_irq_enable(uint32_t irq)
 }
 static uint32_t rd32(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr32(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
+/* Stock 0x08006308 (case_configure_resource_irq) */
 void case_boot_sensor_open_initialize(uint32_t descriptor)
 {
     volatile uint32_t clock[11],pins[5];

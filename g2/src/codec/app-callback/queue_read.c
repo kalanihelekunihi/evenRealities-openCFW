@@ -10,6 +10,7 @@ static uint32_t native_remainder(uint32_t sum, int32_t size)
                      : "r"(sum), "r"(size) : "cc");
     return sum - (uint32_t)quotient * (uint32_t)size;
 }
+/* Stock 0x10206FFC (LvpQueueIsEmpty) */
 uint32_t g2_codec_queue_is_empty(void *storage)
 {
     volatile struct queue_view *const queue = storage;

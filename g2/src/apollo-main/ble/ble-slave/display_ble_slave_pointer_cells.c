@@ -8,5 +8,3 @@ uint8_t *audio_ble_dm_conn_cell;
 uint8_t *audio_ble_profile_connection_context;
 uint8_t *audio_ble_slave_mode_context;
 uint8_t *audio_ble_slave_subcontext;
-const uint8_t *audio_ble_slave_registration_slot;
-const uint8_t *audio_ble_slave_profile_slot;

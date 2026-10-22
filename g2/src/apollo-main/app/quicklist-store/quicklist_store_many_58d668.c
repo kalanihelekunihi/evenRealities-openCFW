@@ -14,6 +14,7 @@ static uint32_t read32(const uint8_t *data) {
            ((uint32_t)data[2] << 16) | ((uint32_t)data[3] << 24);
 }
 
+/* Stock 0x58D668 (quicklist_data_add_mult_items) */
 uint32_t audio_quicklist_store_many(const void *pb_items) {
     if (pb_items == 0) return 2u;
     const uint8_t *source = (const uint8_t *)pb_items;

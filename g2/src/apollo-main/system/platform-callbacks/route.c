@@ -6,6 +6,7 @@ static void call_transition(uint8_t index,uint32_t a,uint32_t old_a,uint32_t b,u
     ((transition_fn)target)(a,old_a,b,old_b);
 }
 extern void callback_voltage(uint32_t b,uint32_t a);
+/* Stock 0x005A44BA (PCM2.2 transition step) */
 void audio_platform_step(uint32_t a,uint32_t old_a,uint32_t b,uint32_t old_b) {
     uint8_t index=26;
     if(old_a<a) {
@@ -16,6 +17,7 @@ void audio_platform_step(uint32_t a,uint32_t old_a,uint32_t b,uint32_t old_b) {
             if(!callback_select(cursor-1,cursor,&index)) call_transition(index,a,old_a,b,old_b);
     }
 }
+/* Stock 0x005A453C (PCM2.2 transition apply) */
 void audio_platform_apply(uint32_t a,uint32_t old_a,uint32_t b,uint32_t old_b) {
     if(a==old_a) { if(b!=old_b) callback_voltage(b,a); return; }
     if((a>>2)==(old_a>>2)) { audio_platform_step(a,old_a,b,old_b); return; }

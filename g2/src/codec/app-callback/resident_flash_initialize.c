@@ -24,6 +24,7 @@ extern void gx8002_resident_flash_word_program_23788(
 extern uint32_t gx8002_resident_flash_word_read_23cac(
     uint32_t, uint32_t *, uint32_t);
 
+/* Stock 0x100245F0 (gx8002_flash_initialize) */
 uint32_t gx8002_resident_flash_initialize_245f0(void)
 {
     uint32_t platform_result = 0u;

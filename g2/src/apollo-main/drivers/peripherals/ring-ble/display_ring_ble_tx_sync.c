@@ -26,10 +26,12 @@ static const char already_short[]="[task.ble.wsf]tx_complete_notify: semaphore a
 static void *tx_semaphore(void) {
     return *(void **)(void *)(audio_ble_wsf_thread_state+0x14u);
 }
+/* Stock 0x4D0B36 (threadBleWsfTakeTxReady) */
 uint32_t audio_ble_take_tx_ready(uint32_t timeout_ticks) {
     void *sem=tx_semaphore();
     return sem!=0 && audio_semaphore_acquire(sem,(uint16_t)timeout_ticks)==0;
 }
+/* Stock 0x4D0B64 (thread_ble_wsf_wait_tx_ready) */
 void audio_ble_tx_ready_wait(void) {
     uint32_t start=g2_flashdb_candidate_tick();
     uint8_t count=0u;
@@ -55,6 +57,7 @@ void audio_ble_tx_ready_wait(void) {
     if((audio_log_flags()&1u)!=0u || (audio_log_flags()&4u)!=0u)
         (void)compressed_log_output(0x10800000u,success_short,success_short,elapsed,count);
 }
+/* Stock 0x4D0C36 (thread_ble_wsf_tx_complete_notify) */
 void audio_ble_tx_complete_notify(void) {
     void *sem=tx_semaphore();
     if(sem==0)return;

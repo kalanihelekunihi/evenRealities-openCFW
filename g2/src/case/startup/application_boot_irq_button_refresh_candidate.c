@@ -12,6 +12,7 @@ static uint8_t rd8(uint32_t a){return *(volatile uint8_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static void wr16(uint32_t a,uint16_t v){*(volatile uint16_t *)(uintptr_t)a=v;}
 static void wr8(uint32_t a,uint8_t v){*(volatile uint8_t *)(uintptr_t)a=v;}
+/* Stock 0x08003A00 (glasses_charge_state_reset) */
 void case_boot_button_mode_reset(uint32_t active)
 {
     const uint32_t s=0x2000087cu;
@@ -23,6 +24,7 @@ void case_boot_button_mode_reset(uint32_t active)
         wr8(s+77u,0u);wr8(s+19u,1u);
     }
 }
+/* Stock 0x08003A84 (case_boot_irq_button_refresh) */
 void case_boot_irq_button_refresh(void)
 {
     uint32_t sampled;

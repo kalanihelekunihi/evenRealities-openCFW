@@ -12,12 +12,15 @@ static const char module[]="task.ring";
 static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\platform\\threads\\thread_ring.c";
 static const char function[]="app_ring_enable_touch";
 static const char event_name[]="RING_EnableTouchEvt";
+/* Stock 0x0046EFD8 (profile_get_conn_state_byte) */
 uint8_t audio_ble_profile_get_connection_state(void) {
     return audio_ble_profile_connection_context[0x54u];
 }
+/* Stock 0x472426 (ring_touch_enable_msg_send_472426) */
 int32_t audio_ble_ring_touch_message(uint8_t enabled) {
     return (int8_t)audio_uart_ring_task_msg_send(0x80u,&enabled,1u);
 }
+/* Stock 0x4C4EE4 (app_ring_enable_touch) */
 void audio_ble_master_followup_delayed(void) {
     if(audio_log_level()&2u)
       audio_log_extended(4u,module,source,function,0xf0u,event_name);

@@ -2,6 +2,7 @@
  * calls. Physical time depends on the unclosed delay implementation/clock. */
 #include <stdint.h>
 extern void opencfw_hal_delay_us(uint32_t);
+/* Stock 0x41D246 (delay_us_status_check; am_hal_delay_us_status_check) */
 uint32_t opencfw_hal_status_poll(uint32_t count, uintptr_t address,
                                 uint32_t mask, uint32_t expected,
                                 uint32_t equal) {

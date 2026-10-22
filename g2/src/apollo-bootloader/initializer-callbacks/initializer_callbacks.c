@@ -79,6 +79,7 @@ __attribute__((naked)) static void mode_apply_wrapper(void)
         "pop {r0, pc}\n");
 }
 
+/* Stock 0x4301D6 (platform_boot_sequence_4301d6) */
 uint32_t opencfw_boot_init_callback_platform_sequence(void)
 {
     opencfw_bl_descriptor_register(opencfw_boot_gpio_descriptors, 0x61u);
@@ -89,6 +90,7 @@ uint32_t opencfw_boot_init_callback_platform_sequence(void)
     return 0u;
 }
 
+/* Stock 0x43194C (platform_services_init_43194c; EasyLogger elog_init/elog_set_fmt/elog_start) */
 uint32_t opencfw_boot_init_callback_services(void)
 {
     (void)opencfw_boot_services_initialize(0u);
@@ -186,6 +188,7 @@ void opencfw_boot_services_finalize(void)
         opencfw_boot_elog_version);
 }
 
+/* Stock 0x415590 (redirect_init; product/s200/bootloader/config/redirect.c) */
 uint32_t opencfw_boot_init_callback_redirect(void)
 {
     volatile uint32_t *const redirect_mutex =

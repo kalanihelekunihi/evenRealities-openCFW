@@ -8,6 +8,7 @@ static const char offline[]="HOST_STATUS_OFFLINE";
 static const char streaming[]="HOST_STATUS_STREAMING";
 static const char unknown[]="HOST_STATUS_UNKNOWN";
 
+/* Stock 0x5E82E6 (semantic_terminal_host_status_name) */
 const char *audio_terminal_host_status_name(uint32_t status) {
     switch((uint8_t)status) {
     case 0:return no_host;
@@ -17,11 +18,13 @@ const char *audio_terminal_host_status_name(uint32_t status) {
     }
 }
 
+/* Stock 0x5E8294 (semantic_terminal_state_is_processing) */
 uint8_t audio_terminal_state_is_processing(uint32_t state) {
     uint8_t value=(uint8_t)state;
     return (uint8_t)(value>=1u && value<=3u);
 }
 
+/* Stock 0x59734A (td_state_ptr_alias2) */
 uint8_t *audio_td_state_ptr_alias2(void) {return audio_td_state;}
 
 uint32_t audio_td_counter_b_get(void) {

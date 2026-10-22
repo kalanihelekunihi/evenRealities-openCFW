@@ -12,6 +12,7 @@ static const char function[]="notify_silent_mode_to_app";
 static const char message[]="just notify silent mode to app = %d";
 static const char compact[]="[pb_service_setting]just notify silent mode to app = %d";
 
+/* Stock 0x49BF24 (notify_silent_mode_to_app) */
 void audio_silent_mode_notify_app(uint32_t enabled) {
     uint8_t packet[104];
     audio_uart_buffer_zero(packet,104u,0u);

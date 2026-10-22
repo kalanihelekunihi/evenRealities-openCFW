@@ -6,6 +6,7 @@
 #include <stdint.h>
 float opencfw_boot_pll_mod(float,float) __attribute__((pcs("aapcs-vfp")));
 typedef union {float f;uint32_t bits;} binary32;
+/* Stock 0x427CCC (fmodf_427ccc) + 0x427CDC (fmod_bits_427cdc, soft-float body folded in) */
 float opencfw_boot_pll_mod(float first,float second){
  binary32 x={.f=first},y={.f=second};uint32_t sign=x.bits&0x80000000u;
  uint32_t ax=x.bits&0x7fffffffu,ay=y.bits&0x7fffffffu;

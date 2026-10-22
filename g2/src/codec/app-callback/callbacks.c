@@ -12,6 +12,7 @@ static g2_codec_request *const g2_codec_request_cell =
     &gx8002_request_initial_26d5c.request;
 extern uint32_t g2_codec_timestamp(void); /* resident 0x10025930 */
 
+/* Stock 0x10205F88 (gx_gpio_set_level) */
 uint32_t g2_codec_gpio_set_level(uint32_t pin, uint32_t level) {
     volatile uint32_t *const output =
         (volatile uint32_t *)(uintptr_t)UINT32_C(0xa0001004);
@@ -22,12 +23,14 @@ uint32_t g2_codec_gpio_set_level(uint32_t pin, uint32_t level) {
 }
 
 /* Native-checked source reductions of 0x102093dc and 0x102093f4. */
+/* Stock 0x102093DC (gx8002_notification_stamp) */
 void g2_codec_event_prepare(void) {
     g2_codec_gpio_set_level(2u, 0u);
     *(volatile uint32_t *)(uintptr_t)UINT32_C(0x2002e910) =
         g2_codec_timestamp();
 }
 
+/* Stock 0x102093F4 (gx8002_app_reply) */
 uint32_t g2_codec_event_dispatch(uint32_t kind, uint32_t code, uint32_t argument) {
     volatile g2_codec_request *request = g2_codec_request_cell;
     *(volatile uint16_t *)(uintptr_t)UINT32_C(0x2002e914) = (uint16_t)argument;
@@ -40,11 +43,13 @@ uint32_t g2_codec_event_dispatch(uint32_t kind, uint32_t code, uint32_t argument
     return 0u;
 }
 
+/* Stock 0x1020975C (gx8002_event_notify) */
 void g2_codec_event_91_helper(uint32_t event_argument) {
     g2_codec_event_prepare();
     g2_codec_event_dispatch(1u, 12u, event_argument);
 }
 
+/* Stock 0x10209770 (gx8002_i2s_ack) */
 void g2_codec_construct_request(void) {
     uint8_t one = 1;
     g2_codec_request *request = g2_codec_request_cell;

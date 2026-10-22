@@ -7,6 +7,7 @@ extern void opencfw_bl_kernel_enter(void);
 extern void opencfw_bl_kernel_exit(void);
 extern void opencfw_bl_kernel_reschedule(void);
 #define WORD(a) (*(volatile uint32_t *)(uintptr_t)(a))
+/* Stock 0x4161C6 (bl_runtime_value; CMSIS-RTOS2 osThreadGetId, folds xTaskGetCurrentTaskHandle 0x418B4E) */
 uintptr_t opencfw_boot_thread_current(void) {return WORD(0x20027134);}
 static void remove_item(uint32_t *item) {
     uint32_t *container=(uint32_t *)(uintptr_t)item[4];
@@ -47,6 +48,7 @@ void opencfw_bl_thread_priority_set(uintptr_t handle,uint32_t priority) {
     }
     opencfw_bl_kernel_exit();
 }
+/* Stock 0x4161CE (bl_runtime_call; CMSIS-RTOS2 osThreadSetPriority) */
 int32_t opencfw_boot_thread_priority_set(uintptr_t handle,uint32_t priority) {
     if (opencfw_bl_context_guard())return -6;
     if (!handle || (priority-1)>=56)return -4;

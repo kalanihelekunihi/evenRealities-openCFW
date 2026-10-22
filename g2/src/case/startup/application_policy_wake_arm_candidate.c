@@ -2,6 +2,7 @@
  * Native CASE 0x50e8 wake configuration and architectural sleep path.
  */
 #include <stdint.h>
+/* Stock 0x080050E8 (HAL_PWR_EnterSLEEPMode) */
 void case_policy_wake_arm(uint32_t a,uint32_t b)
 {
     volatile uint32_t *power=(volatile uint32_t *)(uintptr_t)0x40007000u;

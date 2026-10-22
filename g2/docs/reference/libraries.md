@@ -210,6 +210,29 @@ is at `0x200749C4`):
 - **Concurrency.** No mutex.
 - **ID allocation.** Request IDs are `(next++ & 0x7FFF) | peer_bit`, with
   master = bit 1.
+- **Stock variant.** `struct TinyFrame_` carries G2 bookend words
+  `0xA5A5A5A5` at `+0` and `0x5A5A5A5A` at `+0x715C` (`sizeof` `0x7160`,
+  pinned `0x7158`), stored by `TF_InitStatic` (`0x4917BC..0x4917CA`). The ten
+  stock `TF_Error` lines are the pinned ones +3 before `TF_ClaimTx` and +5
+  after `TF_InitStatic` (35/220/244/332/354/529/593/658/677/714). `TF_Error`
+  logs to EasyLogger (`elog_output` level 1, tag `TinyFrame`) and to the
+  compressed log (`0x04000000 | argc << 22`). `TF_WriteImpl` is `0x4D9522`.
+
+**Other stock-revision details used by the Apollo main upstream units**
+(2026-10-21; compilation is not byte identity):
+
+- **TLSF.** Every `tlsf_assert` line is pinned +1 (e.g. `block_prev` 433,
+  `tlsf_free` 1188), with the IAR path literal `ROM 0x71A23C`; the
+  generic `fls` branch is used (`tlsf_fls_generic` `0x4CFD18`).
+- **Ring-Buffer.** `ring_buffer_init` asserts at line 9 (pinned) with the
+  path literal `ROM 0x6FC92C` (`third_party\ringBuffer\ringbuffer.c`).
+- **cJSON.** `parse_number` receives `strtod` (`0x542D48`) in `d0`, so the
+  unit uses the hard-float calling convention.
+- **FlashDB/FAL.** `FDB_PRINT` is the default `printf`, IAR `0x4733EE`; the
+  FAL table is in `config-recovered/flashdb/g2-config/fal_cfg.h`.
+- **LZ4.** The unit is `lz4/lib/lz4.c` v1.10.0 with
+  `LZ4_FORCE_MEMORY_ACCESS=0`; LVGL's copy differs only by its `#if` wrapper
+  and a static `LZ4_loadDict_internal`.
 
 **CmBacktrace** (Proven for the first block of `cmb_user_cfg.h`):
 

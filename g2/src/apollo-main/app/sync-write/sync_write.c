@@ -17,12 +17,14 @@ extern void audio_delay_us_selected(uint32_t); /* selected 0x4807a0 */
 static volatile uint32_t *uart_reg(uint32_t offset) {
     return (volatile uint32_t *)(uintptr_t)(0x40039000u+offset);
 }
-static void dma_stop(void) {
+/* Stock 0x584A64 (uart_sync_dma_stop_584a64) */
+void uart_sync_dma_stop_584a64(void) {
     *uart_reg(0x48u)=0u;
     *uart_reg(4u)&=~0x30u;
     *uart_reg(0x44u)=0x1800u;
 }
-static void dma_start(uint32_t source,uint32_t count) {
+/* Stock 0x584A38 (uart_sync_dma_start_584a38) */
+void uart_sync_dma_start_584a38(uint32_t source,uint32_t count) {
     *uart_reg(0x48u)=0u;
     *uart_reg(0x4cu)=source;
     *uart_reg(0x50u)=count;
@@ -32,6 +34,7 @@ static void dma_start(uint32_t source,uint32_t count) {
     __asm__ volatile("dmb sy" ::: "memory");
     *uart_reg(0x48u)=10u;
 }
+/* Stock 0x58E754 (am_hal_uart_flags_get) */
 static uint32_t driver_status(void *handle,uint32_t *status) {
     if(handle==0 || (*(uint32_t *)handle&0x1ffffffu)!=0x1ea9e06u)
         return 2u;
@@ -64,10 +67,10 @@ uint32_t audio_uart_sync_write(const void *bytes,uint32_t size) {
     }
     (void)audio_semaphore_acquire(g2_uart_sync_semaphore_handle,0u);
     g2_uart_sync_write_error=0u;
-    dma_stop();
-    dma_start((uint32_t)source,size);
+    uart_sync_dma_stop_584a64();
+    uart_sync_dma_start_584a38((uint32_t)source,size);
     if(audio_semaphore_acquire(g2_uart_sync_semaphore_handle,100u)!=0) {
-        dma_stop();
+        uart_sync_dma_stop_584a64();
         g2_uart_sync_write_error=0u;
         (void)audio_file_mutex_release(g2_uart_sync_mutex);
         return 1u;

@@ -26,6 +26,7 @@ NI uint32_t opencfw_bl_post_context_register(uint32_t module,const void *output)
     return 0;
 }
 /* Original 4275ea; no copy, allocation, or ownership transfer. */
+/* Stock 0x4275EA (queue_init_4275ea; am_hal_queue_init) */
 NI void opencfw_boot_uart_ring_initialize(uint32_t p,uint32_t buffer,uint32_t width,uint32_t capacity) {
     R(p)=0;R(p+4)=0;R(p+8)=0;R(p+12)=capacity;R(p+16)=width;R(p+20)=buffer;
 }
@@ -86,6 +87,7 @@ NI uint32_t opencfw_boot_uart_baud(uint32_t module,uint32_t baud,uint32_t *actua
     R(base+0x24)=integer;R(base+0x28)=fraction;
     *(volatile uint32_t *)actual=udiv(f,(fraction>>2)+(integer<<4));return 0;
 }
+/* Stock 0x42308E (earliest_complete_opaque_body; am_hal_uart_configure) */
 NI uint32_t opencfw_bl_post_validate(uint32_t p,uint32_t config) {
     if(!valid(p))return 2;
     uint32_t module=R(p+0x28),base=UART+(module<<12);

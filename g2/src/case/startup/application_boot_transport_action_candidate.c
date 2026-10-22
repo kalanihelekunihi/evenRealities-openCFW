@@ -10,6 +10,7 @@ extern void case_policy_ota_checksum(uint8_t *packet,uint32_t count); /* 0x9b70 
 extern uint32_t case_policy_send_probe(uint32_t side,const uint8_t *packet,uint32_t count,uint32_t reply); /* 0x258c */
 extern uint32_t case_policy_parse_probe(uint32_t side); /* 0x1e94 */
 
+/* Stock 0x08001C1C (glasses_status_force_refresh) */
 void case_boot_transport_action(uint32_t left,uint32_t right)
 {
     if((left|right)==0u)return;

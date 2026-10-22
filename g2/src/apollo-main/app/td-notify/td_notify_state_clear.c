@@ -4,6 +4,7 @@
 /* Native RAM 0x2010fd20, length 0x806. Final linker placement remains open. */
 extern uint8_t audio_td_state[0xa1dc];
 
+/* Stock 0x597110 (td_notify_state_clear) */
 void audio_td_notify_state_clear(void) {
     volatile uint8_t *state=audio_td_state;
     for(uint32_t i=0;i<0x806u;++i) state[i]=0;

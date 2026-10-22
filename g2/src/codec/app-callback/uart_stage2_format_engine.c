@@ -11,6 +11,7 @@
 extern char *gx8002_uart_stage2_format_number_691c(char *out,
     uint32_t low, uint32_t high, uint32_t base, int32_t width,
     int32_t precision, uint32_t flags);
+/* Stock 0x10006350 (gx8002_stage2_strnlen) */
 int32_t gx8002_uart_stage2_format_strlen_6350(const char *text,
                                                 int32_t precision)
 {

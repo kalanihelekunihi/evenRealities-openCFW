@@ -40,6 +40,7 @@ static uint16_t selected_type(void)
     return (uint16_t)(selected[1] >> 16);
 }
 
+/* Stock 0x10023AE0 (gx8002_flash_otp_status) */
 int32_t gx8002_resident_flash_otp_status_23ae0(uint8_t *locked)
 {
     uint32_t region = otp_config()->current_region & 7u;
@@ -51,12 +52,14 @@ int32_t gx8002_resident_flash_otp_status_23ae0(uint8_t *locked)
     return 0;
 }
 
+/* Stock 0x10023B24 (gx8002_flash_otp_get_region) */
 uint32_t gx8002_resident_flash_otp_get_region_23b24(uint32_t *count)
 {
     *count = otp_config()->region_count;
     return 0u;
 }
 
+/* Stock 0x10023B38 (gx8002_flash_otp_set_region) */
 int32_t gx8002_resident_flash_otp_set_region_23b38(uint32_t region)
 {
     volatile struct resident_otp_config *config = otp_config();
@@ -65,6 +68,7 @@ int32_t gx8002_resident_flash_otp_set_region_23b38(uint32_t region)
     return 0;
 }
 
+/* Stock 0x10023B60 (gx8002_flash_otp_get_current_region) */
 uint32_t gx8002_resident_flash_otp_get_current_region_23b60(
     uint32_t *region)
 {
@@ -72,6 +76,7 @@ uint32_t gx8002_resident_flash_otp_get_current_region_23b60(
     return 0u;
 }
 
+/* Stock 0x10023B78 (gx8002_flash_otp_get_region_size) */
 uint32_t gx8002_resident_flash_otp_get_region_size_23b78(
     uint32_t *bytes)
 {
@@ -79,6 +84,7 @@ uint32_t gx8002_resident_flash_otp_get_region_size_23b78(
     return 0u;
 }
 
+/* Stock 0x10024250 (gx8002_flash_otp_lock) */
 int32_t gx8002_resident_flash_otp_lock_24250(void)
 {
     uint32_t region = otp_config()->current_region & 7u;

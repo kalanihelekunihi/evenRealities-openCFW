@@ -25,5 +25,7 @@ static void reconfigure(uint32_t mode)
     if(case_boot_sensor_set_clock((uint32_t)(uintptr_t)d,0u)!=0u)case_boot_init_failure();
     if(case_boot_sensor_start((uint32_t)(uintptr_t)d)!=0u)case_boot_init_failure();
 }
+/* Stock 0x08006C80 (case_initialize_controller_profile) */
 void case_boot_sensor_post_transmit(void){reconfigure(4u);}
+/* Stock 0x08006CF8 (case_initialize_controller_profile) */
 void case_boot_sensor_service_start(void){reconfigure(8u);}

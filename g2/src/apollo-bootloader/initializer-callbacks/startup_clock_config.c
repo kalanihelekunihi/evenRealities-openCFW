@@ -25,6 +25,7 @@ static void restore(uint32_t v){__asm__ volatile("msr primask,%0"::"r"(v):"memor
 static uint32_t users(unsigned c){uint32_t a=W(0x20026e74+c*8),b=W(0x20026e78+c*8),n=0;while(a){n+=a&1;a>>=1;}while(b){n+=b&1;b>>=1;}return n;}
 static void copy12(uint32_t dest,const void *src){volatile uint8_t *q=(volatile uint8_t *)(uintptr_t)dest;const uint8_t *p=src;for(unsigned i=0;i<12;i++)q[i]=p[i];}
 static uint32_t hf1_apply(uint32_t v){W(0x40004020)=v|1;return 0;}
+/* Stock 0x426C7E (clkgen_hfadj_disable_426c7e; am_hal_clkgen_private_hfadj_disable) */
 static uint32_t hf1_default(void){W(0x40004020)&=~1u;return 0;}
 static uint32_t hf2_default(void){W(0x40004048)&=~1u;return 0;}
 uint32_t opencfw_boot_startup_select4(uint32_t value,const uint32_t *input){

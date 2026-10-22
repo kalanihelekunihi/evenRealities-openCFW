@@ -5,6 +5,7 @@
 extern uint8_t audio_ble_connection_state_table[]; /* native 0x20073e04 */
 extern uint32_t audio_ble_att_zero_connection_assert(uint16_t);
 
+/* Stock 0x52C928 (attsCsfIsClientChangeAware) */
 uint32_t audio_ble_att_connection_valid(uint8_t connection,
                                         uint16_t attribute) {
     if(connection==0u)

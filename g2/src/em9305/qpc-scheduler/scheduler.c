@@ -42,6 +42,7 @@ uint32_t opencfw_em9305_qk_sched_state(struct opencfw_qk_state *state)
     return (uint8_t)candidate;
 }
 
+/* Stock 0x00311634 (QK_sched_) */
 uint32_t opencfw_em9305_qk_sched(void)
 {
     return opencfw_em9305_qk_sched_state(

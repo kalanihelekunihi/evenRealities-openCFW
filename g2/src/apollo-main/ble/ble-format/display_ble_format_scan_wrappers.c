@@ -23,6 +23,7 @@ static int32_t scan_get(void *context,uint32_t character,uint32_t advance) {
     return (uint8_t)*(*cursor)++;
 }
 
+/* Stock 0x004B4728 (IAR DLIB sprintf) */
 int32_t audio_ble_format_to_buffer(char *destination,const char *format,...) {
     va_list arguments;
     va_start(arguments,format);
@@ -36,6 +37,7 @@ int32_t audio_ble_format_to_buffer(char *destination,const char *format,...) {
     return status<0?status:(int32_t)(output-destination);
 }
 
+/* Stock 0x00475FC0 (IAR DLIB sscanf) */
 int32_t audio_ble_parse_version(const char *input,const char *format,...) {
     va_list arguments;
     va_start(arguments,format);

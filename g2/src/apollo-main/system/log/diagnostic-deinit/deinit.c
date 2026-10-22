@@ -4,6 +4,7 @@ extern void audio_codec_control(uint32_t),audio_pdm_control(uint32_t);
 extern int32_t audio_unregister(uint32_t,uint32_t);
 extern int32_t audio_file_close(void*);
 extern void audio_encoder_setup(void*);
+/* Stock 0x0057B312 (service_audio_recording_stop) */
 void audio_recording_stop_selected(uint32_t mode){
  mode=(uint8_t)mode;if(mode>=2)return;
  uint8_t *row=(uint8_t*)(0x20073c08u+12*mode);void *file=*(void**)row;

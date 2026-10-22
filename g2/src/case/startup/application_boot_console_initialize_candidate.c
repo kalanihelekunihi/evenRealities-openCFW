@@ -8,6 +8,7 @@ extern void case_boot_console_start(uint32_t descriptor); /* 0x3fd0 */
 extern void case_boot_init_failure(void); /* 0x3e90 */
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static void wr8(uint32_t a,uint8_t v){*(volatile uint8_t *)(uintptr_t)a=v;}
+/* Stock 0x080068F0 (case_initialize_transport_record) */
 void case_boot_console_initialize(void)
 {
     const uint32_t d=0x200008e4u;

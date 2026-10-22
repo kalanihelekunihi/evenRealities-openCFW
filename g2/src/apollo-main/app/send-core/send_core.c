@@ -115,10 +115,12 @@ static uint32_t send_core(uint16_t app,const void *bytes,uint32_t length,
     audio_file_heap_free(node);
     return UINT32_MAX;
 }
+/* Stock 0x4651E0 (SendDataToPeer) */
 uint32_t audio_uart_request_send(uint32_t app,const void *bytes,uint32_t length,
                                   uint32_t id) {
     return send_core((uint16_t)app,bytes,length,id,0u,0u);
 }
+/* Stock 0x465480 (SendDataToPeerExt) */
 uint32_t audio_uart_handshake_send(uint32_t app,const void *bytes,uint32_t length,
                                     uint32_t id,uint32_t event) {
     return send_core((uint16_t)app,bytes,length,id,(uint16_t)event,1u);

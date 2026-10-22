@@ -13,6 +13,7 @@ static const char fallback[]="message";
 static const char stale[]="ignore terminal %s for stale session: msg=%lu current=%lu";
 static const char stale_short[]="[terminal.pb]ignore terminal %s for stale session: msg=%lu current=%lu";
 
+/* Stock 0x5E818A (terminal_message_session_matches) */
 uint32_t audio_terminal_message_session_matches(uint32_t session,const char *kind) {
     uint32_t current=audio_td_counter_b_get();
     if(session==current) return 1u;

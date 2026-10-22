@@ -50,6 +50,7 @@ static const char function[]="_bleCommProcMsg";
  if((audio_log_flags()&1u)||(audio_log_flags()&4u)) \
   (void)compressed_log_output(mask,short_text,short_text,##__VA_ARGS__); \
 } while(0)
+/* Stock 0x4B75CE (bleProcMsg) */
 void audio_ble_comm_message_release(void *raw) {
  uint8_t *m=(uint8_t *)raw;
  uint8_t event=m[2u],conn=m[0u],emit=0u;

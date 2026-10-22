@@ -4,6 +4,7 @@
 #include "case_battery_measurement_contract.h"
 extern int32_t case_policy_timer_query(uint32_t,uint32_t *); /* 0xa074 */
 extern uint32_t case_policy_sensor_divide(uint32_t,uint32_t); /* 0x0160 */
+/* Stock 0x08009EBC (bounded_percentage_convert) */
 int32_t case_boot_battery_percent(uint32_t *out)
 {
     uint32_t raw=0u;

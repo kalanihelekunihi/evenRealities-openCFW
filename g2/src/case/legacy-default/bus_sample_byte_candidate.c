@@ -6,6 +6,7 @@
 extern uint32_t case_bus_response_sample(uint32_t *bit); /* 0x0800b53c */
 extern uint32_t case_bus_read(uint32_t value);           /* 0x0800c412 parity */
 extern void case_bus_start(uint32_t bit);                /* 0x0800a19a */
+/* Stock 0x0800B5D6 (case_collect_bits) */
 uint32_t case_bus_byte_sample(uint8_t *output)
 {
     uint32_t assembled=0u;
@@ -20,6 +21,7 @@ uint32_t case_bus_byte_sample(uint8_t *output)
     *output=(uint8_t)assembled;
     return success;
 }
+/* Stock 0x0800A176 (case_route_parity_alt) */
 void case_bus_response_bit(uint32_t value)
 {
     case_bus_start(case_bus_read(value)==1u?1u:0u);

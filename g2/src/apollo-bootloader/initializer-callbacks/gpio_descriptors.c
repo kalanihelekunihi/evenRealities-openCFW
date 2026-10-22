@@ -61,11 +61,13 @@ NI uint32_t opencfw_boot_gpio_interrupt_control(uint32_t channel,uint32_t contro
     }
     restore(token);return 0;
 }
+/* Stock 0x43025C (scb_priority_nibble_43025c; CMSIS __NVIC_SetPriority) */
 NI void opencfw_boot_gpio_priority(uint32_t interrupt,uint32_t priority) {
     uint32_t irq=interrupt&0xffffu;uint8_t value=(uint8_t)(priority<<4);
     if(!(irq&0x8000u)) *(volatile uint8_t *)(uintptr_t)(0xe000e400u+irq)=value;
     else *(volatile uint8_t *)(uintptr_t)(0xe000ed18u+(irq&15u)-4u)=value;
 }
+/* Stock 0x430280 (descriptor_register_430280) */
 NI uint32_t opencfw_bl_descriptor_register(const opencfw_boot_gpio_descriptor *table,uint32_t count) {
     const volatile opencfw_boot_gpio_descriptor *rows=table;
     if(!table || !count)return 0xffffffffu;

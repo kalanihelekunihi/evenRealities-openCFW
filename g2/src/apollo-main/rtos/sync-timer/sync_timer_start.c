@@ -30,6 +30,7 @@ static void log0(uint8_t level,uint32_t line,uint32_t compact,
         (void)compressed_log_output(compact,short_text,short_text);
 }
 
+/* Stock 0x45D302 (sync timeout timer callback) */
 void audio_uart_sync_timer_callback(void *unused) {
     (void)unused;
     if(audio_uart_sync_timer_sem!=0) {
@@ -39,6 +40,7 @@ void audio_uart_sync_timer_callback(void *unused) {
     }
 }
 
+/* Stock 0x45D34C (SyncTimeoutDetectionThreadStartup) */
 uint32_t audio_uart_sync_timer_start(void) {
     audio_uart_sync_timer_sem=audio_uart_sync_sem_new(0xffffu,0u,0);
     if(audio_uart_sync_timer_sem==0) {

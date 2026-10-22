@@ -9,6 +9,7 @@ extern void case_bus_send(uint32_t byte,uint32_t first); /* 0x0800a2c4 */
 extern void case_bus_start(uint32_t mode);      /* 0x0800a19a */
 extern uint32_t case_bus_poll(uint32_t *word);  /* 0x0800c43c */
 extern uint32_t case_bus_read(uint32_t value);  /* 0x0800c412 */
+/* Stock 0x08000610 (case_wire_write_register) */
 uint32_t case_binary_3f_bus(uint32_t command,uint32_t index,uint32_t count,
                             const uint8_t *value)
 {

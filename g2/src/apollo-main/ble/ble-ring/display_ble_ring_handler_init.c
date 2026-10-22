@@ -15,6 +15,7 @@ static const char module[]="ble.ring";
 static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\platform\\ble\\profiles\\ring\\profile_ring.c";
 static const char function[]="APP_BleRingHandlerInit";
 static const char short_text[]="[ble.ring]APP_BleRingHandlerInit";
+/* Stock 0x4C4810 (APP_BleRingHandlerInit) */
 void audio_ble_ring_handler_init(uint8_t handler,uint8_t *storage) {
     if(audio_log_level()&2u)
         audio_log_extended(4u,module,source,function,0x98u,function);

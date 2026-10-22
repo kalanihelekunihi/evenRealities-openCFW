@@ -36,6 +36,7 @@ uint32_t gx8002_xip_strlen_10206ca0(const char *text)
     return (uint32_t)(cursor - text);
 }
 
+/* Stock 0x10025D04 (gx8002_flash_otp_configuration) */
 int32_t gx8002_resident_flash_otp_mode_25d04(uint32_t *mode)
 {
     *mode = UINT32_C(0x8002);

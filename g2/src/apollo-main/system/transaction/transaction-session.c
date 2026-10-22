@@ -20,6 +20,7 @@ static const char failed[] = "Failed to initialize UART: %d";
 static const char simple_failed[] =
     "[codec.host]Failed to initialize UART: %d";
 
+/* Stock 0x57BA88 (gx8002_host_init) */
 int32_t audio_transaction_init(void) {
     const int32_t status = audio_uart_session_open();
     if (status != 0) {
@@ -35,6 +36,7 @@ int32_t audio_transaction_init(void) {
     return 0;
 }
 
+/* Stock 0x57BAEC (semantic_gx8002_uart_cleanup) */
 void audio_transaction_cleanup(void) {
     (void)audio_uart_session_close();
 }

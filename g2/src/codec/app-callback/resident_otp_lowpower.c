@@ -9,6 +9,7 @@
 extern int32_t gx8002_resident_flash_otp_mode_25d04(uint32_t *mode);
 extern void gx8002_resident_clock_switch_1m_25a14(void);
 
+/* Stock 0x100248CC (gx8002_otp_lowpower_enter) */
 void gx8002_resident_otp_lowpower_enter_248cc(void)
 {
     uint32_t mode = 0u;

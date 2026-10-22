@@ -13,6 +13,7 @@ static uint32_t load_u32(const uint8_t *p) {
            ((uint32_t)p[2]<<16)|((uint32_t)p[3]<<24);
 }
 
+/* Stock 0x0051301C (input_msg_send_record) */
 void audio_input_message_send_record(const void *record) {
     if(record==0) return;
     uint32_t queue=load_u32(audio_input_message_state+12u);

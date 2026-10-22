@@ -6,6 +6,7 @@
 .thumb
 .fpu fpv4-sp-d16
 .text
+/* Stock 0x432958 (fpu_enable_432958; IAR __iar_init_vfp) */
 .global opencfw_boot_fpu_init
 .thumb_func
 opencfw_boot_fpu_init:

@@ -24,6 +24,7 @@ static const char connected[]="APP_MasterHanderInit: ring owner side, ringMac is
 static const char connected_short[]="[ble.master]APP_MasterHanderInit: ring owner side, ringMac is set, start try connect ring after 15 seconds";
 static const char missing[]="APP_MasterHanderInit: ring owner side, ringMac is not set, skip try connect ring";
 static const char missing_short[]="[ble.master]APP_MasterHanderInit: ring owner side, ringMac is not set, skip try connect ring";
+/* Stock 0x004A19F4 (APP_MasterHanderInit) */
 void audio_ble_app_master_handler_init(uint8_t handler,uint8_t *state,uint8_t *mode) {
     audio_ble_master_registration_slot=audio_ble_master_registration_table;
     audio_ble_master_state_slot=state;

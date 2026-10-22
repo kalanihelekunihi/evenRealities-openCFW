@@ -1,6 +1,7 @@
 /* Independent actual CPU slider raw path5bc0->5938->4fee/5920.
  * Caller supplies acquired rawcounts; HW-IIR/commonmode/ADC not reconstructed. */
 #include "slider.h"
+/* Stock 0x00004FEE (touch_pipeline_1cee_update) */
 uint32_t touch_sensor_baseline(uint8_t *w,uint8_t *s,const uint8_t *context){
  uint32_t raw=*(uint16_t *)s,baseline=*(uint16_t *)(s+2);
  if(raw>=baseline)s[7]=0;
@@ -16,9 +17,11 @@ uint32_t touch_sensor_baseline(uint8_t *w,uint8_t *s,const uint8_t *context){
  }
  return 0;
 }
+/* Stock 0x00005920 (touch_record_2620_threshold_delta) */
 void touch_sensor_difference(const uint8_t *w,uint8_t *s){
  uint32_t raw=*(uint16_t *)s,baseline=*(uint16_t *)(s+2);*(uint16_t *)(s+4)=raw>baseline+*(const uint16_t *)(w+26)?(uint16_t)(raw-baseline):0;
 }
+/* Stock 0x00005BC0 (touch_state_28c0_cap_object) */
 void touch_slider_clamp(uint32_t id,const uint8_t *context){
  uint8_t *w=(uint8_t *)(*(const uint32_t *)(context+12)+id*144u),*c=*(uint8_t **)w,*s=*(uint8_t **)(w+4);
  uint32_t limit=*(uint16_t *)(c+4),count=*(uint16_t *)(w+56);
@@ -31,6 +34,7 @@ uint32_t touch_slider_raw(uint32_t id,const uint8_t *context){
  for(uint32_t i=0;i<*(uint16_t *)(w+56);i++,s+=10){result|=touch_sensor_baseline(c,s,context);touch_sensor_difference(c,s);}
  return result;
 }
+/* Stock 0x00004BA8 (touch_application_18a8_process) */
 uint32_t touch_slider_widget(uint32_t id,uint8_t *context){
  if(id>2)return 1;
  uint8_t *w=(uint8_t *)(*(uint32_t *)(context+12)+id*144u);

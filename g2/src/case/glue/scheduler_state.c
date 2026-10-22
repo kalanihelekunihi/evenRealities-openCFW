@@ -1,6 +1,7 @@
 #include <stdint.h>
 
 /* Original 0x0800ca4c uses base literal 0x20000128. */
+/* Stock 0x0800CA4C (xTaskGetSchedulerState) */
 uint32_t case_scheduler_state(void)
 {
     volatile uint32_t *const base = (volatile uint32_t *)(uintptr_t)0x20000128u;

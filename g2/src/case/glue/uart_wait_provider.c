@@ -13,6 +13,7 @@ static void clear_interrupt_bits(volatile uint32_t *reg,uint32_t mask)
 
 /* Original 0x08008ec4. The caller owns a live UART handle and peripheral.
  * HAL tick cadence and peripheral ISR evolution are separate contracts. */
+/* Stock 0x08008EC4 (case_wait_condition) */
 uint32_t case_wait_condition(void *handle,uint32_t flag,uint32_t expected,
                              uint32_t start,uint32_t timeout)
 {

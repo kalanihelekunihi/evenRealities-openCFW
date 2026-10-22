@@ -10,6 +10,7 @@ extern uint32_t audio_os_interrupt_mask_5fa0a4(void);
 
 static const char suspended_name[] = "unknown";
 
+/* Stock 0x0044AAE0 (elog port task-name helper) */
 static const char *task_context_name(void)
 {
     if (audio_scheduler_state() == 1u)
@@ -23,11 +24,13 @@ static const char *task_context_name(void)
     return (const char *)(task + 0x34u);
 }
 
+/* Stock 0x0044AB14 (elog_port_get_p_info) */
 const char *g2_log_process_string(void)
 {
     return task_context_name();
 }
 
+/* Stock 0x0044AB1C (elog_port_get_t_info) */
 const char *g2_log_thread_string(void)
 {
     return task_context_name();

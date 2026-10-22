@@ -5,6 +5,7 @@
 extern const uint32_t case_boot_clock_shift_table[8]; /* 0x0800d3e8 */
 extern uint32_t case_policy_sensor_divide(uint32_t,uint32_t); /* 0x0160 */
 static uint32_t rd32(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
+/* Stock 0x08005474 (case_shift_selected) */
 uint32_t case_boot_sensor_clock_5474(void)
 {
     uint32_t control=rd32(0x40021008u);
@@ -12,6 +13,7 @@ uint32_t case_boot_sensor_clock_5474(void)
     uint32_t shift=case_boot_clock_shift_table[index>>2]&31u;
     return rd32(0x20000124u)>>shift;
 }
+/* Stock 0x0800549C (case_derive_clock) */
 uint32_t case_boot_sensor_clock_549c(void)
 {
     uint32_t control=rd32(0x40021008u);

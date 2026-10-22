@@ -5,6 +5,7 @@
 
 extern uint32_t audio_ble_wsf_set_event(uint32_t handler, uint32_t mask);
 
+/* Stock 0x4B4A98 (HciDrvIntService) */
 void opencfw_radio_gpio_callback(void *argument) {
     (void)argument;
     volatile uint32_t *const counter = (volatile uint32_t *)(uintptr_t)0x20074640u;

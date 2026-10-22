@@ -9,6 +9,7 @@ extern uint32_t case_policy_adc_special(uint32_t base); /* 0x6792 */
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static uint8_t rd8(uint32_t a){return *(volatile uint8_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
+/* Stock 0x08004330 (case_irq_child_4330) */
 void case_irq_child_4330(uint32_t state)
 {
     uint32_t base=rd(state),control=rd(base),status=rd(base+4u);

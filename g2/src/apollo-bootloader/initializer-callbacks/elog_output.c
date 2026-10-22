@@ -101,11 +101,13 @@ static void utils_assert(const char *condition,uint32_t line) {
  opencfw_boot_elog_output(0,"elog","D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\EasyLogger-master\\easylogger\\src\\elog_utils.c","elog_strcpy",line,"(%s) has assert failed at %s:%ld.",condition,"elog_strcpy",line);
  opencfw_boot_elog_reset_request();
 }
+/* Stock 0x0041B158 (elog_strcpy; upstream easylogger/src/elog_utils.c) */
 size_t opencfw_boot_elog_append(size_t offset,char *dest,const char *text) {
  if(!dest)utils_assert("dst",44);
  if(!text)utils_assert("src",45);
  const char *start=text;while(*text&&offset++<1024)*dest++=*text++;return (size_t)(text-start);
 }
+/* Stock 0x00417AD4 (get_fmt_enabled) */
 static bool fmt_enabled(uint8_t level,size_t mask) {
  if(level>5)opencfw_boot_elog_assert("level <= ELOG_LVL_VERBOSE","get_fmt_enabled",743);
  return (W(0x200267d8+4u*level)&mask)!=0;

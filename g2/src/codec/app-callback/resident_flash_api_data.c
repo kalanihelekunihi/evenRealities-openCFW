@@ -35,10 +35,12 @@ extern uint32_t gx8002_resident_flash_otp_get_region_size_23b78(uint32_t *);
 extern int32_t gx8002_resident_flash_uid_read_24104(
     uint8_t *, int32_t, int32_t *);
 
+/* Stock 0x100264E4 (flash_state) */
 uint32_t gx8002_flash_state_264e4[8]
     __attribute__((section(".gx8002.flash_state.264e4"), used,
                    aligned(4))) = {UINT32_MAX};
 
+/* Stock 0x10026504 (gx8002_flash_interface) */
 uintptr_t gx8002_flash_api_26504[30]
     __attribute__((section(".gx8002.flash_api.26504"), used,
                    aligned(4))) = {

@@ -30,6 +30,7 @@ static void request_log(const char *function,uint32_t line,
     }
 }
 
+/* Stock 0x464B2E (RequestDisplayStartUp) */
 void audio_uart_master_display_start(uint32_t id,const void *payload,
                                      uint16_t length,uint32_t extra)
 {
@@ -40,6 +41,7 @@ void audio_uart_master_display_start(uint32_t id,const void *payload,
     (void)audio_uart_master_request_core_464772(id,payload,length,extra,1u,2u,0u);
 }
 
+/* Stock 0x464BB2 (RequestDisplayReflash) */
 void audio_uart_master_display_refresh(uint32_t id,const void *payload,
                                        uint16_t length,uint32_t extra)
 {
@@ -60,6 +62,7 @@ void audio_uart_master_display_stop(uint32_t id,const void *payload,
     (void)audio_uart_master_request_core_464772(id,payload,length,extra,5u,2u,0u);
 }
 
+/* Stock 0x464CBA (RequestDisplayExit) */
 void audio_uart_master_control(uint32_t extra)
 {
     static const char extended[]="REQUEST_DISPLAY_EXIT";

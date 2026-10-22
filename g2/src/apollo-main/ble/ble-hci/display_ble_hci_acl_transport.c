@@ -4,11 +4,8 @@
 extern uint8_t audio_ble_hci_controller_state_20071478[];
 extern uint32_t audio_ble_hci_driver_write(uint32_t,uint16_t,const void *);
 
-uint16_t audio_ble_hci_get_buf_size(void) {
-    uint8_t *p=audio_ble_hci_controller_state_20071478+0x7eu;
-    return (uint16_t)((uint16_t)p[0]|((uint16_t)p[1]<<8));
-}
 
+/* Stock 0x52A72E (hciCoreNextConnFragment) */
 uint8_t *audio_ble_hci_next_conn_fragment(void) {
     uint8_t *record=audio_ble_hci_controller_state_20071478;
     for(uint32_t i=0u;i<3u;i++,record+=0x1cu) {
@@ -18,6 +15,7 @@ uint8_t *audio_ble_hci_next_conn_fragment(void) {
     return 0;
 }
 
+/* Stock 0x53013C (hciTrSendAclData) */
 uint16_t audio_ble_hci_transport_send_acl(void *record,const void *packet) {
     (void)record;
     const uint8_t *p=(const uint8_t *)packet;
@@ -26,6 +24,7 @@ uint16_t audio_ble_hci_transport_send_acl(void *record,const void *packet) {
     return audio_ble_hci_driver_write(2u,size,p)==size?size:0u;
 }
 
+/* Stock 0x52A76C (hciCoreSendAclData) */
 uint32_t audio_ble_hci_send_acl_data(void *record,void *packet) {
     uint8_t *conn=(uint8_t *)record;
     if(audio_ble_hci_transport_send_acl(record,packet)==0u)return 0u;

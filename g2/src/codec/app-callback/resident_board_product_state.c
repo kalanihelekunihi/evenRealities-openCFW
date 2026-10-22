@@ -5,6 +5,7 @@
  */
 #include "resident_board_product_state.h"
 
+/* Stock 0x100269A4 (audio_board_state) */
 struct gx8002_board_product_state gx8002_board_state_269a4
     __attribute__((section(".gx8002.board_state.269a4"), used,
                    aligned(4))) = {

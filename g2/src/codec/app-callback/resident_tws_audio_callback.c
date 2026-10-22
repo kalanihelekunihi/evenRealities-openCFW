@@ -25,6 +25,7 @@ static uint32_t load32(const void *base, uint32_t offset)
     return *(const uint32_t *)(const void *)((const uint8_t *)base + offset);
 }
 
+/* Stock 0x100263DC (gx8002_tws_audio_callback) */
 uint32_t gx8002_resident_tws_audio_callback_263dc(int32_t index)
 {
     if (index < 0) return 0u;

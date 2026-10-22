@@ -22,6 +22,7 @@ static const char error_text[] = "Encoding failed: %s\n";
 static const char error_short[] = "[pb.evenai]Encoding failed: %s\n";
 static const char none[] = "(none)";
 
+/* Stock 0x4E5338 (APP_PbTxEncodeEvenAICommResp) */
 uint32_t audio_even_ai_encode_common(uint8_t sequence, const void *payload) {
     pb_ostream_t stream = pb_ostream_from_buffer(audio_even_ai_tx_buffer_2037c4a0,
                                                  256u);

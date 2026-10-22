@@ -27,6 +27,7 @@ static const char simple_mismatch[] =
 static const char removed[] = "PCM app unregistered: ID=%d";
 static const char simple_removed[] = "[svc.audio]PCM app unregistered: ID=%d";
 
+/* Stock 0x0057ACD0 (SVC_PcmAppUnregister) */
 int32_t audio_unregister(uint32_t app_id, uint32_t index) {
     struct g2_pcm_registration_slot *slot = &g2_pcm_registration_rows[(uint8_t)index];
     if (slot->active == 0u) {

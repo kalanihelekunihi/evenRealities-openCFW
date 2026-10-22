@@ -26,6 +26,7 @@ uintptr_t opencfw_boot_timer_id_get(uint32_t *timer) {
     opencfw_bl_kernel_enter();uintptr_t id=timer[7];
     opencfw_bl_kernel_exit();return id;
 }
+/* Stock 0x41639A (bl_runtime_callback; CMSIS-RTOS2 TimerCallback) */
 __attribute__((naked))
 void opencfw_boot_timer_callback_dispatcher(uint32_t *timer __attribute__((unused))) {
     __asm__ volatile(

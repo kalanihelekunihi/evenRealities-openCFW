@@ -25,6 +25,7 @@ void PB_LastTxEncodeRingConnectInfoTimeSet(uint32_t value) {
         (void)compressed_log_output(0x0c000000u,compact,compact);
     audio_ble_ring_connect_policy_reset();
 }
+/* Stock 0x49F6AE (RING_ConnectPolicyReset) */
 void audio_ble_ring_connect_policy_reset(void) {
     static const char module[]="ring.policy";
     static const char path[]="D:\\01_workspace\\s200_ap510b_iar_git\\platform\\protocols\\ring_service\\ring_connect_policy.c";

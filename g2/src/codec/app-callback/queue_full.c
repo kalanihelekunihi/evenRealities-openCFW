@@ -15,6 +15,7 @@ struct g2_codec_queue {
 _Static_assert(offsetof(struct g2_codec_queue, size) == 12, "queue size offset");
 _Static_assert(offsetof(struct g2_codec_queue, member_size) == 16, "member offset");
 
+/* Stock 0x10207008 (LvpQueueIsFull) */
 uint32_t g2_codec_queue_is_full(void *storage)
 {
     const volatile struct g2_codec_queue *const queue = storage;

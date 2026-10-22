@@ -221,7 +221,7 @@ static const struct fault_overrun_row stock_overrun_rows[213] = {
     {0x0000u, 0x0000u, 0x00000000u},
     {0xfd00u, 0x00fdu, 0x00000000u},
 };
-const char *audio_fault_unmapped_code_message_509b48(uint16_t code) {
+const char *audio_fault_unmapped_code_message(uint16_t code) {
     uint8_t index = 0u;
     for (;;) {
         if (index < 43u) {

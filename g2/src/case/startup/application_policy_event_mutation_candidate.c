@@ -6,6 +6,7 @@ extern uint32_t case_policy_event_receive(uint32_t event,uint32_t mask); /* 0xc4
 extern uint32_t case_policy_event_receive_irq(uint32_t event); /* 0xc4cc */
 extern uint32_t case_policy_event_irq_apply(uint32_t event,uint32_t bits); /* 0xc478 */
 extern uint32_t case_policy_task_event_send(uint32_t task,uint32_t op,uint32_t value,uint32_t option,uint32_t timeout); /* 0xcd80 */
+/* Stock 0x0800A7D2 (osEventFlagsClear) */
 int32_t case_policy_event_clear(uint32_t event,uint32_t mask)
 {
     if(event==0u || (mask>>24)!=0u)return -4;
@@ -16,6 +17,7 @@ int32_t case_policy_event_clear(uint32_t event,uint32_t mask)
     if(case_policy_event_irq_apply(event,mask)==0u)return -3;
     return (int32_t)prior;
 }
+/* Stock 0x0800AAF0 (osTimerStart) */
 int32_t case_policy_event_signal(uint32_t task,uint32_t value)
 {
     uint32_t ipsr;

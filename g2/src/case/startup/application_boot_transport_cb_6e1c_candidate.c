@@ -43,6 +43,7 @@ static void packet_send(uint32_t count)
         (void)case_policy_send_probe(side,packet,count,1u);
     else (void)case_policy_ota_transmit(side,packet,count,1u);
 }
+/* Stock 0x08006E1C (g2_thread_entry_1) */
 void case_boot_transport_cb_6e1c(void)
 {
     (void)case_policy_event_signal(rd(0x200000c8u),3000u);

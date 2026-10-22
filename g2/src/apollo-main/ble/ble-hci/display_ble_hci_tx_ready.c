@@ -42,6 +42,7 @@ uint64_t audio_ble_hci_tx_ready_body(uint8_t credit,uint32_t unused,
     }
     return ((uint64_t)scratch<<32)|sent;
 }
+/* Stock 0x52A79E (hciCoreTxReady) */
 __attribute__((naked)) uint64_t audio_ble_hci_tx_ready(uint8_t credit) {
     __asm volatile("b audio_ble_hci_tx_ready_body");
 }

@@ -13,6 +13,7 @@ extern uint32_t case_boot_task_create(void (*entry)(void *),const char *name,
     uint32_t stack_words,void *arg,uint32_t priority,
     uint32_t stack_end,uint32_t stack_start); /* 0xca06 */
 
+/* Stock 0x0800C9A8 (xTaskCreate) */
 uint32_t case_boot_transport_worker_dynamic(uint32_t entry,uint32_t name,
     uint32_t stack_words,uint32_t arg,uint32_t priority,uint32_t *task)
 {

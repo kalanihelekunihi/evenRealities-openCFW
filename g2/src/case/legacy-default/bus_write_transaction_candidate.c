@@ -8,6 +8,7 @@ extern void case_bus_output_send(uint32_t byte,uint32_t first); /* 0x0800a2a2 */
 extern void case_bus_output_start(uint32_t bit);        /* 0x0800a188 */
 extern uint32_t case_bus_output_poll(uint32_t *word);   /* 0x0800c42c */
 extern uint32_t case_bus_read(uint32_t byte);           /* sourced parity */
+/* Stock 0x0800056C (case_bus_write_transaction) */
 uint32_t case_bus_write_transaction(uint32_t command,uint32_t index,
                                     uint32_t count,const uint8_t *bytes)
 {

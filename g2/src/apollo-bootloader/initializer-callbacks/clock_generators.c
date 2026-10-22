@@ -10,6 +10,7 @@ extern uint32_t opencfw_boot_pll_vco_generate(opencfw_pll_config *,float,float)
 static uint32_t divide(uint32_t a,uint32_t b){
  uint32_t out;__asm__("udiv %0,%1,%2":"=r"(out):"r"(a),"r"(b));return out;
 }
+/* Stock 0x426C24 (clkmgr_hfrc2_uq15_divider_426c24; am_hal_clkgen_hfrc2adj_ratio_calculate) */
 uint32_t opencfw_boot_startup_hf2_generate(uint32_t reference,uint32_t target,
  uint32_t shift,uint32_t *out){
  uint32_t divisor,value;
@@ -24,6 +25,7 @@ uint32_t opencfw_boot_startup_hf2_generate(uint32_t reference,uint32_t target,
   :"s0","s1","cc","memory");
  return 0;
 }
+/* Stock 0x427040 (syspll_min_fvco_427040; am_hal_syspll_config_generate_minFVCO) */
 uint32_t opencfw_boot_pll_min_generate(opencfw_pll_config *out,
  uint32_t reference,uint32_t target,uint32_t minimum){
  static const uint8_t post[50]={0x00,0x11,0x21,0x31,0x41,0x51,0x61,0x71,
@@ -59,6 +61,7 @@ static uint32_t score(const opencfw_pll_config *c,uint32_t reference,uint32_t ta
  return divide((reference/1000000u)*b[i],c->reference_divider)
        +((target*c->post1*c->post2)/1000000u)*a[i];
 }
+/* Stock 0x427160 (bl_syspll_postdiv; am_hal_syspll_config_generate_with_postdiv) */
 uint32_t opencfw_boot_startup_pll_generate(uint8_t *destination,
  uint32_t reference,uint32_t target){
  opencfw_pll_config low,high;const opencfw_pll_config *chosen=NULL;

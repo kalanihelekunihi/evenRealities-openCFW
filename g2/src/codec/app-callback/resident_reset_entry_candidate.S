@@ -7,6 +7,7 @@
     .align 2
     .global gx8002_resident_reset_entry_23500
     .type gx8002_resident_reset_entry_23500, %function
+/* Stock 0x10023500 (gx8002_reset_entry) */
 gx8002_resident_reset_entry_23500:
     lrw r0, 0x80000200
     mtcr r0, cr<0, 0>

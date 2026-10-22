@@ -9,11 +9,13 @@ extern uint32_t opencfw_provider_42dca2(const void *message);
 extern void opencfw_provider_4176ce(uint32_t level,const char *module,const char *file,const char *function,uint32_t line,const char *format,...);
 static const char file[]="D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_manager.c";
 static const char module[]="task.manager";
+/* Stock 0x42e224 (retained_state_probe_42e224) */
 uint32_t opencfw_boot_manager_needs_update(void) {
     uint32_t flag=*(volatile const uint32_t *)(uintptr_t)0x7fe000;
     opencfw_provider_4176ce(3,module,file,"is_need_updata_image",0x40,"otaFlag = 0x%x",flag);
     return flag==0x55555555;
 }
+/* Stock 0x42e39a (noop_callback_0042e39a) */
 __attribute__((noinline))
 void opencfw_boot_manager_flags_noop(uint32_t flags) {
     (void)flags;
@@ -24,6 +26,7 @@ __attribute__((noinline))
 void opencfw_boot_manager_setup_noop(void) {
     __asm__ volatile("" ::: "memory");
 }
+/* Stock 0x42e2f8 (event_service_loop_42e2f8) */
 void opencfw_boot_manager_task(void *argument) {
     (void)argument;
     volatile uint32_t previous_tick=0;

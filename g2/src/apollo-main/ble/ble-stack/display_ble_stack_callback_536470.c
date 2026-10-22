@@ -5,10 +5,7 @@
 extern void *audio_queue_copy_bytes(void *,const void *,uint32_t);
 extern void WsfMsgSend(uint8_t,void *);
 
-void audio_ble_stack_copy16_542a44(void *destination,const void *source)
-{
-    (void)audio_queue_copy_bytes(destination,source,16u);
-}
+extern void audio_ble_stack_copy16_542a44(void *destination,const void *source); /* opencfw U5: now provided by the Cordio unit */
 
 void audio_ble_stack_callback_536470_body(uint8_t *message,const uint8_t *payload,
                                            uint8_t handler)
@@ -19,13 +16,3 @@ void audio_ble_stack_callback_536470_body(uint8_t *message,const uint8_t *payloa
     WsfMsgSend(handler,message);
 }
 
-/* Native saved fourth argument returns in R0 via pop {r0,r4,r5,pc}. */
-__attribute__((naked)) uint32_t audio_ble_stack_callback_536470(
-    uint8_t *message __attribute__((unused)),const uint8_t *payload __attribute__((unused)),
-    uint8_t handler __attribute__((unused)),uint32_t inherited __attribute__((unused)))
-{
-    __asm__ volatile(
-        "push {r3, r4, r5, lr}\n"
-        "bl audio_ble_stack_callback_536470_body\n"
-        "pop {r0, r4, r5, pc}\n");
-}

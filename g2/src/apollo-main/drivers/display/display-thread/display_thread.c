@@ -36,8 +36,8 @@ extern uint32_t audio_uart_display_sync_info(void); /* native 0x471fa4 */
 extern int32_t audio_uart_display_housekeep(void); /* 0x7243a */
 extern void audio_uart_display_notify(uint32_t,uint32_t,const void *,uint32_t); /* 0x4228a */
 extern void audio_uart_display_quiesce(void); /* 0x65b10 */
-extern uint32_t audio_uart_display_upgrade(uint32_t,const void *,uint32_t); /* 0x4264e */
-extern uint32_t audio_uart_display_input_check(const void *,uint32_t); /* 0x442d86 */
+extern uint32_t ReStartCommandDataHandler_44264e(uint32_t,const void *,uint32_t); /* 0x44264e */
+extern uint32_t inputEventDataHandler_442d86(const uint8_t *); /* 0x442d86; stock ignores the length in r1 */
 extern void audio_uart_task_delay(uint32_t); /* 0x454b4c */
 
 extern uint8_t audio_uart_display_state[2]; /* RAM0x20074f2c */
@@ -243,7 +243,7 @@ static void handle_running(void) {
         static const char c[]="[display_thread]display thread switch display upgrade.";
         log0(3u,0x2feu,e,c);
         audio_uart_display_service_prepare();
-        uint32_t changed=audio_uart_display_upgrade(message_id(),
+        uint32_t changed=ReStartCommandDataHandler_44264e(message_id(),
                                     audio_uart_display_framebuffer,message_length());
         audio_uart_display_sync_info();
         if(changed==1u) delay_refresh();
@@ -251,8 +251,7 @@ static void handle_running(void) {
         return;
     }
     if(type==7u) {
-        if(audio_uart_display_input_check(audio_uart_display_framebuffer,
-                                           message_length())!=1u) {
+        if(inputEventDataHandler_442d86((const uint8_t *)audio_uart_display_framebuffer)!=1u) {
             audio_uart_display_process();return;
         }
         static const char e[]="input event data handler, display close.";
@@ -270,6 +269,7 @@ static void handle_running(void) {
     }
     if(type==8u) {handle_close_all();return;}
 }
+/* Stock 0x4437E0 (ui_display_thread_handler) */
 void audio_uart_display_thread(void *argument) {
     (void)argument;
     static const char e_start[]="ui display thread startup";

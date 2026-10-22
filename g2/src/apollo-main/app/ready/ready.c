@@ -54,6 +54,7 @@ static void log_state(uint8_t level,uint32_t line,const char *message,
                                     short_message);
 }
 
+/* Stock 0x0045E8D0 (SyncModuleInit) */
 uint32_t audio_uart_ready(void) {
     uint8_t role=audio_uart_role_get();
     if(role==1u) {

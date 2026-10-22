@@ -4,6 +4,7 @@
  */
 #include <stdint.h>
 
+/* Stock 0x10024B04 (_clk_set_pll) */
 void gx8002_resident_clock_set_pll_24b04(const uint32_t *configuration)
 {
     if (configuration == 0) return;
@@ -33,6 +34,7 @@ void gx8002_resident_clock_set_pll_24b04(const uint32_t *configuration)
     clock[0x3cu / 4u] |= 1u;
 }
 
+/* Stock 0x10025060 (gx8002_clock_pll_wait) */
 void gx8002_resident_clock_pll_wait_25060(const uint32_t *configuration)
 {
     gx8002_resident_clock_set_pll_24b04(configuration);
@@ -48,6 +50,7 @@ extern uint64_t gx8002_resident_clock_time_us_2585c(void);
 /* 0x1002500c: bounded PLL lock poll; the native unsigned 64-bit difference
  * requires both a zero high word and a low word no greater than limit*1000.
  */
+/* Stock 0x1002500C (gx8002_clock_pll_wait_timeout) */
 uint32_t gx8002_resident_clock_pll_wait_timeout_2500c(
     const uint32_t *configuration, uint32_t limit_ms)
 {

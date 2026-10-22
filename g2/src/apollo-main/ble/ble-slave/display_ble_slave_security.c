@@ -27,22 +27,8 @@ void audio_ble_dm_sec_slave_req_body(uint32_t connection,uint32_t policy)
     SmpDmMsgSend(packet);
 }
 
-/* Native saved fourth argument is returned in R0 on either path. */
-__attribute__((naked)) uint32_t audio_ble_dm_sec_slave_req(
-    uint8_t connection __attribute__((unused)),uint8_t policy __attribute__((unused)),
-    uint32_t unused __attribute__((unused)),uint32_t inherited __attribute__((unused)))
-{
-    __asm__ volatile(
-        "push {r3, r4, r5, lr}\n"
-        "bl audio_ble_dm_sec_slave_req_body\n"
-        "pop {r0, r4, r5, pc}\n");
-}
 
-void audio_ble_slave_security_apply(uint8_t connection)
-{
-    if (DmConnSecLevel(connection)==0u)
-        (void)audio_ble_dm_sec_slave_req(connection,audio_ble_comm_profile_slot[0],0u,0u);
-}
+extern void audio_ble_slave_security_apply(uint8_t connection); /* opencfw U5: now provided by the Cordio unit */
 
 void audio_ble_slave_security_request_body(uint32_t connection,uint32_t *saved)
 {
@@ -59,6 +45,7 @@ void audio_ble_slave_security_request_body(uint32_t connection,uint32_t *saved)
 }
 
 /* The native six-word frame returns saved R0/R1, including log overwrites. */
+/* Stock 0x46DF7E (_bleSlaveSecReq) */
 __attribute__((naked)) uint64_t audio_ble_slave_security_request(
     uint8_t connection __attribute__((unused)),...)
 {

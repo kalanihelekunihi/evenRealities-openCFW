@@ -7,6 +7,7 @@ extern void case_bus_output_prepare(void); /* 0xa2e6 */
 extern uint32_t case_motion_input_transaction(uint32_t command,uint32_t index,uint32_t count,uint8_t *out); /* 0x0420 */
 extern uint32_t case_bus_config_input_transaction(uint32_t command,uint32_t index,uint32_t count,uint8_t *out); /* 0x0310 */
 extern uint32_t case_legacy_logger(const char *format,...);
+/* Stock 0x08008FA8 (gls_frame_pack_l) */
 uint32_t case_init_motion_read(uint32_t index,uint32_t count,uint8_t *out)
 {
     volatile uint32_t *diagnostics=(volatile uint32_t *)(uintptr_t)0x20000000u;
@@ -23,6 +24,7 @@ uint32_t case_init_motion_read(uint32_t index,uint32_t count,uint8_t *out)
     for(uint32_t i=0u;i<count;++i)out[i]=0xffu;
     return 0u;
 }
+/* Stock 0x080090AC (case_init_secondary_config_read) */
 uint32_t case_init_secondary_config_read(uint32_t index,uint32_t count,uint8_t *out)
 {
     volatile uint32_t *diagnostics=(volatile uint32_t *)(uintptr_t)0x2000007cu;

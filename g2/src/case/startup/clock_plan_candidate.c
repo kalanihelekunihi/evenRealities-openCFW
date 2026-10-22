@@ -6,6 +6,7 @@
  */
 #include <stdint.h>
 /* Stock 0x08005024 forwards to 0x080091ac, which writes priority lanes. */
+/* Stock 0x080091AC (case_configure_two_bit_field) */
 void case_clock_priority_config(uint32_t irq,uint32_t plan,uint32_t unused)
 {
     (void)unused;
@@ -60,6 +61,7 @@ static uint32_t descriptor_start(volatile uint8_t *d)
     }
     p[0]|=1u;return 0u;
 }
+/* Stock 0x08004F14 (case_initialize_interrupt_path) */
 uint32_t case_transfer_clock_config(uint32_t plan)
 {
     uint32_t prior=port[0];port[0]=prior|0x40000u;

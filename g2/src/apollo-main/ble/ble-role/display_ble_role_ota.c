@@ -16,10 +16,12 @@ static const char cmd_message[]="pEvenSlaveConnInfo->cmdPipe = %d(%d)";
 static const char cmd_short[]="[ble.Slave]pEvenSlaveConnInfo->cmdPipe = %d(%d)";
 static const char left_message[]="pEvenSlaveConnInfo->cmdPipe = %d(%d)(LEFT = 2|RIGHT = 1)";
 static const char left_short[]="[ble.Slave]pEvenSlaveConnInfo->cmdPipe = %d(%d)(LEFT = 2|RIGHT = 1)";
+/* Stock 0x004487AC (semantic_OtaTransferActive) */
 uint32_t audio_ota_transfer_active(void) {
     if(audio_ota_self_status()==1u||audio_ota_peer_status()==1u) return 1u;
     return audio_ota_transfer_flag==1u;
 }
+/* Stock 0x0046F258 (APP_IsLeftSlaveRole) */
 uint32_t audio_app_is_left_slave_role(void) {
     if((audio_log_flags()&2u)!=0u)
         audio_log_extended(4u,module,path,left_function,795u,left_message,
@@ -29,6 +31,7 @@ uint32_t audio_app_is_left_slave_role(void) {
                                     audio_ble_slave_connection_info[31u],audio_uart_device_role_get());
     return audio_uart_device_role_get()==2u;
 }
+/* Stock 0x0046F1D0 (APP_IsLocalSlaveAsCmdRole) */
 uint32_t audio_app_is_local_slave_cmd_role(void) {
     if((audio_log_flags()&2u)!=0u)
         audio_log_extended(4u,module,path,cmd_function,788u,cmd_message,

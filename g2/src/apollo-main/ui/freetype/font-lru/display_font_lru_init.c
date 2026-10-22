@@ -31,6 +31,7 @@ static uint32_t initialize(void *cache,uint32_t size_class)
         audio_uart_lv_cache_size_data_size_5c3310 : audio_uart_lv_cache_count_data_size_5c330c);
     return 1u;
 }
+/* Stock 0x5C2C54 (init_cnt_cb; upstream third-party/upstream/lvgl/src/misc/cache/lv_cache_lru_rb.c) */
 uint32_t audio_uart_font_lru_initialize(void *cache)
 { return initialize(cache,0u); }
 uint32_t audio_uart_lv_cache_size_lru_init_5c2d30(void *cache)

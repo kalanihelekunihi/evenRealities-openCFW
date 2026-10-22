@@ -8,14 +8,6 @@ extern int32_t audio_uart_lv_flex_height_end_48b98c(void *,uint32_t);
 extern int32_t audio_uart_lv_obj_width_43fd9e(void *);
 extern int32_t audio_uart_lv_obj_height_43fdda(void *);
 
-int32_t audio_uart_lv_flex_min_width_48b914(void *o,uint32_t s)
-{return (int32_t)audio_uart_lv_style_property_44bdea(o,s,4u);}
-int32_t audio_uart_lv_flex_min_height_48b91e(void *o,uint32_t s)
-{return (int32_t)audio_uart_lv_style_property_44bdea(o,s,5u);}
-int32_t audio_uart_lv_flex_max_width_48b932(void *o,uint32_t s)
-{return (int32_t)audio_uart_lv_style_property_44bdea(o,s,6u);}
-int32_t audio_uart_lv_flex_max_height_48b93c(void *o,uint32_t s)
-{return (int32_t)audio_uart_lv_style_property_44bdea(o,s,7u);}
 int32_t audio_uart_lv_flex_width_margin_48c7b4(void *o)
 {
     int32_t start=audio_uart_lv_flex_width_start_48b996(o,0u);

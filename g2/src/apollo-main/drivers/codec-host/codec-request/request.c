@@ -16,6 +16,7 @@ int32_t codec_pack(uint16_t low,uint16_t high,const uint8_t *payload,uint16_t le
  if(payload&&length){copy(wire+14,payload,length);if(crcflag)put32(wire+14+length,codec_crc32(payload,length,0));}
  put32(wire+10,codec_crc32(wire,10,0));*total=(uint16_t)(declared+14);return 0;
 }
+/* Stock 0x58FB38 (codec UART3 send) */
 int32_t codec_uart_tx(const uint8_t *wire,uint32_t total){return codec_channel_tx(3,wire,total)==0?0:-1;}
 int32_t codec_send(uint16_t low,uint16_t high,const uint8_t *payload,uint16_t length,uint8_t flag){
  uint8_t *wire=(uint8_t *)(uintptr_t)0x2007399c;uint16_t total=0;
@@ -25,6 +26,7 @@ int32_t codec_send(uint16_t low,uint16_t high,const uint8_t *payload,uint16_t le
 
 extern uint32_t codec_hal_blocking(void *,const void *);
 extern void codec_wrapper_delay(uint32_t);
+/* Stock 0x0055E7FA (UART channel blocking TX) */
 uint32_t codec_channel_tx(uint32_t input,const uint8_t *payload,uint32_t count){
  uint8_t channel=(uint8_t)input;
  if(channel>=4)return 1;

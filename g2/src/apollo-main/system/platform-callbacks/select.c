@@ -2,6 +2,7 @@
 /* Authenticated transition-selection DATA at0x768BE0, not executable opcodes.
    Caller contract: profile next,old are in0..19; non-NULL output. */
 static const uint8_t transition_data[28]={25,0,1,26,0,2,25,26,3,3,4,26,25,5,26,26,6,7,25,8,2,9,26,10,25,0,0,0};
+/* Stock 0x005A4334 (PCM2.2 transition sequence selector) */
 uint32_t audio_platform_select(uint32_t next,uint32_t old,uint8_t *index) {
     *index=transition_data[5*(old>>2)+(next>>2)];
     if(*index==26) return 7;

@@ -43,6 +43,7 @@ static const char assert_module[]="elog";
 static const char assert_format[]="(%s) has assert failed at %s:%ld.";
 static const char assert_condition[]="0"; /* authenticated 0x45f3c4 */
 
+/* Stock 0x0045F15A (page_manager_init) */
 uint32_t audio_uart_display_audio_new(void *active_screen) {
     uint8_t *page=(uint8_t *)file_heap_allocate(0xecu);
     audio_uart_display_page_manager=page;

@@ -31,6 +31,7 @@ static const char encoded_message[]="[Notify] BLE sent successfully, size = %d";
 static const char encoded_short[]="[pb_service_setting][Notify] BLE sent successfully, size = %d";
 static const char none[]="(none)";
 static void store32(uint8_t *p,uint32_t v) {p[0]=(uint8_t)v;p[1]=(uint8_t)(v>>8);p[2]=(uint8_t)(v>>16);p[3]=(uint8_t)(v>>24);}
+/* Stock 0x49BBFC (setting_notify_common) */
 uint32_t audio_settings_notify_common(uint8_t *packet) {
     if(audio_uart_device_role_get()!=1u) {
         if((audio_log_flags()&2u)!=0u)

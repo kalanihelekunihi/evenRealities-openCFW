@@ -117,6 +117,7 @@ static uint32_t sdr_frequency_word(uint8_t frequency, uint32_t *bits)
     return 0u;
 }
 
+/* Stock 0x424BE4 (am_hal_mspi_device_configure) */
 uint32_t opencfw_hal_mspi_device_configure(uint32_t handle_address,
                                            const void *config_pointer)
 {

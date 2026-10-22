@@ -4,6 +4,7 @@
 #include <stdint.h>
 extern void case_policy_sensor_command(uint32_t channel,uint32_t value); /* 0x99e8 */
 extern void case_policy_sensor_delay(uint32_t amount); /* 0xa7b0 */
+/* Stock 0x0800BE90 (left_indicator_sequence) */
 void case_policy_ota_left_prepare(void)
 {
     case_policy_sensor_command(5u,3u);
@@ -12,6 +13,7 @@ void case_policy_ota_left_prepare(void)
     case_policy_sensor_delay(30u);
     case_policy_sensor_command(7u,3u);
 }
+/* Stock 0x0800BEBA (case_write_profile_three) */
 void case_policy_ota_left_finish(void) /* 0xbeba */
 {
     case_policy_sensor_command(7u,0x20u);
@@ -19,6 +21,7 @@ void case_policy_ota_left_finish(void) /* 0xbeba */
     case_policy_sensor_command(5u,3u);
     case_policy_sensor_command(3u,0xffu);
 }
+/* Stock 0x0800BEDE (right_indicator_sequence) */
 void case_policy_ota_right_prepare(void)
 {
     case_policy_sensor_command(5u,3u);
@@ -27,6 +30,7 @@ void case_policy_ota_right_prepare(void)
     case_policy_sensor_delay(30u);
     case_policy_sensor_command(7u,5u);
 }
+/* Stock 0x0800BF08 (case_write_profile_four) */
 void case_policy_ota_right_finish(void) /* 0xbf08 */
 {
     case_policy_sensor_command(7u,0x20u);

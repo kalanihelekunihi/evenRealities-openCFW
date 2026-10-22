@@ -2,6 +2,7 @@
  * Counter units are delivered SysTick callbacks; no physical speed units claim. */
 #include "speed.h"
 static uint32_t divide(uint32_t n,uint32_t d){uint32_t q=0;for(unsigned k=32;k;k--){unsigned i=k-1;if(d<=(n>>i)){n-=d<<i;q+=1u<<i;}}return q;}
+/* Stock 0x00003EFC (gesture_policy_helper_0bfc) */
 uint32_t touch_gesture_speed(uint8_t *s,uint8_t position,uint32_t counter){
  if(!s)return 0;
  uint32_t index=s[72];s[48+index*8]=position;*(uint32_t *)(s+52+index*8)=counter;

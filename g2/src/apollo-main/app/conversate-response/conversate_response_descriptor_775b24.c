@@ -1,6 +1,9 @@
 /* Generated from authenticated Main 0x775b24 nanopb descriptor graph.
  * Regenerate with extract_main_conversate_descriptor_775b24_20261016.py.
  */
+/* Naming: *_field_info_<addr> / *_submsg_info_<addr> arrays carry their own
+ * stock ROM address (byte-checked against the stock image); descriptors are
+ * named by the descriptor address. */
 #include <stddef.h>
 #include <stdint.h>
 struct pb_msgdesc_candidate {
@@ -31,7 +34,7 @@ extern const struct pb_msgdesc_candidate audio_conversate_descriptor_775c5c;
 extern const struct pb_msgdesc_candidate audio_conversate_descriptor_775c74;
 extern const struct pb_msgdesc_candidate audio_conversate_descriptor_775c8c;
 
-const uint32_t audio_conversate_fields_775b24[26] = {
+const uint32_t audio_conversate_field_info_6a8144[26] = {
     0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u,
     0x2001380du, 0x00940004u, 0x20013811u, 0x00010004u,
     0x20013815u, 0x0aa80004u, 0x20013819u, 0x00080004u,
@@ -40,7 +43,7 @@ const uint32_t audio_conversate_fields_775b24[26] = {
     0x2001382du, 0x00010004u, 0x20013831u, 0x000c0004u,
     0x20013835u, 0x0fa80004u,
 };
-const struct pb_msgdesc_candidate *const audio_conversate_submessages_775b24[12] = {
+const struct pb_msgdesc_candidate *const audio_conversate_submsg_info_732354[12] = {
     &audio_conversate_descriptor_775bfc,
     &audio_conversate_descriptor_775b9c,
     &audio_conversate_descriptor_775b84,
@@ -55,166 +58,166 @@ const struct pb_msgdesc_candidate *const audio_conversate_submessages_775b24[12]
     0
 };
 const struct pb_msgdesc_candidate audio_conversate_response_descriptor_775b24 = {
-    audio_conversate_fields_775b24, audio_conversate_submessages_775b24, 0, 0,
+    audio_conversate_field_info_6a8144, audio_conversate_submsg_info_732354, 0, 0,
     13u, 0u, 13u
 };
 
-const uint32_t audio_conversate_fields_775b54[5] = {
+const uint32_t audio_conversate_field_info_775b3c[5] = {
     0x10001204u, 0x10011208u, 0x1002120cu, 0x10031210u,
     0x10041214u,
 };
-const struct pb_msgdesc_candidate *const audio_conversate_submessages_775b54[1] = {
+const struct pb_msgdesc_candidate *const audio_conversate_submsg_info_78eec8[1] = {
     0
 };
 const struct pb_msgdesc_candidate audio_conversate_descriptor_775b54 = {
-    audio_conversate_fields_775b54, audio_conversate_submessages_775b54, 0, 0,
+    audio_conversate_field_info_775b3c, audio_conversate_submsg_info_78eec8, 0, 0,
     5u, 0u, 5u
 };
 
-const uint32_t audio_conversate_fields_775b6c[3] = {
+const uint32_t audio_conversate_field_info_785740[3] = {
     0x40001204u, 0x00011609u, 0x00820004u,
 };
-const struct pb_msgdesc_candidate *const audio_conversate_submessages_775b6c[1] = {
+const struct pb_msgdesc_candidate *const audio_conversate_submsg_info_78eecc[1] = {
     0
 };
 const struct pb_msgdesc_candidate audio_conversate_descriptor_775b6c = {
-    audio_conversate_fields_775b6c, audio_conversate_submessages_775b6c, 0, 0,
+    audio_conversate_field_info_785740, audio_conversate_submsg_info_78eecc, 0, 0,
     2u, 0u, 2u
 };
 
-const uint32_t audio_conversate_fields_775b84[4] = {
+const uint32_t audio_conversate_field_info_77e9c4[4] = {
     0x40142805u, 0x00880004u, 0x00011209u, 0x00040aa4u,
 };
-const struct pb_msgdesc_candidate *const audio_conversate_submessages_775b84[2] = {
+const struct pb_msgdesc_candidate *const audio_conversate_submsg_info_78d20c[2] = {
     &audio_conversate_descriptor_775b6c,
     0
 };
 const struct pb_msgdesc_candidate audio_conversate_descriptor_775b84 = {
-    audio_conversate_fields_775b84, audio_conversate_submessages_775b84, 0, 0,
+    audio_conversate_field_info_77e9c4, audio_conversate_submsg_info_78d20c, 0, 0,
     2u, 0u, 2u
 };
 
-const uint32_t audio_conversate_fields_775b9c[1] = {
+const uint32_t audio_conversate_field_info_78eed0[1] = {
     0x00000000u,
 };
-const struct pb_msgdesc_candidate *const audio_conversate_submessages_775b9c[1] = {
+const struct pb_msgdesc_candidate *const audio_conversate_submsg_info_78eed4[1] = {
     0
 };
 const struct pb_msgdesc_candidate audio_conversate_descriptor_775b9c = {
-    audio_conversate_fields_775b9c, audio_conversate_submessages_775b9c, 0, 0,
+    audio_conversate_field_info_78eed0, audio_conversate_submsg_info_78eed4, 0, 0,
     0u, 0u, 0u
 };
 
-const uint32_t audio_conversate_fields_775bb4[2] = {
+const uint32_t audio_conversate_field_info_78a664[2] = {
     0x10001204u, 0x40041208u,
 };
-const struct pb_msgdesc_candidate *const audio_conversate_submessages_775bb4[1] = {
+const struct pb_msgdesc_candidate *const audio_conversate_submsg_info_78eed8[1] = {
     0
 };
 const struct pb_msgdesc_candidate audio_conversate_descriptor_775bb4 = {
-    audio_conversate_fields_775bb4, audio_conversate_submessages_775bb4, 0, 0,
+    audio_conversate_field_info_78a664, audio_conversate_submsg_info_78eed8, 0, 0,
     2u, 0u, 2u
 };
 
-const uint32_t audio_conversate_fields_775bcc[3] = {
+const uint32_t audio_conversate_field_info_785750[3] = {
     0x00011605u, 0x00820000u, 0x40841208u,
 };
-const struct pb_msgdesc_candidate *const audio_conversate_submessages_775bcc[1] = {
+const struct pb_msgdesc_candidate *const audio_conversate_submsg_info_78eedc[1] = {
     0
 };
 const struct pb_msgdesc_candidate audio_conversate_descriptor_775bcc = {
-    audio_conversate_fields_775bcc, audio_conversate_submessages_775bcc, 0, 0,
+    audio_conversate_field_info_785750, audio_conversate_submsg_info_78eedc, 0, 0,
     2u, 0u, 2u
 };
 
-const uint32_t audio_conversate_fields_775be4[4] = {
+const uint32_t audio_conversate_field_info_77e9d8[4] = {
     0x00011205u, 0x00040000u, 0x00011609u, 0x0fa20004u,
 };
-const struct pb_msgdesc_candidate *const audio_conversate_submessages_775be4[1] = {
+const struct pb_msgdesc_candidate *const audio_conversate_submsg_info_78eee0[1] = {
     0
 };
 const struct pb_msgdesc_candidate audio_conversate_descriptor_775be4 = {
-    audio_conversate_fields_775be4, audio_conversate_submessages_775be4, 0, 0,
+    audio_conversate_field_info_77e9d8, audio_conversate_submsg_info_78eee0, 0, 0,
     2u, 0u, 2u
 };
 
-const uint32_t audio_conversate_fields_775bfc[6] = {
+const uint32_t audio_conversate_field_info_76a268[6] = {
     0x10001204u, 0x10011809u, 0x00050002u, 0x1001180du,
     0x00880008u, 0x10901210u,
 };
-const struct pb_msgdesc_candidate *const audio_conversate_submessages_775bfc[3] = {
+const struct pb_msgdesc_candidate *const audio_conversate_submsg_info_78a670[3] = {
     &audio_conversate_descriptor_775b54,
     &audio_conversate_descriptor_775bcc,
     0
 };
 const struct pb_msgdesc_candidate audio_conversate_descriptor_775bfc = {
-    audio_conversate_fields_775bfc, audio_conversate_submessages_775bfc, 0, 0,
+    audio_conversate_field_info_76a268, audio_conversate_submsg_info_78a670, 0, 0,
     4u, 0u, 4u
 };
 
-const uint32_t audio_conversate_fields_775c14[8] = {
+const uint32_t audio_conversate_field_info_752a54[8] = {
     0x00011205u, 0x00010000u, 0x00011609u, 0x00820002u,
     0x0001160du, 0x04020084u, 0x00011211u, 0x00040488u,
 };
-const struct pb_msgdesc_candidate *const audio_conversate_submessages_775c14[1] = {
+const struct pb_msgdesc_candidate *const audio_conversate_submsg_info_78eee4[1] = {
     0
 };
 const struct pb_msgdesc_candidate audio_conversate_descriptor_775c14 = {
-    audio_conversate_fields_775c14, audio_conversate_submessages_775c14, 0, 0,
+    audio_conversate_field_info_752a54, audio_conversate_submsg_info_78eee4, 0, 0,
     4u, 0u, 4u
 };
 
-const uint32_t audio_conversate_fields_775c2c[4] = {
+const uint32_t audio_conversate_field_info_77e9ec[4] = {
     0x00011605u, 0x04020000u, 0x00011209u, 0x00040404u,
 };
-const struct pb_msgdesc_candidate *const audio_conversate_submessages_775c2c[1] = {
+const struct pb_msgdesc_candidate *const audio_conversate_submsg_info_78eee8[1] = {
     0
 };
 const struct pb_msgdesc_candidate audio_conversate_descriptor_775c2c = {
-    audio_conversate_fields_775c2c, audio_conversate_submessages_775c2c, 0, 0,
+    audio_conversate_field_info_77e9ec, audio_conversate_submsg_info_78eee8, 0, 0,
     2u, 0u, 2u
 };
 
-const uint32_t audio_conversate_fields_775c44[2] = {
+const uint32_t audio_conversate_field_info_78a67c[2] = {
     0x10001204u, 0x10011208u,
 };
-const struct pb_msgdesc_candidate *const audio_conversate_submessages_775c44[1] = {
+const struct pb_msgdesc_candidate *const audio_conversate_submsg_info_78eeec[1] = {
     0
 };
 const struct pb_msgdesc_candidate audio_conversate_descriptor_775c44 = {
-    audio_conversate_fields_775c44, audio_conversate_submessages_775c44, 0, 0,
+    audio_conversate_field_info_78a67c, audio_conversate_submsg_info_78eeec, 0, 0,
     2u, 0u, 2u
 };
 
-const uint32_t audio_conversate_fields_775c5c[4] = {
+const uint32_t audio_conversate_field_info_77ea00[4] = {
     0x40001204u, 0x10041208u, 0x1005120cu, 0x40081210u,
 };
-const struct pb_msgdesc_candidate *const audio_conversate_submessages_775c5c[1] = {
+const struct pb_msgdesc_candidate *const audio_conversate_submsg_info_78eef0[1] = {
     0
 };
 const struct pb_msgdesc_candidate audio_conversate_descriptor_775c5c = {
-    audio_conversate_fields_775c5c, audio_conversate_submessages_775c5c, 0, 0,
+    audio_conversate_field_info_77ea00, audio_conversate_submsg_info_78eef0, 0, 0,
     4u, 0u, 4u
 };
 
-const uint32_t audio_conversate_fields_775c74[1] = {
+const uint32_t audio_conversate_field_info_78d214[1] = {
     0x10001204u,
 };
-const struct pb_msgdesc_candidate *const audio_conversate_submessages_775c74[1] = {
+const struct pb_msgdesc_candidate *const audio_conversate_submsg_info_78eef4[1] = {
     0
 };
 const struct pb_msgdesc_candidate audio_conversate_descriptor_775c74 = {
-    audio_conversate_fields_775c74, audio_conversate_submessages_775c74, 0, 0,
+    audio_conversate_field_info_78d214, audio_conversate_submsg_info_78eef4, 0, 0,
     1u, 0u, 1u
 };
 
-const uint32_t audio_conversate_fields_775c8c[1] = {
+const uint32_t audio_conversate_field_info_78eef8[1] = {
     0x00000000u,
 };
-const struct pb_msgdesc_candidate *const audio_conversate_submessages_775c8c[1] = {
+const struct pb_msgdesc_candidate *const audio_conversate_submsg_info_78eefc[1] = {
     0
 };
 const struct pb_msgdesc_candidate audio_conversate_descriptor_775c8c = {
-    audio_conversate_fields_775c8c, audio_conversate_submessages_775c8c, 0, 0,
+    audio_conversate_field_info_78eef8, audio_conversate_submsg_info_78eefc, 0, 0,
     0u, 0u, 0u
 };

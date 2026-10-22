@@ -8,15 +8,3 @@ static const uint16_t sin0_90_table[91] = {
     29452, 29698, 29935, 30163, 30382, 30592, 30792, 30983, 31164, 31336, 31499, 31651, 31795, 31928, 32052, 32166,
     32270, 32365, 32449, 32524, 32588, 32643, 32688, 32723, 32748, 32763, 32768
 };
-int32_t audio_uart_lv_sin_4885f0(int16_t angle) {
-    while(angle<0)angle=(int16_t)(angle+360);
-    while(angle>=360)angle=(int16_t)(angle-360);
-    int32_t value;
-    if(angle<90)value=sin0_90_table[angle];
-    else if(angle<180)value=sin0_90_table[180-angle];
-    else if(angle<270)value=-(int32_t)sin0_90_table[angle-180];
-    else value=-(int32_t)sin0_90_table[360-angle];
-    if(value==32767)return 32768;
-    if(value==-32767)return -32768;
-    return value;
-}

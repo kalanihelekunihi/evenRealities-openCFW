@@ -17,6 +17,7 @@ extern uint32_t case_bus_output_poll(uint32_t *word); /* 0xc42c */
 extern uint32_t case_bus_output_parity(uint32_t byte); /* 0xc3f8 */
 extern uint32_t case_bus_output_byte_sample(uint8_t *out); /* 0xb5ac */
 extern void case_bus_output_response_bit(uint32_t byte); /* 0xa164 */
+/* Stock 0x08000310 (case_wire_exchange_register) */
 uint32_t case_bus_config_input_transaction(uint32_t command,uint32_t index,uint32_t count,uint8_t *out)
 {
     volatile uint32_t *diagnostics=(volatile uint32_t *)(uintptr_t)0x2000007cu;
@@ -39,6 +40,7 @@ uint32_t case_bus_config_input_transaction(uint32_t command,uint32_t index,uint3
     }
     case_bus_finish();return 1u;
 }
+/* Stock 0x08000420 (case_motion_input_transaction) */
 uint32_t case_motion_input_transaction(uint32_t command,uint32_t index,uint32_t count,uint8_t *out)
 {
     volatile uint32_t *diagnostics=(volatile uint32_t *)(uintptr_t)0x20000000u;

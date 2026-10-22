@@ -11,6 +11,7 @@ extern void audio_ble_ancc_message(uint8_t,void *);   /* 0x4bf780 */
 extern void audio_ble_master_message_preprocess(void *); /* 0x4a06d4 */
 extern void audio_ble_master_message(uint8_t,void *);    /* 0x4c4910 */
 
+/* Stock 0x0046EF74 (dmConnSmEventDispatch) */
 uint32_t audio_ble_comm_forward_a(uint8_t handler,void *message,
                                    uint32_t unused,uint32_t passthrough) {
     (void)unused;
@@ -25,6 +26,7 @@ uint32_t audio_ble_comm_forward_a(uint8_t handler,void *message,
     return passthrough;
 }
 
+/* Stock 0x004A19C0 (ring_dm_event_dispatch) */
 uint32_t audio_ble_comm_forward_b(uint8_t handler,void *message,
                                    uint32_t unused,uint32_t passthrough) {
     (void)unused;

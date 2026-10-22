@@ -6,6 +6,7 @@
 #include <stdint.h>
 extern uint32_t case_policy_bus_write(uint32_t bus,uint32_t channel,uint32_t count,const uint8_t *value); /* 0x08000610 */
 /* Stock 0x08009108: nine IRQ-guarded bus attempts, cumulative failure count. */
+/* Stock 0x08009108 (case_policy_sensor_write) */
 uint32_t case_policy_sensor_write(uint32_t channel,uint32_t count,const uint8_t *value)
 {
     volatile uint32_t *bus_state=(volatile uint32_t *)(uintptr_t)0x2000007cu;
@@ -23,6 +24,7 @@ uint32_t case_policy_sensor_write(uint32_t channel,uint32_t count,const uint8_t 
     return 0u;
 }
 /* Stock 0x080099e8 cache check and conditional bus write. */
+/* Stock 0x080099E8 (case_update_cached_byte) */
 void case_policy_sensor_command(uint32_t channel,uint32_t value)
 {
     volatile uint8_t *cache=(volatile uint8_t *)(uintptr_t)0x20000090u;
@@ -30,6 +32,7 @@ void case_policy_sensor_command(uint32_t channel,uint32_t value)
     if(cache[channel]==byte)return;
     if(case_policy_sensor_write(channel,1u,&byte)!=0u)cache[channel]=byte;
 }
+/* Stock 0x08009A14 (dual_side_indicator_update) */
 void case_policy_idle_clear(void)
 {
     volatile uint8_t *state=(volatile uint8_t *)(uintptr_t)0x2000087cu;

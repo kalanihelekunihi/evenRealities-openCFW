@@ -2,6 +2,7 @@
  * Original binary implements IIR bit1; other mask bits do not acquire invented
  * median/jitter behavior. History stride derives from configurationbyte+1. */
 #include "slider.h"
+/* Stock 0x00004A2A (touch_state_172a_sync_records) */
 void touch_position_filters(uint8_t *t,const uint8_t *w){
  uint32_t count=t[4],config=*(const uint32_t *)(w+112);uint8_t *history=*(uint8_t **)(w+60);
  if(count && count!=255){

@@ -1,6 +1,6 @@
 # Offline UART RX and stream-buffer source
 
-Eight selected bodies preserve public source text: FreeRTOS10.5.1 stream create/spaces/ISR-send/write-message/write-bytes/bytes-in-buffer/initialize, and pinned Apollo510 UART FIFO read. MIT/BSD3 notices retained. compat.h binds stock36byte control layout and config choices; support.c provides bounded reconstructed non-overlap byte-copy/fill and previously explained BASEPRI operations.
+Eight selected bodies preserve public source text: FreeRTOS10.5.1 stream create/spaces/ISR-send/write-message/write-bytes/bytes-in-buffer/initialize (the pinned Apollo510 UART FIFO read formerly here now compiles from upstream `am_hal_uart.c`). MIT notices retained. compat.h binds stock36byte control layout and config choices; support.c provides bounded reconstructed non-overlap byte-copy/fill and previously explained BASEPRI operations.
 
 Report, exact build, source provenance and original-instruction comparisons (`pre-consolidation:g2/analysis/audio-uart-rx-stream-ownership-2026-10-09/REPORT.md`). Heap and task notification remain explicit external aliases; tests cut or mock their return behavior. No source-complete driver, scheduling or physical UART claim.
 

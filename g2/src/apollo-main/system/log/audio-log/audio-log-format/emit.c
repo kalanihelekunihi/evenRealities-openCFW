@@ -10,6 +10,7 @@ extern uint32_t audio_log_wake_allowed(void); /* stock 0x443484 */
 extern uint32_t audio_log_transport_ready(void); /* stock 0x4487ac */
 extern void audio_log_transport_wake(void); /* stock 0x448f7c */
 
+/* Stock 0x43CA50 (compress_log_ring_write) */
 void audio_log_emit(const void *packet,uint32_t length)
 {
     uint32_t base=g2_audio_log_ring_state[0];

@@ -42,6 +42,7 @@ static void log_event(uint32_t line,uint32_t event) {
                                     audio_uart_begin_c_event,event);
 }
 
+/* Stock 0x45D554 (PeerData listener) */
 uint32_t audio_uart_send_begin4(uint32_t unused,void *message,
                                  uint32_t unused2,uint32_t unused3) {
     (void)unused;(void)unused2;(void)unused3;

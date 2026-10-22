@@ -2,6 +2,7 @@
  * PM dependency remains explicit; stock launch return is deliberately ignored. */
 #include "application.h"
 #include "../lp-scan/scan.h"
+/* Stock 0x00007050 (touch_sub_3d50) */
 uint32_t touch_start_all_lp(uint8_t *c){return c?touch_start_lp_slots(0,4,c):1;}
 void touch_app_lp_phase(uint8_t *c,uint8_t *state,uint32_t *budget,const touch_lp_pm_dependencies *pm){
  (void)touch_start_all_lp(c);uint32_t token=pm->enter();

@@ -25,6 +25,7 @@ static const char send_message[] = "sync version reply send, local version: %s";
 static const char send_short[] =
     "[service.settings]sync version reply send, local version: %s";
 
+/* Stock 0x46BAEC (SVC_Settings_UpdateLeftVersion) */
 void audio_settings_update_left_version(const uint8_t *version)
 {
     if (version == 0 || version[0] == 0u)
@@ -43,6 +44,7 @@ void audio_settings_update_left_version(const uint8_t *version)
         (void)audio_settings_notify_device_status();
 }
 
+/* Stock 0x46B988 (SVC_Settings_SyncVersionOnlySend) */
 void audio_settings_sync_version_only_send(void)
 {
     uint8_t packet[48];

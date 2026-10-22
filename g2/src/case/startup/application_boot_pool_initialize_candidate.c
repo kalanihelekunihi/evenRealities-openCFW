@@ -4,6 +4,7 @@
 #include <stdint.h>
 extern void case_boot_pool_prepare(uint32_t region,uint32_t mode); /* 0xc616 */
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
+/* Stock 0x0800AE74 (case_boot_pool_initialize) */
 void case_boot_pool_initialize(uint32_t count,uint32_t stride,uint32_t storage,
                                uint32_t flags,uint32_t region)
 {

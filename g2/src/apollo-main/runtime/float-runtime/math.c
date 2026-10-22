@@ -20,7 +20,9 @@ float audio_floorf(float input) {
     if (x >> 31) x += mask;
     return value(x & ~mask);
 }
-float audio_roundf(float input) {
+/* Stock 0x00577D08 (roundf VFP entry) */
+/* Stock 0x00577D18 (roundf bit core) */
+__attribute__((pcs("aapcs"))) float audio_roundf(float input) {
     uint32_t x = bits(input);
     int32_t exponent = (int32_t)((x >> 23) & 255) - 126;
     if (exponent <= 0)
@@ -31,6 +33,8 @@ float audio_roundf(float input) {
     x += mask;
     return value(x & ~mask);
 }
+/* Stock 0x00577D40 (ceilf VFP entry) */
+/* Stock 0x00577D50 (ceilf bit core) */
 float audio_ceilf(float input) {
     uint32_t x = bits(input);
     int32_t exponent = (int32_t)((x >> 23) & 255) - 126;

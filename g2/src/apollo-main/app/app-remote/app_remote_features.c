@@ -26,11 +26,3 @@ uint32_t audio_ble_dm_read_remote_features_body(uint32_t connection){
     return rd32(event);
 }
 
-__attribute__((naked))
-uint32_t DmReadRemoteFeatures(uint8_t connection __attribute__((unused))){
-    __asm__ volatile(
-        "push {r0, r1, r2, r3, r4, r5, r6, lr}\n"
-        "bl audio_ble_dm_read_remote_features_body\n"
-        "str r0, [sp]\n"
-        "pop {r0, r1, r2, r3, r4, r5, r6, pc}\n");
-}

@@ -4,9 +4,11 @@
 extern int32_t audio_mutex_acquire(uint32_t tagged_mutex,uint32_t wait_ticks);
 extern int32_t audio_mutex_release(uint32_t tagged_mutex);
 static volatile uint32_t *const logger_mutex = (volatile uint32_t *)(uintptr_t)0x20074578u;
+/* Stock 0x0044AA40 (elog port lock) */
 void g2_log_lock_enter(void) {
     if (*logger_mutex != 0u) (void)audio_mutex_acquire(*logger_mutex,1000u);
 }
+/* Stock 0x0044AA56 (elog port unlock) */
 void g2_log_lock_exit(void) {
     if (*logger_mutex != 0u) (void)audio_mutex_release(*logger_mutex);
 }

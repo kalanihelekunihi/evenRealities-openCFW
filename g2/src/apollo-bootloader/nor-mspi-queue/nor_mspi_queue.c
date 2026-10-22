@@ -95,6 +95,7 @@ static uint32_t shifted(uint32_t value, uint32_t amount)
 }
 #endif
 
+/* Stock 0x427754 (cmdq_update_indices_427754; am_hal_cmdq update_indices) */
 static void update_indices(uint32_t *queue)
 {
     const uint32_t saved_mask = opencfw_bl_critical_save();

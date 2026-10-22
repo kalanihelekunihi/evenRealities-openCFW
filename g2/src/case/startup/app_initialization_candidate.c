@@ -44,6 +44,7 @@ static void log0(uint32_t message)
 static void log1(uint32_t message,uint32_t value)
 {if(logs_enabled()){case_init_log(message,value,0u,0u);case_init_log(CASE_STRING_ADDR(08003374),0u,0u,0u);}}
 
+/* Stock 0x08002FC8 (case_application_initialize_2fc8) */
 void case_application_initialize_2fc8(void)
 {
     volatile uint8_t *s=state();

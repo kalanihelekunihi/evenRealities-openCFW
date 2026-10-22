@@ -1,4 +1,5 @@
-/* Apollo S200 Hongshi brightness at 0x5bc6ae and config cell at 0x46b44c. */
+/* Apollo S200 Hongshi brightness at 0x5bc6ae; the settings config getter
+ * 0x46b44c is audio_settings_get_config_46b44c (app/silent-mode). */
 #include <stdint.h>
 
 extern uint32_t display_driver_brightness_ratio_cell_4af73a(uint32_t);
@@ -10,10 +11,7 @@ extern uint32_t audio_log_simple(uint32_t,const char *,const char *,...);
 extern uint32_t display_driver_uled_type1_write_register_5bbdf0(
     uint32_t,uint32_t,uint32_t);
 extern void audio_ble_hci_radio_reset_4910f4(uint32_t);
-
-uint32_t display_driver_uled_settings_get_config_46b44c(void) {
-    return 0x20072da8u;
-}
+extern uint8_t *audio_settings_get_config_46b44c(void); /* 0x46b44c */
 
 void display_driver_uled_type1_set_brightness_5bc6ae(int32_t level,
                                                         uint32_t unused1,
@@ -29,8 +27,7 @@ void display_driver_uled_type1_set_brightness_5bc6ae(int32_t level,
         display_driver_brightness_ratio_cell_4af73a(5u);
     const uint32_t base = *nvdb;
     const volatile uint8_t *const config =
-        (const volatile uint8_t *)(uintptr_t)
-        display_driver_uled_settings_get_config_46b44c();
+        audio_settings_get_config_46b44c();
     uint32_t reduction = config[display_driver_uled_mode_45a568() == 1u ?
                                 23u : 22u];
     if (reduction > 10u) reduction = 10u;

@@ -6,34 +6,41 @@
 #define READY (*(volatile uint8_t *)0x200008c4u)
 #define CONTEXT ((uint8_t *)0x200008c8u)
 #define RECORD ((touch_saved_record *)0x200009d0u)
+/* Stock 0x00003520 (touch_storage_0220_read) */
 uint32_t touch_application_read(uint32_t address,uint8_t *out,uint32_t size) {
  if(!out || address+size>256u)return 4;
  if(!READY)return 1;
  uint32_t s=touch_eeprom_read(address,out,size,CONTEXT);
  return s==0 || s==TOUCH_EEPROM_REDUNDANT_USED?0:2;
 }
+/* Stock 0x00003568 (touch_config_read_adapter) */
 uint32_t touch_application_write(uint32_t address,const uint8_t *data,uint32_t size) {
  if(!data || address+size>256u)return 4;
  if(!READY)return 1;
  uint32_t s=touch_eeprom_write(address,data,size,CONTEXT);
  return s==0 || s==TOUCH_EEPROM_REDUNDANT_USED?0:3;
 }
+/* Stock 0x000035B0 (touch_storage_02b0_context_operation) */
 uint32_t touch_application_erase(void) {
  if(!READY)return 1;
  uint32_t s=touch_eeprom_erase(CONTEXT);
  return s==0 || s==TOUCH_EEPROM_REDUNDANT_USED?0:3;
 }
+/* Stock 0x00003EE0 (logger_stub) */
 __attribute__((noinline,noipa)) uint32_t touch_bootstrap_log(uint32_t format,uint32_t a,uint32_t b,uint32_t c) {
  (void)format;(void)a;(void)b;(void)c;return 0;
 }
+/* Stock 0x00004480 (Cy_SysLib_DelayCycles) */
 __attribute__((noinline)) void touch_bootstrap_cycles(uint32_t cycles) {
  volatile uint32_t n=(cycles+2u)>>2;
  if(n){n++; do {n-=2u;if(n)n++;}while(n);}
 }
+/* Stock 0x0000A2F0 (Cy_SysLib_Delay) */
 void touch_bootstrap_delay(uint32_t argument) {
  while(argument>32768u){touch_bootstrap_cycles(*(volatile uint32_t *)0x2000086cu);argument-=32768u;}
  touch_bootstrap_cycles(*(volatile uint32_t *)0x20000874u * argument);
 }
+/* Stock 0x0000395C (touch_config_065c_bootstrap) */
 void touch_config_bootstrap(void) {
  uint32_t s=touch_application_eeprom_init();
  if(s){touch_bootstrap_log(0xaab8,s,0xaa5c,0);return;}

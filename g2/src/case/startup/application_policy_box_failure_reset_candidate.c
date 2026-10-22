@@ -7,6 +7,7 @@ extern int32_t case_policy_task_reset(uint32_t task); /* 0xab26 */
 extern void case_policy_led_left_clear(uint32_t value); /* 0x6b80 */
 extern void case_policy_led_right_clear(uint32_t value); /* 0x6b98 */
 extern uint32_t case_legacy_logger(const char *format,...); /* 0x9170 */
+/* Stock 0x080012E4 (aging_led_status_clear) */
 void case_policy_box_failure_reset(void)
 {
     uint32_t task=*(volatile uint32_t *)(uintptr_t)0x200000d0u;

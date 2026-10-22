@@ -61,6 +61,7 @@ void opencfw_wsf_wake(void)
         __asm__ volatile("dsb sy\nisb sy" ::: "memory");
     }
 }
+/* Stock 0x52B91E (WsfSetEvent; upstream third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/port/freertos/wsf_os.c) */
 void opencfw_wsf_set_event(uint32_t handler_id,uint32_t mask)
 {
     opencfw_wsf_cs_enter();
@@ -77,7 +78,9 @@ void opencfw_wsf_task_ready(uint32_t ignored_id,uint32_t mask)
     opencfw_wsf_cs_exit();
     opencfw_wsf_wake();
 }
+/* Stock 0x52B99E (wsfOsReadyToSleep; upstream third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/port/freertos/wsf_os.c) */
 uint32_t opencfw_wsf_ready_to_sleep(void){return FLAGS==0u;}
+/* Stock 0x52B9D0 (wsfOsDispatcher; upstream third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/port/freertos/wsf_os.c) */
 void opencfw_wsf_dispatch(void)
 {
     opencfw_wsf_timer_update();

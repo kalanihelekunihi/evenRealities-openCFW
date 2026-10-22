@@ -34,6 +34,7 @@ static void log1(uint8_t level,uint32_t line,const char *full,
         (void)compressed_log_output(((uint32_t)level<<26)|0x400000u,
                                     short_text,short_text,word);
 }
+/* Stock 0x45ADF4 (SlaveDispalyCommandReplyListener) */
 uint32_t audio_uart_listener_slave2(void *tf,const void *message,
                                     uint32_t unused3,uint32_t unused4) {
     (void)unused3;(void)unused4;

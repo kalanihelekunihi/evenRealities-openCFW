@@ -38,6 +38,7 @@ static void log_error(const char *function,uint32_t line,const char *message,con
     if((audio_log_flags()&1u)!=0u||(audio_log_flags()&4u)!=0u)
         (void)compressed_log_output(0x04000000u,short_message,short_message);
 }
+/* Stock 0x0047697E (fw_event_loop_push_delayed) */
 void audio_event_loop_push_delayed(void (*callback)(void),uint32_t argument,uint32_t delay) {
     if(audio_event_loop_thread_handle==0) {
         log_error(push_function,239u,push_wait,push_wait_short);
@@ -66,6 +67,7 @@ void audio_event_loop_push_delayed(void (*callback)(void),uint32_t argument,uint
         audio_event_loop_timer_callback(elapsed|0xff000000u);
     }
 }
+/* Stock 0x00476ACE (fw_event_loop_remove_delayed) */
 uint32_t audio_event_loop_remove_delayed(void (*callback)(void)) {
     if(audio_event_loop_thread_handle==0) {
         log_error(remove_function,286u,remove_wait,remove_wait_short);

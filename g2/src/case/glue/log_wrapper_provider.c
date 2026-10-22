@@ -20,6 +20,7 @@ int32_t case_log_output_char(int32_t character,void *context)
 
 /* Original 0x08009170. ARM AAPCS varargs make the register arguments and
  * caller stack continuation one contiguous argument word stream. */
+/* Stock 0x08009170 (g2_log_printf) */
 int32_t g2_log_printf(const char *format,...)
 {
     va_list arguments;

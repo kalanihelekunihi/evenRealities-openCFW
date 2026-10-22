@@ -24,39 +24,7 @@
 
 #include "wsf_timer_compat.h"
 
-void WsfQueueRemove(wsfQueue_t *pQueue, void *pElem, void *pPrev)
-{
-  WSF_CS_INIT(cs);
-
-  WSF_ASSERT(pQueue != NULL);
-  WSF_ASSERT(pQueue->pHead != NULL);
-  WSF_ASSERT(pElem != NULL);
-
-  /* enter critical section */
-  WSF_CS_ENTER(cs);
-
-  /* if first element */
-  if (pElem == pQueue->pHead)
-  {
-    /* remove from head of queue */
-    pQueue->pHead = WSF_QUEUE_NEXT(pElem);
-  }
-  else if (pPrev)
-  {
-    /* remove from middle of queue, pPrev will never be null */
-    WSF_QUEUE_NEXT(pPrev) = WSF_QUEUE_NEXT(pElem);
-  }
-
-  /* if last element */
-  if (pElem == pQueue->pTail)
-  {
-    /* update tail */
-    pQueue->pTail = pPrev;
-  }
-
-  /* exit critical section */
-  WSF_CS_EXIT(cs);
-}
+extern void WsfQueueRemove(wsfQueue_t *pQueue, void *pElem, void *pPrev); /* opencfw U5: now provided by the Cordio unit */
 
 static void wsfTimerRemove(wsfTimer_t *pTimer)
 {

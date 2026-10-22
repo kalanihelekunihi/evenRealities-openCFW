@@ -14,6 +14,7 @@ extern uint32_t gx8002_resident_flash_otp_transmit_23e14(
 extern uint32_t gx8002_resident_flash_command_write_236dc(
     uint32_t, const uint8_t *, int32_t);
 
+/* Stock 0x10023BD8 (gx8002_flash_otp_erase) */
 uint32_t gx8002_resident_flash_otp_erase_23bd8(void)
 {
     volatile uint32_t *const state =
@@ -39,6 +40,7 @@ uint32_t gx8002_resident_flash_otp_erase_23bd8(void)
     return 0u;
 }
 
+/* Stock 0x10023EB8 (gx8002_flash_otp_write) */
 uint32_t gx8002_resident_flash_otp_write_23eb8(
     uint32_t offset, const uint8_t *source, uint32_t bytes)
 {

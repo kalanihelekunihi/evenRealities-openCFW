@@ -4,7 +4,7 @@
 extern uint8_t *smpDbGetRecord(uint8_t);
 extern const uint8_t *audio_ble_comm_registration_slot;
 extern volatile uint8_t audio_ble_trace_level_cell;
-extern uint32_t g2_smp_candidate_compare(void *,uint32_t,uint32_t,uint32_t);
+extern int32_t audio_ble_hci_vendor_compare_44b610(const void *,const void *,uint32_t); /* 0x44b610 bounded strncmp */
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,uint32_t,const char *,...);
 extern void audio_ble_wsf_trace(const char *,const char *,...);
@@ -14,7 +14,7 @@ static uint16_t rd16(const uint8_t *p){return (uint16_t)p[0]|((uint16_t)p[1]<<8)
 static uint32_t rd32(const uint8_t *p){return (uint32_t)p[0]|((uint32_t)p[1]<<8)|((uint32_t)p[2]<<16)|((uint32_t)p[3]<<24);}
 static void wr32(uint8_t *p,uint32_t v){p[0]=(uint8_t)v;p[1]=(uint8_t)(v>>8);p[2]=(uint8_t)(v>>16);p[3]=(uint8_t)(v>>24);}
 static uint32_t cmp(const char *a,const char *b,uint32_t n){
-    return g2_smp_candidate_compare(0u,(uint32_t)(uintptr_t)a,(uint32_t)(uintptr_t)b,n);
+    return (uint32_t)audio_ble_hci_vendor_compare_44b610(a,b,n);
 }
 static void trace2(uint32_t line,const char *fn,const char *fmt,uint32_t a,uint32_t b){
     uint8_t level=0u;

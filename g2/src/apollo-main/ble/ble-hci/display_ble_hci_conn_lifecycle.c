@@ -7,6 +7,7 @@ static uint16_t rd16(const uint8_t *p) {uint16_t v;__builtin_memcpy(&v,p,2u);ret
 static uint32_t rd32(const uint8_t *p) {uint32_t v;__builtin_memcpy(&v,p,4u);return v;}
 static void wr16(uint8_t *p,uint16_t v) {__builtin_memcpy(p,&v,2u);}
 static void wr32(uint8_t *p,uint32_t v) {__builtin_memcpy(p,&v,4u);}
+/* Stock 0x52A67C (hciCoreConnAlloc) */
 void audio_ble_hci_conn_alloc(uint16_t handle) {
     uint8_t *row=audio_ble_hci_controller_state_20071478;
     for(uint32_t i=0;i<3u;i++,row+=0x1cu) {
@@ -16,6 +17,7 @@ void audio_ble_hci_conn_alloc(uint16_t handle) {
         return;
     }
 }
+/* Stock 0x52A6B0 (hciCoreConnFree) */
 void audio_ble_hci_conn_free(uint16_t handle) {
     uint8_t *row=audio_ble_hci_controller_state_20071478;
     for(uint32_t i=0;i<3u;i++,row+=0x1cu) {
@@ -30,5 +32,7 @@ void audio_ble_hci_conn_free(uint16_t handle) {
         return;
     }
 }
+/* Stock 0x52A758 (hciCoreConnOpen) */
 void audio_ble_hci_conn_open(uint16_t handle) {audio_ble_hci_conn_alloc(handle);}
+/* Stock 0x52A762 (hciCoreConnClose) */
 void audio_ble_hci_conn_close(uint16_t handle) {audio_ble_hci_conn_free(handle);}

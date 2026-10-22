@@ -3,6 +3,7 @@
 extern uint32_t audio_flags_set(void*,uint32_t);
 extern void audio_ack_index(uint32_t),audio_queue_delete_peer(void*),audio_delay(uint32_t);
 extern uint32_t audio_event_wait(void*,uint32_t,uint32_t,uint32_t);
+/* Stock 0x004C96B6 (thread_manager_stop_fanout) */
 uint32_t audio_stop_fanout(uint32_t reason){
  const uint32_t ctx[10]={0x200040fc,0x20004120,0x20004044,0x20003ffc,0x20004020,0x20004068,0x20003f98,0x2000408c,0x20003664,0x20000658};
  const uint32_t bits[10]={2,0x40,0x800,0x80,0x100,0x200,8,0x10,0x20,0x1000};uint32_t want=0;

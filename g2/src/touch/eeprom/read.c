@@ -13,7 +13,9 @@ static uint32_t next(uint32_t r,const uint8_t *c){r+=h(c,2)&~3u;return r>=w(c,16
 static uint32_t previous(uint32_t r,const uint8_t *c){if(c[12]>1){uint32_t b=h(c,0)*h(c,2);r=r<w(c,16)+b?r+(c[12]-1u)*b:r-b;}return r;}
 static uint32_t check(uint32_t r,const uint8_t *c){return w((const uint8_t *)r,0)==touch_row_checksum((const uint8_t *)r,h(c,2))?0:0x093e0001u;}
 static uint32_t copy(const uint8_t *c,uint32_t r,uint32_t n,uint8_t *out){const uint32_t *p=(const uint32_t *)w(c,28);uint32_t (*fn)(uint32_t,uint32_t,uint32_t,uint8_t *)=(void *)p[5];return fn(p[0],r,n,out);}
+/* Stock 0x00007E44 (touch_eeprom_4b44_read_simple) */
 uint32_t touch_simple_read(uint32_t address,uint8_t *out,uint32_t size,uint8_t *c){return copy(c,w(c,16)+address,size,out)?0x093e0002u:0;}
+/* Stock 0x000082E0 (touch_eeprom_4fe0_read_extended) */
 uint32_t touch_extended_read(uint32_t address,uint8_t *out,uint32_t size,uint8_t *c){
  for(uint32_t i=0;i<size;i++)out[i]=0;
  uint32_t sequence; (void)touch_integrity(&sequence,c);
@@ -40,4 +42,5 @@ uint32_t touch_extended_read(uint32_t address,uint8_t *out,uint32_t size,uint8_t
  }
  return result;
 }
+/* Stock 0x00008A78 (touch_eeprom_5778_read_adapter) */
 uint32_t touch_eeprom_read(uint32_t address,uint8_t *out,uint32_t size,uint8_t *c){if(!size||address+size>w(c,8)||!out)return 0x093e0000u;return c[13]?touch_simple_read(address,out,size,c):touch_extended_read(address,out,size,c);}

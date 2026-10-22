@@ -16,6 +16,7 @@ static const char request_message[]="request left version from slave";
 static const char request_short[]="[service.settings]request left version from slave";
 static const char fail_message[]="request left version send failed, ret=%d, will retry on next trigger";
 static const char fail_short[]="[service.settings]request left version send failed, ret=%d, will retry on next trigger";
+/* Stock 0x46BA02 (SVC_Settings_RequestLeftVersion) */
 void audio_settings_request_left_version(void) {
     if(audio_uart_device_role_get()!=1u||audio_settings_config_live[0x44u]!=0u) return;
     uint32_t now=g2_flashdb_candidate_tick();

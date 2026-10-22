@@ -25,6 +25,7 @@ uint32_t case_policy_event_receive_irq(uint32_t event)
     __asm__ volatile("msr primask, %0"::"r"(primask):"memory");
     return prior;
 }
+/* Stock 0x0800A816 (osEventFlagsGet) */
 uint32_t case_policy_event_peek(uint32_t event)
 {
     if(event==0u)return 0u;

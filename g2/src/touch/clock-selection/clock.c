@@ -5,26 +5,34 @@ static uint8_t *ptr(const uint8_t *c,unsigned n){return *(uint8_t *const *)(c+n)
 static uint16_t u16(const uint8_t *c,unsigned n){return *(const uint16_t *)(c+n);}
 static uint32_t shr(uint32_t x,uint32_t n){n&=255u;return n>=32?0:x>>n;}
 static uint32_t shl(uint32_t x,uint32_t n){n&=255u;return n>=32?0:x<<n;}
+/* Stock 0x00006220 (touch_sub_2f20) */
 uint32_t touch_poly_period(uint32_t p){uint32_t size=65535u,mask=32768u;while(size>1 && !(p&mask)){size>>=1;mask>>=1;}return size;}
+/* Stock 0x00006262 (touch_sub_2f62) */
 uint32_t touch_dither_value(uint32_t bits,uint32_t scale){return shl(1,(bits&3u)+scale+1u);}
+/* Stock 0x00006270 (touch_sub_2f70) */
 uint32_t touch_dither_limit(uint32_t div,uint32_t min,uint32_t percent,uint32_t scale){uint32_t a=shr((div*percent)/100u,scale),b=shr(div-min,scale);return a>b?b:a;}
+/* Stock 0x000061F0 (touch_sub_2ef0) */
 uint32_t touch_ssc_run(uint32_t mode,uint32_t dither,uint32_t limit,uint32_t period,uint32_t conversions){
  uint32_t src=dither<=limit?1u:0u;
  if(mode!=2){if(conversions<period)src=0;if(mode==0 && conversions%period)src=0;}
  return src;
 }
+/* Stock 0x0000623C (touch_sub_2f3c) */
 uint32_t touch_prs_auto(const uint8_t *runtime,const uint8_t *c){const uint8_t *i=ptr(c,8);uint32_t total=u16(runtime,44)+i[77];return(total>=((touch_poly_period(u16(i,60))+1u)>>2)?2u:0u)|8u;}
+/* Stock 0x00006294 (touch_sub_2f94) */
 uint32_t touch_ssc_auto(const uint8_t *w,const uint8_t *c){
  const uint8_t *runtime=ptr(w,0),*i=ptr(c,8);uint32_t total=u16(runtime,44)+i[77];if(total>=65536u)total=65535u;
  uint32_t minimum=(w[122]==1 || w[122]==10)?8u:4u;
  uint32_t limit=touch_dither_limit(u16(runtime,14),minimum,w[135],i[78]);
  return touch_ssc_run(w[136],touch_dither_value(runtime[56]&~128u,i[78]),limit,touch_poly_period(u16(i,60)),total)|4u;
 }
+/* Stock 0x00006352 (touch_sub_3052) */
 uint32_t touch_lfsr_auto(const uint8_t *w,const uint8_t *c){
  const uint8_t *runtime=ptr(w,0),*i=ptr(c,8);uint32_t minimum=(w[122]==1 || w[122]==10)?8u:0u;
  uint32_t limit=touch_dither_limit(u16(runtime,14),minimum,w[135],i[78]);
  return (limit>15?3u:limit>7?2u:limit>3?1u:0u)|128u;
 }
+/* Stock 0x00006384 (touch_sub_3084) */
 uint32_t touch_initialize_source_clock(uint8_t *c){
  uint8_t *w=ptr(c,12);uint32_t status=0,minimum=0;
  for(unsigned j=0;j<3;j++,w+=144){
@@ -38,6 +46,7 @@ uint32_t touch_initialize_source_clock(uint8_t *c){
  }
  return status;
 }
+/* Stock 0x00005D70 (touch_sub_2a70) */
 uint32_t touch_timer_cycles(uint32_t interval,const uint8_t *c){
  uint32_t value=(interval * *(const uint32_t *)(ptr(c,8)+44))>>14;
  if(value)value--;return value>=65536u?65535u:value;

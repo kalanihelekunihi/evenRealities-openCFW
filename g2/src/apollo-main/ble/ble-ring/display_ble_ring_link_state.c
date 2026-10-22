@@ -8,6 +8,7 @@ static const char module[]="ble.master";
 static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\platform\\ble\\app_ble_central.c";
 static const char function[]="_SetRingLinkState";
 static const char no_reason[]="";
+/* Stock 0x49F828 (_ringLinkStateName) */
 const char *audio_ble_ring_link_state_name(uint8_t state) {
     switch(state) {
     case 0u:return "IDLE";
@@ -20,6 +21,7 @@ const char *audio_ble_ring_link_state_name(uint8_t state) {
     default:return "?";
     }
 }
+/* Stock 0x49F870 (_SetRingLinkState) */
 void audio_ble_set_ring_link_state(uint8_t next,const char *reason) {
     uint8_t previous=audio_ble_ring_link_state;
     if(next==previous) {

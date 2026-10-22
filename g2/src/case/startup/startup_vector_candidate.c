@@ -21,29 +21,35 @@ extern void case_vector_irq_8f98(void);
 extern void case_crt_init_known_defaults(void);
 extern void case_application_entry_a598(void);
 
+/* Stock 0x08000156 (case_vector_default_0156) */
 _Noreturn void case_vector_default_0156(void)
 {
     __asm__ volatile("1: b 1b");
     __builtin_unreachable();
 }
 
+/* Stock 0x08006E18 (case_hook_08006e18) */
 void case_vector_svc_6e18(void) { }
 
+/* Stock 0x08006D70 (case_vector_nmi_6d70) */
 _Noreturn void case_vector_nmi_6d70(void)
 {
     __asm__ volatile("1: b 1b");
     __builtin_unreachable();
 }
 
+/* Stock 0x08006778 (case_vector_hardfault_6778) */
 _Noreturn void case_vector_hardfault_6778(void)
 {
     __asm__ volatile("1: b 1b");
     __builtin_unreachable();
 }
 
+/* Stock 0x080084AE (case_early_hook_84ae) */
 __attribute__((noinline,used)) static void case_early_hook_84ae(void)
 { __asm__ volatile("" ::: "memory"); }
 
+/* Stock 0x080002D6 (case_expand_runs) */
 void case_crt_decode_02d6(const uint8_t *source,uint8_t *destination,uint32_t bytes)
 {
     uint8_t *end=destination+bytes;
@@ -64,6 +70,7 @@ void case_crt_zero_9200(const uint8_t *source,uint32_t *destination,uint32_t byt
     for(uint32_t i=0u;i<bytes/4u;i++)destination[i]=0u;
 }
 
+/* Stock 0x080000C0 (case_boot_application_veneer_00c0) */
 __attribute__((naked,noreturn)) void case_boot_application_veneer_00c0(void)
 {
     __asm__ volatile(
@@ -71,6 +78,7 @@ __attribute__((naked,noreturn)) void case_boot_application_veneer_00c0(void)
         "bx r0\n");
 }
 
+/* Stock 0x08000270 (case_boot_initialize) */
 __attribute__((naked,noreturn)) void case_crt_init_0270(void)
 {
     __asm__ volatile(
@@ -93,6 +101,7 @@ __attribute__((naked,noreturn)) void case_startup_entry_00b8(void)
         "bx r0\n");
 }
 
+/* Stock 0x08000144 (case_reset_entry_0144) */
 _Noreturn void case_reset_entry_0144(void)
 {
     case_early_hook_84ae();

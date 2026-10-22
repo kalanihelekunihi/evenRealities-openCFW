@@ -11,6 +11,7 @@ static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static uint8_t rb(uint32_t a){return *(volatile uint8_t *)(uintptr_t)a;}
 static void wb(uint32_t a,uint8_t v){*(volatile uint8_t *)(uintptr_t)a=v;}
+/* Stock 0x08004480 (case_boot_console_open) */
 uint32_t case_boot_console_open(uint32_t d)
 {
     if(d==0u)return 1u;

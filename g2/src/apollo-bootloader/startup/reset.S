@@ -6,6 +6,7 @@
 .syntax unified
 .thumb
 .text
+/* Stock 0x43291A (stack_limits_init_43291a; Reset_Handler) */
 .global opencfw_boot_reset_entry
 .thumb_func
 opencfw_boot_reset_entry:
@@ -14,6 +15,7 @@ opencfw_boot_reset_entry:
     msr psplim,r0
     bl opencfw_boot_stack_entry
     bx lr
+/* Stock 0x43293C (process_stack_init_43293c; IAR __iar_program_start) */
 .global opencfw_boot_stack_entry
 .thumb_func
 opencfw_boot_stack_entry:

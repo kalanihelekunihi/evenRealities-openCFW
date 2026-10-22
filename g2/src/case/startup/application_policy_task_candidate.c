@@ -28,6 +28,7 @@ extern uint8_t case_policy_sensor_right_refresh(volatile uint8_t *right,uint8_t 
 /* Return 1 at the native 0x7ed6 immediate reentry, else after the 1000-tick
  * wait immediately preceding that edge. Neither return is task termination.
  */
+/* Stock 0x08007214 (case_policy_iteration) */
 uint32_t case_policy_task_iteration_7214(struct case_policy_task_context *ctx)
 {
     volatile uint8_t *state=(volatile uint8_t *)(uintptr_t)ctx->idle.state_address;
@@ -75,6 +76,7 @@ wait:
     return 0u;
 }
 
+/* Stock 0x08007200 (g2_thread_entry_3) */
 void case_policy_task_7200(void)
 {
     struct case_policy_task_context ctx={{0x2000087cu,0u},0u,0u};

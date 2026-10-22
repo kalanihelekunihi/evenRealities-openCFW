@@ -7,6 +7,7 @@ extern uint32_t opencfw_hal_status_poll(uint32_t, uintptr_t, uint32_t, uint32_t,
 #define BYTE(h,o) (*(volatile uint8_t *)((uintptr_t)(h)+(o)))
 #define REG(h,o) (*(volatile uint32_t *)(0x40050000u+(h)->module*0x1000u+(o)))
 
+/* Stock 0x42cc34 (hw_instance_configure_42cc34) */
 uint32_t opencfw_boot_context_configure(struct opencfw_iom_context *h,
                                        const struct opencfw_iom_instance_config *config)
 {
@@ -42,6 +43,7 @@ uint32_t opencfw_boot_context_configure(struct opencfw_iom_context *h,
     for (uint32_t i=0;i<4u;++i) BYTE(h,0x8a0u+i)=0u;
     return 0u;
 }
+/* Stock 0x42c034 (hw_status_route_42c034) */
 __attribute__((noinline)) uint32_t opencfw_boot_iom_select_interface(uint32_t module,uint32_t interface)
 {
     volatile uint32_t *const reg=(volatile uint32_t *)(0x4005011cu+module*0x1000u);
@@ -49,6 +51,7 @@ __attribute__((noinline)) uint32_t opencfw_boot_iom_select_interface(uint32_t mo
     if (((*reg>>5)&7u)==interface) {*reg=0x10u;return 1u;}
     return 0u;
 }
+/* Stock 0x42c538 (hw_context_enable_42c538) */
 uint32_t opencfw_boot_context_enable(struct opencfw_iom_context *h)
 {
     if (!h || (h->flags&0x01ffffffu)!=0x01123456u) return 2u;

@@ -4,6 +4,7 @@
  */
 #include <stdint.h>
 
+/* Stock 0x10008288 (spi_master_irq_handler) */
 uint32_t gx8002_image_b_spi_master_irq_10008288(
     uint32_t irq, volatile const uint8_t *context)
 {

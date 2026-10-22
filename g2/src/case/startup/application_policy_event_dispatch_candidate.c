@@ -14,6 +14,7 @@ uint32_t case_policy_event_irq_apply(uint32_t event,uint32_t bits)
  * stack word. Preserve that source-derived ambient-stack ABI explicitly;
  * a three-word C array would overread, and zero padding would invent data.
  * Calls retain real providers; no opcode array or executable blob. */
+/* Stock 0x0800CD80 (case_policy_task_event_send) */
 __attribute__((naked,noinline)) uint32_t case_policy_task_event_send(uint32_t task,uint32_t op,uint32_t value,uint32_t option,uint32_t timeout)
 {
     __asm__ volatile(

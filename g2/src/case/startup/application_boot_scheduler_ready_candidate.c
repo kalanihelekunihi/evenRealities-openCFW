@@ -10,6 +10,7 @@ extern uint32_t case_boot_task_create(void (*entry)(void *),const char *name,
                                       uint32_t stack_end,uint32_t stack_start); /* 0xca06 */
 static __attribute__((noreturn)) void native_fault(void)
 {__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+/* Stock 0x0800CD20 (case_boot_scheduler_ready) */
 uint32_t case_boot_scheduler_ready(void)
 {
     case_boot_scheduler_initialize();

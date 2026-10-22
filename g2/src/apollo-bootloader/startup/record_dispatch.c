@@ -5,6 +5,7 @@
  */
 #include <stdint.h>
 extern const uint32_t opencfw_boot_init_records[18];
+/* Stock 0x43299C (init_array_run_43299c; IAR __iar_data_init3) */
 void opencfw_boot_init_records_run(void) {
     const uint32_t *cursor=opencfw_boot_init_records;
     const uint32_t *end=opencfw_boot_init_records+18;
@@ -13,6 +14,7 @@ void opencfw_boot_init_records_run(void) {
         cursor=((const uint32_t *(*)(const uint32_t *))callback)(cursor+1);
     }
 }
+/* Stock 0x432910 (vector_table_relocate_432910; __low_level_init) */
 uint32_t opencfw_boot_vector_base_init(void) {
     *(volatile uint32_t *)(uintptr_t)0xe000ed08=0x410000;
     return 1;

@@ -12,6 +12,7 @@ static void put16(uint8_t *p,uint16_t x) {__builtin_memcpy(p,&x,2);}
 static uint8_t *getptr(const uint8_t *p) {uint32_t x;__builtin_memcpy(&x,p,4);return (uint8_t *)(uintptr_t)x;}
 static void putptr(uint8_t *p,const void *v) {uint32_t x=(uint32_t)(uintptr_t)v;__builtin_memcpy(p,&x,4);}
 
+/* Stock 0x52A850 (hciCoreTxAclStart) */
 uint32_t audio_ble_hci_tx_acl_start(void *record,uint16_t length,void *packet) {
     uint8_t *conn=(uint8_t *)record;
     uint8_t *data=(uint8_t *)packet;
@@ -31,6 +32,7 @@ uint32_t audio_ble_hci_tx_acl_start(void *record,uint16_t length,void *packet) {
     return audio_ble_hci_send_acl_data(conn,data);
 }
 
+/* Stock 0x52A936 (hciCoreTxAclComplete) */
 void audio_ble_hci_tx_acl_complete(void *record,void *packet) {
     uint8_t *conn=(uint8_t *)record;
     if(conn[0x16u]==0u) {
@@ -42,6 +44,7 @@ void audio_ble_hci_tx_acl_complete(void *record,void *packet) {
     }
 }
 
+/* Stock 0x52A8B0 (hciCoreTxAclContinue) */
 uint32_t audio_ble_hci_tx_acl_continue(void *record) {
     uint8_t *conn=(uint8_t *)record;
     if(conn==0)conn=audio_ble_hci_next_conn_fragment();

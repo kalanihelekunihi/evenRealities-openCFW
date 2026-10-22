@@ -3,6 +3,7 @@
 _Static_assert(sizeof(struct opencfw_iom_context) == 0x8a8u, "stock slot stride");
 struct opencfw_iom_context opencfw_boot_iom_contexts[8]
     __attribute__((section(".bss.boot_iom_context_pool"), aligned(4)));
+/* Stock 0x42c4c6 (hw_context_claim_42c4c6) */
 uint32_t opencfw_boot_context_claim(uint32_t module, uint32_t *output)
 {
     if (module >= 8u) return 5u;

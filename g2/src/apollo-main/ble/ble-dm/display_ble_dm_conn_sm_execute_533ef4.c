@@ -12,6 +12,7 @@ extern void audio_log_extended(uint8_t, const char *, const char *,
                                const char *, uint32_t, const char *, ...);
 extern void audio_ble_hci_wsf_trace(const char *, const char *, ...);
 
+/* Stock 0x6ECC58 (dmConnStateTbl; upstream third-party/upstream/cordio/ble-host/sources/stack/dm/dm_conn_sm.c) */
 __attribute__((used))
 const uint8_t audio_ble_dm_conn_sm_state_table_6ecc58[5][8][2] = {
     {{1,16},{0,0},{2,32},{0,0},{3,34},{0,0},{0,0},{0,0}},

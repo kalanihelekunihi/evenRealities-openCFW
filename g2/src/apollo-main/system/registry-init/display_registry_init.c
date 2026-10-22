@@ -15,6 +15,7 @@ static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\framework\\sy
 static const char fn[]="init_ui_modules";
 static const char extended[]="ui modules count = %d";
 static const char compact[]="[display_thread]ui modules count = %d";
+/* Stock 0x4425A6 (init_ui_modules) */
 void audio_uart_display_service_init(void) {
     uintptr_t first=(uintptr_t)audio_uart_display_registry_begin;
     uintptr_t last=(uintptr_t)audio_uart_display_registry_end;

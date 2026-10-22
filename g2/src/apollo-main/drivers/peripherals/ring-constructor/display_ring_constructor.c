@@ -57,6 +57,7 @@ static void ring_log(uint32_t severity,uint32_t line,const char *function,
     if((audio_log_flags()&1u)||(audio_log_flags()&4u))
         (void)compressed_log_output(compact_flags,short_text,short_text);
 }
+/* Stock 0x46D158 (add_font_to_manager) */
 static void ring_node_add(ring_list *list,void *item,uint8_t type) {
     if(list==0||item==0) return;
     ring_node *node=(ring_node *)file_heap_allocate(12u);
@@ -72,6 +73,7 @@ static void ring_node_add(ring_list *list,void *item,uint8_t type) {
     list->head=(uint32_t)(uintptr_t)node;
     list->count=(uint8_t)(list->count+1u);
 }
+/* Stock 0x46CFA6 (create_single_font) */
 static void *ring_element(const uint8_t *description) {
     if(description==0) return 0;
     uint8_t type=description[0];
@@ -117,6 +119,7 @@ static void *ring_element(const uint8_t *description) {
     }
     return 0;
 }
+/* Stock 0x46D1C6 (cleanup_single_font) */
 static void ring_element_release(void *element,uint8_t type) {
     if(element==0||type==0u||type==2u) return;
     if(type==1u) audio_uart_font_delete(element);
@@ -129,6 +132,7 @@ static void ring_element_release(void *element,uint8_t type) {
                                          audio_uart_ring_text_0046d608,type);
     }
 }
+/* Stock 0x46CAE0 (font_manager_create_chain) */
 ring_list *audio_uart_display_ring_construct(const uint8_t *descriptions,
                                              uint32_t requested_count) {
     if(audio_log_flags()&2u)

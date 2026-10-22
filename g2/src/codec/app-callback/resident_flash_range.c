@@ -7,6 +7,7 @@ extern int32_t gx8002_resident_flash_block_bounds_238a4(
     uint32_t address, uint32_t *begin, uint32_t *end);
 extern uint32_t gx8002_resident_flash_wait_ready_2375c(void);
 
+/* Stock 0x10023A90 (gx8002_flash_block_range) */
 void gx8002_resident_flash_block_range_23a90(
     uint32_t address, uint32_t bytes, uint32_t *begin, uint32_t *end)
 {
@@ -18,6 +19,7 @@ void gx8002_resident_flash_block_range_23a90(
     }
 }
 
+/* Stock 0x10023AB8 (gx8002_flash_sync) */
 void gx8002_resident_flash_sync_23ab8(void)
 {
     gx8002_resident_flash_wait_ready_2375c();

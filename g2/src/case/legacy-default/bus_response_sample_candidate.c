@@ -15,6 +15,7 @@ void case_bus_input_line_prepare(void)
     if(state[1]!=0u){state[1]=0u;case_bus_gpio_config(0x50000000u,state);}
     if(state[2]!=1u){state[2]=1u;case_bus_gpio_config(0x50000000u,state);}
 }
+/* Stock 0x0800B53C (case_probe_high_signal) */
 uint32_t case_bus_response_sample(uint32_t *sample)
 {
     volatile uint32_t *diag=(volatile uint32_t *)(uintptr_t)0x2000007cu;

@@ -23,6 +23,7 @@ static uint32_t resident_remainder(uint32_t sum, int32_t size)
     return sum - (uint32_t)quotient * (uint32_t)size;
 }
 
+/* Stock 0x100261B8 (LvpQueuePut) */
 uint32_t g2_codec_queue_enqueue(void *storage, const void *source)
 {
     volatile struct resident_queue_view *const queue = storage;

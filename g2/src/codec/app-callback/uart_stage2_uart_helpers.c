@@ -53,6 +53,7 @@ int32_t gx8002_uart_stage2_strcmp_627a(const char *a, const char *b)
     }
 }
 
+/* Stock 0x10006270 (gx8002_stage2_strcmp) */
 int32_t gx8002_uart_stage2_strcmp_6270(const char *a, const char *b)
 {
     return gx8002_uart_stage2_strcmp_627a(a, b);

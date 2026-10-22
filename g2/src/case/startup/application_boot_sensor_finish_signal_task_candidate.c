@@ -11,6 +11,7 @@ static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static __attribute__((noreturn)) void native_fault(void)
 {__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+/* Stock 0x0800C4DE (case_event_group_set_bits) */
 int32_t case_boot_sensor_finish_signal_task(uint32_t task,uint32_t bits)
 {
     if(task==0u||(bits>>24)!=0u)native_fault();

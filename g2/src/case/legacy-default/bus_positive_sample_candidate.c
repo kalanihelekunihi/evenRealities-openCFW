@@ -10,6 +10,7 @@ static void configure(volatile uint32_t *state,uint32_t index,uint32_t mode)
     if(state[index]!=mode){state[index]=mode;case_bus_gpio_config(0x50000400u,state);}
 }
 static uint32_t pin(void){return (*(volatile uint32_t *)(uintptr_t)0x50000410u&4u)!=0u;}
+/* Stock 0x0800B4E0 (case_probe_low_signal) */
 uint32_t case_bus_positive_sample(uint32_t *sample)
 {
     volatile uint32_t *diag=(volatile uint32_t *)(uintptr_t)0x20000000u;

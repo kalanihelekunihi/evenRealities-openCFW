@@ -7,6 +7,7 @@ extern uint64_t event_a_temperature_transition_separate(uint32_t new_major,
 extern uint32_t event_a_state_transition_sequence(uint32_t from_state,
     uint32_t to_state, uint8_t *selector);
 
+/* Stock 0x42A4BC (spotmgr_power_trims_update_42a4bc) */
 void event_a_power_trims_update(uint32_t new_major, uint32_t old_major,
                                 uint32_t new_minor, uint32_t old_minor)
 {

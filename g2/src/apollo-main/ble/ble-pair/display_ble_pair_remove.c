@@ -35,6 +35,7 @@ __attribute__((noinline)) void audio_ble_pair_record_clear_full(uint8_t *record)
     (void)audio_ble_privacy_rewrite_record(record);
     (void)audio_ble_pair_record_validate(record);
 }
+/* Stock 0x47B59C (FUN_0047b59c, AppDbClearRecordByMacAddr) */
 uint8_t audio_ble_remove_pair(uint8_t type,const uint8_t *address) {
     if(!address) {
         LOG(1u,0x74cu,"AppDbClearRecordByMacAddr: Invalid MAC address pointer",

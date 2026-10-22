@@ -11,6 +11,7 @@ extern int32_t g2_audio_dump_snprintf(char *, uint32_t, const char *, ...);
 static char g2_log_time_buffer[28];
 static const char g2_log_time_format[] = "%d/%d/%d %02d:%02d:%02d %d";
 
+/* Stock 0x0044AAA8 (elog_port_get_time) */
 const char *g2_log_time_string(void)
 {
     /* Native reserves 40 bytes at sp+24 for the date provider. Formatter

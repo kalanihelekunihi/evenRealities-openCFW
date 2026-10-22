@@ -51,6 +51,7 @@ void audio_ble_pair_ui_diagnostic_body(uint32_t *saved, const char *message,
         ((void (*)(uint32_t, uint32_t))callback)(line == 0xb7u ? 15u : 16u, value);
 }
 
+/* Stock 0x004BD7FA (FUN_004bd7fa, AppUiDisplayPasskey) */
 __attribute__((naked)) void audio_ble_pair_passkey_trace(uint32_t value __attribute__((unused)))
 {
     __asm__ volatile(
@@ -63,6 +64,7 @@ __attribute__((naked)) void audio_ble_pair_passkey_trace(uint32_t value __attrib
         "pop {r0, r1, r2, r3, r4, pc}\n");
 }
 
+/* Stock 0x004BD91E (FUN_004bd91e, AppUiDisplayConfirmValue) */
 __attribute__((naked)) void audio_ble_pair_compare_trace(uint32_t value __attribute__((unused)))
 {
     __asm__ volatile(

@@ -6,6 +6,7 @@
  */
 #include <stdint.h>
 
+/* Stock 0x1020BD1C (gx8002_udivdi3_clz, data) */
 const uint8_t gx8002_xip_udivdi3_bit_length_1020bd1c[256] = {
     0u, 1u, 2u, 2u, 3u, 3u, 3u, 3u, 4u, 4u, 4u, 4u, 4u, 4u, 4u, 4u,
     5u, 5u, 5u, 5u, 5u, 5u, 5u, 5u, 5u, 5u, 5u, 5u, 5u, 5u, 5u, 5u,

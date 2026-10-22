@@ -2,6 +2,7 @@
 struct power_request { uint32_t masks[4]; uint8_t range,state,request; };
 #define W(a) (*(volatile uint32_t *)(uintptr_t)(a))
 static uint32_t nibble(uint32_t word,unsigned bit,uint32_t value) { return (word&~(15u<<bit))|((value&15u)<<bit); }
+/* Stock 0x005A45D0 (PCM2.2 power-state planner) */
 uint32_t audio_platform_plan(struct power_request *r,uint32_t *first,uint32_t *second) {
     uint32_t initial=W(0x200742b0),word=initial;
     word=nibble(word,8,r->range);
@@ -55,6 +56,7 @@ uint32_t audio_platform_plan(struct power_request *r,uint32_t *first,uint32_t *s
     }
     return 0;
 }
+/* Stock 0x005A421C (PCM2.2 state change) */
 void audio_platform_change_state(uint32_t next,uint32_t old) {
     if((uint8_t)old==1 && (uint8_t)next==2) *(volatile uint8_t *)(uintptr_t)0x20074f6b=1;
 }

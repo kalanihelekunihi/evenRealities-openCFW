@@ -11,6 +11,7 @@
 #define GX8002_IMAGE_B_ANALOG_94 (*(volatile uint32_t *)(uintptr_t)UINT32_C(0xa0005094))
 #define GX8002_IMAGE_B_ANALOG_WORD(offset) (*(volatile uint32_t *)(uintptr_t)(UINT32_C(0xa0005000) + (offset)))
 
+/* Stock 0x100051D8 (gx_analog_config_update_enable) */
 void gx8002_image_b_analog_config_update_100051d8(void)
 {
     GX8002_IMAGE_B_ANALOG_WORD(0x40u) = 0x59u;
@@ -19,6 +20,7 @@ void gx8002_image_b_analog_config_update_100051d8(void)
     GX8002_IMAGE_B_ANALOG_WORD(0x4cu) = 0x59u;
 }
 
+/* Stock 0x10008048 (gx_analog_set_pga_itrim) */
 int32_t gx8002_image_b_analog_pga_itrim_10008048(uint32_t value)
 {
     uint32_t bounded = value < 0x3fu ? value : 0x3fu;
@@ -27,6 +29,7 @@ int32_t gx8002_image_b_analog_pga_itrim_10008048(uint32_t value)
     return 0;
 }
 
+/* Stock 0x10008064 (gx_analog_set_pga_bypass) */
 int32_t gx8002_image_b_analog_pga_bypass_10008064(uint32_t value)
 {
     GX8002_IMAGE_B_ANALOG_88 =
@@ -34,6 +37,7 @@ int32_t gx8002_image_b_analog_pga_bypass_10008064(uint32_t value)
     return 0;
 }
 
+/* Stock 0x1000807C (gx_analog_set_pga_enable) */
 int32_t gx8002_image_b_analog_pga_enable_1000807c(uint32_t value)
 {
     GX8002_IMAGE_B_ANALOG_90 =
@@ -41,6 +45,7 @@ int32_t gx8002_image_b_analog_pga_enable_1000807c(uint32_t value)
     return 0;
 }
 
+/* Stock 0x10008094 (gx_analog_set_adc_sample_clk_sel) */
 int32_t gx8002_image_b_analog_adc_sample_clock_10008094(uint32_t value)
 {
     GX8002_IMAGE_B_ANALOG_94 =
@@ -48,6 +53,7 @@ int32_t gx8002_image_b_analog_adc_sample_clock_10008094(uint32_t value)
     return 0;
 }
 
+/* Stock 0x100080AC (gx_analog_set_adc_out_at_clk) */
 int32_t gx8002_image_b_analog_adc_out_clock_100080ac(uint32_t value)
 {
     GX8002_IMAGE_B_ANALOG_94 =
@@ -56,6 +62,7 @@ int32_t gx8002_image_b_analog_adc_out_clock_100080ac(uint32_t value)
     return 0;
 }
 
+/* Stock 0x100080C4 (gx_analog_set_adc_in_sel) */
 int32_t gx8002_image_b_analog_adc_input_100080c4(uint32_t value)
 {
     GX8002_IMAGE_B_ANALOG_94 =
@@ -64,6 +71,7 @@ int32_t gx8002_image_b_analog_adc_input_100080c4(uint32_t value)
     return 0;
 }
 
+/* Stock 0x100080DC (gx_analog_set_adc_rstn) */
 int32_t gx8002_image_b_analog_adc_reset_100080dc(uint32_t value)
 {
     GX8002_IMAGE_B_ANALOG_94 =
@@ -72,6 +80,7 @@ int32_t gx8002_image_b_analog_adc_reset_100080dc(uint32_t value)
     return 0;
 }
 
+/* Stock 0x10008134 (gx_analog_get_ldo_dig_ctrl) */
 uint32_t gx8002_image_b_analog_ldo_digital_control_10008134(void)
 {
     uint32_t value = GX8002_IMAGE_B_ANALOG_WORD(0x58u) & 0xffu;

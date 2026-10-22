@@ -17,6 +17,7 @@ static __attribute__((noreturn)) void case_policy_native_fault(void)
 static uint32_t read32(uint32_t address)
 {return *(volatile uint32_t *)(uintptr_t)address;}
 
+/* Stock 0x0800C128 (case_policy_task_sleep) */
 uint32_t case_policy_task_sleep(uint32_t ticks)
 {
     uint32_t result=0u;
@@ -30,6 +31,7 @@ uint32_t case_policy_task_sleep(uint32_t ticks)
     return result;
 }
 
+/* Stock 0x0800C228 (case_policy_task_cancel_core) */
 uint32_t case_policy_task_cancel_core(uint32_t task)
 {
     if(task==0u)case_policy_native_fault();

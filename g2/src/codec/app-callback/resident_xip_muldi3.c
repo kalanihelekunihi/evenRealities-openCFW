@@ -5,6 +5,7 @@
  */
 #include <stdint.h>
 
+/* Stock 0x1020A528 (gx8002_muldi3) */
 uint64_t __muldi3(uint64_t a, uint64_t b)
 {
     const uint32_t a_lo = (uint32_t)a;

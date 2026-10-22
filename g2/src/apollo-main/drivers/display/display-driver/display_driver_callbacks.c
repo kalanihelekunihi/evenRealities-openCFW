@@ -22,9 +22,9 @@ extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
 
 void audio_display_driver_thread_init(void);
 void audio_display_driver_queue_init(void);
-struct display_driver_manager audio_display_driver_manager = {
-    audio_display_driver_thread_init,audio_display_driver_queue_init,0,0,
-};
+/* RAM 0x20000658; defined (stock init {0x473953, 0x473aa5, 0, 0}) in
+ * drivers/S1-drivers-hal-ble-data/display_data.c. */
+extern struct display_driver_manager audio_display_driver_manager;
 
 static const char module[]="task.displaydrvmgr";
 static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\platform\\display_mgr\\displaydrv_manager.c";
@@ -39,6 +39,7 @@ static const char queue_fail_short[]="[task.displaydrvmgr][DISP_MessageQueueInit
 static const char queue_ok[]="[DISP_MessageQueueInit]osMessageQueueNew:0x%x, success";
 static const char queue_ok_short[]="[task.displaydrvmgr][DISP_MessageQueueInit]osMessageQueueNew:0x%x, success";
 
+/* Stock 0x473952 (Disp_ThreadInit) */
 void audio_display_driver_thread_init(void) {
     audio_display_driver_manager.thread=audio_thread_new(audio_display_driver_thread_entry,0,
                                                         &audio_display_driver_thread_attrs);
@@ -57,6 +58,7 @@ void audio_display_driver_thread_init(void) {
     }
 }
 
+/* Stock 0x4739FC (DISP_MessageQueueInit) */
 void audio_display_driver_queue_init(void) {
     audio_display_driver_manager.queue=audio_queue_new(0x60u,0x24u,
                                                       &audio_display_driver_queue_attrs);

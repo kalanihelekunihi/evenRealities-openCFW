@@ -18,6 +18,7 @@ static uint32_t poll_bit(volatile uint32_t *reg,uint32_t mask,uint32_t wanted,ui
     while(((*reg&mask)!=0u)!=wanted)if(elapsed(start)>limit)return 3u;
     return 0u;
 }
+/* Stock 0x08005528 (case_configure_system_clock) */
 uint32_t case_transfer_control_5528(const uint8_t *cfg)
 {
     if(cfg==0)return 1u;

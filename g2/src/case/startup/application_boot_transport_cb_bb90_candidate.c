@@ -14,6 +14,7 @@ static uint32_t rd32(volatile uint8_t *p)
 static void logline(uint32_t message)
 {(void)case_policy_log(message);(void)case_policy_log(CASE_STRING_ADDR(0800bd40));}
 
+/* Stock 0x0800BB90 (g2_timer_callback_5) */
 void case_boot_transport_cb_bb90(uint32_t argument)
 {
     /* Native trampoline supplies pair[1] in R0; this callback ignores it. */

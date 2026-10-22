@@ -15,6 +15,7 @@ extern uint8_t *audio_ble_ancc_service_context; /* RAM pointer cell 0x200748a0 *
 extern uint8_t audio_ble_ancc_state[]; /* RAM 0x200695c8 */
 static uint32_t rd32(const uint8_t *p){return (uint32_t)p[0]|((uint32_t)p[1]<<8)|
     ((uint32_t)p[2]<<16)|((uint32_t)p[3]<<24);}
+/* Stock 0x4BF780 (profileAnccProcMsg) */
 void audio_ble_ancc_message(uint8_t handler,void *message){
     (void)handler;
     if(message==0)return;

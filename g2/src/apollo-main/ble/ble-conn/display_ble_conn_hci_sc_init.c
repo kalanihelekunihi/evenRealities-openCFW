@@ -19,15 +19,6 @@ extern void audio_wsf_timer_remove(void *); /* native wsfTimerRemove 0x52a3fc */
 static void put(uint8_t *base,uint32_t offset,const void *value) {
     *(const void **)(void *)(base+offset)=value;
 }
-void DmConnInit(void) { /* 0x4b6c28 */
-    WsfTaskLock();
-    put(audio_ble_dm_config,0x0cu,audio_ble_dm_conn_table_a);
-    put(audio_ble_dm_config,0x10u,audio_ble_dm_conn_table_b);
-    put(audio_ble_dm_config,0x38u,audio_ble_dm_conn_table_c);
-    put(audio_ble_dm_master_state_a,0u,audio_ble_dm_conn_state_table_a);
-    put(audio_ble_dm_master_state_b,0u,audio_ble_dm_conn_state_table_b);
-    WsfTaskUnlock();
-}
 void HciSetLeSupFeat(uint32_t lo,uint32_t hi,uint8_t enable) { /* 0x52acd6 */
     if(enable==0u) {
         audio_ble_hci_le_supported_features[0]&=~lo;

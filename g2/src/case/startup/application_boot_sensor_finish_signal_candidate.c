@@ -4,6 +4,7 @@
 #include <stdint.h>
 extern int32_t case_boot_sensor_finish_signal_isr(uint32_t task,uint32_t bits,uint32_t *woken); /* 0xc568 */
 extern int32_t case_boot_sensor_finish_signal_task(uint32_t task,uint32_t bits); /* 0xc4de */
+/* Stock 0x0800A888 (osEventFlagsSet) */
 int32_t case_boot_sensor_finish_signal(uint32_t task,uint32_t bits)
 {
     if(task==0u||(bits>>24)!=0u)return -4;

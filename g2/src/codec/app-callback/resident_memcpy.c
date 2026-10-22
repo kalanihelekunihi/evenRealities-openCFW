@@ -10,6 +10,7 @@
 _Static_assert(sizeof(size_t) == sizeof(uint32_t), "C-SKY memcpy length ABI");
 #endif
 
+/* Stock 0x10025738 (gx8002_memcpy) */
 void *gx8002_resident_memcpy_25738(
     void *destination, const void *source, uint32_t bytes)
 {

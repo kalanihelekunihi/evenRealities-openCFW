@@ -5,6 +5,7 @@
  */
 #include <stdint.h>
 extern int32_t case_policy_event_signal(uint32_t,uint32_t); /* 0xaaf0 */
+/* Stock 0x08001334 (aging_sequence_start) */
 void case_boot_aging_begin(void)
 {
     volatile uint8_t *state=(volatile uint8_t *)(uintptr_t)0x200000f4u;

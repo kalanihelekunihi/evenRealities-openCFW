@@ -19,10 +19,12 @@ static const char suspend_name[]
 static const char resume_name[]
     __attribute__((section(".gx8002.sample_name.b665"), used)) = "SampleAppResume";
 
+/* Stock 0x10026C74 (s_recv_header_data_count) */
 uint32_t gx8002_uart_receive_config_words_26c74[2]
     __attribute__((section(".gx8002.uart_rx_config.26c74"), used,
                    aligned(4))) = {4u, 4u};
 
+/* Stock 0x10026C7C (gx8002_wakeword_parameters) */
 struct gx8002_kws_keyword_record gx8002_kws_keywords_26c7c[2]
     __attribute__((section(".gx8002.kws_keywords.26c7c"), used,
                    aligned(4))) = {
@@ -34,10 +36,14 @@ struct gx8002_kws_keyword_record gx8002_kws_keywords_26c7c[2]
      .result_code = 101u, .field_54 = 1u},
 };
 
+/* Stock 0x10026D2C (gx8002_max_decoder_state) */
 uint32_t gx8002_sample_prestate_26d2c
     __attribute__((section(".gx8002.sample_prestate.26d2c"), used,
                    aligned(4))) = 1u;
 
+/* Stock 0x10026D3C (gx8002_sample_application) */
+/* Stock 0x10026D38 (gx8002_app_core_ops) */
+/* Stock 0x10026D30 (gx8002_event_state) */
 struct gx8002_sample_registration gx8002_sample_registration_26d30
     __attribute__((section(".gx8002.sample_registration.26d30"), used,
                    aligned(4))) = {
@@ -56,6 +62,7 @@ struct gx8002_sample_registration gx8002_sample_registration_26d30
     },
 };
 
+/* Stock 0x10026D5C (gx8002_app_reply_state) */
 struct gx8002_initialized_request gx8002_request_initial_26d5c
     __attribute__((section(".gx8002.request_initial.26d5c"), used,
                    aligned(4))) = {

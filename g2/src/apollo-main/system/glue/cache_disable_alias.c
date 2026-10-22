@@ -1,7 +1,3 @@
-/* PCM2.1 caller uses the same Apollo MAIN 0x474EFA cache-disable entry. */
+/* PCM2.2 transition producers. stock_cache_disable/enable and pcm22_icache_*
+ * (0x474EFA/0x474EB4) are upstream am_hal_cachectrl_icache_* (payload defsym). */
 #include "../../audio/transition-snapshot/producers.c"
-
-__asm__(".global stock_cache_disable\n"
-        ".set stock_cache_disable, pcm22_icache_disable\n"
-        ".global stock_cache_enable\n"
-        ".set stock_cache_enable, pcm22_icache_enable\n");

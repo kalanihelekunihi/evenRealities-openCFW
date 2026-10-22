@@ -4,6 +4,7 @@
  */
 #include <stdint.h>
 static uint32_t lsl32(uint32_t value,uint32_t shift){return shift<32u?value<<shift:0u;}
+/* Stock 0x08004D30 (case_bus_gpio_config) */
 void case_bus_gpio_config(uint32_t base,volatile uint32_t *state)
 {
     volatile uint32_t *port=(volatile uint32_t *)(uintptr_t)base;

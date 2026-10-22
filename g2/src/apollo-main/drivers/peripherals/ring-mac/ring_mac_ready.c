@@ -22,6 +22,7 @@ static void log3(uint32_t line,const char *extended,const char *short_text,
         (void)compressed_log_output(0xcc00000u,short_text,short_text,a,b,c);
 }
 
+/* Stock 0x004A2FDC (APP_MasterRingMacIsSet) */
 uint32_t audio_uart_ring_mac_ready(void) {
     uint8_t mac[6];
     for(uint32_t i=0;i<6u;i++) mac[i]=audio_uart_hand_context[12u+i];

@@ -36,6 +36,7 @@ static const char startup_short[]="[terminal.pb]await-user received while displa
 static const char dropped[]="drop await-user notification in state=%d session=%lu";
 static const char dropped_short[]="[terminal.pb]drop await-user notification in state=%d session=%lu";
 
+/* Stock 0x5E84A8 (terminal_handle_session_await_user) */
 void audio_terminal_handle_session_await_user(uint32_t session) {
     uint8_t mode=audio_terminal_ui_mode;
     if(session==0u) {

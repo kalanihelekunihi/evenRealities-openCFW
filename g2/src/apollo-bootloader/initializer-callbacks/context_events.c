@@ -13,6 +13,7 @@ extern void opencfw_boot_delay_us_math(uint32_t);
 static uint32_t ring_index(uint32_t n,uint32_t size) {
     return size?n%size:n; /* UDIV0 when DIV_0_TRP is clear. */
 }
+/* Stock 0x42c45a (hw_descriptor_publish_42c45a) */
 NI void opencfw_boot_iom_descriptor_publish(void *h) {
     uint32_t module=W(h,4),next=W(h,0x850)+1;
     uintptr_t record=W(h,0x854)+(ring_index(next,W(h,0x848))<<5);
@@ -21,6 +22,7 @@ NI void opencfw_boot_iom_descriptor_publish(void *h) {
     W(iom,0x218)=0;W(iom,0x21c)=W(record,8);W(iom,0x220)=W(record,12);
     W(iom,0x218)=W(record,16);W(iom,0x120)=W(record,20);
 }
+/* Stock 0x42c076 (hw_error_classify_42c076) */
 NI uint32_t opencfw_boot_iom_error_classify(uint32_t module,uint32_t events) {
     uint32_t all=events|W(0x40050000u+(module<<12),0x204);
     if(all&0x6c) return 0x08000000u;
@@ -28,6 +30,7 @@ NI uint32_t opencfw_boot_iom_error_classify(uint32_t module,uint32_t events) {
     if(all&0x10) return 0x08000002u;
     return (all&0x4800)?1u:0u;
 }
+/* Stock 0x42c0b2 (hw_event_apply_42c0b2) */
 NI void opencfw_boot_iom_event_apply(void *h,uint32_t events) {
     uint32_t delay=6u*W(h,0x864),module=W(h,4);
     uintptr_t iom=0x40050000u+(module<<12);uint32_t enabled=W(iom,0x200);
@@ -104,6 +107,7 @@ static void callback_slot(void *h,uint32_t slot,uint32_t status) {
         if(B(h,0x82c)!=2) W(h,0x28+(slot<<2))=0;
     }
 }
+/* Stock 0x42c6f8 (hw_event_service_42c6f8) */
 NI uint32_t opencfw_boot_iom_event_service(void *h,uint32_t events) {
     if(!h || (W(h,0)&0x01ffffffu)!=0x01123456u) return 2;
     uint32_t module=W(h,4),result=0;uintptr_t iom=0x40050000u+(module<<12);

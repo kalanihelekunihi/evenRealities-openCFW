@@ -12,6 +12,8 @@ extern void SVC_Settings_BatteryCallback(uint32_t,void *); /* native 0x46b3e4 */
 extern uint32_t audio_settings_register_battery_callback(void (*)(uint32_t,void *)); /* 0x4aea56 */
 extern void audio_settings_apply_display_levels(void); /* 0x46b912 */
 extern void audio_settings_send_config_to_peer(void); /* 0x46b930 */
+
+/* Native SVC_Settings_Init 0x46be10. */
 uint32_t SVC_Settings_Init(void) {
     audio_uart_buffer_zero(audio_settings_config_live,0x50u,0u);
     (void)audio_queue_copy_bytes(audio_settings_config_live,audio_settings_config_previous,0x1cu);

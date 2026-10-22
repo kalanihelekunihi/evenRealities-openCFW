@@ -11,6 +11,7 @@ extern uint64_t gx8002_resident_clock_time_us_2585c(void);
 typedef int32_t (*gx8002_probe_callback)(
     uint32_t, uint32_t, uint32_t, uint32_t);
 
+/* Stock 0x1002475C (gx8002_flash_probe) */
 int32_t gx8002_resident_flash_probe_2475c(
     uint32_t arg0, uint32_t arg1, uint32_t arg2, uint32_t arg3)
 {

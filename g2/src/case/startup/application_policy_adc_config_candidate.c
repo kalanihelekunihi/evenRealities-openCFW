@@ -10,6 +10,7 @@ static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static uint32_t timeout_error(uint32_t handle)
 {wr(handle+0x58u,rd(handle+0x58u)|0x10u);wr(handle+0x5cu,rd(handle+0x5cu)|1u);return 1u;}
+/* Stock 0x080006D4 (case_wait_controller_flag2) */
 uint32_t case_policy_adc_close_stop(uint32_t handle)
 {
     uint32_t base=rd(handle);
@@ -22,6 +23,7 @@ uint32_t case_policy_adc_close_stop(uint32_t handle)
     }
     return 0u;
 }
+/* Stock 0x08000734 (case_start_controller_flag0) */
 uint32_t case_policy_adc_close_config(uint32_t handle)
 {
     uint32_t base=rd(handle);
@@ -37,6 +39,7 @@ uint32_t case_policy_adc_close_config(uint32_t handle)
     }
     return 0u;
 }
+/* Stock 0x080007A8 (case_start_peripheral) */
 uint32_t case_policy_adc_open_config(uint32_t handle)
 {
     uint32_t base=rd(handle);

@@ -4,24 +4,10 @@
 extern int32_t audio_uart_lv_anim_bezier_curve_48869a(int32_t, int32_t,
                                                        int32_t, int32_t, int32_t);
 
+/* Retired: stock 0x4888b4 is upstream lv_map (lvgl/src/misc/lv_math.c); this name is a link alias. */
 int32_t audio_uart_lv_anim_interpolate_4888b4(int32_t position, int32_t start,
                                                int32_t end, int32_t from,
-                                               int32_t to) {
-    if (end >= start) {
-        if (position >= end) return to;
-        if (position <= start) return from;
-    } else {
-        if (position <= end) return to;
-        if (position >= start) return from;
-    }
-    const int32_t range = (int32_t)((uint32_t)end - (uint32_t)start);
-    const int32_t rise = (int32_t)((uint32_t)to - (uint32_t)from);
-    const int32_t step = (int32_t)((uint32_t)position - (uint32_t)start);
-    const int32_t product = (int32_t)((uint32_t)rise * (uint32_t)step);
-    const int32_t quotient = (product == INT32_MIN && range == -1)
-        ? INT32_MIN : product / range;
-    return (int32_t)((uint32_t)from + (uint32_t)quotient);
-}
+                                               int32_t to);
 
 int32_t audio_uart_lv_anim_bezier_450a04(void *descriptor, int32_t c1,
                                           int32_t c2, int32_t c3, int32_t c4) {

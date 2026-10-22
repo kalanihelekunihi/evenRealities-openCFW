@@ -10,18 +10,6 @@ static void field(uint32_t a,uint32_t value,unsigned shift,unsigned bits) {
     uint32_t mask=((1u<<bits)-1u)<<shift;
     W(a)=(W(a)&~mask)|((value<<shift)&mask);
 }
-static void barrier(void) { __asm volatile("dsb sy\nisb sy" ::: "memory"); }
-uint32_t pcm22_icache_enable(void) {
-    if(W(0xe001e300)&0x300) return 1;
-    if(!(W(0xe000ed14)&0x20000)) {
-        barrier();W(0xe000ef50)=0;barrier();W(0xe000ed14)|=0x20000;barrier();
-    }
-    return 0;
-}
-uint32_t pcm22_icache_disable(void) {
-    if(W(0xe001e300)&0x300) return 1;
-    barrier();W(0xe000ed14)&=~0x20000u;W(0xe000ef50)=0;barrier();return 0;
-}
 static void finish_previous_active(uint32_t active) {
     if(active) {
         for(unsigned i=0;i<60 && !(W(0x40008064)&0x40000000u);i++) stock_delay_us(1);
@@ -53,6 +41,7 @@ void pcm22_sequence_7(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) 
     field(0x40020044,doubled_boost(nc,oc),0,7);
     W(0x200002a4)=next;stock_timer_start(50);B(0x20004540)=7;
 }
+/* Stock 0x005A3CC6 (PCM2.2 transition sequence 21) */
 void pcm22_sequence_21(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old_ton;
     uint32_t n=W(0x20056660+next*4u),o=W(0x20056660+old*4u);
@@ -71,13 +60,16 @@ static uint32_t setup_profile(uint32_t next,uint32_t ton) {
     uint32_t n=W(0x20056660+next*4u),nc=(n>>21)&127,nf=n&127;
     finish_previous();publish(next,ton,nc,nf);return nf;
 }
+/* Stock 0x005A2C30 (PCM2.2 transition sequence 8) */
 void pcm22_sequence_8(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old;(void)old_ton;(void)setup_profile(next,ton);stock_ton_adjust(ton,next);
 }
+/* Stock 0x005A2D24 (PCM2.2 transition sequence 9) */
 void pcm22_sequence_9(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old;(void)old_ton;uint32_t nf=setup_profile(next,ton);
     field(0x4002004c,nf,0,7);stock_ton_adjust(ton,next);
 }
+/* Stock 0x005A3BCC (PCM2.2 transition sequence 20) */
 void pcm22_sequence_20(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old;(void)old_ton;(void)setup_profile(next,ton);
     field(0x40020080,(W(0x20056660+next*4u)>>17)&15,10,4);
@@ -91,30 +83,37 @@ static void load_core(uint32_t next) {
     field(0x40020080,(W(0x20056660+next*4u)>>17)&15,10,4);
     field(0x40020080,(W(0x20056660+next*4u)>>7)&1023,0,10);
 }
+/* Stock 0x005A2E10 (PCM2.2 transition sequence 10) */
 void pcm22_sequence_10(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     pcm22_sequence_8(next,old,ton,old_ton);
 }
+/* Stock 0x005A3122 (PCM2.2 transition sequence 12) */
 void pcm22_sequence_12(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old_ton;uint32_t nf=W(0x20056660+next*4u)&127,of=W(0x20056660+old*4u)&127;
     (void)setup_profile(next,ton);field(0x4002004c,doubled_boost(nf,of),0,7);
     load_core(next);stock_delay_us(50);field(0x4002004c,nf,0,7);
 }
+/* Stock 0x005A34CA (PCM2.2 transition sequence 14) */
 void pcm22_sequence_14(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old;(void)old_ton;uint32_t nf=setup_profile(next,ton);field(0x4002004c,nf,0,7);
 }
+/* Stock 0x005A35A4 (PCM2.2 transition sequence 15) */
 void pcm22_sequence_15(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old;(void)old_ton;uint32_t lv=low_voltage_trim(next),nc=(W(0x20056660+next*4u)>>21)&127;
     (void)setup_profile(next,ton);field(0x40020048,lv,0,7);load_core(next);field(0x40020044,nc,0,7);
 }
+/* Stock 0x005A36AC (PCM2.2 transition sequence 16) */
 void pcm22_sequence_16(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old;(void)old_ton;uint32_t lv=low_voltage_trim(next);
     (void)setup_profile(next,ton);field(0x40020048,lv,0,7);
 }
+/* Stock 0x005A3798 (PCM2.2 transition sequence 17) */
 void pcm22_sequence_17(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old_ton;uint32_t lv=low_voltage_trim(next),previous=low_voltage_trim(old);
     (void)setup_profile(next,ton);field(0x40020048,doubled_boost(lv,previous),0,7);
     load_core(next);field(0x40020048,lv,0,7); /* No stock50us delay in this body. */
 }
+/* Stock 0x005A3AB0 (PCM2.2 transition sequence 19) */
 void pcm22_sequence_19(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old_ton;uint32_t lv=low_voltage_trim(next),previous=low_voltage_trim(old);
     (void)setup_profile(next,ton);field(0x40020048,doubled_boost(lv,previous),0,7);
@@ -144,6 +143,7 @@ static unsigned disable_cache_if_enabled(void) {
     if(enabled) (void)pcm22_icache_disable();return enabled;
 }
 static void restore_cache(unsigned enabled) { if(enabled) (void)pcm22_icache_enable(); }
+/* Stock 0x005A1F04 (PCM2.2 transition sequence 0) */
 void pcm22_sequence_0(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old_ton;
     uint32_t n=W(0x20056660+next*4u),nf=n&127,nc=(n>>21)&127,of=W(0x20056660+old*4u)&127;
@@ -167,25 +167,30 @@ void pcm22_sequence_1(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) 
     unsigned restore=disable_cache_if_enabled();W(0x4002037c)|=0x10000;W(0x4002037c)|=8;W(0x4002037c)|=0x40;
     stock_delay_us(20);restore_cache(restore);
 }
+/* Stock 0x005A2462 (PCM2.2 transition sequence 3) */
 void pcm22_sequence_3(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old_ton;uint32_t nf=W(0x20056660+next*4u)&127,of=W(0x20056660+old*4u)&127;
     (void)setup_profile(next,ton);stock_ton_adjust(ton,next);
     field(0x4002004c,doubled_boost(nf,of),0,7);stock_delay_us(50);field(0x4002004c,nf,0,7);
 }
+/* Stock 0x005A2586 (PCM2.2 transition sequence 4) */
 void pcm22_sequence_4(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old;(void)old_ton;uint32_t nc=(W(0x20056660+next*4u)>>21)&127,nf=setup_profile(next,ton);
     load_core(next);field(0x40020044,nc,0,7);field(0x4002004c,nf,0,7);stock_ton_adjust(ton,next);
     W(0x4002037c)&=~8u;W(0x4002037c)&=~0x40u;W(0x4002037c)&=~0x10000u;
 }
+/* Stock 0x005A26BE (PCM2.2 transition sequence 5) */
 void pcm22_sequence_5(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old;(void)old_ton;uint32_t nc=(W(0x20056660+next*4u)>>21)&127;
     (void)setup_profile(next,ton);stock_ton_adjust(ton,next);switch_low();
     W(0x4002037c)&=~8u;W(0x4002037c)&=~0x40u;W(0x4002037c)|=0x2000000;
     switch_high();load_core(next);field(0x40020044,nc,0,7);
 }
+/* Stock 0x005A28C0 (PCM2.2 transition sequence 6) */
 void pcm22_sequence_6(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     pcm22_sequence_9(next,old,ton,old_ton);
 }
+/* Stock 0x005A2EEA (PCM2.2 transition sequence 11) */
 void pcm22_sequence_11(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old_ton;uint32_t n=W(0x20056660+next*4u),of=W(0x20056660+old*4u)&127,nf=n&127,nc=(n>>21)&127;
     (void)setup_profile(next,ton);switch_low();
@@ -194,6 +199,7 @@ void pcm22_sequence_11(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton)
     field(0x4002004c,doubled_boost(nf,of),0,7);stock_delay_us(50);field(0x4002004c,nf,0,7);
     stock_ton_adjust(ton,next);
 }
+/* Stock 0x005A326C (PCM2.2 transition sequence 13) */
 void pcm22_sequence_13(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old_ton;uint32_t n=W(0x20056660+next*4u),o=W(0x20056660+old*4u);
     uint32_t nf=n&127,nc=(n>>21)&127,oc=(o>>21)&127;
@@ -203,6 +209,7 @@ void pcm22_sequence_13(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton)
     stock_delay_us(50);field(0x40020044,nc,0,7);load_core(next);stock_delay_us(5);field(0x4002004c,nf,0,7);
     switch_low();W(0x4002037c)|=0x40;W(0x4002037c)|=8;W(0x4002037c)&=~0x2000000u;switch_high();
 }
+/* Stock 0x005A38CE (PCM2.2 transition sequence 18) */
 void pcm22_sequence_18(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     (void)old_ton;uint32_t n=W(0x20056660+next*4u),o=W(0x20056660+old*4u);
     uint32_t nf=n&127,nc=(n>>21)&127,oc=(o>>21)&127,lv=low_voltage_trim(next),previous=low_voltage_trim(old);
@@ -220,6 +227,7 @@ void pcm22_sequence_22(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton)
     stock_delay_us(50);field(0x40020044,nc,0,7);load_core(next);stock_delay_us(5);
     W(0x4002037c)&=~0x10000u;W(0x4002037c)&=~0x2000000u;field(0x4002004c,nf,0,7);stock_ton_adjust(ton,next);
 }
+/* Stock 0x005A3FE8 (PCM2.2 transition sequence 23) */
 void pcm22_sequence_23(uint32_t next,uint32_t old,uint32_t ton,uint32_t old_ton) {
     pcm22_sequence_8(next,old,ton,old_ton);
 }

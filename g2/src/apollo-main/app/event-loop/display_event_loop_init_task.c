@@ -48,6 +48,7 @@ static void log_init(uint32_t line,const char *message,const char *short_message
 static void timer_bridge(void *argument) {
     audio_event_loop_timer_callback((uint32_t)(uintptr_t)argument);
 }
+/* Stock 0x00476680 (fw_event_loop_task) */
 void audio_event_loop_task(void *unused) {
     (void)unused;
     for(;;) {
@@ -60,6 +61,7 @@ void audio_event_loop_task(void *unused) {
             (void)compressed_log_output(0x04400000u,task_error_short,task_error_short,status);
     }
 }
+/* Stock 0x004764E0 (fw_event_loop_initialize) */
 void audio_event_loop_initialize(void) {
     if(audio_event_loop_queue==0) {
         const struct queue_attrs attr={queue_name,0u,audio_event_loop_queue_cb,80u,

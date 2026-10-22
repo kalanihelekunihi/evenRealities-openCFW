@@ -22,6 +22,7 @@ static const char function[]="CHG_InitBatterySync";
  if((audio_log_level()&1u)||(audio_log_level()&4u)) \
   (void)compressed_log_output(mask,compact,compact); \
 } while(0)
+/* Stock 0x4ACF7C (CHG_InitBatterySync) */
 void audio_device_manager_battery_sync_init(void) {
     LOG(4u,0x68u,0x10000000u,"CHG_InitBatterySync",
         "[charger_common]CHG_InitBatterySync");

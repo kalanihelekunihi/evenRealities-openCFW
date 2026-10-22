@@ -12,6 +12,7 @@ extern void case_binary_sensor_interbyte_pulse(void);
 extern void case_binary_sensor_final_pulse(void);
 extern void case_binary_sensor_stop(void);
 
+/* Stock 0x080028B4 (case_serial_read_200) */
 uint32_t case_binary_sensor_transaction(uint32_t selector, void *destination,
                                          uint32_t count)
 {

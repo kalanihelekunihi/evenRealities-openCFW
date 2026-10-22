@@ -17,6 +17,7 @@ static const char function[]="AppDbShowAllRecordsStatus";
 static uint32_t word(const uint8_t *p) {
     return (uint32_t)p[0]|((uint32_t)p[1]<<8)|((uint32_t)p[2]<<16)|((uint32_t)p[3]<<24);
 }
+/* Stock 0x47BC30 (FUN_0047bc30, AppDbShowAllRecordsStatus) */
 void audio_ble_pair_complete_commit(void) {
     LOG(4u,0x7d3u,0x10000000u,"=== AppDbShowAllRecordsStatus ===",
         "[ble.smpdb]=== AppDbShowAllRecordsStatus ===");

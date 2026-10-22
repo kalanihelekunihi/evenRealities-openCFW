@@ -21,6 +21,7 @@ static const char audio_uart_ring_init_secondary_error[]="Failed to create foreg
 static const char audio_uart_ring_init_secondary_short[]="[font_manager]Failed to create foreground font manager"; /* ROM0x007202f0 */
 static const char audio_uart_ring_init_success[]="Font initialization completed - background: %p, foreground: %p"; /* ROM0x0070c9e4 */
 static const char audio_uart_ring_init_success_short[]="[font_manager]Font initialization completed - background: %p, foreground: %p"; /* ROM0x006ee3c8 */
+/* Stock 0x46D464 (font_manager_init) */
 void audio_uart_display_ring_init(void) {
     audio_uart_display_ring_static_init();
     uint32_t *primary=(uint32_t *)audio_uart_display_ring_construct(

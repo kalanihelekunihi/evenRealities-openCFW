@@ -20,6 +20,7 @@ static void store32(uint8_t *p, uint32_t v) {
     for (unsigned i=0;i<4u;++i) p[i]=(uint8_t)(v>>(i*8u));
 }
 
+/* Stock 0x5979CE (td_session_ring_append) */
 uint8_t *audio_td_session_ring_append(uint8_t continue_last, uint8_t *kind) {
     uint8_t *ring=audio_td_state+0x1054u; /* native RAM 0x20110d74 */
     if (load32(ring+0x8504u)==0u) audio_td_session_ring_reset();

@@ -9,6 +9,7 @@ static void put_u32(volatile uint8_t *dst,uint32_t value) {
     for(uint32_t i=0;i<4u;++i) dst[i]=(uint8_t)(value>>(8u*i));
 }
 
+/* Stock 0x5970C0 (td_session_ring_reset) */
 void audio_td_session_ring_reset(void) {
     uint32_t sequence=audio_td_ring_reset_counter+1u;
     audio_td_ring_reset_counter=sequence;
@@ -18,6 +19,7 @@ void audio_td_session_ring_reset(void) {
     put_u32(ring+0x8508u,1u);
 }
 
+/* Stock 0x597108 (td_ring_reset_wrapper) */
 void audio_td_ring_reset_wrapper(void) {
     audio_td_session_ring_reset();
 }

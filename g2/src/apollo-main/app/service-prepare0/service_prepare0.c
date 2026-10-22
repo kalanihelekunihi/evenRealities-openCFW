@@ -47,6 +47,7 @@ static void startup_failure(uint32_t line,const char *message,
                                     short_message);
 }
 
+/* Stock 0x444720 (ui_display_thread_startup) */
 uint32_t audio_uart_service_prepare0(void) {
     g2_display_state_cell=(uint32_t)(uintptr_t)g2_display_state_table;
     audio_uart_display_setup0();

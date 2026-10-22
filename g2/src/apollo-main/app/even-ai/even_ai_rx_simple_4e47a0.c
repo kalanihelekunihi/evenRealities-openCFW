@@ -71,14 +71,17 @@ static const struct even_ai_rx_config heartbeat = {
     0x2feu, 0x300u, 0x304u, 9u
 };
 
+/* Stock 0x4E47A0 (PB_RxEvenAIPromptInfo) */
 uint32_t audio_even_ai_rx_prompt(uint8_t sequence, const void *payload) {
     (void)sequence;
     return receive_simple(&prompt, payload);
 }
+/* Stock 0x4E4A34 (PB_RxEvenAIEvent) */
 uint32_t audio_even_ai_rx_event(uint8_t sequence, const void *payload) {
     (void)sequence;
     return receive_simple(&event, payload);
 }
+/* Stock 0x4E4E5C (PB_RxEvenAIHeartbeat) */
 uint32_t audio_even_ai_rx_heartbeat(uint8_t sequence, const void *payload) {
     (void)sequence;
     return receive_simple(&heartbeat, payload);

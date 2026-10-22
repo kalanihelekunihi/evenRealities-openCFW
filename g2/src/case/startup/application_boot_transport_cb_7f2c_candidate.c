@@ -28,6 +28,7 @@ static void wb(uint32_t a,uint8_t v){*(volatile uint8_t *)(uintptr_t)a=v;}
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static void logline(uint32_t a){(void)case_policy_log(a);(void)case_policy_log(CASE_STRING_ADDR(080081c0));}
+/* Stock 0x08007F2C (g2_thread_entry_2) */
 void case_boot_transport_cb_7f2c(void)
 {
     uint8_t stuck=0u;

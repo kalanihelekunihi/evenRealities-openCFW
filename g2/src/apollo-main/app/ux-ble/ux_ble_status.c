@@ -7,6 +7,7 @@ volatile uint8_t audio_ota_packed_status
 extern volatile uint8_t g2_audio_log_transport_bits
     __attribute__((alias("audio_ota_packed_status")));
 
+/* Stock 0x47D8CE (UX_GetSystemBLEStatus) */
 uint8_t audio_ux_get_system_ble_status(void) {
     return (uint8_t)((audio_ota_packed_status&0x0cu)==0x0cu);
 }

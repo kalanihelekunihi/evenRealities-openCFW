@@ -27,6 +27,7 @@ fail:
     case_pmic_bus_stop();
     return 0u;
 }
+/* Stock 0x080029A4 (case_serial_write_pair_200) */
 uint32_t case_init_pmic_device_write(uint32_t reg,uint32_t value)
 {return write_transaction(reg,value,0xc8u);}
 uint32_t case_init_pmic_device_reset(uint32_t reg,uint32_t value)
@@ -42,7 +43,9 @@ static uint32_t guarded_write(uint32_t reg,uint32_t value,uint32_t (*writer)(uin
     }
     return reg;
 }
+/* Stock 0x080039C8 (left_channel_transaction_guard) */
 uint32_t case_init_pmic_write(uint32_t reg,uint32_t value)
 {return guarded_write(reg,value,case_init_pmic_device_write);}
+/* Stock 0x080039E4 (right_channel_transaction_guard) */
 uint32_t case_init_pmic_reset(uint32_t reg,uint32_t value)
 {return guarded_write(reg,value,case_init_pmic_device_reset);}

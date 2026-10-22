@@ -13,6 +13,7 @@ static const char function[]="terminal_data_dismiss_query_notification";
 static const char dismissed[]="query notification dismissed: session=%lu";
 static const char dismissed_short[]="[terminal.data]query notification dismissed: session=%lu";
 
+/* Stock 0x5974D4 (terminal_data_dismiss_query_notification) */
 void audio_td_dismiss_query_notification(uint32_t session) {
     uint32_t index=0u;
     if(audio_td_find_record_index(session,&index)==0u) return;

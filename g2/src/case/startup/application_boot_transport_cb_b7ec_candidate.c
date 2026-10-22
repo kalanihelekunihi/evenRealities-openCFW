@@ -10,6 +10,7 @@ extern uint32_t case_policy_service_idle(void); /* 0xd154 */
 extern uint32_t case_legacy_logger(const char *,...);
 extern __attribute__((noreturn)) void case_init_display_reset(void); /* 0x502c */
 
+/* Stock 0x0800B7EC (g2_timer_callback_4) */
 void case_boot_transport_cb_b7ec(uint32_t argument)
 {
     /* Native trampoline supplies pair[1] in R0; this callback ignores it. */

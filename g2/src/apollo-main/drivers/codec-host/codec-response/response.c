@@ -38,26 +38,9 @@ int32_t codec_unpack(const uint8_t *wire,uint16_t available,uint8_t *m){
  put16(m+24,total);return 0;
 }
 void codec_message_free(uint8_t *m){if(m&&get32(m+14)){codec_release((void *)(uintptr_t)get32(m+14));put32(m+14,0);put16(m+18,0);}}
-int32_t codec_response_read(uint8_t *dst,uint16_t capacity,uint32_t timeout){
- if(!dst||!capacity)return -1;
- uint64_t start=codec_tick_snapshot();uint32_t n=0;
- while((uint16_t)n<14){if(codec_tick_snapshot()-start>=timeout)break;
-  uint32_t got=codec_uart_read(dst+(uint16_t)n,14-(uint16_t)n);
-  if((int32_t)got<1)codec_delay(1);else n+=got;
- }
- if((uint16_t)n<14)return -1;
- uint16_t total=(uint16_t)(get16(dst+8)+14);
- if(capacity<total)return -1;
- while((uint16_t)n<total){if(codec_tick_snapshot()-start>=timeout)break;
-  uint32_t got=codec_uart_read(dst+(uint16_t)n,total-(uint16_t)n);
-  if((int32_t)got<1)codec_delay(1);else n+=got;
- }
- return (uint16_t)n<total?-1:(int32_t)(uint16_t)n;
-}
-
 int32_t codec_read_uart_data(uint8_t *dst,uint16_t capacity,uint16_t *length,uint32_t ticks){
  if(!dst||!length||!capacity)return -1;
- int32_t result=codec_response_read(dst,capacity,ticks);
+ int32_t result=gx8002_uart_read_blocking(dst,capacity,ticks);
  if(result<0)return result;
  *length=(uint16_t)result;return 0;
 }

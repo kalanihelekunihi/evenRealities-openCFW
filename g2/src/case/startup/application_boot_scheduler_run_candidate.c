@@ -4,6 +4,7 @@
 #include <stdint.h>
 extern void case_boot_systick_start(void); /* 0xc078 */
 extern void case_boot_context_switch(void); /* 0x00cc, architectural PSP handoff */
+/* Stock 0x0800C57C (case_boot_scheduler_run) */
 void case_boot_scheduler_run(void)
 {
     volatile uint32_t *priority=(volatile uint32_t *)(uintptr_t)0xe000ed20u;

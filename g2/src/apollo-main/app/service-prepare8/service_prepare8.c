@@ -92,6 +92,7 @@ static void log_size(uint32_t slot,uint32_t line,uint32_t actual,
                                     actual,expected);
 }
 
+/* Stock 0x501D5C (dashboard_ext_load_layout_pb_file) */
 uint32_t audio_uart_service_prepare8(void) {
     audio_uart_dashboard_ready=0u;
     if(audio_uart_pb_file_exists()==0u) {

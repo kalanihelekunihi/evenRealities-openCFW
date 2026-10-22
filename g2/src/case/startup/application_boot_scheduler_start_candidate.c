@@ -3,6 +3,7 @@
  */
 #include <stdint.h>
 extern void case_boot_scheduler_activate(void); /* 0xc284 */
+/* Stock 0x0800A900 (case_boot_scheduler_start) */
 int32_t case_boot_scheduler_start(void)
 {
     uint32_t ipsr;

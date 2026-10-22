@@ -13,6 +13,7 @@ static void configure(uint32_t base,uint32_t pins,uint32_t mode,uint32_t alt,uin
     volatile uint32_t config[5]={pins,mode,alt,fourth,0u};
     case_bus_gpio_config(base,config);
 }
+/* Stock 0x08006A40 (case_configure_platform_routes) */
 void case_boot_pin_initialize(void)
 {
     uint32_t clock=0x40021000u;

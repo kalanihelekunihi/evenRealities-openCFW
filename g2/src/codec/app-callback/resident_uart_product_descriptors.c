@@ -5,6 +5,7 @@
  */
 #include "resident_uart_product_descriptors.h"
 
+/* Stock 0x10026A94 (gx8002_uart_descriptors) */
 struct gx8002_uart_channel_descriptor gx8002_uart_channels_26a94[2]
     __attribute__((section(".gx8002.uart_channels.26a94"), used,
                    aligned(4))) = {

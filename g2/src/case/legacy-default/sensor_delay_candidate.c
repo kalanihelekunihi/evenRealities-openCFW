@@ -4,6 +4,7 @@
  */
 #include <stdint.h>
 
+/* Stock 0x0800A408 (case_delay_10) */
 uint32_t case_binary_sensor_delay(void)
 {
     volatile uint8_t count=0u;

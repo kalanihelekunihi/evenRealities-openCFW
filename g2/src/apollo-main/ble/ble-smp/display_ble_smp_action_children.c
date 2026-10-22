@@ -9,9 +9,6 @@ extern void *WsfBufAlloc(uint16_t length);
 extern void smpSmExecute(void *ccb, void *message);
 extern void audio_ble_wsf_timer_insert(void *timer, uint32_t ticks);
 
-void *smpMsgAlloc(uint16_t length) {
-    return audio_ble_hci_msg_data_alloc(length, 0u);
-}
 
 uint8_t *SmpScAlloc(uint8_t size, void *ccb, uint8_t *message) {
     uint8_t *buffer = WsfBufAlloc(size);

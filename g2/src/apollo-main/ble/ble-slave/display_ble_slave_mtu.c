@@ -24,15 +24,7 @@ uint32_t audio_ble_att_get_mtu_body(uint8_t connection)
     return (uint32_t)ccb[0] | ((uint32_t)ccb[1]<<8);
 }
 
-/* Original AttGetMtu returns an ambient high R7 word as its second result. */
-__attribute__((naked)) uint64_t audio_ble_att_get_mtu(uint8_t connection __attribute__((unused)))
-{
-    __asm__ volatile(
-        "push {r7, lr}\n"
-        "bl audio_ble_att_get_mtu_body\n"
-        "mov r1, r7\n"
-        "pop {r7, pc}\n");
-}
+extern uint64_t audio_ble_att_get_mtu(uint8_t connection ); /* opencfw U5: now provided by the Cordio unit */
 
 void audio_ble_attc_mtu_request_body(uint32_t connection,uint32_t mtu,uint32_t *saved)
 {
@@ -46,17 +38,7 @@ void audio_ble_attc_mtu_request_body(uint32_t connection,uint32_t mtu,uint32_t *
     (void)audio_ble_attc_send_message_4b5640((uint8_t)connection,0u,1u,packet,0u);
 }
 
-/* Native push {r3,r4,r5,lr} / pop {r0,r4,r5,pc}; R0 is saved R3. */
-__attribute__((naked)) uint32_t audio_ble_attc_mtu_request(
-    uint8_t connection __attribute__((unused)),uint16_t mtu __attribute__((unused)),
-    uint32_t unused __attribute__((unused)),uint32_t inherited __attribute__((unused)))
-{
-    __asm__ volatile(
-        "push {r3, r4, r5, lr}\n"
-        "mov r2, sp\n"
-        "bl audio_ble_attc_mtu_request_body\n"
-        "pop {r0, r4, r5, pc}\n");
-}
+extern uint32_t audio_ble_attc_mtu_request( uint8_t connection ,uint16_t mtu , uint32_t unused ,uint32_t inherited ); /* opencfw U5: now provided by the Cordio unit */
 
 void audio_ble_slave_request_mtu_body(const uint8_t *event,uint32_t *saved)
 {
@@ -80,6 +62,7 @@ void audio_ble_slave_request_mtu_body(const uint8_t *event,uint32_t *saved)
     (void)audio_ble_attc_mtu_request((uint8_t)connection,0xf7u,0u,0u);
 }
 
+/* Stock 0x46DEDC (_bleSlaveRequestMtuExchange) */
 __attribute__((naked)) uint64_t audio_ble_slave_request_mtu(
     const uint8_t *event __attribute__((unused)),...)
 {

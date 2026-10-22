@@ -23,6 +23,7 @@ static volatile uint32_t *mspi_reg(uint32_t module, uint32_t offset)
     return (volatile uint32_t *)(uintptr_t)address;
 }
 
+/* Stock 0x423FB8 (mspi_cq_pause) */
 static uint32_t mspi_cq_pause(uint32_t *state)
 {
     const uint32_t module = state[1];
@@ -48,6 +49,7 @@ static uint32_t mspi_cq_pause(uint32_t *state)
         (uintptr_t)mspi_reg(module, 0x104u), 1u, 0u, 1u);
 }
 
+/* Stock 0x42403E (program_dma) */
 uint32_t opencfw_boot_mspi_program_dma(uint32_t state_address)
 {
     uint32_t *const state = (uint32_t *)(uintptr_t)state_address;

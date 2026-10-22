@@ -8,6 +8,7 @@
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static void wr8(uint32_t a,uint8_t v){*(volatile uint8_t *)(uintptr_t)a=v;}
+/* Stock 0x08005C90 (case_irq_child_5c90) */
 void case_irq_child_5c90(uint32_t state)
 {
     uint32_t base=rd(state);

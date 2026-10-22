@@ -25,6 +25,7 @@ static void assert_null(const uint8_t literal[20]) {
     audio_ring_pb_assert_509b48(record);
 }
 
+/* Stock 0x558CB0 (PB_RxQuicklistItem) */
 uint32_t audio_quicklist_one_validate(uint32_t id, const void *payload) {
     (void)id;
     if (payload == 0) {
@@ -52,6 +53,7 @@ uint32_t audio_quicklist_one_validate(uint32_t id, const void *payload) {
     return 0u;
 }
 
+/* Stock 0x558F34 (PB_RxQuicklistMultItems) */
 uint32_t audio_quicklist_many_validate(uint32_t id, const void *payload) {
     (void)id;
     if (payload == 0) {
@@ -76,6 +78,7 @@ uint32_t audio_quicklist_many_validate(uint32_t id, const void *payload) {
     return 0u;
 }
 
+/* Stock 0x559378 (PB_RxQuicklistEvent) */
 uint32_t audio_quicklist_event_validate(uint32_t id, const void *payload) {
     (void)id;
     if (payload == 0) {

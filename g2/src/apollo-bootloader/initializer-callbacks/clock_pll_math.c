@@ -19,6 +19,7 @@ static uint32_t unsigned_fp(float f){
 static uint32_t unsigned_div(uint32_t n,uint32_t d){
  uint32_t out;__asm__("udiv %0,%1,%2":"=r"(out):"r"(n),"r"(d));return out;
 }
+/* Stock 0x426D48 (float_gcd_426d48; syspll_config_util_gcd) */
 float opencfw_boot_pll_gcd(float first,float second){
  if(first<second){float tmp=first;first=second;second=tmp;}
  for(unsigned i=0;i<16;i++){
@@ -29,6 +30,7 @@ float opencfw_boot_pll_gcd(float first,float second){
  }
  return -1.0f;
 }
+/* Stock 0x426DB4 (float_ratio_426db4; syspll_config_util_integer_mode_check) */
 uint32_t opencfw_boot_pll_integer(float reference,float target,uint8_t *refdiv,uint16_t *feedback){
  float gcd=opencfw_boot_pll_gcd(target,reference);
  if(gcd<0x1p-23f)return 0;
@@ -44,6 +46,7 @@ uint32_t opencfw_boot_pll_integer(float reference,float target,uint8_t *refdiv,u
  if(m-4>=957)return 0;
  *refdiv=d&63;*feedback=m&4095;return 1;
 }
+/* Stock 0x426EAC (float_multiplier_426eac; syspll_config_util_fraction_mode_check) */
 uint32_t opencfw_boot_pll_fraction(float reference,float target,uint8_t *refdiv,
  uint16_t *feedback,uint32_t *fraction){
  float ratio=target/reference;
@@ -58,6 +61,7 @@ uint32_t opencfw_boot_pll_fraction(float reference,float target,uint8_t *refdiv,
  uint32_t whole=unsigned_fp(opencfw_boot_pll_floor(integer));
  *refdiv=(uint8_t)divider;*feedback=(uint16_t)whole;*fraction=frac;return 1;
 }
+/* Stock 0x426F6C (float_encoding_select_426f6c; am_hal_syspll_config_generate) */
 uint32_t opencfw_boot_pll_vco_generate(opencfw_pll_config *out,float reference,float target){
  uint8_t divider=0;uint16_t feedback=0;uint32_t fraction=0;
  if(!out)return 6;

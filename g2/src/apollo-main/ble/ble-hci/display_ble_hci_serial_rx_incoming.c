@@ -8,13 +8,8 @@ extern void audio_ble_wsf_set_event(uint32_t,uint32_t); /* 0x52b91e */
 #define W(a) (*(volatile uint32_t *)(uintptr_t)(a))
 #define H(a) (*(volatile uint16_t *)(uintptr_t)(a))
 #define B(a) (*(volatile uint8_t *)(uintptr_t)(a))
-uint16_t audio_ble_hci_get_max_rx_acl_len_530d4c(void) {
-    return H(0x20071478u+0x7cu);
-}
-void audio_ble_hci_core_recv_530c88(uint8_t type,void *message) {
-    audio_wsf_msg_enqueue((void *)(uintptr_t)0x20073870u,type,message);
-    audio_ble_wsf_set_event(B(0x20073870u+0x20u),1u);
-}
+extern uint16_t audio_ble_hci_get_max_rx_acl_len_530d4c(void); /* opencfw U5: now provided by the Cordio unit */
+extern void audio_ble_hci_core_recv_530c88(uint8_t type,void *message); /* opencfw U5: now provided by the Cordio unit */
 uint32_t audio_ble_hci_serial_rx_incoming_530186(const void *input,uint16_t count) {
     const uint8_t *src=(const uint8_t *)input;
     uint16_t remaining=count,consumed=0u;

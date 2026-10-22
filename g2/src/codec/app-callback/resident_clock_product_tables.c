@@ -12,6 +12,7 @@ struct gx8002_clock_source_record {
 _Static_assert(sizeof(struct gx8002_clock_source_record) == 8,
                "native clock source record ABI");
 
+/* Stock 0x10026904 (gx8002_clock_init_pointer_osc) */
 const struct gx8002_clock_source_record gx8002_clock_osc_sources_26904[10]
     __attribute__((section(".gx8002.clock_sources.26904"), used,
                    aligned(4))) = {
@@ -19,6 +20,7 @@ const struct gx8002_clock_source_record gx8002_clock_osc_sources_26904[10]
     {16,0}, {17,0}, {18,1}, {0,1}, {14,0},
 };
 
+/* Stock 0x10026954 (gx8002_clock_init_pointer_xtal) */
 const struct gx8002_clock_source_record gx8002_clock_xtal_sources_26954[10]
     __attribute__((section(".gx8002.clock_sources.26954"), used,
                    aligned(4))) = {

@@ -14,6 +14,7 @@ static void apply_cached(void){
  W(0x40020080)=(W(0x40020080)&~0x3ffu)|(W(0x200270b8)&0x3ff);
  opencfw_hal_delay_us(5);
 }
+/* Stock 0x428378 (spotmgr_transition_sequence_2b_428378; PCM2.2 transition_sequence_2b) */
 void opencfw_pcm22_sequence2b(void){
  apply_cached();W(0x4002037c)&=~0x10000u;W(0x4002037c)&=~0x2000000u;
  W(0x4002004c)=(W(0x4002004c)&~0x7fu)|(W(0x200270b4)&0x7f);B(0x2000055a)=26;
@@ -22,6 +23,7 @@ static void mode_wait(uint32_t mode){
  W(0x40021000)=(W(0x40021000)&~3u)|mode;
  for(uint32_t n=0;n<20&&!(W(0x40021000)&4);n++)opencfw_hal_delay_us(1);
 }
+/* Stock 0x428A94 (spotmgr_transition_sequence_7b_428a94; PCM2.2 transition_sequence_7b) */
 void opencfw_pcm22_sequence7b(void){
  apply_cached();W(0x4002004c)=(W(0x4002004c)&~0x7fu)|(W(0x200270b4)&0x7f);
  uint32_t hp=(W(0x40021000)&3)==2;
@@ -34,6 +36,7 @@ void opencfw_pcm22_sequence7b(void){
  }
  B(0x2000055a)=26;
 }
+/* Stock 0x42A04A (spotmgr_timer_irq_service_42a04a; am_hal_spotmgr_pcm2_2_boost_timer_interrupt_service) */
 uint32_t opencfw_pcm22_timer_service(void){
  uint32_t saved=opencfw_boot_control_critical_save();
  if(B(0x2000055a)==2)opencfw_pcm22_sequence2b();

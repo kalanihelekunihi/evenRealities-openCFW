@@ -6,6 +6,7 @@
 typedef void (*input_ring_callback)(void *,uint32_t,uint32_t);
 extern void *audio_queue_copy_bytes(void *,const void *,uint32_t); /* selected 0x439be4 */
 
+/* Stock 0x46DA92 (lwrb_get_free) */
 uint32_t audio_uart_input_ring_free(const void *descriptor) {
     if(descriptor==0) return 0u;
     const uint32_t *d=(const uint32_t *)descriptor;
@@ -14,6 +15,7 @@ uint32_t audio_uart_input_ring_free(const void *descriptor) {
     return d[2]+distance-1u;
 }
 
+/* Stock 0x46D8E0 (lwrb_write_ex) */
 uint32_t audio_uart_input_ring_write_core(void *descriptor,
                                            const void *source,uint32_t length,
                                            uint32_t *written,uint32_t strict) {
@@ -42,6 +44,7 @@ uint32_t audio_uart_input_ring_write_core(void *descriptor,
     return 1u;
 }
 
+/* Stock 0x46D8C4 (lwrb_write) */
 uint32_t audio_uart_input_ring_write(void *descriptor,const void *source,
                                       uint32_t length) {
     uint32_t written=0u;

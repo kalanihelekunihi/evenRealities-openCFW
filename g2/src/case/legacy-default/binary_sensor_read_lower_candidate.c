@@ -14,6 +14,7 @@ uint32_t case_binary_read_byte_lower(uint32_t selector, uint8_t *destination)
     return 0u;
 }
 
+/* Stock 0x0800A130 (case_run_guarded_status) */
 uint32_t case_binary_sensor_read_adapter(uint32_t selector,
                                          uint8_t *destination,
                                          uint32_t length)

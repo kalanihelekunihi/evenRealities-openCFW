@@ -49,18 +49,22 @@ static int32_t send_display(uint8_t kind,uint32_t id,const void *payload,
     return 0;
 }
 
+/* Stock 0x4441EC (display_startup) */
 int32_t audio_uart_slave_display_start(uint32_t id,const void *payload,uint32_t bytes)
 {
     return send_display(2u,id,payload,bytes,"display_startup",0x36du,start_failure);
 }
+/* Stock 0x4442D0 (display_refresh) */
 int32_t audio_uart_slave_display_refresh(uint32_t id,const void *payload,uint32_t bytes)
 {
     return send_display(3u,id,payload,bytes,"display_refresh",0x38bu,refresh_failure);
 }
+/* Stock 0x4443CC (display_close) */
 int32_t audio_uart_slave_display_stop(uint32_t id,const void *payload,uint32_t bytes)
 {
     return send_display(5u,id,payload,bytes,"display_close",0x3a9u,close_failure);
 }
+/* Stock 0x4444B8 (display_close_all) */
 int32_t audio_uart_slave_display_control(const void *payload,uint32_t bytes)
 {
     return send_display(8u,0u,payload,bytes,"display_close_all",0x3c5u,close_failure);

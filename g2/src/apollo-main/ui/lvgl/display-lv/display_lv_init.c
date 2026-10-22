@@ -33,6 +33,7 @@ static const char assert_format[]="Asserted at expression: %s (%s)";
 /* The native ADR at 0x4735b0 points to these three source version bytes. */
 static const uint8_t version_bytes[3]={0xc3u,0x81u,0x00u};
 
+/* Stock 0x473548 (FUN_00473548) */
 void audio_uart_display_clock_prepare(void)
 {
     if (audio_uart_display_lv_root[0]!=0u) {

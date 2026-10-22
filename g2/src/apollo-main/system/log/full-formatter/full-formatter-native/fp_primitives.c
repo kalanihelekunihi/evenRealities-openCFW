@@ -19,4 +19,5 @@ uint64_t g2_main_fp_frexp(uint64_t x,int *exponent){
  unsigned high=(unsigned)(magnitude>>32),low=(unsigned)magnitude;unsigned shift=high?(unsigned)__builtin_clz(high)-11:(unsigned)__builtin_clz(low)+21;
  *exponent=-(int)shift-1021;return (x&UINT64_C(0x8000000000000000))+(magnitude<<shift)+UINT64_C(0x3fd0000000000000);
 }
+/* Stock 0x48262C (IAR printf x*10^n helper) */
 uint64_t g2_main_fp_pow10(uint64_t x,unsigned exponent){uint64_t factor=UINT64_C(0x4024000000000000);while(exponent){if(exponent&1)x=g2_main_fp_mul(x,factor);factor=g2_main_fp_mul(factor,factor);exponent>>=1;}return x;}

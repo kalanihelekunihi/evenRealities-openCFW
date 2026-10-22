@@ -36,5 +36,7 @@ static void sample(uint32_t descriptor,uint32_t width)
     and_locked(hw,~16u);
     if((rd32(hw+28u)&16u)!=0u)wr32(hw+32u,16u);
 }
+/* Stock 0x08008758 (case_receive_u16) */
 void case_boot_sensor_callback_8758(uint32_t descriptor){sample(descriptor,2u);}
+/* Stock 0x08008998 (case_receive_u8) */
 void case_boot_sensor_callback_8998(uint32_t descriptor){sample(descriptor,1u);}

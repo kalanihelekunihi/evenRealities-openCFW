@@ -10,6 +10,7 @@ uint32_t g2_fal_partition_table_length;
 uint32_t g2_fal_device_cache[2];
 uint8_t g2_fal_partition_init_ok;
 
+/* Stock 0x597C6C (fal check_and_update_part_cache) */
 int32_t g2_fal_check_partition_cache(uint32_t table, uint32_t length)
 {
     for (uint32_t i = 0; i < length; ++i) {
@@ -27,6 +28,7 @@ int32_t g2_fal_check_partition_cache(uint32_t table, uint32_t length)
     return 0;
 }
 
+/* Stock 0x597CAE (fal_partition_init) */
 uint32_t g2_fal_partition_init(void)
 {
     if (g2_fal_partition_init_ok) return g2_fal_partition_table_length;

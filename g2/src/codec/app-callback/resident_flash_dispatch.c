@@ -9,6 +9,7 @@ typedef int32_t (*flash_read_fn)(uint32_t, uint32_t, uint32_t);
 typedef int32_t (*flash_info_fn)(uint32_t);
 typedef int32_t (*flash_otp_read_fn)(uint32_t, uint32_t, uint32_t);
 
+/* Stock 0x100247B8 (gx_spi_flash_readdata) */
 int32_t gx8002_resident_flash_dispatch_read_247b8(
     const volatile uint8_t *descriptor, uint32_t arg1,
     uint32_t arg2, uint32_t arg3)
@@ -18,6 +19,7 @@ int32_t gx8002_resident_flash_dispatch_read_247b8(
     return ((flash_read_fn)(uintptr_t)raw)(arg1, arg2, arg3);
 }
 
+/* Stock 0x100247E0 (gx_spi_flash_getinfo) */
 int32_t gx8002_resident_flash_dispatch_getinfo_247e0(
     const volatile uint8_t *descriptor, uint32_t arg1)
 {
@@ -26,6 +28,7 @@ int32_t gx8002_resident_flash_dispatch_getinfo_247e0(
     return ((flash_info_fn)(uintptr_t)raw)(arg1);
 }
 
+/* Stock 0x100247F4 (gx_spi_flash_otp_read) */
 int32_t gx8002_resident_flash_dispatch_otp_read_247f4(
     const volatile uint8_t *descriptor, uint32_t arg1,
     uint32_t arg2, uint32_t arg3)

@@ -6,6 +6,7 @@
 
 typedef int32_t (*case_format_emit_t)(int32_t,void *);
 
+/* Stock 0x08009638 (case_emit_left_padding) */
 int32_t case_format_space_padding(int32_t width,uint32_t flags,void *context,
                                   case_format_emit_t emit)
 {
@@ -15,6 +16,7 @@ int32_t case_format_space_padding(int32_t width,uint32_t flags,void *context,
     return written;
 }
 
+/* Stock 0x08009658 (case_emit_right_padding) */
 int32_t case_format_field_padding(int32_t width,uint32_t flags,void *context,
                                   case_format_emit_t emit)
 {

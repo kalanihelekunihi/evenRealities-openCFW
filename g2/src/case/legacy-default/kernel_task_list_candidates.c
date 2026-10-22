@@ -23,6 +23,7 @@ void case_queue_wait(uint32_t list,uint32_t ticks)
     case_kernel_task_delay(ticks,1u);
 }
 
+/* Stock 0x0800CBA0 (case_queue_wake) */
 uint32_t case_queue_wake(uint32_t *list)
 {
     uint32_t address=(uint32_t)(uintptr_t)list;
@@ -43,6 +44,7 @@ uint32_t case_queue_wake(uint32_t *list)
     return 0u;
 }
 
+/* Stock 0x0800CB38 (case_kernel_mutex_release) */
 uint32_t case_kernel_mutex_release(uint32_t task)
 {
     if(task==0u)return 0u;

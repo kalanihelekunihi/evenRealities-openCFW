@@ -2,6 +2,7 @@
 #include "context_claim.h"
 #include "../nor-mspi-queue/nor_mspi_queue.h"
 #define WORD(h,o) (*(volatile uint32_t *)((uintptr_t)(h)+(o)))
+/* Stock 0x42c3e2 (cmdq_adapter_init_42c3e2) */
 uint32_t opencfw_boot_iom_cq_initialize(void *handle,uint32_t words,uint32_t buffer)
 {
     struct opencfw_iom_context *h=handle;
@@ -13,6 +14,7 @@ uint32_t opencfw_boot_iom_cq_initialize(void *handle,uint32_t words,uint32_t buf
     if (!status) WORD(h,0x20u)=256u;
     return status;
 }
+/* Stock 0x42c420 (cmdq_adapter_enable_42c420) */
 uint32_t opencfw_boot_iom_cq_enable(void *handle)
 {
     struct opencfw_iom_context *h=handle;
@@ -24,6 +26,7 @@ uint32_t opencfw_boot_iom_cq_enable(void *handle)
     }
     return opencfw_provider_427878((uint32_t *)(uintptr_t)WORD(h,0x828u));
 }
+/* Stock 0x42c44e (cmdq_adapter_disable_42c44e) */
 uint32_t opencfw_boot_iom_cq_disable(void *handle)
 {
     return opencfw_provider_4278c8((uint32_t *)(uintptr_t)WORD(handle,0x828u));

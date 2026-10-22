@@ -18,10 +18,6 @@ const uintptr_t audio_ble_dm_master_table_a[2] = {
     (uintptr_t)&audio_ble_dm_action_536a86,
     (uintptr_t)&audio_ble_dm_action_55bc5c,
 };
-const uintptr_t audio_ble_dm_master_table_b[2] = {
-    (uintptr_t)&audio_ble_dm_action_55bc70,
-    (uintptr_t)&audio_ble_dm_action_55bc7c,
-};
 const uintptr_t audio_ble_dm_slave_table_a[4] = {
     (uintptr_t)&audio_ble_dm_action_536ac8,
     (uintptr_t)&audio_ble_dm_action_536adc,
@@ -34,6 +30,5 @@ const uintptr_t audio_ble_dm_slave_table_b[2] = {
 };
 
 _Static_assert(sizeof(audio_ble_dm_master_table_a) == 8u, "DM master ABI");
-_Static_assert(sizeof(audio_ble_dm_master_table_b) == 8u, "DM master update ABI");
 _Static_assert(sizeof(audio_ble_dm_slave_table_a) == 16u, "DM slave ABI");
 _Static_assert(sizeof(audio_ble_dm_slave_table_b) == 8u, "DM slave update ABI");

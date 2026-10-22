@@ -4,6 +4,7 @@
  * Native CASE 0x08002cc0 image checksum against OTA file metadata.
  */
 #include <stdint.h>
+/* Stock 0x08002CC0 (ota_image_be32_sum_verify) */
 uint32_t case_policy_box_apply_file(void)
 {
     volatile const uint8_t *box=(volatile const uint8_t *)(uintptr_t)0x2000087cu;

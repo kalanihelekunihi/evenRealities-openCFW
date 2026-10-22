@@ -59,6 +59,7 @@ static void log_two(uint8_t severity,uint32_t line,uint32_t mask,uint32_t compre
 static void store32(uint8_t *p,uint32_t v) {
     p[0]=(uint8_t)v;p[1]=(uint8_t)(v>>8);p[2]=(uint8_t)(v>>16);p[3]=(uint8_t)(v>>24);
 }
+/* Stock 0x47564E (Thread_MsgTxByBle) */
 uint32_t audio_ble_msg_tx(uint8_t piping,uint8_t service,uint8_t type,uint8_t command,
                           const void *payload,uint16_t length) {
     struct ble_msgtx_manager *manager=&audio_ble_msgtx_manager;

@@ -15,6 +15,7 @@ extern void case_boot_option_commit_b(void); /* 0x4b50 */
 extern void case_boot_option_commit_c(void); /* 0x4b20 */
 extern uint32_t case_legacy_logger(const char *format,...); /* 0x9170 */
 extern void case_policy_sensor_delay(uint32_t ticks); /* 0xa7b0 */
+/* Stock 0x080038E0 (option_byte_bank_swap) */
 __attribute__((noinline,used)) void case_policy_box_begin_with_native_words(uint32_t *words,uint32_t selector)
 {
     words[1]=selector;

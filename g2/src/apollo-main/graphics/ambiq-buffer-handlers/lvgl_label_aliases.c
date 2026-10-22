@@ -18,10 +18,6 @@ int32_t lv_area_get_width(const int32_t *area) {
 void lv_area_move(int32_t *area,int32_t dx,int32_t dy) {
     audio_uart_ambiq_area_move_450bb2(area,dx,dy);
 }
-void *lv_draw_buf_reshape(void *buf,uint32_t format,uint32_t width,
-                          uint32_t height,uint32_t stride) {
-    return audio_uart_lv_draw_buf_reshape_48b196(buf,format,width,height,stride);
-}
 const void *lv_font_get_glyph_bitmap(void *glyph,void *draw_buf) {
     return (const void *)(uintptr_t)audio_uart_ambiq_glyph_bitmap_4d5612(
         (uint32_t)(uintptr_t)glyph,(uint32_t)(uintptr_t)draw_buf);

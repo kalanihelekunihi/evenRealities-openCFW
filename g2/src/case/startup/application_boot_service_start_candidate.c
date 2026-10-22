@@ -2,6 +2,7 @@
  * Native CASE 0xa8d8 single-start service latch.
  */
 #include <stdint.h>
+/* Stock 0x0800A8D8 (case_boot_service_start) */
 int32_t case_boot_service_start(void)
 {
     uint32_t ipsr;

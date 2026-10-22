@@ -15,6 +15,7 @@
 #include <clk_priv.h>
 #pragma GCC diagnostic pop
 
+/* Stock 0x1001295C (gx8002_platform_gate_switches) */
 void gx8002_image_b_platform_gate_10003be8(uint32_t module, uint32_t enable)
 {
     _clk_set_high_gate((GX_CLOCK_MODULE)module, enable);

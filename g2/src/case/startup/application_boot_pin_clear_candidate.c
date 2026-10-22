@@ -11,6 +11,7 @@ static uint32_t port_index(uint32_t base)
     if(base==0x50001000u)return 4u;
     return 5u;
 }
+/* Stock 0x08004C1C (case_release_pins) */
 void case_boot_pin_config(uint32_t base,uint32_t mask)
 {
     volatile uint32_t *gpio=(volatile uint32_t *)(uintptr_t)base;

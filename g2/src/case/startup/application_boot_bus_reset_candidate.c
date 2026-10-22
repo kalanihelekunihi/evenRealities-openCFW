@@ -5,6 +5,7 @@
 extern uint32_t case_boot_bus_clock_setup(uint32_t *config); /* 0x5128 */
 extern void case_boot_init_failure(void); /* 0x3e90 */
 extern void case_clock_priority_config(uint32_t irq,uint32_t plan,uint32_t unused); /* 0x5024 */
+/* Stock 0x08005B24 (case_configure_controller_irq) */
 void case_boot_bus_reset(uint32_t descriptor)
 {
     if(*(volatile uint32_t *)(uintptr_t)descriptor!=0x40002800u)return;

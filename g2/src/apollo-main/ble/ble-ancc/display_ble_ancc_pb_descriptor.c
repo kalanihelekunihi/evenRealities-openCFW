@@ -1,6 +1,8 @@
 /* Source-owned nanopb descriptor graph rooted at native 0x7799f4.
  * Field records are expressed by generator semantics, not a stock data blob.
  * Absolute ROM placement remains a separate image/linker obligation. */
+/* field_info_<addr> / submsg_info_<addr> arrays are named by their own stock
+ * ROM address (checked against the stock image); desc_<addr> by the descriptor. */
 #include <stddef.h>
 #include <stdint.h>
 struct pb_msgdesc_candidate {
@@ -22,44 +24,44 @@ _Static_assert(offsetof(struct pb_msgdesc_candidate,field_count)==16u,"ARM field
     (((uint32_t)(offset)&0xffffu)|((((uint32_t)(size))&0xfffu)<<16u)| \
      ((((uint32_t)(tag))&0x3c0u)<<22u))
 static const struct pb_msgdesc_candidate desc_779a24,desc_779a54,desc_779a6c,desc_779a84,desc_779a9c;
-static const uint32_t fields_7799f4[]={
+static const uint32_t field_info_72b4d4[]={
     FIELD1(1u,0x12u,0u,1u,0u),FIELD1(2u,0x12u,1u,1u,0u),
     FIELD2(3u,0x38u,4u,5u,2u,1u),FIELD2(4u,0x38u,4u,70u,2u,1u),
     FIELD2(5u,0x38u,4u,2u,2u,1u),FIELD2(6u,0x38u,4u,2u,2u,1u),
     FIELD2(7u,0x38u,4u,8u,2u,1u),0u
 };
-static const struct pb_msgdesc_candidate *const sub_7799f4[]={
+static const struct pb_msgdesc_candidate *const submsg_info_7799dc[]={
     &desc_779a24,&desc_779a54,&desc_779a6c,&desc_779a84,&desc_779a9c,0
 };
 const struct pb_msgdesc_candidate audio_ble_ancc_not_whitelisted_pb_descriptor={
-    fields_7799f4,sub_7799f4,0,0,7u,0u,7u
+    field_info_72b4d4,submsg_info_7799dc,0,0,7u,0u,7u
 };
-static const uint32_t fields_779a24[]={
+static const uint32_t field_info_779a0c[]={
     FIELD1(1u,0x12u,0u,1u,0u),FIELD1(2u,0x12u,1u,1u,0u),
     FIELD1(3u,0x12u,2u,1u,0u),FIELD1(4u,0x12u,3u,1u,0u),
     FIELD1(5u,0x12u,4u,1u,0u),0u
 };
-static const struct pb_msgdesc_candidate *const sub_779a24[]={0};
-static const struct pb_msgdesc_candidate desc_779a24={fields_779a24,sub_779a24,0,0,5u,0u,5u};
-static const uint32_t fields_779a54[]={
+static const struct pb_msgdesc_candidate *const submsg_info_78f2f8[]={0};
+static const struct pb_msgdesc_candidate desc_779a24={field_info_779a0c,submsg_info_78f2f8,0,0,5u,0u,5u};
+static const uint32_t field_info_779a3c[]={
     FIELD2(1u,0x16u,0u,34u,0u,1u),FIELD2(2u,0x16u,34u,34u,0u,1u),
     FIELD1(3u,0x12u,68u,1u,0u),0u
 };
-static const struct pb_msgdesc_candidate *const sub_779a54[]={0};
-static const struct pb_msgdesc_candidate desc_779a54={fields_779a54,sub_779a54,0,0,3u,0u,3u};
-static const uint32_t fields_779a6c[]={
+static const struct pb_msgdesc_candidate *const submsg_info_78f2fc[]={0};
+static const struct pb_msgdesc_candidate desc_779a54={field_info_779a3c,submsg_info_78f2fc,0,0,3u,0u,3u};
+static const uint32_t field_info_78b5f4[]={
     FIELD1(1u,0x12u,0u,1u,0u),FIELD1(2u,0x12u,1u,1u,0u),0u
 };
-static const struct pb_msgdesc_candidate *const sub_779a6c[]={0};
-static const struct pb_msgdesc_candidate desc_779a6c={fields_779a6c,sub_779a6c,0,0,2u,0u,2u};
-static const uint32_t fields_779a84[]={
+static const struct pb_msgdesc_candidate *const submsg_info_78f300[]={0};
+static const struct pb_msgdesc_candidate desc_779a6c={field_info_78b5f4,submsg_info_78f300,0,0,2u,0u,2u};
+static const uint32_t field_info_78b600[]={
     FIELD1(1u,0x12u,0u,1u,0u),FIELD1(2u,0x12u,1u,1u,0u),0u
 };
-static const struct pb_msgdesc_candidate *const sub_779a84[]={0};
-static const struct pb_msgdesc_candidate desc_779a84={fields_779a84,sub_779a84,0,0,2u,0u,2u};
-static const uint32_t fields_779a9c[]={
+static const struct pb_msgdesc_candidate *const submsg_info_78f304[]={0};
+static const struct pb_msgdesc_candidate desc_779a84={field_info_78b600,submsg_info_78f304,0,0,2u,0u,2u};
+static const uint32_t field_info_787ad0[]={
     FIELD1(1u,0x12u,0u,4u,0u),FIELD1(2u,0x12u,4u,1u,0u),
     FIELD1(3u,0x12u,5u,1u,0u),0u
 };
-static const struct pb_msgdesc_candidate *const sub_779a9c[]={0};
-static const struct pb_msgdesc_candidate desc_779a9c={fields_779a9c,sub_779a9c,0,0,3u,0u,3u};
+static const struct pb_msgdesc_candidate *const submsg_info_78f308[]={0};
+static const struct pb_msgdesc_candidate desc_779a9c={field_info_787ad0,submsg_info_78f308,0,0,3u,0u,3u};

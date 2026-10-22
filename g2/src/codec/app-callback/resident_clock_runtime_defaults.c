@@ -15,6 +15,8 @@ struct gx8002_clock_runtime_defaults {
 _Static_assert(sizeof(struct gx8002_clock_runtime_defaults) == 60,
                "native clock state extent");
 
+/* Stock 0x10026900 (gx8002_clock_init_pointer_trim) */
+/* Stock 0x100268C8 (gx8002_clock_switch_1m_pll) */
 const struct gx8002_clock_runtime_defaults gx8002_clock_defaults_268c8
     __attribute__((section(".gx8002.clock_defaults.268c8"), used,
                    aligned(4))) = {

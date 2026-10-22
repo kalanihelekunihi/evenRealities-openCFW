@@ -13,6 +13,7 @@ static void configure(void)
     if(state[1]!=1u){state[1]=1u;case_bus_gpio_config(0x50000400u,state);}
 }
 static void delay(uint32_t cycles){for(volatile int32_t i=0;i<(int32_t)cycles;++i){}}
+/* Stock 0x0800A2E6 (case_pulse4_train) */
 void case_bus_output_prepare(void)
 {
     high();configure();high();low();

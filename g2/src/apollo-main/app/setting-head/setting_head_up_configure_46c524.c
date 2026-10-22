@@ -8,8 +8,8 @@ extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t, const char *, const char *, const char *,
                                uint32_t, const char *, ...);
 extern uint32_t compressed_log_output(uint32_t, const char *, const char *, ...);
-extern uint32_t audio_hub_channel_open(uint32_t);
-extern uint32_t audio_hub_channel_close(uint32_t);
+extern int32_t HUB_Open(uint8_t func_type); /* 0x4a6d58 */
+extern int32_t HUB_Close(uint8_t func_type); /* 0x4a6dca */
 extern uint32_t audio_hub_parameter_config_4a6e3c(uint32_t, const int32_t *);
 
 static const char module[] = "service.settings";
@@ -38,7 +38,7 @@ void audio_setting_head_up_configure_46c524(void)
         if ((audio_log_flags() & 1u) != 0u ||
             (audio_log_flags() & 4u) != 0u)
             (void)compressed_log_output(0x0c000000u, open_short, open_short);
-        (void)audio_hub_channel_open(1u);
+        (void)HUB_Open(1u);
         int32_t angle = (int32_t)(word(config + 0x10u) + word(config + 0xcu));
         if (angle > 90)
             angle = 90;
@@ -52,6 +52,6 @@ void audio_setting_head_up_configure_46c524(void)
         if ((audio_log_flags() & 1u) != 0u ||
             (audio_log_flags() & 4u) != 0u)
             (void)compressed_log_output(0x0c000000u, close_short, close_short);
-        (void)audio_hub_channel_close(1u);
+        (void)HUB_Close(1u);
     }
 }

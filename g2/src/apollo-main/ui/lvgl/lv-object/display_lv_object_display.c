@@ -17,12 +17,14 @@ static void invalid_object(uint32_t line,const char *function) {
     audio_uart_lvgl_log(3u,source_path,line,function,asserted,expression,null_pointer);
     for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
 }
+/* Stock 0x0044DBC4 (lv_obj_get_screen; upstream third-party/upstream/lvgl/src/core/lv_obj_tree.c) */
 void *audio_uart_lv_object_screen(void *object) {
     if(object==0) invalid_object(292u,get_screen);
     uint8_t *root=(uint8_t *)object;
     while(*(void **)(void *)(root+4u)!=0) root=*(uint8_t **)(void *)(root+4u);
     return root;
 }
+/* Stock 0x0044DC0A (lv_obj_get_display; upstream third-party/upstream/lvgl/src/core/lv_obj_tree.c) */
 void *audio_uart_lv_display_for_object(void *object) {
     if(object==0) invalid_object(307u,get_display);
     uint8_t *screen=(uint8_t *)object;

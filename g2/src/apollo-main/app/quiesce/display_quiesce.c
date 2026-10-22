@@ -31,6 +31,7 @@ static void quiesce_abort(void)
     for(;;) __asm volatile("nop");
 }
 
+/* Stock 0x465B10 (SendIdleCommandtoScheduleManager) */
 int32_t audio_uart_display_quiesce(void)
 {
     if(audio_uart_device_role_get()!=1u) return -1;

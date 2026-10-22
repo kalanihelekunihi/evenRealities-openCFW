@@ -9,6 +9,7 @@ extern void audio_log_extended(uint8_t,const char *,const char *,const char *,ui
 extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
 static const char master_module[]="ble.master";
 static const char master_source[]="D:\\01_workspace\\s200_ap510b_iar_git\\platform\\ble\\app_ble_central.c";
+/* Stock 0x4A01FC (_masterConnectCancel) */
 void audio_ble_master_disconnect_delayed(uint32_t connection) {
     if(audio_log_level()&2u)
       audio_log_extended(4u,master_module,master_source,"_masterConnectCancel",0x1c1u,"_masterConnectCancel");

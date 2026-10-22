@@ -3,6 +3,7 @@
 static uint32_t lshift(uint32_t value,uint32_t amount) {return (amount&255u)<32u?value<<(amount&255u):0u;}
 static uint32_t divide(uint32_t n,uint32_t d) {return d?n/d:0u;}
 static uint32_t clz(uint32_t value) {return value?(uint32_t)__builtin_clz(value):32u;}
+/* Stock 0x42c222 (rounded_divider_42c222) */
 __attribute__((noinline)) uint32_t opencfw_boot_iom_frequency(uint32_t base,uint32_t select,
     uint32_t div3,uint32_t div_enable,uint32_t period)
 {
@@ -12,7 +13,9 @@ __attribute__((noinline)) uint32_t opencfw_boot_iom_frequency(uint32_t base,uint
     if ((denominator>>1)<remainder) ++result;
     return result;
 }
+/* Stock 0x42c256 (is_power_of_two_42c256) */
 __attribute__((noinline)) uint32_t opencfw_boot_iom_onebit(uint32_t value) {return value && !(value&(value-1u));}
+/* Stock 0x42c26a (hw_clock_encode_42c26a) */
 uint64_t opencfw_boot_iom_clock_config(uint32_t hz,uint32_t phase)
 {
     const uint32_t base=96000000u;

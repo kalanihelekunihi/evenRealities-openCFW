@@ -36,6 +36,7 @@ uint32_t audio_platform_read_words_restricted(uint32_t kind,uint32_t offset,uint
     uint8_t k=kind;
     return (k==1||k==3||k==5) ? audio_platform_read_words(k,offset,count,dst) : 6;
 }
+/* Stock 0x005A4D48 (PCM2.2 calibration init) */
 uint32_t audio_platform_newer_initialize(void) {
     if((W(0x400201bc)&8u) && !(W(0x40021008)&(1u<<27))) return 7;
     uint32_t *data=(uint32_t *)(uintptr_t)0x2005665c;
@@ -51,12 +52,4 @@ uint32_t audio_platform_newer_initialize(void) {
     platform_finish_init();return 0;
 }
 
-uint32_t audio_platform_get_revision(uint32_t *destination) {
-    uint32_t *cached=(uint32_t *)(uintptr_t)0x200001e8;
-    if(*cached==0xffffffffu) {
-        uint32_t result=audio_platform_read_words_restricted(1,0x244,1,cached);
-        if(*cached==0 || result!=0) *cached=0;
-    }
-    if(!destination) return 6;
-    *destination=*cached;return 0;
-}
+/* TrimVersionGet (stock 0x47EF38) is static in the am_hal_pwrctrl.c unit. */

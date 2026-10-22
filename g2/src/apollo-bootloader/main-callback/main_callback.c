@@ -42,6 +42,7 @@ static void allocation_failure(void)
     }
 }
 
+/* Stock 0x42e39c (guard_context_init_42e39c) */
 CALLBACK_ENTRY_SECTION void opencfw_boot_main_callback(void)
 {
     opencfw_provider_416058();

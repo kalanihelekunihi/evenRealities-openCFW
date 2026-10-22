@@ -4,12 +4,15 @@
 #define REG(a) (*(volatile uint32_t *)(a))
 #define FLAG(a) (*(volatile uint8_t *)(a))
 #define CORE REG(0x20000878u)
+/* Stock 0x00009D90 (Cy_SysClk_IloStartMeasurement) */
 void touch_ilo_start(void){
  if(!FLAG(0x20000f1du)){FLAG(0x20000f1eu)=1;REG(0x40030034u)=(REG(0x40030034u)&0xfffff0ffu)|0x100u;REG(0x40030018u)=(REG(0x40030018u)&0xfffff0f0u)|0x908u;}
 }
+/* Stock 0x00009DDC (Cy_SysClk_IloStopMeasurement) */
 void touch_ilo_stop(void){
  if(!FLAG(0x20000f1du)){FLAG(0x20000f1eu)=0;REG(0x40030034u)&=0xfffff0ffu;REG(0x40030018u)&=0xf0fu;}
 }
+/* Stock 0x00009E18 (Cy_SysClk_IloCompensate) */
 uint32_t touch_ilo_measure(uint32_t delay,uint32_t *out){
  if(delay<100u || delay>2000000u || !out)return TOUCH_ILO_BAD_PARAM;
  uint32_t control=REG(0x40030018u),selection=REG(0x40030034u)&0xf0fu;
@@ -27,6 +30,7 @@ uint32_t touch_ilo_measure(uint32_t delay,uint32_t *out){
  }
  *out=value;FLAG(0x20000f1cu)=0;return TOUCH_ILO_SUCCESS;
 }
+/* Stock 0x00005DD8 (touch_sub_2ad8) */
 uint32_t touch_ilo_compensate(uint8_t *c){
  if(!c)return 1;uint32_t dummy=500;touch_ilo_start();while(touch_ilo_measure(dummy,&dummy)!=0){}
  uint32_t count=REG(0x40030020u);touch_ilo_stop();uint8_t *i=*(uint8_t **)(c+8);

@@ -37,6 +37,7 @@ static int compact(void) {
     uint32_t p=audio_log_level();
     return (p&1u)!=0u || (audio_log_level()&4u)!=0u;
 }
+/* Stock 0x4795DC (FUN_004795dc, _CopyRecListFromNvmToRam) */
 void audio_ble_privacy_load_rows(uint8_t *destination) {
     uint8_t record[200];
     uint8_t valid_count=0u;

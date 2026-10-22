@@ -239,7 +239,8 @@ def compose(manifest, toolchains, payload, rows, out, gen):
     objects = [Path(r["object"]).name for r in linked]
     objdir = ctx["out"]
     argv = (tc.prefix(out, gen) if tc.docker else [tc.host_path(spec["ld"])]) + (
-        [spec["ld"]] if tc.docker else []) + ["-r", *defsyms, "-o", f"{objdir}/{target}"] + [
+        [spec["ld"]] if tc.docker else []) + ["-r", *spec.get("ld_flags", []), *defsyms,
+                                               "-o", f"{objdir}/{target}"] + [
         f"{objdir}/{o}" for o in objects]
     proc = subprocess.run(argv, cwd=ROOT, capture_output=True, text=True)
     result = {"returncode": proc.returncode, "argv": argv[:12] + [f"... {len(objects)} objects"],

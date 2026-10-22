@@ -95,14 +95,17 @@ static uint32_t encode(uint32_t command, uint8_t id, const uint8_t *payload,
     return 0u;
 }
 
+/* Stock 0x558D9E (APP_PbTxEncodeQuicklistItem) */
 uint32_t audio_quicklist_one_dispatch(uint32_t id, const void *payload) {
     return encode(1u, (uint8_t)id, payload, "APP_PbTxEncodeQuicklistItem",
                   item_fault, 0xa7u, 0xbdu, 0xc0u);
 }
+/* Stock 0x558FFE (APP_PbTxEncodeQuicklistMultItems) */
 uint32_t audio_quicklist_many_dispatch(uint32_t id, const void *payload) {
     return encode(2u, (uint8_t)id, payload, "APP_PbTxEncodeQuicklistMultItems",
                   many_fault, 0x100u, 0x115u, 0x118u);
 }
+/* Stock 0x559470 (APP_PbTxEncodeQuicklistEvent) */
 uint32_t audio_quicklist_event_dispatch(uint32_t id, const void *payload) {
     return encode(3u, (uint8_t)id, payload, "APP_PbTxEncodeQuicklistEvent",
                   event_fault, 0x15au, 0x16fu, 0x172u);

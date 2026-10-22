@@ -6,6 +6,7 @@ extern void audio_uart_lv_basic_box_clear_454746(void *,uint32_t,uint32_t);
 void audio_uart_lv_cache_lru_memzero_5c2af4(void *p,uint32_t n)
 { audio_uart_lv_basic_box_clear_454746(p,0u,n); }
 extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+/* Stock 0x5C2BEE (alloc_cb; upstream third-party/upstream/lvgl/src/misc/cache/lv_cache_lru_rb.c) */
 void *audio_uart_font_lru_allocate(void) {
     void *result=audio_uart_lv_malloc(0x44u);
     if(result==0) {

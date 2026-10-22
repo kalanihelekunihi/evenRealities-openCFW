@@ -30,14 +30,17 @@ static void allocation_failure(void) {
     *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0;
     for(;;)__asm__ volatile("":::"memory");
 }
+/* Stock 0x42dd70 (runtime_queue_context_init_42dd70) */
 void opencfw_boot_dfu_queue_init(void) {
     QUEUE=opencfw_boot_dfu_queue_new(50u,40u,0);
     if(!QUEUE)allocation_failure();
 }
+/* Stock 0x42ddae (runtime_action_context_init_42ddae) */
 void opencfw_boot_dfu_thread_init(void) {
     THREAD=opencfw_boot_dfu_thread_new((uintptr_t)opencfw_boot_dfu_orchestrator,0,attributes);
     if(!THREAD)allocation_failure();
 }
+/* Stock 0x42ddda (runtime_action_context_deinit_42ddda) */
 void opencfw_boot_dfu_thread_deinit(void) {
     if(THREAD){opencfw_boot_dfu_thread_terminate(THREAD);THREAD=0;}
 }
@@ -48,10 +51,12 @@ uint32_t opencfw_boot_dfu_send(const opencfw_boot_dfu_message *message) {
     else opencfw_boot_dfu_log(1,0x169u);
     return result==0;
 }
+/* Stock 0x42e1c4 (control_bits_dispatch_42e1c4) */
 void opencfw_boot_dfu_dispatch(uint32_t flags) {
     if(flags&(1u<<22))opencfw_boot_dfu_task();
     if(flags&(1u<<23))opencfw_boot_dfu_terminal();
 }
+/* Stock 0x42dd14 (control_orchestrator_42dd14) */
 #ifdef OPENCFW_DFU_TASK_AT_STOCK_ADDRESS
 __attribute__((section(".boot_dfu_orchestrator"),used))
 #endif

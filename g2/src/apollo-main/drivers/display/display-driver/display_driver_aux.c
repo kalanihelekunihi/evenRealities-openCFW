@@ -12,9 +12,11 @@ void display_driver_init_473abc(void) {
 void display_driver_init_473ac6(void) {
     (void)audio_uart_ring_resource_transition_4c9be2(12u);
 }
+/* Stock 0x473B34 (display_driver_timer_start_473b34) */
 void display_driver_case1_b(void) {
     (void)osTimerStart(display_driver_timer_handle, 2000u);
 }
+/* Stock 0x473B46 (display_driver_timer_stop_473b46) */
 void display_driver_case5_a(void) {
     (void)audio_timer_stop(display_driver_timer_handle);
 }

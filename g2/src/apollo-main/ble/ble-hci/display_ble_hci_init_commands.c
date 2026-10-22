@@ -3,49 +3,21 @@
 #include <stdint.h>
 extern void *audio_ble_hci_cmd_alloc_52ae38(uint16_t,uint16_t);
 extern void audio_ble_hci_cmd_send(void *);
-void audio_ble_hci_vendor_specific_cmd(uint16_t opcode,uint8_t length,
-                                       const void *payload) { /* 0x52b84c */
-    uint8_t *command=(uint8_t *)audio_ble_hci_cmd_alloc_52ae38(opcode,length);
-    if(command!=0) {
-        const uint8_t *src=(const uint8_t *)payload;
-        for(uint32_t i=0;i<length;i++)command[3u+i]=src[i];
-        audio_ble_hci_cmd_send(command);
-    }
-}
-static void send_empty(uint16_t opcode) {
-    void *command=audio_ble_hci_cmd_alloc_52ae38(opcode,0u);
-    if(command!=0)audio_ble_hci_cmd_send(command);
-}
-static void send_mask(uint16_t opcode,const void *mask) {
-    uint8_t *command=(uint8_t *)audio_ble_hci_cmd_alloc_52ae38(opcode,8u);
-    if(command!=0) {
-        const uint8_t *src=(const uint8_t *)mask;
-        for(uint32_t i=0;i<8u;i++)command[3u+i]=src[i];
-        audio_ble_hci_cmd_send(command);
-    }
-}
-void HciLeRandCmd(void) {send_empty(0x2018u);} /* 0x52b304 */
-void HciLeReadBufSizeCmd(void) {send_empty(0x2002u);} /* 0x52b31e */
-void HciLeReadLocalSupFeatCmd(void) {send_empty(0x2003u);} /* 0x52b338 */
-void HciLeReadSupStatesCmd(void) {send_empty(0x201cu);} /* 0x52b37c */
-void HciLeReadWhiteListSizeCmd(void) {send_empty(0x200fu);} /* 0x52b396 */
-void HciLeReadResolvingListSize(void) {send_empty(0x202au);} /* 0x52b7dc */
-void HciLeReadMaxDataLen(void) {send_empty(0x202fu);} /* 0x52b24c */
-void HciReadBdAddrCmd(void) {send_empty(0x1009u);} /* 0x52b606 */
-void HciLeSetEventMaskCmd(const void *mask) {send_mask(0x2001u,mask);} /* 0x52b492 */
-void HciSetEventMaskCmd(const void *mask) {send_mask(0x0c01u,mask);} /* 0x52b6bc */
-void HciSetEventMaskPage2Cmd(const void *mask) {send_mask(0x0c63u,mask);} /* 0x52b6e4 */
-uint32_t HciLeWriteDefDataLen(uint16_t octets,uint16_t time,
-                              uint32_t unused,uint32_t high) { /* 0x52b1bc */
-    (void)unused;
-    uint8_t *command=(uint8_t *)audio_ble_hci_cmd_alloc_52ae38(0x2024u,4u);
-    if(command!=0) {
-        command[3]=(uint8_t)octets;command[4]=(uint8_t)(octets>>8u);
-        command[5]=(uint8_t)time;command[6]=(uint8_t)(time>>8u);
-        audio_ble_hci_cmd_send(command);
-    }
-    return high;
-}
+extern void audio_ble_hci_vendor_specific_cmd(uint16_t opcode,uint8_t length, const void *payload); /* opencfw U5: now provided by the Cordio unit */
+extern void HciLeRandCmd(void); /* opencfw U5: now provided by the Cordio unit */
+/* 0x52b304 */
+/* 0x52b31e */
+/* 0x52b338 */
+/* 0x52b37c */
+/* 0x52b396 */
+extern void HciLeReadResolvingListSize(void); /* opencfw U5: now provided by the Cordio unit */
+/* 0x52b7dc */
+extern void HciLeReadMaxDataLen(void); /* opencfw U5: now provided by the Cordio unit */
+/* 0x52b24c */
+/* 0x52b606 */
+/* 0x52b492 */
+/* 0x52b6bc */
+/* 0x52b6e4 */
 uint64_t HciVscSetRfPowerLevelEx(uint32_t level) { /* 0x4b4cb2 */
     uint32_t value=level;
     uint32_t valid=((uint32_t)(int32_t)(int8_t)level+0x1bu)<0x22u;

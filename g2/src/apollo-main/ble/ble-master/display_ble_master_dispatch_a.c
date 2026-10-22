@@ -11,6 +11,7 @@ extern void audio_ble_master_event_5037d0(void *,void *);
 extern void audio_ble_master_event_50393e(void *,void *);
 extern void audio_ble_master_event_503b24(void *,void *);
 
+/* Stock 0x503B92 (AppMasterProcDmMsg; upstream AmbiqSuite R3.2.0 cordio ble-profiles/sources/apps/app/app_master.c) */
 void audio_ble_comm_master_dispatch_a(void *message)
 {
     const uint8_t *bytes=(const uint8_t *)message;

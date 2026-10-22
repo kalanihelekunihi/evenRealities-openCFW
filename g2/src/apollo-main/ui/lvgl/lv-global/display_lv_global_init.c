@@ -11,12 +11,8 @@ static const char format[]="Asserted at expression: %s (%s)";
 static const char expression[]="global != NULL";
 static const char message[]="NULL pointer";
 
-void audio_uart_lv_array_init_482b00(uint8_t *array,uint32_t bytes)
-{
-    *(uint32_t *)(void *)array=(bytes+3u)&~3u;
-    *(uint32_t *)(void *)(array+4u)=0u;
-    *(uint32_t *)(void *)(array+8u)=0u;
-}
+/* Retired: stock 0x482b00 is upstream lv_ll_init (lvgl/src/misc/lv_ll.c); this name is a link alias. */
+void audio_uart_lv_array_init_482b00(uint8_t *array,uint32_t bytes);
 
 void audio_uart_lv_init_global_4734cc(volatile uint8_t *global)
 {

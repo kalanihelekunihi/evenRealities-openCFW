@@ -1,7 +1,7 @@
 /* Native mode selector 0x50938e and watchdog-kick wrapper 0x5118e0.
  * ROM 0x509494/0x5094a4/0x5094a8 -> live bytes 0x20074368/69/6a. */
 #include <stdint.h>
-extern uint8_t audio_ble_hci_radio_mode_cells_20074368[3];
+extern uint8_t audio_ble_hci_radio_mode_cells_20074368[4];
 extern void audio_ble_npmx_kick_watchdog_5118e8(void);
 
 uint8_t *audio_ble_hci_radio_mode_state_50938e(uint32_t mode) {

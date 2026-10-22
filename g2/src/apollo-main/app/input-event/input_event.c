@@ -13,6 +13,7 @@ extern uint32_t audio_uart_input_ring_write(void *,const void *,uint32_t); /* 0x
 extern int32_t audio_ble_hci_boot_log_4733ee(const void *,...); /* selected 0x4733ee */
 extern void audio_delay_scheduler_assert(void); /* 0x5fa0a4 */
 
+/* Stock 0x4445A4 (display_thread.c input-event forwarder) */
 uint32_t audio_uart_input_event(uint32_t id,uint32_t field4,uint32_t field8) {
     uint8_t bytes[10];
     bytes[0]=(uint8_t)id;bytes[1]=(uint8_t)(id>>8);

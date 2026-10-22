@@ -4,6 +4,7 @@
 #include "../max-raw/max_raw.h"
 #include "../scan-watchdog/watchdog.h"
 #include "../scan-frame/frame.h"
+/* Stock 0x00007BC0 (touch_sub_48c0) */
 uint32_t touch_execute_saturated(uint32_t *out,uint32_t id,uint32_t slot,uint8_t *context,touch_mode_switch transition){
  uint8_t *w=(uint8_t *)(*(uint32_t *)(context+12)+id*144u),*runtime=(uint8_t *)(*(uint32_t *)(context+16)+id*60u);const uint8_t *common=*(const uint8_t **)context;volatile uint32_t *hw=**(volatile uint32_t *const *const *)(common+8);
  uint32_t status=transition(5,context);const uint32_t *frame=(const uint32_t *)(*(uint32_t *)(context+40)+slot*28u);

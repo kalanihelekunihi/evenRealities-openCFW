@@ -17,6 +17,7 @@ static const char absent[]="layout pb file not found: %s";
 static const char absent_short[]="[dashboard.layout]layout pb file not found: %s";
 static const char present[]="layout pb file exists: %s";
 static const char present_short[]="[dashboard.layout]layout pb file exists: %s";
+/* Stock 0x55876A (dashboard_layout_pb_file_exists) */
 uint32_t audio_uart_pb_file_exists(void) {
     void *file=audio_file_open(path,mode);
     if(file==0) {

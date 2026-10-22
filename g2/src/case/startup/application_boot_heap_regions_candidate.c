@@ -5,6 +5,7 @@
  */
 #include <stdint.h>
 
+/* Stock 0x0800BF54 (case_boot_heap_region_a) */
 uint32_t case_boot_heap_region_a(uint32_t *first,uint32_t *second,uint32_t *bytes)
 {
     *first=0x200015d0u;
@@ -13,6 +14,7 @@ uint32_t case_boot_heap_region_a(uint32_t *first,uint32_t *second,uint32_t *byte
     return 128u;
 }
 
+/* Stock 0x0800BF6C (case_boot_heap_region_b) */
 uint32_t case_boot_heap_region_b(uint32_t *first,uint32_t *second,uint32_t *bytes)
 {
     *first=0x2000182cu;

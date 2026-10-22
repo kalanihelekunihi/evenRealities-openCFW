@@ -2,6 +2,7 @@
  * Native CASE 0x080067b0 write one console control field.
  */
 #include <stdint.h>
+/* Stock 0x080067B0 (case_control_word5_replace_slot) */
 void case_boot_console_write_field(uint32_t base,uint32_t selector,uint32_t value)
 {
     volatile uint32_t *reg=(volatile uint32_t *)(uintptr_t)(base+20u);

@@ -16,6 +16,7 @@ static uint8_t *ptr(const uint8_t *c,unsigned off){return *(uint8_t *const *)(c+
 static uint16_t u16(const uint8_t *c,unsigned off){return *(const uint16_t *)(c+off);}
 static volatile uint32_t *hardware(const uint8_t *c){return *(volatile uint32_t **)ptr(ptr(c,0),8);}
 static uint32_t enabled(uint32_t id,const uint8_t *c){return id<3 && ((ptr(c,16)[id*60+35]&6u)==6u);}
+/* Stock 0x000069C4 (msc_sensing_loop) */
 uint32_t touch_dither_measure(const uint32_t *frames,const uint8_t *w,uint32_t stride,uint32_t *max,uint8_t *c){
  uint32_t status=0;*max=0;volatile uint32_t *hw=hardware(c);
  for(unsigned s=0;s<u16(w,56);s++,frames+=stride){
@@ -26,6 +27,7 @@ uint32_t touch_dither_measure(const uint32_t *frames,const uint8_t *w,uint32_t s
  }
  return status;
 }
+/* Stock 0x00007064 (touch_sub_3d64) */
 uint32_t touch_dither_scale(uint8_t *c){
  uint32_t status=touch_switch_dither_dependency(7,c);uint8_t *w=ptr(c,12);
  for(unsigned id=0;id<3;id++,w+=144){
@@ -50,6 +52,7 @@ uint32_t touch_prepare_scan_fields(uint8_t *c){
 static uint32_t saturated(uint32_t *out,uint32_t id,uint32_t slot,uint32_t mode,uint8_t *c){
  (void)mode;return touch_execute_saturated(out,id,slot,c,touch_switch_dither_dependency);
 }
+/* Stock 0x000071C8 (touch_sub_3ec8) */
 uint32_t touch_prepare_scan(uint8_t *c){
  uint32_t status=touch_prepare_scan_fields(c);void (*callback)(uint8_t *)=*(void (**)(uint8_t *))(ptr(c,8)+20);
  if(callback)callback(c); /* No return status is consumed. */

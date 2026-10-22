@@ -73,6 +73,7 @@ static bool event_a_sleep_mode_allows(void)
     return (mode & 0x40000000U) == 0U;
 }
 
+/* Stock 0x42A08C (spotmgr_buck_deepsleep_state_42a08c; PCM2.2 spotmgr_buck_deepsleep_state_determine) */
 NI void event_a_deepsleep_state(startup_events_a_snapshot *s)
 {
     uint32_t mode, enabled;
@@ -178,6 +179,7 @@ NI uint32_t event_a_state_determine(const startup_events_a_snapshot *s,
     return 0U;
 }
 
+/* Stock 0x42A878 (spotmgr_power_state_update_42a878; am_hal_spotmgr_pcm2_2_power_state_update) */
 NI uint32_t opencfw_boot_spotmgr_power_state_update_a(
     uint32_t stimulus, uint32_t on, void *opaque_args)
 {

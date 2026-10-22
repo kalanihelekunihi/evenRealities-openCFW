@@ -53,6 +53,7 @@ static void cq_callback(volatile uint8_t *state, uint32_t index, uint32_t status
     }
 }
 
+/* Stock 0x4C240E (am_hal_mspi_interrupt_service) */
 uint32_t am_hal_mspi_interrupt_service(void *handle, uint32_t interrupt_status)
 {
     volatile uint8_t *const state = (volatile uint8_t *)handle;

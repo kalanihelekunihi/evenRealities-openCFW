@@ -6,6 +6,7 @@ extern uint32_t case_policy_task_lookup(uint32_t mode); /* 0xca4c */
 extern uint32_t case_kernel_irq_save(void); /* 0x00f4 */
 extern void case_kernel_irq_restore(uint32_t token); /* 0x00fc */
 extern uint32_t case_policy_task_pended(void); /* 0xca78 */
+/* Stock 0x0800C5AC (xPortSysTickHandler) */
 void case_boot_systick_dispatch(void)
 {
     uint32_t token=case_kernel_irq_save();
@@ -13,6 +14,7 @@ void case_boot_systick_dispatch(void)
         *(volatile uint32_t *)(uintptr_t)0xe000ed04u=0x10000000u;
     case_kernel_irq_restore(token);
 }
+/* Stock 0x08008420 (systick_gate) */
 void case_vector_systick_8420(void)
 {
     uint32_t control=*(volatile uint32_t *)(uintptr_t)0xe000e010u;

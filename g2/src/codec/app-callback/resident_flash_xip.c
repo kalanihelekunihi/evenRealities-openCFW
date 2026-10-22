@@ -11,6 +11,7 @@ extern uint32_t gx8002_resident_flash_command_write_236dc(
 extern uint32_t gx8002_resident_flash_wait_ready_2375c(void);
 extern uint32_t gx8002_resident_flash_write_enable_2374c(void);
 
+/* Stock 0x100242EC (gx8002_flash_device_config) */
 uint32_t gx8002_resident_flash_device_config_242ec(void)
 {
     uint8_t config;
@@ -25,6 +26,7 @@ uint32_t gx8002_resident_flash_device_config_242ec(void)
     return 0u;
 }
 
+/* Stock 0x1002436C (gx_xip_init) */
 uint32_t gx8002_resident_xip_initialize_2436c(
     uint32_t command, uint32_t command_width, uint32_t address_width,
     uint32_t dummy_cycles, uint32_t data_width, uint32_t unused,

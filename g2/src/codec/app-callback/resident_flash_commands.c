@@ -12,6 +12,7 @@ extern uint32_t gx8002_resident_flash_command_read_23684(
 static volatile uint32_t *const spi =
     (volatile uint32_t *)(uintptr_t)UINT32_C(0xa2000000);
 
+/* Stock 0x10023670 (gx8002_spi_wait_tx_empty) */
 uint32_t gx8002_resident_flash_wait_tx_empty_23670(void)
 {
     while (spi[0x20u / 4u] != 0u) { }
@@ -19,6 +20,7 @@ uint32_t gx8002_resident_flash_wait_tx_empty_23670(void)
     return 0u;
 }
 
+/* Stock 0x100236DC (gx8002_flash_command_write) */
 uint32_t gx8002_resident_flash_command_write_236dc(
     uint32_t command, const uint8_t *data, int32_t bytes)
 {
@@ -41,6 +43,7 @@ uint32_t gx8002_resident_flash_command_write_236dc(
     return 0u;
 }
 
+/* Stock 0x10023734 (gx8002_flash_read_status) */
 uint8_t gx8002_resident_flash_read_status_23734(void)
 {
     uint8_t result;
@@ -48,18 +51,21 @@ uint8_t gx8002_resident_flash_read_status_23734(void)
     return result;
 }
 
+/* Stock 0x1002374C (gx8002_flash_write_enable) */
 uint32_t gx8002_resident_flash_write_enable_2374c(void)
 {
     gx8002_resident_flash_command_write_236dc(6u, 0, 0);
     return 0u;
 }
 
+/* Stock 0x1002375C (gx8002_flash_wait_ready) */
 uint32_t gx8002_resident_flash_wait_ready_2375c(void)
 {
     while ((gx8002_resident_flash_read_status_23734() & 1u) != 0u) { }
     return 1u;
 }
 
+/* Stock 0x10023770 (gx8002_flash_read_status2) */
 uint8_t gx8002_resident_flash_read_status2_23770(void)
 {
     uint8_t result;
@@ -67,6 +73,7 @@ uint8_t gx8002_resident_flash_read_status2_23770(void)
     return result;
 }
 
+/* Stock 0x100242B4 (gx8002_flash_quad_enable) */
 uint32_t gx8002_resident_flash_quad_enable_242b4(void)
 {
     uint8_t state = gx8002_resident_flash_read_status2_23770();
@@ -80,6 +87,7 @@ uint32_t gx8002_resident_flash_quad_enable_242b4(void)
     return 0u;
 }
 
+/* Stock 0x10024330 (gx8002_flash_quad_enable_pair) */
 uint32_t gx8002_resident_flash_quad_enable_pair_24330(void)
 {
     uint8_t states[2] = {

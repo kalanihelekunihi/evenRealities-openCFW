@@ -4,6 +4,7 @@
  * halfword target bytes at LR. R3 is the selector; other argument registers
  * pass through to the selected case. This is architecture-level source.
  */
+/* Stock 0x08009190 (case_switch8_offset) */
 __attribute__((naked)) void case_boot_jump_table_dispatch_9190(void)
 {
     __asm__ volatile(

@@ -14,6 +14,7 @@ static const char function[]="terminal_refresh_session_list_if_visible";
 static const char loading[]="session list is loading, skip refresh";
 static const char loading_short[]="[terminal.pb]session list is loading, skip refresh";
 
+/* Stock 0x5E8208 (terminal_refresh_session_list_if_visible) */
 uint8_t audio_terminal_refresh_session_list_if_visible(void) {
     if(audio_terminal_ui_mode!=11u) return 0u;
     if(audio_terminal_selector_loading!=0u) {

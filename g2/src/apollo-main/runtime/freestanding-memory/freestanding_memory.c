@@ -10,6 +10,7 @@ void *memcpy(void *destination,const void *source,size_t bytes)
     return destination;
 }
 
+/* Stock 0x0043BB00 (memset) */
 void *memset(void *destination,int value,size_t bytes)
 {
     volatile uint8_t *write=(volatile uint8_t *)destination;

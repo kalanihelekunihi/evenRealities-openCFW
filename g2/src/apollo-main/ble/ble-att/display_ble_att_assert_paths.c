@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 extern volatile uint8_t audio_ble_trace_level_cell;
-extern uint32_t g2_smp_candidate_compare(void *,uint32_t,uint32_t,uint32_t);
+extern int32_t audio_ble_hci_vendor_compare_44b610(const void *,const void *,uint32_t); /* 0x44b610 bounded strncmp */
 extern uint32_t audio_log_flags(void); /* selected 0x43d0ce */
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,uint32_t,const char *,...);
 extern void audio_ble_wsf_trace(const char *,const char *,...); /* 0x52a63c */
@@ -26,8 +26,7 @@ static const char reg_invalid_message[]="atts ccb not in use: %d";
 static const char csf_message[]="Invalid connId in attsCsfIsClientChangeAware: %d, handle: %d";
 
 static uint32_t cmp(const char *a,const char *b,uint32_t n) {
-    return g2_smp_candidate_compare(0,(uint32_t)(uintptr_t)a,
-                                     (uint32_t)(uintptr_t)b,n);
+    return (uint32_t)audio_ble_hci_vendor_compare_44b610(a,b,n);
 }
 static void log_at(uint8_t level,const char *path,const char *name,
                    uint32_t line,const char *message,uint8_t mode,

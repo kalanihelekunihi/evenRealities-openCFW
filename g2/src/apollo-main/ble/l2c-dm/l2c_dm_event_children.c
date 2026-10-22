@@ -12,10 +12,6 @@ __attribute__((used)) void audio_ble_dm_l2c_conn_update_ind_impl(uint32_t id,uin
     uint8_t *ccb=audio_ble_dm_conn_ccb_by_handle_4b601c((uint16_t)handle);
     if(ccb!=0){event[2u]=0x72u;event[8u]=(uint8_t)id;audio_ble_dm_conn_upd_execute_4b6532(ccb,event);}
 }
-__attribute__((naked)) void audio_ble_dm_l2c_conn_update_ind_55bc96(uint8_t id,uint16_t handle,
-                                                                       const uint16_t *params){
-    __asm__ volatile("b.w audio_ble_dm_l2c_conn_update_ind_impl");
-}
 __attribute__((used)) void audio_ble_dm_l2c_conn_update_cnf_impl(uint32_t handle,uint32_t result,
                                                                    uint32_t ambient_r2,uint32_t ambient_r3){
     uint8_t event[8];put32(event,ambient_r2);put32(event+4u,ambient_r3);

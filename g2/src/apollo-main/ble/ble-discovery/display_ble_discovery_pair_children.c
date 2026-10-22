@@ -4,9 +4,6 @@ extern uint8_t audio_dm_connection_records[]; /* RAM 0x200712a4 */
 extern void *audio_queue_copy_bytes(void *,const void *,uint32_t);
 extern uint32_t audio_ble_privacy_rewrite_record(uint8_t *);
 extern uint8_t audio_ble_pair_record_validate(uint8_t *);
-uint8_t audio_ble_dm_sec_level_4b71b2(uint8_t connection){
-    return audio_dm_connection_records[(uint32_t)connection*0x30u-0x19u];
-}
 void audio_ble_pair_record_update_name_47b3ae(uint8_t *record,const uint8_t *name){
     (void)audio_queue_copy_bytes(record+0x87u,name,16u);
     (void)audio_ble_privacy_rewrite_record(record);

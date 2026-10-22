@@ -2,6 +2,7 @@
  * Native CASE 0x08005bc0 port-register field update.
  */
 #include <stdint.h>
+/* Stock 0x08005BC0 (case_boot_register_mask_5bc0) */
 void case_boot_register_mask_5bc0(uint32_t bits)
 {
     volatile uint32_t *register_word=(volatile uint32_t *)(uintptr_t)0x40010000u;

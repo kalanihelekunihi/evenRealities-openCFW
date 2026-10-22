@@ -9,6 +9,7 @@ static const char audio_uart_ring_head_source[]="D:\\01_workspace\\s200_ap510b_i
 static const char audio_uart_ring_head_function[]="font_manager_get_font"; /* ROM0x0077958c */
 static const char audio_uart_ring_head_error[]="Invalid manager handle"; /* ROM0x007795a4 */
 static const char audio_uart_ring_head_short[]="[font_manager]Invalid manager handle"; /* ROM0x0074b16c */
+/* Stock 0x46CF56 (font_manager_get_font) */
 void *audio_uart_display_ring_head(const uint32_t *list) {
     if(list!=0) return (void *)(uintptr_t)list[0];
     if(audio_log_flags()&2u)

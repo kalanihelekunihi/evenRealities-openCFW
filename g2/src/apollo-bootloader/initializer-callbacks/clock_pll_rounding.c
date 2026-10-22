@@ -7,6 +7,7 @@ float opencfw_boot_pll_floor(float) FP_ABI;
 float opencfw_boot_pll_round(float) FP_ABI;
 float opencfw_boot_pll_ceil(float) FP_ABI;
 typedef union {float f;uint32_t bits;} binary32;
+/* Stock 0x427C90 (floorf_427c90) + 0x427CA0 (floor_bits_427ca0, soft-float body folded in) */
 float opencfw_boot_pll_floor(float value){
  binary32 x={.f=value};int shift=(int)((x.bits>>23)&255)-126;
  if(shift<=0){
@@ -18,6 +19,7 @@ float opencfw_boot_pll_floor(float value){
  }
  return x.f;
 }
+/* Stock 0x427D98 (roundf_427d98) + 0x427DA8 (round_bits_427da8, soft-float body folded in) */
 float opencfw_boot_pll_round(float value){
  binary32 x={.f=value};int shift=(int)((x.bits>>23)&255)-126;
  if(shift<=0){
@@ -29,6 +31,7 @@ float opencfw_boot_pll_round(float value){
  }
  return x.f;
 }
+/* Stock 0x427DD0 (ceilf_427dd0) + 0x427DE0 (ceil_bits_427de0, soft-float body folded in) */
 float opencfw_boot_pll_ceil(float value){
  binary32 x={.f=value};int shift=(int)((x.bits>>23)&255)-126;
  if(shift<=0){

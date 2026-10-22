@@ -7,6 +7,7 @@
     .align 2
     .global gx8002_resident_digital_voltage_24730
     .type gx8002_resident_digital_voltage_24730, %function
+/* Stock 0x10024730 (gx8002_digital_voltage) */
 gx8002_resident_digital_voltage_24730:
     push r15
     subi r14, r14, 4

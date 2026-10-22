@@ -3,6 +3,7 @@
 extern uint8_t audio_ble_subsystem_link_state_200719c8[];
 extern void appSetAdvScanDataFrag(uint8_t handle,uint8_t location);
 static uint16_t get16(const uint8_t *p) { return (uint16_t)p[0]|((uint16_t)p[1]<<8u); }
+/* Stock 0x4B3514 (appSetAdvScanData; upstream third-party/upstream/cordio/ble-profiles/sources/af/app_slave.c) */
 void appSetAdvScanData(uint8_t handle,uint8_t mode)
 {
     uint8_t *const state=audio_ble_subsystem_link_state_200719c8;

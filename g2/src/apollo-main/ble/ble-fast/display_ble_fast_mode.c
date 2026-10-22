@@ -14,6 +14,7 @@ static const char path[]="D:\\01_workspace\\s200_ap510b_iar_git\\platform\\ble\\
 static const char function[]="APP_ConnectParamESSSetFastMode";
 static const char message[]="Connection param update was recently rejected, skip immediate retry. Elapsed: %d ms, remaining: %d ms";
 static const char short_message[]="[ble.param]Connection param update was recently rejected, skip immediate retry. Elapsed: %d ms, remaining: %d ms";
+/* Stock 0x478160 (APP_ConnectParamESSSetFastMode) */
 void audio_ble_set_fast_mode(void) {
     if(audio_ble_fast_mode_throttle_enabled!=0u&&audio_ble_fast_mode_last_reject_tick!=0u) {
         uint32_t elapsed=g2_flashdb_candidate_tick()-audio_ble_fast_mode_last_reject_tick;

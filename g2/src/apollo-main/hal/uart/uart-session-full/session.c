@@ -31,6 +31,7 @@ static const char suspend_failed[] = "Failed to suspend UART bus: %d";
 static const char simple_suspend_failed[] =
     "[codec.porting]Failed to suspend UART bus: %d";
 
+/* Stock 0x58FB52 (uart_init) */
 int32_t audio_uart_session_open(void) {
     if (g2_audio_uart_initialized == 0u) {
         codec_ring_initialize(&g2_audio_uart_ring_state,
@@ -61,6 +62,7 @@ int32_t audio_uart_session_open(void) {
     return 0;
 }
 
+/* Stock 0x58FC0C (uart_close) */
 int32_t audio_uart_session_close(void) {
     if (g2_audio_uart_resumed == 0u) {
         if (audio_log_flags() & 2u)

@@ -27,6 +27,7 @@ extern int32_t gx8002_xip_tws_submit_10205d60(
     uint32_t (*callback)(uint32_t, uint32_t, uint32_t),
     void *next_context);
 
+/* Stock 0x100260D0 (gx8002_kws_pair) */
 uint32_t gx8002_resident_tws_callback_260d0(
     uint32_t arg0, uint32_t arg1, uint32_t arg2)
 {

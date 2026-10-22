@@ -60,6 +60,7 @@ static uint32_t timeout_end(const char *module,const char *source,
     return 3u;
 }
 
+/* Stock 0x45D710 (PeerData timeout listener) */
 uint32_t audio_uart_send_end4(uint32_t unused,uart_timeout_callback callback,
                                void *unused2,void *unused3) {
     (void)unused;(void)unused2;(void)unused3;
@@ -70,6 +71,7 @@ uint32_t audio_uart_send_end4(uint32_t unused,uart_timeout_callback callback,
                        audio_uart_timeout_submit_compact_peer,
                        4u,0x4acu,callback);
 }
+/* Stock 0x45D9CC (UserDataCmd timeout listener) */
 uint32_t audio_uart_send_end_type1(uint32_t unused,uart_timeout_callback callback,
                                     void *unused2,void *unused3) {
     (void)unused;(void)unused2;(void)unused3;
@@ -77,6 +79,7 @@ uint32_t audio_uart_send_end_type1(uint32_t unused,uart_timeout_callback callbac
                        audio_uart_timeout_name_user,audio_uart_timeout_compact,
                        audio_uart_timeout_submit_compact,4u,0x4e5u,callback);
 }
+/* Stock 0x45DC84 (SlaveScheduleModuleDataCmd timeout listener) */
 uint32_t audio_uart_send_end0(uint32_t unused,uart_timeout_callback callback,
                                void *unused2,void *unused3) {
     (void)unused;(void)unused2;(void)unused3;
@@ -84,6 +87,7 @@ uint32_t audio_uart_send_end0(uint32_t unused,uart_timeout_callback callback,
                        audio_uart_timeout_name_slave,audio_uart_timeout_compact,
                        audio_uart_timeout_submit_compact,4u,0x519u,callback);
 }
+/* Stock 0x45DF24 (MasterInputEventDataCmd timeout listener) */
 uint32_t audio_uart_send_end3(uint32_t unused,uart_timeout_callback callback,
                                void *unused2,void *unused3) {
     (void)unused;(void)unused2;(void)unused3;
@@ -91,6 +95,7 @@ uint32_t audio_uart_send_end3(uint32_t unused,uart_timeout_callback callback,
                        audio_uart_timeout_name_input,audio_uart_timeout_compact,
                        audio_uart_timeout_submit_compact,4u,0x551u,callback);
 }
+/* Stock 0x45E5A4 (MasterDisplayCmd timeout listener) */
 uint32_t audio_uart_send_end_type2(uint32_t unused,uart_timeout_callback callback,
                                     void *unused2,void *unused3) {
     (void)unused;(void)unused2;(void)unused3;

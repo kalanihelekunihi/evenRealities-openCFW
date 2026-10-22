@@ -14,6 +14,7 @@ static const char function_name[]="CommonMalloc";
 static const char message[]="malloc failed, retry %d/%d after %dms";
 static const char short_message[]=
  "[sync.module.api]malloc failed, retry %d/%d after %dms";
+/* Stock 0x4646F0 (CommonMalloc) */
 void *audio_uart_alloc_retry(uint32_t bytes) {
     void *p=0;
     uint32_t delay=1u;

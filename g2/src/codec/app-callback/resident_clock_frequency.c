@@ -20,6 +20,7 @@ static uint32_t bit(uint32_t word, uint32_t position)
     return (word >> (position & 31u)) & 1u;
 }
 
+/* Stock 0x10025210 (gx8002_clock_frequency) */
 uint32_t gx8002_resident_clock_frequency_25210(uint32_t module)
 {
     /* Native dispatch selects the parent module or the zero result. */

@@ -6,6 +6,7 @@
 
 extern uint32_t case_legacy_command_candidate(const uint8_t *,uint32_t); /* 0x0928 */
 extern uint32_t case_binary_command_candidate(const uint8_t *,uint32_t,uint32_t); /* 0x0e1c */
+/* Stock 0x08009B94 (case_hex_value) */
 uint32_t case_boot_hex_digit(uint32_t value) /* 0x9b94 */
 {
     if(value-0x30u<10u)return (uint8_t)(value-0x30u);
@@ -18,6 +19,7 @@ uint32_t case_boot_hex_digit(uint32_t value) /* 0x9b94 */
 #define FRAME ((uint8_t *)(uintptr_t)0x20000974u)
 #define RETRY (*(volatile uint8_t *)(uintptr_t)0x20000893u)
 
+/* Stock 0x0800085C (gls_rx_buffer_parse_dispatch) */
 void case_boot_transport_event_085c(void)
 {
     uint32_t n=COUNT;

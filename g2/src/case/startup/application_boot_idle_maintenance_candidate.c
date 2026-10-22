@@ -8,6 +8,7 @@ extern void case_policy_task_unlink(uint32_t link);
 extern void case_boot_task_reclaim(uint32_t task); /* 0xadb8 */
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
+/* Stock 0x0800ACE4 (case_boot_idle_maintenance) */
 void case_boot_idle_maintenance(void)
 {
     uint32_t scheduler=0x20000128u;

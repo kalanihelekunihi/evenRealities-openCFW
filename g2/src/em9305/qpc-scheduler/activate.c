@@ -7,6 +7,7 @@ extern uint32_t opencfw_em9305_log2p1(uint16_t ready);
 extern void opencfw_em9305_assert(uint32_t module, uint32_t line);
 extern void *opencfw_em9305_active_get(void *active); /* 0x310d38 */
 extern void opencfw_em9305_event_gc(void *event); /* 0x310fb8 */
+/* Stock 0x00311554 (QK_activate_) */
 void opencfw_em9305_qk_activate(void)
 {
     volatile struct qk_prefix *const state = (volatile struct qk_prefix *)(uintptr_t)UINT32_C(0x801394);

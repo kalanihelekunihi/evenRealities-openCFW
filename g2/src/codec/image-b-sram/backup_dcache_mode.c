@@ -9,6 +9,7 @@ static void native_double_sync(void)
     __asm__ volatile ("sync\n\tsync\n" ::: "memory");
 }
 
+/* Stock 0x10004D94 (gx_dcache_enable) */
 void gx8002_image_b_dcache_enable_10004d94(void)
 {
     volatile uint32_t *control = (volatile uint32_t *)(uintptr_t)UINT32_C(0xe000f000);
@@ -18,6 +19,7 @@ void gx8002_image_b_dcache_enable_10004d94(void)
     native_double_sync();
 }
 
+/* Stock 0x10004DB4 (gx_dcache_disable) */
 void gx8002_image_b_dcache_disable_10004db4(void)
 {
     volatile uint32_t *control = (volatile uint32_t *)(uintptr_t)UINT32_C(0xe000f000);

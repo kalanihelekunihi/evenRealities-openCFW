@@ -46,6 +46,7 @@ static void log_failure(uint32_t line, const char *message,
         audio_log_simple(0x04000000u, short_message, short_message);
 }
 
+/* Stock 0x471FA4 (sync_info_fn_00471fa4) */
 uint32_t audio_uart_display_sync_info(void) {
     uint8_t *message = (uint8_t *)codec_allocate(12u);
     if (!message) {

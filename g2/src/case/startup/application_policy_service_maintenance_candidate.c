@@ -13,6 +13,7 @@ static void wr32(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static uint16_t rd16(uint32_t a){return *(volatile uint16_t *)(uintptr_t)a;}
 static uint32_t rem(uint32_t value,uint32_t divisor){return value-case_policy_sensor_divide(value,divisor)*divisor;}
 static void logline(uint32_t a){(void)case_policy_log(a);(void)case_policy_log(CASE_STRING_ADDR(08001b08));}
+/* Stock 0x080018E4 (glasses_status_poll_dispatch) */
 void case_policy_service_maintenance(void)
 {
     const uint32_t base=0x2000087cu;

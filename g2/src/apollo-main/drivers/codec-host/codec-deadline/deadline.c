@@ -3,6 +3,7 @@
 extern uint64_t codec_tick64(void);
 extern uint32_t codec_uart_read(uint8_t *,uint32_t);
 extern uint32_t codec_delay_tick(uint32_t);
+/* Stock 0x0058FAD2 (codec byte read with deadline) */
 uint32_t codec_read_byte_deadline(uint8_t *dst,uint32_t timeout){
     uint64_t start=codec_tick64(),now=start;
     uint64_t deadline=start+(uint64_t)(int64_t)(int32_t)timeout;

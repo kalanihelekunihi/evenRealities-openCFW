@@ -12,12 +12,3 @@ static const char asserted[] = "Asserted at expression: %s (%s)";
 static const char expression[] = "obj != NULL";
 static const char reason[] = "NULL pointer";
 
-void audio_uart_page_43f09a(uint32_t object, uint32_t x, uint32_t y) {
-    if (object == 0u) {
-        audio_uart_lvgl_log(3u, path, 0x35u, function,
-                            asserted, expression, reason);
-        for (;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0u;
-    }
-    audio_uart_page_43f0e0(object, x);
-    audio_uart_page_43f142(object, y);
-}

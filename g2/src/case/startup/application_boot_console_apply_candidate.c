@@ -16,6 +16,7 @@ static uint32_t pin_code(uint32_t value)
     for(uint32_t bit=1u;bit<=18u;++bit)if((value&(1u<<bit))!=0u)return bit;
     return 0u;
 }
+/* Stock 0x08004100 (case_configure_pin_policy) */
 uint32_t case_boot_console_apply(uint32_t d,const uint32_t *config)
 {
     if(rb(d+84u)==1u)return 2u;

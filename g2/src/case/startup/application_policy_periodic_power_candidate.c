@@ -15,6 +15,7 @@ static void prepare_line(void)
     volatile uint32_t *state=(volatile uint32_t *)(uintptr_t)0x20000014u;
     if(state[1]!=1u){state[1]=1u;case_bus_gpio_config(0x50000400u,state);}
 }
+/* Stock 0x08002CB8 (case_periodic_policy_adapter) */
 void case_policy_periodic_power_check(void)
 {
     line_high();

@@ -10,6 +10,7 @@ static uint32_t config_persist(void) {
  uint32_t status=touch_eeprom_write(0,config,8,(void *)0x200008c8u);
  return status==0u || status==0x093e0004u ? 0u : 3u;
 }
+/* Stock 0x00003A80 (touch_deferred_0780_process) */
 void touch_deferred(void) {
  uint32_t mask=Cy_SysLib_EnterCriticalSection();
  uint8_t restart=*(volatile uint8_t *)0x200009ceu;

@@ -7,8 +7,7 @@ extern uint32_t audio_ble_pair_record_find_47add4(uint32_t, const void *);
 extern void audio_ble_slave_resolve_4b36b2(void *);
 
 static const uint8_t empty_address[8] = {0};
-/* Native 0x20074f93, distinct from subsystem offset 0x74. */
-uint8_t audio_ble_slave_open_flag_20074f93;
+extern uint8_t audio_ble_slave_open_flag_20074f93; /* opencfw U5: now provided by the Cordio unit */
 
 /* Native 0x4b39de. */
 void audio_ble_slave_finish_4b39de(const void *message, void *record)

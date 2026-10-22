@@ -6,7 +6,7 @@ extern uint8_t audio_ble_smp_handler_state[]; /* live 0x20070aec */
 extern uint8_t audio_ble_smp_database[];      /* live 0x200708ec */
 extern const uint8_t *audio_ble_comm_registration_slot; /* live pointer 0x200004b8 */
 extern volatile uint8_t audio_ble_trace_level_cell; /* live 0x2007502f */
-extern uint32_t g2_smp_candidate_compare(void *,uint32_t,uint32_t,uint32_t);
+extern int32_t audio_ble_hci_vendor_compare_44b610(const void *,const void *,uint32_t); /* 0x44b610 bounded strncmp */
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,uint32_t,const char *,...);
 extern void audio_ble_wsf_trace(const char *,const char *,...);
@@ -14,16 +14,14 @@ extern uint8_t *smpDbGetRecord(uint8_t); /* native 0x541fb8 */
 
 static const char err[]="ERR", warn[]="WARN", info[]="INFO";
 static const char smp[]="SMP", hci[]="HCI";
-static const char smp_main[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\cordio\\ble-host\\sources\\stack\\smp\\smp_main.c";
 static const char sc_main[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\cordio\\ble-host\\sources\\stack\\smp\\smp_sc_main.c";
 static const char db_main[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\cordio\\ble-host\\sources\\stack\\smp\\smp_db.c";
 static const char ccb_name[]="smpCcbByConnId", cancel_name[]="SmpScGetCancelMsgWithReattempt", fail_name[]="SmpDbPairingFailed";
-static const char ccb_msg[]="Invalid connId in smpCcbByConnId: %d";
 static const char cancel_msg[]="SmpScGetCancelMsgWithReattempt: %d";
 static const char fail_msg[]="SmpDbPairingFailed: connId: %d";
 
 static uint32_t cmp(const char *a,const char *b,uint32_t n) {
-    return g2_smp_candidate_compare(0,(uint32_t)(uintptr_t)a,(uint32_t)(uintptr_t)b,n);
+    return (uint32_t)audio_ble_hci_vendor_compare_44b610(a,b,n);
 }
 static void diagnostic(uint8_t severity,const char *path,const char *name,
                        uint32_t line,const char *msg,uint32_t value) {
@@ -43,11 +41,7 @@ static void diagnostic(uint8_t severity,const char *path,const char *name,
     }
 }
 
-uint8_t *smpCcbByConnId(uint8_t conn) {
-    if(conn!=0u)return audio_ble_smp_handler_state+(uint32_t)(conn-1u)*0x4cu;
-    diagnostic(2u,smp_main,ccb_name,0x133u,ccb_msg,0u);
-    return 0;
-}
+extern uint8_t *smpCcbByConnId(uint8_t conn); /* opencfw U5: now provided by the Cordio unit */
 void SmpDbPairingFailed(uint8_t conn) {
     uint8_t *record=smpDbGetRecord(conn);
     diagnostic(3u,db_main,fail_name,0x14du,fail_msg,conn);

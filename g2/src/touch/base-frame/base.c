@@ -7,12 +7,14 @@ static uint16_t u16(const uint8_t *c,unsigned off){return *(const uint16_t *)(c+
 static const uint32_t default_modes[21] = {0x0u, 0x0u, 0x1000000u, 0x4001u, 0x87010100u, 0x53u, 0x5004u, 0x11000000u, 0x0u, 0x1000000u, 0x4001u, 0x87010000u, 0x52u, 0x5005u, 0x0u, 0x0u, 0x1000000u, 0x4001u, 0x87010000u, 0x51u, 0x5100u};
 static const uint32_t dither_modes[21] = {0x0u, 0x763023u, 0x1000000u, 0x4001u, 0x87010100u, 0x53u, 0x5004u, 0x11000000u, 0x540045u, 0x1000000u, 0x4001u, 0x87010000u, 0x52u, 0x5005u, 0x0u, 0x542245u, 0x1000000u, 0x4001u, 0x87010000u, 0x51u, 0x5100u};
 static const uint32_t pin_functions[14] = {0x41000000u, 0x40000000u, 0x1u, 0x8060000u, 0x7070000u, 0x402000au, 0x2040000u, 0x306u, 0x4020a00u, 0x9080000u, 0x40000100u, 0x4020303u, 0x4020404u, 0x4020000u};
+/* Stock 0x000052BC (touch_config_1fbc_load_profiles) */
 void touch_generate_modes(uint8_t *c){
  uint8_t *i=ptr(c,8);uint32_t *m=(uint32_t *)(ptr(c,36)+144);
  for(unsigned j=0;j<21;j++)m[j]=default_modes[j];
  for(unsigned mode=0;mode<3;mode++)if(i[90+mode]==1)for(unsigned j=0;j<7;j++)m[7*mode+j]=dither_modes[7*mode+j];
  if(i[117]==5)m[11]|=0x100;
 }
+/* Stock 0x000050E4 (touch_config_1de4_load_mapping) */
 uint32_t touch_generate_pin_functions(uint8_t *c){
  uint8_t *i=ptr(c,8);uint32_t *f=(uint32_t *)(ptr(c,36)+112);
  for(unsigned j=0;j<14;j++)i[99+j]=255;
@@ -22,6 +24,7 @@ uint32_t touch_generate_pin_functions(uint8_t *c){
  for(unsigned j=0;j<14;j++)if(i[99+j]!=255)f[i[99+j]]=pin_functions[j];
  return 0;
 }
+/* Stock 0x00005378 (touch_config_2078_build) */
 uint32_t touch_generate_base(uint8_t *c){
  uint8_t *i=ptr(c,8),*common=ptr(c,0);uint32_t *f=(uint32_t *)ptr(c,36);
  f[0]=0x100011u|(((uint32_t)i[113]<<16)&0x30000u);

@@ -14,6 +14,7 @@ static const char fn[]="worker_thread";
 static const char extended[]="worker_thread app ID: %d running.";
 static const char compact[]="[thread_pool]worker_thread app ID: %d running.";
 static uint32_t rd32(const uint8_t *p) {return (uint32_t)p[0]|((uint32_t)p[1]<<8)|((uint32_t)p[2]<<16)|((uint32_t)p[3]<<24);}
+/* Stock 0x0049110C (worker_thread) */
 void audio_uart_worker_thread(void *unused) {
     (void)unused;
     for(;;) {

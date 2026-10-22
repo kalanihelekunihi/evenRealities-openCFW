@@ -43,6 +43,7 @@ static void callback_if_present(void *handler, void *page,
             handler, page, code, event);
 }
 
+/* Stock 0x0045F910 (page_manager_container_event_cb; body at 0x45f914 after 4 pad bytes) */
 void audio_uart_page_event_45f914(void *event) {
     if (event == 0) return;
     uint8_t *e = (uint8_t *)event;

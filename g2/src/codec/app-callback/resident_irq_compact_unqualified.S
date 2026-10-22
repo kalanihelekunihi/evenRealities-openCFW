@@ -5,6 +5,7 @@
     .align 2
     .global gx8002_resident_irq_compact_entry_25574
     .type gx8002_resident_irq_compact_entry_25574, %function
+/* Stock 0x10025574 (gx8002_irq_compact_entry) */
 gx8002_resident_irq_compact_entry_25574:
     nie
     ipush

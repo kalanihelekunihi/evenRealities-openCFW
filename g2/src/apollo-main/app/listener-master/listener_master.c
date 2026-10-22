@@ -39,6 +39,7 @@ static void log2(uint32_t line,uint32_t i,uint32_t value) {
     if((audio_log_flags()&1u)||(audio_log_flags()&4u))
         (void)compressed_log_output(0x10800000u,c_byte,c_byte,i,value);
 }
+/* Stock 0x45B14C (MasterScheduleModuleDataReplyListener) */
 uint32_t audio_uart_listener_master0(void *tf,const void *message,
                                       uint32_t unused3,uint32_t unused4) {
     (void)unused3;(void)unused4;

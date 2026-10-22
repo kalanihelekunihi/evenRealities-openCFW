@@ -6,21 +6,7 @@ extern uint8_t audio_ble_dm_handler_state[];
 extern void *audio_ble_hci_cmd_alloc_52ae38(uint16_t, uint16_t);
 extern void audio_ble_hci_cmd_send(void *);
 
-void audio_ble_hci_le_set_scan_params_52b50a(uint8_t type, uint16_t interval,
-                                               uint16_t window, uint8_t own_addr,
-                                               uint8_t filter_policy)
-{
-    uint8_t *const command = (uint8_t *)audio_ble_hci_cmd_alloc_52ae38(0x200bu, 7u);
-    if (command == 0) return;
-    command[3u] = type;
-    command[4u] = (uint8_t)interval;
-    command[5u] = (uint8_t)(interval >> 8);
-    command[6u] = (uint8_t)window;
-    command[7u] = (uint8_t)(window >> 8);
-    command[8u] = own_addr;
-    command[9u] = filter_policy;
-    audio_ble_hci_cmd_send(command);
-}
+extern void audio_ble_hci_le_set_scan_params_52b50a(uint8_t type, uint16_t interval, uint16_t window, uint8_t own_addr, uint8_t filter_policy); /* opencfw U5: now provided by the Cordio unit */
 
 void audio_ble_dm_dispatch_536820(void *message_ptr)
 {

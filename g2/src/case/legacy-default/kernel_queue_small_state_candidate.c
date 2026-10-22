@@ -7,6 +7,7 @@ extern void case_kernel_enter(void);
 extern void case_kernel_exit(void);
 extern _Noreturn void case_kernel_invariant_failure(uint32_t condition);
 
+/* Stock 0x0800B080 (case_queue_is_active) */
 uint32_t case_queue_is_active(uint32_t queue)
 {
     const volatile uint32_t *words=(const volatile uint32_t *)(uintptr_t)queue;
@@ -17,6 +18,7 @@ uint32_t case_queue_is_active(uint32_t queue)
     return used==capacity;
 }
 
+/* Stock 0x0800C15C (case_kernel_timeout_start) */
 void case_kernel_timeout_start(uint32_t *snapshot)
 {
     const volatile uint32_t *state=(const volatile uint32_t *)(uintptr_t)0x20000128u;

@@ -9,6 +9,7 @@ void case_policy_fake_standby_set(uint32_t side)
 {
     case_boot_button_mode_reset(side);
 }
+/* Stock 0x080013B8 (idle_mode_exit) */
 void case_policy_fake_standby_clear(void)
 {
     volatile uint8_t *state=(volatile uint8_t *)(uintptr_t)0x2000087cu;

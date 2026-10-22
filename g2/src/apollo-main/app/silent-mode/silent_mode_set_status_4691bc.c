@@ -10,6 +10,7 @@ static const char function[]="SilentMode_SetStatus";
 static const char failure[]="Failed to get settings";
 static const char compact[]="[silent_mode]Failed to get settings";
 
+/* Stock 0x4691BC (SilentMode_SetStatus) */
 void audio_silent_mode_set_status(uint32_t enabled) {
     uint8_t *config=audio_settings_get_config_46b44c();
     if(config==0) {

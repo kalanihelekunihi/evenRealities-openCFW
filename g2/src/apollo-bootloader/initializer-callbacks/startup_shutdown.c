@@ -12,13 +12,17 @@ extern void opencfw_hal_delay_us(uint32_t);
 extern uint32_t opencfw_bl_mspi_mode_enter(uint32_t);
 extern uint32_t opencfw_bl_mspi_mode_leave(uint32_t);
 static inline void restore(uint32_t saved){__asm__ volatile("msr primask,%0"::"r"(saved):"memory");}
+/* Stock 0x423DA0 (stage_one_wait_index; am_hal_itm_stimulus_not_busy) */
 NI uint32_t opencfw_boot_shutdown_wait_slot(uint32_t slot){
  return opencfw_boot_control_delay_status_change(1000,(volatile uint32_t *)(uintptr_t)(0xe0000000u+(slot<<2)),3,1)==0;
 }
+/* Stock 0x423DC4 (stage_one_wait_zero; am_hal_itm_print_not_busy) */
 NI uint32_t opencfw_boot_shutdown_wait_zero(void){return opencfw_boot_shutdown_wait_slot(0);}
+/* Stock 0x423D7A (stage_one_wait_reg80; am_hal_itm_not_busy) */
 NI uint32_t opencfw_boot_shutdown_wait_clear(void){
  return opencfw_boot_control_delay_status_change(1000,(volatile uint32_t *)(uintptr_t)0xe0000e80u,0x800000,0)==0;
 }
+/* Stock 0x423D58 (stage_one_status; am_hal_itm_tpiu_pipeline_flush) */
 NI uint32_t opencfw_boot_shutdown_prepare(void){
  if(!opencfw_boot_shutdown_wait_zero() || !opencfw_boot_shutdown_wait_clear())return 4;
  opencfw_hal_delay_us(500);return 0;
@@ -47,6 +51,7 @@ NI uint32_t opencfw_boot_shutdown_resource(uint32_t enable){
  }
  restore(saved);return status;
 }
+/* Stock 0x422468 (debug_disable; am_hal_debug_disable) */
 NI uint32_t opencfw_boot_shutdown_clock_release(void){
  uint32_t saved=opencfw_boot_control_critical_save();
  if(B(0x200271a1))B(0x200271a1)--;
@@ -55,6 +60,7 @@ NI uint32_t opencfw_boot_shutdown_clock_release(void){
  (void)opencfw_boot_shutdown_debug_release();
  uint32_t status=opencfw_boot_shutdown_resource(0);restore(saved);return status;
 }
+/* Stock 0x423D20 (stage_one_entry; am_hal_itm_disable) */
 NI uint32_t opencfw_boot_startup_shutdown_first(void){
  /* Stock ignores the preparatory timeout, continues register writes. */
  (void)opencfw_boot_shutdown_prepare();
@@ -63,6 +69,7 @@ NI uint32_t opencfw_boot_startup_shutdown_first(void){
  if(!status){status=opencfw_boot_shutdown_clock_release();if(status==3)status=0;}
  return status;
 }
+/* Stock 0x423DD0 (stage_two_status; am_hal_tpiu_disable) */
 NI uint32_t opencfw_boot_startup_shutdown_second(void){
  uint32_t saved=opencfw_boot_control_critical_save(),status;
  if(B(0x200271c3))B(0x200271c3)--;

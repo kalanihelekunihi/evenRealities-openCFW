@@ -8,17 +8,20 @@ extern void case_bus_drive_a(void);    /* 0x0800bad8 */
 extern void case_bus_drive_b(void);    /* 0x0800baa4 */
 extern void case_bus_drive_c(void);    /* 0x0800bafc */
 extern void case_bus_delay(uint32_t); /* 0x0800a7a2 */
+/* Stock 0x0800A19A (case_route_boolean_alt) */
 void case_bus_start(uint32_t bit)
 {
     case_bus_drive_a();case_bus_drive_b();case_bus_drive_a();
     case_bus_drive_c();case_bus_delay(bit?0x5au:0x17u);case_bus_drive_a();
 }
+/* Stock 0x0800A24A (case_pulse8_extended) */
 void case_bus_finish(void)
 {
     case_bus_drive_a();case_bus_drive_b();case_bus_drive_a();
     case_bus_delay(0x17u);case_bus_drive_c();case_bus_delay(0x15eu);
     case_bus_drive_a();
 }
+/* Stock 0x0800A310 (case_pulse8_double_train) */
 void case_bus_prepare(void)
 {
     case_bus_drive_a();case_bus_drive_b();case_bus_drive_a();case_bus_drive_c();

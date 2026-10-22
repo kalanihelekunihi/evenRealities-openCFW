@@ -22,6 +22,7 @@ void audio_td_temp_record_clear(void) {
         put_u32(state+0x9564u,0u);
 }
 
+/* Stock 0x5971F6 (td_temp_record_invalidate) */
 void audio_td_temp_record_invalidate(void) {
     volatile uint8_t *state=audio_td_state;
     clear_temp();

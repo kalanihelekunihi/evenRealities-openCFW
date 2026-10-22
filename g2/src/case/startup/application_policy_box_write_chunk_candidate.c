@@ -7,6 +7,7 @@
 extern void case_boot_option_prepare(void); /* 0x4bf4 */
 extern uint32_t case_binary_5e_flash_program(uint32_t,uint32_t,uint32_t,uint32_t); /* 0x4b94 */
 extern void case_boot_option_commit_c(void); /* 0x4b20 */
+/* Stock 0x08002E04 (case_policy_box_write_chunk) */
 uint32_t case_policy_box_write_chunk(uint32_t offset,uint32_t data,uint32_t count)
 {
     volatile const uint8_t *quiet=(volatile const uint8_t *)(uintptr_t)0x200000bfu;

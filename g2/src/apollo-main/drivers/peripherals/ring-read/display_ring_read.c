@@ -3,6 +3,7 @@
 #include <stdint.h>
 extern void *audio_queue_copy_bytes(void *,const void *,uint32_t);
 typedef void (*ring_callback)(void *,uint32_t,uint32_t);
+/* Stock 0x46DACC (lwrb_get_full) */
 uint32_t audio_uart_display_ring_available(const void *descriptor) {
     if(descriptor==0) return 0u;
     const uint32_t *d=(const uint32_t *)descriptor;
@@ -10,6 +11,7 @@ uint32_t audio_uart_display_ring_available(const void *descriptor) {
     uint32_t read=d[2],write=d[3];
     return write<read?write+(d[1]-read):write-read;
 }
+/* Stock 0x46D9AC (lwrb_read) */
 uint32_t audio_uart_display_ring_read(void *descriptor,void *destination,
                                        uint32_t count) {
     uint32_t *d=(uint32_t *)descriptor;

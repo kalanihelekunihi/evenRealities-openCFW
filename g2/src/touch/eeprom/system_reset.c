@@ -4,6 +4,7 @@
  * It does not preserve AIRCR fields that the original unconditionally replaces.
  */
 #include <stdint.h>
+/* Stock 0x00007E14 (NVIC_SystemReset) */
 __attribute__((noinline,noreturn)) void touch_reset_boundary(void)
 {
     __asm__ volatile("dsb sy" ::: "memory");

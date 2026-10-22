@@ -10,11 +10,13 @@
 static volatile uint32_t *const spi =
     (volatile uint32_t *)(uintptr_t)UINT32_C(0xa2000000);
 
+/* Stock 0x1002364C (wait_bus_ready) */
 void gx8002_resident_flash_wait_bus_2364c(void)
 {
     while ((spi[0x28u / 4u] & 1u) != 0u) { }
 }
 
+/* Stock 0x1002365C (gx8002_spi_wait_rx_empty) */
 uint32_t gx8002_resident_flash_wait_rx_empty_2365c(void)
 {
     while (spi[0x24u / 4u] != 0u) { }
@@ -22,6 +24,7 @@ uint32_t gx8002_resident_flash_wait_rx_empty_2365c(void)
     return 0u;
 }
 
+/* Stock 0x10023684 (gx8002_flash_command_read) */
 uint32_t gx8002_resident_flash_command_read_23684(
     uint32_t command, uint8_t *destination, int32_t bytes)
 {
@@ -45,6 +48,7 @@ uint32_t gx8002_resident_flash_command_read_23684(
 _Static_assert(sizeof(struct gx8002_flash_catalog_entry) == 24,
                "resident flash catalog ABI");
 
+/* Stock 0x10024190 (gx8002_flash_discover) */
 int32_t gx8002_resident_flash_discover_24190(void)
 {
     volatile uint32_t *const state =

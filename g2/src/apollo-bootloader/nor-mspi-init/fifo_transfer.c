@@ -16,6 +16,7 @@ uint32_t opencfw_hal_mspi_fifo_write(uint32_t module, uint32_t address,
     }
     return status;
 }
+/* Stock 0x423E8A (mspi_fifo_read) */
 uint32_t opencfw_hal_mspi_fifo_read(uint32_t module, uint32_t address,
                                    uint32_t length, uint32_t timeout) {
     if (module >= 4u) return 5;

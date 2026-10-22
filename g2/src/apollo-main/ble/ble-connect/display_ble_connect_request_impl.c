@@ -49,6 +49,7 @@ static void log_three(uint32_t line,const char *text,const char *short_text,
     if((audio_log_flags()&2u)!=0u)audio_log_extended(4u,module,path,function,line,text,a,b,c);
     if((audio_log_flags()&5u)!=0u)(void)compressed_log_output(0x10c00000u,short_text,short_text,a,b,c);
 }
+/* Stock 0x47720C (_connectParamReq_impl) */
 void audio_ble_connect_param_request_impl(uint8_t mode) {
     uint8_t *conn=(uint8_t *)audio_ble_dm_conn_params();
     if(conn==0||conn[4u]==0u||conn[4u]>3u) {

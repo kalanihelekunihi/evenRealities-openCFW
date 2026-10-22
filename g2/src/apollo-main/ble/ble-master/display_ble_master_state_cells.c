@@ -18,4 +18,4 @@ extern uint8_t *audio_ble_master_context
 uint8_t *audio_ble_master_mode_slot;                   /* 0x20074300 */
 uint8_t *audio_ble_master_state_shadow;                /* 0x20074304 */
 uint8_t *audio_ble_master_payload_slot;                /* 0x20074308 */
-const uint8_t *audio_ble_master_registration_slot;     /* 0x20074354 */
+/* 0x20074354 */

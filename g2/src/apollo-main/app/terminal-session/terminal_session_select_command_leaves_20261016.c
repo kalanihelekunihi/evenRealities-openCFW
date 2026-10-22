@@ -3,6 +3,7 @@
 
 extern uint8_t audio_td_state[0xa1dc]; /* observed RAM 0x2010fd20 */
 
+/* Stock 0x5eca3e (terminal session payload: row kind, 0x5eca3e..0x5eca44) */
 uint32_t audio_terminal_session_command_5eca3e(uint32_t payload) {
     return (uint8_t)(payload>>16);
 }

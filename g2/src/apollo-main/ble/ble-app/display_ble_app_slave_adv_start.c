@@ -8,10 +8,7 @@ extern void appAdvStart(uint8_t count,const uint8_t *handles,
                         const uint8_t *maximum_events,uint8_t configure);
 static void set16(uint8_t *p,uint16_t v) { p[0]=(uint8_t)v;p[1]=(uint8_t)(v>>8u); }
 
-void AppSetBondable(uint8_t bondable)
-{
-    audio_ble_subsystem_link_state_200719c8[0x54u]=bondable;
-}
+extern void AppSetBondable(uint8_t bondable); /* opencfw U5: now provided by the Cordio unit */
 
 /* Existing product caller names the same native 0x4b467c entry by role. */
 __attribute__((naked)) void audio_ble_app_adv_set_state(uint8_t bondable __attribute__((unused)))
@@ -19,6 +16,7 @@ __attribute__((naked)) void audio_ble_app_adv_set_state(uint8_t bondable __attri
     __asm volatile("b AppSetBondable");
 }
 
+/* Stock 0x4B33D2 (appSlaveForceAdvDataSync; upstream third-party/upstream/cordio/ble-profiles/sources/af/app_slave.c) */
 void appSlaveForceAdvDataSync(uint8_t handle,uint8_t mode)
 {
     uint8_t *const state=audio_ble_subsystem_link_state_200719c8;
@@ -28,6 +26,7 @@ void appSlaveForceAdvDataSync(uint8_t handle,uint8_t mode)
     state[0x55u+handle]=0u;
 }
 
+/* Stock 0x4B446A (appSlaveAdvStart product variant) */
 void appSlaveAdvStart(uint8_t count,const uint8_t *handles,
                       const uint16_t *interval,const uint16_t *duration,
                       const uint8_t *maximum_events,uint8_t configure,uint8_t mode)

@@ -51,6 +51,7 @@ static const char display_driver_unknown[] = "unknow async command type = %d\r\n
 static const char display_driver_compact_recovery[] = "[task.displaydrvmgr]uled recovery and reflash ok\r\n";
 static const char display_driver_compact_unknown[] = "[task.displaydrvmgr]unknow async command type = %d\r\n";
 
+/* Stock 0x473C44 (Disp_Mgr_ThreadHandler) */
 void display_driver_event_loop(void) {
     display_driver_message message;
     audio_display_driver_queue_init();

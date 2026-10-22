@@ -15,6 +15,7 @@ static uint32_t native_divu(uint32_t numerator, uint32_t denominator)
     return result;
 }
 
+/* Stock 0x10000EB8 (gx8002_uart_stage1_pmu_second_body; true entry 0x10000EA0) */
 int32_t gx8002_uart_stage1_pmu_clock_rate(uint32_t selector)
 {
     uint32_t lookup = selector;

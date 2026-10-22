@@ -7,6 +7,7 @@
 extern int32_t case_policy_sensor_delay(uint32_t amount); /* 0xa7b0 */
 extern void case_boot_transport_action(uint32_t side,uint32_t mode); /* 0x1c1c */
 
+/* Stock 0x080082EC (g2_thread_entry_4) */
 void case_boot_transport_cb_82ec(void)
 {
     volatile uint8_t *state=(volatile uint8_t *)(uintptr_t)0x2000087cu;

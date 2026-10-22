@@ -6,6 +6,7 @@ extern void WsfTaskLock(void);
 extern void WsfTaskUnlock(void);
 extern void audio_wsf_queue_remove(void **queue, void *element, void *previous);
 
+/* Stock 0x0052A542 (WsfTimerServiceExpired) */
 void *opencfw_wsf_timer_expired(uint32_t ignored)
 {
     (void)ignored;

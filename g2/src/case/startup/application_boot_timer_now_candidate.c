@@ -5,6 +5,7 @@
 extern void case_boot_timer_handle_wrap(void); /* 0xb2b0 */
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
+/* Stock 0x0800B284 (case_boot_timer_now) */
 uint32_t case_boot_timer_now(uint32_t *overflow)
 {
     uint32_t now=rd(0x20000134u);

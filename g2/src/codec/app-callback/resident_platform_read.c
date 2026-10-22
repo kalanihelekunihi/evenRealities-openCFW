@@ -5,6 +5,7 @@
  */
 #include <stdint.h>
 
+/* Stock 0x10024810 (gx8002_platform_read) */
 uint32_t gx8002_resident_platform_read_24810(uint32_t query, void *output)
 {
     volatile const uint32_t *const analog =

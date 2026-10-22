@@ -20,6 +20,7 @@ static uint32_t pack_be32(const uint8_t *bytes)
            ((uint32_t)bytes[2]<<8)|bytes[3];
 }
 
+/* Stock 0x0800373C (case_binary_5e_apply) */
 uint32_t case_binary_5e_apply(const uint8_t *sixteen)
 {
     volatile uint32_t *config=(volatile uint32_t *)(uintptr_t)0x200001a4u;

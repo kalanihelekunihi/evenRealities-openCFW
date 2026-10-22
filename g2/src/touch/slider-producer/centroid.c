@@ -3,7 +3,9 @@
 #include "slider.h"
 static uint32_t divide(uint32_t n,uint32_t d){uint32_t q=0;for(unsigned k=32;k;k--){unsigned i=k-1;if(d<=(n>>i)){n-=d<<i;q+=1u<<i;}}return q;}
 static int32_t signed_divide(int32_t n,int32_t d){return n<0?-(int32_t)divide(0u-(uint32_t)n,(uint32_t)d):(int32_t)divide((uint32_t)n,(uint32_t)d);}
+/* Stock 0x00004FDE (touch_leaf_1cde_blend_u8) */
 uint32_t touch_position_iir(uint32_t sample,uint32_t prior,uint32_t coefficient){return (sample*coefficient+prior*(256u-coefficient))>>8;}
+/* Stock 0x000048CC (touch_select_15cc_peak) */
 void touch_linear_centroid(uint8_t *t,const uint8_t *w){
  uint32_t n=*(const uint16_t *)(w+56),config=*(const uint32_t *)(w+48);if(n<3)n=3;
  if((config&3u)!=1)return;

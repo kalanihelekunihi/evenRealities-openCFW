@@ -13,14 +13,3 @@ static const char assertion[] = "Asserted at expression: %s (%s)";
 static const char expression[] = "obj != NULL";
 static const char reason[] = "NULL pointer";
 
-void audio_conversate_lv_object_delete_44d90e(uint32_t object) {
-    if (object == 0u) {
-        audio_uart_lvgl_log(3u, path, 0x8fu, function, assertion,
-                            expression, reason);
-        volatile uint32_t *const fault = (volatile uint32_t *)(uintptr_t)UINT32_MAX;
-        for (;;) *fault = 0u;
-    }
-    (void)audio_uart_lv_async_post_484014(
-        audio_uart_lv_delete_event_callback_44df20,
-        (void *)(uintptr_t)object);
-}

@@ -11,6 +11,7 @@ void case_policy_scheduler_lock(void)
     *depth=*depth+1u;
     __asm__ volatile("dsb\nisb" ::: "memory");
 }
+/* Stock 0x0800C014 (case_policy_scheduler_unlock) */
 uint32_t case_policy_scheduler_unlock(void)
 {
     volatile uint32_t *depth=(volatile uint32_t *)(uintptr_t)0x2000019cu;

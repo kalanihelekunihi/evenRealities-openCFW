@@ -4,6 +4,7 @@
 extern uint32_t audio_uart_handshake_send(uint32_t channel,const void *data,
                                           uint32_t size,uint32_t flags,
                                           uint32_t timeout);
+/* Stock 0x471528 (general_configure_initial_sync_request_471528) */
 void audio_uart_service_prepare4(void) {
     uint8_t message[10]={0};
     message[0]=2u;

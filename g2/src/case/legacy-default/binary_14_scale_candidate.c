@@ -3,6 +3,7 @@
  */
 #include <stdint.h>
 
+/* Stock 0x0800018C (case_binary_14_divpair) */
 static __attribute__((used)) void case_binary_14_divpair(uint32_t dividend_word,
                             uint32_t divisor_word, uint32_t *quotient_out,
                             uint32_t *remainder_out)

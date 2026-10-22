@@ -5,6 +5,7 @@
 extern void case_boot_pin_config(uint32_t base,uint32_t mask); /* 0x4c1c */
 extern void case_boot_irq_disable(uint32_t irq); /* 0x4fec */
 
+/* Stock 0x080062AC (case_release_peripheral) */
 void case_policy_sensor_stop(uint32_t descriptor)
 {
     volatile const uint32_t *desc=(volatile const uint32_t *)(uintptr_t)descriptor;

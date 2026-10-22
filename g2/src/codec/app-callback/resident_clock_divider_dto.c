@@ -10,6 +10,7 @@ extern uint32_t gx8002_resident_module_div_read_24ae8(
 extern void gx8002_resident_reg_set_val_24a30(
     volatile uint32_t *, uint32_t, uint32_t, uint32_t);
 
+/* Stock 0x10024DF8 (gx8002_clock_module_divider_set) */
 void gx8002_resident_clock_module_divider_24df8(
     uint32_t module, uint32_t divider)
 {
@@ -55,6 +56,7 @@ void gx8002_resident_clock_module_divider_24df8(
     if (primary_active) *info.disable = UINT32_C(1) << (primary & 31u);
 }
 
+/* Stock 0x10024F44 (gx8002_clock_module_dto_set) */
 void gx8002_resident_clock_module_dto_24f44(
     uint32_t module, uint32_t numerator, uint32_t mode)
 {

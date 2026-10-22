@@ -2,6 +2,7 @@
 #include <stdint.h>
 extern uint8_t audio_td_state[0xa1dc];
 
+/* Stock 0x597BE4 (td_session_struct_copy_out) */
 uint32_t audio_td_session_struct_copy_out(const void *source) {
     if(source==0) return UINT32_MAX;
     const uint8_t *p=source;

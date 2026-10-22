@@ -18,6 +18,7 @@ extern void case_policy_ota_right_finish(void); /* 0xbf08 */
 extern int32_t case_policy_sensor_delay(uint32_t amount); /* 0xa7b0 */
 extern void case_policy_idle_clear(void); /* 0x9a14 */
 
+/* Stock 0x08009A9C (glasses_sides_reset) */
 void case_policy_no_reply_reset(uint32_t left,uint32_t right)
 {
     _Static_assert(offsetof(Registry,event)+offsetof(EventSpec,field4)==0x100u,

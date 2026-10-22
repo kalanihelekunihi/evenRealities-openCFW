@@ -14,6 +14,7 @@ static const char function[]="AppDbResetAllTimestamps";
  if((audio_log_flags()&1u)||(audio_log_flags()&4u)) \
   (void)compressed_log_output(mask,compact,compact,##__VA_ARGS__); \
 } while(0)
+/* Stock 0x47C164 (FUN_0047c164, AppDbResetAllTimestamps) */
 void audio_ble_pair_timestamp_reset_all(void) {
     LOG(4u,0x82bu,0x10000000u,
         "AppDbResetAllTimestamps: Resetting all record timestamps",

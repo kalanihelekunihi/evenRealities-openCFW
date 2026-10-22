@@ -13,6 +13,7 @@ static void put_u32(uint8_t *p,uint32_t value) {
     for(uint32_t i=0;i<4u;++i) p[i]=(uint8_t)(value>>(8u*i));
 }
 
+/* Stock 0x5977CE (td_state_sync) */
 uint32_t audio_td_state_sync(const void *payload) {
     if(payload==0) return UINT32_MAX;
     const uint8_t *p=payload;

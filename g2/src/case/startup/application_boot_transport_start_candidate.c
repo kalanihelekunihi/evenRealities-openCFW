@@ -20,6 +20,7 @@ extern void case_boot_transport_cb_7f2c(void);
 extern void case_policy_task_7200(void);
 extern void case_boot_transport_cb_82ec(void);
 
+/* Stock 0x08006968 (app_rtos_init) */
 void case_boot_transport_start(void)
 {
     volatile uint32_t *shared=(volatile uint32_t *)(uintptr_t)0x200000b8u;

@@ -10,13 +10,6 @@ extern void audio_uart_lv_anim_init_4d46de(void *);
 extern uint32_t audio_uart_lv_image_cache_init_4d4ad4(uint32_t);
 extern uint32_t audio_uart_lv_image_header_cache_init_4d4bdc(uint32_t);
 
-void audio_uart_lv_init_memory_48aa60(void)
-{
-    uint8_t *root=audio_uart_display_lv_root;
-    audio_uart_lv_draw_handlers_default_48aa80(root+0xc8u);
-    audio_uart_lv_draw_handlers_default_48aa80(root+0xe8u);
-    audio_uart_lv_draw_handlers_default_48aa80(root+0x108u);
-}
 void audio_uart_lv_init_async_49acb0(void)
 {
     audio_uart_lv_async_init_4d465c(audio_uart_display_lv_root+0x1d0u);
@@ -26,10 +19,6 @@ void audio_uart_lv_init_display_464330(void)
     audio_uart_lv_array_init_482b00(audio_uart_display_lv_root+0x74u,0x18u);
     audio_uart_lv_display_init_4645d8(1u);
 }
-void audio_uart_lv_init_indev_4c6d8c(void)
-{
-    audio_uart_lv_array_init_482b00(audio_uart_display_lv_root+0x180u,4u);
-}
 void audio_uart_lv_init_style_44d32c(void)
 {
     audio_uart_lv_array_init_482b00(audio_uart_display_lv_root+0x34u,0x20u);
@@ -37,10 +26,6 @@ void audio_uart_lv_init_style_44d32c(void)
 void audio_uart_lv_init_anim_48438c(void)
 {
     audio_uart_lv_anim_init_4d46de(audio_uart_display_lv_root+0x148u);
-}
-void audio_uart_lv_init_cache_44b90c(void)
-{
-    audio_uart_lv_array_init_482b00(audio_uart_display_lv_root+0x18u,0x14u);
 }
 void audio_uart_lv_image_decoder_init_488f4c(uint32_t primary,uint32_t secondary)
 {
@@ -157,28 +142,8 @@ void audio_uart_lv_bin_decoder_close_4c7e28(void *decoder,void *descriptor)
  * file_d0, driver4, cache8; driver cache_size4, close_cb16;
  * cache buffer12. Native result is truncated to8 bits. */
 extern void audio_uart_lv_heap_free(void *);
-uint32_t audio_uart_lv_fs_file_close_4c6ee0(void *file)
-{
-    volatile uint32_t *f = file;
-    if(f[1] == 0u) return 11u;
-    if(((volatile uint32_t *)(uintptr_t)f[1])[4] == 0u) return 9u;
-    uint32_t file_data = f[0];
-    uint32_t driver = f[1];
-    uint32_t callback = ((volatile uint32_t *)(uintptr_t)f[1])[4];
-    uint32_t result = ((uint32_t (*)(void *,void *))(uintptr_t)callback)
-        ((void *)(uintptr_t)driver,(void *)(uintptr_t)file_data);
-    if(((volatile uint32_t *)(uintptr_t)f[1])[1] != 0u && f[2] != 0u) {
-        if(((volatile uint32_t *)(uintptr_t)f[1])[1] != UINT32_MAX &&
-           ((volatile uint32_t *)(uintptr_t)f[2])[3] != 0u) {
-            audio_uart_lv_heap_free((void *)(uintptr_t)((volatile uint32_t *)(uintptr_t)f[2])[3]);
-        }
-        audio_uart_lv_heap_free((void *)(uintptr_t)f[2]);
-    }
-    f[0] = 0u;
-    f[1] = 0u;
-    f[2] = 0u;
-    return (uint8_t)result;
-}
+/* Retired: stock 0x4c6ee0 is upstream lv_fs_close (lvgl/src/misc/lv_fs.c); this name is a link alias. */
+uint32_t audio_uart_lv_fs_file_close_4c6ee0(void *file);
 
 /* Full native4c79d0..4c7b1c. Invocation: unused decoder, descriptor,
  * header. Descriptor src12/src_type16/file20. Header12 bytes.
@@ -236,16 +201,10 @@ uint32_t audio_uart_lv_bin_decoder_info_4c79d0(void *decoder,void *descriptor,vo
 
 extern uint32_t g2_log_module_length(const char *); /* selected44a43c */
 extern int32_t audio_uart_font_path_compare(const char *,const char *); /* selected46cacc */
-/* Full native454768..454770. */
-uint32_t audio_uart_lv_string_length_454768(const char *source)
-{
-    return g2_log_module_length(source);
-}
-/* Full native4547be..4547c6. */
-int32_t audio_uart_lv_string_compare_4547be(const char *a,const char *b)
-{
-    return audio_uart_font_path_compare(a,b);
-}
+/* Retired: stock 0x454768 is upstream lv_strlen (lvgl/src/stdlib/clib/lv_string_clib.c); this name is a link alias. */
+uint32_t audio_uart_lv_string_length_454768(const char *source);
+/* Retired: stock 0x4547be is upstream lv_strcmp (lvgl/src/stdlib/clib/lv_string_clib.c); this name is a link alias. */
+int32_t audio_uart_lv_string_compare_4547be(const char *a,const char *b);
 /* Full native4c70e4..4c7116. Index0 deliberately excluded by native loop. */
 const char *audio_uart_lv_fs_extension_4c70e4(const char *source)
 {
@@ -262,27 +221,8 @@ const char *audio_uart_lv_fs_extension_4c70e4(const char *source)
 /* Full native4c6f46..4c6fba. Driver offsets cache_size4/read20/seek28.
  * Cached read is a genuine child provider, not an uncached substitute. */
 extern uint32_t audio_uart_lv_fs_read_cached_4c713c(void *,void *,uint32_t,uint32_t *);
-uint32_t audio_uart_lv_fs_file_read_4c6f46(void *file,void *buffer,uint32_t size,uint32_t *read_out)
-{
-    volatile uint32_t *f=file;
-    if(read_out != 0) *read_out=0u;
-    if(f[1]==0u) return 11u;
-    if(((volatile uint32_t *)(uintptr_t)f[1])[1]!=0u) {
-        if(((volatile uint32_t *)(uintptr_t)f[1])[5]==0u ||
-           ((volatile uint32_t *)(uintptr_t)f[1])[7]==0u) return 9u;
-    } else if(((volatile uint32_t *)(uintptr_t)f[1])[5]==0u) return 9u;
-    uint32_t count=0u,result;
-    if(((volatile uint32_t *)(uintptr_t)f[1])[1]!=0u) {
-        result=audio_uart_lv_fs_read_cached_4c713c(file,buffer,size,&count);
-    } else {
-        uint32_t data=f[0],driver=f[1];
-        uint32_t callback=((volatile uint32_t *)(uintptr_t)f[1])[5];
-        result=((uint32_t (*)(void *,void *,void *,uint32_t,uint32_t *))(uintptr_t)callback)
-            ((void *)(uintptr_t)driver,(void *)(uintptr_t)data,buffer,size,&count);
-    }
-    if(read_out != 0) *read_out=count;
-    return (uint8_t)result;
-}
+/* Retired: stock 0x4c6f46 is upstream lv_fs_read (lvgl/src/misc/lv_fs.c); this name is a link alias. */
+uint32_t audio_uart_lv_fs_file_read_4c6f46(void *file,void *buffer,uint32_t size,uint32_t *read_out);
 
 /* Complete native4c713c..4c7326; reconstructed from pinned lv_fs.c and
  * native field offsets, 16-bit partial-copy length and fresh owner reloads.
@@ -294,60 +234,6 @@ extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,cons
 #define DRIVER ((volatile uint32_t *)(uintptr_t)f[1])
 #define SEEK(pos) ((uint32_t (*)(void *,void *,uint32_t,uint32_t))(uintptr_t)DRIVER[7])((void *)(uintptr_t)f[1],(void *)(uintptr_t)f[0],(pos),0u)
 #define READ(buf,len,count) ((uint32_t (*)(void *,void *,void *,uint32_t,uint32_t *))(uintptr_t)DRIVER[5])((void *)(uintptr_t)f[1],(void *)(uintptr_t)f[0],(buf),(len),(count))
-uint32_t audio_uart_lv_fs_read_cached_4c713c(void *file,void *out,uint32_t request,uint32_t *read_out)
-{
-    volatile uint32_t *f=file;
-    uint32_t result=0u,position=CACHE[2],start=CACHE[0],end=CACHE[1];
-    uint8_t *buffer=(void *)(uintptr_t)CACHE[3];
-    uint32_t buffer_size=DRIVER[1];
-    if(position>=start && position<=end) {
-        uint32_t remaining=end-position+1u;
-        uint32_t offset=(end-start)-remaining+1u;
-        if(DRIVER[1]==UINT32_MAX && request>remaining) request=remaining-1u;
-        if(request<=remaining) {
-            audio_uart_lv_grid_copy_454738(out,buffer+offset,request);
-            *read_out=request;
-        } else {
-            audio_uart_lv_grid_copy_454738(out,buffer+offset,remaining);
-            (void)SEEK(CACHE[1]+1u);
-            uint32_t count=0u;
-            if(request-remaining>buffer_size) {
-                result=READ((uint8_t *)out+remaining,request-remaining,&count);
-            } else {
-                result=READ(buffer,buffer_size,&count);
-                CACHE[0]=CACHE[1]+1u;
-                CACHE[1]=CACHE[0]+count-1u;
-                uint32_t chunk=request-remaining;
-                if(chunk>=count) chunk=count;
-                audio_uart_lv_grid_copy_454738((uint8_t *)out+remaining,buffer,(uint16_t)chunk);
-            }
-            uint32_t total=remaining+count;
-            *read_out=total<request?total:request;
-        }
-    } else {
-        (void)SEEK(CACHE[2]);
-        if(request>buffer_size) {
-            result=READ(out,request,read_out);
-        } else {
-            if(buffer==0) {
-                CACHE[3]=(uint32_t)(uintptr_t)audio_uart_lv_malloc(buffer_size);
-                if(CACHE[3]==0u) {
-                    audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\lv_fs.c",600u,"lv_fs_read_cached","Asserted at expression: %s (%s)","file_p->cache->buffer != NULL","Out of memory");
-                    for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
-                }
-                buffer=(void *)(uintptr_t)CACHE[3];
-            }
-            uint32_t count=0u;
-            result=READ(buffer,buffer_size,&count);
-            CACHE[0]=position;
-            CACHE[1]=CACHE[0]+count-1u;
-            *read_out=request<count?request:count;
-            audio_uart_lv_grid_copy_454738(out,buffer,*read_out);
-        }
-    }
-    if((uint8_t)result==0u) CACHE[2]=CACHE[2]+*read_out;
-    return (uint8_t)result;
-}
 #undef READ
 #undef SEEK
 #undef DRIVER
@@ -567,159 +453,20 @@ uint32_t audio_uart_lv_bin_decoder_get_area_4c7e4c(void *decoder,void *descripto
     return 0u;
 }
 
-/* Complete48b750..48b762: low16 flag mask merged with existing header. */
-void audio_uart_lv_draw_buf_set_flag_48b750(void *buffer,uint32_t flags)
-{
-    volatile uint32_t *b=buffer;
-    uint32_t merged=(uint16_t)flags|(b[0]>>16);
-    b[0]=(b[0]&0xffffu)|(merged<<16);
-}
 
-/* Complete native48b762..48b7a6; following literal pool excluded.
- * Qualified by288 bounded compiled ARM/native comparisons. */
-extern uint32_t audio_uart_lv_draw_buf_init_48aef8(void *,uint32_t,uint32_t,uint32_t,uint32_t,void *,uint32_t);
-uint32_t audio_uart_lv_draw_buf_from_image_48b762(void *draw_buffer,const void *image)
-{
-    const volatile uint32_t *src=image;
-    uint32_t data_size=src[3];
-    void *data=(void *)(uintptr_t)src[4];
-    uint32_t stride=(uint16_t)src[2];
-    uint32_t cf=(uint8_t)(src[0]>>8);
-    uint32_t height=src[1]>>16;
-    uint32_t width=(uint16_t)src[1];
-    uint32_t result=audio_uart_lv_draw_buf_init_48aef8(draw_buffer,width,height,cf,stride,data,data_size);
-    if((uint8_t)result!=1u) return (uint8_t)result;
-    uint32_t flags=src[0]>>16;
-    volatile uint32_t *dst=draw_buffer;
-    dst[0]=(dst[0]&0xffffu)|(flags<<16);
-    return (uint8_t)result;
-}
-
-/* Complete native48aef8..48affa; qualified by649 bounded native comparisons. */
 extern uint8_t audio_uart_display_lv_root[];
-extern void audio_uart_lv_draw_memzero_48aa54(void *,uint32_t);
-extern uint32_t audio_uart_font_bitmap_stride(uint32_t,uint8_t);
-extern void *audio_uart_lv_draw_align_48ab04(void *,uint32_t);
 extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
-uint32_t audio_uart_lv_draw_buf_init_48aef8(void *draw_buffer,uint32_t width,uint32_t height,uint32_t cf,uint32_t stride,void *data,uint32_t data_size)
-{
-    static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw_buf.c";
-    if(draw_buffer==0) {
-        audio_uart_lvgl_log(3u,source,286u,"lv_draw_buf_init","Asserted at expression: %s (%s)","draw_buf != NULL","NULL pointer");
-        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
-    }
-    if(draw_buffer==0) return 0u;
-    audio_uart_lv_draw_memzero_48aa54(draw_buffer,28u);
-    if(stride==0u) stride=audio_uart_font_bitmap_stride(width,(uint8_t)cf);
-    uint32_t required=height*stride;
-    if(data_size<required) {
-        audio_uart_lvgl_log(2u,source,293u,"lv_draw_buf_init","Data size too small, required: %d, provided: %d",required,data_size);return 0u;
-    }
-    volatile uint32_t *dst=draw_buffer;
-    dst[1]=(dst[1]&0xffff0000u)|(uint16_t)width;
-    dst[1]=(dst[1]&0xffffu)|((uint32_t)(uint16_t)height<<16);
-    dst[0]=(dst[0]&0xffff00ffu)|((uint32_t)(uint8_t)cf<<8);
-    dst[2]=(dst[2]&0xffff0000u)|(uint16_t)stride;
-    dst[0]=(uint16_t)dst[0];
-    dst[0]=(dst[0]&0xffffff00u)|25u;
-    dst[4]=(uint32_t)(uintptr_t)data;dst[5]=(uint32_t)(uintptr_t)data;
-    dst[6]=(uint32_t)(uintptr_t)(audio_uart_display_lv_root+0xc8u);dst[3]=data_size;
-    if((uint32_t)(uintptr_t)audio_uart_lv_draw_align_48ab04(data,(uint8_t)cf)!=dst[5]) {
-        audio_uart_lvgl_log(2u,source,310u,"lv_draw_buf_init","Data is not aligned, ignored");
-    }
-    return 1u;
-}
 
 extern uint8_t audio_uart_display_lv_root[];
 extern void audio_uart_lv_basic_box_clear_454746(void *,uint32_t,uint32_t);
-/* Complete48aa54..48aa60: native R0 scratch discarded by caller. */
-void audio_uart_lv_draw_memzero_48aa54(void *object,uint32_t size)
-{
-    audio_uart_lv_basic_box_clear_454746(object,0u,size);
-}
-/* Complete48ab16..48ab30. Null handler returns null, not original data. */
-void *audio_uart_lv_draw_align_ex_48ab16(void *handlers,void *data,uint32_t cf)
-{
-    volatile uint32_t *h=handlers;
-    if(h[2]!=0u) {
-        uint32_t callback=h[2];
-        return ((void *(*)(void *,uint32_t))(uintptr_t)callback)(data,(uint8_t)cf);
-    }
-    return 0;
-}
-/* Complete48ab04..48ab16. Native default handlers root+0xc8. */
-void *audio_uart_lv_draw_align_48ab04(void *data,uint32_t cf)
-{
-    return audio_uart_lv_draw_align_ex_48ab16(audio_uart_display_lv_root+0xc8u,data,(uint8_t)cf);
-}
 
-/* Full48aaa2..48aad8 and48aa80..48aaa2. Native comparisons passed.
- * Native48aa80 is handlers initialization, not memory-pool initialization. */
-extern void audio_uart_lv_draw_memzero_48aa54(void *,uint32_t);
-/* Callback invocation signatures qualified by native body comparisons. */
-void *audio_uart_lv_draw_buf_malloc_cb_48b80c(uint32_t,uint32_t);
-void audio_uart_lv_draw_buf_free_cb_48b816(void *);
-void *audio_uart_lv_draw_buf_align_cb_48b81e(void *,uint32_t);
-uint32_t audio_uart_lv_draw_width_stride_cb_48b82a(uint32_t,uint32_t);
-void audio_uart_lv_draw_handlers_init_48aaa2(void *object,uint32_t allocate,uint32_t release,uint32_t align,uint32_t invalidate,uint32_t flush,uint32_t stride)
-{
-    audio_uart_lv_draw_memzero_48aa54(object,32u);
-    volatile uint32_t *h=object;
-    h[0]=allocate;h[1]=release;h[2]=align;h[3]=invalidate;h[4]=flush;h[5]=stride;
-}
-void audio_uart_lv_draw_handlers_default_48aa80(void *object)
-{
-    audio_uart_lv_draw_handlers_init_48aaa2(object,
-        (uint32_t)(uintptr_t)audio_uart_lv_draw_buf_malloc_cb_48b80c,
-        (uint32_t)(uintptr_t)audio_uart_lv_draw_buf_free_cb_48b816,
-        (uint32_t)(uintptr_t)audio_uart_lv_draw_buf_align_cb_48b81e,
-        0u,0u,(uint32_t)(uintptr_t)audio_uart_lv_draw_width_stride_cb_48b82a);
-}
 
 extern void *audio_uart_lv_malloc(uint32_t);
 extern void audio_uart_lv_heap_free(void *);
 extern uint32_t audio_uart_lv_color_bpp_440f44(uint32_t);
-/* Full48b80c..48b816: native adds seven with32-bit wrap. */
-void *audio_uart_lv_draw_buf_malloc_cb_48b80c(uint32_t size,uint32_t cf)
-{
-    (void)cf;return audio_uart_lv_malloc(size+7u);
-}
-/* Full48b816..48b81e: void scratch R0 not return API. */
-void audio_uart_lv_draw_buf_free_cb_48b816(void *data)
-{
-    audio_uart_lv_heap_free(data);
-}
-/* Full48b81e..48b82a: null stays null, otherwise8-byte align/wrap. */
-void *audio_uart_lv_draw_buf_align_cb_48b81e(void *data,uint32_t cf)
-{
-    (void)cf;uint32_t ptr=(uint32_t)(uintptr_t)data;
-    if(ptr!=0u) ptr=(ptr+7u)&~7u;
-    return (void *)(uintptr_t)ptr;
-}
-/* Full48b82a..48b840: low-byte format, full child BPP return. */
-uint32_t audio_uart_lv_draw_width_stride_cb_48b82a(uint32_t width,uint32_t cf)
-{
-    uint32_t bits=audio_uart_lv_color_bpp_440f44((uint8_t)cf);
-    return (width*bits+7u)>>3;
-}
 
-/* Native 0x440f44..0x440fc4, locked s200 2.2.6.10 payload.
- * The native UXTB makes the format ABI explicitly byte-valued. */
-uint32_t audio_uart_lv_color_bpp_440f44(uint32_t format)
-{
-    switch ((uint8_t)format) {
-    case 7: case 11: return 1;
-    case 8: case 12: return 2;
-    case 9: case 13: case 48: return 4;
-    case 49: case 50: case 51: return 6;
-    case 6: case 10: case 14: case 24: return 8;
-    case 52: case 53: return 12;
-    case 18: case 20: case 21: case 22: case 23: case 38: return 16;
-    case 15: case 19: return 24;
-    case 16: case 17: return 32;
-    default: return 0;
-    }
-}
+/* Retired: stock 0x440f44 is upstream lv_color_format_get_bpp (lvgl/src/misc/lv_color.c); this name is a link alias. */
+uint32_t audio_uart_lv_color_bpp_440f44(uint32_t format);
 
 extern uint32_t audio_uart_lv_fs_file_read_4c6f46(void *,void *,uint32_t,uint32_t *);
 /* Full native4c7364..4c73c2; driver and cache reloaded after callbacks. */
@@ -748,26 +495,8 @@ uint32_t audio_uart_lv_fs_seek_cached_4c7364(void *file,uint32_t position,uint32
     }
     return (uint8_t)result;
 }
-/* Full native4c6fba..4c7018. Cached seek requires seek and tell callbacks. */
-uint32_t audio_uart_lv_fs_file_seek_4c6fba(void *file,uint32_t position,uint32_t whence)
-{
-    volatile uint32_t *f=file;
-    if(f[1]==0u) return 11u;
-    if(((volatile uint32_t *)(uintptr_t)f[1])[1]!=0u) {
-        if(((volatile uint32_t *)(uintptr_t)f[1])[7]==0u ||
-           ((volatile uint32_t *)(uintptr_t)f[1])[8]==0u) return 9u;
-    } else if(((volatile uint32_t *)(uintptr_t)f[1])[7]==0u) return 9u;
-    uint32_t result;
-    if(((volatile uint32_t *)(uintptr_t)f[1])[1]!=0u)
-        result=audio_uart_lv_fs_seek_cached_4c7364(file,position,(uint8_t)whence);
-    else {
-        uint32_t data=f[0],driver=f[1];
-        uint32_t callback=((volatile uint32_t *)(uintptr_t)f[1])[7];
-        result=((uint32_t (*)(void *,void *,uint32_t,uint32_t))(uintptr_t)callback)
-            ((void *)(uintptr_t)driver,(void *)(uintptr_t)data,position,(uint8_t)whence);
-    }
-    return (uint8_t)result;
-}
+/* Retired: stock 0x4c6fba is upstream lv_fs_seek (lvgl/src/misc/lv_fs.c); this name is a link alias. */
+uint32_t audio_uart_lv_fs_file_seek_4c6fba(void *file,uint32_t position,uint32_t whence);
 /* Full native4c8d3c..4c8d8c; preserve output clear before seek. */
 uint32_t audio_uart_lv_fs_read_at_4c8d3c(void *file,uint32_t position,void *buffer,uint32_t size,uint32_t *read_out)
 {
@@ -779,42 +508,9 @@ uint32_t audio_uart_lv_fs_read_at_4c8d3c(void *file,uint32_t position,void *buff
 }
 
 extern uint32_t audio_uart_font_bitmap_stride(uint32_t,uint8_t);
-/* Full native48b86c..48b8d8; all size arithmetic wraps in 32 bits. */
-uint32_t audio_uart_lv_draw_buf_size_48b86c(uint32_t width,uint32_t height,uint32_t cf,uint32_t stride)
-{
-    if(stride==0u) stride=audio_uart_font_bitmap_stride(width,(uint8_t)cf);
-    uint32_t bytes=height*stride;
-    uint8_t format=(uint8_t)cf;
-    if(format==20u) return bytes+height*(stride>>1u);
-    switch(format) {
-    case 7: return bytes+8u;
-    case 8: return bytes+16u;
-    case 9: return bytes+64u;
-    case 10: return bytes+1024u;
-    default: return bytes;
-    }
-}
-/* Full native48b196..48b216; fresh header loads preserve child mutations. */
-void *audio_uart_lv_draw_buf_reshape_48b196(void *draw_buffer,uint32_t cf,uint32_t width,uint32_t height,uint32_t stride)
-{
-    volatile uint32_t *b=draw_buffer;
-    if(b==0) return 0;
-    if((uint8_t)cf==0u) cf=b[0]>>8u;
-    if(stride==0u) stride=audio_uart_font_bitmap_stride(width,(uint8_t)cf);
-    uint32_t size=audio_uart_lv_draw_buf_size_48b86c(width,height,(uint8_t)cf,stride);
-    if(b[3]<size) return 0;
-    b[0]=(b[0]&0xffff00ffu)|((uint32_t)(uint8_t)cf<<8u);
-    b[1]=(b[1]&0xffff0000u)|(uint16_t)width;
-    b[1]=(b[1]&0x0000ffffu)|((uint32_t)(uint16_t)height<<16u);
-    b[2]=(b[2]&0xffff0000u)|(uint16_t)stride;
-    return draw_buffer;
-}
 
-/* Full native4d5104..4d5114; native unconditionally dereferences cache. */
-uint32_t audio_uart_lv_cache_enabled_4d5104(void *cache)
-{
-    return ((volatile uint32_t *)cache)[2]!=0u;
-}
+/* Retired: stock 0x4d5104 is upstream lv_cache_is_enabled (lvgl/src/misc/cache/lv_cache.c); this name is a link alias. */
+uint32_t audio_uart_lv_cache_enabled_4d5104(void *cache);
 /* Full native4d4b24..4d4b32; image-cache owner at root+0x134. */
 uint32_t audio_uart_lv_image_cache_enabled_4d4b24(void)
 {
@@ -963,29 +659,9 @@ uint32_t audio_uart_lv_bin_decode_alpha_4c887c(void *decoder,void *descriptor)
     return 1u;
 }
 
-/* Both names identify native48b010..48b12c. Canonical selected implementation
- * remains in display_font_bitmap_allocate.c; the entry ABI truncates cf. */
-extern void *audio_uart_font_bitmap_allocate(void *,uint32_t,uint32_t,uint8_t,uint32_t);
-void *audio_uart_lv_draw_buf_create_ex_48b010(void *handlers,uint32_t width,uint32_t height,uint32_t cf,uint32_t stride)
-{
-    return audio_uart_font_bitmap_allocate(handlers,width,height,(uint8_t)cf,stride);
-}
 
-/* Full native4c7018..4c7064. Cached tell reads cache+8 without a callback. */
-uint32_t audio_uart_lv_fs_file_tell_4c7018(void *file,uint32_t *position)
-{
-    volatile uint32_t *f=file;
-    if(f[1]==0u) {*position=0u;return 11u;}
-    if(((volatile uint32_t *)(uintptr_t)f[1])[1]==0u &&
-       ((volatile uint32_t *)(uintptr_t)f[1])[8]==0u) {*position=0u;return 9u;}
-    if(((volatile uint32_t *)(uintptr_t)f[1])[1]!=0u) {
-        *position=((volatile uint32_t *)(uintptr_t)f[2])[2];return 0u;
-    }
-    uint32_t data=f[0],driver=f[1];
-    uint32_t callback=((volatile uint32_t *)(uintptr_t)f[1])[8];
-    return (uint8_t)((uint32_t (*)(void *,void *,uint32_t *))(uintptr_t)callback)
-        ((void *)(uintptr_t)driver,(void *)(uintptr_t)data,position);
-}
+/* Retired: stock 0x4c7018 is upstream lv_fs_tell (lvgl/src/misc/lv_fs.c); this name is a link alias. */
+uint32_t audio_uart_lv_fs_file_tell_4c7018(void *file,uint32_t *position);
 
 extern uint8_t audio_uart_display_lv_root[];
 extern uint32_t audio_uart_lv_draw_buf_from_image_48b762(void *,const void *);
@@ -1268,17 +944,8 @@ void *audio_uart_lv_decoder_add_cache_48911a(void *decoder,const void *key,void 
 }
 
 #include <stdint.h>
-/* Full native 440fc4..440fde: enum ABI is reduced to its low byte. */
-uint32_t audio_uart_lv_color_has_alpha_440fc4(uint32_t format)
-{
-    uint32_t cf=(uint8_t)format;
-    return (cf-7u<=7u || cf==16u || cf-19u<=5u) ? 1u : 0u;
-}
-/* Full native 48b73c..48b750: only header flags bits 16..31 participate. */
-uint32_t audio_uart_lv_draw_buf_has_flag_48b73c(const void *buffer,uint32_t mask)
-{
-    return ((*(const volatile uint32_t *)buffer >> 16u)&mask)!=0u;
-}
+/* Retired: stock 0x440fc4 is upstream lv_color_format_has_alpha (lvgl/src/misc/lv_color.c); this name is a link alias. */
+uint32_t audio_uart_lv_color_has_alpha_440fc4(uint32_t format);
 
 #include <stdint.h>
 extern uint8_t audio_uart_display_lv_root[];
@@ -1320,21 +987,6 @@ void *audio_uart_lv_decoder_postprocess_489168(void *descriptor,void *decoded)
 #include <stdint.h>
 extern void *audio_uart_lv_draw_buf_create_ex_48b010(void *,uint32_t,uint32_t,uint32_t,uint32_t);
 extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
-/* Full native48b134..48b196; preserve fresh loads after allocation and flag writes. */
-void *audio_uart_lv_draw_buf_duplicate_ex_48b134(void *handlers,const void *source)
-{
-    const volatile uint32_t *src=source;
-    volatile uint32_t *dst=audio_uart_lv_draw_buf_create_ex_48b010(handlers,(uint16_t)src[1],src[1]>>16u,(uint8_t)(src[0]>>8u),(uint16_t)src[2]);
-    if(dst==0) return 0;
-    uint32_t flags=src[0]>>16u;
-    dst[0]=(dst[0]&0xffffu)|(flags<<16u);
-    flags=(dst[0]>>16u)|48u;
-    dst[0]=(dst[0]&0xffffu)|(flags<<16u);
-    uint32_t size;
-    if(src[3]<dst[3]) size=src[3];else size=dst[3];
-    audio_uart_lv_grid_copy_454738((void *)(uintptr_t)dst[4],(const void *)(uintptr_t)src[4],size);
-    return (void *)dst;
-}
 
 #include <stdint.h>
 extern uint32_t audio_uart_lv_draw_buf_has_flag_48b73c(const void *,uint32_t);
@@ -1343,53 +995,6 @@ extern uint32_t audio_uart_lv_color_bpp_440f44(uint32_t);
 extern uint32_t audio_uart_lv_draw_buf_size_48b86c(uint32_t,uint32_t,uint32_t,uint32_t);
 extern void *audio_uart_lv_grid_move_45475a(void *,const void *,uint32_t);
 extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
-/* Full native48b34e..48b51e; assertions retain native repeated zero-store. */
-uint32_t audio_uart_lv_draw_buf_adjust_stride_48b34e(void *buffer,uint32_t stride)
-{
-    volatile uint32_t *b=buffer;
-    static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw_buf.c";
-    static const char function[]="lv_draw_buf_adjust_stride";
-    if(b==0) {
-        audio_uart_lvgl_log(3u,source,449u,function,"Asserted at expression: %s (%s)","src != NULL","NULL pointer");
-        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
-    }
-    if(b[4]==0u) {
-        audio_uart_lvgl_log(3u,source,450u,function,"Asserted at expression: %s (%s)","src->data != NULL","NULL pointer");
-        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
-    }
-    if(b==0 || b[4]==0u) return 0u;
-    uint32_t width=(uint16_t)b[1],height=b[1]>>16u;
-    if(audio_uart_lv_draw_buf_has_flag_48b73c((void *)b,32u)==0u) return 0u;
-    if(stride==0u) stride=audio_uart_font_bitmap_stride(width,(uint8_t)(b[0]>>8u));
-    if((uint16_t)b[2]==stride) return 1u;
-    uint32_t minimal=(audio_uart_lv_color_bpp_440f44((uint8_t)(b[0]>>8u))*width+7u)>>3u;
-    if(stride<minimal) {audio_uart_lvgl_log(2u,source,477u,function,"New stride is too small. min: %d",minimal);return 0u;}
-    uint32_t required=audio_uart_lv_draw_buf_size_48b86c(width,height,(uint8_t)(b[0]>>8u),stride);
-    if(b[3]<required) return 0u;
-    uint32_t palette;
-    if((uint8_t)(b[0]>>8u)==7u) palette=2u;
-    else if((uint8_t)(b[0]>>8u)==8u) palette=4u;
-    else if((uint8_t)(b[0]>>8u)==9u) palette=16u;
-    else if((uint8_t)(b[0]>>8u)==10u) palette=256u;
-    else palette=0u;
-    uint32_t source_data,destination_data;
-    if((uint16_t)b[2]<stride) {
-        source_data=b[4]+palette*4u+(uint16_t)b[2]*(height-1u);
-        destination_data=b[4]+palette*4u+stride*(height-1u);
-        for(uint32_t y=0u;y<height;y++) {
-            audio_uart_lv_grid_move_45475a((void *)(uintptr_t)destination_data,(void *)(uintptr_t)source_data,minimal);
-            source_data-=(uint16_t)b[2];destination_data-=stride;
-        }
-    } else {
-        source_data=b[4]+palette*4u;destination_data=b[4]+palette*4u;
-        for(uint32_t y=0u;y<height;y++) {
-            audio_uart_lv_grid_move_45475a((void *)(uintptr_t)destination_data,(void *)(uintptr_t)source_data,minimal);
-            source_data+=(uint16_t)b[2];destination_data+=stride;
-        }
-    }
-    b[2]=(b[2]&0xffff0000u)|(uint16_t)stride;
-    return 1u;
-}
 
 #include <stdint.h>
 extern void *audio_queue_copy_bytes(void *,const void *,uint32_t);
@@ -1439,11 +1044,6 @@ void audio_uart_compiler_move_439710(void *destination,const void *source,uint32
         --s;--d;*(volatile uint8_t *)(uintptr_t)d=*(const volatile uint8_t *)(uintptr_t)s;--length;
     }
 }
-/* Full native45475a..454768 restores destination after void compiler helper. */
-void *audio_uart_lv_grid_move_45475a(void *destination,const void *source,uint32_t length)
-{
-    audio_uart_compiler_move_439710(destination,source,length);return destination;
-}
 
 #include <stdint.h>
 extern void audio_uart_lv_basic_box_clear_454746(void *,uint32_t,uint32_t);
@@ -1477,60 +1077,6 @@ void audio_uart_lv_color16_premultiply_4410ee(void *color,uint32_t alpha)
     uint32_t blue=((uint32_t)(*(volatile uint8_t *)color&31u)*(uint8_t)alpha>>8u)&31u;
     c->value=(uint16_t)((c->value&0xffe0u)|blue);
 }
-/* Full native48b540..48b722, including unsupported-format diagnostic and flags. */
-uint32_t audio_uart_lv_draw_buf_premultiply_48b540(void *buffer)
-{
-    volatile uint32_t *b=buffer;
-    static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw_buf.c";
-    static const char function[]="lv_draw_buf_premultiply";
-    if(b==0) {
-        audio_uart_lvgl_log(3u,source,520u,function,"Asserted at expression: %s (%s)","draw_buf != NULL","NULL pointer");
-        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
-    }
-    if(b==0) return 0u;
-    if(((b[0]>>16u)&1u)!=0u) return 0u;
-    if(((b[0]>>16u)&32u)==0u) {
-        audio_uart_lvgl_log(2u,source,525u,function,"draw buf is not modifiable: 0x%04x",b[0]>>16u);return 0u;
-    }
-    uint32_t cf=b[0]>>8u;
-    if((uint32_t)(uint8_t)cf-7u<4u) {
-        uint32_t n=(uint8_t)cf==7u?2u:(uint8_t)cf==8u?4u:(uint8_t)cf==9u?16u:256u;
-        uint32_t data=b[4];
-        for(uint32_t i=0u;i<n;i++) audio_uart_lv_color_premultiply_4410b8((void *)(uintptr_t)(data+4u*i));
-    } else if((uint8_t)cf==16u) {
-        uint32_t height=b[1]>>16u,width=(uint16_t)b[1],stride=(uint16_t)b[2],line=b[4];
-        for(uint32_t y=0u;y<height;y++) {
-            uint32_t pixel=line;
-            for(uint32_t x=0u;x<width;x++) {audio_uart_lv_color_premultiply_4410b8((void *)(uintptr_t)pixel);pixel+=4u;}
-            line+=stride;
-        }
-    } else if((uint8_t)cf==20u) {
-        uint32_t height=b[1]>>16u,width=(uint16_t)b[1],stride=(uint16_t)b[2],alpha_stride=stride>>1u,line=b[4];
-        uint32_t alpha=line+height*stride;
-        for(uint32_t y=0u;y<height;y++) {
-            uint32_t pixel=line;
-            for(uint32_t x=0u;x<width;x++) {
-                audio_uart_lv_color16_premultiply_4410ee((void *)(uintptr_t)pixel,*(volatile uint8_t *)(uintptr_t)(alpha+x));pixel+=2u;
-            }
-            line+=stride;alpha+=alpha_stride;
-        }
-    } else if((uint8_t)cf==19u) {
-        uint32_t height=b[1]>>16u,width=(uint16_t)b[1],stride=(uint16_t)b[2],line=b[4];
-        for(uint32_t y=0u;y<height;y++) {
-            uint32_t pixel=line;
-            for(uint32_t x=0u;x<width;x++) {
-                uint32_t alpha=*(volatile uint8_t *)(uintptr_t)(pixel+2u);
-                audio_uart_lv_color16_premultiply_4410ee((void *)(uintptr_t)pixel,alpha);pixel+=3u;
-            }
-            line+=stride;
-        }
-    } else if((uint32_t)(uint8_t)cf-11u>=4u) {
-        audio_uart_lvgl_log(2u,source,589u,function,"draw buf has no alpha, cf: %d",(uint32_t)(uint8_t)cf);
-    }
-    uint32_t flags=(b[0]>>16u)|1u;
-    b[0]=(b[0]&0xffffu)|(flags<<16u);
-    return 1u;
-}
 
 #include <stdint.h>
 extern int32_t audio_uart_lv_area_width_451598(const int32_t *);
@@ -1538,73 +1084,10 @@ extern void *audio_uart_lv_draw_buf_goto_xy_48b2aa(const void *,uint32_t,uint32_
 extern uint32_t audio_uart_lv_color_bpp_440f44(uint32_t);
 extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
 extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
-/* Full native48ad42..48aef8, including custom-copy dispatch and assertions. */
-void audio_uart_lv_draw_buf_copy_48ad42(void *destination,const void *destination_area,const void *source,const void *source_area)
-{
-    volatile uint32_t *d=destination;
-    const volatile uint32_t *s=source;
-    const volatile uint32_t *handlers=(const volatile uint32_t *)(uintptr_t)d[6];
-    if(handlers[7]!=0u) {
-        ((void (*)(void *,const void *,const void *,const void *))(uintptr_t)handlers[7])(destination,destination_area,source,source_area);return;
-    }
-    static const char file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw_buf.c";
-    static const char function[]="lv_draw_buf_copy";
-    if((uint8_t)(d[0]>>8u)!=(uint8_t)(s[0]>>8u)) {
-        audio_uart_lvgl_log(3u,file,235u,function,"Asserted at expression: %s Color format mismatch: %d != %d","dest->header.cf == src->header.cf",(uint32_t)(uint8_t)(d[0]>>8u),(uint32_t)(uint8_t)(s[0]>>8u));
-        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
-    }
-    uint32_t width=destination_area==0 ? (uint16_t)d[1] : audio_uart_lv_area_width_451598(destination_area);
-    if((destination_area==0 || source_area==0) && (uint32_t)(uint8_t)(d[0]>>8u)-7u<4u) {
-        uint32_t palette;
-        if((uint8_t)(d[0]>>8u)==7u) palette=2u;
-        else if((uint8_t)(d[0]>>8u)==8u) palette=4u;
-        else if((uint8_t)(d[0]>>8u)==9u) palette=16u;
-        else if((uint8_t)(d[0]>>8u)==10u) palette=256u;
-        else palette=0u;
-        audio_uart_lv_grid_copy_454738((void *)(uintptr_t)d[4],(void *)(uintptr_t)s[4],palette*4u);
-    }
-    if((source_area==0 && width!=(uint16_t)s[1]) || (source_area!=0 && width!=(uint32_t)audio_uart_lv_area_width_451598(source_area))) {
-        audio_uart_lvgl_log(3u,file,250u,function,"Asserted at expression: %s (%s)","0","Source and destination areas have different width");
-        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
-    }
-    const volatile uint32_t *sa=source_area,*da=destination_area;
-    uint32_t src=source_area!=0 ? (uint32_t)(uintptr_t)audio_uart_lv_draw_buf_goto_xy_48b2aa(source,sa[0],sa[1]) : (uint32_t)(uintptr_t)audio_uart_lv_draw_buf_goto_xy_48b2aa(source,0u,0u);
-    uint32_t dst=destination_area!=0 ? (uint32_t)(uintptr_t)audio_uart_lv_draw_buf_goto_xy_48b2aa(destination,da[0],da[1]) : (uint32_t)(uintptr_t)audio_uart_lv_draw_buf_goto_xy_48b2aa(destination,0u,0u);
-    uint32_t y,end;
-    if(destination_area!=0) {y=da[1];end=da[3];}
-    else {y=0u;end=(d[1]>>16u)-1u;}
-    uint32_t dest_stride=(uint16_t)d[2],src_stride=(uint16_t)s[2];
-    uint32_t bytes=(width*audio_uart_lv_color_bpp_440f44((uint8_t)(d[0]>>8u))+7u);
-    bytes=(bytes>>3u)|((bytes&0x80000000u)!=0u?0xe0000000u:0u);
-    while((int32_t)y<=(int32_t)end) {
-        audio_uart_lv_grid_copy_454738((void *)(uintptr_t)dst,(void *)(uintptr_t)src,bytes);
-        dst+=dest_stride;src+=src_stride;y+=1u;
-    }
-}
 
 #include <stdint.h>
 extern uint32_t audio_uart_lv_color_bpp_440f44(uint32_t);
 extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
-/* Full native48b2aa..48b34e; address arithmetic wraps in 32 bits. */
-void *audio_uart_lv_draw_buf_goto_xy_48b2aa(const void *buffer,uint32_t x,uint32_t y)
-{
-    const volatile uint32_t *b=buffer;
-    static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw_buf.c";
-    if(b==0) {
-        audio_uart_lvgl_log(3u,source,433u,"lv_draw_buf_goto_xy","Asserted at expression: %s (%s)","buf != NULL","NULL pointer");
-        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
-    }
-    if(b==0) return 0;
-    uint32_t data=b[4],palette;
-    if((uint8_t)(b[0]>>8u)==7u) palette=2u;
-    else if((uint8_t)(b[0]>>8u)==8u) palette=4u;
-    else if((uint8_t)(b[0]>>8u)==9u) palette=16u;
-    else if((uint8_t)(b[0]>>8u)==10u) palette=256u;
-    else palette=0u;
-    uint32_t address=data+palette*4u+y*(uint16_t)b[2];
-    if(x!=0u) address+=(x*audio_uart_lv_color_bpp_440f44((uint8_t)(b[0]>>8u)))>>3u;
-    return (void *)(uintptr_t)address;
-}
 
 #include <stdint.h>
 extern uint32_t audio_uart_lv_lock_core(void *);
@@ -1612,26 +1095,8 @@ extern uint32_t audio_uart_lv_unlock_core(void *);
 extern void *audio_uart_lv_cache_add_internal_4d51c0(void *,const void *,uint32_t);
 extern void *audio_uart_font_cache_acquire_data(void *);
 extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
-/* Full native4d4eea..4d4f90; no initializer callback in this cache-add API. */
-void *audio_uart_lv_cache_add_4d4eea(void *cache,const void *key,void *user_data)
-{
-    static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\cache\\lv_cache.c";
-    if(cache==0) {
-        audio_uart_lvgl_log(3u,source,125u,"lv_cache_add","Asserted at expression: %s (%s)","cache != NULL","NULL pointer");
-        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
-    }
-    if(key==0) {
-        audio_uart_lvgl_log(3u,source,126u,"lv_cache_add","Asserted at expression: %s (%s)","key != NULL","NULL pointer");
-        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
-    }
-    void *lock=(void *)((uintptr_t)cache+28u);
-    (void)audio_uart_lv_lock_core(lock);
-    if(((volatile uint32_t *)cache)[2]==0u) {(void)audio_uart_lv_unlock_core(lock);return 0;}
-    void *entry=audio_uart_lv_cache_add_internal_4d51c0(cache,key,(uint32_t)(uintptr_t)user_data);
-    if(entry!=0) (void)audio_uart_font_cache_acquire_data(entry);
-    (void)audio_uart_lv_unlock_core(lock);
-    return entry;
-}
+/* Retired: stock 0x4d4eea is upstream lv_cache_add (lvgl/src/misc/cache/lv_cache.c); this name is a link alias. */
+void *audio_uart_lv_cache_add_4d4eea(void *cache,const void *key,void *user_data);
 
 #include <stdint.h>
 extern int32_t audio_uart_lv_string_compare_4547be(const char *,const char *);
@@ -1699,11 +1164,8 @@ extern int32_t audio_uart_lv_image_cache_compare_4d4b94(const void *,const void 
 extern int32_t audio_uart_lv_image_header_cache_compare_4d4c9c(const void *,const void *);
 extern void audio_uart_lv_image_cache_free_4d4ba4(void *);
 extern void audio_uart_lv_image_header_cache_free_4d4cac(void *);
-/* Native4d5114..4d511c: null is deliberately a no-op. */
-void audio_uart_lv_cache_set_name_4d5114(void *cache,const char *name)
-{
-    if(cache!=0) *(volatile uint32_t *)((uint8_t *)cache+36u)=(uint32_t)(uintptr_t)name;
-}
+/* Retired: stock 0x4d5114 is upstream lv_cache_set_name (lvgl/src/misc/cache/lv_cache.c); this name is a link alias. */
+void audio_uart_lv_cache_set_name_4d5114(void *cache,const char *name);
 /* Native4d4ad4..4d4b24: image-cache startup, not font init. */
 uint32_t audio_uart_lv_image_cache_init_4d4ad4(uint32_t size)
 {
@@ -1896,50 +1358,8 @@ static const char fs_open_missing[]="Can't open file (%s): open function not exi
 static const char fs_open_reason[]="Out of memory";
 static const char fs_open_expression[]="file_p->cache != NULL";
 static const char fs_open_format[]="Asserted at expression: %s (%s)";
-/* Native4c6d9a..4c6ee0. Driver cache UINT32_MAX denotes memory-backed file. */
-uint32_t audio_uart_lv_fs_file_open_4c6d9a(void *file,const char *path,uint32_t mode) {
-    volatile uint32_t *f=file;
-    if(path==0) {audio_uart_lvgl_log(2u,fs_open_path,79u,fs_open_function,fs_open_null);return 11u;}
-    const volatile uint8_t *p=(const volatile uint8_t *)path;
-    uint8_t letter=p[0];const char *relative=path;
-    if(p[0]!=0u) {relative=path+1;if(*(const volatile uint8_t *)relative==':')++relative;}
-    volatile uint32_t *driver=audio_uart_lv_fs_driver_find_4c70b4(letter);
-    if(driver==0) {audio_uart_lvgl_log(2u,fs_open_path,88u,fs_open_function,fs_open_unknown,path);return 3u;}
-    if(driver[2]!=0u) {
-        uint32_t cb=driver[2];
-        if(((uint32_t (*)(void *))(uintptr_t)cb)((void *)driver)==0u) {
-            audio_uart_lvgl_log(2u,fs_open_path,94u,fs_open_function,fs_open_ready,path);return 1u;
-        }
-    }
-    if(driver[3]==0u) {audio_uart_lvgl_log(2u,fs_open_path,100u,fs_open_function,fs_open_missing,path);return 9u;}
-    f[1]=(uint32_t)(uintptr_t)driver;
-    if(driver[1]==UINT32_MAX) f[0]=(uint32_t)(uintptr_t)file;
-    else {
-        uint32_t cb=driver[3];
-        void *handle=((void *(*)(void *,const char *,uint8_t))(uintptr_t)cb)((void *)driver,relative,(uint8_t)mode);
-        if(handle==0||(uintptr_t)handle==UINT32_MAX)return 12u;
-        f[0]=(uint32_t)(uintptr_t)handle;
-    }
-    if(driver[1]!=0u) {
-        f[2]=(uint32_t)(uintptr_t)audio_uart_lv_heap_alloc(16u);
-        if(f[2]==0u) {
-            audio_uart_lvgl_log(3u,fs_open_path,123u,fs_open_function,fs_open_format,fs_open_expression,fs_open_reason);
-            for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
-        }
-        if(driver[1]==UINT32_MAX) {
-            uint32_t buffer=*(const volatile uint32_t *)((const uint8_t *)path+4u);
-            ((volatile uint32_t *)(uintptr_t)f[2])[3]=buffer;
-            ((volatile uint32_t *)(uintptr_t)f[2])[0]=0u;
-            ((volatile uint32_t *)(uintptr_t)f[2])[2]=0u;
-            uint32_t end=*(const volatile uint32_t *)((const uint8_t *)path+8u);
-            ((volatile uint32_t *)(uintptr_t)f[2])[1]=end;
-        } else {
-            ((volatile uint32_t *)(uintptr_t)f[2])[0]=UINT32_MAX;
-            ((volatile uint32_t *)(uintptr_t)f[2])[1]=UINT32_MAX-1u;
-        }
-    }
-    return 0u;
-}
+/* Retired: stock 0x4c6d9a is upstream lv_fs_open (lvgl/src/misc/lv_fs.c); this name is a link alias. */
+uint32_t audio_uart_lv_fs_file_open_4c6d9a(void *file,const char *path,uint32_t mode);
 
 #include <stdint.h>
 extern volatile uint32_t audio_uart_ambiq_unit_cell[]; /* RAM200746c0 */
@@ -2011,36 +1431,16 @@ extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,cons
 static const char lv_thread_message[]="xTaskCreate failed!";
 static const char lv_thread_function[]="lv_thread_init";
 static const char lv_thread_path[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\osal\\lv_freertos.c";
-/* Native4d4768..4d477a. Native scratchR0 discarded by caller. */
-void audio_uart_lv_thread_trampoline_4d4768(void *cell) {
-    volatile uint32_t *t=cell;
-    void *argument=(void *)(uintptr_t)t[1];
-    uint32_t callback=t[0];
-    ((void (*)(void *))(uintptr_t)callback)(argument);
-    audio_task_delete(0);
-}
-/* Native4d4610..4d4650: stackbytes>>2 truncated to16-bit depth. */
-uint32_t audio_uart_lv_thread_init_4d4610(void *cell,const char *name,uint32_t priority,void (*callback)(void),uint32_t stackbytes,void *argument) {
-    volatile uint32_t *t=cell;
-    t[1]=(uint32_t)(uintptr_t)argument;
-    t[0]=(uint32_t)(uintptr_t)callback;
-    int32_t result=g2_thread_create_dynamic(audio_uart_lv_thread_trampoline_4d4768,name,(uint16_t)(stackbytes>>2),cell,(uint8_t)priority,(void **)((uint8_t *)cell+8u));
-    if(result!=1) {
-        audio_uart_lvgl_log(3u,lv_thread_path,103u,lv_thread_function,lv_thread_message);return 0u;
-    }
-    return 1u;
-}
+/* Retired: stock 0x4d4610 is upstream lv_thread_init (lvgl/src/osal/lv_freertos.c); this name is a link alias. */
+uint32_t audio_uart_lv_thread_init_4d4610(void *cell,const char *name,uint32_t priority,void (*callback)(void),uint32_t stackbytes,void *argument);
 
 #include <stdint.h>
 extern void audio_uart_font_bitmap_release(void *);
 extern void audio_uart_nema_cl_destroy_5142f0(void *);
 extern uint32_t audio_uart_lv_thread_sync_signal_4d4724(void *);
 extern void audio_task_delete(void *);
-/* Native4d4650..4d465c; taskdelete return discarded. */
-uint32_t audio_uart_lv_thread_delete_4d4650(void *thread) {
-    audio_task_delete((void *)(uintptr_t)((volatile uint32_t *)thread)[2]);
-    return 1u;
-}
+/* Retired: stock 0x4d4650 is upstream lv_thread_delete (lvgl/src/osal/lv_freertos.c); this name is a link alias. */
+uint32_t audio_uart_lv_thread_delete_4d4650(void *thread);
 /* Native4c74f0..4c752e. No VG destroy calls in native configuration. */
 int32_t audio_uart_ambiq_delete_4c74f0(void *unit) {
     volatile uint32_t *u=unit;
@@ -2058,18 +1458,8 @@ extern void audio_uart_lv_anim_mutex_ensure_4d47fa(uint32_t *);
 extern void stock_enter_critical(void);
 extern void stock_exit_critical(void);
 extern uint32_t audio_notify_task(void *,uint32_t,uint32_t,uint32_t,uint32_t *);
-/* Native4d4724..4d475c; consume waiter atomically, defer notification. */
-uint32_t audio_uart_lv_thread_sync_signal_4d4724(void *cell) {
-    volatile uint32_t *s=cell;
-    audio_uart_lv_anim_mutex_ensure_4d47fa(cell);
-    stock_enter_critical();
-    uint32_t waiter=s[2];
-    s[2]=0u;
-    if(waiter==0u)s[1]=1u;
-    stock_exit_critical();
-    if(waiter!=0u)(void)audio_notify_task((void *)(uintptr_t)waiter,0u,0u,2u,0);
-    return 1u;
-}
+/* Retired: stock 0x4d4724 is upstream lv_thread_sync_signal (lvgl/src/osal/lv_freertos.c); this name is a link alias. */
+uint32_t audio_uart_lv_thread_sync_signal_4d4724(void *cell);
 
 #include <stdint.h>
 extern volatile uint32_t audio_uart_nema_context_cell[]; /* RAM20074efc */
@@ -2246,21 +1636,10 @@ void audio_uart_ambiq_execute_unit_4c752e(void *task) {
     *(volatile uint32_t *)(unit+28u)=0u;
     audio_uart_lv_draw_dispatch_request_48462e();
 }
-/* Native4d475c..4d4768; waiter at word2 intentionally retained. */
-uint32_t audio_uart_lv_thread_sync_delete_4d475c(void *cell) {
-    volatile uint32_t *s=cell;
-    s[1]=0u;
-    s[0]=0u;
-    return 1u;
-}
-/* Native4d46c2..4d46de; queue deletion precedes clearing initialized. */
-uint32_t audio_uart_lv_mutex_delete_4d46c2(void *cell) {
-    volatile uint32_t *s=cell;
-    if(!s[0])return 0u;
-    audio_queue_delete((void *)(uintptr_t)s[1]);
-    s[0]=0u;
-    return 1u;
-}
+/* Retired: stock 0x4d475c is upstream lv_thread_sync_delete (lvgl/src/osal/lv_freertos.c); this name is a link alias. */
+uint32_t audio_uart_lv_thread_sync_delete_4d475c(void *cell);
+/* Retired: stock 0x4d46c2 is upstream lv_mutex_delete (lvgl/src/osal/lv_freertos.c); this name is a link alias. */
+uint32_t audio_uart_lv_mutex_delete_4d46c2(void *cell);
 
 #include <stdint.h>
 extern void audio_uart_lv_anim_mutex_ensure_4d47fa(uint32_t *);
@@ -2268,19 +1647,8 @@ extern void *receiver_current_task(void);
 extern void stock_enter_critical(void);
 extern void stock_exit_critical(void);
 extern uint32_t audio_uart_notify_take_455afc(uint32_t,int32_t,uint32_t);
-/* Native4d46e8..4d4724: consume pending signal, otherwise register and wait. */
-uint32_t audio_uart_lv_thread_sync_wait_4d46e8(void *cell) {
-    volatile uint32_t *s=cell;
-    audio_uart_lv_anim_mutex_ensure_4d47fa(cell);
-    uint32_t current=(uint32_t)(uintptr_t)receiver_current_task();
-    stock_enter_critical();
-    uint32_t pending=s[1];
-    s[1]=0u;
-    if(!pending)s[2]=current;
-    stock_exit_critical();
-    if(!pending)audio_uart_notify_take_455afc(0u,1,UINT32_MAX);
-    return 1u;
-}
+/* Retired: stock 0x4d46e8 is upstream lv_thread_sync_wait (lvgl/src/osal/lv_freertos.c); this name is a link alias. */
+uint32_t audio_uart_lv_thread_sync_wait_4d46e8(void *cell);
 
 #include <stdint.h>
 extern void audio_uart_ambiq_area_copy_4c73c4(uint32_t *,const void *);
@@ -2364,57 +1732,13 @@ void audio_uart_ambiq_area_copy_4c73c4(uint32_t *destination,const void *source)
     const volatile uint32_t *s=source;
     d[0]=s[0];d[1]=s[1];d[2]=s[2];d[3]=s[3];
 }
-/* Native450bb2..450bcc: x1,x2,y1,y2 access ordering and wrapped sums. */
-void audio_uart_ambiq_area_move_450bb2(uint32_t *area,uint32_t x,uint32_t y) {
-    volatile uint32_t *a=area;
-    a[0]=a[0]+x;
-    a[2]=a[2]+x;
-    a[1]=a[1]+y;
-    a[3]=a[3]+y;
-}
+/* Retired: stock 0x450bb2 is upstream lv_area_move (lvgl/src/misc/lv_area.c); this name is a link alias. */
+void audio_uart_ambiq_area_move_450bb2(uint32_t *area,uint32_t x,uint32_t y);
 
 #include <stdint.h>
 extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 extern void audio_uart_lv_draw_full_area_48b8d8(void *,void *);
 extern void audio_uart_lv_area_set_450b5c(void *,uint32_t,uint32_t,uint32_t,uint32_t);
-static void cache_assert(uint32_t line,const char *name,const char *expression) {
-    static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw_buf.c";
-    audio_uart_lvgl_log(3u,source,line,name,"Asserted at expression: %s (%s)",expression,"NULL pointer");
-    for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
-}
-/* Native48ab30..48abb8. Cached handler table; callback freshly reread. */
-void audio_uart_lv_draw_invalidate_cache_48ab30(void *buffer,const void *area) {
-    volatile uint32_t *b=buffer;
-    if(!b)cache_assert(121u,"lv_draw_buf_invalidate_cache","draw_buf != NULL");
-    if(!b[6])cache_assert(122u,"lv_draw_buf_invalidate_cache","draw_buf->handlers != NULL");
-    volatile uint32_t *h=(void *)(uintptr_t)b[6];
-    if(h[3]) {
-        uint32_t full[4];
-        if(!area){audio_uart_lv_draw_full_area_48b8d8(buffer,full);area=full;}
-        uint32_t callback=h[3];
-        ((void (*)(void *,const void *))(uintptr_t)callback)(buffer,area);
-    }
-}
-/* Native48abb8..48ac40. Same contract, flush slot at handlerword4. */
-void audio_uart_lv_draw_flush_cache_48abb8(void *buffer,const void *area) {
-    volatile uint32_t *b=buffer;
-    if(!b)cache_assert(143u,"lv_draw_buf_flush_cache","draw_buf != NULL");
-    if(!b[6])cache_assert(144u,"lv_draw_buf_flush_cache","draw_buf->handlers != NULL");
-    volatile uint32_t *h=(void *)(uintptr_t)b[6];
-    if(h[4]) {
-        uint32_t full[4];
-        if(!area){audio_uart_lv_draw_full_area_48b8d8(buffer,full);area=full;}
-        uint32_t callback=h[4];
-        ((void (*)(void *,const void *))(uintptr_t)callback)(buffer,area);
-    }
-}
-/* Native48b8d8..48b8f6. Fresh height then width header reads, uint16 zero wraps. */
-void audio_uart_lv_draw_full_area_48b8d8(void *buffer,void *area) {
-    const volatile uint32_t *b=buffer;
-    uint32_t y2=(b[1]>>16)-1u;
-    uint32_t x2=(uint16_t)b[1]-1u;
-    audio_uart_lv_area_set_450b5c(area,0u,0u,x2,y2);
-}
 
 #include <stdint.h>
 /* Native450b5c..450b6c; four words written in coordinate order. */
@@ -3146,45 +2470,8 @@ uint32_t audio_uart_nema_pool_contains_514148(uint32_t id,uint32_t address,uint3
 }
 
 #include <stdint.h>
-static uint32_t clean_read(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
-static void clean_write(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
-static void clean_barrier(void){__asm__ volatile("dsb sy\n\tisb sy" ::: "memory");}
-/* Native47510e..475194: source-owned SCB addresses and native cache policy. */
-uint32_t audio_uart_cache_clean_range_47510e(const uint32_t *range) {
-    if(!(clean_read(0xe000ed14u)&(1u<<16))) {clean_barrier();return 0u;}
-    if(!range) {
-        clean_write(0xe000ed84u,0u);
-        __asm__ volatile("dsb sy" ::: "memory");
-        uint32_t ccsidr=clean_read(0xe000ed80u);
-        uint32_t set=(ccsidr>>13)&0x7fffu;
-        do {
-            uint32_t way=(ccsidr>>3)&0x3ffu;
-            do {
-                clean_write(0xe000ef6cu,((set<<5)&0x3fe0u)|(way<<30));
-                if(way==0u)break;
-                --way;
-            } while(1);
-            if(set==0u)break;
-            --set;
-        } while(1);
-        clean_barrier();
-    } else {
-        const volatile uint32_t *r=range;
-        uint32_t size=r[1];
-        uint32_t address=r[0];
-        if((int32_t)size>=1) {
-            uint32_t remaining=(address&31u)+size;
-            __asm__ volatile("dsb sy" ::: "memory");
-            do {
-                clean_write(0xe000ef68u,address);
-                address+=32u;
-                remaining-=32u;
-            } while((int32_t)remaining>=1);
-            clean_barrier();
-        }
-    }
-    return 0u;
-}
+/* Native 0x47510e..0x475194 is upstream am_hal_cachectrl_dcache_clean
+ * (audio_uart_cache_clean_range_47510e defsym). */
 
 #include <stdint.h>
 extern void *audio_uart_nema_pool_select_514050(uint32_t);
@@ -3229,59 +2516,8 @@ void *audio_uart_lv_pool_aligned_allocate_4841d8(void *cell,uint32_t bytes,uint3
     return result;
 }
 
-#include <stdint.h>
-extern uint32_t g2_tlsf_adjust_request(uint32_t,uint32_t);
-extern void *g2_tlsf_find_suitable(void *,uint32_t);
-extern void *g2_tlsf_block_to_ptr(void *);
-extern void *g2_tlsf_align_ptr(void *,uint32_t);
-extern void *g2_tlsf_trim_free_leading_4d0444(void *,void *,uint32_t);
-extern void *g2_tlsf_prepare_allocation(void *,void *,uint32_t);
-extern void g2_file_close_error(const char *,const char *,uint32_t);
-/* Native4d0744..4d0802, pinned TLSF alignment policy with native gap16. */
-void *audio_uart_lv_tlsf_aligned_allocate_4d0744(void *pool,uint32_t alignment,uint32_t size) {
-    uint32_t adjusted=g2_tlsf_adjust_request(size,4u);
-    uint32_t requested=g2_tlsf_adjust_request(alignment+adjusted+16u,alignment);
-    if(adjusted==0u || alignment<5u)requested=adjusted;
-    void *block=g2_tlsf_find_suitable(pool,requested);
-    uint32_t minimum=*(const volatile uint32_t *)(uintptr_t)0x78f4c4u;
-    uint32_t overhead=*(const volatile uint32_t *)(uintptr_t)0x78f4bcu;
-    if(minimum+overhead!=16u)g2_file_close_error("sizeof(block_header_t) == block_size_min + block_header_overhead","D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\tlsf\\tlsf.c",1149u);
-    if(block) {
-        void *ptr=g2_tlsf_block_to_ptr(block);
-        void *aligned=g2_tlsf_align_ptr(ptr,alignment);
-        uint32_t gap=(uint32_t)(uintptr_t)aligned-(uint32_t)(uintptr_t)ptr;
-        if(gap!=0u && gap<16u) {
-            uint32_t offset=16u-gap;
-            if(alignment>=offset)offset=alignment;
-            aligned=g2_tlsf_align_ptr((void *)(uintptr_t)((uint32_t)(uintptr_t)aligned+offset),alignment);
-            gap=(uint32_t)(uintptr_t)aligned-(uint32_t)(uintptr_t)ptr;
-        }
-        if(gap) {
-            if(gap<16u)g2_file_close_error("gap >= gap_minimum && \"gap size too small\"","D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\tlsf\\tlsf.c",1173u);
-            block=g2_tlsf_trim_free_leading_4d0444(pool,block,gap);
-        }
-    }
-    return g2_tlsf_prepare_allocation(pool,block,adjusted);
-}
-
-#include <stdint.h>
-extern uint32_t g2_tlsf_block_can_split(void *,uint32_t);
-extern void *g2_tlsf_block_split(void *,uint32_t);
-extern void g2_tlsf_block_set_prev_free(void *);
-extern void *g2_tlsf_block_link_next(void *);
-extern void g2_tlsf_block_insert(void *,void *);
-/* Native4d0444..4d0484: leading free-block split and original-block reinsertion. */
-void *g2_tlsf_trim_free_leading_4d0444(void *pool,void *block,uint32_t size) {
-    void *result=block;
-    if(g2_tlsf_block_can_split(block,size)!=0u) {
-        uint32_t overhead=*(const volatile uint32_t *)(uintptr_t)0x78f4bcu;
-        result=g2_tlsf_block_split(block,size-overhead);
-        g2_tlsf_block_set_prev_free(result);
-        (void)g2_tlsf_block_link_next(block);
-        g2_tlsf_block_insert(pool,block);
-    }
-    return result;
-}
+/* TLSF tlsf_memalign 0x4D0744 and block_trim_free_leading 0x4D0444 are
+ * compiled from pinned TLSF 3.1 (third-party/upstream/tlsf/tlsf.c). */
 
 #include <stdint.h>
 extern void audio_uart_nema_error_set_4b127c(uint32_t);
@@ -4066,15 +3302,11 @@ void audio_uart_ambiq_vector_font_callback_53d82c(void *event) {
  else if(code==41u)audio_uart_ambiq_vector_font_release_53db3c((void *)(uintptr_t)*(volatile uint32_t *)data);
  else audio_uart_lvgl_log(2u,vector270_file,186u,vector270_function,vector270_message,code);
 }
-/* Native529bf2..529bfe: only callback is stored; two incoming args are unused. */
-void audio_uart_font_outline_register_529bf2(uintptr_t callback,uint32_t unused,void *unit) {
- (void)unused;(void)unit;
- volatile uint32_t *context=audio_uart_font_outline_context();
- context[4]=(uint32_t)callback;
-}
-/* Native53d6da..53d6ea: registers the source callback with the original arguments. */
+/* Native53d6da..53d6ea: registers the source callback with the original arguments.
+ * lv_freetype_outline_add_event 0x529bf2 is compiled from upstream lv_freetype_outline.c. */
+extern void lv_freetype_outline_add_event(void (*event_cb)(void *),uint8_t filter,void *user_data);
 void audio_uart_ambiq_vector_font_init_53d6da(void *unit) {
- audio_uart_font_outline_register_529bf2((uintptr_t)audio_uart_ambiq_vector_font_callback_53d82c,0u,unit);
+ lv_freetype_outline_add_event(audio_uart_ambiq_vector_font_callback_53d82c,0u,unit);
 }
 
 #include <stdint.h>
@@ -4187,16 +3419,8 @@ static const char array278_function[]="lv_array_init_from_buf";
 static const char array278_format[]="Asserted at expression: %s (%s)";
 static const char array278_expression[]="buf != NULL";
 static const char array278_null[]="NULL pointer";
-/* Native488440..488478: external buffer initialization with ordered sparse stores. */
-void audio_uart_lv_array_init_external_488440(void *array,void *buffer,uint32_t count,uint32_t stride) {
- if(!buffer) {
-  audio_uart_lvgl_log(3u,array278_file,51u,array278_function,array278_format,array278_expression,array278_null);
-  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
- }
- volatile uint32_t *a=array;
- a[1]=0u;a[2]=count;a[3]=stride;a[0]=(uint32_t)(uintptr_t)buffer;
- ((volatile uint8_t *)array)[16]=0u;
-}
+/* Retired: stock 0x488440 is upstream lv_array_init_from_buf (lvgl/src/misc/lv_array.c); this name is a link alias. */
+void audio_uart_lv_array_init_external_488440(void *array,void *buffer,uint32_t count,uint32_t stride);
 
 #include <stdint.h>
 extern uint32_t audio_uart_lv_array_push_488506(void *,const void *);
@@ -4266,17 +3490,8 @@ static const char access282_function[]="lv_array_at";
 static const char access282_format[]="Asserted at expression: %s (%s)";
 static const char access282_expression[]="array->data != NULL";
 static const char access282_null[]="NULL pointer";
-/* Native488578..4885b8: count gate precedes data assertion and fresh pointer reload. */
-void *audio_uart_lv_array_item_488578(void *array,uint32_t index) {
- const volatile uint32_t *a=array;
- if(index>=a[1])return 0;
- if(a[0]==0u) {
-  audio_uart_lvgl_log(3u,access282_file,202u,access282_function,access282_format,access282_expression,access282_null);
-  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
- }
- uint32_t data=a[0];uint32_t stride=a[3];
- return (void *)(uintptr_t)(data+index*stride);
-}
+/* Retired: stock 0x488578 is upstream lv_array_at (lvgl/src/misc/lv_array.c); this name is a link alias. */
+void *audio_uart_lv_array_item_488578(void *array,uint32_t index);
 /* Native53d6cc..53d6d0: count only. */
 uint32_t audio_uart_ambiq_vector_array_count_53d6cc(void *array) {
  return ((const volatile uint32_t *)array)[1];
@@ -4296,29 +3511,8 @@ static const char append284_function[]="lv_array_push_back";
 static const char append284_format[]="Asserted at expression: %s (%s)";
 static const char append284_expression[]="array->data != NULL";
 static const char append284_null[]="NULL pointer";
-/* Native4883f0..4883fc: consumed void zero-fill wrapper. */
-void audio_uart_lv_array_zero_4883f0(void *destination,uint32_t size) {
- audio_uart_lv_basic_box_clear_454746(destination,0u,size);
-}
-/* Native488506..488578: equality gate, full result, fresh descriptor loads. */
-uint32_t audio_uart_lv_array_push_488506(void *array,const void *source) {
- volatile uint32_t *a=array;
- if(a[0]==0u) {
-  audio_uart_lvgl_log(3u,append284_file,176u,append284_function,append284_format,append284_expression,append284_null);
-  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
- }
- uint32_t count=a[1];uint32_t capacity=a[2];
- if(count==capacity) {
-  uint32_t wanted=a[2]+4u;
-  if(audio_uart_lv_array_resize_48849c(array,wanted)==0u)return 0u;
- }
- uint32_t data=a[0];count=a[1];uint32_t stride=a[3];
- void *destination=(void *)(uintptr_t)(data+count*stride);
- if(source)(void)audio_uart_lv_grid_copy_454738(destination,source,a[3]);
- else audio_uart_lv_array_zero_4883f0(destination,a[3]);
- a[1]=a[1]+1u;
- return 1u;
-}
+/* Retired: stock 0x488506 is upstream lv_array_push_back (lvgl/src/misc/lv_array.c); this name is a link alias. */
+uint32_t audio_uart_lv_array_push_488506(void *array,const void *source);
 
 #include <stdint.h>
 extern void audio_uart_nema_vg_set_error_51565c(uint32_t);
@@ -4406,6 +3600,7 @@ static uint32_t remainder296_lsr(uint32_t value,uint32_t amount) {
  amount&=255u;return amount>=32u?0u:value>>amount;
 }
 /* Native577c4c..577d08: integer float-bit remainder, native exceptional policy. */
+/* Stock 0x00577C34 (FUN_00577c4c) */
 uint32_t audio_uart_float_remainder_bits_577c4c(uint32_t x,uint32_t y) {
  uint32_t sign=x&0x80000000u, twice_y=y<<1;
  int32_t ex=(int32_t)((x>>23)&255u),ey=(int32_t)(twice_y>>24);
@@ -6258,62 +5453,12 @@ LAB_0056385a:
 /* Native4408d6..440966/440968..4409f8; source-backed LVGL size clamps.
  * LVGL lv_obj_pos.c969..980; native wrap and signed percentage boundaries retained. */
 #include <stdint.h>
-static int32_t lv319_resolve(int32_t bound,int32_t reference)
-{
- uint32_t raw=(uint32_t)bound;
- int32_t plain=(int32_t)(raw & 0x9fffffffu);
- if((raw & 0x60000000u)==0x20000000u && plain<0x1fffffff){
-  int32_t percent=plain>=0x10000000 ? (int32_t)(0x0fffffffu-(uint32_t)plain) : plain;
-  int32_t product=(int32_t)((uint32_t)percent*(uint32_t)reference);
-  return product/100;
- }
- return bound;
-}
-static int32_t lv319_clamp(int32_t value,int32_t minimum,int32_t maximum,int32_t reference)
-{
- minimum=lv319_resolve(minimum,reference);
- maximum=lv319_resolve(maximum,reference);
- int32_t limited=value<maximum?value:maximum;
- return limited<minimum?minimum:limited;
-}
-int32_t audio_uart_lv_clamp_width_4408d6(int32_t v,int32_t lo,int32_t hi,int32_t ref)
-{return lv319_clamp(v,lo,hi,ref);}
-int32_t audio_uart_lv_clamp_height_440968(int32_t v,int32_t lo,int32_t hi,int32_t ref)
-{return lv319_clamp(v,lo,hi,ref);}
 
 /* Native LVGL size-refresh leaf contracts; qualification receipt round320. */
 /* Complete native style leaves: native selectors agree with pinned LVGL lv_style.h.
  * Area copy43ee94..43eea4 intentionally retains interleaved load/store for overlap. */
 #include <stdint.h>
 extern uint32_t audio_uart_lv_style_property_44bdea(void *,uint32_t,uint32_t);
-int32_t audio_uart_lv_style_width_43eea6(void *object,uint32_t selector)
-{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,1u);}
-int32_t audio_uart_lv_style_min_width_43eeb0(void *object,uint32_t selector)
-{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,4u);}
-int32_t audio_uart_lv_style_max_width_43eeba(void *object,uint32_t selector)
-{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,5u);}
-int32_t audio_uart_lv_style_height_43eec4(void *object,uint32_t selector)
-{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,2u);}
-int32_t audio_uart_lv_style_min_height_43eece(void *object,uint32_t selector)
-{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,6u);}
-int32_t audio_uart_lv_style_max_height_43eed8(void *object,uint32_t selector)
-{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,7u);}
-int32_t audio_uart_lv_style_margin_top_43ef70(void *object,uint32_t selector)
-{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,24u);}
-int32_t audio_uart_lv_style_margin_bottom_43ef7a(void *object,uint32_t selector)
-{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,25u);}
-int32_t audio_uart_lv_style_margin_left_43ef84(void *object,uint32_t selector)
-{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,26u);}
-int32_t audio_uart_lv_style_margin_right_43ef8e(void *object,uint32_t selector)
-{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,27u);}
-uint8_t audio_uart_lv_style_base_dir_43efba(void *object,uint32_t selector)
-{return (uint8_t)audio_uart_lv_style_property_44bdea(object,selector,39u);}
-void audio_uart_lv_area_copy_43ee94(void *destination,const void *source)
-{
- volatile uint32_t *d=destination;
- const volatile uint32_t *s=source;
- d[0]=s[0]; d[1]=s[1]; d[2]=s[2]; d[3]=s[3];
-}
 
 /* Complete native coordinate getters; qualification receipt round321. */
 /* Complete native43fc2a..43fc63 and43feca..43ff43; pinned lv_obj_pos.c.
@@ -6334,26 +5479,6 @@ static const char lv321_coords_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\th
 static const char lv321_coords_function[]="lv_obj_get_coords";
 static const char lv321_content_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\core\\lv_obj_pos.c";
 static const char lv321_content_function[]="lv_obj_get_content_coords";
-static _Noreturn void lv321_assert_null(uint32_t line,const char *function,const char *file)
-{
- audio_uart_lvgl_log(3u,file,line,function,lv321_format,lv321_expression,lv321_message);
- for(;;) *(volatile uint32_t *)(uintptr_t)0xffffffffu=0u;
-}
-void audio_uart_lv_obj_coords_43fc2a(const void *object,void *area)
-{
- if(object==NULL)lv321_assert_null(480u,lv321_coords_function,lv321_coords_file);
- audio_uart_lv_area_copy_43ee94(area,(const uint8_t *)object+20u);
-}
-void audio_uart_lv_obj_content_coords_43feca(void *object,void *area)
-{
- if(object==NULL)lv321_assert_null(579u,lv321_content_function,lv321_content_file);
- audio_uart_lv_obj_coords_43fc2a(object,area);
- volatile uint32_t *a=area;
- uint32_t space=(uint32_t)audio_uart_lv_style_pad_left_43efc6(object,0u,0u,0u);a[0]=a[0]+space;
- space=(uint32_t)audio_uart_lv_style_pad_right_43eff4(object,0u);a[2]=a[2]-space;
- space=(uint32_t)audio_uart_lv_style_pad_top_43f022(object,0u,0u,0u);a[1]=a[1]+space;
- space=(uint32_t)audio_uart_lv_style_pad_bottom_43f050(object,0u);a[3]=a[3]-space;
-}
 
 /* Complete native content-sizing helper bodies, source-backed lv_obj_pos.c/lv_style.h. */
 #include <stdint.h>
@@ -6362,28 +5487,6 @@ extern uint32_t audio_uart_lv_style_property_44bdea(void *,uint32_t,uint32_t);
 extern uint32_t audio_uart_lv_obj_has_flag_any_43e11c(void *,uint32_t);
 extern void *audio_uart_lv_obj_parent_44dca2(void *);
 extern uint32_t audio_uart_lv_obj_event_451670(void *,uint32_t,void *);
-int32_t audio_uart_lv_style_x_43eee2(void *o,uint32_t s){return (int32_t)audio_uart_lv_style_property_44bdea(o,s,8u);}
-int32_t audio_uart_lv_style_y_43eeec(void *o,uint32_t s){return (int32_t)audio_uart_lv_style_property_44bdea(o,s,9u);}
-uint8_t audio_uart_lv_style_align_43eef6(void *o,uint32_t s){return (uint8_t)audio_uart_lv_style_property_44bdea(o,s,10u);}
-uint32_t audio_uart_lv_layout_positioned_43f612(void *o)
-{
- if(audio_uart_lv_obj_has_flag_any_43e11c(o,0x60001u))return 0u;
- void *parent=audio_uart_lv_obj_parent_44dca2(o);
- if(parent==NULL)return 0u;
- return (uint16_t)audio_uart_lv_style_property_44bdea(parent,0u,22u)!=0u;
-}
-int32_t audio_uart_lv_self_width_43ff44(void *o)
-{
- int32_t size[2]={0,(int32_t)0xe0000001u};
- (void)audio_uart_lv_obj_event_451670(o,52u,size);
- return size[0];
-}
-int32_t audio_uart_lv_self_height_43ff5e(void *o)
-{
- int32_t size[2]={(int32_t)0xe0000001u,0};
- (void)audio_uart_lv_obj_event_451670(o,52u,size);
- return size[1];
-}
 
 /* Complete native area size450b80..450b97 and scrollbar invalidate44f2ca..44f315.
  * Pinned Ambiq LVGL lv_area.c69-77 and lv_obj_scroll.c637-647.
@@ -6391,21 +5494,6 @@ int32_t audio_uart_lv_self_height_43ff5e(void *o)
 #include <stdint.h>
 extern void audio_uart_lv_get_scrollbar_areas_44eb28(void *,int32_t *,int32_t *);
 extern void audio_uart_display_invalidate_area(void *,const int32_t *);
-uint32_t audio_uart_lv_area_size_450b80(const void *area)
-{
- const volatile uint32_t *p=(const volatile uint32_t *)area;
- uint32_t x2=p[2];uint32_t x1=p[0];uint32_t width=x2-x1+1u;
- uint32_t y2=p[3];uint32_t y1=p[1];uint32_t height=y2-y1+1u;
- return height*width;
-}
-void audio_uart_lv_scrollbar_invalidate_44f2ca(void *object)
-{
- int32_t horizontal[4],vertical[4];
- audio_uart_lv_get_scrollbar_areas_44eb28(object,horizontal,vertical);
- if(audio_uart_lv_area_size_450b80(horizontal)==0u && audio_uart_lv_area_size_450b80(vertical)==0u)return;
- if(audio_uart_lv_area_size_450b80(horizontal)!=0u)audio_uart_display_invalidate_area(object,horizontal);
- if(audio_uart_lv_area_size_450b80(vertical)!=0u)audio_uart_display_invalidate_area(object,vertical);
-}
 
 /* Full native440a3c..440c2d/440c2e..440d47, pinned lv_obj_pos.c1077..1230.
  * Native wrap, repeated LV_MAX margin fetches, scroll mutation and child order retained. */
@@ -6431,90 +5519,11 @@ extern int32_t audio_uart_lv_style_margin_top_43ef70(void *,uint32_t);
 extern int32_t audio_uart_lv_style_margin_bottom_43ef7a(void *,uint32_t);
 extern int32_t audio_uart_lv_area_width_451598(const int32_t *);
 extern int32_t audio_uart_lv_area_height_4515a4(const int32_t *);
-static uint32_t lv322_read(const void *p,uint32_t offset){return *(const volatile uint32_t *)((const uint8_t *)p+offset);}
-static void lv322_write(void *p,uint32_t offset,uint32_t value){*(volatile uint32_t *)((uint8_t *)p+offset)=value;}
-static int32_t lv322_add(int32_t a,int32_t b){return (int32_t)((uint32_t)a+(uint32_t)b);}
-static int32_t lv322_extent(uint32_t end,uint32_t start){return (int32_t)(end-start+1u);}
-static void *lv322_child(void *o,uint32_t i){uint32_t spec=lv322_read(o,8);uint32_t children=lv322_read((void *)(uintptr_t)spec,0);return (void *)(uintptr_t)lv322_read((void *)(uintptr_t)children,i*4u);}
-int32_t audio_uart_lv_calc_content_width_440a3c(void *object)
-{
- int32_t old_scroll=audio_uart_lv_obj_x_44e486(object);
- if(lv322_read(object,8))lv322_write((void *)(uintptr_t)lv322_read(object,8),32,0);
- int32_t right=audio_uart_lv_style_pad_right_43eff4(object,0);
- int32_t left=audio_uart_lv_style_pad_left_43efc6(object,0,0,0);
- int32_t self=lv322_add(lv322_add(audio_uart_lv_self_width_43ff44(object),left),right);
- int32_t result=(int32_t)0xe0000001u;uint32_t count=audio_uart_lv_child_count_44ddea(object);
- uint8_t rtl=audio_uart_lv_style_base_dir_43efba(object,0)==1;
- for(uint32_t i=0;i<count;i++){
-  int32_t tmp=(int32_t)0xe0000001u;void *child=lv322_child(object,i);
-  if(audio_uart_lv_obj_has_flag_any_43e11c(child,0x40001u))continue;
-  uint32_t positioned=audio_uart_lv_layout_positioned_43f612(child);
-  uint8_t align=0;if(!positioned)align=audio_uart_lv_style_align_43eef6(child,0);
-  if(positioned || (rtl?(align==0 || align==3 || align==6 || align==8):(align==0 || align==1 || align==4 || align==7))){
-   tmp=rtl?lv322_extent(lv322_read(object,28),lv322_read(child,20)):lv322_extent(lv322_read(child,28),lv322_read(object,20));
-  }else if(audio_uart_lv_style_x_43eee2(child,0)==0){
-   tmp=lv322_add(audio_uart_lv_area_width_451598((const int32_t *)((uint8_t *)child+20)),rtl?right:left);
-   tmp=lv322_add(tmp,rtl?audio_uart_lv_style_margin_left_43ef84(child,0):audio_uart_lv_style_margin_right_43ef8e(child,0));
-  }
-  int32_t margin=rtl?audio_uart_lv_style_margin_left_43ef84(child,0):audio_uart_lv_style_margin_right_43ef8e(child,0);
-  if(lv322_add(tmp,margin)>=result){
-   margin=rtl?audio_uart_lv_style_margin_left_43ef84(child,0):audio_uart_lv_style_margin_right_43ef8e(child,0);
-   result=lv322_add(tmp,margin);
-  }
- }
- if(result!=(int32_t)0xe0000001u)result=lv322_add(result,rtl?left:right);
- if(lv322_read(object,8))lv322_write((void *)(uintptr_t)lv322_read(object,8),32,0u-(uint32_t)old_scroll);
- if(result==(int32_t)0xe0000001u)return self;
- return result>self?result:self;
-}
-int32_t audio_uart_lv_calc_content_height_440c2e(void *object)
-{
- int32_t old_scroll=audio_uart_lv_obj_y_44e498(object);
- if(lv322_read(object,8))lv322_write((void *)(uintptr_t)lv322_read(object,8),36,0);
- int32_t top=audio_uart_lv_style_pad_top_43f022(object,0,0,0);
- int32_t bottom=audio_uart_lv_style_pad_bottom_43f050(object,0);
- int32_t self=lv322_add(lv322_add(audio_uart_lv_self_height_43ff5e(object),top),bottom);
- int32_t result=(int32_t)0xe0000001u;uint32_t count=audio_uart_lv_child_count_44ddea(object);
- for(uint32_t i=0;i<count;i++){
-  int32_t tmp=(int32_t)0xe0000001u;void *child=lv322_child(object,i);
-  if(audio_uart_lv_obj_has_flag_any_43e11c(child,0x40001u))continue;
-  uint32_t positioned=audio_uart_lv_layout_positioned_43f612(child);
-  uint8_t align=0;if(!positioned)align=audio_uart_lv_style_align_43eef6(child,0);
-  if(positioned || align<=3){tmp=lv322_extent(lv322_read(child,32),lv322_read(object,24));}
-  else if(audio_uart_lv_style_y_43eeec(child,0)==0){
-   tmp=lv322_add(audio_uart_lv_area_height_4515a4((const int32_t *)((uint8_t *)child+20)),top);
-   tmp=lv322_add(tmp,audio_uart_lv_style_margin_top_43ef70(child,0));
-  }
-  int32_t margin=audio_uart_lv_style_margin_bottom_43ef7a(child,0);
-  if(lv322_add(tmp,margin)>=result)result=lv322_add(tmp,audio_uart_lv_style_margin_bottom_43ef7a(child,0));
- }
- if(lv322_read(object,8))lv322_write((void *)(uintptr_t)lv322_read(object,8),36,0u-(uint32_t)old_scroll);
- if(result==(int32_t)0xe0000001u)return self;
- int32_t combined=lv322_add(result,bottom);return combined>=self?combined:self;
-}
 
 /* Entire native getters44e42c..44e441,44e442..44e459,44fbe6..44fbfb.
  * Source lv_obj_scroll.c94-105 and lv_display.c430-436; native storage widths retained. */
 #include <stdint.h>
 extern void *audio_uart_display_default_get(void);
-uint32_t audio_uart_lv_get_scrollbar_mode_44e42c(const void *object)
-{
- const volatile uint32_t *slot=(const volatile uint32_t *)((const uint8_t *)object+8);
- if(*slot==0u)return 3u;
- return *(const volatile uint8_t *)((uintptr_t)*slot+50u)&3u;
-}
-uint32_t audio_uart_lv_get_scroll_dir_44e442(const void *object)
-{
- const volatile uint32_t *slot=(const volatile uint32_t *)((const uint8_t *)object+8);
- if(*slot==0u)return 15u;
- return (*(const volatile uint16_t *)((uintptr_t)*slot+50u)>>6)&15u;
-}
-int32_t audio_uart_lv_display_dpi_44fbe6(void *display)
-{
- if(display==0)display=audio_uart_display_default_get();
- if(display==0)return 130;
- return *(const volatile int32_t *)((const uint8_t *)display+24u);
-}
 
 /* Entire scrollbar raw-property and input iterator/field getter bodies.
  * Native property IDs/narrowing and root/list/node offsets retained.
@@ -6522,34 +5531,6 @@ int32_t audio_uart_lv_display_dpi_44fbe6(void *display)
 #include <stdint.h>
 extern uint32_t audio_uart_lv_style_property_44bdea(void *,uint32_t,uint32_t);
 extern uint8_t audio_uart_display_lv_root[];
-int32_t audio_uart_lv_style_length_44e226(void *o,uint32_t selector){return (int32_t)audio_uart_lv_style_property_44bdea(o,selector,3u);}
-int32_t audio_uart_lv_style_raw_pad_top_44e230(void *o,uint32_t selector){return (int32_t)audio_uart_lv_style_property_44bdea(o,selector,16u);}
-int32_t audio_uart_lv_style_raw_pad_bottom_44e23a(void *o,uint32_t selector){return (int32_t)audio_uart_lv_style_property_44bdea(o,selector,17u);}
-int32_t audio_uart_lv_style_raw_pad_left_44e244(void *o,uint32_t selector){return (int32_t)audio_uart_lv_style_property_44bdea(o,selector,18u);}
-int32_t audio_uart_lv_style_raw_pad_right_44e24e(void *o,uint32_t selector){return (int32_t)audio_uart_lv_style_property_44bdea(o,selector,19u);}
-uint8_t audio_uart_lv_style_background_opacity_44e276(void *o,uint32_t selector){return (uint8_t)audio_uart_lv_style_property_44bdea(o,selector,29u);}
-uint8_t audio_uart_lv_style_border_opacity_44e282(void *o,uint32_t selector){return (uint8_t)audio_uart_lv_style_property_44bdea(o,selector,50u);}
-void *audio_uart_lv_input_next_452edc(void *input)
-{
- const volatile uint32_t *list=(const volatile uint32_t *)(audio_uart_display_lv_root+0x44u);
- if(input==0)return (void *)(uintptr_t)list[1];
- uint32_t node_size=list[0];
- return (void *)(uintptr_t)*(const volatile uint32_t *)((uintptr_t)input+node_size+4u);
-}
-uint32_t audio_uart_lv_input_scroll_direction_452f8c(const void *input)
-{
- if(input==0)return 0u;
- const volatile uint8_t *p=(const volatile uint8_t *)input;
- if(p[0]!=1u && p[0]!=3u)return 0u;
- return p[168]&15u;
-}
-void *audio_uart_lv_input_scroll_object_452fae(const void *input)
-{
- if(input==0)return 0;
- const volatile uint8_t *p=(const volatile uint8_t *)input;
- if(p[0]!=1u && p[0]!=3u)return 0;
- return (void *)(uintptr_t)*(const volatile uint32_t *)(p+112);
-}
 
 /* Entire native 44eb28..44f2c9 scrollbar area calculator.
  * Pinned Ambiq LVGL lv_obj_scroll.c461-635 reconciled with existing native lift.
@@ -6581,131 +5562,6 @@ extern uint8_t audio_uart_lv_style_background_opacity_44e276(void *,uint32_t);
 extern uint8_t audio_uart_lv_style_border_opacity_44e282(void *,uint32_t);
 extern int32_t audio_uart_lv_display_dpi_44fbe6(void *);
 
-static int32_t lv334_add(int32_t a,int32_t b){return (int32_t)((uint32_t)a+(uint32_t)b);}
-static int32_t lv334_sub(int32_t a,int32_t b){return (int32_t)((uint32_t)a-(uint32_t)b);}
-static int32_t lv334_mul(int32_t a,int32_t b){return (int32_t)((uint32_t)a*(uint32_t)b);}
-static int32_t lv334_div(int32_t a,int32_t b)
-{
-    if(b==0)return 0;
-    if(a==INT32_MIN && b==-1)return INT32_MIN;
-    return a/b;
-}
-static int32_t lv334_coord(const void *o,uint32_t offset)
-{return *(const volatile int32_t *)((const uint8_t *)o+offset);}
-static int32_t lv334_min_size(void)
-{
-    int32_t dpi=audio_uart_lv_display_dpi_44fbe6(0);
-    int32_t scaled=lv334_div(lv334_add(lv334_mul(dpi,10),80),160);
-    if(scaled<2)return 1;
-    dpi=audio_uart_lv_display_dpi_44fbe6(0);
-    return lv334_div(lv334_add(lv334_mul(dpi,10),80),160);
-}
-static int32_t lv334_length(int32_t calculated,int32_t style,int32_t extent)
-{
-    int32_t minimum=lv334_min_size();
-    int32_t candidate=style>0?style:calculated;
-    if(minimum<candidate){if(style>0)calculated=style;}
-    else calculated=lv334_min_size();
-    if(extent<=calculated)calculated=extent;
-    return calculated;
-}
-void audio_uart_lv_get_scrollbar_areas_44eb28(void *object,int32_t *horizontal,int32_t *vertical)
-{
-    volatile int32_t *h=horizontal,*v=vertical;
-    audio_uart_lv_area_set_450b5c(horizontal,0u,0u,UINT32_MAX,UINT32_MAX);
-    audio_uart_lv_area_set_450b5c(vertical,0u,0u,UINT32_MAX,UINT32_MAX);
-    if(audio_uart_lv_obj_has_flag_43e0e0(object,16u)==0u)return;
-    uint32_t mode=audio_uart_lv_get_scrollbar_mode_44e42c(object);
-    if(mode==0u)return;
-    void *input=audio_uart_lv_input_next_452edc(0);
-    if(mode==2u){
-        while(input!=0 && audio_uart_lv_input_scroll_object_452fae(input)!=object)
-            input=audio_uart_lv_input_next_452edc(input);
-        if(input==0)return;
-    }
-    int32_t st=audio_uart_lv_obj_y_44e498(object);
-    int32_t sb=audio_uart_lv_scroll_bottom_44e4bc(object);
-    int32_t sl=audio_uart_lv_scroll_left_44e586(object);
-    int32_t sr=audio_uart_lv_scroll_right_44e67a(object);
-    uint32_t dir=audio_uart_lv_get_scroll_dir_44e442(object);
-    uint32_t ver_draw=0u,hor_draw=0u;
-    if((dir&12u)!=0u && (mode==1u || (mode==3u && (st>0 || sb>0)) ||
-       (mode==2u && audio_uart_lv_input_scroll_direction_452f8c(input)==12u)))ver_draw=1u;
-    if((dir&3u)!=0u && (mode==1u || (mode==3u && (sl>0 || sr>0)) ||
-       (mode==2u && audio_uart_lv_input_scroll_direction_452f8c(input)==3u)))hor_draw=1u;
-    if(hor_draw==0u && ver_draw==0u)return;
-    uint32_t rtl=audio_uart_lv_style_base_dir_43efba(object,0x10000u)==1u;
-    int32_t top=audio_uart_lv_style_raw_pad_top_44e230(object,0x10000u);
-    int32_t bottom=audio_uart_lv_style_raw_pad_bottom_44e23a(object,0x10000u);
-    int32_t left=audio_uart_lv_style_raw_pad_left_44e244(object,0x10000u);
-    int32_t right=audio_uart_lv_style_raw_pad_right_44e24e(object,0x10000u);
-    int32_t thickness=audio_uart_lv_style_width_43eea6(object,0x10000u);
-    int32_t length=audio_uart_lv_style_length_44e226(object,0x10000u);
-    int32_t obj_h=audio_uart_lv_obj_height_43fdda(object);
-    int32_t obj_w=audio_uart_lv_obj_width_43fd9e(object);
-    int32_t ver_req=ver_draw?thickness:0,hor_req=hor_draw?thickness:0;
-    if(audio_uart_lv_style_background_opacity_44e276(object,0x10000u)<=1u &&
-       audio_uart_lv_style_border_opacity_44e282(object,0x10000u)<=1u)return;
-    int32_t content_h=lv334_add(lv334_add(sb,st),obj_h);
-    if(ver_draw && content_h!=0){
-        v[1]=lv334_coord(object,24);v[3]=lv334_coord(object,32);
-        if(rtl){v[0]=lv334_add(left,lv334_coord(object,20));v[2]=lv334_sub(lv334_add(thickness,v[0]),1);}
-        else{v[2]=lv334_sub(lv334_coord(object,28),right);v[0]=lv334_add(lv334_sub(v[2],thickness),1);}
-        int32_t track=lv334_sub(lv334_sub(lv334_sub(obj_h,top),bottom),hor_req);
-        int32_t sb_h=lv334_length(lv334_div(lv334_mul(obj_h,track),content_h),length,obj_h);
-        int32_t rem=lv334_sub(track,sb_h),scroll_h=lv334_sub(content_h,obj_h);
-        if(scroll_h<1){
-            v[1]=lv334_add(top,lv334_coord(object,24));
-            v[3]=lv334_sub(lv334_sub(lv334_sub(lv334_coord(object,32),bottom),hor_req),1);
-        }else{
-            int32_t y=lv334_sub(rem,lv334_div(lv334_mul(sb,rem),scroll_h));
-            v[1]=lv334_add(lv334_add(top,y),lv334_coord(object,24));v[3]=lv334_sub(lv334_add(sb_h,v[1]),1);
-            if(v[1]<lv334_add(top,lv334_coord(object,24))){
-                v[1]=lv334_add(top,lv334_coord(object,24));int32_t minimum=lv334_min_size();
-                if(v[3]<lv334_add(minimum,v[1])){minimum=lv334_min_size();v[3]=lv334_add(minimum,v[1]);}
-            }
-            if(lv334_sub(lv334_sub(lv334_coord(object,32),hor_req),bottom)<v[3]){
-                v[3]=lv334_sub(lv334_sub(lv334_coord(object,32),hor_req),bottom);int32_t minimum=lv334_min_size();
-                if(lv334_sub(v[3],minimum)<v[1]){minimum=lv334_min_size();v[1]=lv334_sub(v[3],minimum);}
-            }
-        }
-    }
-    int32_t content_w=lv334_add(lv334_add(sr,sl),obj_w);
-    if(hor_draw && content_w!=0){
-        h[3]=lv334_sub(lv334_coord(object,32),bottom);h[1]=lv334_add(lv334_sub(h[3],thickness),1);
-        h[0]=lv334_coord(object,20);h[2]=lv334_coord(object,28);
-        int32_t track=lv334_sub(lv334_sub(lv334_sub(obj_w,left),right),ver_req);
-        int32_t sb_w=lv334_length(lv334_div(lv334_mul(obj_w,track),content_w),length,obj_w);
-        int32_t rem=lv334_sub(track,sb_w),scroll_w=lv334_sub(content_w,obj_w);
-        if(scroll_w<1){
-            if(rtl){h[0]=lv334_sub(lv334_add(lv334_add(ver_req,left),lv334_coord(object,20)),1);h[2]=lv334_sub(lv334_coord(object,28),right);}
-            else{h[0]=lv334_add(left,lv334_coord(object,20));h[2]=lv334_sub(lv334_sub(lv334_sub(lv334_coord(object,28),right),ver_req),1);}
-        }else{
-            int32_t x=lv334_sub(rem,lv334_div(lv334_mul(sr,rem),scroll_w));
-            if(rtl){
-                h[0]=lv334_add(lv334_add(lv334_add(ver_req,left),x),lv334_coord(object,20));h[2]=lv334_sub(lv334_add(sb_w,h[0]),1);
-                if(h[0]<lv334_add(lv334_add(ver_req,left),lv334_coord(object,20))){
-                    h[0]=lv334_add(lv334_add(ver_req,left),lv334_coord(object,20));int32_t minimum=lv334_min_size();
-                    if(h[2]<lv334_add(minimum,h[0])){minimum=lv334_min_size();h[2]=lv334_add(minimum,h[0]);}
-                }
-                if(lv334_sub(lv334_coord(object,28),right)<h[2]){
-                    h[2]=lv334_sub(lv334_coord(object,28),right);int32_t minimum=lv334_min_size();
-                    if(lv334_sub(h[2],minimum)<h[0]){minimum=lv334_min_size();h[0]=lv334_sub(h[2],minimum);}
-                }
-            }else{
-                h[0]=lv334_add(lv334_add(left,x),lv334_coord(object,20));h[2]=lv334_sub(lv334_add(sb_w,h[0]),1);
-                if(h[0]<lv334_add(left,lv334_coord(object,20))){
-                    h[0]=lv334_add(left,lv334_coord(object,20));int32_t minimum=lv334_min_size();
-                    if(h[2]<lv334_add(minimum,h[0])){minimum=lv334_min_size();h[2]=lv334_add(minimum,h[0]);}
-                }
-                if(lv334_sub(lv334_sub(lv334_coord(object,28),ver_req),right)<h[2]){
-                    h[2]=lv334_sub(lv334_sub(lv334_coord(object,28),ver_req),right);int32_t minimum=lv334_min_size();
-                    if(lv334_sub(h[2],minimum)<h[0]){minimum=lv334_min_size();h[0]=lv334_sub(h[2],minimum);}
-                }
-            }
-        }
-    }
-}
 
 /* Entire native scroll-bottom44e4bc..44e585, left44e586..44e679,
  * right44e67a..44e75d. Pinned Ambiq LVGL lv_obj_scroll.c136-242.
@@ -6729,93 +5585,6 @@ extern int32_t audio_uart_lv_obj_height_43fdda(void *);
 extern int32_t audio_uart_lv_obj_width_43fd9e(void *);
 extern int32_t audio_uart_lv_obj_y_44e498(void *);
 extern int32_t audio_uart_lv_obj_x_44e486(void *);
-static int32_t lv336_add(int32_t a,int32_t b){return (int32_t)((uint32_t)a+(uint32_t)b);}
-static int32_t lv336_sub(int32_t a,int32_t b){return (int32_t)((uint32_t)a-(uint32_t)b);}
-static uint32_t lv336_word(const void *p,uint32_t offset)
-{return *(const volatile uint32_t *)((const uint8_t *)p+offset);}
-static void *lv336_child(void *object,uint32_t index)
-{
-    void *spec=(void *)(uintptr_t)lv336_word(object,8u);
-    void *children=(void *)(uintptr_t)lv336_word(spec,0u);
-    return (void *)(uintptr_t)lv336_word(children,index*4u);
-}
-static _Noreturn void lv336_null(uint32_t line,const char *function)
-{
-    audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\core\\lv_obj_scroll.c",
-        line,function,"Asserted at expression: %s (%s)","obj != NULL","NULL pointer");
-    for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
-}
-int32_t audio_uart_lv_scroll_bottom_44e4bc(void *object)
-{
-    if(object==0)lv336_null(138u,"lv_obj_get_scroll_bottom");
-    const int32_t minimum=(int32_t)0xe0000001u;
-    int32_t child_res=minimum;uint32_t count=audio_uart_lv_child_count_44ddea(object);
-    for(uint32_t i=0;i<count;i++){
-        void *child=lv336_child(object,i);
-        if(audio_uart_lv_obj_has_flag_any_43e11c(child,0x40001u))continue;
-        int32_t margin=audio_uart_lv_style_margin_bottom_43ef7a(child,0u);
-        int32_t tmp=lv336_add(margin,(int32_t)lv336_word(child,32u));
-        if(child_res<=tmp)child_res=tmp;
-    }
-    int32_t top=audio_uart_lv_style_pad_top_43f022(object,0u,0u,0u);
-    int32_t bottom=audio_uart_lv_style_pad_bottom_43f050(object,0u);
-    if(child_res!=minimum)child_res=lv336_add(bottom,lv336_sub(child_res,(int32_t)lv336_word(object,32u)));
-    int32_t self=audio_uart_lv_self_height_43ff5e(object);
-    int32_t height=audio_uart_lv_obj_height_43fdda(object);
-    self=lv336_add(bottom,lv336_add(top,lv336_sub(self,height)));
-    int32_t scroll=audio_uart_lv_obj_y_44e498(object);self=lv336_sub(self,scroll);
-    return self>=child_res?self:child_res;
-}
-int32_t audio_uart_lv_scroll_left_44e586(void *object)
-{
-    if(object==0)lv336_null(166u,"lv_obj_get_scroll_left");
-    if(audio_uart_lv_style_base_dir_43efba(object,0u)!=1u){
-        void *spec=(void *)(uintptr_t)lv336_word(object,8u);
-        return spec==0?0:(int32_t)(0u-lv336_word(spec,32u));
-    }
-    int32_t right=audio_uart_lv_style_pad_right_43eff4(object,0u);
-    int32_t left=audio_uart_lv_style_pad_left_43efc6(object,0u,0u,0u);
-    int32_t x1=0x1fffffff;uint32_t count=audio_uart_lv_child_count_44ddea(object);
-    for(uint32_t i=0;i<count;i++){
-        void *child=lv336_child(object,i);
-        if(audio_uart_lv_obj_has_flag_any_43e11c(child,0x40001u))continue;
-        int32_t margin=audio_uart_lv_style_margin_left_43ef84(child,0u);
-        int32_t tmp=lv336_sub((int32_t)lv336_word(child,20u),margin);
-        if(tmp<=x1)x1=tmp;
-    }
-    int32_t child_res=(int32_t)0xe0000001u;
-    if(x1!=0x1fffffff)child_res=lv336_sub(lv336_add(left,(int32_t)lv336_word(object,20u)),x1);
-    int32_t self=audio_uart_lv_self_width_43ff44(object);
-    int32_t width=audio_uart_lv_obj_width_43fd9e(object);
-    self=lv336_add(right,lv336_add(left,lv336_sub(self,width)));
-    int32_t scroll=audio_uart_lv_obj_x_44e486(object);self=lv336_add(scroll,self);
-    return self>=child_res?self:child_res;
-}
-int32_t audio_uart_lv_scroll_right_44e67a(void *object)
-{
-    if(object==0)lv336_null(209u,"lv_obj_get_scroll_right");
-    if(audio_uart_lv_style_base_dir_43efba(object,0u)==1u){
-        void *spec=(void *)(uintptr_t)lv336_word(object,8u);
-        return spec==0?0:(int32_t)lv336_word(spec,32u);
-    }
-    const int32_t minimum=(int32_t)0xe0000001u;
-    int32_t child_res=minimum;uint32_t count=audio_uart_lv_child_count_44ddea(object);
-    for(uint32_t i=0;i<count;i++){
-        void *child=lv336_child(object,i);
-        if(audio_uart_lv_obj_has_flag_any_43e11c(child,0x40001u))continue;
-        int32_t margin=audio_uart_lv_style_margin_right_43ef8e(child,0u);
-        int32_t tmp=lv336_add(margin,(int32_t)lv336_word(child,28u));
-        if(child_res<=tmp)child_res=tmp;
-    }
-    int32_t right=audio_uart_lv_style_pad_right_43eff4(object,0u);
-    int32_t left=audio_uart_lv_style_pad_left_43efc6(object,0u,0u,0u);
-    if(child_res!=minimum)child_res=lv336_add(right,lv336_sub(child_res,(int32_t)lv336_word(object,28u)));
-    int32_t self=audio_uart_lv_self_width_43ff44(object);
-    int32_t width=audio_uart_lv_obj_width_43fd9e(object);
-    self=lv336_add(left,lv336_add(right,lv336_sub(self,width)));
-    int32_t scroll=audio_uart_lv_obj_x_44e486(object);self=lv336_sub(self,scroll);
-    return self>=child_res?self:child_res;
-}
 
 /* Entire native lv_obj_refr_size43f1a4..43f4bf (796bytes).
  * Source: pinned Ambiq LVGL lv_obj_pos.c87-209 and original native assembly/lift.
@@ -6855,103 +5624,6 @@ extern uint8_t audio_uart_lv_style_base_dir_43efba(void *,uint32_t);
 extern uint32_t audio_uart_lv_obj_event_451670(void *,uint32_t,void *);
 extern void audio_uart_lv_refresh_draw_452d42(void *);
 
-static uint16_t lv338_flags(const void *object)
-{return *(const volatile uint16_t *)((const uint8_t *)object+42u);}
-static int32_t lv338_coord(const void *object,uint32_t offset)
-{return *(const volatile int32_t *)((const uint8_t *)object+offset);}
-static void lv338_coordinate(void *object,uint32_t offset,int32_t value)
-{*(volatile int32_t *)((uint8_t *)object+offset)=value;}
-static int32_t lv338_add(int32_t a,int32_t b){return (int32_t)((uint32_t)a+(uint32_t)b);}
-static int32_t lv338_sub(int32_t a,int32_t b){return (int32_t)((uint32_t)a-(uint32_t)b);}
-static uint32_t lv338_is_percentage(uint32_t encoded)
-{return (encoded&0x60000000u)==0x20000000u && (int32_t)(encoded&0x9fffffffu)<0x1fffffff;}
-static int32_t lv338_percentage_size(uint32_t encoded,int32_t reference)
-{
-    int32_t plain=(int32_t)(encoded&0x9fffffffu);
-    int32_t factor=plain<0x10000000?plain:(int32_t)(0x0fffffffu-(uint32_t)plain);
-    int32_t product=(int32_t)((uint32_t)reference*(uint32_t)factor);
-    return product/100;
-}
-static _Noreturn void lv338_null(void)
-{
-    audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\core\\lv_obj_pos.c",
-        89u,"lv_obj_refr_size","Asserted at expression: %s (%s)","obj != NULL","NULL pointer");
-    for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
-}
-uint32_t audio_uart_lv_basic_invalidate_43f1a4(void *object)
-{
-    if(object==0)lv338_null();
-    if((lv338_flags(object)&0xc00u)==0xc00u)return 0u;
-    void *parent=audio_uart_lv_obj_parent_44dca2(object);
-    if(parent==0)return 0u;
-    int32_t width,height;
-    if((lv338_flags(object)&0x800u)!=0u)width=audio_uart_lv_obj_width_43fd9e(object);
-    else{
-        uint32_t encoded=(uint32_t)audio_uart_lv_style_width_43eea6(object,0u);
-        uint32_t percentage=lv338_is_percentage(encoded);
-        int32_t reference=audio_uart_lv_obj_content_width_43fe16(parent,0u,0u,0u);
-        width=(int32_t)encoded;
-        if(encoded==0x3fffffffu)width=audio_uart_lv_calc_content_width_440a3c(object);
-        else if(percentage){
-            if((lv338_flags(parent)&0x800u)==0u &&
-               (uint32_t)audio_uart_lv_style_width_43eea6(parent,0u)==0x3fffffffu){
-                int32_t left=audio_uart_lv_style_pad_left_43efc6(object,0u,0u,0u);
-                int32_t right=audio_uart_lv_style_pad_right_43eff4(object,0u);width=lv338_add(right,left);
-            }else{
-                int32_t size=lv338_percentage_size(encoded,reference);
-                int32_t left=audio_uart_lv_style_margin_left_43ef84(object,0u);
-                int32_t right=audio_uart_lv_style_margin_right_43ef8e(object,0u);
-                width=lv338_sub(lv338_sub(size,left),right);
-            }
-        }
-        int32_t minimum=audio_uart_lv_style_min_width_43eeb0(object,0u);
-        int32_t maximum=audio_uart_lv_style_max_width_43eeba(object,0u);
-        width=audio_uart_lv_clamp_width_4408d6(width,minimum,maximum,reference);
-    }
-    if((lv338_flags(object)&0x400u)!=0u)height=audio_uart_lv_obj_height_43fdda(object);
-    else{
-        uint32_t encoded=(uint32_t)audio_uart_lv_style_height_43eec4(object,0u);
-        uint32_t percentage=lv338_is_percentage(encoded);
-        int32_t reference=audio_uart_lv_obj_content_height_43fe70(parent,0u,0u,0u);
-        height=(int32_t)encoded;
-        if(encoded==0x3fffffffu)height=audio_uart_lv_calc_content_height_440c2e(object);
-        else if(percentage){
-            if((lv338_flags(parent)&0x400u)==0u &&
-               (uint32_t)audio_uart_lv_style_height_43eec4(parent,0u)==0x3fffffffu){
-                int32_t top=audio_uart_lv_style_pad_top_43f022(object,0u,0u,0u);
-                int32_t bottom=audio_uart_lv_style_pad_bottom_43f050(object,0u);height=lv338_add(bottom,top);
-            }else{
-                int32_t size=lv338_percentage_size(encoded,reference);
-                int32_t top=audio_uart_lv_style_margin_top_43ef70(object,0u);
-                int32_t bottom=audio_uart_lv_style_margin_bottom_43ef7a(object,0u);
-                height=lv338_sub(lv338_sub(size,top),bottom);
-            }
-        }
-        int32_t minimum=audio_uart_lv_style_min_height_43eece(object,0u);
-        int32_t maximum=audio_uart_lv_style_max_height_43eed8(object,0u);
-        height=audio_uart_lv_clamp_height_440968(height,minimum,maximum,reference);
-    }
-    if(audio_uart_lv_obj_width_43fd9e(object)==width &&
-       audio_uart_lv_obj_height_43fdda(object)==height)return 0u;
-    audio_uart_display_size_changed(object);
-    int32_t original[4],parent_fit[4];
-    audio_uart_lv_obj_coords_43fc2a(object,original);
-    audio_uart_lv_obj_content_coords_43feca(parent,parent_fit);
-    uint8_t on1=(uint8_t)audio_uart_lv_area_contains_450f28(original,parent_fit,0u);
-    if(on1==0u)audio_uart_lv_scrollbar_invalidate_44f2ca(parent);
-    lv338_coordinate(object,32u,lv338_sub(lv338_add(height,lv338_coord(object,24u)),1));
-    if(audio_uart_lv_style_base_dir_43efba(object,0u)==1u)
-        lv338_coordinate(object,20u,lv338_add(lv338_sub(lv338_coord(object,28u),width),1));
-    else lv338_coordinate(object,28u,lv338_sub(lv338_add(width,lv338_coord(object,20u)),1));
-    (void)audio_uart_lv_obj_event_451670(object,49u,original);
-    (void)audio_uart_lv_obj_event_451670(parent,42u,object);
-    audio_uart_display_size_changed(object);
-    *(volatile uint16_t *)((uint8_t *)object+42u)=(uint16_t)(lv338_flags(object)|2u);
-    uint8_t on2=(uint8_t)audio_uart_lv_area_contains_450f28((const int32_t *)((uint8_t *)object+20u),parent_fit,0u);
-    if(on1!=0u || on2!=0u)audio_uart_lv_scrollbar_invalidate_44f2ca(parent);
-    audio_uart_lv_refresh_draw_452d42(object);
-    return 1u;
-}
 
 /* Six complete native LittleFS LVGL callbacks, source-backed lv_fs_littlefs.c.
  * drv userdata48; output store/reread; whence UXTB; status0/12 andcleanup ordering.
@@ -7067,181 +5739,20 @@ uint32_t audio_uart_lv_fs_dir_read_4c9104(void *driver,void *directory,char *fil
  }
 }
 
-/* Complete native public LittleFS entries anddir-close core.
- * Unadmitted; native/source/compiler/runtime qualification remains.
- * Pinned lfs.c6155/6207/6318 etc; native mlist offset40 retained. */
-#include <stdint.h>
-extern int32_t g2_lfs_mlist_isopen(void *,void *);
-extern void g2_file_close_error(const char *,const char *,uint32_t);
-extern int32_t g2_lfs_file_close(void *,void *);
-extern int32_t audio_file_lfs_write_core_4ce308(void *,void *,const void *,uint32_t);
-extern int32_t audio_file_lfs_dir_open_core_4cd558(void *,void *,const char *);
-extern int32_t audio_file_lfs_dir_read_core_4cd60e(void *,void *,void *);
-extern void g2_lfs_mlist_remove(void *,void *);
-static void *lfs347_list(const void *filesystem)
-{return (void *)(uintptr_t)*(const volatile uint32_t *)((const uint8_t *)filesystem+40u);}
-static const char lfs347_source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\littlefs\\lfs.c";
-static const char lfs347_open[]="lfs_mlist_isopen(lfs->mlist, (struct lfs_mlist*)file)";
-static const char lfs347_closed_dir[]="!lfs_mlist_isopen(lfs->mlist, (struct lfs_mlist*)dir)";
-int32_t audio_file_lfs_close_4cfad0(void *filesystem,void *file)
-{
- if(g2_lfs_mlist_isopen(lfs347_list(filesystem),file)==0)
-  g2_file_close_error(lfs347_open,lfs347_source,6155u);
- return g2_lfs_file_close(filesystem,file);
-}
-int32_t audio_file_lfs_write_4cfb7c(void *filesystem,void *file,const void *buffer,uint32_t size)
-{
- if(g2_lfs_mlist_isopen(lfs347_list(filesystem),file)==0)
-  g2_file_close_error(lfs347_open,lfs347_source,6207u);
- return audio_file_lfs_write_core_4ce308(filesystem,file,buffer,size);
-}
-int32_t audio_file_lfs_dir_open_4cfc66(void *filesystem,void *directory,const char *path)
-{
- if(g2_lfs_mlist_isopen(lfs347_list(filesystem),directory)!=0)
-  g2_file_close_error(lfs347_closed_dir,lfs347_source,6318u);
- return audio_file_lfs_dir_open_core_4cd558(filesystem,directory,path);
-}
-int32_t audio_file_lfs_dir_close_core_4cd604(void *filesystem,void *directory)
-{
- g2_lfs_mlist_remove(filesystem,directory);return 0;
-}
-int32_t audio_file_lfs_dir_close_4cfcf8(void *filesystem,void *directory)
-{return audio_file_lfs_dir_close_core_4cd604(filesystem,directory);}
-int32_t audio_file_lfs_dir_read_4cfd02(void *filesystem,void *directory,void *info)
-{return audio_file_lfs_dir_read_core_4cd60e(filesystem,directory,info);}
+/* lfs_file_close 0x4CFAD0, lfs_file_write 0x4CFB7C, lfs_dir_open 0x4CFC66,
+ * lfs_dir_close 0x4CFCF8 / lfs_dir_close_ 0x4CD604 and lfs_dir_read 0x4CFD02
+ * are compiled from pinned littlefs v2.10.1 (third-party/upstream/littlefs). */
 
 /* Whole native bounded-copy entry0x454778..0x4547ad; qualification draft. */
 extern uint32_t g2_log_module_length(const char *);
 extern void *audio_queue_copy_bytes(void *,const void *,uint32_t);
-uint32_t audio_uart_lv_strlcpy_454778(char *destination,const char *source,uint32_t capacity)
-{
- uint32_t length=g2_log_module_length(source);
- if(capacity!=0u){
-  uint32_t count=length;
-  if(length>=capacity)count=capacity-1u;
-  (void)audio_queue_copy_bytes(destination,source,count);
-  *(volatile uint8_t *)(destination+count)=0u;
- }
- return length;
-}
+/* Retired: stock 0x454778 is upstream lv_strlcpy (lvgl/src/stdlib/clib/lv_string_clib.c); this name is a link alias. */
+uint32_t audio_uart_lv_strlcpy_454778(char *destination,const char *source,uint32_t capacity);
 
-/* Whole native LittleFS write core4ce308..4ce3b1,170bytes. Unadmitted draft.
- * Pinned lfs.c3657..3701; allstateoffsets/flagbits/native32bitwrap preserved. */
-#include <stdint.h>
-extern int32_t g2_lfs_file_flush(void *,void *);
-extern int32_t g2_lfs_file_flushedwrite(void *,void *,const void *,uint32_t);
-extern void g2_file_close_error(const char *,const char *,uint32_t);
-static uint32_t lfs350_get(const void *p,uint32_t offset)
-{return *(const volatile uint32_t *)((const uint8_t *)p+offset);}
-static void lfs350_put(void *p,uint32_t offset,uint32_t value)
-{*(volatile uint32_t *)((uint8_t *)p+offset)=value;}
-int32_t audio_file_lfs_write_core_4ce308(void *filesystem,void *file,const void *buffer,uint32_t size)
-{
- uint32_t zero_word=(uint32_t)(uintptr_t)buffer;
- if((*(const volatile uint8_t *)((const uint8_t *)file+48u)&2u)==0u)
-  g2_file_close_error("(file->flags & LFS_O_WRONLY) == LFS_O_WRONLY","D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\littlefs\\lfs.c",3659u);
- if((lfs350_get(file,48u)&0x40000u)!=0u){
-  int32_t error=g2_lfs_file_flush(filesystem,file);if(error!=0)return error;
- }
- if((lfs350_get(file,48u)&0x800u)!=0u&&lfs350_get(file,52u)<lfs350_get(file,44u))
-  lfs350_put(file,52u,lfs350_get(file,44u));
- if(lfs350_get(filesystem,116u)<(uint32_t)(size+lfs350_get(file,52u)))return -27;
- if((lfs350_get(file,48u)&0x20000u)==0u&&lfs350_get(file,44u)<lfs350_get(file,52u)){
-  uint32_t target=lfs350_get(file,52u);lfs350_put(file,52u,lfs350_get(file,44u));
-  while(lfs350_get(file,52u)<target){
-   *(uint8_t *)&zero_word=0u;
-   int32_t error=g2_lfs_file_flushedwrite(filesystem,file,&zero_word,1u);
-   if(error<0)return error;
-  }
- }
- int32_t result=g2_lfs_file_flushedwrite(filesystem,file,buffer,size);
- if(result>=0)lfs350_put(file,48u,lfs350_get(file,48u)&0xfff7ffffu);
- return result;
-}
+/* lfs_file_write_ 0x4CE308 is compiled from pinned littlefs v2.10.1. */
 
-/* Whole directory cores:open4cd558..4cd5fd/read4cd60e..4cd6b9. Draft.
- * Pinned lfs.c2722..2821, nativeoffsetsandtagconstants preserved. */
-extern int32_t audio_file_lfs_dir_find(void *,void *,const char **,uint16_t *);
-extern int32_t audio_file_lfs_dir_get(void *,void *,uint32_t,uint32_t,void *);
-extern void audio_file_lfs_ctz_fromle32(void *);
-extern int32_t g2_lfs_dir_fetch(void *,void *,const uint32_t *);
-extern void audio_file_lfs_mlist_append(void *,void *);
-extern void *g2_lfs_cache_fill(void *,uint32_t,uint32_t);
-extern int32_t audio_file_lfs_dir_getinfo_4cbf38(void *,void *,uint32_t,void *);
-static uint32_t lfs351_word(const void *p,uint32_t offset)
-{return *(const volatile uint32_t *)((const uint8_t *)p+offset);}
-static void lfs351_store(void *p,uint32_t offset,uint32_t value)
-{*(volatile uint32_t *)((uint8_t *)p+offset)=value;}
-static uint16_t lfs351_half(const void *p,uint32_t offset)
-{return *(const volatile uint16_t *)((const uint8_t *)p+offset);}
-static void lfs351_storehalf(void *p,uint32_t offset,uint16_t value)
-{*(volatile uint16_t *)((uint8_t *)p+offset)=value;}
-int32_t audio_file_lfs_dir_open_core_4cd558(void *filesystem,void *directory,const char *path)
-{
- uint8_t *d=directory;
- int32_t tag=audio_file_lfs_dir_find(filesystem,d+8u,&path,0);
- if(tag<0)return tag;
- if(((uint32_t)tag>>20u&0x7ffu)!=2u)return -20;
- uint32_t pair[2];uint32_t id=((uint32_t)tag>>10u)&0x3ffu;
- if(id==0x3ffu){pair[0]=lfs351_word(filesystem,32u);pair[1]=lfs351_word(filesystem,36u);}
- else {
-  int32_t result=audio_file_lfs_dir_get(filesystem,d+8u,0x700ffc00u,0x20000008u|(id<<10u),pair);
-  if(result<0)return result;
-  audio_file_lfs_ctz_fromle32(pair);
- }
- int32_t result=g2_lfs_dir_fetch(filesystem,d+8u,pair);
- if(result!=0)return result;
- lfs351_store(directory,44u,lfs351_word(directory,8u));
- lfs351_store(directory,48u,lfs351_word(directory,12u));
- lfs351_storehalf(directory,4u,0u);lfs351_store(directory,40u,0u);
- *(volatile uint8_t *)(d+6u)=2u;audio_file_lfs_mlist_append(filesystem,directory);return 0;
-}
-static void lfs351_dotcopy(char *destination,const char *source)
-{for(;;){uint8_t byte=*(const volatile uint8_t *)source++;*(volatile uint8_t *)destination++=byte;if(byte==0u)return;}}
-int32_t audio_file_lfs_dir_read_core_4cd60e(void *filesystem,void *directory,void *information)
-{
- uint8_t *d=directory,*info=information;
- (void)g2_lfs_cache_fill(info,264u,0u);
- if(lfs351_word(directory,40u)==0u){
-  *(volatile uint8_t *)info=2u;lfs351_dotcopy((char *)info+8u,".");
-  lfs351_store(directory,40u,lfs351_word(directory,40u)+1u);return 1;
- }else if(lfs351_word(directory,40u)==1u){
-  *(volatile uint8_t *)info=2u;lfs351_dotcopy((char *)info+8u,"..");
-  lfs351_store(directory,40u,lfs351_word(directory,40u)+1u);return 1;
- }
- for(;;){
-  if(lfs351_half(directory,4u)==lfs351_half(directory,28u)){
-   if(*(const volatile uint8_t *)(d+31u)==0u)return 0;
-   int32_t result=g2_lfs_dir_fetch(filesystem,d+8u,(const uint32_t *)(d+32u));
-   if(result!=0)return result;
-   lfs351_storehalf(directory,4u,0u);
-  }
-  int32_t result=audio_file_lfs_dir_getinfo_4cbf38(filesystem,d+8u,lfs351_half(directory,4u),information);
-  if(result!=0&&result!=-2)return result;
-  lfs351_storehalf(directory,4u,(uint16_t)(lfs351_half(directory,4u)+1u));
-  if(result!=-2)break;
- }
- lfs351_store(directory,40u,lfs351_word(directory,40u)+1u);return 1;
-}
-
-/* Entire lfs_dir_getinfo4cbf38..4cbfdd166bytes; pinned lfs.c1415..1447. Draft. */
-int32_t audio_file_lfs_dir_getinfo_4cbf38(void *filesystem,void *directory,uint32_t identifier,void *information)
-{
- uint8_t *info=information;uint32_t id=(uint16_t)identifier;
- if(id==0x3ffu){lfs351_dotcopy((char *)info+8u,"/");*(volatile uint8_t *)info=2u;return 0;}
- int32_t tag=audio_file_lfs_dir_get(filesystem,directory,0x780ffc00u,
-  (lfs351_word(filesystem,112u)+1u)|(id<<10u),info+8u);
- if(tag<0)return tag;
- *(volatile uint8_t *)info=(uint8_t)(((uint32_t)tag>>20u)&0x7ffu);
- uint32_t pair[2]={identifier,(uint32_t)(uintptr_t)information};
- tag=audio_file_lfs_dir_get(filesystem,directory,0x700ffc00u,0x20000008u|(id<<10u),pair);
- if(tag<0)return tag;
- audio_file_lfs_ctz_fromle32(pair);
- uint32_t type=((uint32_t)tag>>20u)&0x7ffu;
- if(type==0x202u)lfs351_store(information,4u,pair[1]);
- else if(type==0x201u)lfs351_store(information,4u,(uint32_t)tag&0x3ffu);
- return 0;
-}
+/* lfs_dir_open_ 0x4CD558, lfs_dir_read_ 0x4CD60E and lfs_dir_getinfo
+ * 0x4CBF38 are compiled from pinned littlefs v2.10.1. */
 #pragma clang attribute push (__attribute__((target("no-lob,no-mve,no-mve.fp"))), apply_to=function)
 
 /* Entire pinned LVGL builtin formatter adapted for native-cluster qualification.
@@ -7253,8 +5764,6 @@ int32_t audio_file_lfs_dir_getinfo_4cbf38(void *filesystem,void *directory,uint3
 #define LVFMT354_UNUSED(x) ((void)(x))
 _Static_assert(sizeof(size_t)==4 && sizeof(long)==4 && sizeof(long long)==8,"native widths");
 _Static_assert(sizeof(va_list)==4,"native va-list pointer width");
-static size_t lvfmt354_strnlen(const char *str,size_t max_len)
-{size_t i=0;while(i<max_len && str[i])i++;return i;}
 ///////////////////////////////////////////////////////////////////////////////
 // \author (c) Marco Paland (info@paland.com)
 //             2014-2019, PALANDesign Hannover, Germany
@@ -7384,41 +5893,16 @@ typedef struct {
     void * arg;
 } lvfmt354_out_wrap;
 
-// internal buffer output
-static inline void lvfmt354_out_buffer(char character, void * buffer, size_t idx, size_t maxlen)
-{
-    if(idx < maxlen) {
-        ((char *)buffer)[idx] = character;
-    }
-}
 
 // internal null output
-static inline void lvfmt354_out_null(char character, void * buffer, size_t idx, size_t maxlen)
-{
-    LVFMT354_UNUSED(character);
-    LVFMT354_UNUSED(buffer);
-    LVFMT354_UNUSED(idx);
-    LVFMT354_UNUSED(maxlen);
-}
 
 // internal test if char is a digit (0-9)
 // \return true if char is a digit
-static inline bool lvfmt354_is_digit(char ch)
-{
-    return (ch >= '0') && (ch <= '9');
-}
 
 // internal ASCII string to unsigned int conversion
-static unsigned int lvfmt354_atoi(const char ** str)
-{
-    unsigned int i = 0U;
-    while(lvfmt354_is_digit(**str)) {
-        i = i * 10U + (unsigned int)(*((*str)++) - '0');
-    }
-    return i;
-}
 
 // output the specified string in reverse, taking care of any zero-padding
+/* Stock 0x48306C (LVGL lv_sprintf_builtin _out_rev) */
 static size_t lvfmt354_out_rev(lvfmt354_out_type out, char * buffer, size_t idx, size_t maxlen, const char * buf, size_t len,
                        unsigned int width, unsigned int flags)
 {
@@ -7448,6 +5932,7 @@ static size_t lvfmt354_out_rev(lvfmt354_out_type out, char * buffer, size_t idx,
 }
 
 // internal itoa format
+/* Stock 0x4830DA (LVGL lv_sprintf_builtin _ntoa_format) */
 static size_t lvfmt354_ntoa_format(lvfmt354_out_type out, char * buffer, size_t idx, size_t maxlen, char * buf, size_t len,
                            bool negative, unsigned int base, unsigned int prec, unsigned int width, unsigned int flags)
 {
@@ -7502,6 +5987,7 @@ static size_t lvfmt354_ntoa_format(lvfmt354_out_type out, char * buffer, size_t 
 }
 
 // internal itoa for 'long' type
+/* Stock 0x48320A (LVGL lv_sprintf_builtin _ntoa_long) */
 static size_t lvfmt354_ntoa_long(lvfmt354_out_type out, char * buffer, size_t idx, size_t maxlen, unsigned long value, bool negative,
                          unsigned long base, unsigned int prec, unsigned int width, unsigned int flags)
 {
@@ -7527,28 +6013,6 @@ static size_t lvfmt354_ntoa_long(lvfmt354_out_type out, char * buffer, size_t id
 
 // internal itoa for 'long long' type
 #if defined(LVFMT354_PRINTF_SUPPORT_LONG_LONG)
-static size_t lvfmt354_ntoa_long_long(lvfmt354_out_type out, char * buffer, size_t idx, size_t maxlen, unsigned long long value,
-                              bool negative, unsigned long long base, unsigned int prec, unsigned int width, unsigned int flags)
-{
-    char buf[LVFMT354_PRINTF_NTOA_BUFFER_SIZE];
-    size_t len = 0U;
-
-    // no hash for 0 values
-    if(!value) {
-        flags &= ~LVFMT354_FLAGS_HASH;
-    }
-
-    // write if precision != 0 and value is != 0
-    if(!(flags & LVFMT354_FLAGS_PRECISION) || value) {
-        do {
-            const char digit = (char)(value % base);
-            buf[len++] = digit < 10 ? '0' + digit : (flags & LVFMT354_FLAGS_UPPERCASE ? 'A' : 'a') + digit - 10;
-            value /= base;
-        } while(value && (len < LVFMT354_PRINTF_NTOA_BUFFER_SIZE));
-    }
-
-    return lvfmt354_ntoa_format(out, buffer, idx, maxlen, buf, len, negative, (unsigned int)base, prec, width, flags);
-}
 #endif  // LVFMT354_PRINTF_SUPPORT_LONG_LONG
 
 #if defined(LVFMT354_PRINTF_SUPPORT_FLOAT)
@@ -7560,6 +6024,7 @@ static size_t lvfmt354_etoa(lvfmt354_out_type out, char * buffer, size_t idx, si
 #endif
 
 // internal ftoa for fixed decimal floating point
+/* Stock 0x483350 (LVGL lv_sprintf_builtin _ftoa) */
 static size_t lvfmt354_ftoa(lvfmt354_out_type out, char * buffer, size_t idx, size_t maxlen, double value, unsigned int prec,
                     unsigned int width, unsigned int flags)
 {
@@ -7689,6 +6154,7 @@ static size_t lvfmt354_ftoa(lvfmt354_out_type out, char * buffer, size_t idx, si
 
 #if defined(LVFMT354_PRINTF_SUPPORT_EXPONENTIAL)
 // internal ftoa variant for exponential floating-point type, contributed by Martijn Jasperse <m.jasperse@gmail.com>
+/* Stock 0x48364C (LVGL lv_sprintf_builtin _etoa) */
 static size_t lvfmt354_etoa(lvfmt354_out_type out, char * buffer, size_t idx, size_t maxlen, double value, unsigned int prec,
                     unsigned int width, unsigned int flags)
 {
@@ -7800,337 +6266,10 @@ static size_t lvfmt354_etoa(lvfmt354_out_type out, char * buffer, size_t idx, si
 #endif  // LVFMT354_PRINTF_SUPPORT_EXPONENTIAL
 #endif  // LVFMT354_PRINTF_SUPPORT_FLOAT
 
-// internal vsnprintf
-static int lvfmt354_inner(lvfmt354_out_type out, char * buffer, const size_t maxlen, const char * format, va_list va)
-{
-    unsigned int flags, width, precision, n;
-    size_t idx = 0U;
 
-    if(!buffer) {
-        // use null output function
-        out = lvfmt354_out_null;
-    }
+/* Retired: stock 0x483fd0 is upstream lv_snprintf (lvgl/src/stdlib/builtin/lv_sprintf_builtin.c); this name is a link alias. */
+int audio_uart_lv_snprintf_483fd0(char * buffer, size_t count, const char * format, ...);
 
-    while(*format) {
-        // format specifier?  %[flags][width][.precision][length]
-        if(*format != '%') {
-            // no
-            out(*format, buffer, idx++, maxlen);
-            format++;
-            continue;
-        }
-        else {
-            // yes, evaluate it
-            format++;
-        }
-
-        // evaluate flags
-        flags = 0U;
-        do {
-            switch(*format) {
-                case '0':
-                    flags |= LVFMT354_FLAGS_ZEROPAD;
-                    format++;
-                    n = 1U;
-                    break;
-                case '-':
-                    flags |= LVFMT354_FLAGS_LEFT;
-                    format++;
-                    n = 1U;
-                    break;
-                case '+':
-                    flags |= LVFMT354_FLAGS_PLUS;
-                    format++;
-                    n = 1U;
-                    break;
-                case ' ':
-                    flags |= LVFMT354_FLAGS_SPACE;
-                    format++;
-                    n = 1U;
-                    break;
-                case '#':
-                    flags |= LVFMT354_FLAGS_HASH;
-                    format++;
-                    n = 1U;
-                    break;
-                default :
-                    n = 0U;
-                    break;
-            }
-        } while(n);
-
-        // evaluate width field
-        width = 0U;
-        if(lvfmt354_is_digit(*format)) {
-            width = lvfmt354_atoi(&format);
-        }
-        else if(*format == '*') {
-            const int w = va_arg(va, int);
-            if(w < 0) {
-                flags |= LVFMT354_FLAGS_LEFT;    // reverse padding
-                width = (unsigned int) - w;
-            }
-            else {
-                width = (unsigned int)w;
-            }
-            format++;
-        }
-
-        // evaluate precision field
-        precision = 0U;
-        if(*format == '.') {
-            flags |= LVFMT354_FLAGS_PRECISION;
-            format++;
-            if(lvfmt354_is_digit(*format)) {
-                precision = lvfmt354_atoi(&format);
-            }
-            else if(*format == '*') {
-                const int prec = (int)va_arg(va, int);
-                precision = prec > 0 ? (unsigned int)prec : 0U;
-                format++;
-            }
-        }
-
-        // evaluate length field
-        switch(*format) {
-            case 'l' :
-                flags |= LVFMT354_FLAGS_LONG;
-                format++;
-                if(*format == 'l') {
-                    flags |= LVFMT354_FLAGS_LONG_LONG;
-                    format++;
-                }
-                break;
-            case 'h' :
-                flags |= LVFMT354_FLAGS_SHORT;
-                format++;
-                if(*format == 'h') {
-                    flags |= LVFMT354_FLAGS_CHAR;
-                    format++;
-                }
-                break;
-#if defined(LVFMT354_PRINTF_SUPPORT_PTRDIFF_T)
-            case 't' :
-                flags |= (sizeof(ptrdiff_t) == sizeof(long) ? LVFMT354_FLAGS_LONG : LVFMT354_FLAGS_LONG_LONG);
-                format++;
-                break;
-#endif
-            case 'j' :
-                flags |= (sizeof(intmax_t) == sizeof(long) ? LVFMT354_FLAGS_LONG : LVFMT354_FLAGS_LONG_LONG);
-                format++;
-                break;
-            case 'z' :
-                flags |= (sizeof(size_t) == sizeof(long) ? LVFMT354_FLAGS_LONG : LVFMT354_FLAGS_LONG_LONG);
-                format++;
-                break;
-            default :
-                break;
-        }
-
-        // evaluate specifier
-        switch(*format) {
-            case 'd' :
-            case 'i' :
-            case 'u' :
-            case 'x' :
-            case 'X' :
-            case 'p' :
-            case 'P' :
-            case 'o' :
-            case 'b' : {
-                    // set the base
-                    unsigned int base;
-                    if(*format == 'x' || *format == 'X') {
-                        base = 16U;
-                    }
-                    else if(*format == 'p' || *format == 'P') {
-                        base = 16U;
-                        flags |= LVFMT354_FLAGS_HASH;   // always hash for pointer format
-#if defined(LVFMT354_PRINTF_SUPPORT_LONG_LONG)
-                        if(sizeof(uintptr_t) == sizeof(long long))
-                            flags |= LVFMT354_FLAGS_LONG_LONG;
-                        else
-#endif
-                            flags |= LVFMT354_FLAGS_LONG;
-
-                        if(*(format + 1) == 'V')
-                            format++;
-                    }
-                    else if(*format == 'o') {
-                        base =  8U;
-                    }
-                    else if(*format == 'b') {
-                        base =  2U;
-                    }
-                    else {
-                        base = 10U;
-                        flags &= ~LVFMT354_FLAGS_HASH;   // no hash for dec format
-                    }
-                    // uppercase
-                    if(*format == 'X' || *format == 'P') {
-                        flags |= LVFMT354_FLAGS_UPPERCASE;
-                    }
-
-                    // no plus or space flag for u, x, X, o, b
-                    if((*format != 'i') && (*format != 'd')) {
-                        flags &= ~(LVFMT354_FLAGS_PLUS | LVFMT354_FLAGS_SPACE);
-                    }
-
-                    // ignore '0' flag when precision is given
-                    if(flags & LVFMT354_FLAGS_PRECISION) {
-                        flags &= ~LVFMT354_FLAGS_ZEROPAD;
-                    }
-
-                    // convert the integer
-                    if((*format == 'i') || (*format == 'd')) {
-                        // signed
-                        if(flags & LVFMT354_FLAGS_LONG_LONG) {
-#if defined(LVFMT354_PRINTF_SUPPORT_LONG_LONG)
-                            const long long value = va_arg(va, long long);
-                            idx = lvfmt354_ntoa_long_long(out, buffer, idx, maxlen, (unsigned long long)(value > 0 ? value : 0 - value), value < 0, base,
-                                                  precision, width, flags);
-#endif
-                        }
-                        else if(flags & LVFMT354_FLAGS_LONG) {
-                            const long value = va_arg(va, long);
-                            idx = lvfmt354_ntoa_long(out, buffer, idx, maxlen, (unsigned long)(value > 0 ? value : 0 - value), value < 0, base, precision,
-                                             width, flags);
-                        }
-                        else {
-                            const int value = (flags & LVFMT354_FLAGS_CHAR) ? (char)va_arg(va, int) : (flags & LVFMT354_FLAGS_SHORT) ? (short int)va_arg(va,
-                                                                                                                                       int) : va_arg(va, int);
-                            idx = lvfmt354_ntoa_long(out, buffer, idx, maxlen, (unsigned int)(value > 0 ? value : 0 - value), value < 0, base, precision,
-                                             width, flags);
-                        }
-                    }
-                    else if(*format == 'V') {
-                        lvfmt354_vaformat_t * vaf = va_arg(va, lvfmt354_vaformat_t *);
-                        va_list copy;
-
-                        va_copy(copy, *vaf->va);
-                        idx += lvfmt354_inner(out, buffer + idx, maxlen - idx, vaf->fmt, copy);
-                        va_end(copy);
-                    }
-                    else {
-                        // unsigned
-                        if(flags & LVFMT354_FLAGS_LONG_LONG) {
-#if defined(LVFMT354_PRINTF_SUPPORT_LONG_LONG)
-                            idx = lvfmt354_ntoa_long_long(out, buffer, idx, maxlen, va_arg(va, unsigned long long), false, base, precision, width, flags);
-#endif
-                        }
-                        else if(flags & LVFMT354_FLAGS_LONG) {
-                            idx = lvfmt354_ntoa_long(out, buffer, idx, maxlen, va_arg(va, unsigned long), false, base, precision, width, flags);
-                        }
-                        else {
-                            const unsigned int value = (flags & LVFMT354_FLAGS_CHAR) ? (unsigned char)va_arg(va,
-                                                                                                    unsigned int) : (flags & LVFMT354_FLAGS_SHORT) ? (unsigned short int)va_arg(va, unsigned int) : va_arg(va, unsigned int);
-                            idx = lvfmt354_ntoa_long(out, buffer, idx, maxlen, value, false, base, precision, width, flags);
-                        }
-                    }
-                    format++;
-                    break;
-                }
-#if defined(LVFMT354_PRINTF_SUPPORT_FLOAT)
-            case 'f' :
-            case 'F' :
-                if(*format == 'F') flags |= LVFMT354_FLAGS_UPPERCASE;
-                idx = lvfmt354_ftoa(out, buffer, idx, maxlen, va_arg(va, double), precision, width, flags);
-                format++;
-                break;
-#if defined(LVFMT354_PRINTF_SUPPORT_EXPONENTIAL)
-            case 'e':
-            case 'E':
-            case 'g':
-            case 'G':
-                if((*format == 'g') || (*format == 'G')) flags |= LVFMT354_FLAGS_ADAPT_EXP;
-                if((*format == 'E') || (*format == 'G')) flags |= LVFMT354_FLAGS_UPPERCASE;
-                idx = lvfmt354_etoa(out, buffer, idx, maxlen, va_arg(va, double), precision, width, flags);
-                format++;
-                break;
-#endif  // LVFMT354_PRINTF_SUPPORT_EXPONENTIAL
-#endif  // LVFMT354_PRINTF_SUPPORT_FLOAT
-            case 'c' : {
-                    unsigned int l = 1U;
-                    // pre padding
-                    if(!(flags & LVFMT354_FLAGS_LEFT)) {
-                        while(l++ < width) {
-                            out(' ', buffer, idx++, maxlen);
-                        }
-                    }
-                    // char output
-                    out((char)va_arg(va, int), buffer, idx++, maxlen);
-                    // post padding
-                    if(flags & LVFMT354_FLAGS_LEFT) {
-                        while(l++ < width) {
-                            out(' ', buffer, idx++, maxlen);
-                        }
-                    }
-                    format++;
-                    break;
-                }
-
-            case 's' : {
-                    const char * p = va_arg(va, char *);
-                    unsigned int l = lvfmt354_strnlen(p, precision ? precision : (size_t) -1);
-                    // pre padding
-                    if(flags & LVFMT354_FLAGS_PRECISION) {
-                        l = (l < precision ? l : precision);
-                    }
-                    if(!(flags & LVFMT354_FLAGS_LEFT)) {
-                        while(l++ < width) {
-                            out(' ', buffer, idx++, maxlen);
-                        }
-                    }
-                    // string output
-                    while((*p != 0) && (!(flags & LVFMT354_FLAGS_PRECISION) || precision--)) {
-                        out(*(p++), buffer, idx++, maxlen);
-                    }
-                    // post padding
-                    if(flags & LVFMT354_FLAGS_LEFT) {
-                        while(l++ < width) {
-                            out(' ', buffer, idx++, maxlen);
-                        }
-                    }
-                    format++;
-                    break;
-                }
-
-            case '%' :
-                out('%', buffer, idx++, maxlen);
-                format++;
-                break;
-
-            default :
-                out(*format, buffer, idx++, maxlen);
-                format++;
-                break;
-        }
-    }
-
-    // termination
-    out((char)0, buffer, idx < maxlen ? idx : maxlen - 1U, maxlen);
-
-    // return written chars without terminating \0
-    return (int)idx;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-/// GLOBAL FUNCTIONS FOR LVGL
-///////////////////////////////////////////////////////////////////////////////
-
-int audio_uart_lv_snprintf_483fd0(char * buffer, size_t count, const char * format, ...)
-{
-    va_list va;
-    va_start(va, format);
-    const int ret = lvfmt354_inner(lvfmt354_out_buffer, buffer, count, format, va);
-    va_end(va);
-    return ret;
-}
-
-int audio_uart_lv_vsnprintf_483fea(char * buffer, size_t count, const char * format, va_list va)
-{
-    return lvfmt354_inner(lvfmt354_out_buffer, buffer, count, format, va);
-}
 
 
 
@@ -8288,11 +6427,11 @@ int audio_uart_lv_vsnprintf_483fea(char * buffer, size_t count, const char * for
 
 
 
-int __aeabi_dcmpge(double a,double b){return __gedf2(a,b)>=0;}
-int __aeabi_dcmpgt(double a,double b){return __gedf2(a,b)>0;}
-int __aeabi_dcmple(double a,double b){return __ledf2(a,b)<=0;}
-int __aeabi_dcmplt(double a,double b){return __ledf2(a,b)<0;}
-int __aeabi_dcmpeq(double a,double b){return __eqdf2(a,b)==0;}
+__attribute__((pcs("aapcs"))) int __aeabi_dcmpge(double a,double b){return __gedf2(a,b)>=0;}
+__attribute__((pcs("aapcs"))) int __aeabi_dcmpgt(double a,double b){return __gedf2(a,b)>0;}
+__attribute__((pcs("aapcs"))) int __aeabi_dcmple(double a,double b){return __ledf2(a,b)<=0;}
+__attribute__((pcs("aapcs"))) int __aeabi_dcmplt(double a,double b){return __ledf2(a,b)<0;}
+__attribute__((pcs("aapcs"))) int __aeabi_dcmpeq(double a,double b){return __eqdf2(a,b)==0;}
 #pragma clang attribute pop
 
 /* Entire LVGL draw unit/dispatch/task selector bodies. Unadmitted draft. */
@@ -8306,8 +6445,8 @@ static void draw360_store(void *p,uint32_t offset,uint32_t value)
 {*(volatile uint32_t *)((uint8_t *)p+offset)=value;}
 static void *draw360_pointer(const void *p,uint32_t offset)
 {return (void *)(uintptr_t)draw360_word(p,offset);}
-void *audio_uart_lv_refreshing_display_453604(void)
-{return draw360_pointer(audio_uart_display_lv_root,16u);}
+/* Retired: stock 0x453604 is upstream lv_refr_get_disp_refreshing (lvgl/src/core/lv_refr.c); this name is a link alias. */
+void *audio_uart_lv_refreshing_display_453604(void);
 void *audio_uart_lv_draw_unit_create_484398(uint32_t size)
 {
  void *unit=audio_uart_lv_heap_alloc(size);
@@ -8377,8 +6516,8 @@ extern int32_t audio_uart_lv_area_height_4515a4(const int32_t *);
 extern uint32_t audio_uart_font_bitmap_stride(uint32_t,uint8_t);
 extern void *audio_uart_font_bitmap_allocate(void *,uint32_t,uint32_t,uint8_t,uint32_t);
 extern void audio_uart_lv_draw_buf_clear_48ac40(void *,const void *);
-void *audio_uart_display_surface_alloc(uint32_t width,uint32_t height,uint32_t format,uint32_t stride)
-{return audio_uart_font_bitmap_allocate(audio_uart_display_lv_root+200u,width,height,(uint8_t)format,stride);}
+/* lv_draw_buf_create 0x48affa (audio_uart_display_surface_alloc) is compiled from
+ * upstream ambiq-lvgl lv_draw_buf.c. */
 void *audio_uart_lv_draw_layer_alloc_buf_484836(void *layer)
 {
  if(draw360_word(layer,0u)!=0u)return draw360_pointer(draw360_pointer(layer,0u),16u);
@@ -8397,186 +6536,11 @@ void *audio_uart_lv_draw_layer_alloc_buf_484836(void *layer)
  return draw360_pointer(draw360_pointer(layer,0u),16u);
 }
 
-/* Whole native lv_draw_buf_clear 48ac40..48ad42, 258 bytes.
- * Pinned LVGL source supplies structure; native instructions govern ABI/read order. */
-void audio_uart_lv_draw_buf_clear_48ac40(void *buffer,const void *area)
-{
- const volatile uint32_t *b=buffer;
- if(b==0)cache_assert(165u,"lv_draw_buf_clear","draw_buf != NULL");
- const volatile uint32_t *handlers=(const void *)(uintptr_t)b[6];
- if(handlers[6]!=0u){
-  uint32_t callback=handlers[6];
-  ((void (*)(void *,const void *))(uintptr_t)callback)(buffer,area);return;
- }
- uint32_t stride=(uint16_t)b[2];
- if(area==0){
-  void *data=audio_uart_lv_draw_buf_goto_xy_48b2aa(buffer,0u,0u);
-  uint32_t height=b[1]>>16u;
-  audio_uart_lv_draw_memzero_48aa54(data,stride*height);
-  audio_uart_lv_draw_flush_cache_48abb8(buffer,area);return;
- }
- int32_t bounds[4],clipped[4];
- bounds[0]=0;bounds[1]=0;
- bounds[2]=(int32_t)((uint32_t)(uint16_t)b[1]-1u);
- bounds[3]=(int32_t)((b[1]>>16u)-1u);
- if(audio_uart_lv_area_intersect_450bcc(clipped,area,bounds)==0u)return;
- if(audio_uart_lv_area_width_451598(clipped)<1)return;
- if(audio_uart_lv_area_height_4515a4(clipped)<1)return;
- uint32_t data=(uint32_t)(uintptr_t)audio_uart_lv_draw_buf_goto_xy_48b2aa(buffer,(uint32_t)clipped[0],(uint32_t)clipped[1]);
- uint32_t bits=audio_uart_lv_color_bpp_440f44((uint8_t)(b[0]>>8u));
- uint32_t width=(uint32_t)audio_uart_lv_area_width_451598(clipped);
- uint32_t length=(uint32_t)((int32_t)((uint8_t)bits*width+7u)>>3u);
- int32_t y=clipped[1];
- while(y<=clipped[3]){
-  audio_uart_lv_draw_memzero_48aa54((void *)(uintptr_t)data,length);
-  data+=stride;y=(int32_t)((uint32_t)y+1u);
- }
- audio_uart_lv_draw_flush_cache_48abb8(buffer,area);
-}
 
-/* Complete lv_freetype_init 4b1b98..4b1c9c (260 bytes).
- * Historical import alias retained; native return value is LV_RESULT 0/1. */
-extern void *audio_uart_font_outline_context(void);
-extern uint32_t audio_uart_ft_init_freetype_52431c(void *);
-extern int32_t audio_uart_ft_node_compare_4b2342(const void *,const void *);
-extern uint32_t audio_uart_ft_node_create_4b220a(void *,void *);
-extern void audio_uart_ft_node_free_4b2308(void *,void *);
-extern const uintptr_t audio_uart_font_cache_backend_vtable[];
-static const uintptr_t freetype364_ops[3]={
- (uintptr_t)&audio_uart_ft_node_compare_4b2342,
- (uintptr_t)&audio_uart_ft_node_create_4b220a,
- (uintptr_t)&audio_uart_ft_node_free_4b2308
-};
-uint32_t audio_uart_lv_init_draw_unit_4b1b98(uint32_t max_glyphs)
-{
- static const char path[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\freetype\\lv_freetype.c";
- static const char name[]="lv_freetype_init";
- if(draw360_word(audio_uart_display_lv_root,448u)!=0u){
-  audio_uart_lvgl_log(2u,path,68u,name,"freetype already initialized");return 0u;
- }
- void *allocated=audio_uart_lv_heap_alloc(28u);
- draw360_store(audio_uart_display_lv_root,448u,(uint32_t)(uintptr_t)allocated);
- if(draw360_word(audio_uart_display_lv_root,448u)==0u){
-  audio_uart_lvgl_log(3u,path,73u,name,"Asserted at expression: %s (%s)","(&lv_global)->ft_context != NULL","Out of memory");
-  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
- }
- if(draw360_word(audio_uart_display_lv_root,448u)==0u){
-  audio_uart_lvgl_log(3u,path,75u,name,"malloc failed for lv_freetype_context_t");return 0u;
- }
- void *context=audio_uart_font_outline_context();
- draw360_store(context,20u,max_glyphs);
- uint32_t error=audio_uart_ft_init_freetype_52431c(context);
- if(error!=0u){audio_uart_lvgl_log(3u,path,87u,name,"FT_Init_FreeType error(0x%x)",error);return 0u;}
- audio_uart_lv_array_init_482b00((uint8_t *)context+4u,8u);
- void *cache=audio_uart_lv_cache_create_4d4cd4((const uint32_t *)(const void *)audio_uart_font_cache_backend_vtable,
- 32u,0x7fffffffu,(uint32_t)freetype364_ops[0],(uint32_t)freetype364_ops[1],(uint32_t)freetype364_ops[2]);
- draw360_store(context,24u,(uint32_t)(uintptr_t)cache);
- audio_uart_lv_cache_set_name_4d5114(draw360_pointer(context,24u),"FREETYPE_CACHE_NODE");return 1u;
-}
-
-/* Complete native node comparator4b2342..4b239c90bytes.
- * Byte fields are reread after comparison as in native instructions. */
-int32_t audio_uart_ft_node_compare_4b2342(const void *left,const void *right)
-{
- const volatile uint8_t *a=left,*b=right;
- if(a[5]!=b[5]){uint32_t rhs=b[5],lhs=a[5];return lhs>rhs?1:-1;}
- if(a[4]!=b[4]){uint32_t rhs=b[4],lhs=a[4];return lhs>rhs?1:-1;}
- const char *rhs=(const char *)(uintptr_t)*(const volatile uint32_t *)right;
- const char *lhs=(const char *)(uintptr_t)*(const volatile uint32_t *)left;
- int32_t result=audio_uart_lv_string_compare_4547be(lhs,rhs);
- return result==0?0:result>0?1:-1;
-}
-
-/* Full native cache node creation4b220a..4b225c82bytes, no kerning write. */
-extern uint32_t audio_uart_ft_new_face_525ade(void *,const char *,int32_t,void **);
-extern void audio_uart_ft_italic_transform_4b1fd4(void *);
-uint32_t audio_uart_ft_node_create_4b220a(void *node,void *user_data)
-{
- (void)user_data;
- void *context=audio_uart_font_outline_context();void *face;
- void *library=draw360_pointer(context,0u);
- const char *pathname=draw360_pointer(node,0u);
- uint32_t error=audio_uart_ft_new_face_525ade(library,pathname,0,&face);
- if(error!=0u){
-  audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\freetype\\lv_freetype.c",371u,"cache_node_cache_create_cb","FT_New_Face error(0x%x)",error);return 0u;
- }
- draw360_store(node,8u,128u);
- if((*(const volatile uint8_t *)((const uint8_t *)node+4u)&1u)!=0u)audio_uart_ft_italic_transform_4b1fd4(face);
- draw360_store(node,12u,(uint32_t)(uintptr_t)face);
- audio_uart_lv_async_init_4d465c((uint8_t *)node+16u);return 1u;
-}
-/* Full native node free4b2308..4b2342 58bytes; rereads cache after non-null tests. */
-extern uint32_t audio_uart_ft_done_face_526814(void *);
 extern void audio_uart_lv_cache_destroy_4d4d6a(void *,void *);
-void audio_uart_ft_node_free_4b2308(void *node,void *user_data)
-{
- (void)audio_uart_ft_done_face_526814(draw360_pointer(node,12u));
- (void)audio_uart_lv_mutex_delete_4d46c2((uint8_t *)node+16u);
- if(draw360_word(node,24u)!=0u){audio_uart_lv_cache_destroy_4d4d6a(draw360_pointer(node,24u),user_data);draw360_store(node,24u,0u);}
- if(draw360_word(node,28u)!=0u){audio_uart_lv_cache_destroy_4d4d6a(draw360_pointer(node,28u),user_data);draw360_store(node,28u,0u);}
-}
 
-/* Native FT_Init_FreeType52431c..52435456bytes. */
 extern void *audio_uart_ft_new_memory_5676a0(void);
-extern uint32_t audio_uart_ft_new_library_5274b2(void *,void *);
 extern void audio_uart_ft_done_memory_5676c6(void *);
-extern void audio_uart_ft_add_default_modules_5242fc(void *);
-uint32_t audio_uart_ft_init_freetype_52431c(void *out_library)
-{
- void *memory=audio_uart_ft_new_memory_5676a0();
- if(memory==0)return 7u;
- uint32_t error=audio_uart_ft_new_library_5274b2(memory,out_library);
- if(error!=0u)audio_uart_ft_done_memory_5676c6(memory);
- else audio_uart_ft_add_default_modules_5242fc(draw360_pointer(out_library,0u));
- (void)draw360_word(out_library,0u);return error;
-}
-/* Native italic transform4b1fd4..4b201e74bytes. */
-extern void audio_uart_ft_set_transform_525444(void *,const int32_t *,const int32_t *);
-void audio_uart_ft_italic_transform_4b1fd4(void *face)
-{
- if(face==0){
-  audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\freetype\\lv_freetype.c",216u,"lv_freetype_italic_transform","Asserted at expression: %s (%s)","face != NULL","NULL pointer");
-  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
- }
- int32_t matrix[4]={65536,13930,0,65536};
- audio_uart_ft_set_transform_525444(face,matrix,0);
-}
-/* Native cache destroy4d4d6a..4d4dca96bytes. */
-void audio_uart_lv_cache_destroy_4d4d6a(void *cache,void *user_data)
-{
- if(cache==0){
-  audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\cache\\lv_cache.c",72u,"lv_cache_destroy","Asserted at expression: %s (%s)","cache != NULL","NULL pointer");
-  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
- }
- (void)audio_uart_lv_lock_core((uint8_t *)cache+28u);
- void *vtable=draw360_pointer(cache,0u);
- uint32_t callback=draw360_word(vtable,8u);
- ((void (*)(void *,void *))(uintptr_t)callback)(cache,user_data);
- (void)audio_uart_lv_unlock_core((uint8_t *)cache+28u);
- (void)audio_uart_lv_mutex_delete_4d46c2((uint8_t *)cache+28u);
- audio_uart_lv_heap_free(cache);
-}
-
-/* Full FT_Set_Transform525444..5254c8 132bytes.
- * Matrix/vector pointers retain native aliasing and read order. */
-void audio_uart_ft_set_transform_525444(void *face,const int32_t *matrix,const int32_t *vector)
-{
- if(face==0)return;
- void *internal=draw360_pointer(face,128u);
- draw360_store(internal,24u,0u);
- if(matrix==0){
-  draw360_store(internal,0u,65536u);draw360_store(internal,4u,0u);
-  draw360_store(internal,8u,0u);draw360_store(internal,12u,65536u);
-  matrix=internal;
- }else audio_uart_checksum_copy(internal,matrix,16u);
- uint32_t xy=draw360_word(matrix,4u),yx=draw360_word(matrix,8u);
- if((xy|yx)!=0u || draw360_word(matrix,0u)!=65536u || draw360_word(matrix,12u)!=65536u)
-  draw360_store(internal,24u,draw360_word(internal,24u)|1u);
- if(vector==0){draw360_store(internal,16u,0u);draw360_store(internal,20u,0u);vector=(const void *)((const uint8_t *)internal+16u);}
- else {uint32_t x=draw360_word(vector,0u),y=draw360_word(vector,4u);draw360_store(internal,16u,x);draw360_store(internal,20u,y);}
- uint32_t x=draw360_word(vector,0u),y=draw360_word(vector,4u);
- if((x|y)!=0u)draw360_store(internal,24u,draw360_word(internal,24u)|2u);
-}
 
 /* Five complete FT system-memory adapters, authenticated product pool handle. */
 extern void *audio_uart_lv_pool_allocate_484180(void *,uint32_t);
@@ -8600,500 +6564,7 @@ void *audio_uart_ft_new_memory_5676a0(void)
 }
 void audio_uart_ft_done_memory_5676c6(void *memory)
 {audio_uart_lv_pool_free_48429e((void *)(uintptr_t)0x20000354u,memory);}
-
-/* Full native FT_New_Library5274b2..5274f6 68bytes, selected FreeType2.9.1. */
-extern void *audio_uart_font_mem_alloc(void *,int32_t,int32_t *);
-uint32_t audio_uart_ft_new_library_5274b2(void *memory,void *out_library)
-{
- if(memory==0 || out_library==0)return 6u;
- int32_t error;
- void *library=audio_uart_font_mem_alloc(memory,184,&error);
- if(error!=0)return (uint32_t)error;
- draw360_store(library,0u,(uint32_t)(uintptr_t)memory);
- draw360_store(library,4u,2u);draw360_store(library,8u,9u);draw360_store(library,12u,1u);
- draw360_store(library,180u,1u);
- draw360_store(out_library,0u,(uint32_t)(uintptr_t)library);return 0u;
-}
-
-/* FT_New_Face525ade..525b02 36bytes; flags/path/stream only initialized. */
-extern uint32_t audio_uart_ft_open_face_internal_5264a6(void *,const void *,int32_t,void **,uint32_t);
-uint32_t audio_uart_ft_new_face_525ade(void *library,const char *pathname,int32_t index,void **out)
-{
- if(pathname==0)return 6u;
- uint32_t args[8];args[0]=4u;args[3]=(uint32_t)(uintptr_t)pathname;args[4]=0u;
- return audio_uart_ft_open_face_internal_5264a6(library,args,index,out,1u);
-}
-/* FT_Done_Face526814..52687c104bytes; native fresh reads preserved. */
-extern void *audio_uart_ft_list_find_5292e6(void *,void *);
-extern void audio_uart_ft_list_remove_529324(void *,void *);
-extern void audio_uart_font_mem_free(void *,void *);
-extern void audio_uart_ft_destroy_face_5258a8(void *,void *,void *);
-uint32_t audio_uart_ft_done_face_526814(void *face)
-{
- if(face==0)return 35u;
- if(draw360_word(face,96u)==0u)return 35u;
- void *internal=draw360_pointer(face,128u);
- uint32_t count=draw360_word(internal,64u)-1u;
- draw360_store(draw360_pointer(face,128u),64u,count);
- if((int32_t)draw360_word(draw360_pointer(face,128u),64u)>=1)return 0u;
- void *driver=draw360_pointer(face,96u);
- void *memory=draw360_pointer(driver,8u);
- void *node=audio_uart_ft_list_find_5292e6((uint8_t *)driver+16u,face);
- if(node==0)return 35u;
- audio_uart_ft_list_remove_529324((uint8_t *)driver+16u,node);
- audio_uart_font_mem_free(memory,node);
- audio_uart_ft_destroy_face_5258a8(memory,face,driver);return 0u;
-}
-
-/* Complete FT_List_Find5292e6..52930430bytes. */
-void *audio_uart_ft_list_find_5292e6(void *list,void *data)
-{
- if(list==0)return 0;
- void *node=draw360_pointer(list,0u);
- while(node!=0){if(draw360_pointer(node,8u)==data)return node;node=draw360_pointer(node,4u);}
- return 0;
-}
-/* Complete FT_List_Remove529324..52934836bytes; detached node retained. */
-void audio_uart_ft_list_remove_529324(void *list,void *node)
-{
- if(list==0 || node==0)return;
- void *previous=draw360_pointer(node,0u),*next=draw360_pointer(node,4u);
- if(previous!=0)draw360_store(previous,4u,(uint32_t)(uintptr_t)next);
- else draw360_store(list,0u,(uint32_t)(uintptr_t)next);
- if(next!=0)draw360_store(next,0u,(uint32_t)(uintptr_t)previous);
- else draw360_store(list,4u,(uint32_t)(uintptr_t)previous);
-}
-
-/* Whole destroy_face5258a8..525936142bytes, FreeType2.9.1. */
-extern void audio_uart_ft_done_glyph_slot_5253f4(void *);
-extern void audio_uart_ft_destroy_size_525832(void *,void *,void *);
-extern void audio_uart_ft_list_finalize_529378(void *,void (*)(void *,void *,void *),void *,void *);
-extern void audio_uart_ft_destroy_charmaps_52586e(void *,void *);
-extern void audio_uart_ft_stream_free_52502a(void *,uint32_t);
-void audio_uart_ft_destroy_face_5258a8(void *memory,void *face,void *driver)
-{
- void *clazz=draw360_pointer(driver,12u);
- if(draw360_word(face,120u)!=0u){
-  void *data=draw360_pointer(face,116u);
-  uint32_t callback=draw360_word(face,120u);
-  ((void (*)(void *))(uintptr_t)callback)(data);
- }
- while(draw360_word(face,84u)!=0u)audio_uart_ft_done_glyph_slot_5253f4(draw360_pointer(face,84u));
- audio_uart_ft_list_finalize_529378((uint8_t *)face+108u,audio_uart_ft_destroy_size_525832,memory,driver);
- draw360_store(face,88u,0u);
- if(draw360_word(face,48u)!=0u){uint32_t callback=draw360_word(face,48u);((void (*)(void *))(uintptr_t)callback)(face);}
- audio_uart_ft_destroy_charmaps_52586e(face,memory);
- if(draw360_word(clazz,52u)!=0u){uint32_t callback=draw360_word(clazz,52u);((void (*)(void *))(uintptr_t)callback)(face);}
- uint32_t external=(draw360_word(face,8u)>>10u)&1u;
- audio_uart_ft_stream_free_52502a(draw360_pointer(face,104u),external);
- draw360_store(face,104u,0u);
- if(draw360_word(face,128u)!=0u){audio_uart_font_mem_free(memory,draw360_pointer(face,128u));draw360_store(face,128u,0u);}
- audio_uart_font_mem_free(memory,face);
-}
-
-/* Full FT_List_Finalize529378..5293be70bytes. Cache next before destructor/free. */
-void audio_uart_ft_list_finalize_529378(void *list,void (*destroy)(void *,void *,void *),void *memory,void *user)
-{
- if(list==0 || memory==0)return;
- void *node=draw360_pointer(list,0u);
- while(node!=0){
-  void *next=draw360_pointer(node,4u);
-  void *data=draw360_pointer(node,8u);
-  if(destroy!=0)destroy(memory,data,user);
-  audio_uart_font_mem_free(memory,node);node=next;
- }
- draw360_store(list,0u,0u);draw360_store(list,4u,0u);
-}
-
-/* Full destroy_size525832..52586e60bytes. */
-void audio_uart_ft_destroy_size_525832(void *memory,void *size,void *driver)
-{
- if(draw360_word(size,8u)!=0u){uint32_t callback=draw360_word(size,8u);((void (*)(void *))(uintptr_t)callback)(size);}
- void *clazz=draw360_pointer(driver,12u);
- if(draw360_word(clazz,60u)!=0u){clazz=draw360_pointer(driver,12u);uint32_t callback=draw360_word(clazz,60u);((void (*)(void *))(uintptr_t)callback)(size);}
- audio_uart_font_mem_free(memory,draw360_pointer(size,40u));
- draw360_store(size,40u,0u);audio_uart_font_mem_free(memory,size);
-}
-/* Full FT_Stream_Close5288ce..5288e018bytes, fresh callback reread. */
-void audio_uart_ft_stream_close_5288ce(void *stream)
-{
- if(stream!=0 && draw360_word(stream,24u)!=0u){uint32_t callback=draw360_word(stream,24u);((void (*)(void *))(uintptr_t)callback)(stream);}
-}
-/* Full FT_Stream_Free52502a..52504c34bytes, allocator cached before close. */
-void audio_uart_ft_stream_free_52502a(void *stream,uint32_t external)
-{
- if(stream==0)return;
- void *memory=draw360_pointer(stream,28u);
- audio_uart_ft_stream_close_5288ce(stream);
- if(external==0u)audio_uart_font_mem_free(memory,stream);
-}
-
-/* Full FT_Done_GlyphSlot5253f4..52544480bytes. */
-extern void audio_uart_ft_glyph_slot_done_525334(void *);
-void audio_uart_ft_done_glyph_slot_5253f4(void *slot)
-{
- if(slot==0)return;
- void *driver=draw360_pointer(draw360_pointer(slot,4u),96u);
- void *memory=draw360_pointer(driver,8u);
- void *previous=0,*current=draw360_pointer(draw360_pointer(slot,4u),84u);
- while(current!=0){
-  if(current==slot){
-   void *next=draw360_pointer(current,8u);
-   if(previous==0)draw360_store(draw360_pointer(slot,4u),84u,(uint32_t)(uintptr_t)next);
-   else draw360_store(previous,8u,(uint32_t)(uintptr_t)next);
-   if(draw360_word(slot,20u)!=0u){uint32_t callback=draw360_word(slot,20u);((void (*)(void *))(uintptr_t)callback)(slot);}
-   audio_uart_ft_glyph_slot_done_525334(slot);audio_uart_font_mem_free(memory,slot);return;
-  }
-  previous=current;current=draw360_pointer(current,8u);
- }
-}
-/* Full ft_cmap_done_internal526e38..526e5a34bytes. Cached class and memory. */
-void audio_uart_ft_cmap_done_internal_526e38(void *cmap)
-{
- void *clazz=draw360_pointer(cmap,12u);
- void *face=draw360_pointer(cmap,0u);
- void *memory=draw360_pointer(face,100u);
- if(draw360_word(clazz,8u)!=0u){uint32_t callback=draw360_word(clazz,8u);((void (*)(void *))(uintptr_t)callback)(cmap);}
- audio_uart_font_mem_free(memory,cmap);
-}
-/* Full destroy_charmaps52586e..5258a8 58bytes. Array/count freshly reread. */
-void audio_uart_ft_destroy_charmaps_52586e(void *face,void *memory)
-{
- if(face==0)return;
- uint32_t index=0u;
- while((int32_t)index<(int32_t)draw360_word(face,36u)){
-  void *array=draw360_pointer(face,40u);
-  audio_uart_ft_cmap_done_internal_526e38(draw360_pointer(array,index*4u));
-  draw360_store(draw360_pointer(face,40u),index*4u,0u);index+=1u;
- }
- audio_uart_font_mem_free(memory,draw360_pointer(face,40u));
- draw360_store(face,40u,0u);draw360_store(face,36u,0u);
-}
-
-/* Full ft_glyphslot_done525334..52538682bytes. Driver/memory cached before callback. */
-extern void audio_uart_font_slot_bitmap_release(void *);
-extern void audio_uart_ft_glyph_loader_done_524c1e(void *);
-void audio_uart_ft_glyph_slot_done_525334(void *slot)
-{
- void *driver=draw360_pointer(draw360_pointer(slot,4u),96u);
- void *clazz=draw360_pointer(driver,12u);
- void *memory=draw360_pointer(driver,8u);
- if(draw360_word(clazz,68u)!=0u){uint32_t callback=draw360_word(clazz,68u);((void (*)(void *))(uintptr_t)callback)(slot);}
- audio_uart_font_slot_bitmap_release(slot);
- if(draw360_word(slot,156u)!=0u){
-  void *module_class=draw360_pointer(driver,0u);
-  if((draw360_word(module_class,0u)&512u)==0u){
-   audio_uart_ft_glyph_loader_done_524c1e(draw360_pointer(draw360_pointer(slot,156u),0u));
-   draw360_store(draw360_pointer(slot,156u),0u,0u);
-  }
-  audio_uart_font_mem_free(memory,draw360_pointer(slot,156u));draw360_store(slot,156u,0u);
- }
-}
-
-/* Full FT_GlyphLoader_Done524c1e..524c3a28bytes; memory cached before reset. */
-extern void audio_uart_ft_glyph_loader_reset_524bc4(void *);
-void audio_uart_ft_glyph_loader_done_524c1e(void *loader)
-{
- if(loader==0)return;
- void *memory=draw360_pointer(loader,0u);
- audio_uart_ft_glyph_loader_reset_524bc4(loader);
- audio_uart_font_mem_free(memory,loader);
-}
-
-/* Whole FT_GlyphLoader_Rewind524ba8..524bc4 28bytes. */
-void audio_uart_ft_glyph_loader_rewind_524ba8(void *loader)
-{
- uint8_t *base=(uint8_t *)loader+20u;
- *(volatile uint16_t *)(void *)(base+2u)=0u;
- *(volatile uint16_t *)(void *)base=0u;
- draw360_store(base,28u,0u);
- audio_uart_checksum_copy((uint8_t *)loader+56u,base,36u);
-}
-/* Whole FT_GlyphLoader_Reset524bc4..524c1e90bytes; fresh each allocation read. */
-void audio_uart_ft_glyph_loader_reset_524bc4(void *loader)
-{
- void *memory=draw360_pointer(loader,0u);
- static const uint8_t offsets[5]={24u,28u,32u,40u,52u};
- for(uint32_t i=0;i<5u;i++){
-  audio_uart_font_mem_free(memory,draw360_pointer(loader,offsets[i]));
-  draw360_store(loader,offsets[i],0u);
- }
- draw360_store(loader,44u,0u);draw360_store(loader,4u,0u);
- draw360_store(loader,8u,0u);draw360_store(loader,12u,0u);
- audio_uart_ft_glyph_loader_rewind_524ba8(loader);
-}
-
-/* Whole ft_open_face_internal5264a6..5267ee840bytes, FreeType2.9.1 with Mac branches. */
-extern uint32_t audio_uart_ft_stream_new_524f96(void *,const void *,void **);
-extern uint32_t audio_uart_ft_open_driver_face_5259be(void *,void **,uint32_t,int32_t,int32_t,void *,void **);
-extern void audio_uart_ft_list_add_529304(void *,void *);
-extern uint32_t audio_uart_ft_new_glyph_slot_525386(void *,void **);
-extern uint32_t audio_uart_ft_new_size_52687e(void *,void **);
-extern uint32_t audio_uart_ft_stream_seek_5288e0(void *,uint32_t);
-extern uint32_t audio_uart_ft_open_ps_sfnt_525d32(void *,void *,int32_t,int32_t,void *,void **);
-extern uint32_t audio_uart_ft_load_mac_face_526452(void *,void *,int32_t,void **,const void *);
-uint32_t audio_uart_ft_open_face_internal_5264a6(void *library,const void *args,int32_t face_index,void **out,uint32_t test_mac_fonts)
-{
- void *driver=0,*memory=0,*stream=0,*face=0,*node=0;
- if((out==0 && face_index>=0) || args==0)return 6u;
- uint32_t external=(*(const volatile uint8_t *)args&2u)!=0u && draw360_word(args,16u)!=0u;
- uint32_t error=audio_uart_ft_stream_new_524f96(library,args,&stream);
- if(error!=0u)goto scan_failure;
- memory=draw360_pointer(library,0u);
- if((*(const volatile uint8_t *)args&8u)!=0u && draw360_word(args,20u)!=0u){
-  driver=draw360_pointer(args,20u);
-  if((*(const volatile uint8_t *)draw360_pointer(driver,0u)&1u)!=0u){
-   int32_t count=0;void *params=0;
-   if((*(const volatile uint8_t *)args&16u)!=0u){count=(int32_t)draw360_word(args,24u);params=draw360_pointer(args,28u);}
-   error=audio_uart_ft_open_driver_face_5259be(driver,&stream,external,face_index,count,params,&face);
-   if(error==0u)goto success;
-  }else error=32u;
-  audio_uart_ft_stream_free_52502a(stream,external);goto failure;
- }
- error=11u;
- uint32_t cursor=(uint32_t)(uintptr_t)library+20u;
- uint32_t limit=cursor+draw360_word(library,16u)*4u;
- for(;cursor<limit;cursor+=4u){
-  void *candidate=draw360_pointer((void *)(uintptr_t)cursor,0u);
-  if((*(const volatile uint8_t *)draw360_pointer(candidate,0u)&1u)==0u)continue;
-  driver=candidate;int32_t count=0;void *params=0;
-  if((*(const volatile uint8_t *)args&16u)!=0u){count=(int32_t)draw360_word(args,24u);params=draw360_pointer(args,28u);}
-  error=audio_uart_ft_open_driver_face_5259be(driver,&stream,external,face_index,count,params,&face);
-  if(error==0u)goto success;
-  if((uint8_t)test_mac_fonts!=0u && audio_uart_font_path_compare(draw360_pointer(draw360_pointer(draw360_pointer((void *)(uintptr_t)cursor,0u),0u),8u),"truetype")==0 && (uint8_t)error==142u){
-   error=audio_uart_ft_stream_seek_5288e0(stream,0u);
-   if(error!=0u)break;
-   error=audio_uart_ft_open_ps_sfnt_525d32(library,stream,face_index,count,params,out);
-   if(error==0u){audio_uart_ft_stream_free_52502a(stream,external);return error;}
-  }
-  if((uint8_t)error!=2u)break;
- }
-scan_failure:
- if((uint8_t)error==81u || (uint8_t)error==2u || (uint8_t)error==85u){
-  if((uint8_t)test_mac_fonts!=0u){
-   error=audio_uart_ft_load_mac_face_526452(library,stream,face_index,out,args);
-   if(error==0u){audio_uart_ft_stream_free_52502a(stream,external);return error;}
-  }
-  if((uint8_t)error==2u)error=2u;
- }
- audio_uart_ft_stream_free_52502a(stream,external);
- goto failure;
-success:
- {
-  int32_t alloc_error;node=audio_uart_font_mem_alloc(memory,12,&alloc_error);error=(uint32_t)alloc_error;
-  if(error!=0u)goto failure;
- }
- draw360_store(node,8u,(uint32_t)(uintptr_t)face);
- audio_uart_ft_list_add_529304((uint8_t *)draw360_pointer(face,96u)+16u,node);
- if(face_index>=0){
-  error=audio_uart_ft_new_glyph_slot_525386(face,0);
-  if(error!=0u)goto failure;
-  void *size;error=audio_uart_ft_new_size_52687e(face,&size);
-  if(error!=0u)goto failure;
-  draw360_store(face,88u,(uint32_t)(uintptr_t)size);error=0u;
- }
- if((*(const volatile uint8_t *)((const uint8_t *)face+8u)&1u)!=0u){
-  volatile int16_t *height=(volatile int16_t *)((uint8_t *)face+74u);
-  if(*height<0)*height=(int16_t)(0u-(uint32_t)(int32_t)*height);
-  if((*(const volatile uint8_t *)((const uint8_t *)face+8u)&32u)==0u)
-   *(volatile int16_t *)((uint8_t *)face+78u)=*height;
- }
- if((*(const volatile uint8_t *)((const uint8_t *)face+8u)&2u)!=0u){
-  uint32_t i=0;
-  for(;(int32_t)i<(int32_t)draw360_word(face,28u);i++){
-   uint8_t *strike=(uint8_t *)draw360_pointer(face,32u)+i*16u;
-   volatile int16_t *height=(volatile int16_t *)(void *)strike;
-   if(*height<0)*height=(int16_t)(0u-(uint32_t)(int32_t)*height);
-   if((int32_t)draw360_word(strike,8u)<0)draw360_store(strike,8u,0u-draw360_word(strike,8u));
-   if((int32_t)draw360_word(strike,12u)<0)draw360_store(strike,12u,0u-draw360_word(strike,12u));
-   if(*height<0 || (int32_t)draw360_word(strike,8u)<0 || (int32_t)draw360_word(strike,12u)<0)
-    for(uint32_t j=0;j<8u;j++)((volatile uint16_t *)(void *)strike)[j]=0u;
-  }
- }
- {
-  void *internal=draw360_pointer(face,128u);
-  draw360_store(internal,0u,65536u);draw360_store(internal,4u,0u);draw360_store(internal,8u,0u);draw360_store(internal,12u,65536u);
-  draw360_store(internal,16u,0u);draw360_store(internal,20u,0u);draw360_store(internal,64u,1u);
-  *(volatile uint8_t *)((uint8_t *)internal+56u)=255u;
- }
- if(out!=0)draw360_store(out,0u,(uint32_t)(uintptr_t)face);
- else (void)audio_uart_ft_done_face_526814(face);
- return error;
-failure:
- if(node!=0)(void)audio_uart_ft_done_face_526814(face);
- else if(face!=0)audio_uart_ft_destroy_face_5258a8(memory,face,driver);
- return error;
-}
-
-/* Whole FT_Stream_New524f96..52502a148bytes; output cleared before validation. */
-extern void audio_uart_ft_stream_open_memory_5288b8(void *,const void *,uint32_t);
 extern uint32_t audio_uart_ft_stream_open_path_5675e8(void *,const char *);
-uint32_t audio_uart_ft_stream_new_524f96(void *library,const void *args,void **out)
-{
- draw360_store(out,0u,0u);
- if(library==0)return 33u;
- if(args==0)return 6u;
- void *memory=draw360_pointer(library,0u);
- int32_t error;void *stream=audio_uart_font_mem_alloc(memory,40,&error);
- if(error!=0)return (uint32_t)error;
- draw360_store(stream,28u,(uint32_t)(uintptr_t)memory);
- if((*(const volatile uint8_t *)args&1u)!=0u)
-  audio_uart_ft_stream_open_memory_5288b8(stream,draw360_pointer(args,4u),draw360_word(args,8u));
- else if((*(const volatile uint8_t *)args&4u)!=0u){
-  error=(int32_t)audio_uart_ft_stream_open_path_5675e8(stream,draw360_pointer(args,12u));
-  draw360_store(stream,16u,draw360_word(args,12u));
- }else if((*(const volatile uint8_t *)args&2u)!=0u && draw360_word(args,16u)!=0u){
-  audio_uart_font_mem_free(memory,stream);stream=draw360_pointer(args,16u);
- }else error=6;
- if(error==0)draw360_store(stream,28u,(uint32_t)(uintptr_t)memory);
- else{audio_uart_font_mem_free(memory,stream);stream=0;}
- draw360_store(out,0u,(uint32_t)(uintptr_t)stream);return (uint32_t)error;
-}
-/* Whole open_face5259be..525ade288bytes; all seven call arguments explicit. */
-extern uint32_t audio_uart_ft_find_unicode_charmap_52594a(void *);
-uint32_t audio_uart_ft_open_driver_face_5259be(void *driver,void **stream_cell,uint32_t external,int32_t index,int32_t param_count,void *params,void **out)
-{
- void *clazz=draw360_pointer(driver,12u);
- void *memory=draw360_pointer(driver,8u);
- void *internal=0;
- int32_t error;
- void *face=audio_uart_font_mem_alloc(memory,(int32_t)draw360_word(clazz,36u),&error);
- if(error!=0)goto failed;
- draw360_store(face,96u,(uint32_t)(uintptr_t)driver);draw360_store(face,100u,(uint32_t)(uintptr_t)memory);
- draw360_store(face,104u,draw360_word(stream_cell,0u));
- if((uint8_t)external!=0u)draw360_store(face,8u,draw360_word(face,8u)|1024u);
- internal=audio_uart_font_mem_alloc(memory,68,&error);
- if(error!=0)goto failed;
- draw360_store(face,128u,(uint32_t)(uintptr_t)internal);
- draw360_store(draw360_pointer(face,128u),52u,0u);
- for(uint32_t i=0;(int32_t)i<param_count && draw360_word(draw360_pointer(face,128u),52u)==0u;i++){
-  if(draw360_word(params,i*8u)==0x696e6372u)
-   draw360_store(draw360_pointer(face,128u),52u,draw360_word(params,i*8u+4u));
- }
- draw360_store(draw360_pointer(face,128u),60u,UINT32_MAX);
- if(draw360_word(clazz,48u)!=0u){
-  uint32_t callback=draw360_word(clazz,48u);
-  error=(int32_t)((uint32_t (*)(void *,void *,int32_t,int32_t,void *))(uintptr_t)callback)
-   (draw360_pointer(stream_cell,0u),face,index,param_count,params);
- }
- draw360_store(stream_cell,0u,draw360_word(face,104u));
- if(error==0){
-  uint32_t lookup=audio_uart_ft_find_unicode_charmap_52594a(face);
-  if(lookup==0u || (uint8_t)lookup==38u){draw360_store(out,0u,(uint32_t)(uintptr_t)face);return (uint32_t)error;}
-  error=(int32_t)lookup;
- }
-failed:
- if(error!=0){
-  audio_uart_ft_destroy_charmaps_52586e(face,memory);
-  if(draw360_word(clazz,52u)!=0u){uint32_t callback=draw360_word(clazz,52u);((void (*)(void *))(uintptr_t)callback)(face);}
-  audio_uart_font_mem_free(memory,internal);audio_uart_font_mem_free(memory,face);
-  draw360_store(out,0u,0u);
- }
- return (uint32_t)error;
-}
-
-/* Whole FT_Stream_OpenMemory5288b8..5288ce22bytes. */
-void audio_uart_ft_stream_open_memory_5288b8(void *stream,const void *base,uint32_t size)
-{
- draw360_store(stream,0u,(uint32_t)(uintptr_t)base);draw360_store(stream,4u,size);
- draw360_store(stream,8u,0u);draw360_store(stream,32u,0u);
- draw360_store(stream,20u,0u);draw360_store(stream,24u,0u);
-}
-
-/* Complete FT_GlyphLoader_New524b88..524ba8 32bytes; output only written on success. */
-uint32_t audio_uart_ft_glyph_loader_new_524b88(void *memory,void **out)
-{
- int32_t error;void *loader=audio_uart_font_mem_alloc(memory,96,&error);
- if(error==0){draw360_store(loader,0u,(uint32_t)(uintptr_t)memory);draw360_store(out,0u,(uint32_t)(uintptr_t)loader);}
- return (uint32_t)error;
-}
-/* Complete ft_glyphslot_init52504c..5250a2 86bytes; typed hidden loader output. */
-uint32_t audio_uart_ft_glyph_slot_init_52504c(void *slot)
-{
- void *driver=draw360_pointer(draw360_pointer(slot,4u),96u);
- void *clazz=draw360_pointer(driver,12u),*memory=draw360_pointer(driver,8u);
- draw360_store(slot,0u,draw360_word(driver,4u));
- int32_t error;void *internal=audio_uart_font_mem_alloc(memory,40,&error);
- if(error!=0)return (uint32_t)error;
- draw360_store(slot,156u,(uint32_t)(uintptr_t)internal);
- if((draw360_word(draw360_pointer(driver,0u),0u)&512u)==0u)
-  error=(int32_t)audio_uart_ft_glyph_loader_new_524b88(memory,draw360_pointer(slot,156u));
- if(error==0 && draw360_word(clazz,64u)!=0u){uint32_t callback=draw360_word(clazz,64u);error=(int32_t)((uint32_t (*)(void *))(uintptr_t)callback)(slot);}
- return (uint32_t)error;
-}
-/* Complete FT_New_GlyphSlot525386..5253f4110bytes; only allocation failure clears output. */
-uint32_t audio_uart_ft_new_glyph_slot_525386(void *face,void **out)
-{
- if(face==0)return 35u;
- if(draw360_word(face,96u)==0u)return 6u;
- void *driver=draw360_pointer(face,96u),*clazz=draw360_pointer(driver,12u),*memory=draw360_pointer(driver,8u);
- int32_t error;void *slot=audio_uart_font_mem_alloc(memory,(int32_t)draw360_word(clazz,44u),&error);
- if(error!=0){if(out!=0)draw360_store(out,0u,0u);return (uint32_t)error;}
- draw360_store(slot,4u,(uint32_t)(uintptr_t)face);
- error=(int32_t)audio_uart_ft_glyph_slot_init_52504c(slot);
- if(error!=0){audio_uart_ft_glyph_slot_done_525334(slot);audio_uart_font_mem_free(memory,slot);return (uint32_t)error;}
- draw360_store(slot,8u,draw360_word(face,84u));draw360_store(face,84u,(uint32_t)(uintptr_t)slot);
- if(out!=0)draw360_store(out,0u,(uint32_t)(uintptr_t)slot);
- return (uint32_t)error;
-}
-/* Complete FT_New_Size52687e..526944198bytes; retained native cleanup scope. */
-uint32_t audio_uart_ft_new_size_52687e(void *face,void **out)
-{
- if(face==0)return 35u;
- if(out==0)return 6u;
- if(draw360_word(face,96u)==0u)return 34u;
- draw360_store(out,0u,0u);
- void *clazz=draw360_pointer(draw360_pointer(face,96u),12u),*memory=draw360_pointer(face,100u);
- void *node=0;int32_t error;
- void *size=audio_uart_font_mem_alloc(memory,(int32_t)draw360_word(clazz,40u),&error);
- if(error==0)node=audio_uart_font_mem_alloc(memory,12,&error);
- if(error==0){
-  draw360_store(size,0u,(uint32_t)(uintptr_t)face);
-  void *internal=audio_uart_font_mem_alloc(memory,36,&error);
-  if(error==0){
-   draw360_store(size,40u,(uint32_t)(uintptr_t)internal);
-   if(draw360_word(clazz,56u)!=0u){uint32_t callback=draw360_word(clazz,56u);error=(int32_t)((uint32_t (*)(void *))(uintptr_t)callback)(size);}
-   if(error==0){draw360_store(out,0u,(uint32_t)(uintptr_t)size);draw360_store(node,8u,(uint32_t)(uintptr_t)size);audio_uart_ft_list_add_529304((uint8_t *)face+108u,node);}
-  }
- }
- if(error!=0){audio_uart_font_mem_free(memory,node);audio_uart_font_mem_free(memory,size);}
- return (uint32_t)error;
-}
-
-/* Complete FT_List_Add529304..52932432bytes; tail cached before node writes. */
-void audio_uart_ft_list_add_529304(void *list,void *node)
-{
- if(list==0 || node==0)return;
- void *tail=draw360_pointer(list,4u);
- draw360_store(node,4u,0u);draw360_store(node,0u,(uint32_t)(uintptr_t)tail);
- if(tail!=0)draw360_store(tail,4u,(uint32_t)(uintptr_t)node);
- else draw360_store(list,0u,(uint32_t)(uintptr_t)node);
- draw360_store(list,4u,(uint32_t)(uintptr_t)node);
-}
-
-/* Full find_unicode_charmap52594a..5259be116bytes, backward UCS-4 preference. */
-uint32_t audio_uart_ft_find_unicode_charmap_52594a(void *face)
-{
- uint32_t array=draw360_word(face,40u);
- if(array==0u)return 38u;
- uint32_t cursor=array+draw360_word(face,36u)*4u-4u;
- for(;cursor>=array;cursor-=4u){
-  void *map=draw360_pointer((void *)(uintptr_t)cursor,0u);
-  if(draw360_word(map,4u)!=0x756e6963u)continue;
-  uint16_t platform=*(const volatile uint16_t *)((const uint8_t *)map+8u);
-  if((platform==3u && *(const volatile uint16_t *)((const uint8_t *)map+10u)==10u)
-   || (*(const volatile uint16_t *)((const uint8_t *)map+8u)==0u
-    && *(const volatile uint16_t *)((const uint8_t *)map+10u)==4u)){
-   draw360_store(face,92u,draw360_word((void *)(uintptr_t)cursor,0u));return 0u;
-  }
- }
- cursor=array+draw360_word(face,36u)*4u-4u;
- for(;cursor>=array;cursor-=4u){
-  void *map=draw360_pointer((void *)(uintptr_t)cursor,0u);
-  if(draw360_word(map,4u)==0x756e6963u){draw360_store(face,92u,draw360_word((void *)(uintptr_t)cursor,0u));return 0u;}
- }
- return 38u;
-}
 /* Full LVGL filesystem read callback567734..56777a70bytes. */
 extern uint32_t audio_uart_lv_fs_file_read_4c6f46(void *,void *,uint32_t,uint32_t *);
 uint32_t audio_uart_ft_lv_fs_stream_io_567734(void *stream,uint32_t offset,void *buffer,uint32_t count)
@@ -9141,663 +6612,12 @@ uint32_t audio_uart_ft_stream_open_path_5675e8(void *stream,const char *pathname
  draw360_store(stream,24u,(uint32_t)(uintptr_t)&audio_uart_ft_lv_fs_stream_close_5676f8);
  return 0u;
 }
-
-/* Whole ft_lookup_PS_in_sfnt_stream525c08..525d32 298bytes. */
-extern uint32_t audio_uart_ft_stream_read_ulong_528ba8(void *,int32_t *);
-extern uint32_t audio_uart_ft_stream_read_ushort_528b4a(void *,int32_t *);
-extern uint32_t audio_uart_ft_stream_skip_528914(void *,int32_t);
-uint32_t audio_uart_ft_lookup_ps_sfnt_525c08(void *stream,int32_t index,uint32_t *offset,uint32_t *length,uint8_t *cid)
-{
- *offset=0u;*length=0u;*cid=0u;
- int32_t error=index;
- uint32_t tag=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
- if(error!=0)return (uint32_t)error;
- if(tag!=0x74797031u)return 2u;
- uint32_t count=(uint16_t)audio_uart_ft_stream_read_ushort_528b4a(stream,&error);
- if(error!=0)return (uint32_t)error;
- error=(int32_t)audio_uart_ft_stream_skip_528914(stream,6);
- if(error!=0)return (uint32_t)error;
- int32_t found=-1;*cid=0u;
- for(uint32_t i=0;i<count;i++){
-  uint32_t table=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
-  if(error!=0)return (uint32_t)error;
-  error=(int32_t)audio_uart_ft_stream_skip_528914(stream,4);
-  if(error!=0)return (uint32_t)error;
-  uint32_t value=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);*offset=value;
-  if(error!=0)return (uint32_t)error;
-  value=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);*length=value;
-  if(error!=0)return (uint32_t)error;
-  if(table==0x43494420u){found=(int32_t)((uint32_t)found+1u);*offset+=22u;*length-=22u;*cid=1u;if(index<0)return 0u;}
-  else if(table==0x54595031u){found=(int32_t)((uint32_t)found+1u);*offset+=24u;*length-=24u;*cid=0u;if(index<0)return 0u;}
-  if(index>=0 && found==index)return 0u;
- }
- return 142u;
-}
-/* Whole open_face_from_buffer525b6e..525c08 154bytes, typed stream ownership. */
-extern void audio_uart_ft_memory_stream_close_525b02(void *);
-extern uint32_t audio_uart_ft_new_memory_stream_525b20(void *,void *,uint32_t,void (*)(void *),void **);
-extern void *audio_uart_ft_get_module_5273b8(void *,const char *);
-uint32_t audio_uart_ft_open_face_from_buffer_525b6e(void *library,void *buffer,uint32_t size,int32_t index,const char *driver_name,void **out)
-{
- void *stream=0,*memory=draw360_pointer(library,0u);
- uint32_t error=audio_uart_ft_new_memory_stream_525b20(library,buffer,size,audio_uart_ft_memory_stream_close_525b02,&stream);
- if(error!=0u){audio_uart_font_mem_free(memory,buffer);return error;}
- uint32_t args[8];args[0]=2u;args[4]=(uint32_t)(uintptr_t)stream;
- if(driver_name!=0){args[0]=10u;args[5]=(uint32_t)(uintptr_t)audio_uart_ft_get_module_5273b8(library,driver_name);}
- error=audio_uart_ft_open_face_internal_5264a6(library,args,index,out,0u);
- if(error==0u){void *face=draw360_pointer(out,0u);draw360_store(face,8u,draw360_word(face,8u)&~1024u);}
- else{audio_uart_ft_stream_close_5288ce(stream);audio_uart_font_mem_free(memory,stream);}
- return error;
-}
-/* Whole open_face_PS_from_sfnt_stream525d32..525e16 228bytes. */
-extern uint32_t audio_uart_ft_stream_read_528928(void *,void *,uint32_t);
-uint32_t audio_uart_ft_open_ps_sfnt_525d32(void *library,void *stream,int32_t index,int32_t count,void *params,void **out)
-{
- (void)count;(void)params;
- void *memory=draw360_pointer(library,0u);
- if(index>0)index=(int32_t)((uint32_t)index&65535u);
- uint32_t original=draw360_word(stream,8u),offset,length;uint8_t cid;
- uint32_t error=audio_uart_ft_lookup_ps_sfnt_525c08(stream,index,&offset,&length,&cid);
- if(error==0u){
-  if(draw360_word(stream,4u)<offset || draw360_word(stream,4u)-offset<length)error=8u;
-  else{
-   error=audio_uart_ft_stream_seek_5288e0(stream,offset+original);
-   if(error==0u){
-    int32_t alloc_error;void *buffer=audio_uart_font_mem_alloc(memory,(int32_t)length,&alloc_error);error=(uint32_t)alloc_error;
-    if(error==0u){
-     error=audio_uart_ft_stream_read_528928(stream,buffer,length);
-     if(error==0u){if(index>=0)index=0;error=audio_uart_ft_open_face_from_buffer_525b6e(library,buffer,length,index,cid?"cid":"type1",out);}
-     else audio_uart_font_mem_free(memory,buffer);
-    }
-   }
-  }
- }
- if((uint8_t)error==2u){uint32_t rewind=audio_uart_ft_stream_seek_5288e0(stream,original);if(rewind!=0u)return rewind;}
- return error;
-}
-
-/* Whole memory_stream_close525b02..525b20 30bytes. */
-void audio_uart_ft_memory_stream_close_525b02(void *stream)
-{
- void *memory=draw360_pointer(stream,28u);
- audio_uart_font_mem_free(memory,draw360_pointer(stream,0u));
- draw360_store(stream,0u,0u);draw360_store(stream,4u,0u);
- draw360_store(stream,0u,0u);draw360_store(stream,24u,0u);
-}
-/* Whole new_memory_stream525b20..525b6e78bytes; do not invent stream-memory initialization. */
-uint32_t audio_uart_ft_new_memory_stream_525b20(void *library,void *buffer,uint32_t size,void (*close)(void *),void **out)
-{
- if(library==0)return 33u;
- if(buffer==0)return 6u;
- draw360_store(out,0u,0u);
- void *memory=draw360_pointer(library,0u);
- int32_t error;void *stream=audio_uart_font_mem_alloc(memory,40,&error);
- if(error==0){audio_uart_ft_stream_open_memory_5288b8(stream,buffer,size);draw360_store(stream,24u,(uint32_t)(uintptr_t)close);draw360_store(out,0u,(uint32_t)(uintptr_t)stream);}
- return (uint32_t)error;
-}
-
-/* Whole FT_Stream_Seek5288e0..52891452bytes. Callback count0 result is failure boolean. */
-uint32_t audio_uart_ft_stream_seek_5288e0(void *stream,uint32_t position)
-{
- if(draw360_word(stream,20u)!=0u){
-  uint32_t callback=draw360_word(stream,20u);
-  uint32_t result=((uint32_t (*)(void *,uint32_t,void *,uint32_t))(uintptr_t)callback)(stream,position,0,0u);
-  if(result!=0u)return 85u;
- }else if(draw360_word(stream,4u)<position)return 85u;
- draw360_store(stream,8u,position);return 0u;
-}
-/* Whole FT_Stream_Skip528914..52892820bytes. */
-uint32_t audio_uart_ft_stream_skip_528914(void *stream,int32_t distance)
-{if(distance<0)return 85u;return audio_uart_ft_stream_seek_5288e0(stream,draw360_word(stream,8u)+(uint32_t)distance);}
-/* Whole FT_Stream_ReadAt528936..52899292bytes; short-read advances position. */
-uint32_t audio_uart_ft_stream_read_at_528936(void *stream,uint32_t offset,void *buffer,uint32_t count)
-{
- if(offset>=draw360_word(stream,4u))return 85u;
- uint32_t actual;
- if(draw360_word(stream,20u)!=0u){
-  uint32_t callback=draw360_word(stream,20u);
-  actual=((uint32_t (*)(void *,uint32_t,void *,uint32_t))(uintptr_t)callback)(stream,offset,buffer,count);
- }else{
-  actual=draw360_word(stream,4u)-offset;
-  if(count<actual)actual=count;
-  uint32_t address=draw360_word(stream,0u)+offset;
-  audio_uart_checksum_copy(buffer,(const void *)(uintptr_t)address,actual);
- }
- draw360_store(stream,8u,offset+actual);
- return actual<count?85u:0u;
-}
-/* Whole FT_Stream_Read528928..52893614bytes. */
-uint32_t audio_uart_ft_stream_read_528928(void *stream,void *buffer,uint32_t count)
-{return audio_uart_ft_stream_read_at_528936(stream,draw360_word(stream,8u),buffer,count);}
-/* Common C representation of whole BE16/BE32 bodies; preserve all native read/order/ABI branches. */
-static uint32_t ft382_read_be(void *stream,int32_t *error,uint32_t width)
-{
- *error=0;
- if(draw360_word(stream,8u)+(width-1u)>=draw360_word(stream,4u)){*error=85;return 0u;}
- uint8_t local[4];const volatile uint8_t *data;
- if(draw360_word(stream,20u)!=0u){
-  uint32_t offset=draw360_word(stream,8u),callback=draw360_word(stream,20u);
-  uint32_t actual=((uint32_t (*)(void *,uint32_t,void *,uint32_t))(uintptr_t)callback)(stream,offset,local,width);
-  if(actual!=width){*error=85;return 0u;}
-  data=local;
- }else data=(const volatile uint8_t *)(uintptr_t)(draw360_word(stream,0u)+draw360_word(stream,8u));
- uint32_t value=0u;
- if(data!=0)for(uint32_t i=0;i<width;i++)value=(value<<8u)|data[i];
- draw360_store(stream,8u,draw360_word(stream,8u)+width);return value;
-}
-/* Whole FT_Stream_ReadUShort528b4a..528ba8 94bytes. */
-uint32_t audio_uart_ft_stream_read_ushort_528b4a(void *stream,int32_t *error)
-{return (uint16_t)ft382_read_be(stream,error,2u);}
-/* Whole FT_Stream_ReadULong528ba8..528c14108bytes. */
-uint32_t audio_uart_ft_stream_read_ulong_528ba8(void *stream,int32_t *error)
-{return ft382_read_be(stream,error,4u);}
-/* Whole FT_Get_Module5273b8..5273f2 58bytes. */
-void *audio_uart_ft_get_module_5273b8(void *library,const char *name)
-{
- if(library==0 || name==0)return 0;
- uint32_t cursor=(uint32_t)(uintptr_t)library+20u;
- uint32_t limit=cursor+draw360_word(library,16u)*4u;
- for(;cursor<limit;cursor+=4u){
-  void *module=draw360_pointer((void *)(uintptr_t)cursor,0u);
-  const char *module_name=draw360_pointer(draw360_pointer(module,0u),8u);
-  if(audio_uart_font_path_compare(module_name,name)==0)return draw360_pointer((void *)(uintptr_t)cursor,0u);
- }
- return 0;
-}
-/* Whole resource-fork provider222bytes remains an explicit external boundary. */
-extern uint32_t audio_uart_ft_read_mac_resource_5261ac(void *,void *,uint32_t,int32_t,void **);
-extern uint32_t audio_uart_ft_mac_path_search_526356(void *,void *,int32_t,void **,const void *);
-/* Whole MacBinary reader5262ac..526356170bytes. Native instruction ABI has four args. */
-uint32_t audio_uart_ft_read_macbinary_5262ac(void *library,void *stream,int32_t index,void **face)
-{
- if(stream==0)return 85u;
- uint32_t error=audio_uart_ft_stream_seek_5288e0(stream,0u);
- if(error!=0u)return error;
- uint8_t header[128];
- error=audio_uart_ft_stream_read_528928(stream,header,128u);
- if(error!=0u)return error;
- if(header[0]!=0u || header[74]!=0u || header[82]!=0u || header[1]==0u || header[1]>=34u || header[63]!=0u || header[(uint32_t)header[1]+2u]!=0u || header[83]>=128u)return 2u;
- uint32_t length=((uint32_t)header[83]<<24u)|((uint32_t)header[84]<<16u)|((uint32_t)header[85]<<8u)|header[86];
- uint32_t offset=((length+127u)&~127u)+128u;
- return audio_uart_ft_read_mac_resource_5261ac(library,stream,offset,index,face);
-}
-/* Whole Mac fallback526452..5264a684bytes; branch on low byte, preserve full R0 result. */
-uint32_t audio_uart_ft_load_mac_face_526452(void *library,void *stream,int32_t index,void **face,const void *args)
-{
- uint32_t error=audio_uart_ft_read_macbinary_5262ac(library,stream,index,face);
- if((uint8_t)error==2u)error=audio_uart_ft_read_mac_resource_5261ac(library,stream,0u,index,face);
- if(((uint8_t)error==2u || (uint8_t)error==85u) && ((*(const volatile uint8_t *)args)&4u)!=0u)error=audio_uart_ft_mac_path_search_526356(library,stream,index,face,args);
- return error;
-}
-extern uint32_t audio_uart_ft_raccess_header_528064(void *,void *,uint32_t,uint32_t *,uint32_t *);
-extern uint32_t audio_uart_ft_raccess_offsets_528298(void *,void *,uint32_t,uint32_t,uint32_t,uint32_t,void **,int32_t *);
-extern uint32_t audio_uart_ft_mac_read_post_525e16(void *,void *,void *,int32_t,int32_t,void **);
-extern uint32_t audio_uart_ft_mac_read_sfnt_5260a4(void *,void *,void *,int32_t,int32_t,void **);
-/* Whole IsMacResource5261ac..52628a222bytes. Cached allocator, full status, fresh face pointer. */
-uint32_t audio_uart_ft_read_mac_resource_5261ac(void *library,void *stream,uint32_t offset,int32_t index,void **face)
-{
- void *memory=draw360_pointer(library,0u);
- uint32_t map,data;
- uint32_t error=audio_uart_ft_raccess_header_528064(library,stream,offset,&map,&data);
- if(error!=0u)return error;
- void *offsets;int32_t count;
- error=audio_uart_ft_raccess_offsets_528298(library,stream,map,data,0x504f5354u,1u,&offsets,&count);
- if(error==0u){
-  error=audio_uart_ft_mac_read_post_525e16(library,stream,offsets,count,index,face);
-  audio_uart_font_mem_free(memory,offsets);
-  offsets=0;
-  if(error==0u)draw360_store(*face,0u,1u);
-  return error;
- }
- error=audio_uart_ft_raccess_offsets_528298(library,stream,map,data,0x73666e74u,0u,&offsets,&count);
- if(error==0u){
-  /* Cortex-M SDIV contract includes divide-by-zero and INT_MIN/-1 results. */
-  int32_t quotient=count==0?0:(index==(-2147483647-1) && count==-1?(-2147483647-1):index/count);
-  int32_t internal=(int32_t)((uint32_t)index-(uint32_t)count*(uint32_t)quotient);
-  error=audio_uart_ft_mac_read_sfnt_5260a4(library,stream,offsets,count,internal,face);
-  audio_uart_font_mem_free(memory,offsets);
-  offsets=0;
-  if(error==0u)draw360_store(*face,0u,(uint32_t)count);
- }
- return error;
-}
-static uint32_t ft385_be32(const uint8_t *p)
-{return ((uint32_t)p[0]<<24u)|((uint32_t)p[1]<<16u)|((uint32_t)p[2]<<8u)|p[3];}
-/* Whole FT_Raccess_Get_HeaderInfo528064..528272526bytes. Output writes persist on later failure. */
-uint32_t audio_uart_ft_raccess_header_528064(void *library,void *stream,uint32_t resource,uint32_t *map_out,uint32_t *data_out)
-{
- (void)library;uint8_t h[32];int32_t error=(int32_t)audio_uart_ft_stream_seek_5288e0(stream,resource);
- if(error!=0)return (uint32_t)error;
- error=(int32_t)audio_uart_ft_stream_read_528928(stream,h,16u);
- if(error!=0)return (uint32_t)error;
- if(h[0]>=128u || h[4]>=128u || h[8]>=128u || h[12]>=128u)return 2u;
- volatile uint32_t *data=data_out;
- *data=ft385_be32(h);
- uint32_t map=ft385_be32(h+4u),data_length=ft385_be32(h+8u),map_length=ft385_be32(h+12u);
- if(map==0u)return 2u;
- if((int32_t)*data<(int32_t)map){if((int32_t)(map-data_length)<(int32_t)*data)return 2u;}
- else if((int32_t)(*data-map_length)<(int32_t)map)return 2u;
- if((int32_t)(0x7fffffffu-data_length)<(int32_t)*data || (int32_t)(0x7fffffffu-map_length)<(int32_t)map || (int32_t)(0x7fffffffu-*data-data_length)<(int32_t)resource || (int32_t)(0x7fffffffu-map-map_length)<(int32_t)resource || draw360_word(stream,4u)<data_length+*data+resource || draw360_word(stream,4u)<map_length+map+resource)return 2u;
- *data=resource+*data;map+=resource;
- error=(int32_t)audio_uart_ft_stream_seek_5288e0(stream,map);
- if(error!=0)return (uint32_t)error;
- h[31]=(uint8_t)(h[15]+1u);
- error=(int32_t)audio_uart_ft_stream_read_528928(stream,h+16u,16u);
- if(error!=0)return (uint32_t)error;
- uint32_t all_zero=1u,all_equal=1u;
- for(uint32_t i=0;i<16u;i++){if(h[i+16u]!=0u)all_zero=0u;if(h[i+16u]!=h[i])all_equal=0u;}
- if(all_zero==0u && all_equal==0u)return 2u;
- /* Native BE reader overwrites the skip status through its error output. */
- (void)audio_uart_ft_stream_skip_528914(stream,8);
- int32_t type_offset=(int16_t)audio_uart_ft_stream_read_ushort_528b4a(stream,&error);
- if(error!=0)return (uint32_t)error;
- if(type_offset<0)return 2u;
- uint32_t type_position=map+(uint32_t)type_offset;
- error=(int32_t)audio_uart_ft_stream_seek_5288e0(stream,type_position);
- if(error==0)*map_out=type_position;
- return (uint32_t)error;
-}
-extern void *audio_uart_font_mem_realloc_items(void *,int32_t,int32_t,int32_t,void *,int32_t *);
 extern void audio_uart_ft_sort_core_56798c(void *,uint32_t,uint32_t,uint32_t,int32_t (*)(const void *,const void *));
-/* Whole callback528272..52829838bytes, authenticated pointer word528710. */
-int32_t audio_uart_ft_resource_ref_compare_528272(const void *left,const void *right)
-{
- int32_t a=*(const volatile int16_t *)left,b=*(const volatile int16_t *)right;
- if(a<b)return -1;
- b=*(const volatile int16_t *)right;a=*(const volatile int16_t *)left;
- return b<a?1:0;
-}
 /* Whole qsort wrapper567c4c..567c6424bytes. Void contract; native scratch R0/R1 not API output. */
 void audio_uart_ft_qsort_567c4c(void *base,uint32_t count,uint32_t width,int32_t (*compare)(const void *,const void *))
 {if(base!=0 && compare!=0)audio_uart_ft_sort_core_56798c(base,count,count,width,compare);}
-/* Whole FT_Raccess_Get_DataOffsets528298..528470472bytes. */
-uint32_t audio_uart_ft_raccess_offsets_528298(void *library,void *stream,uint32_t map,uint32_t data,uint32_t tag,uint32_t sort,void **offsets_out,int32_t *count_out)
-{
- void *memory=draw360_pointer(library,0u);int32_t error=(int32_t)audio_uart_ft_stream_seek_5288e0(stream,map);
- if(error!=0)return (uint32_t)error;
- int32_t types=(int16_t)audio_uart_ft_stream_read_ushort_528b4a(stream,&error);
- if(error!=0)return (uint32_t)error;
- types++;
- if(types>=4080)return 8u;
- volatile int32_t *count=count_out;
- for(int32_t i=0;i<types;i++){
-  uint32_t current_tag=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
-  if(error!=0)return (uint32_t)error;
-  int32_t subcount=(int16_t)audio_uart_ft_stream_read_ushort_528b4a(stream,&error);
-  if(error!=0)return (uint32_t)error;
-  int32_t relative=(int16_t)audio_uart_ft_stream_read_ushort_528b4a(stream,&error);
-  if(error!=0)return (uint32_t)error;
-  if(current_tag!=tag)continue;
-  *count=subcount+1;
-  if((uint32_t)*count-1u>2726u)return 8u;
-  error=(int32_t)audio_uart_ft_stream_seek_5288e0(stream,map+(uint32_t)relative);
-  if(error!=0)return (uint32_t)error;
-  uint8_t *references=audio_uart_font_mem_realloc_items(memory,8,0,*count,0,&error);
-  if(error!=0)return (uint32_t)error;
-  for(int32_t j=0;j<*count;j++){
-   uint16_t id=(uint16_t)audio_uart_ft_stream_read_ushort_528b4a(stream,&error);
-   *(volatile uint16_t *)(references+(uint32_t)j*8u)=id;
-   if(error!=0)goto cleanup;
-   error=(int32_t)audio_uart_ft_stream_skip_528914(stream,2);
-   if(error!=0)goto cleanup;
-   uint32_t attributes=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
-   if(error!=0)goto cleanup;
-   error=(int32_t)audio_uart_ft_stream_skip_528914(stream,4);
-   if(error!=0)goto cleanup;
-   if((int32_t)attributes<0){error=8;goto cleanup;}
-   draw360_store(references+(uint32_t)j*8u,4u,attributes&0x00ffffffu);
-  }
-  if((uint8_t)sort!=0u){
-   audio_uart_ft_qsort_567c4c(references,(uint32_t)*count,8u,audio_uart_ft_resource_ref_compare_528272);
-   /* Native trace-disabled loop still rereads caller-owned count. */
-   for(int32_t j=0;j<*count;j++){}
-  }
-  uint32_t *offsets=audio_uart_font_mem_realloc_items(memory,4,0,*count,0,&error);
-  if(error==0){
-   for(int32_t j=0;j<*count;j++)offsets[j]=draw360_word(references+(uint32_t)j*8u,4u)+data;
-   *offsets_out=offsets;error=0;
-  }
- cleanup:
-  audio_uart_font_mem_free(memory,references);return (uint32_t)error;
- }
- return 1u;
-}
-extern int32_t g2_lfs_memcmp(const void *,const void *,uint32_t);
-/* Whole Mac_Read_sfnt_Resource5260a4..5261a8260bytes. R0 is status; scratch R1 is not API output. */
-uint32_t audio_uart_ft_mac_read_sfnt_5260a4(void *library,void *stream,void *offsets,int32_t count,int32_t index,void **face)
-{
- void *memory=draw360_pointer(library,0u);
- uint32_t normalized=index<0?~(uint32_t)index:(uint32_t)index;
- if((int32_t)normalized>=count)return 1u;
- uint32_t offset=draw360_word(offsets,normalized*4u);
- int32_t error=(int32_t)audio_uart_ft_stream_seek_5288e0(stream,offset);
- if(error!=0)return (uint32_t)error;
- uint32_t length=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
- if(error!=0)return (uint32_t)error;
- if((int32_t)length<1)return 1u;
- if(length>=0x01000000u)return 9u;
- uint32_t ps_error=audio_uart_ft_open_ps_sfnt_525d32(library,stream,(int32_t)normalized,0,0,face);
- if(ps_error==0u)return 0u;
- error=(int32_t)audio_uart_ft_stream_seek_5288e0(stream,offset+4u);
- if(error!=0)return (uint32_t)error;
- void *buffer=audio_uart_font_mem_alloc(memory,(int32_t)length,&error);
- if(error!=0)return (uint32_t)error;
- error=(int32_t)audio_uart_ft_stream_read_528928(stream,buffer,length);
- if(error!=0){audio_uart_font_mem_free(memory,buffer);return (uint32_t)error;}
- const char *driver="truetype";
- if(length>=5u && g2_lfs_memcmp(buffer,"OTTO",4u)==0)driver="cff";
- return audio_uart_ft_open_face_from_buffer_525b6e(library,buffer,length,0,driver,face);
-}
-
-/* Complete Mac POST resource reader, native 0x525e16..0x52609c. */
-uint32_t audio_uart_ft_mac_read_post_525e16(void *library,void *stream,void *offsets,int32_t count,int32_t index,void **face)
-{
- void *memory=draw360_pointer(library,0u);
- uint32_t error=1u;
- if(index==-1)index=0;
- if(index!=0)return error;
- uint32_t total=0u;
- for(int32_t i=0;i<count;i++){
-  error=audio_uart_ft_stream_seek_5288e0(stream,draw360_word(offsets,(uint32_t)i*4u));
-  if(error!=0u)return error;
-  int32_t read_error=0;
-  uint32_t length=audio_uart_ft_stream_read_ulong_528ba8(stream,&read_error);
-  if(read_error!=0)return (uint32_t)read_error;
-  if(length>0xffffffu || 0xffffffu-length<total+6u)return 9u;
-  total+=length+6u;
- }
- if(total+2u<6u)return 10u;
- int32_t alloc_error=0;
- uint8_t *pfb=(uint8_t *)audio_uart_font_mem_alloc(memory,(int32_t)(total+2u),&alloc_error);
- if(alloc_error!=0)return (uint32_t)alloc_error;
- pfb[0]=0x80u;pfb[1]=1u;pfb[2]=0u;pfb[3]=0u;pfb[4]=0u;pfb[5]=0u;
- uint32_t used=6u,header=2u,segment=0u;
- int32_t prior_type=1;
- int32_t i=0;
- while(i<count){
-  error=audio_uart_ft_stream_seek_5288e0(stream,draw360_word(offsets,(uint32_t)i*4u));
-  if(error!=0u)goto fail;
-  int32_t read_error=0;
-  uint32_t resource_length=audio_uart_ft_stream_read_ulong_528ba8(stream,&read_error);
-  if(read_error!=0){error=(uint32_t)read_error;goto fail;}
-  if(resource_length>0x7fffffffu){error=9u;goto fail;}
-  uint32_t flags=audio_uart_ft_stream_read_ushort_528b4a(stream,&read_error);
-  if(read_error!=0){error=(uint32_t)read_error;goto fail;}
-  error=10u;
-  int32_t type=(int32_t)(flags>>8);
-  if(type!=0){
-   uint32_t payload=resource_length<3u?0u:resource_length-2u;
-   if(type==prior_type)segment+=payload;
-   else{
-    if(total+2u<header+3u)goto fail;
-    pfb[header]=(uint8_t)segment;pfb[header+1]=(uint8_t)(segment>>8);
-    pfb[header+2]=(uint8_t)(segment>>16);pfb[header+3]=(uint8_t)(segment>>24);
-    if(type==5)break;
-    if(total+2u<used+6u)goto fail;
-    pfb[used]=0x80u;pfb[used+1]=(uint8_t)type;
-    header=used+2u;
-    pfb[header]=0u;pfb[header+1]=0u;pfb[header+2]=0u;pfb[header+3]=0u;
-    used+=6u;segment=payload;
-   }
-   if(total<used || total<payload+used)goto fail;
-   error=audio_uart_ft_stream_read_528928(stream,pfb+used,payload);
-   if(error!=0u)goto fail;
-   used+=payload;error=0u;prior_type=type;
-  }
-  i++;
- }
- error=10u;
- if(used+2u<=total+2u){
-  pfb[used]=0x80u;pfb[used+1]=3u;
-  if(header+3u<=total+2u){
-   pfb[header]=(uint8_t)segment;pfb[header+1]=(uint8_t)(segment>>8);
-   pfb[header+2]=(uint8_t)(segment>>16);pfb[header+3]=(uint8_t)(segment>>24);
-   return audio_uart_ft_open_face_from_buffer_525b6e(library,pfb,used+2u,0,"type1",face);
-  }
- }
-fail:
- if(error!=0u)error=1u;
- audio_uart_font_mem_free(memory,pfb);
- return error;
-}
 
 #include <stdint.h>
-/* Native Mac resource search rule table at 0x6fac7c, nine 8-byte entries. */
-typedef uint32_t (*audio_uart_ft_mac_rule_fn)(void *,void *,void *,void *,void *);
-typedef struct { audio_uart_ft_mac_rule_fn handler; int32_t type_code; } audio_uart_ft_mac_rule_entry;
-extern uint32_t audio_uart_ft_mac_rule_528508(void *,void *,void *,void *,void *);
-extern uint32_t audio_uart_ft_mac_rule_528524(void *,void *,void *,void *,void *);
-extern uint32_t audio_uart_ft_mac_rule_528540(void *,void *,void *,void *,void *);
-extern uint32_t audio_uart_ft_mac_rule_5285d4(void *,void *,void *,void *,void *);
-extern uint32_t audio_uart_ft_mac_rule_52857e(void *,void *,void *,void *,void *);
-extern uint32_t audio_uart_ft_mac_rule_52862c(void *,void *,void *,void *,void *);
-extern uint32_t audio_uart_ft_mac_rule_528650(void *,void *,void *,void *,void *);
-extern uint32_t audio_uart_ft_mac_rule_528674(void *,void *,void *,void *,void *);
-extern uint32_t audio_uart_ft_mac_rule_5286b2(void *,void *,void *,void *,void *);
-const audio_uart_ft_mac_rule_entry audio_uart_ft_mac_rules_6fac7c[9]={
- {audio_uart_ft_mac_rule_528508,0},
- {audio_uart_ft_mac_rule_528524,1},
- {audio_uart_ft_mac_rule_528540,2},
- {audio_uart_ft_mac_rule_5285d4,3},
- {audio_uart_ft_mac_rule_52857e,4},
- {audio_uart_ft_mac_rule_52862c,5},
- {audio_uart_ft_mac_rule_528650,6},
- {audio_uart_ft_mac_rule_528674,7},
- {audio_uart_ft_mac_rule_5286b2,8}
-};
-int32_t audio_uart_ft_mac_rule_code_5284de(void *library,uint32_t index)
-{
- (void)library;
- return index<9u?(int8_t)audio_uart_ft_mac_rules_6fac7c[index].type_code:-2;
-}
-uint32_t audio_uart_ft_mac_rule_is_3_or_4_5284f4(void *library,uint32_t index)
-{
- uint32_t code=(uint32_t)audio_uart_ft_mac_rule_code_5284de(library,index);
- return code-3u<2u?1u:0u;
-}
-
-#include <stdint.h>
-extern void *audio_uart_font_mem_alloc(void *,int32_t,int32_t *);
-char *audio_uart_ft_mac_path_insert_528842(void *memory,const char *name,const char *insertion)
-{
- uint32_t name_len=0u,insert_len=0u;
- while(name[name_len]!=0)name_len++;
- while(insertion[insert_len]!=0)insert_len++;
- int32_t error=0;
- char *result=(char *)audio_uart_font_mem_alloc(memory,(int32_t)(name_len+insert_len+1u),&error);
- if(error!=0)return 0;
- uint32_t slash=0u;uint32_t has_slash=0u;
- for(uint32_t i=0;i<name_len;i++)if(name[i]=='/'){slash=i;has_slash=1u;}
- uint32_t prefix=has_slash?slash+1u:0u;
- for(uint32_t i=0;i<prefix;i++)result[i]=name[i];
- result[prefix]=0;
- uint32_t pos=prefix;
- for(uint32_t i=0;i<insert_len;i++)result[pos++]=insertion[i];
- for(uint32_t i=prefix;i<name_len;i++)result[pos++]=name[i];
- result[pos]=0;
- return result;
-}
-uint32_t audio_uart_ft_mac_rule_52862c(void *library,void *stream,void *name,void *out,void *offset)
-{
- (void)stream;
- char *path=audio_uart_ft_mac_path_insert_528842(*(void **)library,(const char *)name,"resource.frk/");
- if(path==0)return 0x40u;
- *(void **)out=path;*(uint32_t *)offset=0u;return 0u;
-}
-uint32_t audio_uart_ft_mac_rule_528650(void *library,void *stream,void *name,void *out,void *offset)
-{
- (void)stream;
- char *path=audio_uart_ft_mac_path_insert_528842(*(void **)library,(const char *)name,".resource/");
- if(path==0)return 0x40u;
- *(void **)out=path;*(uint32_t *)offset=0u;return 0u;
-}
-
-#include <stdint.h>
-extern void *audio_uart_font_mem_alloc(void *,int32_t,int32_t *);
-uint32_t audio_uart_ft_mac_rule_52857e(void *library,void *stream,void *name,void *out,void *offset)
-{
- (void)stream;
- const char *base=(const char *)name;uint32_t length=0u;while(base[length]!=0)length++;
- int32_t error=0;char *path=(char *)audio_uart_font_mem_alloc(*(void **)library,(int32_t)(length+6u),&error);
- if(error!=0)return (uint32_t)error;
- for(uint32_t i=0;i<length;i++)path[i]=base[i];
- const char suffix[6]="/rsrc";for(uint32_t i=0;i<6u;i++)path[length+i]=suffix[i];
- *(void **)out=path;*(uint32_t *)offset=0u;return 0u;
-}
-uint32_t audio_uart_ft_mac_rule_5285d4(void *library,void *stream,void *name,void *out,void *offset)
-{
- (void)stream;
- const char *base=(const char *)name;uint32_t length=0u;while(base[length]!=0)length++;
- int32_t error=0;char *path=(char *)audio_uart_font_mem_alloc(*(void **)library,(int32_t)(length+18u),&error);
- if(error!=0)return (uint32_t)error;
- for(uint32_t i=0;i<length;i++)path[i]=base[i];
- const char suffix[18]="/..namedfork/rsrc";for(uint32_t i=0;i<18u;i++)path[length+i]=suffix[i];
- *(void **)out=path;*(uint32_t *)offset=0u;return 0u;
-}
-
-#include <stdint.h>
-extern uint32_t audio_uart_ft_mac_apple_generic_528720(void *,void *,void *,uint32_t,void *);
-uint32_t audio_uart_ft_mac_rule_528508(void *library,void *stream,void *name,void *out,void *offset)
-{
- *(void **)out=0;
- if(stream==0)return 0x51u;
- return audio_uart_ft_mac_apple_generic_528720(library,stream,name,0x00051607u,offset);
-}
-uint32_t audio_uart_ft_mac_rule_528524(void *library,void *stream,void *name,void *out,void *offset)
-{
- *(void **)out=0;
- if(stream==0)return 0x51u;
- return audio_uart_ft_mac_apple_generic_528720(library,stream,name,0x00051600u,offset);
-}
-
-#include <stdint.h>
-extern uint32_t audio_uart_ft_stream_read_ulong_528ba8(void *,int32_t *);
-extern uint32_t audio_uart_ft_stream_read_ushort_528b4a(void *,int32_t *);
-extern uint32_t audio_uart_ft_stream_skip_528914(void *,int32_t);
-uint32_t audio_uart_ft_mac_apple_generic_528720(void *library,void *stream,void *name,uint32_t magic,void *offset_out)
-{
- (void)library;(void)name;
- int32_t error=0;
- uint32_t actual=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
- if(error!=0)return (uint32_t)error;
- if(actual!=magic)return 2u;
- (void)audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
- if(error!=0)return (uint32_t)error;
- error=(int32_t)audio_uart_ft_stream_skip_528914(stream,16);
- if(error!=0)return (uint32_t)error;
- uint32_t count=audio_uart_ft_stream_read_ushort_528b4a(stream,&error);
- if(error!=0)return (uint32_t)error;
- if((uint16_t)count==0u)return 2u;
- for(uint32_t i=0;i<(uint16_t)count;i++){
-  uint32_t id=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
-  if(error!=0)return (uint32_t)error;
-  if(id==2u){
-   uint32_t offset=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
-   if(error==0){
-    (void)audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
-    if(error==0){*(uint32_t *)offset_out=offset;return 0u;}
-   }
-  }else{
-   error=(int32_t)audio_uart_ft_stream_skip_528914(stream,8);
-   if(error!=0)return (uint32_t)error;
-  }
- }
- return 2u;
-}
-
-#include <stdint.h>
-extern char *audio_uart_ft_mac_path_insert_528842(void *,const char *,const char *);
-extern void audio_uart_font_mem_free(void *,void *);
-extern uint32_t audio_uart_ft_mac_double_from_file_528802(void *,const char *,void *);
-uint32_t audio_uart_ft_mac_rule_528540(void *library,void *stream,void *name,void *out,void *offset)
-{
- (void)stream;void *memory=*(void **)library;
- char *path=audio_uart_ft_mac_path_insert_528842(memory,(const char *)name,"._");
- if(path==0)return 0x40u;
- uint32_t error=audio_uart_ft_mac_double_from_file_528802(library,path,offset);
- if(error==0u)*(void **)out=path;else audio_uart_font_mem_free(memory,path);
- return error;
-}
-uint32_t audio_uart_ft_mac_rule_528674(void *library,void *stream,void *name,void *out,void *offset)
-{
- (void)stream;void *memory=*(void **)library;
- char *path=audio_uart_ft_mac_path_insert_528842(memory,(const char *)name,"%");
- if(path==0)return 0x40u;
- uint32_t error=audio_uart_ft_mac_double_from_file_528802(library,path,offset);
- if(error==0u)*(void **)out=path;else audio_uart_font_mem_free(memory,path);
- return error;
-}
-uint32_t audio_uart_ft_mac_rule_5286b2(void *library,void *stream,void *name,void *out,void *offset)
-{
- (void)stream;void *memory=*(void **)library;
- char *path=audio_uart_ft_mac_path_insert_528842(memory,(const char *)name,".AppleDouble/");
- if(path==0)return 0x40u;
- uint32_t error=audio_uart_ft_mac_double_from_file_528802(library,path,offset);
- if(error==0u)*(void **)out=path;else audio_uart_font_mem_free(memory,path);
- return error;
-}
-
-#include <stdint.h>
-extern uint32_t audio_uart_ft_stream_new_524f96(void *,const void *,void **);
-extern uint32_t audio_uart_ft_mac_rule_528508(void *,void *,void *,void *,void *);
-extern void audio_uart_ft_stream_free_52502a(void *,uint32_t);
-uint32_t audio_uart_ft_mac_double_from_file_528802(void *library,const char *path,void *offset)
-{
- uint32_t args[8]={0};args[0]=4u;args[3]=(uint32_t)(uintptr_t)path;
- void *stream=0;void *unused=0;
- uint32_t error=audio_uart_ft_stream_new_524f96(library,args,&stream);
- if(error==0u){
-  error=audio_uart_ft_mac_rule_528508(library,stream,(void *)path,&unused,offset);
-  audio_uart_ft_stream_free_52502a(stream,0u);
- }
- return error;
-}
-
-#include <stdint.h>
-extern void audio_uart_ft_raccess_guess_528470(void *,void *,const char *,void **,uint32_t *,uint32_t *);
-extern uint32_t audio_uart_ft_mac_rule_is_3_or_4_5284f4(void *,uint32_t);
-extern uint32_t audio_uart_ft_stream_new_524f96(void *,const void *,void **);
-extern uint32_t audio_uart_ft_read_mac_resource_5261ac(void *,void *,uint32_t,int32_t,void **);
-extern void audio_uart_ft_stream_free_52502a(void *,uint32_t);
-extern void audio_uart_font_mem_free(void *,void *);
-uint32_t audio_uart_ft_mac_path_search_526356(void *library,void *stream,int32_t index,void **face,const void *args)
-{
- void *memory=*(void **)library;
- uint32_t status=2u,seen_special=0u;
- void *names[9];uint32_t offsets[9],errors[9];
- const char *base=*(const char *const *)((const uint8_t *)args+12u);
- audio_uart_ft_raccess_guess_528470(library,stream,base,names,offsets,errors);
- for(uint32_t i=0;i<9u;i++){
-  uint32_t special=audio_uart_ft_mac_rule_is_3_or_4_5284f4(library,i);
-  if((special==0u || seen_special==0u) && errors[i]==0u){
-   uint32_t open_args[8]={0};open_args[0]=4u;
-   open_args[3]=(uint32_t)(uintptr_t)(names[i]?names[i]:(void *)base);
-   void *opened=0;
-   status=audio_uart_ft_stream_new_524f96(library,open_args,&opened);
-   if(special!=0u && (status&0xffu)==0x51u)seen_special=1u;
-   if(status==0u){
-    status=audio_uart_ft_read_mac_resource_5261ac(library,opened,offsets[i],index,face);
-    audio_uart_ft_stream_free_52502a(opened,0u);
-    if(status==0u)break;
-    if(special!=0u)seen_special=1u;
-   }
-  }
- }
- for(uint32_t i=0;i<9u;i++)if(names[i]!=0)audio_uart_font_mem_free(memory,names[i]);
- return status==0u?0u:2u;
-}
-
-#include <stdint.h>
-extern uint32_t audio_uart_ft_stream_seek_5288e0(void *,uint32_t);
-extern const audio_uart_ft_mac_rule_entry audio_uart_ft_mac_rules_6fac7c[9];
-void audio_uart_ft_raccess_guess_528470(void *library,void *stream,const char *base,void **names,uint32_t *offsets,uint32_t *errors)
-{
- for(uint32_t i=0;i<9u;i++){
-  names[i]=0;
-  errors[i]=stream?audio_uart_ft_stream_seek_5288e0(stream,0u):0u;
-  if(errors[i]==0u)errors[i]=audio_uart_ft_mac_rules_6fac7c[i].handler(library,stream,(void *)base,&names[i],&offsets[i]);
- }
-}
 
 /* Round 398: qualified complete native sort helper bodies. */
 typedef int32_t (*ft_sort_compare)(const void *, const void *);
@@ -10058,332 +6878,8 @@ insertion_move:
 
 /* Round 401: complete native-matched FreeType module installer. */
 extern int32_t audio_uart_font_path_compare(const char *, const char *);
-extern void *audio_uart_font_mem_alloc(void *, int32_t, int32_t *);
-extern void audio_uart_font_mem_free(void *, void *);
-extern uint32_t audio_uart_ft_remove_module_527466(void *, void *);
-extern uint32_t audio_uart_ft_add_renderer_5270d2(void *);
-
-static uint32_t ft401_word(const void *base, uint32_t offset)
-{
-    return *(const volatile uint32_t *)((uintptr_t)base + offset);
-}
-
-static void ft401_set_word(void *base, uint32_t offset, uint32_t value)
-{
-    *(volatile uint32_t *)((uintptr_t)base + offset) = value;
-}
-
-/* Whole native FT_Add_Module body at 0x52729c, 278 bytes. */
-uint32_t audio_uart_ft_add_module_52729c(void *library, const void *clazz)
-{
-    if (library == 0) return 0x21u;
-    if (clazz == 0) return 6u;
-    if ((int32_t)ft401_word(clazz, 16u) >= 0x2000a) return 4u;
-
-    for (uint32_t i = 0; i < ft401_word(library, 16u); ++i) {
-        void *existing = (void *)(uintptr_t)ft401_word(library, 20u + i * 4u);
-        const void *old_class = (const void *)(uintptr_t)ft401_word(existing, 0u);
-        if (audio_uart_font_path_compare(
-                (const char *)(uintptr_t)ft401_word(old_class, 8u),
-                (const char *)(uintptr_t)ft401_word(clazz, 8u)) == 0) {
-            if ((int32_t)ft401_word(clazz, 12u) <= (int32_t)ft401_word(old_class, 12u))
-                return 5u;
-            (void)audio_uart_ft_remove_module_527466(library, existing);
-            break;
-        }
-    }
-
-    void *memory = (void *)(uintptr_t)ft401_word(library, 0u);
-    int32_t error = 0;
-    if (ft401_word(library, 16u) >= 32u) return 0x30u;
-
-    void *module = audio_uart_font_mem_alloc(memory, (int32_t)ft401_word(clazz, 4u), &error);
-    if (error != 0) return (uint32_t)error;
-    ft401_set_word(module, 4u, (uint32_t)(uintptr_t)library);
-    ft401_set_word(module, 8u, (uint32_t)(uintptr_t)memory);
-    ft401_set_word(module, 0u, (uint32_t)(uintptr_t)clazz);
-
-    uint32_t flags = ft401_word(clazz, 0u);
-    if ((flags & 2u) != 0u) {
-        error = (int32_t)audio_uart_ft_add_renderer_5270d2(module);
-        if (error != 0) goto fail;
-    }
-    if ((flags & 4u) != 0u) ft401_set_word(library, 0xa0u, (uint32_t)(uintptr_t)module);
-    if ((flags & 1u) != 0u) ft401_set_word(module, 12u, (uint32_t)(uintptr_t)clazz);
-
-    uint32_t init = ft401_word(clazz, 24u);
-    if (init != 0u) {
-        error = ((int32_t (*)(void *))(uintptr_t)init)(module);
-        if (error != 0) goto fail;
-    }
-    uint32_t count = ft401_word(library, 16u);
-    ft401_set_word(library, 16u, count + 1u);
-    ft401_set_word(library, 20u + count * 4u, (uint32_t)(uintptr_t)module);
-    return (uint32_t)error;
-
-fail:
-    if ((flags & 2u) != 0u) {
-        const void *renderer_class = (const void *)(uintptr_t)ft401_word(module, 12u);
-        if (renderer_class != 0 && ft401_word(renderer_class, 36u) == 0x6f75746cu &&
-            ft401_word(module, 52u) != 0u) {
-            const void *raster_class = (const void *)(uintptr_t)ft401_word(renderer_class, 56u);
-            uint32_t raster_done = ft401_word(raster_class, 20u);
-            ((void (*)(void *))(uintptr_t)raster_done)((void *)(uintptr_t)ft401_word(module, 52u));
-        }
-    }
-    audio_uart_font_mem_free(memory, module);
-    return (uint32_t)error;
-}
-
-/* Round 402: complete native-matched FreeType module removal and teardown. */
-extern void audio_uart_font_mem_free(void *, void *);
-extern void audio_uart_ft_remove_renderer_52716c(void *);
-extern void audio_uart_ft_destroy_driver_525936(void *);
-
-static uint32_t ft402_word(const void *base, uint32_t offset)
-{
-    return *(const volatile uint32_t *)((uintptr_t)base + offset);
-}
-
-static void ft402_set_word(void *base, uint32_t offset, uint32_t value)
-{
-    *(volatile uint32_t *)((uintptr_t)base + offset) = value;
-}
-
-/* Whole native FT_Done_Module body at 0x52724c, 80 bytes. */
-uint32_t audio_uart_ft_done_module_52724c(void *module)
-{
-    const void *clazz = (const void *)(uintptr_t)ft402_word(module, 0u);
-    void *library = (void *)(uintptr_t)ft402_word(module, 4u);
-    void *memory = (void *)(uintptr_t)ft402_word(module, 8u);
-    if (library != 0 && ft402_word(library, 0xa0u) == (uint32_t)(uintptr_t)module)
-        ft402_set_word(library, 0xa0u, 0u);
-    uint32_t flags = ft402_word(clazz, 0u);
-    if ((flags & 2u) != 0u) (void)audio_uart_ft_remove_renderer_52716c(module);
-    if ((flags & 1u) != 0u) (void)audio_uart_ft_destroy_driver_525936(module);
-    uint32_t done = ft402_word(clazz, 28u);
-    if (done != 0u) ((void (*)(void *))(uintptr_t)done)(module);
-    audio_uart_font_mem_free(memory, module);
-    return 0u;
-}
-
-/* Whole native FT_Remove_Module body at 0x527466, 76 bytes. */
-uint32_t audio_uart_ft_remove_module_527466(void *library, void *module)
-{
-    if (library == 0) return 0x21u;
-    if (module != 0) {
-        uint32_t count = ft402_word(library, 16u);
-        for (uint32_t i = 0; i < count; ++i) {
-            if (ft402_word(library, 20u + i * 4u) == (uint32_t)(uintptr_t)module) {
-                ft402_set_word(library, 16u, count - 1u);
-                for (uint32_t j = i; j + 1u < count; ++j)
-                    ft402_set_word(library, 20u + j * 4u,
-                                   ft402_word(library, 20u + (j + 1u) * 4u));
-                ft402_set_word(library, 20u + (count - 1u) * 4u, 0u);
-                (void)audio_uart_ft_done_module_52724c(module);
-                return 0u;
-            }
-        }
-    }
-    return 0x22u;
-}
-
-/* Round 403: complete native-matched FreeType renderer graph. */
-extern void *audio_uart_font_mem_alloc(void *, int32_t, int32_t *);
-extern void audio_uart_font_mem_free(void *, void *);
-extern void audio_uart_ft_list_add_529304(void *, void *);
-extern void *audio_uart_ft_list_find_5292e6(void *, void *);
-extern void audio_uart_ft_list_remove_529324(void *, void *);
-extern void *audio_uart_font_lookup_renderer(void *, uint32_t, void *);
-
-static uint32_t ft403_word(const void *base, uint32_t offset)
-{
-    return *(const volatile uint32_t *)((uintptr_t)base + offset);
-}
-
-static void ft403_set_word(void *base, uint32_t offset, uint32_t value)
-{
-    *(volatile uint32_t *)((uintptr_t)base + offset) = value;
-}
-
-/* Whole native ft_set_current_renderer body at 0x5270bc, 22 bytes. */
-void audio_uart_ft_set_current_renderer_5270bc(void *library)
-{
-    void *renderer = audio_uart_font_lookup_renderer(library, 0x6f75746cu, 0);
-    ft403_set_word(library, 0x9cu, (uint32_t)(uintptr_t)renderer);
-}
-
-/* Whole native ft_add_renderer body at 0x5270d2, 154 bytes. */
-uint32_t audio_uart_ft_add_renderer_5270d2(void *module)
-{
-    void *library = (void *)(uintptr_t)ft403_word(module, 4u);
-    void *memory = (void *)(uintptr_t)ft403_word(library, 0u);
-    int32_t error = 0;
-    void *node = audio_uart_font_mem_alloc(memory, 12, &error);
-    if (error != 0) return (uint32_t)error;
-
-    const void *clazz = (const void *)(uintptr_t)ft403_word(module, 0u);
-    ft403_set_word(module, 12u, (uint32_t)(uintptr_t)clazz);
-    uint32_t glyph_format = ft403_word(clazz, 36u);
-    ft403_set_word(module, 16u, glyph_format);
-    if (glyph_format == 0x6f75746cu) {
-        const void *raster_class = (const void *)(uintptr_t)ft403_word(clazz, 56u);
-        uint32_t raster_new = ft403_word(raster_class, 4u);
-        if (raster_new != 0u) {
-            error = ((int32_t (*)(void *, void **))(uintptr_t)raster_new)(
-                memory, (void **)((uintptr_t)module + 52u));
-            if (error != 0) goto fail;
-            ft403_set_word(module, 56u, ft403_word(raster_class, 16u));
-            ft403_set_word(module, 60u, ft403_word(clazz, 40u));
-        }
-    }
-    ft403_set_word(node, 8u, (uint32_t)(uintptr_t)module);
-    audio_uart_ft_list_add_529304((void *)((uintptr_t)library + 0x94u), node);
-    audio_uart_ft_set_current_renderer_5270bc(library);
-    return (uint32_t)error;
-
-fail:
-    audio_uart_font_mem_free(memory, node);
-    return (uint32_t)error;
-}
-
-/* Whole native ft_remove_renderer body at 0x52716c, 84 bytes. */
-void audio_uart_ft_remove_renderer_52716c(void *module)
-{
-    void *library = (void *)(uintptr_t)ft403_word(module, 4u);
-    if (library == 0) return;
-    void *memory = (void *)(uintptr_t)ft403_word(library, 0u);
-    void *list = (void *)((uintptr_t)library + 0x94u);
-    void *node = audio_uart_ft_list_find_5292e6(list, module);
-    if (node == 0) return;
-    const void *clazz = (const void *)(uintptr_t)ft403_word(module, 12u);
-    if (ft403_word(clazz, 36u) == 0x6f75746cu && ft403_word(module, 52u) != 0u) {
-        const void *raster_class = (const void *)(uintptr_t)ft403_word(clazz, 56u);
-        uint32_t raster_done = ft403_word(raster_class, 20u);
-        ((void (*)(void *))(uintptr_t)raster_done)(
-            (void *)(uintptr_t)ft403_word(module, 52u));
-    }
-    audio_uart_ft_list_remove_529324(list, node);
-    audio_uart_font_mem_free(memory, node);
-    audio_uart_ft_set_current_renderer_5270bc(library);
-}
-
-/* Round 404: complete native-matched FreeType driver teardown. */
-extern void audio_uart_ft_list_finalize_529378(void *, void (*)(void *, void *, void *), void *, void *);
-extern void audio_uart_ft_destroy_face_5258a8(void *, void *, void *);
-
-/* Whole native driver teardown at 0x525936, 20 bytes. */
-void audio_uart_ft_destroy_driver_525936(void *driver)
-{
-    void *memory = (void *)(uintptr_t)*(const volatile uint32_t *)((uintptr_t)driver + 8u);
-    audio_uart_ft_list_finalize_529378((void *)((uintptr_t)driver + 16u),
-                                       audio_uart_ft_destroy_face_5258a8,
-                                       memory, driver);
-}
 
 /* Round 405: native-matched typed FreeType default-module order. */
 struct FT_Module_Class;
 struct FT_Driver_ClassRec;
 struct FT_Renderer_Class;
-
-extern const struct FT_Module_Class autofit_module_class;
-extern const struct FT_Driver_ClassRec tt_driver_class;
-extern const struct FT_Driver_ClassRec cff_driver_class;
-extern const struct FT_Module_Class psaux_module_class;
-extern const struct FT_Module_Class psnames_module_class;
-extern const struct FT_Module_Class pshinter_module_class;
-extern const struct FT_Module_Class sfnt_module_class;
-extern const struct FT_Renderer_Class ft_smooth_renderer_class;
-extern const struct FT_Renderer_Class ft_smooth_lcd_renderer_class;
-extern const struct FT_Renderer_Class ft_smooth_lcdv_renderer_class;
-extern uint32_t audio_uart_ft_add_module_52729c(void *, const void *);
-
-/* Exact recovered ten-class order, source owned; class objects remain imports. */
-static const void *const ft405_default_modules[] = {
-    &autofit_module_class,
-    &tt_driver_class,
-    &cff_driver_class,
-    &psaux_module_class,
-    &psnames_module_class,
-    &pshinter_module_class,
-    &sfnt_module_class,
-    &ft_smooth_renderer_class,
-    &ft_smooth_lcd_renderer_class,
-    &ft_smooth_lcdv_renderer_class,
-    0
-};
-
-/* Whole native FT_Add_Default_Modules body at 0x5242fc, 28 bytes. */
-void audio_uart_ft_add_default_modules_5242fc(void *library)
-{
-    for (const void *const *current = ft405_default_modules; *current != 0; ++current)
-        (void)audio_uart_ft_add_module_52729c(library, *current);
-}
-
-/* Native 0x524c3a..0x524c88, pinned FreeType 2.9.1 ftgloadr.c. */
-static uint32_t ft407_word(const void *base, uint32_t offset) {
-  const uint8_t *p = (const uint8_t *)base + offset;
-  return (uint32_t)p[0] | ((uint32_t)p[1] << 8) |
-         ((uint32_t)p[2] << 16) | ((uint32_t)p[3] << 24);
-}
-static void ft407_store(void *base, uint32_t offset, uint32_t value) {
-  uint8_t *p = (uint8_t *)base + offset;
-  p[0] = (uint8_t)value;
-  p[1] = (uint8_t)(value >> 8);
-  p[2] = (uint8_t)(value >> 16);
-  p[3] = (uint8_t)(value >> 24);
-}
-static int32_t ft407_short(const void *base, uint32_t offset) {
-  const uint8_t *p = (const uint8_t *)base + offset;
-  return (int16_t)((uint16_t)p[0] | ((uint16_t)p[1] << 8));
-}
-
-void audio_uart_ft_glyph_loader_adjust_points_524c3a(void *loader) {
-  int32_t points = ft407_short(loader, 22u);
-  int32_t contours = ft407_short(loader, 20u);
-  ft407_store(loader, 60u, ft407_word(loader, 24u) + (uint32_t)(points * 8));
-  ft407_store(loader, 64u, ft407_word(loader, 28u) + (uint32_t)points);
-  ft407_store(loader, 68u, ft407_word(loader, 32u) + (uint32_t)(contours * 2));
-  if (((uint8_t *)loader)[16u] != 0u) {
-    ft407_store(loader, 76u, ft407_word(loader, 40u) + (uint32_t)(points * 8));
-    ft407_store(loader, 80u, ft407_word(loader, 44u) + (uint32_t)(points * 8));
-  }
-}
-
-/* Native 0x524c88..0x524cc4. The qalloc child is still a controlled import. */
-extern void *audio_uart_font_mem_realloc_items(void *, int32_t, int32_t,
-                                                int32_t, void *, int32_t *);
-uint32_t audio_uart_ft_glyph_loader_create_extra_524c88(void *loader) {
-  int32_t error = 0;
-  uint32_t max_points = ft407_word(loader, 4u);
-  void *extra = audio_uart_font_mem_realloc_items(
-      (void *)(uintptr_t)ft407_word(loader, 0u), 8, 0,
-      (int32_t)(max_points * 2u), (void *)0, &error);
-  ft407_store(loader, 40u, (uint32_t)(uintptr_t)extra);
-  if (error == 0) {
-    ((uint8_t *)loader)[16u] = 1u;
-    ft407_store(loader, 44u, (uint32_t)(uintptr_t)extra + max_points * 8u);
-    audio_uart_ft_glyph_loader_adjust_points_524c3a(loader);
-  }
-  return (uint32_t)error;
-}
-
-/* Whole native ft_mem_qalloc body at 0x529176..0x52919c (38 bytes).
- * Pinned FreeType 2.9.1 src/base/ftutil.c supplies the source contract. */
-void *audio_uart_ft_mem_qalloc_529176(void *memory, int32_t size, int32_t *error)
-{
-    void *block = 0;
-    int32_t status = 0;
-    if (size > 0) {
-        const uint8_t *p = (const uint8_t *)memory + 4u;
-        uint32_t callback = (uint32_t)p[0] | ((uint32_t)p[1] << 8) |
-                            ((uint32_t)p[2] << 16) | ((uint32_t)p[3] << 24);
-        block = ((void *(*)(void *, int32_t))(uintptr_t)callback)(memory, size);
-        if (block == 0)
-            status = 64;
-    } else if (size < 0) {
-        status = 6;
-    }
-    *error = status;
-    return block;
-}

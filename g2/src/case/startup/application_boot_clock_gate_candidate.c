@@ -3,6 +3,7 @@
  */
 #include <stdint.h>
 extern uint32_t case_policy_sensor_divide(uint32_t,uint32_t); /* 0x08000160 */
+/* Stock 0x08005048 (case_configure_mode_wait) */
 uint32_t case_boot_clock_gate_enable(uint32_t mask)
 {
     volatile uint32_t *const gate=(volatile uint32_t *)(uintptr_t)0x40007000u;

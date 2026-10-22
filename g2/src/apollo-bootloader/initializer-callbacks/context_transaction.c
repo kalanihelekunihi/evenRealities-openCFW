@@ -10,6 +10,7 @@ extern uint32_t opencfw_hal_status_poll(uint32_t, uintptr_t, uint32_t, uint32_t,
 #define WORD(h,o) (*(volatile uint32_t *)((uintptr_t)(h)+(o)))
 #define BYTE(h,o) (*(volatile uint8_t *)((uintptr_t)(h)+(o)))
 #define REG(h,o) (*(volatile uint32_t *)(0x40050000u + (h)->module * 0x1000u + (o)))
+/* Stock 0x42c988 (hw_config_transaction_42c988) */
 uint32_t opencfw_boot_context_transaction(struct opencfw_iom_context *h,
                                          uint32_t command, uint32_t retain)
 {

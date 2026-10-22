@@ -13,6 +13,7 @@ static uint32_t await_status(uint32_t base,uint32_t start)
     }
     return 0u;
 }
+/* Stock 0x08005910 (case_start_controller) */
 uint32_t case_boot_bus_start(uint32_t descriptor)
 {
     uint32_t state=descriptor+32u,base=rd(descriptor);
@@ -28,6 +29,7 @@ uint32_t case_boot_bus_start(uint32_t descriptor)
     wr(base+36u,255u);wr8(state+9u,1u);wr8(state+8u,0u);
     return 0u;
 }
+/* Stock 0x0800598C (stm32_hal_peripheral_init) */
 uint32_t case_boot_bus_set_frequency(uint32_t descriptor,uint32_t frequency,uint32_t width)
 {
     uint32_t state=descriptor+32u,base=rd(descriptor);

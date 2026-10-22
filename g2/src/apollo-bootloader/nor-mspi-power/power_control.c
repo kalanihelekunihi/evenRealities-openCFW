@@ -74,6 +74,7 @@ static void restore_registers(uint32_t *handle,
     }
 }
 
+/* Stock 0x426808 (am_hal_mspi_power_control) */
 uint32_t opencfw_hal_mspi_power_control(uint32_t *handle,
                                         uint32_t operation,
                                         uint32_t retain_state,

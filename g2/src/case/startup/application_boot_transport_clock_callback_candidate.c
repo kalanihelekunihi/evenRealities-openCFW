@@ -6,6 +6,7 @@
 #include <stdint.h>
 extern void case_boot_transport_stop_clock(uint32_t channel); /* 0x6b80 */
 extern void case_boot_transport_stop_link(uint32_t channel); /* 0x6b98 */
+/* Stock 0x08009D70 (g2_timer_callback_1) */
 void case_boot_transport_cb_9d70(uint32_t argument)
 {
     /* Native trampoline supplies pair[1] in R0; this callback ignores it. */

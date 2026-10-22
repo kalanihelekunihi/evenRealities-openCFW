@@ -31,6 +31,7 @@ static const char sent[] = "Message sent successfully";
 static const char simple_sent[] =
     "[codec.host]Message sent successfully";
 
+/* Stock 0x57C0D6 (gx8002_send_message) */
 int32_t audio_transaction_construct(uint32_t code, uint32_t family,
                                      uint32_t payload, uint32_t length,
                                      uint32_t flags) {

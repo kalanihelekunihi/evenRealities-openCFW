@@ -3,6 +3,7 @@
  */
 #include <stdint.h>
 extern void case_policy_task_list_initialize(uint32_t list);
+/* Stock 0x0800AF70 (case_boot_first_task_prepare) */
 void case_boot_first_task_prepare(void)
 {
     for(uint32_t i=0u;i<56u;++i)
@@ -16,6 +17,7 @@ void case_boot_first_task_prepare(void)
     scheduler[13]=0x20001454u;
     scheduler[14]=0x20001468u;
 }
+/* Stock 0x0800C0B8 (case_boot_scheduler_register) */
 void case_boot_scheduler_register(uint32_t scheduler,const char *name)
 {
     volatile uint32_t *registry=(volatile uint32_t *)(uintptr_t)0x20000fb4u;

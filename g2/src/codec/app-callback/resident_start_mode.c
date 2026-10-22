@@ -6,6 +6,7 @@
 
 extern uint32_t gx8002_resident_pmu_wakeup_source_24940(void);
 
+/* Stock 0x10024984 (gx8002_start_mode) */
 uint32_t gx8002_resident_start_mode_24984(void)
 {
     uint32_t source = gx8002_resident_pmu_wakeup_source_24940();

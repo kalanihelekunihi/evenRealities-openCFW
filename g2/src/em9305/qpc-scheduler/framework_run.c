@@ -8,6 +8,7 @@ extern void opencfw_em9305_startup_hook(void);
 extern void opencfw_em9305_idle(void); /* 0x3115e4 */
 /* Stock0x302518 is exactly NOP_S then return; not a fabricated stub. */
 void opencfw_em9305_startup_lower(void) { __asm__ volatile("nop_s"); }
+/* Stock 0x00311230 (QF_run) */
 _Noreturn void opencfw_em9305_framework_run(void)
 {
     __asm__ volatile("clri 0\n\tsync" ::: "memory");

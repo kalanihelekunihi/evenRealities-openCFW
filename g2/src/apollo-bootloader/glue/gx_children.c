@@ -9,6 +9,7 @@ extern void native_spot_profile_trim_42ae24(uint32_t);
 #define U8(a)  (*(volatile uint8_t *)(uintptr_t)(a))
 extern const uint32_t opencfw_boot_spot_config_values[2];
 
+/* Stock 0x42AD40 (spotmgr_temperature_range_42ad40; spotmgr_temp_to_range) */
 uint8_t native_spot_temperature_range(float value)
 {
     if (value < -20.0f && value >= -273.0f) return 0;
@@ -18,6 +19,7 @@ uint8_t native_spot_temperature_range(float value)
     return 4;
 }
 
+/* Stock 0x42B014 (spotmgr_state_transition_effects_42b014) */
 void native_spot_transition_effect(uint8_t requested, uint8_t current)
 {
     if (current == 1U && requested == 2U && U8(0x200271b2U) == 0U)
@@ -30,6 +32,7 @@ void native_spot_transition_effect(uint8_t requested, uint8_t current)
     }
 }
 
+/* Stock 0x42b6b8 (hw_state_decode_42b6b8) */
 int native_spot_state_decode(const uint8_t *input, uint32_t *major,
                              uint32_t *minor)
 {
@@ -120,6 +123,7 @@ static uint32_t native_spot_power_predicate_41f3f0(void)
     return ((mode >> 30) & 1U) == 0U;
 }
 
+/* Stock 0x42AEF0 (spotmgr_buck_deepsleep_scan_42aef0; second buck_deepsleep_state_determine copy) */
 uint32_t native_spot_buck_deepsleep_scan(uint32_t snapshot[4], uint8_t temperature)
 {
     if (temperature == 3U || (snapshot[0] & 0x3fffffffU) != 0U ||
@@ -180,6 +184,7 @@ void native_spot_trim_enable_42adb8(uint8_t enable)
 /* native_spot_trim_restore_42ae6c: selected source_candidate_20261010/spot_trim.c supplies this body. */
 
 
+/* Stock 0x42B06C (spotmgr_power_transition_trims_42b06c) */
 void native_spot_power_transition_trims(uint32_t new_minor, uint32_t new_major)
 {
     uint32_t *const profile = (uint32_t *)(uintptr_t)0x20026ba0U;
@@ -311,6 +316,7 @@ static void native_spot_clock_transition_release(void)
     U32(0xe000e288U) = 0x40000U;
 }
 
+/* Stock 0x42b294 (spotmgr_state_transition_42b294) */
 uint32_t native_spot_state_transition(uint32_t new_major, uint32_t old_major,
                                       uint32_t new_minor, uint32_t old_minor)
 {

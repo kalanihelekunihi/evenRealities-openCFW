@@ -9,6 +9,7 @@ struct audio_terminal_output_tracking {
 };
 extern struct audio_terminal_output_tracking audio_terminal_output_tracking; /* state-base +0x294 */
 
+/* Stock 0x5E8178 (semantic_terminal_reset_output_tracking) */
 void audio_terminal_reset_output_tracking(void) {
     audio_terminal_output_tracking.active=0;
     audio_terminal_output_tracking.count=0;

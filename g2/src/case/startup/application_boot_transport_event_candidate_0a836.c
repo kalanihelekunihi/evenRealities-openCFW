@@ -4,6 +4,7 @@
 #include <stdint.h>
 extern uint32_t case_boot_transport_event_allocate(uint32_t); /* 0xc48c */
 extern uint32_t case_boot_transport_event_create(uint32_t); /* 0xc4aa */
+/* Stock 0x0800A836 (os_event_flags_create_wrapper) */
 uint32_t case_boot_transport_event(uint32_t descriptor)
 {
     uint32_t ipsr;

@@ -6,11 +6,13 @@
 #include <stdint.h>
 extern void case_control_write(uint32_t base,uint32_t mask,uint32_t enable);
 
+/* Stock 0x0800A550 (case_write_selected_mask) */
 void case_binary_sensor_line_a(uint32_t level)
 {
     uint32_t mask=*(volatile uint8_t *)(uintptr_t)0x20000114u ? 16u : 8u;
     case_control_write(0x50000400u,mask,level);
 }
+/* Stock 0x0800A574 (case_write_selected_mask_alt) */
 void case_binary_sensor_line_b(uint32_t level)
 {
     uint32_t mask=*(volatile uint8_t *)(uintptr_t)0x20000114u ? 8u : 16u;

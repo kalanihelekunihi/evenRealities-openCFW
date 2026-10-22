@@ -1,0 +1,235 @@
+address	payload	kind	owner_or_note
+0x10003144	g2-codec-b	compiler-data	codec-b-01 (literal pool / switch table of existing function)
+0x10004C78	g2-codec-b	compiler-data	codec-b-01 (literal pool / switch table of existing function)
+0x1001295C	g2-codec-b	compiler-data	codec-b-01 (literal pool / switch table of existing function)
+0x100129F0	g2-codec-b	compiler-data	codec-b-01 (literal pool / switch table of existing function)
+0x10012A64	g2-codec-b	compiler-data	codec-b-01 (literal pool / switch table of existing function)
+0x10000000	g2-codec-a	data	codec-a-01
+0x10001FE8	g2-codec-a	data	codec-a-01
+0x1000829C	g2-codec-a	data	codec-a-01
+0x100082B0	g2-codec-a	data	codec-a-01
+0x100082BC	g2-codec-a	data	codec-a-01
+0x100082C8	g2-codec-a	data	codec-a-01
+0x100082D4	g2-codec-a	data	codec-a-01
+0x100082FC	g2-codec-a	data	codec-a-01
+0x42029A	g2-apollo-bootloader	mislabelled-call-site	boot-01 (BL inside another function)
+0x4202EE	g2-apollo-bootloader	mislabelled-call-site	boot-01 (BL inside another function)
+0x42032E	g2-apollo-bootloader	mislabelled-call-site	boot-01 (BL inside another function)
+0x42033E	g2-apollo-bootloader	mislabelled-call-site	boot-01 (BL inside another function)
+0x420E36	g2-apollo-bootloader	mislabelled-call-site	boot-01 (BL inside another function)
+0x4240D2	g2-apollo-bootloader	mislabelled-call-site	boot-01 (BL inside another function)
+0x42410E	g2-apollo-bootloader	mislabelled-call-site	boot-01 (BL inside another function)
+0x425012	g2-apollo-bootloader	mislabelled-call-site	boot-01 (BL inside another function)
+0x4258B8	g2-apollo-bootloader	mislabelled-call-site	boot-01 (BL inside another function)
+0x4258E4	g2-apollo-bootloader	mislabelled-call-site	boot-01 (BL inside another function)
+0x425C60	g2-apollo-bootloader	mislabelled-call-site	boot-01 (BL inside another function)
+0x425CC8	g2-apollo-bootloader	mislabelled-call-site	boot-01 (BL inside another function)
+0x425F92	g2-apollo-bootloader	mislabelled-call-site	boot-01 (BL inside another function)
+0x426620	g2-apollo-bootloader	mislabelled-call-site	boot-01 (BL inside another function)
+0x102093D8	g2-codec-a	literal-pool	codec-a-03
+0x00003746	g2-touch	code-label	touch-reconcile; in-function case label of 0x3700 app_event (9-entry in-frame table 0xB0C4); not a function
+0x00003766	g2-touch	code-label	touch-reconcile; in-function case label of 0x3700 app_event (9-entry in-frame table 0xB0C4); not a function
+0x00003780	g2-touch	code-label	touch-reconcile; in-function case label of 0x3700 app_event (9-entry in-frame table 0xB0C4); not a function
+0x000037A0	g2-touch	code-label	touch-reconcile; in-function case label of 0x3700 app_event (9-entry in-frame table 0xB0C4); not a function
+0x000037C8	g2-touch	code-label	touch-reconcile; in-function case label of 0x3700 app_event (9-entry in-frame table 0xB0C4); not a function
+0x0000382C	g2-touch	code-label	touch-reconcile; in-function case label of 0x3700 app_event (9-entry in-frame table 0xB0C4); not a function
+0x0000384C	g2-touch	code-label	touch-reconcile; in-function case label of 0x3700 app_event (9-entry in-frame table 0xB0C4); not a function
+0x00003960	g2-touch	bogus-row	touch-reconcile; overlaps 0x395C touch_config_bootstrap body (TSV duplicate)
+0x00006924	g2-touch	code-label	touch-reconcile; in-function label (return 0x40) of 0x68EC auto-dither configure; not a function
+0x0000795C	g2-touch	code-label	touch-reconcile; in-function label inside 0x7838..0x7984 (TSV vector_entry_* rows are bogus)
+0x0000795E	g2-touch	code-label	touch-reconcile; in-function label inside 0x7838..0x7984 (TSV vector_entry_* rows are bogus)
+0x00007974	g2-touch	code-label	touch-reconcile; in-function label inside 0x7838..0x7984 (TSV vector_entry_* rows are bogus)
+0x0000A33A	g2-touch	padding	touch-reconcile; 2-byte alignment pad after 0xA338 (TSV power_mgmt row is bogus)
+0x006ECC58	g2-apollo-main	const-table	u-12; Cordio dmConnStateTbl[5][8][2] (dm_conn_sm.c), upstream-identical; used by dmConnSmExecute 0x533EF4; followed by a string at 0x6ECCA8
+0x00709D24	g2-apollo-main	const-table	a-27; common_list_container.c get_color_from_index grey table uint32[16] 0x000000..0xffffff step 0x111111; used by 0x4DCD32
+0x00709F24	g2-apollo-main	const-table	a-27; common_text_container.c get_color_from_index grey table uint32[16] (same values); used by 0x4DF7F2; defined as static const in ui/a-27-evenhub-common-containers/common_text_container_core.c
+0x6C9260	g2-apollo-main	const table	eAT command registry, 21 x 16-byte rows {type,name,handler,0} to 0x6c93af; walked by at_core_dispatch_command 0x5414ba (a-46)
+0x78D6CC	g2-apollo-main	const table	int16 GPIO0 bank IRQ numbers {56,57,58,59}; hal_gpio 0x53a454/0x53a5e0.. (a-46)
+0x78F0F8	g2-apollo-main	const	am_hal_gpio_pincfg_output 0x183, _input 0x93 (+4), _disabled 0x3 (+8); used by 0x53a454 (a-46)
+0x54C248	g2-apollo-main	literal pool	trailing pool of navigation_ui_reflash_page_handler_549c24 to 0x54c267 (a-50)
+0x78DD64	g2-apollo-main	const	22 x 8-byte usage records {4, reason 1/2/3} for key 0x40102, to 0x78de13; navigation_ui_reflash_page_handler_549c24 (a-50)
+0x00545644	g2-apollo-main	code-label	a-48; in-function tail inside StartIMUCompassFunc 0x5455e4..0x54566b (bl 0x43d574 + compress log); TSV FUN_00545644 row is bogus
+0x00545844	g2-apollo-main	code-label	a-48; in-function tail inside navigation_create_max_map 0x5456f6..0x545867; TSV FUN_00545844 row is bogus
+0x00545CAC	g2-apollo-main	string	a-48; inline "ON"/"OFF" (0x545cb0) used by navigation_set_max_map_data 0x5458a2
+0x00546D98	g2-apollo-main	string	a-48; inline "AM"/"PM" (0x546d9c) inside navigation_ui_create_map_page 0x54692c
+0x00762870	g2-apollo-main	const-table	a-48; generic_animation config template (frames 0x20002d08, 64, 50 ms, 32x32) for navigation_ui_create_calibrate_compass_page 0x546620
+0x005598C4	g2-apollo-main	string	"HRV","ALL" type names used by health_data_type_name_559854 (a-55)
+0x1020A8AA	g2-codec-a	const-table	codec-a-r1; TSV gx8002_messages_gain; rodata; used by audio_board_gain 0x1020300c
+0x1020A8B3	g2-codec-a	string	codec-a-r1; TSV gx8002_messages_dmic; rodata; used by audio_board_init 0x10203024
+0x1020A8EE	g2-codec-a	const-table	codec-a-r1; TSV gx8002_pga_corrections; rodata; used by gx8002_audio_pga_gain 0x102042d4
+0x1020A910	g2-codec-a	const-table	codec-a-r1; TSV gx8002_aout_gain_steps; rodata; used by gx8002_aout_get_db 0x10204ff0, gx8002_aout_set_db 0x10204f90
+0x1020A9A4	g2-codec-a	const-table	codec-a-r1; TSV gx8002_channel_selectors; rodata; used by gx8002_aout_set_channel 0x1020502c
+0x1020A9B0	g2-codec-a	string	codec-a-r1; TSV gx8002_aout_pcm_clock_diagnostic; rodata; used by gx8002_aout_config_pcm 0x10204d38
+0x1020AA26	g2-codec-a	string	codec-a-r1; TSV gx8002_aout_route_name; rodata; used by gx8002_aout_route 0x10026b94
+0x1020AA33	g2-codec-a	string	codec-a-r1; TSV gx8002_aout_alloc_label; rodata; used by gx8002_audio_out_alloc_playback 0x1020537c
+0x1020AA4F	g2-codec-a	string	codec-a-r1; TSV gx8002_aout_free_label; rodata; used by gx8002_audio_out_free 0x102053b0
+0x1020AA61	g2-codec-a	string	codec-a-r1; TSV gx8002_aout_buffer_label; rodata; used by gx8002_audio_out_config_buffer 0x102053e4
+0x1020AA7C	g2-codec-a	string	codec-a-r1; TSV gx8002_aout_pcm_label; rodata; used by gx8002_audio_out_config_pcm 0x10205418
+0x1020AA94	g2-codec-a	string	codec-a-r1; TSV gx8002_audio_labels_config; rodata; no direct pool xref (merged string run, interior strings referenced via label tables/offsets)
+0x1020AAC4	g2-codec-a	string	codec-a-r1; TSV gx8002_aout_cb_label; rodata; used by gx8002_audio_out_config_cb 0x10205450
+0x1020AADB	g2-codec-a	string	codec-a-r1; TSV gx8002_aout_frame_label; rodata; used by gx8002_audio_out_push_frame 0x10205488
+0x1020AAF3	g2-codec-a	string	codec-a-r1; TSV gx8002_audio_labels_drain; rodata; no direct pool xref (merged string run, interior strings referenced via label tables/offsets)
+0x1020AB0C	g2-codec-a	string	codec-a-r1; TSV gx8002_aout_db_label; rodata; used by gx8002_audio_out_set_db 0x102054c0
+0x1020AB20	g2-codec-a	string	codec-a-r1; TSV gx8002_audio_labels_controls; rodata; no direct pool xref (merged string run, interior strings referenced via label tables/offsets)
+0x1020AB60	g2-codec-a	string	codec-a-r1; TSV gx8002_aout_channel_label; rodata; used by gx8002_audio_out_set_channel 0x102054f8
+0x1020AB79	g2-codec-a	string	codec-a-r1; TSV gx8002_aout_init_label; rodata; used by gx8002_audio_out_init 0x10205530
+0x1020AB8B	g2-codec-a	string	codec-a-r1; TSV gx8002_aout_exit_label; rodata; used by gx8002_audio_out_exit 0x10205574
+0x1020AB9D	g2-codec-a	string	codec-a-r1; TSV gx8002_audio_labels_power; rodata; no direct pool xref (merged string run, interior strings referenced via label tables/offsets)
+0x1020ABFA	g2-codec-a	string	codec-a-r1; TSV gx8002_aout_error_format; rodata; used by gx8002_audio_out_alloc_playback 0x1020537c, gx8002_audio_out_config_buffer 0x102053e4, gx8002_audio_out_config_cb 0x10205450, gx8002_audio_out_config_pcm 0x10205418, gx8002_audio_out_exit 0x10205574, gx8002_audio_out_free 0x102053b0, gx8002_audio_out_init 0x10205530, gx8002_audio_out_push_frame 0x10205488, gx8002_audio_out_set_channel 0x102054f8, gx8002_audio_out_set_db 0x102054c0
+0x1020AC0E	g2-codec-a	string	codec-a-r1; TSV snpu_dump_word; rodata; used by gx8002_snpu_dump_words 0x10205ad8
+0x1020AC16	g2-codec-a	string	codec-a-r1; TSV snpu_overtime_addresses; rodata; used by gx8002_snpu_overtime_reset 0x10205b1c
+0x1020AC5C	g2-codec-a	string	codec-a-r1; TSV snpu_overtime_before; rodata; used by gx8002_snpu_overtime_reset 0x10205b1c
+0x1020AC7A	g2-codec-a	string	codec-a-r1; TSV snpu_overtime_command; rodata; used by gx8002_snpu_overtime_reset 0x10205b1c
+0x1020AC91	g2-codec-a	string	codec-a-r1; TSV snpu_overtime_type; rodata; used by gx8002_snpu_overtime_reset 0x10205b1c
+0x1020ACC4	g2-codec-a	const-table	codec-a-r1; TSV gx8002_padmux_defaults; rodata; used by gx8002_padmux_init 0x10206630
+0x1020AD04	g2-codec-a	string	codec-a-r1; TSV gx8002_rtc_error; rodata; used by gx8002_rtc_init 0x102066bc
+0x1020AD1A	g2-codec-a	string	codec-a-r1; TSV gx8002_watchdog_error; rodata; used by gx8002_watchdog_initialize 0x10206720
+0x1020AD30	g2-codec-a	const-table	codec-a-r1; TSV gx8002_board_pin_defaults; rodata; used by gx8002_board_pin_initialize 0x102068a0
+0x1020AD4A	g2-codec-a	string	codec-a-r1; TSV gx8002_board_pin_error; rodata; used by gx8002_board_pin_configure 0x102067dc
+0x1020AD66	g2-codec-a	string	codec-a-r1; TSV gx8002_board_pin_setup_error; rodata; used by gx8002_board_pin_setup 0x1020681c
+0x1020AD97	g2-codec-a	string	codec-a-r1; TSV gx8002_board_pin_initialize_error; rodata; used by gx8002_board_pin_initialize 0x102068a0
+0x1020ADAA	g2-codec-a	string	codec-a-r1; TSV gx8002_gsensor_workstate_message; rodata; used by gx8002_gsensor_workstate 0x10206908
+0x1020ADC1	g2-codec-a	string	codec-a-r1; TSV kws_flash_init_error; rodata; used by gx8002_kws_flash_load 0x10206cb0
+0x1020ADDE	g2-codec-a	string	codec-a-r1; TSV kws_flash_elapsed; rodata; used by gx8002_kws_flash_load 0x10206cb0
+0x1020ADF7	g2-codec-a	string	codec-a-r1; TSV kws_flash_read_error; rodata; used by gx8002_kws_flash_load 0x10206cb0
+0x1020AE14	g2-codec-a	string	codec-a-r1; TSV vad_level_4_message; rodata; used by gx8002_audio_input_query_vad 0x10207404
+0x1020AE2F	g2-codec-a	string	codec-a-r1; TSV vad_level_3_message; rodata; used by gx8002_audio_input_query_vad 0x10207404
+0x1020AE4A	g2-codec-a	string	codec-a-r1; TSV vad_level_2_message; rodata; used by gx8002_audio_input_query_vad 0x10207404
+0x1020AE65	g2-codec-a	string	codec-a-r1; TSV vad_level_1_message; rodata; used by gx8002_audio_input_query_vad 0x10207404
+0x1020AE80	g2-codec-a	string	codec-a-r1; TSV gx8002_power_sleep_message; rodata; used by gx8002_power_suspend 0x10207808
+0x1020AE8F	g2-codec-a	string	codec-a-r1; TSV gx8002_soft_off_label; rodata; no direct pool xref (merged string run, interior strings referenced via label tables/offsets)
+0x1020AEA2	g2-codec-a	const-table	codec-a-r1; TSV sys_trim_millivolts; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020AEBA	g2-codec-a	string	codec-a-r1; TSV sys_title; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020AEDB	g2-codec-a	string	codec-a-r1; TSV sys_copyright; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020AF0F	g2-codec-a	string	codec-a-r1; TSV sys_rights; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020AF2A	g2-codec-a	string	codec-a-r1; TSV sys_board; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020AF3E	g2-codec-a	string	codec-a-r1; TSV sys_board_format; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020AF56	g2-codec-a	string	codec-a-r1; TSV sys_version_format; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020AF6E	g2-codec-a	string	codec-a-r1; TSV sys_release_format; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020AF88	g2-codec-a	string	codec-a-r1; TSV sys_date; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020AF9D	g2-codec-a	string	codec-a-r1; TSV sys_date_format; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020AFB5	g2-codec-a	string	codec-a-r1; TSV sys_puya; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020AFBA	g2-codec-a	string	codec-a-r1; TSV sys_vendor_format; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020AFD2	g2-codec-a	string	codec-a-r1; TSV sys_esmt; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020AFD7	g2-codec-a	string	codec-a-r1; TSV sys_zbit; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020AFDC	g2-codec-a	string	codec-a-r1; TSV sys_type_format; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020AFF4	g2-codec-a	string	codec-a-r1; TSV sys_id_format; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020B00D	g2-codec-a	string	codec-a-r1; TSV sys_size_format; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020B02A	g2-codec-a	string	codec-a-r1; TSV sys_cpu_format; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020B04A	g2-codec-a	string	codec-a-r1; TSV sys_sram_format; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020B065	g2-codec-a	string	codec-a-r1; TSV sys_npu_format; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020B080	g2-codec-a	string	codec-a-r1; TSV sys_flash_format; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020B09B	g2-codec-a	string	codec-a-r1; TSV sys_bypass; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020B0B8	g2-codec-a	string	codec-a-r1; TSV sys_trim_format; rodata; used by gx8002_lvp_system_initialize 0x102078a4
+0x1020B0D3	g2-codec-a	string	codec-a-r1; TSV gx8002_messages_stack; rodata; no direct pool xref (merged string run, interior strings referenced via label tables/offsets)
+0x1020B148	g2-codec-a	string	codec-a-r1; TSV gx8002_multiboot_first; rodata; used by gx8002_multiboot_switch 0x10207a80
+0x1020B162	g2-codec-a	string	codec-a-r1; TSV gx8002_multiboot_second; rodata; used by gx8002_multiboot_switch 0x10207a80
+0x1020B17D	g2-codec-a	string	codec-a-r1; TSV gx8002_uart_error_string; rodata; used by gx8002_uart_async_tick 0x10208334
+0x1020B18B	g2-codec-a	string	codec-a-r1; TSV suspend_label; rodata; used by UartMessageAsyncInit 0x10208458
+0x1020B1A3	g2-codec-a	string	codec-a-r1; TSV resume_label; rodata; used by UartMessageAsyncInit 0x10208458
+0x1020B1BC	g2-codec-a	pointer-table	codec-a-r1; TSV gx8002_mode_list; rodata; used by LvpInitMode 0x102085a4, LvpModeTick 0x102085f8
+0x1020B1C4	g2-codec-a	const-struct	codec-a-r1; TSV lvp_idle_mode_info; rodata; used by LvpInitMode 0x102085a4, gx8002_mode_list 0x1020b1bc
+0x1020B1D8	g2-codec-a	string	codec-a-r1; TSV gx8002_idle_exit_message; rodata; used by gx8002_idle_done 0x10208624
+0x1020B1EE	g2-codec-a	string	codec-a-r1; TSV gx8002_idle_init_message; rodata; used by gx8002_idle_init 0x10208634
+0x1020B204	g2-codec-a	const-struct	codec-a-r1; TSV lvp_tws_mode_info; rodata; used by LvpInitMode 0x102085a4, gx8002_mode_list 0x1020b1bc
+0x005836C4	g2-apollo-main	literal-pool	a-60; cli_terminal_command_582b0c pool 0x5836c4..0x5837b7 (strings, msg 0x20100954, magic 0x20075002)
+0x00584990	g2-apollo-main	literal-pool	a-60; FreeRTOS_CLI.c pool 0x584990..0x5849a7 (list head 0x20000be8, tail 0x20000bf0, cursors 0x200745e4/0x200745e8, two message strings)
+0x00584E40	g2-apollo-main	literal-pool	a-60; sync UART unit pool 0x584e40..0x584e93 (NVIC, UART0 0x40039000, sync cells, ROM pin cfg 0x78f108/0x78f10c)
+0x005850E4	g2-apollo-main	literal-pool	a-60; system_monitor_common_data_handler 0x584ee4 pool 0x5850e4..0x58511f
+0x0058540C	g2-apollo-main	const	a-60; _Stoflt (stopfx_585258) exponent cap 100000000
+0x00585980	g2-apollo-main	literal-pool	a-60; FlashDB fdb_utils.c pool 0x585980..0x58599f
+0x00585C48	g2-apollo-main	literal-pool	a-60; FlashDB fdb.c pool 0x585c48..0x585c93
+0x0058638C	g2-apollo-main	string+literal-pool	a-60; navigation.c "AM" 0x58638c / "PM" 0x586390, pool 0x586394..0x586447
+0x00586F04	g2-apollo-main	literal-pool	a-60; navigation_data_handler.c pool 0x586f04..0x586f13 (navigation_send_type_1/13/17/16/4_allocating)
+0x0058704C	g2-apollo-main	literal-pool	a-60; navigation_data_handler.c pool 0x58704c..0x58705b (navigation_send_type_1/13/17/16/4/14_allocating)
+0x1020B218	g2-codec-a	string	codec-a-r2; gx8002_tws_exit; used by gx8002_tws_done 0x1020864c; already source-owned in resident_xip_mode_callbacks.c
+0x1020B230	g2-codec-a	string	codec-a-r2; gx8002_messages_tws; used by gx8002_tws_init 0x10208670; already source-owned in resident_xip_mode_callbacks.c
+0x1020B276	g2-codec-a	string	codec-a-r2; gx8002_max_score_diagnostic; used by gx8002_max_score 0x102086dc; already source-owned in resident_xip_max_score.c
+0x1020B2AE	g2-codec-a	string	codec-a-r2; gx8002_max_list_header; used by LvpPrintMaxKwsList 0x10208880; already source-owned in resident_xip_print_max_kws.c
+0x1020B2D9	g2-codec-a	string	codec-a-r2; gx8002_max_list_word; used by LvpPrintMaxKwsList 0x10208880; already source-owned in resident_xip_print_max_kws.c
+0x1020B2F4	g2-codec-a	string	codec-a-r2; gx8002_max_list_value; used by LvpPrintMaxKwsList 0x10208880; already source-owned in resident_xip_print_max_kws.c
+0x1020B300	g2-codec-a	string	codec-a-r2; gx8002_max_list_threshold; used by LvpPrintMaxKwsList 0x10208880; already source-owned in resident_xip_print_max_kws.c
+0x1020B30D	g2-codec-a	string	codec-a-r2; gx8002_max_init_error; used by LvpInitMaxKws 0x10208944; already source-owned in resident_xip_max_kws_initialize.c
+0x1020B34F	g2-codec-a	string	codec-a-r2; gx8002_messages_kws; used by KwsStragegyInsertKwsActivation 0x10208980; already source-owned in resident_xip_max_score_lowers.c
+0x1020B37E	g2-codec-a	string	codec-a-r2; gx8002_kws_strategy_row; used by gx8002_kws_strategy 0x10208a10; already source-owned in resident_xip_kws_strategy.c
+0x1020B39F	g2-codec-a	string	codec-a-r2; gx8002_kws_strategy_selected; used by gx8002_kws_strategy 0x10208a10; already source-owned in resident_xip_kws_strategy.c
+0x1020B3CD	g2-codec-a	string	codec-a-r2; gx8002_bionic_run_rodata; used by gx8002_bionic_run 0x10208b78; already source-owned in resident_xip_max_score_lowers.c
+0x1020B3EE	g2-codec-a	string	codec-a-r2; suspend_name; used by gx8002_app_initialize 0x10208cd4; already source-owned in resident_xip_app_initialize.c
+0x1020B3FD	g2-codec-a	string	codec-a-r2; resume_name; used by gx8002_app_initialize 0x10208cd4; already source-owned in resident_xip_app_initialize.c
+0x1020B40B	g2-codec-a	string	codec-a-r2; gx8002_app_gpio_event_name; used by gx8002_app_gpio_event 0x10208e20; already source-owned in resident_xip_app_audio_gpio.c
+0x1020B419	g2-codec-a	string	codec-a-r2; gx8002_sample_app_init_name; used by gx8002_sample_app_init 0x10208e4c; already source-owned in resident_xip_app_setup.c
+0x1020B427	g2-codec-a	string	codec-a-r2; gx8002_start_i2s_name; used by gx8002_start_i2s 0x10208ff0; already source-owned in resident_xip_start_i2s.c
+0x1020B431	g2-codec-a	string	codec-a-r2; gx8002_stop_i2s_name; used by gx8002_stop_i2s 0x1020913c; already source-owned in resident_xip_stop_i2s.c
+0x1020B43B	g2-codec-a	string	codec-a-r2; gx8002_app_gpio_message; used by gx8002_app_gpio_suspend 0x10208dcc / gx8002_app_gpio_event 0x10208e20; already source-owned in resident_xip_app_audio_gpio.c
+0x1020B447	g2-codec-a	string	codec-a-r2; gx8002_app_gpio_event_message; used by gx8002_app_gpio_suspend 0x10208dcc / gx8002_app_gpio_event 0x10208e20; already source-owned in resident_xip_app_audio_gpio.c
+0x1020B458	g2-codec-a	string	codec-a-r2; gx8002_sample_app_init_message; used by gx8002_sample_app_init 0x10208e4c; already source-owned in resident_xip_app_setup.c
+0x1020B468	g2-codec-a	string	codec-a-r2; gx8002_mic_buffer_invalid; used by gx8002_mic_buffer 0x10208e80; already source-owned in resident_xip_mic_buffer.c
+0x1020B498	g2-codec-a	string	codec-a-r2; gx8002_mic_buffer_large; used by gx8002_mic_buffer 0x10208e80; already source-owned in resident_xip_mic_buffer.c
+0x1020B4C7	g2-codec-a	string	codec-a-r2; gx8002_sample_event_hey; used by gx8002_sample_event 0x10208f04; already source-owned in resident_xip_sample_event.c
+0x1020B4D9	g2-codec-a	string	codec-a-r2; gx8002_sample_event_hi; used by gx8002_sample_event 0x10208f04; already source-owned in resident_xip_sample_event.c
+0x1020B4EA	g2-codec-a	string	codec-a-r2; gx8002_sample_event_start; used by gx8002_sample_event 0x10208f04; already source-owned in resident_xip_sample_event.c
+0x1020B50A	g2-codec-a	string	codec-a-r2; gx8002_sample_event_range; used by gx8002_sample_event 0x10208f04; already source-owned in resident_xip_sample_event.c
+0x1020B536	g2-codec-a	string	codec-a-r2; gx8002_start_i2s_log; used by gx8002_start_i2s 0x10208ff0 + gx8002_stop_i2s 0x1020913c; already source-owned in resident_xip_start_i2s.c, resident_xip_stop_i2s.c
+0x1020B547	g2-codec-a	string	codec-a-r2; gx8002_start_i2s_close_log; used by gx8002_start_i2s 0x10208ff0 + gx8002_stop_i2s 0x1020913c; already source-owned in resident_xip_start_i2s.c, resident_xip_stop_i2s.c
+0x1020B565	g2-codec-a	string	codec-a-r2; gx8002_start_i2s_mclk; used by gx8002_start_i2s 0x10208ff0; already source-owned in resident_xip_start_i2s.c
+0x1020B571	g2-codec-a	string	codec-a-r2; gx8002_start_i2s_lrclk; used by gx8002_start_i2s 0x10208ff0; already source-owned in resident_xip_start_i2s.c
+0x1020B57E	g2-codec-a	string	codec-a-r2; gx8002_start_i2s_bits; used by gx8002_start_i2s 0x10208ff0; already source-owned in resident_xip_start_i2s.c
+0x1020B588	g2-codec-a	string	codec-a-r2; gx8002_start_i2s_master; used by gx8002_start_i2s 0x10208ff0; already source-owned in resident_xip_start_i2s.c
+0x1020B597	g2-codec-a	string	codec-a-r2; gx8002_start_i2s_done; used by gx8002_start_i2s 0x10208ff0; already source-owned in resident_xip_start_i2s.c
+0x1020B5A4	g2-codec-a	string	codec-a-r2; gx8002_i2s_request_tick_request; used by gx8002_i2s_request_tick 0x102091bc; already source-owned in resident_xip_i2s_request_tick.c
+0x1020B5D4	g2-codec-a	string	codec-a-r2; gx8002_i2s_request_tick_lock; used by gx8002_i2s_request_tick 0x102091bc; already source-owned in resident_xip_i2s_request_tick.c
+0x1020B5FB	g2-codec-a	string	codec-a-r2; gx8002_i2s_request_tick_unlock; used by gx8002_i2s_request_tick 0x102091bc; already source-owned in resident_xip_i2s_request_tick.c
+0x1020B624	g2-codec-a	string	codec-a-r2; gx8002_i2s_request_tick_timeout; used by gx8002_i2s_request_tick 0x102091bc; already source-owned in resident_xip_i2s_request_tick.c
+0x1020B649	g2-codec-a	string	codec-a-r2; gx8002_sample_app_labels; used by sample app descriptor record referenced from SRAM 0x10026d3c (name/suspend/resume labels); already source-owned in resident_sample_product_data.c
+0x1020B678	g2-codec-a	const-data	codec-a-r2; gx8002_notification_setup_bundle; used by gx8002_notification_setup 0x102096fc (_uartMsgInit name + initializer words 0x1020b688..); already source-owned in resident_xip_app_setup.c
+0x1020B698	g2-codec-a	string	codec-a-r2; gx8002_app_commands_mic; used by gx8002_app_commands 0x10209258 (command-name table); already source-owned in resident_xip_app_commands.c
+0x1020B6A3	g2-codec-a	string	codec-a-r2; gx8002_app_commands_gsensor; used by gx8002_app_commands 0x10209258 (command-name table); already source-owned in resident_xip_app_commands.c
+0x1020B6B2	g2-codec-a	string	codec-a-r2; gx8002_app_commands_version; used by gx8002_app_commands 0x10209258 (command-name table); already source-owned in resident_xip_app_commands.c
+0x1020B6BA	g2-codec-a	string	codec-a-r2; gx8002_app_commands_beamforming; used by gx8002_app_commands 0x10209258 (command-name table); already source-owned in resident_xip_app_commands.c
+0x1020B6C8	g2-codec-a	string	codec-a-r2; gx8002_app_commands_vad_open; used by gx8002_app_commands 0x10209258 (command-name table); already source-owned in resident_xip_app_commands.c
+0x1020B6DB	g2-codec-a	string	codec-a-r2; gx8002_app_commands_vad_close; used by gx8002_app_commands 0x10209258 (command-name table); already source-owned in resident_xip_app_commands.c
+0x1020B6EF	g2-codec-a	string	codec-a-r2; gx8002_app_commands_gain; used by gx8002_app_commands 0x10209258 (command-name table); already source-owned in resident_xip_app_commands.c
+0x1020B6FC	g2-codec-a	string	codec-a-r2; gx8002_app_commands_dmic_start; used by gx8002_app_commands 0x10209258 (command-name table); already source-owned in resident_xip_app_commands.c
+0x1020B70B	g2-codec-a	string	codec-a-r2; gx8002_app_commands_dmic_close; used by gx8002_app_commands 0x10209258 (command-name table); already source-owned in resident_xip_app_commands.c
+0x1020B71A	g2-codec-a	string	codec-a-r2; gx8002_app_commands_pdm_delay; used by gx8002_app_commands 0x10209258 (command-name table); already source-owned in resident_xip_app_commands.c
+0x1020B727	g2-codec-a	string	codec-a-r2; gx8002_app_commands_i2s_state; used by gx8002_app_commands 0x10209258 (command-name table); already source-owned in resident_xip_app_commands.c
+0x1020B735	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_mic; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B74C	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_gsensor; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B766	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_version; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B77B	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_delimiter; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B77D	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_beamforming; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B794	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_vad_open; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B7A8	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_vad_close; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B7BD	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_byte; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B7C4	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_gain_ok; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B7DD	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_gain_fail; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B7F3	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_gain_range; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B81B	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_dmic_open; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B832	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_dmic_init; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B844	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_dmic_close; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B85C	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_dmic_stop; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B86F	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_delay; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B88D	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_i2s; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B8A9	g2-codec-a	string	codec-a-r2; gx8002_app_command_callback_persistent_mode; used by gx8002_app_command_callback_persistent 0x10209430; already source-owned in resident_xip_app_command_callback.c
+0x1020B8BC	g2-codec-a	string	codec-a-r2; gx8002_notification_setup_pin; used by gx8002_notification_setup 0x102096fc; already source-owned in resident_xip_app_setup.c
+0x1020B8D7	g2-codec-a	string	codec-a-r2; gx8002_notification_setup_uart; used by gx8002_notification_setup 0x102096fc; already source-owned in resident_xip_app_setup.c
+0x1020B8F4	g2-codec-a	string	codec-a-r2; gx8002_vad_notify_diagnostic; used by gx8002_vad_notify 0x1020979c; already source-owned in resident_xip_notification_service.c
+0x1020B908	g2-codec-a	const-table	codec-a-r2; crc_table; used by crc32_no_comp 0x102097f4: static const crc_table[256] of upstream base/src/crc32.c (byte-identical, IEEE 0xedb88320); already source-owned in third-party/upstream/nationalchip-lvp-kws/base/src/crc32.c
+0x1020BD08	g2-codec-a	const-data	codec-a-r2; gx8002_fpadd_parts_nan; used by libgcc soft-float NaN parts (5 zero words) read by subdf3/muldf3/divdf3 pools 0x1020a104/0x1020a304/0x1020a41c; already source-owned in resident_xip_fpadd_parts.c (anchored)
+0x1020BD1C	g2-codec-a	const-table	codec-a-r2; gx8002_udivdi3_clz; used by libgcc __clz_tab-style bit-length table, udivdi3 pool 0x10209dd4; already source-owned in resident_xip_udiv_bitlength_data.c (anchored)
+0x1020BE5C	g2-codec-a	string	codec-a-r2; gx8002_flash_name_p25q40l; used by flash catalog names referenced by SRAM catalog 0x10026624..; already source-owned in resident_flash_product_catalog.c (anchored)
+0x1020BE64	g2-codec-a	string	codec-a-r2; gx8002_flash_name_p25q80l; used by flash catalog names referenced by SRAM catalog 0x10026624..; already source-owned in resident_flash_product_catalog.c (anchored)
+0x1020BE6C	g2-codec-a	string	codec-a-r2; gx8002_flash_name_en25s20a; used by flash catalog names referenced by SRAM catalog 0x10026624..; already source-owned in resident_flash_product_catalog.c (anchored)
+0x1020BE75	g2-codec-a	string	codec-a-r2; gx8002_flash_name_en25s40a; used by flash catalog names referenced by SRAM catalog 0x10026624..; already source-owned in resident_flash_product_catalog.c (anchored)
+0x1020BE7E	g2-codec-a	string	codec-a-r2; gx8002_flash_name_zb25wq80a; used by flash catalog names referenced by SRAM catalog 0x10026624..; already source-owned in resident_flash_product_catalog.c (anchored)
+0x597C20	g2-apollo-main	literal-pool	x-03; pool words 0x597c04..0x597c6b after td_session_struct_copy_out 0x597be4 (false BL target, no function)
+0x69A12A	g2-apollo-main	const-data	x-03; packed/compressed asset bytes in 0x5fa84a..0x6ecc58 (false BL target from data at 0x4a9b26)
+0x6A494C	g2-apollo-main	const-table	x-03; repeating 'LL\0' byte table near 0x6a4934 (false BL target from data at 0x5a6340)
+0x5F98D0	g2-apollo-main	literal-pool	UX_BatterySyncHandler 0x5f958c pool 0x5f98d0..0x5f9923 (21 words); TSV row mis-bounded, real function UX_LocalProductionSyncHandler starts 0x5f9924 (a-67 audio_uart_registry_callback_5f9924)
+0x4F4678	g2-apollo-main	code-label	final-r2; inside News_Widget_ext_init_4f4670 (0x4F4670..0x4F4EBA, g2/src/apollo-main/ui/a-35-news-page/ui_widget_news_page_ext.c) after prologue; not a function
+0x4F4688	g2-apollo-main	code-label	final-r2; inside News_Widget_ext_init_4f4670 (mid-instruction-sequence split of log call); not a function
+0x54C1F2	g2-apollo-main	code-label	final-r2; "unknown navigation_ui_state" tail of navigation_ui_reflash_page_handler 0x549C24 (log line 0xB5C); not a function
+0x54C240	g2-apollo-main	code-label	final-r2; shared epilogue (add sp,#0xD4; pop) of navigation_ui_reflash_page_handler 0x549C24
+0x54D926	g2-apollo-main	code-label	final-r2; epilogue (add sp,#24; pop) of navigation_inject_event_54cfd0 (0x54CFD0..0x54D92C, a-51 navigation_ui_select.c)
+0x59AA06	g2-apollo-main	label-inside-function	final-r3; liblc3 tns.c unquantize_rc 0x59AA00 (body after the order<1 early return; TSV split)
+0x59D476	g2-apollo-main	label-inside-function	final-r3; translate_ui_create_gif_lang_pair_container_59d400 (movs r1,#7 before lv_obj_align; already noted in app/p-13-translate-ui/translate_ui.c)

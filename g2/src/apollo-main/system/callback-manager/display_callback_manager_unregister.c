@@ -36,6 +36,7 @@ static void log_named(uint8_t level,uint32_t line,uint32_t code,const char *mess
     if((audio_log_flags()&1u)!=0u||(audio_log_flags()&4u)!=0u)
         (void)compressed_log_output(code,short_message,short_message,name);
 }
+/* Stock 0x5103C4 (CALLBACK_MGR_Unregister) */
 void audio_callback_mgr_unregister(void *manager_storage,void *callback) {
     uint8_t *manager=(uint8_t *)manager_storage;
     if(manager==0) {log_plain(1u,135u,0x04000000u,bad_manager,bad_manager_short);return;}

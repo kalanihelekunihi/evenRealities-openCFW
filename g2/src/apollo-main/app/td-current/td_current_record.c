@@ -8,6 +8,7 @@ static uint32_t load_u32(const uint8_t *p) {
            ((uint32_t)p[2]<<16)|((uint32_t)p[3]<<24);
 }
 
+/* Stock 0x597188 (td_current_record) */
 uint8_t *audio_td_current_record(uint32_t session) {
     if(session==UINT32_MAX)
         return load_u32(audio_td_state+0x956cu)==UINT32_MAX?

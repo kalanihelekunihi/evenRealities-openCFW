@@ -7,6 +7,8 @@ extern uint8_t *audio_ble_ancc_mode; /* pointer cell 0x2007489c */
 extern uint8_t *audio_ble_ancc_service_context; /* pointer cell 0x200748a0 */
 extern void audio_uart_buffer_zero(void *,uint32_t,uint32_t); /* selected 0x43c0e4 */
 extern void audio_ble_ancc_reset_state_machine(void); /* native 0x4bf6c4 */
+
+/* Native profileAnccInit 0x4bf742. */
 void audio_ble_profile_ancc_init(uint8_t handler,uint8_t *controller,uint8_t *mode) {
     audio_ble_ancc_state[1]=handler;
     audio_uart_buffer_zero(audio_ble_ancc_state+0x1cu,0x300u,0u);

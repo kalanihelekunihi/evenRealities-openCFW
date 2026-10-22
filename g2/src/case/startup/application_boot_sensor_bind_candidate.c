@@ -5,6 +5,7 @@
 extern uint32_t case_boot_sensor_bind_core(uint32_t descriptor,uint32_t channel,uint32_t enabled); /* 0x8d98 */
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
+/* Stock 0x080064EC (case_start_context_transfer) */
 uint32_t case_boot_sensor_bind(uint32_t descriptor,uint32_t channel,uint32_t enabled)
 {
     if(rd(descriptor+140u)!=32u)return 2u;

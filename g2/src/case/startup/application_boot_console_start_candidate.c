@@ -10,6 +10,7 @@ static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static uint8_t rb(uint32_t a){return *(volatile uint8_t *)(uintptr_t)a;}
 static void wb(uint32_t a,uint8_t v){*(volatile uint8_t *)(uintptr_t)a=v;}
 static uint32_t ready(uint32_t hw){return rd(hw+8u)&1u;}
+/* Stock 0x08003FD0 (case_calibrate_controller) */
 uint32_t case_boot_console_start(uint32_t descriptor)
 {
     uint32_t hw=rd(descriptor);

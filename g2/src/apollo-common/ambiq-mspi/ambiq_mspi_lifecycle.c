@@ -92,6 +92,7 @@ am_hal_mspi_disable(void *pHandle)
     return AM_HAL_STATUS_SUCCESS;
 }
 
+/* Stock 0x4C0F24 (am_hal_mspi_deinitialize) */
 uint32_t
 am_hal_mspi_deinitialize(void *pHandle)
 {

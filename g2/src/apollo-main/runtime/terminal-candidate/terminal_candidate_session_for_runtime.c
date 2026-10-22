@@ -11,6 +11,7 @@ static uint32_t load_u32(const uint8_t *p) {
            ((uint32_t)p[2]<<16)|((uint32_t)p[3]<<24);
 }
 
+/* Stock 0x5E505A (terminal_candidate_session_for_runtime) */
 uint32_t audio_terminal_candidate_session_for_runtime(void) {
     uint8_t *records=audio_td_active_records_ptr();
     uint32_t saved=audio_terminal_runtime_saved_session;

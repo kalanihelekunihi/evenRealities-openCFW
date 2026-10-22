@@ -14,6 +14,7 @@ static const char function[]="AppUiAction";
  if((audio_log_flags()&1u)||(audio_log_flags()&4u)) \
   (void)compressed_log_output(0x10000000u,compact,compact); \
  break; }
+/* Stock 0x004BD054 (FUN_004bd054, AppUiAction) */
 void audio_ble_slave_event_state(uint8_t event) {
  switch(event) {
  EVENT(1u,0x3bu,">>> Reset complete <<<")

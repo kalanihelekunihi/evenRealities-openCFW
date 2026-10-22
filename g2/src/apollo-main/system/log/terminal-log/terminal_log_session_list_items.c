@@ -20,6 +20,7 @@ static uint32_t load_u32(const uint8_t *p) {
            ((uint32_t)p[2]<<16)|((uint32_t)p[3]<<24);
 }
 
+/* Stock 0x5E9B84 (terminal_log_session_list_items) */
 void audio_terminal_log_session_list_items(const void *payload) {
     if(payload==0) return;
     const uint8_t *p=payload;

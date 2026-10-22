@@ -1,8 +1,6 @@
-# UART power/configuration offline comparison source
+# Main unsigned division support
 
-Selected unchanged pinned Apollo510 SDK bodies with retained BSD3 notice; stock284Bhandle/16Bconfig and register adapters. Evidence and limitations (`pre-consolidation:g2/analysis/audio-uart-power-config-2026-10-09/REPORT.md`), pseudocode (`pre-consolidation:g2/analysis/audio-uart-power-config-2026-10-09/pseudocode.md`).
-
-This is an offline knowledge/comparison artifact, not a production driver. interrupt-clear differs in an extra MIS read and NULL prevalidation access. The original quotient-only division limitation is superseded by the round259 source revision below. External power/clock calls are explicit aliases supplied synthetic returns in tests. UART driver zero-divisor/overflow paths and physical device behavior remain unvalidated.
+The UART power/configuration comparison copies that used to live here were retired: `am_hal_uart_power_control`/`am_hal_uart_configure`/`am_hal_uart_interrupt_clear` now compile from AmbiqSuite 5.1.0 `hal/mcu/am_hal_uart.c` (generated stock-variant copy, see the U6 manifest notes). Only `division_support.c` remains.
 
 ## Main unsigned division ABI revision (round259)
 

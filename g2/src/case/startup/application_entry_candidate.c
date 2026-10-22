@@ -27,6 +27,7 @@ extern void case_boot_scheduler_start(void);     /* 0x0800a900 */
 static uint32_t silent(void){return *(volatile uint8_t *)(uintptr_t)0x200000bfu;}
 static void logline(uint32_t id,uint32_t a,uint32_t b)
 {if(silent()==0u){case_boot_log(id,a,b);case_boot_log(CASE_STRING_ADDR(0800a70c),0u,0u);}}
+/* Stock 0x0800A598 (case_application_entry_a598) */
 __attribute__((noreturn)) void case_application_entry_a598(void)
 {
     case_boot_clock_restore();case_boot_input_initialize();case_boot_pin_initialize();

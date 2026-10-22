@@ -5,6 +5,7 @@ extern void *audio_terminal_agent_session_ptr; /* RAM 0x2006e0d4, state-base +4 
 extern uint8_t audio_terminal_agent_special_flag; /* RAM 0x2006e35c, +0x28c */
 extern int32_t audio_uart_lv_obj_y_44e498(void *);
 
+/* Stock 0x5E5166 (terminal_agent_text_token) */
 uint32_t audio_terminal_agent_text_token(uint8_t kind, uint16_t length) {
     uint32_t scroll = 0u;
     if (audio_terminal_agent_session_ptr != 0) {
@@ -17,6 +18,7 @@ uint32_t audio_terminal_agent_text_token(uint8_t kind, uint16_t length) {
            (scroll & 0xffffu);
 }
 
+/* Stock 0x5E51B0 (terminal_agent_trigger_token) */
 uint32_t audio_terminal_agent_trigger_token(uint32_t flags, uint32_t tick) {
     return (flags & 15u) | (tick << 4);
 }

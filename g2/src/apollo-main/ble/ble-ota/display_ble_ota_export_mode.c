@@ -12,6 +12,7 @@ extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
 static const char module[]="ble.smpdb";
 static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\cordio\\ble-profiles\\sources\\apps\\app\\common\\app_db.c";
 static const char function[]="OTA_FileSystemSetBootloaderFlag";
+/* Stock 0x478860 (OTA_FileSystemSetBootloaderFlag; TSV FUN_00478860) */
 void audio_ble_ota_export_mode_set(uint32_t requested) {
     volatile uint32_t *flag=&audio_ble_bootloader_flag;
     uint32_t previous=*flag;

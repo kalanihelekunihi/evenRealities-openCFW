@@ -45,15 +45,7 @@ __attribute__((naked)) uint32_t audio_ble_gatt_update_child_533630(
         "pop {r0, r4, r5, r6, r7, pc}\n");
 }
 
-uint8_t audio_ble_gatt_value_update_4b5a1e(const uint8_t *subcontext,
-                                             const uint8_t *event)
-{
-    uint16_t expected=(uint16_t)subcontext[0]|((uint16_t)subcontext[1]<<8);
-    uint16_t actual=(uint16_t)event[10]|((uint16_t)event[11]<<8);
-    if (actual!=expected) return 10u;
-    (void)audio_ble_gatt_update_child_533630(event);
-    return 0u;
-}
+extern uint8_t audio_ble_gatt_value_update_4b5a1e(const uint8_t *subcontext, const uint8_t *event); /* opencfw U5: now provided by the Cordio unit */
 
 void audio_ble_slave_adv_stop_body(const uint8_t *event)
 {

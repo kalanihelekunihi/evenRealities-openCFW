@@ -16,6 +16,7 @@ static volatile uint32_t *const spi_extra =
 
 /* 0x1002381c: the native top-level read chunks at exactly 64 KiB and
  * dispatches via the selected product callback at state + 0x1c. */
+/* Stock 0x1002381C (gx8002_flash_read) */
 uint32_t gx8002_resident_flash_read_2381c(
     uint32_t address, void *destination, uint32_t byte_count)
 {
@@ -40,6 +41,7 @@ uint32_t gx8002_resident_flash_read_2381c(
 
 /* 0x10023858: 14-entry native jump table at XIP 0x1020be1c. Each entry was
  * decoded from the authenticated XIP image; this switch names its targets. */
+/* Stock 0x10023858 (gx8002_flash_getinfo) */
 uint32_t gx8002_resident_flash_getinfo_23858(uint32_t query)
 {
     volatile const uint32_t *const state =
@@ -60,6 +62,7 @@ uint32_t gx8002_resident_flash_getinfo_23858(uint32_t query)
     }
 }
 
+/* Stock 0x10023788 (gx8002_flash_word_program) */
 void gx8002_resident_flash_word_program_23788(
     uint32_t address, const uint32_t *source, uint32_t byte_count)
 {
@@ -89,6 +92,7 @@ void gx8002_resident_flash_word_program_23788(
     spi[0x08u / 4u] = 1u;
 }
 
+/* Stock 0x10023CAC (gx8002_flash_word_read) */
 uint32_t gx8002_resident_flash_word_read_23cac(
     uint32_t address, uint32_t *destination, uint32_t byte_count)
 {

@@ -12,6 +12,7 @@ extern void opencfw_provider_4176ce(uint32_t,const char *,const char *,const cha
 #define WORD(a) (*(volatile uint32_t *)(uintptr_t)(a))
 static const char module[]="evtloop";
 static const char file[]="D:\\01_workspace\\s200_ap510b_iar_git\\framework\\fw_event_loop\\fw_event_loop.c";
+/* Stock 0x42e644 (event_callback_loop_42e644) */
 void opencfw_boot_event_thread(void *argument) {
     (void)argument;
     opencfw_boot_event_message message;
@@ -24,6 +25,7 @@ void opencfw_boot_event_thread(void *argument) {
             "[fw_evt_loop_task]app treat event invalid status:%d",status);
     }
 }
+/* Stock 0x42e686 (event_callback_enqueue_42e686) */
 void opencfw_boot_event_enqueue(uint32_t callback,uint32_t argument,uint32_t timeout) {
     if (!WORD(0x200270f0)) {
         opencfw_provider_4176ce(1,module,file,"fw_evt_loop_push",0x96,

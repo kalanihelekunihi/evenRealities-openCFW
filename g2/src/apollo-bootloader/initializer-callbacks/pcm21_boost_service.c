@@ -5,6 +5,7 @@
 extern uint32_t opencfw_boot_control_critical_save(void);
 extern void native_spot_trim_restore_42ae6c(void),native_spot_profile_trim_42ae24(uint8_t);
 extern void opencfw_pcm22_spot_timer_stop(void);
+/* Stock 0x42AE9C (spotmgr_trim_commit_42ae9c; boost timer interrupt service) */
 uint32_t pcm21_boost_service(void){
  uint32_t mask=opencfw_boot_control_critical_save();native_spot_trim_restore_42ae6c();
  if(B(0x200271b2)){

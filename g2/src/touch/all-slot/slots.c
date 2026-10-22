@@ -2,6 +2,7 @@
 #include "slots.h"
 #include "../frame-generation/generator.h"
 static uint32_t pad(uint8_t n){return n<32?1u<<n:0;}
+/* Stock 0x000056A4 (touch_packet_23a4_build_group) */
 void touch_generate_all_slots(uint32_t type,uint8_t *c){
  const uint8_t *common=*(const uint8_t **)c,*i=*(const uint8_t **)(c+8),*pins=*(const uint8_t **)(c+20),*shields=*(const uint8_t **)(c+24);uint32_t project=0;
  for(uint32_t n=0;n<*(const uint16_t *)(common+12);n++)project|=pad(pins[n*8+5]);for(uint32_t n=0;n<common[44];n++)project|=pad(shields[n*8+5]);

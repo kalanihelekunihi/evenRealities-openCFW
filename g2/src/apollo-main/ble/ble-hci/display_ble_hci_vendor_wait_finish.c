@@ -1,21 +1,7 @@
-/* Native vendor polling 0x480826 and completion status 0x55bd70.
+/* Native completion status 0x55bd70. Vendor polling 0x480826 is upstream
+ * am_hal_delay_us_status_check (audio_ble_vendor_wait_480826 defsym).
  * ROM 0x55c548/54c/550: MMIO 0x40050000, errors 0x08000001/2. */
 #include <stdint.h>
-
-extern void audio_ble_vendor_yield_4807a0(uint32_t);
-
-uint32_t audio_ble_vendor_wait_480826(uint32_t timeout,volatile uint32_t *reg,
-                                      uint32_t mask,uint32_t expected,uint32_t equal) {
-    for(;;) {
-        uint32_t current=*reg&mask;
-        if(equal==0u) {
-            if(current!=expected)return 0u;
-        } else if(current==expected)return 0u;
-        if(timeout==0u)return 4u;
-        audio_ble_vendor_yield_4807a0(1u);
-        --timeout;
-    }
-}
 
 uint32_t audio_ble_vendor_finish_55bd70(uint32_t channel,uint32_t extra) {
     volatile uint32_t *const status=(volatile uint32_t *)(uintptr_t)

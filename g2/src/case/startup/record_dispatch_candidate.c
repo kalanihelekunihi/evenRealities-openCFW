@@ -53,6 +53,7 @@ static uint32_t charging(uint32_t side,const volatile uint8_t *p,uint8_t logs_qu
     }
     return 0xffu;
 }
+/* Stock 0x08001E94 (gls_frame_validate_dispatch) */
 uint32_t case_record_dispatch_1e94(uint32_t side){
     struct case_record_prefix prefix;
     uint32_t scan=case_record_scan_prefix(&prefix);

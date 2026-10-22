@@ -3,6 +3,7 @@
  */
 #include <stdint.h>
 
+/* Stock 0x10002A3C (gx_analog_config_update_enable) */
 void gx8002_uart_stage2_runtime_boot_2a3c(void)
 {
     volatile uint32_t *const analog =
@@ -19,6 +20,7 @@ uint32_t gx8002_uart_stage2_address_mask_29c0(uint32_t address)
     return address;
 }
 
+/* Stock 0x10004408 (gx_analog_set_ldo_ana_voltage) */
 uint32_t gx8002_uart_stage2_set_ldo_analog_voltage_4408(uint32_t voltage)
 {
     if (voltage == UINT32_MAX) return voltage;

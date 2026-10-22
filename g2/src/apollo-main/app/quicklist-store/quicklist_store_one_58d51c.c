@@ -7,6 +7,7 @@ extern uint32_t audio_quicklist_tick_now(void);
 /* Stock item cache 0x20101a1c..0x20102c54. Startup/layout qualification open. */
 uint8_t audio_quicklist_item_cache[0x1238];
 
+/* Stock 0x58D51C (quicklist_data_add_item) */
 uint32_t audio_quicklist_store_one(const void *pb_item) {
     if (pb_item == 0) return 2u;
     for (uint32_t i = 0; i < 0x1220u; ++i) audio_quicklist_item_cache[i] = 0;

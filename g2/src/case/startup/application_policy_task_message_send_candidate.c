@@ -19,6 +19,7 @@ static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr8(uint32_t a,uint8_t v){*(volatile uint8_t *)(uintptr_t)a=v;}
 static __attribute__((noreturn)) void native_fault(void)
 {__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+/* Stock 0x0800C686 (case_policy_task_message_send) */
 uint32_t case_policy_task_message_send(uint32_t queue,const uint32_t *args,uint32_t timeout,uint32_t mode,uint32_t metadata)
 {
     (void)metadata;

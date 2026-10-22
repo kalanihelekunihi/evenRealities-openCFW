@@ -22,6 +22,7 @@ static void invoke(uint32_t callback,uint32_t descriptor)
 /* DMA cancellation slot differs from the void-returning RxISR slots. */
 static void invoke_cancel(uint32_t callback,uint32_t peripheral)
 {(void)((uint32_t (*)(uint32_t))(uintptr_t)callback)(peripheral);}
+/* Stock 0x08005F50 (HAL_UART_IRQHandler) */
 void case_irq_child_5f50(uint32_t descriptor)
 {
     uint32_t hw=rd(descriptor),status=rd(hw),control=rd(hw+8u),enable=rd(hw+28u);

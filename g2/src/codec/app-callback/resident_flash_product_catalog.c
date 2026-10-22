@@ -13,10 +13,15 @@ _Static_assert(sizeof(struct gx8002_flash_catalog_entry) == 24,
 #define STOCK_NAME(sym, section_name, literal) \
     const char sym[] __attribute__((section(section_name), used, aligned(1))) = literal
 STOCK_NAME(gx8002_flash_name_p25q21l, ".gx8002.flash_name.be54", "p25q21l");
+/* Stock 0x1020BE5C (gx8002_flash_name_p25q40l, data) */
 STOCK_NAME(gx8002_flash_name_p25q40l, ".gx8002.flash_name.be5c", "p25q40l");
+/* Stock 0x1020BE64 (gx8002_flash_name_p25q80l, data) */
 STOCK_NAME(gx8002_flash_name_p25q80l, ".gx8002.flash_name.be64", "p25q80l");
+/* Stock 0x1020BE6C (gx8002_flash_name_en25s20a, data) */
 STOCK_NAME(gx8002_flash_name_en25s20a, ".gx8002.flash_name.be6c", "en25s20a");
+/* Stock 0x1020BE75 (gx8002_flash_name_en25s40a, data) */
 STOCK_NAME(gx8002_flash_name_en25s40a, ".gx8002.flash_name.be75", "en25s40a");
+/* Stock 0x1020BE7E (gx8002_flash_name_zb25wq80a, data) */
 STOCK_NAME(gx8002_flash_name_zb25wq80a, ".gx8002.flash_name.be7e", "zb25wq80a");
 #undef STOCK_NAME
 
@@ -24,6 +29,7 @@ volatile uint32_t gx8002_flash_protection_maps_26ff8[6]
     __attribute__((section(".bss.gx8002.flash_protection_maps.26ff8"), used,
                    aligned(4)));
 
+/* Stock 0x100266CC (flash_otp_descriptor) */
 volatile struct gx8002_otp_config gx8002_flash_otp_config_266cc
     __attribute__((section(".gx8002.flash_otp_config.266cc"), used,
                    aligned(4))) = {0x1000u, 0x1000u, 0x200u, 3u, 0u};

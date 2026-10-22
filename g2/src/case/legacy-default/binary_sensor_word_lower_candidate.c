@@ -9,6 +9,7 @@ extern uint32_t case_binary_sensor_read_adapter(uint32_t selector,
                                                  uint32_t length);
 extern uint32_t case_binary_sensor_delay_count(uint32_t count);
 
+/* Stock 0x0800A074 (case_read_stable_u16) */
 uint32_t case_binary_read_word_lower(uint32_t selector, uint32_t *out)
 {
     uint8_t sample[4] = {0, 0, 0, 0};

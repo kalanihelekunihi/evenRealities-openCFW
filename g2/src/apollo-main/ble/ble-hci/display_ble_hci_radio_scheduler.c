@@ -1,17 +1,11 @@
-/* Native HCI radio scheduler and IRQ setup 0x53006c/0x52f38c/
+/* Native HCI radio prepare and IRQ setup 0x52f38c/
  * 0x4b4786/0x4b4768. The 0x4b4d30/34/38 literal slots are NVIC MMIO. */
 #include <stdint.h>
 extern uint8_t *audio_ble_hci_radio_mode_state_50938e(uint32_t);
 extern void audio_ble_hci_radio_state_prepare_5118e0(void);
-static void put32(uint8_t *p,uint32_t x) {__builtin_memcpy(p,&x,4u);}
 
-void audio_ble_hci_radio_scheduler_53006c(void *ring,const void *storage,
-                                           uint32_t element_size,uint32_t capacity) {
-    uint8_t *p=(uint8_t *)ring;
-    put32(p+0u,0u);put32(p+4u,0u);put32(p+8u,0u);
-    put32(p+12u,capacity);put32(p+16u,element_size);
-    put32(p+20u,(uint32_t)(uintptr_t)storage);
-}
+/* 0x53006c is am_hal_queue_init (AmbiqSuite 5.1.0 hal/am_hal_queue.c);
+ * audio_ble_hci_radio_scheduler_53006c is a payload defsym alias of it. */
 
 uint32_t audio_ble_hci_radio_prepare_body(uint32_t unused,uint32_t scratch,
                                            uint32_t high,uint32_t saved_r7) {

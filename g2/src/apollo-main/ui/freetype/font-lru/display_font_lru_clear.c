@@ -9,21 +9,9 @@ extern void *audio_uart_lv_list_next(void *,void *);
 extern void audio_uart_lv_list_remove(void *,void *);
 extern void audio_uart_lv_heap_free(void *);
 extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
-void audio_uart_lv_list_clear_custom_482c9a(void *list,void (*destroy)(void *))
-{
-    void *node=audio_uart_lv_list_first(list);
-    while(node!=0) {
-        void *next=audio_uart_lv_list_next(list,node);
-        if(destroy!=0) destroy(node);
-        else {
-            audio_uart_lv_list_remove(list,node);
-            audio_uart_lv_heap_free(node);
-        }
-        node=next;
-    }
-}
-void audio_uart_font_lru_list_clear(void *list)
-{ audio_uart_lv_list_clear_custom_482c9a(list,0); }
+/* Retired: stock 0x482da4 is upstream lv_ll_clear (lvgl/src/misc/lv_ll.c); this name is a link alias. */
+void audio_uart_font_lru_list_clear(void *list);
+/* Stock 0x5C315A (drop_all_cb; upstream third-party/upstream/lvgl/src/misc/cache/lv_cache_lru_rb.c) */
 void audio_uart_font_lru_clear(void *cache,uint32_t context)
 {
     static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\cache\\lv_cache_lru_rb.c";

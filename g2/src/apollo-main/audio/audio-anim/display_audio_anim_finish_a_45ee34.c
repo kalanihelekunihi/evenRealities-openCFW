@@ -22,6 +22,7 @@ static void store32(uint8_t *p, uint32_t value) {
     p[3] = (uint8_t)(value >> 24u);
 }
 
+/* Stock 0x0045EE34 (page anim completion callback) */
 void audio_uart_display_anim_finish_a_45ee35(void *descriptor) {
     uint8_t *page = (uint8_t *)(uintptr_t)load32((const uint8_t *)descriptor);
     uint8_t *entry = (uint8_t *)(uintptr_t)load32(page + 16u);

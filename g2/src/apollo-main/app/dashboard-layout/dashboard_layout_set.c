@@ -33,6 +33,7 @@ static void log2(uint8_t level,uint32_t line,const char *e,const char *c,uint32_
         audio_dashboard_layout_set_function,line,e,a,b);
     if((audio_log_flags()&1u)||(audio_log_flags()&4u)) (void)compressed_log_output(flag,c,c,a,b);
 }
+/* Stock 0x558148 (dashboard_layout_reset_default) */
 void audio_dashboard_layout_reset(void) {
     (void)audio_queue_copy_bytes(audio_dashboard_layout_current,audio_dashboard_layout_default,128u);
     if(audio_log_flags()&2u) audio_log_extended(3u,audio_dashboard_layout_module,audio_dashboard_layout_source,
@@ -40,8 +41,11 @@ void audio_dashboard_layout_reset(void) {
     if((audio_log_flags()&1u)||(audio_log_flags()&4u))
         (void)compressed_log_output(0xc000000u,audio_dashboard_layout_c_reset,audio_dashboard_layout_c_reset);
 }
+/* Stock 0x558030 (widget id valid, < 5) */
 uint32_t audio_dashboard_widget_valid(uint8_t v) {return v<5u;}
+/* Stock 0x558040 (watchface slot valid, < 10) */
 uint32_t audio_dashboard_face_slot_valid(uint8_t v) {return v<10u;}
+/* Stock 0x558050 (watchface cfg valid) */
 uint32_t audio_dashboard_face_valid(const uint8_t *p) {
     if(p==0) return 0;
     if(p[0]==1u) return p[4]<2u&&audio_dashboard_face_slot_valid(p[5])&&audio_dashboard_face_slot_valid(p[6]);
@@ -54,6 +58,7 @@ uint32_t audio_dashboard_face_valid(const uint8_t *p) {
     if(p[0]==4u) return p[4]<3u&&p[5]<4u&&p[6]<4u&&p[0x14u]<4u;
     return 0;
 }
+/* Stock 0x558376 (dashboard_layout_set) */
 int32_t audio_dashboard_layout_set(const void *layout) {
     if(layout==0) {audio_dashboard_layout_reset();return 0;}
     uint8_t s[128];

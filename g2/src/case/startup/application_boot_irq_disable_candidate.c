@@ -2,6 +2,7 @@
  * Native CASE 0x08004fec NVIC disable path.
  */
 #include <stdint.h>
+/* Stock 0x08004FEC (case_clear_irq) */
 void case_boot_irq_disable(uint32_t irq)
 {
     if((int32_t)irq<0)return;

@@ -110,6 +110,7 @@ static int simple_enabled(void) {
     return (audio_log_flags() & 1u) || (audio_log_flags() & 4u);
 }
 
+/* Stock 0x57BD06 (gx8002_unpack_message) */
 int32_t audio_transaction_extract(const void *wire, uint32_t available,
                                    void *message) {
     const uint16_t size = (uint16_t)available;

@@ -5,6 +5,7 @@
 extern uint32_t case_boot_transport_heap_allocate(uint32_t bytes); /* 0xb3e8 */
 extern void case_policy_task_list_initialize(uint32_t list); /* 0xbf94 */
 
+/* Stock 0x0800C48C (case_boot_transport_event_allocate) */
 uint32_t case_boot_transport_event_allocate(uint32_t descriptor)
 {
     (void)descriptor; /* Native allocator ignores incoming R0. */
@@ -18,6 +19,7 @@ uint32_t case_boot_transport_event_allocate(uint32_t descriptor)
     return event;
 }
 
+/* Stock 0x0800C4AA (case_boot_transport_event_create) */
 uint32_t case_boot_transport_event_create(uint32_t storage)
 {
     if(storage==0u){

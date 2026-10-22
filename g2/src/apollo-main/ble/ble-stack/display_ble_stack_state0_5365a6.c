@@ -5,15 +5,7 @@
 extern void audio_ble_stack_copy16_542a44(void *,const void *);
 extern void audio_ble_stack_state1_5364a4(uint8_t *);
 
-uint8_t audio_ble_stack_shift1_53655c(uint8_t *bytes,uint32_t bits)
-{
-    uint8_t carry=(uint8_t)(bytes[0]>>(8u-bits));
-    for (uint32_t i=0u;i<16u;++i) {
-        uint8_t next=i<15u ? bytes[i+1u] : 0u;
-        bytes[i]=(uint8_t)((bytes[i]<<bits)|(next>>(8u-bits)));
-    }
-    return carry;
-}
+extern uint8_t audio_ble_stack_shift1_53655c(uint8_t *bytes,uint32_t bits); /* opencfw U5: now provided by the Cordio unit */
 
 void audio_ble_stack_state0_5365a6_body(uint8_t *message)
 {
@@ -30,11 +22,3 @@ void audio_ble_stack_state0_5365a6_body(uint8_t *message)
     audio_ble_stack_state1_5364a4(message);
 }
 
-__attribute__((naked)) uint32_t audio_ble_stack_state0_5365a6(
-    uint8_t *message __attribute__((unused)))
-{
-    __asm__ volatile(
-        "push {r3, r4, r5, lr}\n"
-        "bl audio_ble_stack_state0_5365a6_body\n"
-        "pop {r0, r4, r5, pc}\n");
-}

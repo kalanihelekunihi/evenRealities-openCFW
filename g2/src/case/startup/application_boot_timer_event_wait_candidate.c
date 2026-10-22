@@ -7,6 +7,7 @@ extern void case_policy_task_sleep_enqueue(uint32_t ticks,uint32_t mode); /* 0xa
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static __attribute__((noreturn)) void native_fault(void)
 {__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+/* Stock 0x0800C19C (case_boot_timer_event_wait) */
 void case_boot_timer_event_wait(uint32_t event_list,uint32_t ticks,uint32_t indefinite)
 {
     if(event_list==0u)native_fault();

@@ -21,6 +21,7 @@ extern uint32_t case_boot_sensor_flags_5f44(uint32_t descriptor);
 static void logline(uint32_t address)
 {(void)case_policy_log(address);(void)case_policy_log(CASE_STRING_ADDR(0800271c));}
 
+/* Stock 0x0800258C (gls_uart_transfer_controlled) */
 uint32_t case_policy_send_probe(uint32_t side,const uint8_t *packet,uint32_t count,uint32_t reply)
 {
     const uint32_t descriptor=0x20000eb8u;

@@ -1,6 +1,7 @@
 #include "blob_read.h"
 _Static_assert(sizeof(g2_blob)==20,"ARM blob size");
 _Static_assert(__builtin_offsetof(g2_blob,saved_len)==16,"saved length offset");
+/* Stock 0x54116E (SVC_FlashDBBlobRead) */
 uint32_t g2_flashdb_candidate_blob_read(uint32_t index,uint32_t key,uint32_t buf,uint32_t length) {
     g2_blob blob;
     g2_flashdb_candidate_tick();

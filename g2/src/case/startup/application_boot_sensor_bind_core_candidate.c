@@ -18,6 +18,7 @@ static void or_locked(uint32_t address,uint32_t bits)
     wr32(address,rd32(address)|bits);
     setmask(saved);
 }
+/* Stock 0x08008D98 (case_begin_receive) */
 uint32_t case_boot_sensor_bind_core(uint32_t descriptor,uint32_t channel,uint32_t enabled)
 {
     uint32_t mode=rd32(descriptor+8u),linked=rd32(descriptor+16u);

@@ -20,6 +20,7 @@ static const char failure[] = "codec audio check timer start failed";
 static const char simple_failure[] =
     "[thread.audio]codec audio check timer start failed";
 
+/* Stock 0x53C2BE (AUD_CodecAudioCheckTimerStart) */
 void audio_watchdog_start(void) {
     void *timer = g2_audio_codec_check_timer;
     if (timer == 0 || osTimerStart(timer, 2000u) == 0)

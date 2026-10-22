@@ -6,6 +6,7 @@
 extern uint32_t stock_save_irq(void),stock_hfrc2_ratio(uint32_t,uint32_t,uint32_t,uint32_t *),stock_pll_generate(void *,uint32_t,uint32_t);
 extern uint32_t stock_ext_request(uint32_t),stock_ext_release(uint32_t),stock_hfrc2_apply(const void *),stock_hfrc2_disable(void);
 static void restore(uint32_t m){__asm volatile("msr primask, %0"::"r"(m):"memory");}
+/* Stock 0x4C399E (am_hal_clkmgr HFRC2 config) */
 uint32_t audio_hfrc2_config(uint32_t hz,const uint32_t *cfg){
  uint32_t status=0,sw=(hz==0||hz==250000000)&&(W(0x20074254)==0||W(0x20074254)==250000000);uint32_t generated[3]={0x200,0xc49ba,0};
  if(hz!=0&&hz!=196608000&&hz!=250000000)return 5;
@@ -25,10 +26,12 @@ uint32_t audio_hfrc2_config(uint32_t hz,const uint32_t *cfg){
  }
  return status;
 }
+/* Stock 0x4C3B44 (am_hal_clkmgr SYSPLL config) */
 uint32_t audio_syspll_config(uint32_t hz,const uint32_t *cfg){
  uint32_t status=0,generated[3]={0,0,0};
  if(!cfg){uint32_t reference;if(W(0x200001d0)){((uint8_t*)generated)[0]=0;reference=W(0x200001d0);}else if(W(0x200001dc)){((uint8_t*)generated)[0]=1;reference=W(0x200001dc);}else return 7;status=stock_pll_generate(generated,reference,hz);cfg=generated;
  }else{if(((const uint8_t*)cfg)[0]==0&&!W(0x200001d0))return 7;if(((const uint8_t*)cfg)[0]==1&&!W(0x200001dc))return 7;}
  if(!status){uint32_t m=stock_save_irq();if(audio_clock_count(6))status=3;if(!status){for(unsigned i=0;i<3;i++)W(0x20073f48+4*i)=cfg[i];W(0x20074258)=hz;B(0x20074f55)=1;}restore(m);}return status;
 }
+/* Stock 0x4C446C (am_hal_clkmgr_clock_config) */
 uint32_t audio_clock_config(uint32_t clock,uint32_t hz,const uint32_t *cfg){switch((uint8_t)clock){case 4:return audio_hfrc_config(hz,cfg);case 5:return audio_hfrc2_config(hz,cfg);case 6:return audio_syspll_config(hz,cfg);default:return 7;}}

@@ -24,20 +24,12 @@ extern void audio_uart_page_49942e(uint32_t, const void *);
 extern void audio_uart_page_style_apply_44be4c(void *, uint8_t, uint32_t, uint32_t);
 extern uint32_t audio_uart_ring_primary_head_cell;
 
-void audio_uart_page_4413be(uint32_t object, uint32_t value, uint32_t selector) {
-    audio_uart_page_style_apply_44be4c((void *)(uintptr_t)object, 0x3eu,
-                                        (uint8_t)value, selector);
-}
 
-void audio_uart_page_4413ce(uint32_t object, uint32_t value, uint32_t selector) {
-    audio_uart_page_style_apply_44be4c((void *)(uintptr_t)object, 0x44u,
-                                        (uint8_t)value, selector);
-}
+/* Retired: stock 0x4413ce is upstream lv_obj_set_style_image_opa (lvgl/src/core/lv_obj_style_gen.c); this name is a link alias. */
+void audio_uart_page_4413ce(uint32_t object, uint32_t value, uint32_t selector);
 
-void audio_uart_page_44144c(uint32_t object, uint32_t value, uint32_t selector) {
-    audio_uart_page_style_apply_44be4c((void *)(uintptr_t)object, 0x5cu,
-                                        value, selector);
-}
+/* Retired: stock 0x44144c is upstream lv_obj_set_style_text_line_space (lvgl/src/core/lv_obj_style_gen.c); this name is a link alias. */
+void audio_uart_page_44144c(uint32_t object, uint32_t value, uint32_t selector);
 
 void audio_legal_regulatory_zero_styles_5bf114(uint32_t object,
                                                  uint32_t value,

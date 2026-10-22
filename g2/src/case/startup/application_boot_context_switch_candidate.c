@@ -3,6 +3,7 @@
  * architectural and must be linked with the matching task-frame creator.
  */
 #include <stdint.h>
+/* Stock 0x080000CC (vPortStartFirstTask) */
 __attribute__((naked,noreturn)) void case_boot_context_switch(void)
 {
     __asm__ volatile(

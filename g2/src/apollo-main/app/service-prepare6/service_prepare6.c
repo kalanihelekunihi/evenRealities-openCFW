@@ -16,6 +16,7 @@ static const char message[]="RPC_SyncRingStatusWithPeer skip, ring mac not set";
 static const char short_message[]=
  "[ux.setting]RPC_SyncRingStatusWithPeer skip, ring mac not set";
 
+/* Stock 0x47D818 (RPC_SyncRingStatusWithPeer) */
 void audio_uart_service_prepare6(void) {
     if(audio_uart_ring_mac_ready()==0u) {
         if(audio_log_flags()&2u)

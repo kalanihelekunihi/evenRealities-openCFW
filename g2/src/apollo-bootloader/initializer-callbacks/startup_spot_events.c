@@ -12,6 +12,7 @@ extern void opencfw_boot_delay_us_math(uint32_t usec);
 extern uint32_t opencfw_boot_control_critical_save(void);
 static uint32_t replace(uint32_t old,uint32_t value,uint32_t mask,unsigned shift);
 
+/* Stock 0x42cdf8 (state_adjust_42cdf8) */
 void state_adjust_42cdf8_native(uint32_t state)
 {
     uint32_t base, target, delta=0U, result;
@@ -29,6 +30,7 @@ void state_adjust_42cdf8_native(uint32_t state)
     R32(0x4002004cU)=replace(R32(0x4002004cU),result,0x7fU,0U);
 }
 
+/* Stock 0x42cea4 (state_update_critical_42cea4) */
 void state_update_critical_42cea4_native(uint32_t state)
 {
     uint32_t irq=opencfw_boot_control_critical_save();
@@ -47,6 +49,7 @@ uint32_t power_predicate_41f3f0_native(void)
     return ((mode>>30)&1U)==0U;
 }
 
+/* Stock 0x42ced8 (state_range_update_42ced8) */
 uint32_t state_range_update_42ced8_native(float *arg)
 {
     float x=arg[0]; unsigned bucket;
@@ -64,6 +67,7 @@ uint32_t state_range_update_42ced8_native(float *arg)
     return 0U;
 }
 
+/* Stock 0x42cfe0 (state_event_zero_42cfe0) */
 uint32_t state_event_zero_42cfe0_native(void)
 {
     if(R8(0x200271acU)!=0U){
@@ -95,6 +99,7 @@ static uint32_t replace(uint32_t old,uint32_t value,uint32_t mask,unsigned shift
 static uint32_t replace_masked(uint32_t old,uint32_t keep,uint32_t value)
 {return (old&keep)|value;}
 
+/* Stock 0x42d104 (state_event_one_value_42d104) */
 uint32_t state_event_one_value_42d104_native(uint32_t value)
 {
     volatile uint32_t *state=(volatile uint32_t *)(uintptr_t)0x40020080U;
@@ -119,6 +124,7 @@ uint32_t state_event_one_value_42d104_native(uint32_t value)
     return 0U;
 }
 
+/* Stock 0x42d3bc (state_register_initialize_42d3bc) */
 uint32_t state_register_initialize_42d3bc_native(void)
 {
     volatile uint32_t *state=(volatile uint32_t *)(uintptr_t)0x40020080U;uint32_t n;
@@ -134,6 +140,7 @@ uint32_t state_register_initialize_42d3bc_native(void)
     return 0U;
 }
 
+/* Stock 0x42d562 (state_event_dispatch_42d562) */
 uint32_t state_event_dispatch_42d562_native(uint32_t selector,uint32_t unused,uint8_t *state)
 {
     uint32_t result=0U;(void)unused;selector=(uint8_t)selector;

@@ -1,4 +1,4 @@
-/* Native HCI driver children: ring commit 0x530084, WsfSetEvent 0x52b91e,
+/* Native HCI driver children: WsfSetEvent 0x52b91e,
  * error_check 0x4b47ae, and architectural IRQ pair 0x473940/0x5300d8. */
 #include <stdint.h>
 extern uint8_t audio_wsf_task_state[]; /* live 0x20073230, ROM slot 0x52bac4 */
@@ -16,30 +16,9 @@ __attribute__((noinline)) uint32_t g2_power_critical_save(void) {
 __attribute__((noinline)) void g2_power_critical_restore(uint32_t primask) {
     __asm__ volatile("msr primask, %0" :: "r"(primask) : "memory");
 }
-static uint32_t get32(const uint8_t *p) {uint32_t x;__builtin_memcpy(&x,p,4u);return x;}
-static void put32(uint8_t *p,uint32_t x) {__builtin_memcpy(p,&x,4u);}
 
-uint64_t audio_ble_hci_ring_commit_530084(void *ring,const void *input,uint32_t count) {
-    uint8_t *r=(uint8_t *)ring;
-    uint32_t bytes=get32(r+0x10u)*count;
-    uint32_t saved=g2_power_critical_save();
-    uint32_t accepted=0u;
-    if(get32(r+0x0cu)-get32(r+8u)>=bytes) {
-        const uint8_t *src=(const uint8_t *)input;
-        for(uint32_t i=0u;i<bytes;i++) {
-            if(src!=0) {
-                uint8_t *base=(uint8_t *)(uintptr_t)get32(r+0x14u);
-                base[get32(r)]=src[i];
-            }
-            uint32_t next=get32(r)+1u;
-            put32(r,next-get32(r+0x0cu)*(next/get32(r+0x0cu)));
-        }
-        put32(r+8u,get32(r+8u)+bytes);
-        accepted=1u;
-    }
-    g2_power_critical_restore(saved);
-    return ((uint64_t)saved<<32)|accepted;
-}
+/* 0x530084 is am_hal_queue_item_add (AmbiqSuite 5.1.0 hal/am_hal_queue.c);
+ * audio_ble_hci_ring_commit_530084 is a payload defsym alias of it. */
 
 uint32_t audio_ble_wsf_set_event_body(uint32_t handler,uint32_t mask,
                                       uint32_t scratch,uint32_t high) {

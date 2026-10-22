@@ -31,5 +31,7 @@ static void configure_input_system(void)
         case_boot_init_failure();
 }
 
+/* Stock 0x08008438 (case_initialize_application_profile) */
 void case_boot_input_initialize(void) { configure_input_system(); }
+/* Stock 0x0800B600 (board_peripheral_init) */
 void case_policy_system_reset(void) { configure_input_system(); }

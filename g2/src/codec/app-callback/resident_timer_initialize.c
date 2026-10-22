@@ -14,6 +14,7 @@ extern void gx8002_xip_memset_102099cc(void *dst, uint32_t value,
                                         uint32_t size);
 extern uint32_t gx8002_resident_timer_dispatch_258c4(void);
 
+/* Stock 0x100257B8 (gx8002_timer_channel_initialize) */
 void gx8002_resident_timer_channel_initialize_257b8(void)
 {
     volatile uint32_t *const timer =
@@ -27,6 +28,7 @@ void gx8002_resident_timer_channel_initialize_257b8(void)
     timer[0x50u / 4u] = 2u;
 }
 
+/* Stock 0x100257E8 (gx8002_timer_initialize) */
 void gx8002_resident_timer_initialize_257e8(void)
 {
     gx8002_resident_platform_gate_25080(23u, 1u);

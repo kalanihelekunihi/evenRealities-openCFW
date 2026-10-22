@@ -29,6 +29,7 @@ typedef struct {
 
 #define AUDIO_WORD(offset) (*(volatile uint32_t *)(uintptr_t)(UINT32_C(0xa0a00000) + (offset)))
 
+/* Stock 0x10005C80 (gx_audio_in_get_fftvad_state) */
 int32_t gx8002_image_b_get_fftvad_state_10005c80(
     gx8002_image_b_fftvad_state *state)
 {
@@ -41,6 +42,7 @@ int32_t gx8002_image_b_get_fftvad_state_10005c80(
     return 0;
 }
 
+/* Stock 0x10005AB4 (gx_audio_in_set_logfbank_enable) */
 int32_t gx8002_image_b_set_logfbank_enable_10005ab4(
     uint32_t module_enable, uint32_t hmt_enable)
 {
@@ -56,6 +58,7 @@ int32_t gx8002_image_b_set_logfbank_enable_10005ab4(
     return 0;
 }
 
+/* Stock 0x10005AF8 (gx_audio_in_set_fftvad_w) */
 int32_t gx8002_image_b_set_fftvad_w_10005af8(gx8002_image_b_fftvad_w w)
 {
     uint32_t old = AUDIO_WORD(0x158u);
@@ -70,6 +73,7 @@ int32_t gx8002_image_b_set_fftvad_w_10005af8(gx8002_image_b_fftvad_w w)
     return 0;
 }
 
+/* Stock 0x10005C30 (gx_audio_in_set_fftvad_chipping) */
 int32_t gx8002_image_b_set_fftvad_chipping_10005c30(
     gx8002_image_b_fftvad_chipping c)
 {

@@ -12,11 +12,13 @@ extern uint32_t opencfw_boot_uart_rx_blocking(uint32_t,uint32_t);
 extern uint32_t opencfw_boot_uart_rx_start(uint32_t,uint32_t);
 extern void *memset(void *,int,size_t);
 static void restore(uint32_t mask){__asm__ volatile("msr primask, %0"::"r"(mask):"memory");}
+/* Stock 0x427602 (queue_item_add_427602; am_hal_queue_item_add) */
 NI uint32_t opencfw_boot_uart_tx_ring_add(uint32_t p,uint32_t src,uint32_t count){
  uint32_t bytes=W(p+16)*count,mask=opencfw_bl_critical_save(),ok=0;
  if(W(p+12)-W(p+8)>=bytes){for(uint32_t i=0;i<bytes;i++){if(src)B(W(p+20)+W(p))=B(src+i);uint32_t n=W(p)+1;W(p)=n-W(p+12)*(n/W(p+12));}W(p+8)+=bytes;ok=1;}
  restore(mask);return ok;
 }
+/* Stock 0x427660 (queue_item_get_427660; am_hal_queue_item_get) */
 NI uint32_t opencfw_boot_uart_tx_ring_get(uint32_t p,uint32_t dst,uint32_t count){
  uint32_t bytes=W(p+16)*count,mask=opencfw_bl_critical_save(),ok=0;
  if(W(p+8)>=bytes){for(uint32_t i=0;i<bytes;i++){if(dst)B(dst+i)=B(W(p+20)+W(p+4));uint32_t n=W(p+4)+1;W(p+4)=n-W(p+12)*(n/W(p+12));}W(p+8)-=bytes;ok=1;}

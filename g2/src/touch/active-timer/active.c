@@ -5,6 +5,7 @@
 static uint8_t *ptr(const uint8_t *c,unsigned n){return *(uint8_t *const *)(c+n);}
 static uint16_t u16(const uint8_t *c,unsigned n){return *(const uint16_t *)(c+n);}
 static void set16(uint8_t *c,unsigned n,uint16_t v){*(uint16_t *)(c+n)=v;}
+/* Stock 0x00006BD4 (touch_sub_38d4) */
 uint32_t touch_start_active_slots(uint32_t first,uint32_t count,uint8_t *c){
  uint32_t last=first+count-1u;if(!c || !count || first>4 || last>4)return 1;
  uint8_t *common=ptr(c,4);if(*(uint32_t *)(common+8)&0x80u)return 0x40;

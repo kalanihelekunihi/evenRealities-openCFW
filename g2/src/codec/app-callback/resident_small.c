@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 /* 0x10024244; literal at 0x1002424c is SRAM flash_state 0x200264e4. */
+/* Stock 0x10024244 (gx8002_flash_gettype) */
 uint32_t gx8002_resident_flash_gettype_24244(void)
 {
     uintptr_t descriptor = *(volatile const uint32_t *)(uintptr_t)
@@ -23,6 +24,7 @@ uint32_t gx8002_resident_clock_subband_hz_25e38(
 }
 
 /* 0x100247d4: invoke optional descriptor callback at byte offset 0x30. */
+/* Stock 0x100247D4 (gx8002_flash_type_api) */
 uintptr_t gx8002_resident_flash_type_api_247d4(const void *descriptor)
 {
     uintptr_t raw = *(volatile const uint32_t *)

@@ -14,4 +14,3 @@ _Static_assert(offsetof(struct audio_ble_sec_cb,aes)==0x20u,"AES queue ABI");
 _Static_assert(offsetof(struct audio_ble_sec_cb,token)==0x38u,"token ABI");
 _Static_assert(offsetof(struct audio_ble_sec_cb,callbacks)==0x3cu,"callback ABI");
 _Static_assert(sizeof(struct audio_ble_sec_cb)==0x50u,"secCb extent");
-struct audio_ble_sec_cb audio_ble_stack_state_20072cb8;

@@ -15,6 +15,7 @@ uint32_t audio_settings_profile_for_role(uint8_t index) {
     if(index>2u) index=2u;
     return audio_uart_device_role_get()==1u ? role_one_profiles[index]:other_profiles[index];
 }
+/* Stock 0x46C9D0 (audio_settings_display_apply) */
 uint32_t audio_settings_display_apply(uint32_t brightness,uint32_t profile) {
     audio_settings_display_brightness_cell=brightness;
     audio_settings_display_profile_cell=profile;

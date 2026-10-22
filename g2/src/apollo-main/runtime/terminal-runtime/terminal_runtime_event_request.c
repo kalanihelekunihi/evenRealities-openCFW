@@ -23,6 +23,7 @@ static const char function[]="terminal_request_runtime_event_if_allowed";
 static const char dropped[]="drop runtime query notification in state=%d session=%lu";
 static const char dropped_short[]="[terminal.pb]drop runtime query notification in state=%d session=%lu";
 
+/* Stock 0x5E873E (terminal_request_runtime_event_if_allowed) */
 void audio_terminal_request_runtime_event_if_allowed(uint32_t ble_status) {
     uint8_t event=audio_terminal_runtime_event_from_ble((uint8_t)ble_status);
     uint8_t mode=audio_terminal_ui_mode;

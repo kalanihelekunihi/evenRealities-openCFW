@@ -18,6 +18,7 @@ extern void audio_ble_profile_ancc_init(uint8_t,uint8_t *,uint8_t *); /* 0x4bf74
 extern uint32_t audio_log_level(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,uint32_t,const char *,...);
 extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
+/* Stock 0x0046ED94 (APP_SlaveHanderInit) */
 void audio_ble_app_slave_handler_init(uint8_t handler,uint8_t *state,uint8_t *mode) {
     if(audio_log_level()&2u)
       audio_log_extended(4u,"ble.Slave",

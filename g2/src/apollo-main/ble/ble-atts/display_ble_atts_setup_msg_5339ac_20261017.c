@@ -8,10 +8,7 @@ extern void audio_ble_att_exec_callback_4b5074(uint8_t, uint8_t,
 extern void audio_ble_atts_exec_callback_533934(uint8_t, uint16_t, uint8_t);
 extern uint8_t audio_ble_att_cfg_ptr_200004b4[4];
 
-uint16_t audio_ble_att_msg_param_4b50f0(uint8_t connection, uint8_t slot)
-{
-    return (uint16_t)((uint16_t)connection * 3u + slot);
-}
+extern uint16_t audio_ble_att_msg_param_4b50f0(uint8_t connection, uint8_t slot); /* opencfw U5: now provided by the Cordio unit */
 
 void audio_ble_atts_set_pend_ntf_53390e(uint8_t *ccb, uint16_t handle)
 {

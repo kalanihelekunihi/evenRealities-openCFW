@@ -4,14 +4,9 @@ extern uint32_t audio_wsf_timer_list[2]; /* live WSF timer queue 0x200741b0 */
 extern void audio_wsf_cs_enter(void);
 extern void audio_wsf_cs_exit(void);
 
-void audio_wsf_queue_remove(void **queue,void *element,void *previous) {
-    audio_wsf_cs_enter();
-    if(element==queue[0]) queue[0]=*(void **)element;
-    else if(previous!=0) *(void **)previous=*(void **)element;
-    if(element==queue[1]) queue[1]=previous;
-    audio_wsf_cs_exit();
-}
+extern void audio_wsf_queue_remove(void **queue,void *element,void *previous); /* opencfw U5: now provided by the Cordio unit */
 
+/* Stock 0x0052A3FC (wsfTimerRemove) */
 void audio_wsf_timer_remove(void *timer) {
     void *previous=0;
     void *current=(void *)(uintptr_t)audio_wsf_timer_list[0];

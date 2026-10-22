@@ -2,11 +2,13 @@
  * Native CASE 0x4a00 option-word reader. The caller supplies selector words[1].
  */
 #include <stdint.h>
+/* Stock 0x08003EA8 (case_flash_status_classify) */
 uint32_t case_boot_option_status_a(void) /* 0x3ea8 */
 {
     uint32_t status=*(volatile uint32_t *)(uintptr_t)0x40022020u&0xffu;
     return status==0xaau || status==0xccu?status:0xbbu;
 }
+/* Stock 0x08003EC0 (case_flash_status_masked) */
 uint32_t case_boot_option_status_b(void) /* 0x3ec0 */
 {return *(volatile uint32_t *)(uintptr_t)0x40022020u&0x077f6000u;}
 void case_boot_read_option_words(uint32_t *words)

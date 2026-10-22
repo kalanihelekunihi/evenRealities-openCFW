@@ -6,6 +6,7 @@ extern void log_hex_buffer(const uint8_t *bytes,uint32_t length);
 
 /* Original 0x0800680c. Lower UART write and logging contracts are explicit.
  * Valid input is a readable payload of length at most 65535 bytes. */
+/* Stock 0x0800680C (case_send) */
 void case_send(const uint8_t *payload,uint32_t length)
 {
     uint8_t byte;

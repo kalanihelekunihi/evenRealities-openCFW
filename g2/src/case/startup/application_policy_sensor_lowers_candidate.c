@@ -9,6 +9,7 @@ extern void case_policy_adc_close(uint32_t adc); /* 0x483c */
 extern void case_policy_task_sleep(uint32_t ticks); /* 0xc128 */
 extern void case_policy_task_cancel_core(uint32_t task); /* 0xc228 */
 
+/* Stock 0x08000160 (__aeabi_uidiv) */
 uint32_t case_policy_sensor_divide(uint32_t value,uint32_t divisor)
 {
     uint32_t quotient=0u;
@@ -23,6 +24,7 @@ uint32_t case_policy_sensor_divide(uint32_t value,uint32_t divisor)
     }
     return quotient;
 }
+/* Stock 0x08002EDC (case_trimmed_average8) */
 uint32_t case_policy_sensor_sample(void)
 {
     uint32_t adc=0x200008e4u;
@@ -38,6 +40,7 @@ uint32_t case_policy_sensor_sample(void)
     case_policy_adc_close(adc);
     return (uint16_t)case_policy_sensor_divide(total-high-low,6u);
 }
+/* Stock 0x0800A7B0 (osDelay) */
 int32_t case_policy_sensor_delay(uint32_t amount)
 {
     uint32_t ipsr;
@@ -52,6 +55,7 @@ int32_t case_policy_wait(uint32_t amount)
 {
     return case_policy_sensor_delay(amount);
 }
+/* Stock 0x0800AA00 (case_start_scheduler) */
 int32_t case_policy_task_cancel(uint32_t task)
 {
     uint32_t ipsr;

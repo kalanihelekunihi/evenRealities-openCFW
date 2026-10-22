@@ -16,6 +16,7 @@ static const char name[]="_RPC_SystemOtaStatusSync";
 static const char format[]="RPC_SystemOtaStatusSync state = %d";
 static const char compact[]="[ota.service]RPC_SystemOtaStatusSync state = %d";
 
+/* Stock 0x444E90 (_RPC_SystemOtaStatusSync) */
 void audio_ble_rpc_ota_status_sync(uint32_t status) {
     if((audio_log_flags()&2u)!=0u)
         audio_log_extended(4u,module,path,name,0x332u,format,status&0xffu);
@@ -31,6 +32,7 @@ void audio_ble_rpc_ota_status_sync(uint32_t status) {
     }
 }
 
+/* Stock 0x00448784 (semantic_OtaCancelExport) */
 void audio_ble_ota_disconnect(void) {
     audio_uart_buffer_zero(audio_ble_ota_export_state,0x60u,0u);
     audio_ble_ota_export_state[0]=0u;

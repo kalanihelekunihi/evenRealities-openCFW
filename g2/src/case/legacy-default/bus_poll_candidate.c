@@ -4,6 +4,7 @@
  */
 #include <stdint.h>
 extern uint32_t case_bus_response_sample(uint32_t *word);
+/* Stock 0x0800C43C (case_transform_word_alt) */
 uint32_t case_bus_poll(uint32_t *word)
 {
     uint32_t sample=0u;

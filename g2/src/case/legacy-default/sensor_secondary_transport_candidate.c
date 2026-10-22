@@ -10,6 +10,7 @@ extern uint32_t case_binary_sensor_byte_input(void);
 extern void case_binary_sensor_final_pulse(void);
 extern void case_binary_sensor_interbyte_pulse(void);
 extern void case_binary_sensor_stop(void);
+/* Stock 0x0800292C (case_serial_read_70) */
 uint32_t case_legacy_ee_transport(uint32_t selector,void *response,uint32_t count)
 {
     uint8_t *out=(uint8_t *)response;
@@ -33,6 +34,7 @@ failed:
     case_binary_sensor_stop();
     return 0u;
 }
+/* Stock 0x08002A00 (case_serial_write_pair_70) */
 uint32_t case_legacy_pmic_transport(uint32_t selector,uint32_t value)
 {
     uint8_t retries=0u;

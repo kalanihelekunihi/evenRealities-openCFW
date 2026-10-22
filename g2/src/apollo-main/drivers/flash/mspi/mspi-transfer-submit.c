@@ -4,6 +4,9 @@
  */
 #include <stdint.h>
 
+/* Stock 0x4c072e: AmbiqSuite 5.1.0 am_hal_mspi.c mspi_seq_loopback (generated with external linkage). */
+extern void mspi_seq_loopback(void *context, uint32_t status);
+
 extern uint64_t g2_main_cq_reserve_538ece(uint32_t, uint32_t,
                                             uint32_t, uint32_t);
 extern uint32_t g2_main_cq_commit_538fb4(uint32_t, uint32_t);
@@ -67,7 +70,7 @@ uint32_t g2_main_mspi_transfer_submit_candidate(uint32_t controller,
             (volatile uint32_t *)(uintptr_t)slot_address;
         volatile uint32_t *const state =
             (volatile uint32_t *)(void *)handle;
-        state[(index & 0xffu) + 10u] = UINT32_C(0x004c072f);
+        state[(index & 0xffu) + 10u] = (uint32_t)(uintptr_t)&mspi_seq_loopback;
         state[(index & 0xffu) + 0x10au] = controller;
         slot[0] = base + 0x2b4u;
         slot[1] = 0u;

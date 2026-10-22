@@ -1,5 +1,6 @@
 /* Independent6ac0; unclosed regular/dither dependencies explicit in ops. */
 #include "mode.h"
+/* Stock 0x00006AC0 (event_dispatcher) */
 uint32_t touch_switch_mode(uint32_t desired,uint8_t *c,const touch_mode_dependencies *ops){
  uint8_t *internal=*(uint8_t **)(c+8);uint32_t old=internal[85];if(old==desired)return 0;
  uint32_t status=(old<=2 || (old>=5 && old<=7))?0:1;internal[115]=0;if(status)return status;

@@ -4,6 +4,7 @@
 #include <stdint.h>
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
+/* Stock 0x0800AFCC (case_boot_heap_insert) */
 void case_boot_heap_insert(uint32_t block)
 {
     uint32_t prior=0x20000194u;

@@ -39,6 +39,7 @@ _Static_assert(__builtin_offsetof(struct flash_selected, protection) == 16,
 /* 0x10023980: report whether the selected device has an active protection
  * map. Direct native instructions load state[3], then selected + 0x10,
  * then the map's first word; absent or zero returns UINT32_MAX. */
+/* Stock 0x10023980 (gx8002_flash_write_protect_mode) */
 uint32_t gx8002_resident_flash_write_protect_mode_23980(void)
 {
     const volatile uint32_t *const state =
@@ -50,6 +51,7 @@ uint32_t gx8002_resident_flash_write_protect_mode_23980(void)
     return *(const volatile uint32_t *)map == 0u ? UINT32_MAX : 1u;
 }
 
+/* Stock 0x100238A4 (gx8002_flash_block_bounds) */
 int32_t gx8002_resident_flash_block_bounds_238a4(
     uint32_t address, uint32_t *begin, uint32_t *end)
 {
@@ -70,6 +72,7 @@ int32_t gx8002_resident_flash_block_bounds_238a4(
     return -1;
 }
 
+/* Stock 0x100238EC (gx8002_flash_write_protect_status) */
 int32_t gx8002_resident_flash_write_protect_status_238ec(
     uint32_t *protected_bytes)
 {
@@ -100,6 +103,7 @@ int32_t gx8002_resident_flash_write_protect_status_238ec(
     return -1;
 }
 
+/* Stock 0x100239A4 (gx8002_flash_write_protect_set) */
 int32_t gx8002_resident_flash_write_protect_set_239a4(
     uint32_t requested_bytes, uint32_t *actual_bytes)
 {
@@ -142,12 +146,14 @@ int32_t gx8002_resident_flash_write_protect_set_239a4(
     return 0;
 }
 
+/* Stock 0x10023A70 (gx8002_flash_write_protect_lock) */
 void gx8002_resident_flash_write_protect_lock_23a70(uint32_t bytes)
 {
     uint32_t observed;
     (void)gx8002_resident_flash_write_protect_set_239a4(bytes, &observed);
 }
 
+/* Stock 0x10023A80 (gx8002_flash_write_protect_unlock) */
 void gx8002_resident_flash_write_protect_unlock_23a80(void)
 {
     uint32_t observed;

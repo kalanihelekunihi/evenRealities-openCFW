@@ -7,6 +7,7 @@
 extern void gx8002_resident_flash_wait_bus_2364c(void);
 extern uint32_t gx8002_resident_flash_wait_rx_empty_2365c(void);
 
+/* Stock 0x10024104 (gx8002_flash_uid_read) */
 int32_t gx8002_resident_flash_uid_read_24104(
     uint8_t *destination, int32_t requested, int32_t *actual)
 {

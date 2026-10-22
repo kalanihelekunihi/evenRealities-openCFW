@@ -7,6 +7,7 @@ static void wr32(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static uint16_t rd16(uint32_t a){return *(volatile uint16_t *)(uintptr_t)a;}
 static void field(uint32_t address,uint32_t clear,uint32_t value)
 {wr32(address,(rd32(address)&~clear)|value);}
+/* Stock 0x080085B0 (case_apply_context_options) */
 void case_boot_sensor_open_apply(uint32_t d)
 {
     uint32_t hw=rd32(d);

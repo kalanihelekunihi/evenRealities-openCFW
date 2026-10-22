@@ -13,6 +13,7 @@ void gx8002_uart_stage2_cache_init_3174(void)
     while ((cache[1] & 3u) != 2u) { }
 }
 
+/* Stock 0x10003194 (gx_dcache_enable) */
 void gx8002_uart_stage2_interrupt_tail_3194(void)
 {
     volatile uint32_t *const control =
@@ -23,6 +24,7 @@ void gx8002_uart_stage2_interrupt_tail_3194(void)
     __asm__ volatile("sync\nsync" ::: "memory");
 }
 
+/* Stock 0x100031B4 (gx_dcache_disable) */
 void gx8002_uart_stage2_dcache_disable_31b4(void)
 {
     volatile uint32_t *const control =

@@ -63,6 +63,7 @@ uint32_t opencfw_boot_storage_read_impl(void *destination, const void *source,
     return 0u;
 }
 
+/* Stock 0x430B10 (word_transfer_critical_430b10) */
 static uint32_t program_with_critical_state(uint32_t destination,
                                            const void *source,
                                            uint32_t size)

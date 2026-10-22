@@ -12,6 +12,7 @@ extern void stock_bus_flush(uint32_t,uint32_t);
 static void flush_sysbus(void){(void)W(0x47ff0000);}
 static uint32_t needs_xtal(void){return HAS(3)||(HAS(5)&&!HAS(6));}
 static uint32_t needs_ext(void){return HAS(4)||(HAS(5)&&HAS(6));}
+/* Stock 0x0044B158 (am_hal_sysctrl_clkmuxrst_low_power_init stock variant) */
 void clock_reset_recover(uint32_t incoming_r5){
  uint32_t saved_pin=0;
  if(!(W(0x4000885c)&2)&&(W(0x40008858)>>16)==0x5af0&&(W(0x40008858)&63)){

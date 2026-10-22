@@ -9,6 +9,7 @@ extern uint32_t audio_ble_hci_radio_disable_52dd6a(void);
 extern void audio_ble_hci_radio_switch_52eece(uint8_t);
 extern void audio_ble_hci_radio_pins_52dd7c(void);
 extern uint32_t audio_ble_hci_radio_reset_52df12(void *);
+/* Stock 0x4B49CE (HciDrvRadioShutdown) */
 void audio_ble_hci_driver_radio_shutdown(void) {
     WsfTimerStop(audio_ble_hci_radio_timer);
     (void)audio_ble_hci_radio_disable_52dd6a();

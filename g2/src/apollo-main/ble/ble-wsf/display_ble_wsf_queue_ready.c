@@ -9,11 +9,6 @@ extern void WsfSetOsSpecificEvent(void);
 void *WsfTaskMsgQueue(void) {
     return audio_wsf_task_state+0x34u;
 }
-void WsfMsgEnq(void *queue,uint8_t handler,void *message) {
-    uint8_t *payload=(uint8_t *)message;
-    payload[-4]=handler;
-    WsfQueueEnq(queue,payload-8);
-}
 void WsfTaskSetReady(uint8_t handler,uint8_t bit) {
     (void)handler; /* native body uses only the ready-bit argument */
     WsfCsEnter();

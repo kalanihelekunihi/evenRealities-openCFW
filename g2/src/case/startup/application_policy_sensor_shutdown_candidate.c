@@ -4,6 +4,7 @@
 #include <stdint.h>
 extern void case_policy_sensor_stop(uint32_t descriptor); /* 0x62ac */
 
+/* Stock 0x08005F00 (case_reset_controller_context) */
 uint32_t case_policy_sensor_shutdown(uint32_t descriptor)
 {
     if(descriptor==0u)return 1u;

@@ -5,6 +5,7 @@
 
 extern uint32_t case_binary_3f_set(uint32_t index, uint32_t value);
 
+/* Stock 0x0800D154 (aging_indicator_apply) */
 uint32_t case_binary_3f_enable(void)
 {
     case_binary_3f_set(3u, 0xaeu);

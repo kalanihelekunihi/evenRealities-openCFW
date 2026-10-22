@@ -9,6 +9,7 @@ extern uint32_t case_transfer_clock_config(uint32_t plan); /* 0x4f14 */
 extern const uint32_t case_boot_ahb_shift_table[16]; /* 0xd3a8 */
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
+/* Stock 0x080052E4 (case_configure_clock_path) */
 uint32_t case_boot_clock_device_apply(const uint32_t *config,uint32_t latency)
 {
     if(config==0)return 1u;

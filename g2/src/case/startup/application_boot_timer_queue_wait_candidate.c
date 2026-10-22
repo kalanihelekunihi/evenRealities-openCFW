@@ -9,6 +9,7 @@ extern void case_policy_queue_wait_cleanup(uint32_t queue); /* existing 0xb374 *
 static uint8_t rb(uint32_t a){return *(volatile uint8_t *)(uintptr_t)a;}
 static void wb(uint32_t a,uint8_t v){*(volatile uint8_t *)(uintptr_t)a=v;}
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
+/* Stock 0x0800C0E0 (case_normalize_context) */
 void case_boot_timer_queue_wait(uint32_t queue,uint32_t ticks,uint32_t option)
 {
     case_policy_scheduler_lock();

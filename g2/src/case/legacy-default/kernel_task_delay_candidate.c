@@ -9,6 +9,7 @@ extern void case_kernel_list_insert_ordered(uint32_t list,uint32_t item);
 static volatile uint32_t *words(uint32_t address)
 {return (volatile uint32_t *)(uintptr_t)address;}
 
+/* Stock 0x0800ABB0 (case_kernel_task_delay) */
 void case_kernel_task_delay(uint32_t ticks,uint32_t allow_indefinite)
 {
     volatile uint32_t *state=words(0x20000128u);

@@ -21,6 +21,7 @@ uint32_t case_legacy_aa_first(uint32_t prior)
     if(*flag==0u) result=case_legacy_logger("\r\n");
     return result;
 }
+/* Stock 0x0800D218 (case_legacy_aa_second) */
 uint32_t case_legacy_aa_second(uint32_t prior)
 {
     (void)prior;

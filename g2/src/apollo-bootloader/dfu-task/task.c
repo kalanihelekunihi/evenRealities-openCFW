@@ -24,6 +24,7 @@ static void try_boot(uint32_t first_line,uint32_t second_line) {
         opencfw_boot_vector_handoff(IMAGE->destination);
     }
 }
+/* Stock 0x42de58 (dfu_service_task_42de58) */
 void opencfw_boot_dfu_task(void) {
     opencfw_boot_dfu_message message;
     memset(&message,0,sizeof(message));

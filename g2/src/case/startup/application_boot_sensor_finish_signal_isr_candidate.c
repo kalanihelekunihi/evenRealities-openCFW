@@ -7,6 +7,7 @@
 extern void vEventGroupSetBitsCallback(void *event_group,uint32_t bits);
 extern uint32_t case_policy_irq_event_dispatch(uint32_t descriptor,uint32_t event,
                                                 uint32_t bits,uint32_t option); /* 0xce0c */
+/* Stock 0x0800C568 (case_dispatch_resource4) */
 int32_t case_boot_sensor_finish_signal_isr(uint32_t task,uint32_t bits,uint32_t *woken)
 {
     return (int32_t)case_policy_irq_event_dispatch((uint32_t)(uintptr_t)vEventGroupSetBitsCallback,task,bits,

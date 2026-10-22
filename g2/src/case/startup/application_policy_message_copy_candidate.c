@@ -7,6 +7,7 @@ static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static void copy_bytes(uint32_t destination,const uint8_t *source,uint32_t count)
 {for(uint32_t i=0u;i<count;++i)*(volatile uint8_t *)(uintptr_t)(destination+i)=source[i];}
+/* Stock 0x0800AD48 (case_policy_message_copy) */
 uint32_t case_policy_message_copy(uint32_t queue,const uint32_t *args,uint32_t mode)
 {
     uint32_t count=rd(queue+56u),width=rd(queue+64u),result=0u;

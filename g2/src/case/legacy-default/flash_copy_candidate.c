@@ -3,6 +3,7 @@
  * status wait, and interrupt masking are source-owned; persistence is not.
  */
 #include <stdint.h>
+/* Stock 0x08003F38 (case_copy64_protected) */
 void case_flash_copy_operation(uint32_t address,uint32_t source)
 {
     volatile uint32_t *const control=(volatile uint32_t *)(uintptr_t)0x40022014u;

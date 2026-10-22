@@ -131,6 +131,7 @@ static void pll_power_restore(void)
     critical_restore(previous);
 }
 
+/* Stock 0x4272AC (bl_syspll_initialize; am_hal_syspll_initialize, power-up child 0x41CA5C inlined) */
 static uint32_t pll_initialize(int mode, uint32_t **handle_out)
 {
     volatile uint32_t *const context =
@@ -159,6 +160,7 @@ static uint32_t pll_disable(uint32_t *handle)
     return 0u;
 }
 
+/* Stock 0x427310 (syspll_deinitialize_427310; am_hal_syspll_deinitialize) */
 static uint32_t pll_deinitialize(uint32_t *handle)
 {
     if (handle == 0 || (handle[0] & 0x01ffffffu) != SYSPLL_CONTEXT_MAGIC)
@@ -225,6 +227,7 @@ static uint32_t pll_configure(uint32_t *handle, const uint8_t *config)
     return 0u;
 }
 
+/* Stock 0x427360 (syspll_enable_427360; am_hal_syspll_enable) */
 static uint32_t pll_enable(uint32_t *handle)
 {
     if (handle == 0 || (handle[0] & 0x01ffffffu) != SYSPLL_CONTEXT_MAGIC)
@@ -242,6 +245,7 @@ static uint32_t pll_enable(uint32_t *handle)
     return 0u;
 }
 
+/* Stock 0x427522 (syspll_lock_wait_427522; am_hal_syspll_lock_wait) */
 static uint32_t pll_lock_wait(uint32_t *handle)
 {
     if (handle == 0 || (handle[0] & 0x01ffffffu) != SYSPLL_CONTEXT_MAGIC)

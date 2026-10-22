@@ -25,6 +25,7 @@ static const char null_short[] = "[pb.evenai]PORINT NULL";
 static const char status_message[] = "pCtrl->status = %d";
 static const char status_short[] = "[pb.evenai]pCtrl->status = %d";
 
+/* Stock 0x4E3530 (PB_RxEvenAICtrl) */
 uint32_t audio_even_ai_rx_ctrl(uint8_t sequence, const void *payload) {
     (void)sequence;
     if (payload == 0) {

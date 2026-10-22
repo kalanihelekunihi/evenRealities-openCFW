@@ -34,6 +34,7 @@ _Static_assert(offsetof(opencfw_boot_storage,read)==0x18,"read callback");
 _Static_assert(offsetof(opencfw_boot_storage,program)==0x1c,"program callback");
 _Static_assert(offsetof(opencfw_boot_storage,erase)==0x20,"erase callback");
 #endif
+/* Stock 0x42e1ec (crc32_table_42e1ec) */
 uint32_t opencfw_boot_crc32(const void *data, uint32_t size, const uint32_t *previous) {
     const uint8_t *bytes=data;
     uint32_t crc=previous ? ~*previous : UINT32_MAX;
@@ -43,6 +44,7 @@ uint32_t opencfw_boot_crc32(const void *data, uint32_t size, const uint32_t *pre
     }
     return ~crc;
 }
+/* Stock 0x42d84c (stream_mode_42d84c) */
 uintptr_t opencfw_boot_stream_mode(uint32_t flags) {
     static const char mode_write_plus[] = "w+";
     static const char mode_append_plus[] = "a+";
@@ -76,6 +78,7 @@ int32_t opencfw_boot_memcmp(const void *a,const void *b,uint32_t size) {
     while(size--) { int32_t diff=(int32_t)*left++-(int32_t)*right++; if(diff)return diff; }
     return 0;
 }
+/* Stock 0x42d9f0 (chunked_indirect_visit_42d9f0) */
 void opencfw_boot_erase_visit(uint32_t address,uint32_t size) {
     while(size) {
         opencfw_boot_storage *descriptor=STORAGE;
@@ -86,6 +89,7 @@ void opencfw_boot_erase_visit(uint32_t address,uint32_t size) {
         address+=STORAGE->chunk_size;
     }
 }
+/* Stock 0x42da1e (chunked_source_compare_42da1e) */
 int32_t opencfw_boot_compare(uint32_t address,const void *source,uint32_t size,
                             const opencfw_boot_storage *descriptor) {
     uint32_t offset=0,remaining=size;
@@ -100,6 +104,7 @@ int32_t opencfw_boot_compare(uint32_t address,const void *source,uint32_t size,
     }
     return 0;
 }
+/* Stock 0x42d890 (dfu_image_crc_check_42d890) */
 uint32_t opencfw_boot_verify(uint32_t *handle,const opencfw_boot_image_header *header) {
     uint32_t length=(header->encoded_size&0xffffffu)-8u,crc=0;
     *handle=opencfw_boot_file_open(PATH,opencfw_boot_stream_mode(1));
@@ -121,6 +126,7 @@ uint32_t opencfw_boot_verify(uint32_t *handle,const opencfw_boot_image_header *h
     LOG(((uintptr_t)opencfw_update_log_literal_4339ac),0xe4u,((uintptr_t)opencfw_update_log_literal_4339c4),crc,WORD(0x20026efcu));
     return crc==header->expected_crc;
 }
+/* Stock 0x42dae8 (dfu_payload_program_42dae8) */
 void opencfw_boot_program(uint32_t *handle,const opencfw_boot_image_header *header) {
     uint32_t remaining=(header->encoded_size&0xffffffu)-32u,address=header->destination;
     opencfw_boot_erase_visit(address,remaining);

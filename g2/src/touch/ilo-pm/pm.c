@@ -2,6 +2,7 @@
 #include "pm.h"
 #define PREVENT (*(volatile uint8_t *)0x20000f1du)
 #define MEASURING (*(volatile uint8_t *)0x20000f1eu)
+/* Stock 0x0000A1C0 (not in touch.tsv: PDL Cy_SysClk_DeepSleepCallback) */
 uint32_t touch_ilo_deep_sleep_callback(void *params, uint32_t mode)
 {
     (void)params;

@@ -11,6 +11,7 @@
 #define PAIR 0x20026fe0u
 __attribute__((section(".bss.boot_adc_context_pool"),used))
 volatile opencfw_boot_adc_context opencfw_boot_adc_context_pool;
+/* Stock 0x42e8d0 (hw_context_initialize_42e8d0) */
 NI uint32_t opencfw_bl_adc_context_initialize(uint32_t module,uint32_t *context_out) {
     if(module!=0)return 5;
     if(!context_out)return 6;
@@ -41,6 +42,7 @@ NI uint32_t opencfw_bl_adc_context_initialize(uint32_t module,uint32_t *context_
     B(0x20027199u)=R(PAIR+4)&&R(PAIR)&&status==0 ? 1u:0u;
     return 0;
 }
+/* Stock 0x42ea32 (hw_handle_reset_42ea32) */
 NI uint32_t opencfw_bl_adc_reset(uint32_t context) {
     if(!context || (R(context)&0x01ffffffu)!=0x01afafafu)return 2;
     R(context)&=~0x01000000u;

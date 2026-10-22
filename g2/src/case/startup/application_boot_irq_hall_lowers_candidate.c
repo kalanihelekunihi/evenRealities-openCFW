@@ -5,8 +5,10 @@
 extern void case_policy_led_left_clear(uint32_t value); /* 0x6b80 */
 extern void case_policy_led_right_clear(uint32_t value); /* 0x6b98 */
 static uint8_t rd8(uint32_t a){return *(volatile uint8_t *)(uintptr_t)a;}
+/* Stock 0x08002A5C (case_read_byte3) */
 uint32_t case_boot_irq_hall_state(void)
 {return rd8(0x200000bbu);}
+/* Stock 0x08003848 (glasses_charge_side_select) */
 void case_boot_irq_hall_prepare(uint32_t mode)
 {
     const uint32_t s=0x2000087cu;

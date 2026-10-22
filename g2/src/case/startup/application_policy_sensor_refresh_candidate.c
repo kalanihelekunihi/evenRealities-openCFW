@@ -4,6 +4,7 @@
  * returning prior models the later stock byte store without inventing data.
  */
 #include <stdint.h>
+/* Stock 0x08003A3C (left_glasses_state_reset) */
 uint8_t case_policy_sensor_left_refresh(volatile uint8_t *left,uint8_t prior,uint8_t active)
 {
     (void)active;
@@ -19,6 +20,7 @@ uint8_t case_policy_sensor_left_refresh(volatile uint8_t *left,uint8_t prior,uin
     *(volatile uint32_t *)(void *)(state+0x48u)=0u;
     return prior;
 }
+/* Stock 0x08003A60 (right_glasses_state_reset) */
 uint8_t case_policy_sensor_right_refresh(volatile uint8_t *right,uint8_t prior,uint8_t active)
 {
     (void)active;

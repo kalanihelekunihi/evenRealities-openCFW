@@ -33,6 +33,7 @@
  * Full SDK state is intentionally not instantiated by this subset. */
 #include "ambiq_mspi_compat.h"
 
+/* Stock 0x4C2328 (am_hal_mspi_interrupt_enable) */
 uint32_t
 am_hal_mspi_interrupt_enable(void *pHandle,
                              uint32_t ui32IntMask)
@@ -92,6 +93,7 @@ am_hal_mspi_interrupt_disable(void *pHandle,
     return AM_HAL_STATUS_SUCCESS;
 }
 
+/* Stock 0x4C2392 (am_hal_mspi_interrupt_status_get) */
 uint32_t
 am_hal_mspi_interrupt_status_get(void *pHandle,
                                  uint32_t  *pui32Status,

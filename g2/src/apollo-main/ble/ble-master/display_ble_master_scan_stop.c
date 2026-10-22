@@ -19,10 +19,7 @@ static const char function_name[]="appMasterScanStop";
 static const char source_path[]=
     "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\cordio\\ble-profiles\\sources\\apps\\app\\app_master.c";
 
-uint8_t audio_ble_master_scan_count_503d14(void)
-{
-    return audio_ble_subsystem_state_20071670[0x96u];
-}
+extern uint8_t audio_ble_master_scan_count_503d14(void); /* opencfw U5: now provided by the Cordio unit */
 
 void audio_ble_master_event_50367c(void *event,void *record)
 {

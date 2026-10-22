@@ -2,6 +2,9 @@
  * Source: official s200 v2.2.6.10 OTA SHA-256 36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863.
  * Nanopb field generator semantics: PB_FIELDINFO_1/2; no stock byte blob.
  * Absolute ROM placement remains a separate image/linker obligation. */
+/* Naming: *_field_info_<addr> / *_submsg_info_<addr> arrays carry their own
+ * stock ROM address (byte-checked against the stock image); descriptors are
+ * named by the descriptor address. */
 #include <stddef.h>
 #include <stdint.h>
 struct pb_msgdesc_candidate {
@@ -43,7 +46,7 @@ static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_77688c;
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_7768a4;
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_7768bc;
 /* Native 0x7766dc: 16 fields, largest tag 129. */
-static const uint32_t ring_fields_7766dc[] = {
+static const uint32_t ring_field_info_6d4db4[] = {
     FIELD2(1u,0x12u,0u,1u,0u,1u),
     FIELD2(2u,0x12u,2u,2u,0u,1u),
     FIELD2(3u,0x38u,8u,3u,4u,1u),
@@ -62,7 +65,7 @@ static const uint32_t ring_fields_7766dc[] = {
     FIELD2(129u,0x38u,8u,12u,4u,1u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_7766dc[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_7140f8[] = {
     &audio_ble_ring_pb_desc_7767b4,
     &audio_ble_ring_pb_desc_776814,
     &audio_ble_ring_pb_desc_7767cc,
@@ -80,35 +83,35 @@ static const struct pb_msgdesc_candidate *const ring_submessages_7766dc[] = {
     0
 };
 const struct pb_msgdesc_candidate audio_ble_ring_connect_pb_descriptor = {
-    ring_fields_7766dc,ring_submessages_7766dc,0,0,16u,0u,129u
+    ring_field_info_6d4db4,ring_submsg_info_7140f8,0,0,16u,0u,129u
 };
 /* Native 0x7766f4: 2 fields, largest tag 2. */
-static const uint32_t ring_fields_7766f4[] = {
+static const uint32_t ring_field_info_78a7cc[] = {
     FIELD1(1u,0x12u,0u,1u,0u),
     FIELD1(2u,0x12u,1u,1u,0u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_7766f4[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78efa8[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_7766f4 = {
-    ring_fields_7766f4,ring_submessages_7766f4,0,0,2u,0u,2u
+    ring_field_info_78a7cc,ring_submsg_info_78efa8,0,0,2u,0u,2u
 };
 /* Native 0x77670c: 2 fields, largest tag 2. */
-static const uint32_t ring_fields_77670c[] = {
+static const uint32_t ring_field_info_77ec44[] = {
     FIELD2(1u,0x28u,4u,24u,4u,8u),
     FIELD2(2u,0x12u,196u,1u,0u,1u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_77670c[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78d394[] = {
     &audio_ble_ring_pb_desc_776724,
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_77670c = {
-    ring_fields_77670c,ring_submessages_77670c,0,0,2u,0u,2u
+    ring_field_info_77ec44,ring_submsg_info_78d394,0,0,2u,0u,2u
 };
 /* Native 0x776724: 9 fields, largest tag 9. */
-static const uint32_t ring_fields_776724[] = {
+static const uint32_t ring_field_info_701f2c[] = {
     FIELD1(1u,0x12u,0u,1u,0u),
     FIELD2(2u,0x38u,4u,8u,2u,1u),
     FIELD1(3u,0x32u,4u,1u,2u),
@@ -120,7 +123,7 @@ static const uint32_t ring_fields_776724[] = {
     FIELD2(9u,0x38u,4u,10u,2u,1u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_776724[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_75f270[] = {
     &audio_ble_ring_pb_desc_77673c,
     &audio_ble_ring_pb_desc_776754,
     &audio_ble_ring_pb_desc_776754,
@@ -131,85 +134,85 @@ static const struct pb_msgdesc_candidate *const ring_submessages_776724[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_776724 = {
-    ring_fields_776724,ring_submessages_776724,0,0,9u,0u,9u
+    ring_field_info_701f2c,ring_submsg_info_75f270,0,0,9u,0u,9u
 };
 /* Native 0x77673c: 3 fields, largest tag 3. */
-static const uint32_t ring_fields_77673c[] = {
+static const uint32_t ring_field_info_7859d0[] = {
     FIELD1(1u,0x12u,0u,4u,0u),
     FIELD1(2u,0x12u,4u,1u,0u),
     FIELD1(3u,0x12u,5u,1u,0u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_77673c[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78efac[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_77673c = {
-    ring_fields_77673c,ring_submessages_77673c,0,0,3u,0u,3u
+    ring_field_info_7859d0,ring_submsg_info_78efac,0,0,3u,0u,3u
 };
 /* Native 0x776754: 2 fields, largest tag 2. */
-static const uint32_t ring_fields_776754[] = {
+static const uint32_t ring_field_info_78a7d8[] = {
     FIELD1(1u,0x12u,0u,4u,0u),
     FIELD1(2u,0x12u,4u,1u,0u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_776754[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78efb0[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_776754 = {
-    ring_fields_776754,ring_submessages_776754,0,0,2u,0u,2u
+    ring_field_info_78a7d8,ring_submsg_info_78efb0,0,0,2u,0u,2u
 };
 /* Native 0x77676c: 2 fields, largest tag 2. */
-static const uint32_t ring_fields_77676c[] = {
+static const uint32_t ring_field_info_7859e0[] = {
     FIELD2(1u,0x16u,0u,18u,0u,1u),
     FIELD1(2u,0x12u,18u,1u,0u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_77676c[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78efb4[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_77676c = {
-    ring_fields_77676c,ring_submessages_77676c,0,0,2u,0u,2u
+    ring_field_info_7859e0,ring_submsg_info_78efb4,0,0,2u,0u,2u
 };
 /* Native 0x776784: 3 fields, largest tag 3. */
-static const uint32_t ring_fields_776784[] = {
+static const uint32_t ring_field_info_7859f0[] = {
     FIELD1(1u,0x12u,0u,4u,0u),
     FIELD1(2u,0x12u,4u,4u,0u),
     FIELD1(3u,0x12u,8u,1u,0u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_776784[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78efb8[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_776784 = {
-    ring_fields_776784,ring_submessages_776784,0,0,3u,0u,3u
+    ring_field_info_7859f0,ring_submsg_info_78efb8,0,0,3u,0u,3u
 };
 /* Native 0x77679c: 2 fields, largest tag 2. */
-static const uint32_t ring_fields_77679c[] = {
+static const uint32_t ring_field_info_785a00[] = {
     FIELD2(1u,0x16u,0u,8u,0u,1u),
     FIELD1(2u,0x12u,8u,1u,0u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_77679c[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78efbc[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_77679c = {
-    ring_fields_77679c,ring_submessages_77679c,0,0,2u,0u,2u
+    ring_field_info_785a00,ring_submsg_info_78efbc,0,0,2u,0u,2u
 };
 /* Native 0x7767b4: 3 fields, largest tag 3. */
-static const uint32_t ring_fields_7767b4[] = {
+static const uint32_t ring_field_info_785a10[] = {
     FIELD1(1u,0x10u,0u,1u,0u),
     FIELD1(2u,0x12u,1u,1u,0u),
     FIELD1(3u,0x12u,2u,1u,0u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_7767b4[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78efc0[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_7767b4 = {
-    ring_fields_7767b4,ring_submessages_7767b4,0,0,3u,0u,3u
+    ring_field_info_785a10,ring_submsg_info_78efc0,0,0,3u,0u,3u
 };
 /* Native 0x7767cc: 5 fields, largest tag 5. */
-static const uint32_t ring_fields_7767cc[] = {
+static const uint32_t ring_field_info_75f290[] = {
     FIELD1(1u,0x10u,0u,1u,0u),
     FIELD2(2u,0x16u,2u,8u,0u,1u),
     FIELD2(3u,0x16u,10u,18u,0u,1u),
@@ -217,14 +220,14 @@ static const uint32_t ring_fields_7767cc[] = {
     FIELD1(5u,0x12u,29u,1u,0u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_7767cc[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78efc4[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_7767cc = {
-    ring_fields_7767cc,ring_submessages_7767cc,0,0,5u,0u,5u
+    ring_field_info_75f290,ring_submsg_info_78efc4,0,0,5u,0u,5u
 };
 /* Native 0x7767fc: 5 fields, largest tag 5. */
-static const uint32_t ring_fields_7767fc[] = {
+static const uint32_t ring_field_info_7767e4[] = {
     FIELD1(1u,0x12u,0u,2u,0u),
     FIELD1(2u,0x12u,2u,2u,0u),
     FIELD1(3u,0x12u,4u,1u,0u),
@@ -232,106 +235,106 @@ static const uint32_t ring_fields_7767fc[] = {
     FIELD1(5u,0x12u,6u,1u,0u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_7767fc[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78efc8[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_7767fc = {
-    ring_fields_7767fc,ring_submessages_7767fc,0,0,5u,0u,5u
+    ring_field_info_7767e4,ring_submsg_info_78efc8,0,0,5u,0u,5u
 };
 /* Native 0x776814: 2 fields, largest tag 2. */
-static const uint32_t ring_fields_776814[] = {
+static const uint32_t ring_field_info_78a7e4[] = {
     FIELD1(1u,0x12u,0u,1u,0u),
     FIELD1(2u,0x12u,1u,1u,0u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_776814[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78efcc[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_776814 = {
-    ring_fields_776814,ring_submessages_776814,0,0,2u,0u,2u
+    ring_field_info_78a7e4,ring_submsg_info_78efcc,0,0,2u,0u,2u
 };
 /* Native 0x77682c: 3 fields, largest tag 3. */
-static const uint32_t ring_fields_77682c[] = {
+static const uint32_t ring_field_info_77ec58[] = {
     FIELD1(1u,0x12u,0u,1u,0u),
     FIELD2(2u,0x16u,2u,8u,0u,1u),
     FIELD1(3u,0x12u,10u,1u,0u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_77682c[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78efd0[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_77682c = {
-    ring_fields_77682c,ring_submessages_77682c,0,0,3u,0u,3u
+    ring_field_info_77ec58,ring_submsg_info_78efd0,0,0,3u,0u,3u
 };
 /* Native 0x776844: 3 fields, largest tag 3. */
-static const uint32_t ring_fields_776844[] = {
+static const uint32_t ring_field_info_77ec6c[] = {
     FIELD1(1u,0x12u,0u,1u,0u),
     FIELD2(2u,0x16u,2u,8u,0u,1u),
     FIELD1(3u,0x12u,10u,1u,0u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_776844[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78efd4[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_776844 = {
-    ring_fields_776844,ring_submessages_776844,0,0,3u,0u,3u
+    ring_field_info_77ec6c,ring_submsg_info_78efd4,0,0,3u,0u,3u
 };
 /* Native 0x77685c: 1 fields, largest tag 1. */
-static const uint32_t ring_fields_77685c[] = {
+static const uint32_t ring_field_info_78d39c[] = {
     FIELD1(1u,0x12u,0u,1u,0u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_77685c[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78efd8[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_77685c = {
-    ring_fields_77685c,ring_submessages_77685c,0,0,1u,0u,1u
+    ring_field_info_78d39c,ring_submsg_info_78efd8,0,0,1u,0u,1u
 };
 /* Native 0x776874: 1 fields, largest tag 1. */
-static const uint32_t ring_fields_776874[] = {
+static const uint32_t ring_field_info_78d3a4[] = {
     FIELD1(1u,0x12u,0u,1u,0u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_776874[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78efdc[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_776874 = {
-    ring_fields_776874,ring_submessages_776874,0,0,1u,0u,1u
+    ring_field_info_78d3a4,ring_submsg_info_78efdc,0,0,1u,0u,1u
 };
 /* Native 0x77688c: 1 fields, largest tag 1. */
-static const uint32_t ring_fields_77688c[] = {
+static const uint32_t ring_field_info_78d3ac[] = {
     FIELD1(1u,0x12u,0u,1u,0u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_77688c[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78efe0[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_77688c = {
-    ring_fields_77688c,ring_submessages_77688c,0,0,1u,0u,1u
+    ring_field_info_78d3ac,ring_submsg_info_78efe0,0,0,1u,0u,1u
 };
 /* Native 0x7768a4: 3 fields, largest tag 3. */
-static const uint32_t ring_fields_7768a4[] = {
+static const uint32_t ring_field_info_785a20[] = {
     FIELD1(1u,0x12u,0u,4u,0u),
     FIELD1(2u,0x11u,4u,1u,0u),
     FIELD1(3u,0x12u,5u,1u,0u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_7768a4[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78efe4[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_7768a4 = {
-    ring_fields_7768a4,ring_submessages_7768a4,0,0,3u,0u,3u
+    ring_field_info_785a20,ring_submsg_info_78efe4,0,0,3u,0u,3u
 };
 /* Native 0x7768bc: 3 fields, largest tag 3. */
-static const uint32_t ring_fields_7768bc[] = {
+static const uint32_t ring_field_info_785a30[] = {
     FIELD1(1u,0x12u,0u,1u,0u),
     FIELD1(2u,0x12u,4u,4u,0u),
     FIELD1(3u,0x12u,8u,1u,0u),
     0u
 };
-static const struct pb_msgdesc_candidate *const ring_submessages_7768bc[] = {
+static const struct pb_msgdesc_candidate *const ring_submsg_info_78efe8[] = {
     0
 };
 static const struct pb_msgdesc_candidate audio_ble_ring_pb_desc_7768bc = {
-    ring_fields_7768bc,ring_submessages_7768bc,0,0,3u,0u,3u
+    ring_field_info_785a30,ring_submsg_info_78efe8,0,0,3u,0u,3u
 };

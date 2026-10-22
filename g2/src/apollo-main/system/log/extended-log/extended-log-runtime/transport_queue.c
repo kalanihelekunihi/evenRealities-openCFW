@@ -43,6 +43,7 @@ static void record_exhaustion(int also_empty) {
     if(also_empty) stats[1]++;
 }
 
+/* Stock 0x00448A0C (elog async node allocate) */
 uint8_t *g2_log_transport_node_allocate(void) {
     for(unsigned attempts=1;attempts<=1000;attempts++) {
         LogNode *head=load_node(free_head);
@@ -59,6 +60,7 @@ uint8_t *g2_log_transport_node_allocate(void) {
     return 0;
 }
 
+/* Stock 0x00448A8E (elog async node free) */
 void g2_log_transport_node_free(uint8_t *raw) {
     if(!raw) return;
     LogNode *node=(LogNode *)raw;
@@ -74,6 +76,7 @@ void g2_log_transport_node_free(uint8_t *raw) {
     record_exhaustion(0);
 }
 
+/* Stock 0x00448AF0 (elog async node enqueue) */
 uint32_t g2_log_transport_node_enqueue(uint8_t *raw) {
     if(!raw) return 0;
     LogNode *node=(LogNode *)raw;

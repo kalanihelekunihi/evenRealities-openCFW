@@ -3,6 +3,7 @@
  */
 #include <stdint.h>
 extern void case_boot_transport_stop_clock(uint32_t value); /* 0x6b80 */
+/* Stock 0x0800BB4C (g2_timer_callback_2) */
 void case_boot_transport_cb_bb4c(uint32_t argument)
 {
     /* Native trampoline supplies pair[1] in R0; this callback ignores it. */

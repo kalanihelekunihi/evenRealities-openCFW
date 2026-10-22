@@ -17,6 +17,7 @@ void opencfw_provider_42e254(void) {
         for (;;)__asm__ volatile("b .":::"memory");
     }
 }
+/* Stock 0x42e284 (event_callback_dispatch_42e284) */
 void opencfw_boot_manager_callback_dispatch(void) {
     (void)opencfw_boot_thread_priority_set(opencfw_boot_thread_current(),8);
     void (*callback)(void)=(void (*)(void))(uintptr_t)WORD(0x200004cc);
@@ -27,6 +28,7 @@ void opencfw_provider_42e278(void) {
     opencfw_provider_42e53c();
     opencfw_boot_manager_callback_dispatch();
 }
+/* Stock 0x42e2a2 (event_wait_mask_42e2a2) */
 void opencfw_boot_manager_signal_wait(uintptr_t thread,uint32_t bit) {
     /* ARM register LSL uses the low byte; shifts>=32 produce zero. */
     uint32_t shift=bit&255,mask=shift<32?1u<<shift:0;

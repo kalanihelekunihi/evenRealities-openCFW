@@ -6,6 +6,7 @@
 extern uint32_t case_bus_input_transaction(uint32_t command,uint32_t index,
                                             uint32_t count,void *output);
 extern uint32_t case_legacy_logger(const char *format,...);
+/* Stock 0x08009040 (case_legacy_aa_read) */
 uint32_t case_legacy_aa_read(uint32_t index,uint32_t count,void *output)
 {
     volatile uint32_t *diagnostics=(volatile uint32_t *)(uintptr_t)0x2000007cu;

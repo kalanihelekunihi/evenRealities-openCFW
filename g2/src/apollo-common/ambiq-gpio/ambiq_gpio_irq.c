@@ -80,6 +80,7 @@
 //*****************************************************************************
 
 #include "ambiq_gpio_compat.h"
+/* Stock 0x481574 (am_hal_gpio_interrupt_irq_status_get) */
 uint32_t
 am_hal_gpio_interrupt_irq_status_get(uint32_t ui32GpioIrq,
                                      bool bEnabledOnly,
@@ -123,6 +124,7 @@ am_hal_gpio_interrupt_irq_status_get(uint32_t ui32GpioIrq,
 
 }
 
+/* Stock 0x4815F2 (am_hal_gpio_interrupt_irq_clear) */
 uint32_t
 am_hal_gpio_interrupt_irq_clear(uint32_t ui32GpioIrq,
                                 uint32_t ui32GpioIntMaskStatus)
@@ -201,6 +203,7 @@ am_hal_gpio_interrupt_register(am_hal_gpio_int_channel_e eChannel,
 
 }
 
+/* Stock 0x4816C6 (am_hal_gpio_interrupt_service) */
 uint32_t
 am_hal_gpio_interrupt_service(uint32_t ui32GpioIrq,
                               uint32_t ui32GpioIntMaskStatus)

@@ -11,6 +11,7 @@ extern uint32_t gx8002_resident_flash_command_write_236dc(
 
 typedef void (*flash_program_fn)(uint32_t, const uint32_t *, uint32_t);
 
+/* Stock 0x10023B8C (sflash_addr2cmd.isra.0) */
 void gx8002_resident_flash_addr_to_command_23b8c(
     const volatile uint32_t *address_bytes, uint32_t address, uint8_t *command)
 {
@@ -21,6 +22,7 @@ void gx8002_resident_flash_addr_to_command_23b8c(
     }
 }
 
+/* Stock 0x10023C34 (gx8002_flash_page_program) */
 int32_t gx8002_resident_flash_page_program_23c34(
     uint32_t address, const uint8_t *source, uint32_t bytes)
 {
@@ -50,6 +52,7 @@ int32_t gx8002_resident_flash_page_program_23c34(
     return 0;
 }
 
+/* Stock 0x10023D58 (gx8002_flash_erase) */
 int32_t gx8002_resident_flash_erase_23d58(uint32_t address, uint32_t bytes)
 {
     volatile uint32_t *const state =
@@ -81,6 +84,7 @@ int32_t gx8002_resident_flash_erase_23d58(uint32_t address, uint32_t bytes)
     return 0;
 }
 
+/* Stock 0x10023E00 (gx8002_flash_chip_erase) */
 void gx8002_resident_flash_chip_erase_23e00(void)
 {
     const volatile uint32_t *const state =

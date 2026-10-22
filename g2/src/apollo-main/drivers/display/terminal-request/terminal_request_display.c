@@ -28,6 +28,7 @@ struct display_request {
 };
 _Static_assert(sizeof(struct display_request)==8u,"display request size");
 
+/* Stock 0x5E43D2 (terminal_request_display) */
 uint32_t audio_terminal_request_display(uint8_t event,uint32_t value) {
     if(audio_uart_device_role_get()!=1u) return 0u;
     struct display_request request={event,{0,0,0},value};

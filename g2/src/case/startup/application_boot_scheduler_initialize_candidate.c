@@ -9,6 +9,7 @@ extern uint32_t case_boot_scheduler_pool(uint32_t count,uint32_t stride,uint32_t
                                          uint32_t region,uint32_t flags); /* 0xc5d0 */
 extern void case_boot_scheduler_register(uint32_t scheduler,const char *name); /* 0xc0b8 */
 extern const char case_boot_scheduler_name[]; /* linker data 0xacdc */
+/* Stock 0x0800AC84 (case_boot_scheduler_initialize) */
 void case_boot_scheduler_initialize(void)
 {
     case_policy_scheduler_lock();

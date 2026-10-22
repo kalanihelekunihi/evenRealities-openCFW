@@ -1,6 +1,6 @@
 /* Apollo uLED recovery guard 0x4ca5be..0x4ca60d. Candidate. */
 #include <stdint.h>
-void * volatile display_driver_uled_instance; /* source-owned BSS cell, SRAM 0x20074530 */
+extern void * volatile display_driver_uled_instance; /* SRAM 0x20074530, drivers/S1-drivers-hal-ble-data/display_data.c */
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,uint32_t,const char *,...);
 extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
@@ -9,6 +9,7 @@ static const char path[]="D:\\01_workspace\\s200_ap510b_iar_git\\driver\\uled\\d
 static const char function[]="uled_status_check_and_recovery";
 static const char text[]="Error - Failed to find uled driver.\r\n";
 static const char compact[]="[driver.uled]Error - Failed to find uled driver.\r\n";
+/* Stock 0x4CA5BE (uled_status_check_and_recovery) */
 uint32_t display_driver_case6_guard(uint32_t requested) {
     (void)requested;
     uint8_t *driver=(uint8_t *)display_driver_uled_instance;
@@ -24,6 +25,7 @@ uint32_t display_driver_case6_guard(uint32_t requested) {
 }
 
 static const char set_mode_function[]="uled_set_mode";
+/* Stock 0x4CA60E (uled_set_mode) */
 uint32_t display_driver_case8(uint32_t mode) {
     uint8_t *driver=(uint8_t *)display_driver_uled_instance;
     if(driver!=0) {
@@ -85,6 +87,7 @@ uint32_t display_driver_case5_b(void) { /* native 0x4ca126 uled_driver_power_dow
     missing_driver("uled_driver_power_down",0xbfu);
     return UINT32_MAX;
 }
+/* Stock 0x4CA1EE (uled_mspi_setBrightness) */
 uint32_t display_driver_case4_apply(uint32_t brightness,uint32_t upper,uint32_t lower) {
     /* Native 0x4ca1ee uled_mspi_setBrightness. The driver controls the mapping. */
     uint8_t *driver=(uint8_t *)display_driver_uled_instance;
@@ -96,6 +99,7 @@ uint32_t display_driver_case4_apply(uint32_t brightness,uint32_t upper,uint32_t 
         *(uint32_t (**)(uint32_t,uint32_t,uint32_t))(void *)(driver+0x18u);
     return apply(brightness,upper,lower);
 }
+/* Stock 0x4CA564 (uled_QSPI_PartialReflash_async) */
 uint32_t display_driver_case3(uint32_t a,uint32_t b,uint32_t c,uint32_t d,uint32_t e,uint32_t f) {
     /* Native 0x4ca564 uled_QSPI_PartialReflash_async, six-word ABI. */
     uint8_t *driver=(uint8_t *)display_driver_uled_instance;

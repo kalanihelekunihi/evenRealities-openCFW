@@ -4,6 +4,7 @@
 extern uint32_t opencfw_bl_mspi_mode_enter(uint32_t);
 extern uint32_t __attribute__((pcs("aapcs-vfp"))) opencfw_boot_startup_temperature(float *,float);
 extern uint32_t opencfw_boot_control_delay_status_change(uint32_t,volatile uint32_t *,uint32_t,uint32_t);
+/* Stock 0x42AB7C (spotmgr_profile_apply_42ab7c) */
 uint32_t opencfw_pcm22_profile_apply(void){
  if(W(0x20026ba0)==0x1f01600d){
   W(0x40020080)=(W(0x40020080)&~1023u)|((W(0x20026bc0)>>7)&1023u);
@@ -11,6 +12,7 @@ uint32_t opencfw_pcm22_profile_apply(void){
   W(0x400201b0)=(W(0x400201b0)&~0x18000u)|((W(0x20026c08)&3)<<15);
  }return 0;
 }
+/* Stock 0x42AC54 (spotmgr_temperature_init_42ac54) */
 uint32_t opencfw_pcm22_temperature_init(void){
  if(W(0x40021008)||W(0x40021010))return 1;
  if(opencfw_bl_mspi_mode_enter(29))return 1;

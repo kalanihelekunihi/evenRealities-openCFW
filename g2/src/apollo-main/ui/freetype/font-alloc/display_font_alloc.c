@@ -5,12 +5,9 @@ extern int32_t xQueueSemaphoreTake(void *,uint32_t);
 extern int32_t audio_uart_queue_send(void *,const void *,uint32_t,uint32_t);
 extern void *g2_file_pool_allocate(void *,uint32_t);
 extern void g2_file_pool_free(void *,void *);
-extern void *g2_tlsf_block_from_ptr(void *);
-extern uint32_t g2_tlsf_block_size(void *);
 extern void audio_uart_lv_basic_box_clear_454746(void *,uint32_t,uint32_t);
-uint32_t audio_uart_lv_allocation_size_4d05e4(void *pointer) {
-    return pointer==0?0u:g2_tlsf_block_size(g2_tlsf_block_from_ptr(pointer));
-}
+/* tlsf_block_size 0x4D05E4 is compiled from pinned TLSF 3.1 (alias). */
+extern uint32_t audio_uart_lv_allocation_size_4d05e4(void *pointer);
 void *audio_uart_lv_pool_allocate_484180(void *cell,uint32_t bytes) {
     volatile uint32_t *pool=cell;
     if(bytes==0u)return 0;
@@ -29,19 +26,6 @@ void *audio_uart_lv_pool_allocate_484180(void *cell,uint32_t bytes) {
 void *audio_uart_lv_pool_allocate_48431e(uint32_t bytes) {
     return audio_uart_lv_pool_allocate_484180(audio_uart_lv_heap_pool,bytes);
 }
-void audio_uart_lv_heap_zero_44f70c(void *pointer,uint32_t bytes) {
-    audio_uart_lv_basic_box_clear_454746(pointer,0u,bytes);
-}
-void *audio_uart_lv_malloc(uint32_t bytes) {
-    if(bytes==0u)return audio_uart_lv_static_slot;
-    return audio_uart_lv_pool_allocate_48431e(bytes);
-}
-void *audio_uart_lv_heap_alloc(uint32_t bytes) {
-    if(bytes==0u)return audio_uart_lv_static_slot;
-    void *result=audio_uart_lv_pool_allocate_48431e(bytes);
-    if(result!=0)audio_uart_lv_heap_zero_44f70c(result,bytes);
-    return result;
-}
 void audio_uart_lv_pool_free_48429e(void *cell,void *pointer) {
     volatile uint32_t *pool=cell;
     if(pointer==0)return;
@@ -54,23 +38,14 @@ void audio_uart_lv_pool_free_48429e(void *cell,void *pointer) {
 void audio_uart_lv_pool_free_484338(void *pointer) {
     audio_uart_lv_pool_free_48429e(audio_uart_lv_heap_pool,pointer);
 }
-void audio_uart_lv_heap_free(void *pointer) {
-    if(pointer==audio_uart_lv_static_slot||pointer==0)return;
-    audio_uart_lv_pool_free_484338(pointer);
-}
 
 /* Native heap startup and TLSF control composition. */
 #include <stdint.h>
-extern void *g2_tlsf_control_create_4d06b4(void *);
-extern void *g2_tlsf_add_pool_4d0608(void *,void *,uint32_t);
 extern void *audio_uart_mutex_dynamic_create(uint32_t);
 extern void g2_file_heap_error_log(const char *);
 extern void audio_uart_heap_memory_configure_4840c8(void);
-void *g2_tlsf_create_with_pool_4d06ec(void *memory,uint32_t bytes) {
-    void *control=g2_tlsf_control_create_4d06b4(memory);
-    (void)g2_tlsf_add_pool_4d0608(control,(void *)((uintptr_t)memory+0xc74u),bytes-0xc74u);
-    return control;
-}
+/* tlsf_create_with_pool 0x4D06EC is compiled from pinned TLSF 3.1 (alias). */
+extern void *g2_tlsf_create_with_pool_4d06ec(void *memory,uint32_t bytes);
 void audio_uart_lv_pool_initialize_48413c(void *cell,void *memory,uint32_t bytes) {
     volatile uint32_t *pool=cell;
     pool[1]=(uint32_t)(uintptr_t)g2_tlsf_create_with_pool_4d06ec(memory,bytes);
@@ -94,67 +69,9 @@ void audio_uart_heap_initialize_4842e6(void) {
     *(volatile uint8_t *)(uintptr_t)0x20000388u=0u;
 }
 
-/* Native TLSF control construction and aligned creation. */
-#include <stdint.h>
-extern void audio_ble_hci_boot_log_4733ee(const char *,...);
-void g2_tlsf_control_construct_4d0524(void *cell) {
-    volatile uint32_t *words=cell;
-    words[2]=(uint32_t)(uintptr_t)cell;words[3]=(uint32_t)(uintptr_t)cell;words[4]=0;
-    for(uint32_t fl=0;fl<24u;fl++) {
-        words[5u+fl]=0;
-        for(uint32_t sl=0;sl<32u;sl++) words[29u+fl*32u+sl]=(uint32_t)(uintptr_t)cell;
-    }
-}
-void *g2_tlsf_control_create_4d06b4(void *memory) {
-    if(((uintptr_t)memory&3u)!=0u) {
-        audio_ble_hci_boot_log_4733ee((const char *)(uintptr_t)0x72f49cu,4u);
-        return 0;
-    }
-    g2_tlsf_control_construct_4d0524(memory);
-    return memory;
-}
-
-/* Native TLSF pool creation and flag leaves. */
-#include <stdint.h>
-extern void audio_ble_hci_boot_log_4733ee(const char *,...);
-extern void g2_tlsf_block_set_size(void *,uint32_t);
-extern void g2_tlsf_block_insert(void *,void *);
-extern void *g2_tlsf_block_link_next(void *);
-extern void g2_tlsf_block_set_prev_free(void *);
-static uint32_t config(uint32_t address) {return *(const volatile uint32_t *)(uintptr_t)address;}
-void g2_tlsf_block_set_free_4cfdc0(void *block) {
-    uint32_t mask=config(0x78f4b4u);
-    *(volatile uint32_t *)((uint8_t *)block+4u)|=mask;
-}
-void g2_tlsf_block_set_used_4cfdce(void *block) {
-    uint32_t mask=config(0x78f4b4u);
-    *(volatile uint32_t *)((uint8_t *)block+4u)&=~mask;
-}
-extern void g2_tlsf_block_clear_prev_free(void *);
-void *g2_tlsf_add_pool_4d0608(void *control,void *memory,uint32_t bytes) {
-    uint32_t overhead=config(0x78f4bcu)*2u;
-    uint32_t size=(bytes-overhead)&~3u;
-    if(((uintptr_t)memory&3u)!=0u) {
-        audio_ble_hci_boot_log_4733ee((const char *)(uintptr_t)0x72f468u,4u);
-        return 0;
-    }
-    if(size<config(0x78f4c4u)||config(0x78f4c8u)<size) {
-        uint32_t max=config(0x78f4c8u)+overhead;
-        uint32_t min=config(0x78f4c4u)+overhead;
-        audio_ble_hci_boot_log_4733ee((const char *)(uintptr_t)0x710764u,min,max);
-        return 0;
-    }
-    void *block=(void *)((uintptr_t)memory-config(0x78f4bcu));
-    g2_tlsf_block_set_size(block,size);
-    g2_tlsf_block_set_free_4cfdc0(block);
-    g2_tlsf_block_clear_prev_free(block);
-    g2_tlsf_block_insert(control,block);
-    void *last=g2_tlsf_block_link_next(block);
-    g2_tlsf_block_set_size(last,0u);
-    g2_tlsf_block_set_used_4cfdce(last);
-    g2_tlsf_block_set_prev_free(last);
-    return memory;
-}
+/* TLSF control_construct 0x4D0524, tlsf_create 0x4D06B4, block_set_free
+ * 0x4CFDC0, block_set_used 0x4CFDCE and tlsf_add_pool 0x4D0608 are compiled
+ * from pinned TLSF 3.1 (third-party/upstream/tlsf/tlsf.c). */
 
 /* Native memory-protection configuration sequence and descriptors. */
 #include <stdint.h>

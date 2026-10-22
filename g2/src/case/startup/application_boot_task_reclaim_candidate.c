@@ -5,6 +5,7 @@
 extern void case_boot_heap_free(uint32_t address); /* 0xc030 */
 static __attribute__((noreturn)) void native_fault(void)
 {__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+/* Stock 0x0800ADB8 (case_boot_task_reclaim) */
 void case_boot_task_reclaim(uint32_t task)
 {
     uint8_t owner=*(volatile uint8_t *)(uintptr_t)(task+0x59u);

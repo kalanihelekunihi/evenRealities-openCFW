@@ -8,6 +8,7 @@ static uint32_t five(uint32_t word, uint32_t shift) {
     return (word >> shift) & 31u;
 }
 
+/* Stock 0x005A423C (PCM2.2 TON adjust) */
 void callback_voltage(uint32_t source, uint32_t selection) {
     uint32_t first, second;
     if (selection == 8u)

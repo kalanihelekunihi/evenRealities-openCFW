@@ -6,6 +6,7 @@
 #include "../mode/mode.h"
 #include "../pin-control/pins.h"
 extern uint32_t Cy_MSCLP_Configure(volatile uint32_t *,const void *,uint32_t,void *);
+/* Stock 0x000068EC (not in touch.tsv: CAPSENSE Cy_CapSense_ConfigureAutoDitherMode) */
 uint32_t touch_configure_auto_dither(uint8_t *c){
  const uint8_t *common=*(const uint8_t **)c,*ch=*(const uint8_t **)(common+8);volatile uint32_t *hw=*(volatile uint32_t **)ch;
  touch_generate_all_slots(0,c);touch_generate_all_slots(1,c);

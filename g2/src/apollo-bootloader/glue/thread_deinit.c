@@ -14,6 +14,7 @@ uint32_t opencfw_boot_dfu_thread_deinit_native(void)
     return 0u;
 }
 
+/* Stock 0x42e3ca (guarded_context_teardown_42e3ca) */
 uint32_t opencfw_boot_manager_thread_deinit(void)
 {
     volatile uint32_t *const handle = (volatile uint32_t *)(uintptr_t)0x200004fcu;

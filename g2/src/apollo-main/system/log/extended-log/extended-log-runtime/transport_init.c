@@ -23,6 +23,7 @@ static void publish_word(volatile uint32_t *word,uint32_t value) {
     *word=value;
     __asm__ volatile("dmb" ::: "memory");
 }
+/* Stock 0x0044895E (elog async node pool init) */
 void g2_log_transport_pool_initialize(void) {
     for(uint32_t i=0;i<254u;i++) {
         volatile uint8_t *bytes=(volatile uint8_t *)&pool[i];
@@ -38,6 +39,7 @@ void g2_log_transport_pool_initialize(void) {
     *free_head=pool;
     __asm__ volatile("dmb" ::: "memory");
 }
+/* Stock 0x004489E8 (elog async pending-queue sentinel init) */
 void g2_log_transport_pending_initialize(void) {
     LogInitNode *const sentinel=&pool[255];
     sentinel->next=0;
@@ -45,6 +47,7 @@ void g2_log_transport_pending_initialize(void) {
     *pending_tail=sentinel;
     __asm__ volatile("dmb" ::: "memory");
 }
+/* Stock 0x00448C74 (elog async transport init) */
 void g2_log_transport_initialize(void) {
     if(*enabled) return;
     g2_log_transport_pool_initialize();

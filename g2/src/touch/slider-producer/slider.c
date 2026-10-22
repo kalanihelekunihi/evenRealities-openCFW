@@ -1,6 +1,7 @@
 /* Independent process-slider5a94. Defined X/activity/count/history behavior;
  * stock local Y/Z/padding bytes are uninitialized, native makes themzero. */
 #include "slider.h"
+/* Stock 0x00005A94 (touch_select_2794_update) */
 void touch_slider_process(uint8_t *w){
  uint8_t *c=*(uint8_t **)w,*s=*(uint8_t **)(w+4),*debounce=*(uint8_t **)(w+40);uint32_t n=*(uint16_t *)(w+56);
  uint32_t threshold=*(uint16_t *)(c+8),h=*(uint16_t *)(c+30),active=0;threshold=(c[35]&1u)?threshold-h:threshold+h;

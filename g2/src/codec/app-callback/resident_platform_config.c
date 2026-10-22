@@ -4,6 +4,7 @@
  */
 #include <stdint.h>
 
+/* Stock 0x10025D74 (gx8002_platform_config) */
 uint32_t gx8002_resident_platform_config_25d74(
     uint32_t module, uint32_t *input)
 {

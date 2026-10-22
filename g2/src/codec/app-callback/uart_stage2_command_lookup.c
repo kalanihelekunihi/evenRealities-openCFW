@@ -7,6 +7,7 @@
 #include <stddef.h>
 #include "uart_stage2_command.h"
 
+/* Stock 0x100062FC (gx8002_stage2_strlen) */
 uint32_t gx8002_uart_stage2_strlen_62fc(const char *s)
 {
     const char *p = s;
@@ -14,6 +15,7 @@ uint32_t gx8002_uart_stage2_strlen_62fc(const char *s)
     return (uint32_t)(p - s);
 }
 
+/* Stock 0x100062E0 (gx8002_stage2_strchr) */
 const char *gx8002_uart_stage2_strchr_62e0(const char *s, char c)
 {
     for (;;) {

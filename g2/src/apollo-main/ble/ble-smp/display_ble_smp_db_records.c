@@ -3,7 +3,7 @@
 #include <stdint.h>
 extern uint8_t audio_ble_smp_database[]; /* selected 0x200708ec */
 extern volatile uint8_t audio_ble_trace_level_cell; /* live 0x2007502f */
-extern uint32_t g2_smp_candidate_compare(void *,uint32_t,uint32_t,uint32_t);
+extern int32_t audio_ble_hci_vendor_compare_44b610(const void *,const void *,uint32_t); /* 0x44b610 bounded strncmp */
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,uint32_t,const char *,...);
 extern void audio_ble_wsf_trace(const char *,const char *,...);
@@ -20,7 +20,7 @@ static const char get_msg[]="smpDbGetRecord: connId: %d type: %d";
 static const char common_msg[]="smpDbGetRecord: common record";
 static const char add_msg[]="smpDbAddDevice";
 static uint32_t cmp(const char *a,const char *b,uint32_t n) {
-    return g2_smp_candidate_compare(0,(uint32_t)(uintptr_t)a,(uint32_t)(uintptr_t)b,n);
+    return (uint32_t)audio_ble_hci_vendor_compare_44b610(a,b,n);
 }
 void audio_ble_smp_db_diagnostic(const char *name,uint32_t line,const char *message,
                                  uint8_t arity,uint32_t first,uint32_t second) {
